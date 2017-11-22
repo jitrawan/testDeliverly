@@ -6,7 +6,6 @@ body {
 }
 
 #header{
-    /* position: fixed;  */
     z-index: 2; 
     width: 100%;
 }
@@ -116,13 +115,12 @@ a:focus {
 
 /* Menu */
 
-#mainMenu li a {
+.mainMenu li a {
     font-size: 18px;
     color: white;
-    transition: all 0.3s;
 }
 
-#mainMenu li:hover>a {
+.mainMenu li:hover>a {
     border-bottom: 4px solid #f4cc33;
     margin-bottom: -0.5rem;
 }
@@ -176,7 +174,6 @@ a:focus {
 }
 
 .overlay {
-    display: none;
     position: fixed;
     width: 100vw;
     height: 100vh;
@@ -559,10 +556,10 @@ ul.footer {
 }
 
 @media (max-width: 767px) {
-    #mainMenu li {
+    .mainMenu li {
         width: 100%;
     }
-    #mainMenu .dropdown-menu.show {
+    .mainMenu .dropdown-menu.show {
         position: static;
         float: none;
         width: auto;
@@ -578,7 +575,7 @@ ul.footer {
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
-    #mainMenu li>a {
+    .mainMenu li>a {
         padding-top: 10px;
     }
 }
@@ -591,18 +588,18 @@ ul.footer {
         text-align: right;
     }
     /* Navbar & Sidebar */
-    #mainMenu li:hover {
+    .mainMenu li:hover {
         border-bottom: none;
         margin-bottom: 0;
     }
-    #mainMenu li>a,
-    #mainMenu li a {
+    .mainMenu li>a,
+    .mainMenu li a {
         font-size: 16px;
     }
-    #mainMenu li>.navbar-toggle {
+    .mainMenu li>.navbar-toggle {
         display: block;
     }
-    #mainMenu .open .dropdown-menu>li:hover {
+    .mainMenu .open .dropdown-menu>li:hover {
         background-color: #3191f5;
     }
     /* Custom sidebar's scroll  */

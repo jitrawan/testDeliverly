@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './pages/home/home.component';
 
 import { AllEventComponent } from './pages/eventTickets/all-event/all-event.component';
 import { EventInfoComponent } from './pages/event-info/event-info.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/', pathMatch: 'full' },
-    { path: '',  component: AllEventComponent  },
+    { path: '', component: HomeComponent },
     { path: 'eventInfo', component: EventInfoComponent },
   ];
   

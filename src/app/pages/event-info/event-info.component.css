@@ -1,0 +1,762 @@
+@import url('https://fonts.googleapis.com/css?family=Kanit&subset=thai');
+
+body {
+    font-family: 'Kanit', sans-serif;
+    font-size : 16px;
+}
+
+.middle {  
+  top: 50%;
+  left: 50%;
+  width: 100%;      
+
+}
+
+.banner {
+	display: block;
+	width: 100%;	
+	border-radius: 10px;	 
+}
+
+#eventLogo {
+	height: auto;
+}
+
+#eventDescHeader {
+	background-color: #333333;
+}
+
+#eventDesc {
+	color: white;
+}
+
+.ic_calendar {
+	background-image: url(../../../assets/images/calendar.png);
+	display: inline-block;
+    height: 30px;
+    width: 30px;
+}
+
+.buyTicketsBtn {
+	-moz-box-shadow: 0px 1px 0px 0px #f0f7fa;
+	-webkit-box-shadow: 0px 1px 0px 0px #f0f7fa;
+	box-shadow: 0px 1px 0px 0px #f0f7fa;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #33bdef), color-stop(1, #019ad2));
+	background:-moz-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+	background:-webkit-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+	background:-o-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+	background:-ms-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+	background:linear-gradient(to bottom, #33bdef 5%, #019ad2 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#33bdef', endColorstr='#019ad2',GradientType=0);
+	background-color:#33bdef;
+	-moz-border-radius:42px;
+	-webkit-border-radius:42px;
+	border-radius:42px;
+	border:1px solid #057fd0;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:KanitLatin;
+	font-size:22px;
+	font-weight:bold;
+	padding:10px 50px;
+	text-decoration:none;
+	text-shadow:0px -1px 0px #5b6178;
+}
+.buyTicketsBtn:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #019ad2), color-stop(1, #33bdef));
+	background:-moz-linear-gradient(top, #019ad2 5%, #33bdef 100%);
+	background:-webkit-linear-gradient(top, #019ad2 5%, #33bdef 100%);
+	background:-o-linear-gradient(top, #019ad2 5%, #33bdef 100%);
+	background:-ms-linear-gradient(top, #019ad2 5%, #33bdef 100%);
+	background:linear-gradient(to bottom, #019ad2 5%, #33bdef 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#019ad2', endColorstr='#33bdef',GradientType=0);
+	background-color:#019ad2;
+	color: #ffffff !important;
+}
+.buyTicketsBtn:active {
+	position:relative;
+	top:1px;
+}
+
+.map {
+	height : 300px;
+	margin-bottom: 4%;
+	border-color: #ff0000;
+    border-style: solid;
+}
+
+#headerBar {		
+	position:relative;
+	background-color: #414042;
+}		
+
+.banner-wrapper {
+	position: relative;
+	margin-bottom: 2.5%;
+	margin-top : -1px;
+}
+.banner-wrapper  img {
+	max-height: 700px;
+	width : 100%;
+}
+
+.buyTicket {
+  position: absolute;
+  bottom: -4%;
+  right: 8%;
+}
+
+.buyTicket button {
+    border-radius: 30px;
+    border-color : transparent;
+    background:#F45753;
+    height: 60px;
+    width: 400px;
+    color:#FFF;
+    font-size: 38px;
+    font-weight: bold;
+    outline: none;
+}
+
+.eventDetail {
+	margin : 0 auto;
+	width : 90%;
+}
+
+.eventDetail > .row i {
+	margin-top : -4%;
+	margin-right : -10%;
+	float: right;
+}
+.cursorPointer {
+	cursor: pointer;
+}
+#Locat{
+	text-align: center;
+}
+.zoneWrapper img {
+	position: relative;
+	top: 0; left: 0; right: 0; bottom: 0;
+	margin: auto;
+}
+
+a > .eventAddress {
+	text-decoration: none;
+	color : #222;
+}
+
+.eventDetailZone {
+	padding : 1% 3% 1% 2%;
+	border-radius: 15px;
+	border : 10px solid #e6e6e6;
+}
+
+.eventDetailZone .eventZoneText {
+	font-weight: bold;
+	color : #444141;
+}
+
+.titleText {
+	text-align: center;
+}
+
+/* Utility Class */
+
+
+.pd-b-1 {
+	padding-bottom: 1%;
+}
+
+.pd-b-2 {
+	padding-bottom: 2%;
+}
+
+.mg-b-1 {
+	margin-bottom: 1%;
+}
+
+@media screen and (min-width: 100px) and (max-width : 320px){
+	
+	.eventDetail > .row h1 , 
+	.eventDetail > .row h3 {
+		text-align: center;
+		font-size : 1.7em;
+		font-weight: bold;
+	}
+
+	.eventDetail > .row h1 {
+		margin-bottom: -2%;
+	}
+
+	.eventDetail > .row i {
+		float: left;
+		margin-right: 1%;
+		margin-top : 0%;
+	}
+
+	.buyTicket {
+		bottom: -11%;
+  		right: 1%;
+	}
+	.buyTicket button {
+	    border-radius: 25px;
+	    border-color : transparent;
+	    background:#F45753;
+	    height: 35px;
+	    width: 100px;
+	    color:#FFF;
+	    font-size: 0.9em;
+	}
+	
+
+}
+
+@media screen and (min-width: 320px) and (max-width : 480px) {
+	
+	.eventDetail > .row h1 ,
+	.eventDetail > .row h3 {
+		text-align: center;
+		font-size : 1.7em;
+		font-weight: bold;
+	}
+
+	.eventDetail > .row h1 {
+		margin-bottom: -2%;
+	}
+
+	.eventDetail > .row i {
+		float: left;
+		margin-right: 1%;
+		margin-top : 0%;
+	}
+
+	.titleText {
+		font-size : 1.7em;
+		font-weight: bold;
+	}
+
+	.buyTicket {
+		bottom: -9%;
+  		right: 3%;
+	}
+	.buyTicket button {
+	    border-radius: 25px;
+	    border-color : transparent;
+	    background:#F45753;
+	    height: 55px;
+	    width: 130px;
+	    color:#FFF;
+	    font-size: 1.2em;
+	}
+
+}
+
+@media screen and (min-width: 480px) and (max-width : 640px) {
+	
+	.eventDetail > .row h1 , 
+	.eventDetail > .row h3 {
+		text-align: center;
+		font-size : 1.7em;
+		font-weight: bold;
+	}
+
+	.eventDetail > .row h1 {
+		margin-bottom: -2%;
+	}
+
+	.titleText {
+		text-align: center;
+		font-size : 1.7em;
+		font-weight: bold;
+	}
+
+	.eventDetail > .row i {
+		float: right;
+		margin-right: 1%;
+		margin-top : 0%;
+	}
+
+	.buyTicket {
+		bottom: -7%;
+  		right: 6%;
+	}
+	.buyTicket button {
+	    border-radius: 25px;
+	    border-color : transparent;
+	    background:#F45753;
+	    height: 55px;
+	    width: 180px;
+	    color:#FFF;
+	    font-size: 1.2em;
+	}
+	
+}
+
+@media screen and (min-width : 640px) and (max-width : 768px) {
+	.eventDetail > .row h1 , 
+	.eventDetail > .row h3 {
+		text-align: center;
+	}
+
+	.buyTicket {
+		bottom: -5%;
+  		right: 9%;
+	}
+	.buyTicket button {
+	    border-radius: 30px;
+	    border-color : transparent;
+	    background:#F45753;
+	    height: 55px;
+	    width: 240px;
+	    color:#FFF;
+	    font-size: 1.7em;
+	}
+
+	.eventDetail > .row i {
+		float: right;
+		margin-right: 0%;
+		margin-top : -0.5%;
+	}
+
+	.titleText {
+		font-size : 1.7em;
+		font-weight: bold;
+	}
+}
+
+@media screen and (max-width : 360px){
+	.concertBanner {	
+		content: url("../../../assets/images/eventProfile/festival_profile.png");
+	}		
+}
+
+@media screen and (min-width: 361px) and (max-width : 640px){
+	.concertBanner {
+		content: url("../../../assets/images/eventProfile/festival_profile.png");
+	}				
+}
+	
+@media screen and (min-width: 641px) and (max-width : 1024px){
+	.concertBanner {
+		content: url("../../../assets/images/eventProfile/festival_profile.png");
+	}				
+}
+
+@media screen and (min-width : 1025px){
+	.concertBanner {
+		content: url("../../../assets/images/eventProfile/festival_profile.png");
+	}				
+}
+
+@media screen and (max-width : 420px){
+
+	.headerSticky .buyTicketBtnBar {
+	    /* -moz-box-shadow:inset 0px 37px 0px -24px #fff34f;
+		-webkit-box-shadow:inset 0px 37px 0px -24px #fff34f;
+		box-shadow:inset 0px 37px 0px -24px #fff34f;
+		background-color:#e2d80a;
+		-moz-border-radius:42px;
+		-webkit-border-radius:42px;
+	    border-radius: 42px;
+	    display: inline-block;
+	    cursor: pointer;
+	    color: #414042;
+	    font-family: ImpactFont;
+	    font-size: 11px;
+	    padding: 5px 25px;
+	    height: 35px;
+	    width: 100px;
+	    text-decoration: none;
+	    text-shadow: 0px 1px 0px rgba(0, 0, 0, .0001);
+	    line-height: 2.3;
+	    margin-top: 10px; */
+	    
+	    -moz-box-shadow: 0px 1px 0px 0px #f0f7fa;
+		-webkit-box-shadow: 0px 1px 0px 0px #f0f7fa;
+		box-shadow: 0px 1px 0px 0px #f0f7fa;
+		background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #33bdef), color-stop(1, #019ad2));
+		background:-moz-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+		background:-webkit-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+		background:-o-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+		background:-ms-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+		background:linear-gradient(to bottom, #33bdef 5%, #019ad2 100%);
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#33bdef', endColorstr='#019ad2',GradientType=0);
+		background-color:#33bdef;
+		-moz-border-radius:42px;
+		-webkit-border-radius:42px;
+		border-radius:42px;
+		border:1px solid #057fd0;
+		display:inline-block;
+		cursor:pointer;
+		color:#ffffff;
+		font-size:14px;
+		font-weight:bold;
+	    padding: 5px 20px;
+	    height: 35px;
+	    width:50%;
+	    min-width: 120px;
+	    text-decoration:none;		
+		text-shadow:0px -1px 0px #5b6178;
+	    line-height: 1.7;
+	}
+	
+}
+
+@media screen and (min-width : 421px){
+	.headerSticky .buyTicketBtnBar {
+		-moz-box-shadow: 0px 1px 0px 0px #f0f7fa;
+		-webkit-box-shadow: 0px 1px 0px 0px #f0f7fa;
+		box-shadow: 0px 1px 0px 0px #f0f7fa;
+		background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #33bdef), color-stop(1, #019ad2));
+		background:-moz-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+		background:-webkit-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+		background:-o-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+		background:-ms-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+		background:linear-gradient(to bottom, #33bdef 5%, #019ad2 100%);
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#33bdef', endColorstr='#019ad2',GradientType=0);
+		background-color:#33bdef;
+		-moz-border-radius:42px;
+		-webkit-border-radius:42px;
+		border-radius:42px;
+		border:1px solid #057fd0;
+		display:inline-block;
+		cursor:pointer;
+		color:#ffffff;
+		font-size:14px;
+		font-weight:bold;
+	    padding: 5px 20px;
+	    width:50%;
+	    min-width: 120px;
+	    text-decoration:none;		
+		text-shadow:0px -1px 0px #5b6178;
+	    line-height: 1.7;	
+	}
+}
+
+.buyTicketBtnBar:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #019ad2), color-stop(1, #33bdef));
+	background:-moz-linear-gradient(top, #019ad2 5%, #33bdef 100%);
+	background:-webkit-linear-gradient(top, #019ad2 5%, #33bdef 100%);
+	background:-o-linear-gradient(top, #019ad2 5%, #33bdef 100%);
+	background:-ms-linear-gradient(top, #019ad2 5%, #33bdef 100%);
+	background:linear-gradient(to bottom, #019ad2 5%, #33bdef 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#019ad2', endColorstr='#33bdef',GradientType=0);
+	background-color:#019ad2;
+	color: #ffffff !important;
+}
+.buyTicketBtnBar:active {
+	position:relative;
+	top:1px;
+}
+
+
+/*@media screen and (min-width: 1001px) and (max-width : 1050px){
+	.imgban .buyTicketBtn {
+		font-size: 20px;
+		padding: 21px 55px;
+		height: 50px;		
+	    line-height: 0.5;
+	}
+	.imgban .buttoncenter{
+		margin-top : -22%;
+		margin-left: 75%;		
+	}
+	.imgban {
+		padding-bottom: 100px !important;
+	}
+}*/
+
+#bttop{
+	z-index : 99;
+	border : none;
+	color : white;
+	cursor: pointer;
+	border-radius: 10px;
+	line-height:40px;
+	background-color : rgba(49,79,96,0.84);
+	opacity : 0.6;
+	position : fixed;
+	bottom: 50px;
+	right: 20px;
+	height : 40px;
+	width : 40px;
+}
+
+.overlay{
+	position : absolute;
+	top : 0;
+	left : 0;
+	bottom : 0;
+	right : 0;
+	opacity: 1;
+	width : 100%;
+	height : 100%;
+	background-color: rgba(0,0,0,0.6);
+}
+
+.headerSticky {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 2;
+	background-color :#414042;
+	display: none;
+}
+
+.sticky-btn-buy {
+	line-height: 40px;		
+}
+.sticky-btn-buy > button {
+	background-color : #f5e900;
+	border-radius: 10px;
+	color : black;
+	font-weight: bold;
+}
+
+.sticky-image {
+	text-align : right;	
+}
+
+.sticky-image img {
+	height: auto;
+	width : 100%;
+}
+
+.stickyOverlay {
+	color : white;
+}
+
+@media screen and (min-width : 320px) and (max-width : 480px) {
+	.headerSticky .detail {
+		font-size : 13px;
+	}
+}
+
+@media screen and (max-width : 420px) {
+	.stickyTitle {
+		margin-left : 25px;
+	}
+}
+
+.containerBanner {
+	position: relative;
+	width: 100%;				
+}
+
+#concertContent .image {
+	opacity: 1;
+	display: block;
+	width: 100%;						
+	transition: .5s ease;
+	backface-visibility: hidden;
+}
+
+@media screen and (min-width:1025px) {
+	#concertContent .image {
+		height: 550px;
+	}	
+}
+
+@media screen and (max-width:1024px) {
+	#concertContent .image {
+		height: auto;
+	}	
+}
+
+@media screen and (max-width:400px) {
+	#concertContent #eventBanner span {
+		font-size: 8px !important;
+	}	
+	#concertContent #eventBanner i {
+		font-size: 8px !important;
+		padding-right: 0px;
+	}	
+	#concertContent #eventBanner h1 {
+		font-size: 8px !important;
+	}	
+	#concertContent #eventBanner{
+		height: 20px;
+		padding-top: 8px;
+		padding-bottom: 5px;
+		margin-top: 0px !important;
+		font-size: 10px !important;
+		line-height: 0px;
+	}
+	#concertContent #leftEventInfo{
+		padding-left: 0px;
+		padding-right: 0px;			
+	}
+	#concertContent .outerContent{
+		padding-left: 0px;
+		padding-right: 0px;			
+	}
+
+	#concertContent #concertProfile{
+		padding-top: 25%;
+		width: 80% !important;
+	}
+	#concertContent .descIcon{
+		padding-left: 0px;
+	}
+	#concertContent .imgIcon{
+		padding-right: 0px;
+	}
+}
+
+@media screen and (min-width:401px) and (max-width:450px) {
+	#concertContent #eventBanner span {
+		font-size: 13px !important;
+	}	
+	#concertContent #eventBanner i {
+		font-size: 15px !important;
+		padding-right: 0px;
+	}	
+	#concertContent #eventBanner h1 {
+		font-size: 20px !important;
+	}	
+	#concertContent #eventBanner{
+		height: 30px;
+		padding-top: 13px;
+		padding-bottom: 0px;
+		margin-top: 0px !important;
+		font-size: 15px !important;
+		line-height: 1px;
+	}
+	#concertContent #leftEventInfo{
+		padding-left: 0px;
+		padding-right: 0px;			
+	}
+	#concertContent .outerContent{
+		padding-left: 0px;
+		padding-right: 0px;			
+	}
+
+	#concertContent #concertProfile{
+		padding-top: 25%;
+		width: 80% !important;
+	}
+	#concertContent .descIcon{
+		padding-left: 0px;
+	}
+	#concertContent .imgIcon{
+		padding-right: 0px;
+	}
+}
+
+@media screen and (min-width:451px) and (max-width:480px) {
+	#concertContent #eventBanner span {
+		font-size: 13px !important;
+	}	
+	#concertContent #eventBanner i {
+		font-size: 13px !important;
+	}	
+	#concertContent #eventBanner h1 {
+		font-size: 13px !important;
+	}	
+	#concertContent #eventBanner{
+		height: 25px;
+		margin-top: 5px !important;
+		font-size: 15px !important;
+		line-height: 1px;
+	}
+	#concertContent #leftEventInfo{
+		padding-left: 0px;
+		padding-right: 0px;			
+	}
+	#concertContent #concertProfile{
+		padding-top: 15%;		
+	}
+}	
+
+@media screen and (min-width:481px) and (max-width:640px) {
+	#concertContent #eventBanner span {
+		font-size: 13px !important;
+	}	
+	#concertContent #eventBanner i {
+		font-size: 13px !important;
+	}	
+	#concertContent #eventBanner h1 {
+		font-size: 20px !important;
+	}	
+	#concertContent #eventBanner{
+		height: 25px;
+		margin-top: 5px !important;
+		font-size: 15px !important;
+		line-height: 1px;
+	}
+	#concertContent #leftEventInfo{
+		padding-left: 0px;
+		padding-right: 0px;			
+	}
+
+}
+
+#concertContent .middleBanner {
+	transition: .5s ease;
+	opacity: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	width:100%;
+	height:100%;
+}
+
+#concertContent .middleBanner {
+	opacity: 1;
+}
+
+#concertContent .textBanner {
+	background-color: rgba(0,0,0,0.6);
+	color: white;
+	font-size: 16px;  
+	height:100%;
+}
+
+
+#concertContent #eventBanner{
+	vertical-align: middle;
+}
+
+#concertContent ul{
+	list-style: none;
+	padding-left: 0px;
+}	
+
+#concertContent ul li i {		
+	width: 30px;
+	font-size: 25px;
+	text-align: center;
+	padding-right: 20px;
+}	
+
+#concertContent ul li span {		
+	width: 30px;
+	font-size: 15px;
+}	
+
+#concertContent .eventName{
+	border-bottom: 2px solid white;
+	padding-bottom: 5px;
+}
+
+#concertContent .outerContent{
+	display: table;			
+	height: 100%;
+}
+
+#concertContent .middleContent{
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#concertContent .innerContent{
+	margin-left: auto;
+	margin-right: auto;
+}		
+
+#concertContent #eventBanner h1 {
+	text-align: center;
+}

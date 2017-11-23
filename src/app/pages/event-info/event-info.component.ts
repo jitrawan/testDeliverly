@@ -3,13 +3,20 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-event-info',
   templateUrl: './event-info.component.html',
-  styleUrls: ['./event-info.component.css']
+  styleUrls: ['./event-info.component.css',
+    '../../../assets/css/standard/jquerysctipttop.css']
 })
 export class EventInfoComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  private showMap: boolean = false;
+
+  private clickShowMap() {
+    this.showMap = !this.showMap;
   }
 
+  ngOnInit() {
+
+  }
 }

@@ -11,6 +11,8 @@ export class HeaderComponent implements OnInit {
     private isMobileSize: boolean = false;
     private isSidebarOpen: boolean = false;
     private showOverlay: boolean = false;
+    private isLoginOpen: boolean = false;
+    private isRegisterOpen: boolean = false;
 
     @ViewChild('navSideBar') private navSideBar: ElementRef;
 
@@ -33,23 +35,49 @@ export class HeaderComponent implements OnInit {
         this.checkSidebar(window.innerWidth);
 
     }
+        
+    ngAfterViewInit() {
+        // setTimeout(_ => this.navbarContent = this.child.nativeElement.innerHTML);
+    }
 
     triggerSidebar() {
-
+        
         if (this.isSidebarOpen === false && this.isMobileSize) {
             this.isSidebarOpen = true;
             this.showOverlay = true;
             this.renderer.addClass(this.navSideBar.nativeElement, 'show');
         } else {
-            this.isSidebarOpen = false;
-            this.showOverlay = false;
-            this.renderer.removeClass(this.navSideBar.nativeElement, 'show');
+            this.closeAllDialog();
         }
 
     }
+    
+    triggerDialog(type:string) {
+
+        this.showOverlay = true;
+
+        if(type === 'login') {
+            this.isLoginOpen = true;
+        } else if(type === 'signUp') {
+            this.isLoginOpen = false;
+            this.isRegisterOpen = true;
+        }
+        
+        this.isSidebarOpen = false;
+        this.renderer.removeClass(this.navSideBar.nativeElement, 'show');
+    }
+
+
+    closeAllDialog() {
+        this.isSidebarOpen = false;
+        this.showOverlay = false;
+        this.isLoginOpen = false;
+        this.isRegisterOpen = false;
+        this.renderer.removeClass(this.navSideBar.nativeElement, 'show');
+    }
+    
     checkSidebar(width) {
         if (width <= 992) {
-            this.el.nativeElement.querySelector('.sidebar-content');
             this.isMobileSize = true;
         } else {
             this.isMobileSize = false;
@@ -58,13 +86,6 @@ export class HeaderComponent implements OnInit {
     }
 
     overlayClicked(event) {
-        this.showOverlay = false;
-        this.triggerSidebar();
+        this.closeAllDialog();
     }
-
-    ngAfterViewInit() {
-
-        // setTimeout(_ => this.navbarContent = this.child.nativeElement.innerHTML);
-    }
-
 }

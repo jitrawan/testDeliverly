@@ -1,4 +1,7 @@
 import { Component, OnInit, AfterViewInit, HostListener, ElementRef, ViewChild, Renderer2 } from '@angular/core';
+import { Router } from '@angular/router';
+import { HeaderModel } from '../../shared/model/header.model';
+import { HeaderService } from '../../shared/service/header.service';
 
 @Component({
     selector: 'app-navbar',
@@ -7,6 +10,7 @@ import { Component, OnInit, AfterViewInit, HostListener, ElementRef, ViewChild, 
 })
 export class HeaderComponent implements OnInit {
 
+    private headerModel: HeaderModel[];
     private resizeTimeout: number = 0;
     private isMobileSize: boolean = false;
     private isSidebarOpen: boolean = false;
@@ -27,19 +31,31 @@ export class HeaderComponent implements OnInit {
         }).bind(this), 100);
     }
 
-    constructor(private el: ElementRef, private renderer: Renderer2) {
+    constructor(
+        private el: ElementRef, 
+        private renderer: Renderer2,
+        private headerService: HeaderService,
+        private router: Router) {
     }
 
     ngOnInit() {
         this.resizeTimeout = 0;
-        this.checkSidebar(window.innerWidth);
 
+        this.headerService.getHeaderMenu().subscribe(response => {
+            this.headerModel = response['data'];
+            console.log(this.headerModel)
+        });
+
+        this.checkSidebar(window.innerWidth);
     }
         
     ngAfterViewInit() {
         // setTimeout(_ => this.navbarContent = this.child.nativeElement.innerHTML);
     }
 
+    routeMenu(route: string) {
+        this.router.navigate([route]);
+    }
     triggerSidebar() {
         
         if (this.isSidebarOpen === false && this.isMobileSize) {

@@ -8,7 +8,9 @@ import { EventInfoComponent } from './pages/event-info/event-info.component';
 const routes: Routes = [
     { path: '', redirectTo: '/', pathMatch: 'full' },
     { path: '', component: HomeComponent },
+    { path: 'Home', component: HomeComponent },
     { path: 'eventInfo', component: EventInfoComponent },
+    { path: 'AllEvent/:type', component: AllEventComponent },
   ];
   
   @NgModule({

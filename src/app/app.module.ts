@@ -17,6 +17,10 @@ import { BookingComponent } from './pages/booking/booking.component';
 import { HeaderService } from './shared/service/header.service';
 import { FaqComponent } from './faq/faq.component';
 import { PolicyComponent } from './policy/policy.component';
+import { AirlinesComponent } from './pages/eventTickets/airlines/airlines.component';
+import { BusComponent } from './pages/eventTickets/bus/bus.component';
+import { ShoppingComponent } from './pages/eventTickets/shopping/shopping.component';
+import { TravelComponent } from './pages/eventTickets/travel/travel.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +33,10 @@ import { PolicyComponent } from './policy/policy.component';
     BookingComponent,
     FaqComponent,
     PolicyComponent,
+    AirlinesComponent,
+    BusComponent,
+    ShoppingComponent,
+    TravelComponent,
   ],
   imports: [
     NgbModule.forRoot(), BrowserModule,

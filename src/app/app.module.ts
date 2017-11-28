@@ -11,6 +11,7 @@ import { FooterComponent } from './core/footer/footer.component';
 import { EventInfoComponent } from './pages/event-info/event-info.component';
 import { AllEventComponent } from './pages/eventTickets/all-event/all-event.component';
 import { HomeComponent } from './pages/home/home.component';
+import { BookingComponent } from './pages/booking/booking.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { HomeComponent } from './pages/home/home.component';
     EventInfoComponent,
     AllEventComponent,
     HomeComponent,
+    BookingComponent,
   ],
   imports: [
     NgbModule.forRoot(), BrowserModule,

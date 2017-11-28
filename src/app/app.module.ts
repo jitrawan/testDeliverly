@@ -21,6 +21,8 @@ import { AirlinesComponent } from './pages/eventTickets/airlines/airlines.compon
 import { BusComponent } from './pages/eventTickets/bus/bus.component';
 import { ShoppingComponent } from './pages/eventTickets/shopping/shopping.component';
 import { TravelComponent } from './pages/eventTickets/travel/travel.component';
+import { PaymentComponent } from './pages/payment/payment.component';
+
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import { TravelComponent } from './pages/eventTickets/travel/travel.component';
     BusComponent,
     ShoppingComponent,
     TravelComponent,
+    PaymentComponent
   ],
   imports: [
     NgbModule.forRoot(), BrowserModule,

@@ -12,8 +12,13 @@ import { FooterComponent } from './core/footer/footer.component';
 import { EventInfoComponent } from './pages/event-info/event-info.component';
 import { AllEventComponent } from './pages/eventTickets/all-event/all-event.component';
 import { HomeComponent } from './pages/home/home.component';
+import { BookingComponent } from './pages/booking/booking.component';
+
 import { HeaderService } from './shared/service/header.service';
+import { FaqComponent } from './faq/faq.component';
+import { PolicyComponent } from './policy/policy.component';
 import { PaymentComponent } from './pages/payment/payment.component';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +28,10 @@ import { PaymentComponent } from './pages/payment/payment.component';
     EventInfoComponent,
     AllEventComponent,
     HomeComponent,
-    PaymentComponent,
+    BookingComponent,
+    FaqComponent,
+    PolicyComponent,
+    PaymentComponent
   ],
   imports: [
     NgbModule.forRoot(), BrowserModule,

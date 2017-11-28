@@ -13,6 +13,7 @@ import { EventInfoComponent } from './pages/event-info/event-info.component';
 import { AllEventComponent } from './pages/eventTickets/all-event/all-event.component';
 import { HomeComponent } from './pages/home/home.component';
 import { HeaderService } from './shared/service/header.service';
+import { PaymentComponent } from './pages/payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { HeaderService } from './shared/service/header.service';
     EventInfoComponent,
     AllEventComponent,
     HomeComponent,
+    PaymentComponent,
   ],
   imports: [
     NgbModule.forRoot(), BrowserModule,

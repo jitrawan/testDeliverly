@@ -17,8 +17,10 @@ export class HeaderComponent implements OnInit {
     private showOverlay: boolean = false;
     private isLoginOpen: boolean = false;
     private isRegisterOpen: boolean = false;
+    private isShowForgotPassword: boolean = false;
 
     @ViewChild('navSideBar') private navSideBar: ElementRef;
+    @ViewChild('modalBox') private modalBox: ElementRef;
 
     @HostListener('window:resize', ['$event'])
     onWindowResize(event) {
@@ -43,7 +45,6 @@ export class HeaderComponent implements OnInit {
 
         this.headerService.getHeaderMenu().subscribe(response => {
             this.headerModel = response['data'];
-            console.log(this.headerModel)
         });
 
         this.checkSidebar(window.innerWidth);
@@ -71,12 +72,20 @@ export class HeaderComponent implements OnInit {
     triggerDialog(type:string) {
 
         this.showOverlay = true;
-
+        this.renderer.addClass(this.modalBox.nativeElement, 'show');
+        
         if(type === 'login') {
+            this.isRegisterOpen = false;
+            this.isShowForgotPassword = false;
             this.isLoginOpen = true;
         } else if(type === 'signUp') {
             this.isLoginOpen = false;
+            this.isShowForgotPassword = false;
             this.isRegisterOpen = true;
+        } else if(type === 'forgot') {
+            this.isLoginOpen = false;
+            this.isRegisterOpen = false;
+            this.isShowForgotPassword = true;
         }
         
         this.isSidebarOpen = false;
@@ -85,11 +94,14 @@ export class HeaderComponent implements OnInit {
 
 
     closeAllDialog() {
+        this.renderer.removeClass(this.modalBox.nativeElement, 'show');
+        this.renderer.removeClass(this.navSideBar.nativeElement, 'show');
+        
         this.isSidebarOpen = false;
         this.showOverlay = false;
         this.isLoginOpen = false;
         this.isRegisterOpen = false;
-        this.renderer.removeClass(this.navSideBar.nativeElement, 'show');
+        this.isShowForgotPassword = false;
     }
     
     checkSidebar(width) {

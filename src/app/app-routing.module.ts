@@ -8,9 +8,11 @@ import { BookingComponent } from './pages/booking/booking.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/', pathMatch: 'full' },
-    { path: '', component: AllEventComponent },
-    { path: 'eventInfo', component: EventInfoComponent },
+    { path: '', component: HomeComponent },
     { path: 'booking', component: BookingComponent },
+    { path: 'Home', component: HomeComponent },
+    { path: 'eventInfo', component: EventInfoComponent },
+    { path: 'AllEvent/:type', component: AllEventComponent },
   ];
   
   @NgModule({

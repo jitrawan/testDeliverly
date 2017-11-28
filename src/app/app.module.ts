@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 
 import { HeaderComponent } from './core/header/header.component';
@@ -13,6 +14,7 @@ import { AllEventComponent } from './pages/eventTickets/all-event/all-event.comp
 import { HomeComponent } from './pages/home/home.component';
 import { BookingComponent } from './pages/booking/booking.component';
 
+import { HeaderService } from './shared/service/header.service';
 
 @NgModule({
   declarations: [
@@ -27,8 +29,9 @@ import { BookingComponent } from './pages/booking/booking.component';
   imports: [
     NgbModule.forRoot(), BrowserModule,
     AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ HeaderService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

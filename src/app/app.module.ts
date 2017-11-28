@@ -15,6 +15,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { BookingComponent } from './pages/booking/booking.component';
 
 import { HeaderService } from './shared/service/header.service';
+import { FaqComponent } from './faq/faq.component';
+import { PolicyComponent } from './policy/policy.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { HeaderService } from './shared/service/header.service';
     AllEventComponent,
     HomeComponent,
     BookingComponent,
+    FaqComponent,
+    PolicyComponent,
   ],
   imports: [
     NgbModule.forRoot(), BrowserModule,

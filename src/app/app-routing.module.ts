@@ -5,6 +5,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { AllEventComponent } from './pages/eventTickets/all-event/all-event.component';
 import { EventInfoComponent } from './pages/event-info/event-info.component';
 import { BookingComponent } from './pages/booking/booking.component';
+import { PolicyComponent } from './policy/policy.component';
+import { FaqComponent } from './faq/faq.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/', pathMatch: 'full' },
@@ -12,6 +14,8 @@ const routes: Routes = [
     { path: 'booking', component: BookingComponent },
     { path: 'Home', component: HomeComponent },
     { path: 'eventInfo', component: EventInfoComponent },
+    { path: 'policy', component: PolicyComponent },
+    { path: 'faq', component: FaqComponent },
     { path: 'AllEvent/:type', component: AllEventComponent },
   ];
   

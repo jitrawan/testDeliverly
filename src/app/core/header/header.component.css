@@ -506,6 +506,10 @@ ul.footer {
     #searchBox {
         height: 30px;
     }
+    
+    .modal-box.show {
+        width: 100%;
+    }
 }
 
 @media (max-width: 767px) {

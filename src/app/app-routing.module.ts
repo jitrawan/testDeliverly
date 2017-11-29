@@ -21,10 +21,10 @@ const routes: Routes = [
     { path: 'eventInfo', component: EventInfoComponent },
     { path: 'policy', component: PolicyComponent },
     { path: 'faq', component: FaqComponent },
-    { path: 'transport/Airlines', component: AirlinesComponent },
-    { path: 'transport/Bus', component: BusComponent },
+    { path: 'transport/airlines', component: AirlinesComponent },
+    { path: 'transport/bus', component: BusComponent },
     { path: 'shopping', component: ShoppingComponent },
-    { path: 'transport/Travel', component: TravelComponent },
+    { path: 'transport/travel', component: TravelComponent },
     { path: 'allevent/:type', component: AllEventComponent },
     { path: 'payment', component: PaymentComponent },
   ];

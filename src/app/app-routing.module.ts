@@ -7,10 +7,13 @@ import { EventInfoComponent } from './pages/event-info/event-info.component';
 import { BookingComponent } from './pages/booking/booking.component';
 import { PolicyComponent } from './policy/policy.component';
 import { FaqComponent } from './faq/faq.component';
+<<<<<<< HEAD
+=======
 import { AirlinesComponent } from './pages/eventTickets/airlines/airlines.component';
 import { BusComponent } from './pages/eventTickets/bus/bus.component';
 import { ShoppingComponent } from './pages/eventTickets/shopping/shopping.component';
 import { TravelComponent } from './pages/eventTickets/travel/travel.component';
+>>>>>>> e96048dc94ba14ceee7555de9d1fd9dac6369179
 import { PaymentComponent } from './pages/payment/payment.component';
 
 const routes: Routes = [
@@ -21,10 +24,13 @@ const routes: Routes = [
     { path: 'eventInfo', component: EventInfoComponent },
     { path: 'policy', component: PolicyComponent },
     { path: 'faq', component: FaqComponent },
+<<<<<<< HEAD
+=======
     { path: 'transport/airlines', component: AirlinesComponent },
     { path: 'transport/bus', component: BusComponent },
     { path: 'shopping', component: ShoppingComponent },
     { path: 'transport/travel', component: TravelComponent },
+>>>>>>> e96048dc94ba14ceee7555de9d1fd9dac6369179
     { path: 'allevent/:type', component: AllEventComponent },
     { path: 'payment', component: PaymentComponent },
   ];

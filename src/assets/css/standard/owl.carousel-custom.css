@@ -297,17 +297,21 @@
 }
 
 .owl-carousel .owl-dots .owl-dot.active span,
+<<<<<<< HEAD
+.owl-carousel .owl-dots .owl-dot:hover span { opacity: 1; }
+=======
 .owl-carousel .owl-dots .owl-dot:hover span { opacity: 1; }
 
 
 @media (max-width: 767px) {
 
 	.owl-carousel .owl-nav .owl-next {
-		right: -10px !important;
+		right: -15px !important;
 	}
 
 	.owl-carousel .owl-nav .owl-prev {
-		left: -10px !important;
+		left: -15px !important;
 	}
 
 }
+>>>>>>> e96048dc94ba14ceee7555de9d1fd9dac6369179

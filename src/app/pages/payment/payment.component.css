@@ -83,8 +83,6 @@
     color: #C32E34;
 }
 
-
-
 /* Booking Information */
 
 .info-header h4 {
@@ -97,10 +95,27 @@
 }
 
 .titleText {
-    font-weight: bold;
+    font-size: 18px
 }
-.textValue {
 
+.textValue {
+    font-size: 17px;
+    font-weight: 300;
+}
+
+.btn-next {
+    font-size: 20px;
+    background-color : #37BDE0;
+    border-bottom: 3px solid #389ABF;
+    color: #fff;
+    padding-left: 5.5rem;
+    padding-right: 5.5rem;
+    border-radius: 2rem;
+    cursor: pointer;
+}
+
+.btn-next:hover {
+    background-color: #3dabc7;
 }
 
 @media (max-width: 1023px) {

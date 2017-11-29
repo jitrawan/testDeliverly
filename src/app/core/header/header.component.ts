@@ -78,6 +78,7 @@ export class HeaderComponent implements OnInit {
             this.isRegisterOpen = false;
             this.isShowForgotPassword = false;
             this.isLoginOpen = true;
+            window.scrollTo(0, 0);
         } else if(type === 'signUp') {
             this.isLoginOpen = false;
             this.isShowForgotPassword = false;

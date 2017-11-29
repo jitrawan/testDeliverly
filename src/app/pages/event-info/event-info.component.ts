@@ -49,7 +49,7 @@ export class EventInfoComponent implements OnInit {
   }
 
   adjustStickyHeader(){    
-    document.getElementById('headerSticky').style.width = document.getElementById('container-fluid').offsetWidth+'';	
+    // document.getElementById('headerSticky').style.width = document.getElementById('container-fluid').offsetWidth+'';	
     console.log('window.outerWidth : ' + window.outerWidth);
     if(window.outerWidth <= 1100 && window.outerWidth > 450) {
       console.log('768');

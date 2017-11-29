@@ -1,0 +1,96 @@
+.topicWrapper {
+    background-color: #eff0f2;
+    padding: 80px;
+    text-align: center;
+    letter-spacing: 6px;
+}
+
+.faqicon{
+    font-size: 50px;
+    color: #515659;
+}
+
+.faqBanner {
+    font-size: 42px;
+    color: #515659;
+    border-bottom: 2px solid #515659;
+    padding: 0px 50px 15px 50px;
+}
+
+.contentWrapper {
+    padding-top: 50px;
+}
+
+.rightWrapper {
+    border-left: 2px solid #515659;
+    height: 500px;
+}
+
+.rightWrapper .topic {
+    padding-left: 30px;
+    font-size: 32px;
+    color: #b3b3b3;
+    letter-spacing: 8px;
+}
+
+.rightWrapper .information {
+    padding: 15px 0px 0px 30px;
+}
+
+.leftWrapper {
+    height: 500px;
+}
+
+.menu {
+    font-size: 16px;
+    color: #1b1464;
+    letter-spacing: 6px;
+    padding-top: 30px;
+    cursor: pointer;
+}
+
+.menu:hover {
+    color: #b3b3b3;
+}
+
+.menu:active {
+    color: #b3b3b3;
+}
+
+.menu:hover .rightArrow {
+    color: #1b1464;
+    display: inline;
+}
+
+.menu:active .rightArrow {
+    color: #3191f5;
+    display: inline;
+}
+
+.rightArrow {
+    display: none;
+    font-size: 22px;
+}
+
+@media (max-width: 768px) {
+    .topicWrapper {
+        padding: 40px;
+    }
+    .faqBanner {
+        font-size: 22px;
+        padding: 0px 30px 5px 30px;
+    }
+    .leftWrapper {
+        padding-bottom: 30px;
+        padding-left: 50px;
+    }
+    .rightWrapper {
+        border-top: 2px solid #515659;
+        border-left: 0px solid #515659;
+        padding-top: 30px;
+    }
+    .leftWrapper {
+        height: auto;
+    }
+    
+}

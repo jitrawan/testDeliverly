@@ -1,8 +1,12 @@
 .cardwrapper {
-	border: 1px #fff solid;
+	border: 0px #fff solid !important;
 	border-top: none;
 	border-left: none;
 	padding-bottom: 40px;
+}
+
+.card {
+	border: 0px #fff solid !important;
 }
 
 .imgResponsive {
@@ -12,7 +16,8 @@
 .cardbox {
 	box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.5);
 	position: relative;
-	max-height: 480px;
+	min-height: 200px;
+	cursor: pointer;
 }
 
 .card-deck {
@@ -175,11 +180,7 @@
 	font-size: 12px;
 }
 
-@media (max-width: 480px) {
-	.cardWrapper {
-		padding-left: 1rem;
-		padding-right: 1rem;
-	}
+@media screen and (min-width : 320px) and (max-width : 600px) {
 	.iconTopic {
 		padding-left: 10px;
 		height: auto;
@@ -196,13 +197,15 @@
 		bottom: -58%;
 	}
 	.eventName {
-		font-size: 12px;
+		font-size: 14px;
 		text-align: center;
 	}
-	.cardwrapper {
-		margin: 0 auto;
+	.eventName.text_overflow {
+		width : 100%;
 	}
-	.cardbox{
-		max-height: 300px;
+	.cardbox {
+		min-height: 200px;
+		max-width: 250px;
+		margin: 0 auto;
 	}
 }

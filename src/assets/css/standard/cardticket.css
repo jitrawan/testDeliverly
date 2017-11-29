@@ -1,10 +1,4 @@
 .cardwrapper {
-<<<<<<< HEAD
-	border: 0px #fff solid !important;
-	border-top: none;
-	border-left: none;
-	padding-bottom: 40px;
-=======
   border: 0px #fff solid !important;
   border-top: none;
   border-left: none;
@@ -13,11 +7,6 @@
 
 .card {
   border: 0px #fff solid !important;
->>>>>>> e96048dc94ba14ceee7555de9d1fd9dac6369179
-}
-
-.card {
-	border: 0px #fff solid !important;
 }
 
 .imgResponsive {
@@ -26,17 +15,10 @@
 }
 
 .cardbox {
-<<<<<<< HEAD
-	box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.5);
-	position: relative;
-	min-height: 200px;
-	cursor: pointer;
-=======
   box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.5);
   position: relative;
   min-height: 200px;
   cursor: pointer;
->>>>>>> e96048dc94ba14ceee7555de9d1fd9dac6369179
 }
 
 .card-deck {
@@ -207,40 +189,6 @@
 }
 
 .font12 {
-<<<<<<< HEAD
-	font-size: 12px;
-}
-
-@media screen and (min-width : 320px) and (max-width : 600px) {
-	.iconTopic {
-		padding-left: 10px;
-		height: auto;
-		font-size: 18px;
-	}
-	.border-ticket-title {
-		margin-top: 1rem;
-	}
-	.ticket-recommend img {
-		max-height: 30px;
-	}
-	.ticket-recommend .border-ticket-title:after {
-		width: 80%;
-		bottom: -58%;
-	}
-	.eventName {
-		font-size: 14px;
-		text-align: center;
-	}
-	.eventName.text_overflow {
-		width : 100%;
-	}
-	.cardbox {
-		min-height: 200px;
-		max-width: 250px;
-		margin: 0 auto;
-	}
-}
-=======
   font-size: 12px;
 }
 
@@ -278,4 +226,3 @@
     margin: 0 auto;
   }
 }
->>>>>>> e96048dc94ba14ceee7555de9d1fd9dac6369179

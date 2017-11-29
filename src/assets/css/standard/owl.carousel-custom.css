@@ -297,9 +297,6 @@
 }
 
 .owl-carousel .owl-dots .owl-dot.active span,
-<<<<<<< HEAD
-.owl-carousel .owl-dots .owl-dot:hover span { opacity: 1; }
-=======
 .owl-carousel .owl-dots .owl-dot:hover span { opacity: 1; }
 
 
@@ -314,4 +311,3 @@
 	}
 
 }
->>>>>>> e96048dc94ba14ceee7555de9d1fd9dac6369179

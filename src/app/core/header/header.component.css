@@ -254,7 +254,7 @@ a:focus {
 
 .modal-box.show {
     visibility: visible;
-    width: 400px;
+    width: 450px;
     padding: 10px;
     opacity: 1;
 }

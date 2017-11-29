@@ -1,13 +1,22 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+<<<<<<< HEAD
 import { Router, NavigationEnd } from '@angular/router';
+=======
+import { Router , NavigationEnd } from '@angular/router';
+>>>>>>> e96048dc94ba14ceee7555de9d1fd9dac6369179
 import 'owl.carousel';
 declare var jQuery: any;
 
 @Component({
 	selector: 'app-home',
 	templateUrl: './home.component.html',
+<<<<<<< HEAD
 	styleUrls: ['./home.component.css',
 		'../../../assets/css/standard/cardticket.css']
+=======
+	styleUrls: [ './home.component.css' ,
+		'../../../assets/css/standard/cardticket.css' ]
+>>>>>>> e96048dc94ba14ceee7555de9d1fd9dac6369179
 })
 export class HomeComponent implements OnInit {
 
@@ -43,7 +52,11 @@ export class HomeComponent implements OnInit {
 		{ performId: '17079', performName: 'Event 17079', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
 		{ performId: '17080', performName: 'Event 17080', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
 	];
+<<<<<<< HEAD
 	constructor(private router: Router) { }
+=======
+	constructor( private router: Router ) { }
+>>>>>>> e96048dc94ba14ceee7555de9d1fd9dac6369179
 
 	ngOnInit() {
 		this.router.events.subscribe((evt) => {
@@ -61,13 +74,18 @@ export class HomeComponent implements OnInit {
 	slideLoaded() {
 		this.countImagesLoaded++;
 
+<<<<<<< HEAD
 		if (this.countImagesLoaded == this.slideBannerImages.length) {
+=======
+		if(this.countImagesLoaded == this.slideBannerImages.length) {
+>>>>>>> e96048dc94ba14ceee7555de9d1fd9dac6369179
 
 			jQuery('#slider .owl-carousel').owlCarousel({
 				items: 1,
 				animateOut: 'fadeOutLeft',
 				animateIn: 'zoomInRight',
 			});
+<<<<<<< HEAD
 
 			jQuery('#sliderCard .owl-carousel').owlCarousel({
 				items: 5,
@@ -80,6 +98,35 @@ export class HomeComponent implements OnInit {
 	}
 
 	goEventInfo(performId: string) {
+=======
+			
+			jQuery('#sliderCard .owl-carousel').owlCarousel({
+				loop : true,
+				items: 1,
+				dots: false,
+				nav: true,
+				navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
+				responsive : {
+					0 : {
+						items : 1
+					},
+					480 : {
+						items : 2
+					},
+					992 : {
+						items : 3
+					},
+					1366 : {
+						items : 5
+					}
+				}
+			});
+		}
+		
+	}
+
+	goEventInfo(performId:string){
+>>>>>>> e96048dc94ba14ceee7555de9d1fd9dac6369179
 		this.router.navigate(['/eventInfo']);
 	}
 }

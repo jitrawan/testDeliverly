@@ -245,9 +245,7 @@ a:focus {
     margin-left: auto; 
     margin-right: auto;
     z-index: 2;
-    width: 400px;
     background-color: #fff;
-    padding: 10px;
     border-radius: 20px;
     -webkit-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.33);
     -moz-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.33);
@@ -256,6 +254,8 @@ a:focus {
 
 .modal-box.show {
     visibility: visible;
+    width: 400px;
+    padding: 10px;
     opacity: 1;
 }
 

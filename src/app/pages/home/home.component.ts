@@ -70,10 +70,25 @@ export class HomeComponent implements OnInit {
 			});
 			
 			jQuery('#sliderCard .owl-carousel').owlCarousel({
-				items:5,
-				dots : false,
-				nav : true,
-				navText: ['<i class="fa fa-chevron-left"></i>','<i class="fa fa-chevron-right"></i>'],
+				loop : true,
+				items: 1,
+				dots: false,
+				nav: true,
+				navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
+				responsive : {
+					0 : {
+						items : 1
+					},
+					480 : {
+						items : 2
+					},
+					992 : {
+						items : 3
+					},
+					1366 : {
+						items : 5
+					}
+				}
 			});
 		}
 		

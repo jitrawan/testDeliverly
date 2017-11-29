@@ -298,3 +298,16 @@
 
 .owl-carousel .owl-dots .owl-dot.active span,
 .owl-carousel .owl-dots .owl-dot:hover span { opacity: 1; }
+
+
+@media (max-width: 767px) {
+
+	.owl-carousel .owl-nav .owl-next {
+		right: -10px !important;
+	}
+
+	.owl-carousel .owl-nav .owl-prev {
+		left: -10px !important;
+	}
+
+}

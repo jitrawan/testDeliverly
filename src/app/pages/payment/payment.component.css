@@ -1,0 +1,110 @@
+.step-wrapper {
+    margin : 0 auto;
+    max-width : 60%;
+}
+
+.step-wrapper .step-title {
+    color: #C32E34;
+    font-weight: 700;
+    margin: 1.6rem 0;
+    text-align: center;
+}
+
+.step-wrapper hr {
+    border-top: 3px solid rgba(0, 0, 0, 0.1);
+}
+
+.step-process {
+    background-color : #d4d4d4;
+    padding: 2rem;
+    list-style: none;
+    display : flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.step-process li.step-order {
+    margin-left: 3rem;
+    max-width : 30%;
+}
+
+.step-process .step-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step-process .step-arrow {
+    color: #535353;
+    margin-left: 3rem;
+    margin-top: -1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.step-process .step-arrow.active > div {
+    color: #C32E34;
+}
+
+.step-process li:first-child {
+    margin-left : 0;
+}
+
+.step-process li h5 {
+    text-align: center;
+    font-weight: 500;
+    margin-top: 0.6rem;
+}
+
+.step-process li.step-order > div {
+    background-color: #535353;
+    border-radius: 0.4rem;
+    max-height : 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 5rem;
+}
+
+.step-process li.step-order > h5 {
+    color: #808080;
+}
+
+.step-process li.step-order.active > div {
+    background-color: #C32E34;
+}
+
+.step-process li.step-order.active > h5 {
+    color: #C32E34;
+}
+
+
+
+/* Booking Information */
+
+.info-header h4 {
+    display: inline;
+}
+
+.split-solid-border {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+    padding-bottom : 0.7rem;
+}
+
+.titleText {
+    font-weight: bold;
+}
+.textValue {
+
+}
+
+@media (max-width: 1023px) {
+    .step-wrapper {
+        max-width : 100%;
+    }
+}

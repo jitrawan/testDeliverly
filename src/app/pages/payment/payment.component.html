@@ -39,49 +39,56 @@
 
 	</div>
 
-	<div class="row mt-5 pb-2">
-		<div class="col-12 info-header split-solid-border">
-			<i class="fa fa-user fa-2x fa-fw"></i>
-			<h4>Customer Information</h4>
-		</div>
-	</div>
+	<div class="info-wrapper mt-5">
 
-	<div class="row mt-2">
-		<div class="col-12 col-md-4 offset-md-1">
-			<span class="titleText">Name - Surname</span>
-		</div>
-		<div class="col-12 col-sm-7">
-			<span class="textValue">Burin Sangwan</span>
-		</div>
-		<div class="col-12 col-md-4 offset-md-1">
-			<span class="titleText">Email - Address</span>
-		</div>
-		<div class="col-12 col-sm-7">
-			<span class="textValue">burinsan@gosoft.co.th</span>
-		</div>
-		<div class="col-12 col-md-4 offset-md-1">
-			<span class="titleText">Mobile No</span>
-		</div>
-		<div class="col-12 col-sm-7">
-			<span class="textValue">085-199-2697</span>
-		</div>
-		<div class="col-12 col-md-4 offset-md-1">
-			<span class="titleText">ID Card / Passport ID</span>
-		</div>
-		<div class="col-12 col-sm-7">
-			<span class="textValue">1103100207792</span>
-		</div>
-		<div class="col-12 col-md-4 offset-md-1">
-			<span class="titleText">Shipping Address</span>
-		</div>
-		<div class="col-12 col-sm-7">
-			<span class="textValue">1015/15 bkk</span>
-		</div>
-	</div>
+		<ng-container *ngIf="menuStep==constMenu.booking">
+		
+			<div class="row pb-2">
+				<div class="col-12 info-header split-solid-border">
+					<i class="fa fa-user fa-2x fa-fw"></i>
+					<h4>Customer Information</h4>
+				</div>
+			</div>
+		
+			<div class="row mt-2">
+				<div class="col-12 col-md-4 offset-md-1">
+					<span class="titleText">Name - Surname</span>
+				</div>
+				<div class="col-12 col-sm-7">
+					<span class="textValue">Burin Sangwan</span>
+				</div>
+				<div class="col-12 col-md-4 offset-md-1">
+					<span class="titleText">Email - Address</span>
+				</div>
+				<div class="col-12 col-sm-7">
+					<span class="textValue">burinsan@gosoft.co.th</span>
+				</div>
+				<div class="col-12 col-md-4 offset-md-1">
+					<span class="titleText">Mobile No</span>
+				</div>
+				<div class="col-12 col-sm-7">
+					<span class="textValue">085-199-2697</span>
+				</div>
+				<div class="col-12 col-md-4 offset-md-1">
+					<span class="titleText">ID Card / Passport ID</span>
+				</div>
+				<div class="col-12 col-sm-7">
+					<span class="textValue">1103100207792</span>
+				</div>
+				<div class="col-12 col-md-4 offset-md-1">
+					<span class="titleText">Shipping Address</span>
+				</div>
+				<div class="col-12 col-sm-7">
+					<span class="textValue">1015/15 bkk</span>
+				</div>
+			</div>
+		
+			<div class="row justify-content-center mt-5">
+				<div class="col-3 text-center">
+					<button class="btn btn-next" type="button">Next</button>
+				</div>
+			</div>
 
-	<div class="row justify-content-center mt-5">
-		<div class="col-3 text-center">
-			<button class="btn btn-next" type = "button">Next</button>
-		</div>
+		</ng-container>
 	</div>
 </div>

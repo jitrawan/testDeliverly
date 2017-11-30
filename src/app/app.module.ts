@@ -15,8 +15,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { BookingComponent } from './pages/booking/booking.component';
 
 import { HeaderService } from './shared/service/header.service';
-import { FaqComponent } from './faq/faq.component';
-import { PolicyComponent } from './policy/policy.component';
+import { FaqComponent } from './pages/faq/faq.component';
+import { PolicyComponent } from './pages/policy/policy.component';
 import { AirlinesComponent } from './pages/eventTickets/airlines/airlines.component';
 import { BusComponent } from './pages/eventTickets/bus/bus.component';
 import { ShoppingComponent } from './pages/eventTickets/shopping/shopping.component';

@@ -26,7 +26,7 @@ const routes: Routes = [
     { path: 'shopping', component: ShoppingComponent },
     { path: 'transport/travel', component: TravelComponent },
     { path: 'allevent/:type', component: AllEventComponent },
-    { path: 'payment', component: PaymentComponent },
+    { path: 'payment/:step', component: PaymentComponent },
   ];
   
   @NgModule({

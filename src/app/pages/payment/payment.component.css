@@ -8,6 +8,7 @@
     font-weight: 700;
     margin: 1.6rem 0;
     text-align: center;
+    text-transform: uppercase;
 }
 
 .step-wrapper hr {
@@ -28,6 +29,7 @@
 .step-process li.step-order {
     margin-left: 3rem;
     max-width : 30%;
+    cursor: pointer;
 }
 
 .step-process .step-arrow {
@@ -73,6 +75,7 @@
 
 .step-process li.step-order > h5 {
     color: #808080;
+    text-transform: uppercase;
 }
 
 .step-process li.step-order.active > div {
@@ -116,6 +119,41 @@
 
 .btn-next:hover {
     background-color: #3dabc7;
+}
+
+.btn-cancel {
+    font-size: 20px;
+    background-color : #ECECEC;
+    border-bottom: 3px solid #C2C6C7;
+    color: #B3B3B3;
+    padding-left: 5.5rem;
+    padding-right: 5.5rem;
+    border-radius: 2rem;
+    cursor: pointer;
+}
+
+.btn-cancel:focus,.btn-cancel:active {
+    outline: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+.btn-cancel:hover {
+    background-color: #dedede;
+}
+
+
+/* Slide */
+
+.owl-carousel .item img {
+    margin: 0 auto;
+}
+
+.owl-carousel .item i {
+    top: 0;
+    right: -10%;
+    position: absolute;
+    display : none;
 }
 
 @media (max-width: 1023px) {

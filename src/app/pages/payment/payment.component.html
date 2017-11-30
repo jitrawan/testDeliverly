@@ -1,39 +1,40 @@
 <div class="container">
 	<div class="step-wrapper mt-5">
 		<ul class="step-process">
-			<li class="step-order active">
+			<!-- <li class="step-order" [ngClass]="{'active' : menuStep.routeTo==constMenu.booking.routeTo}"> -->
+			<li class="step-order" (click)="changeStep(constMenu.booking.routeTo)" [ngClass]="menuStep.routeTo==constMenu.booking.routeTo ? 'active' : '' ">
 				<div>
 					1
 				</div>
-				<h5>BOOKING</h5>
+				<h5>{{constMenu.booking.displayName}}</h5>
 			</li>
-			<li class="step-arrow active">
+			<li class="step-arrow" [ngClass]="menuStep.routeTo==constMenu.booking.routeTo ? 'active' : '' ">
 				<div>
 					<i class="fa fa-play" aria-hidden="true"></i>
 				</div>
 			</li>
-			<li class="step-order">
+			<li class="step-order" (click)="changeStep(constMenu.payment.routeTo)" [ngClass]="menuStep.routeTo==constMenu.payment.routeTo ? 'active' : '' ">
 				<div>
 					2
 				</div>
-				<h5>PAYMENT</h5>
+				<h5>{{constMenu.payment.displayName}}</h5>
 			</li>
-			<li class="step-arrow">
+			<li class="step-arrow" [ngClass]="menuStep.routeTo==constMenu.payment.routeTo ? 'active' : '' ">
 				<div>
 					<i class="fa fa-play" aria-hidden="true"></i>
 				</div>
 			</li>
-			<li class="step-order">
+			<li class="step-order" (click)="changeStep(constMenu.summary.routeTo)" [ngClass]="menuStep.routeTo==constMenu.summary.routeTo ? 'active' : '' ">
 				<div>
 					3
 				</div>
-				<h5>SUMMARY</h5>
+				<h5>{{constMenu.summary.displayName}}</h5>
 			</li>
 		</ul>
 
 		<hr class="mt-5">
 			<h3 class="step-title">
-				BOOKING
+				{{menuStep.displayName}}
 			</h3>
 		<hr>
 
@@ -41,7 +42,7 @@
 
 	<div class="info-wrapper mt-5">
 
-		<ng-container *ngIf="menuStep==constMenu.booking">
+		<ng-container *ngIf="menuStep.routeTo==constMenu.booking.routeTo">
 		
 			<div class="row pb-2">
 				<div class="col-12 info-header split-solid-border">
@@ -84,11 +85,118 @@
 			</div>
 		
 			<div class="row justify-content-center mt-5">
-				<div class="col-3 text-center">
-					<button class="btn btn-next" type="button">Next</button>
+				<div class="col-12 text-center">
+					<button class="btn btn-next" (click)="changeStep(constMenu.payment.routeTo)" type="button">Next</button>
 				</div>
 			</div>
 
+		</ng-container>
+
+		<ng-container *ngIf="menuStep.routeTo==constMenu.payment.routeTo">
+
+			<section id = "discount">
+				<div class="row justify-content-center">
+					<div class="col-12 col-lg-9 mt-2">
+						<h4>Select discount</h4>
+						<div class="owl-carousel owl-theme mt-3">
+							<div data-discount-id="MCard" class="item">
+								<i class="fa fa-check-circle fa-2x fa-fw"></i>
+								<img class="rounded" src="../../assets/images/discount/mcard.png" />
+								<div class="innerDiscount">
+									<div class="titleDiscount">M Card</div>
+									<div class="discountDetail">รหัสส่วนลด สมาชิกบัตร M Card ของ The Mall รับส่วนลด 10%
+									</div>
+								</div>
+							</div>
+							<div data-discount-id="DTAC REWARD" class="item">
+								<i class="fa fa-check-circle fa-2x fa-fw"></i>
+								<img class="rounded" src="../../assets/images/discount/dtac.png" />
+								<div class="innerDiscount">
+									<div class="titleDiscount">DTAC REWARD</div>
+									<div class="discountDetail">
+										กด *123*222# เพื่อรับส่วนลด 200 บาทสำหรับสมาชิก Dtac Silver ขึ้นไป
+									</div>
+								</div>
+							</div>
+							<div data-discount-id="TRUE-H" class="item">
+								<i class="fa fa-check-circle fa-2x fa-fw"></i>
+								<img class="rounded" src="../../assets/images/discount/trueh.png" />
+								<div class="innerDiscount">
+									<div class="titleDiscount">True move H</div>
+									<div class="discountDetail">กด *142*10# สำหรับสมาชิกรายเดือนรับส่วนลด 100 บาท</div>
+								</div>
+							</div>
+							<div data-discount-id="AIS-SERENADE" class="item">
+								<i class="fa fa-check-circle fa-2x fa-fw"></i>
+								<img class="rounded" src="../../assets/images/discount/ais.png" />
+								<div class="innerDiscount">
+									<div class="titleDiscount">Senenade Privillage</div>
+									<div class="discountDetail">
+										สำหรับลูกค้า AIS SERENADE ตั้งแต่ GOLD ขึ้นไปรับส่วนลด 300 บาท
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<div class="row justify-content-center mt-5">
+				<div class="col-12 text-center">
+					<button class="btn btn-next" (click)="changeStep(constMenu.summary.routeTo)" type="button">Next</button>
+				</div>
+			</div>
+		</ng-container>
+
+		<ng-container *ngIf="menuStep.routeTo==constMenu.summary.routeTo">
+		
+			<div class="row pb-2">
+				<div class="col-12 info-header split-solid-border">
+					<i class="fa fa-calculator fa-2x fa-fw"></i>
+					<h4>Order Information</h4>
+				</div>
+			</div>
+		
+			<div class="row mt-2">
+				<div class="col-12 col-md-4 offset-md-1">
+					<span class="titleText">Name - Surname</span>
+				</div>
+				<div class="col-12 col-sm-7">
+					<span class="textValue">Burin Sangwan</span>
+				</div>
+				<div class="col-12 col-md-4 offset-md-1">
+					<span class="titleText">Email - Address</span>
+				</div>
+				<div class="col-12 col-sm-7">
+					<span class="textValue">burinsan@gosoft.co.th</span>
+				</div>
+				<div class="col-12 col-md-4 offset-md-1">
+					<span class="titleText">Mobile No</span>
+				</div>
+				<div class="col-12 col-sm-7">
+					<span class="textValue">085-199-2697</span>
+				</div>
+				<div class="col-12 col-md-4 offset-md-1">
+					<span class="titleText">ID Card / Passport ID</span>
+				</div>
+				<div class="col-12 col-sm-7">
+					<span class="textValue">1103100207792</span>
+				</div>
+				<div class="col-12 col-md-4 offset-md-1">
+					<span class="titleText">Shipping Address</span>
+				</div>
+				<div class="col-12 col-sm-7">
+					<span class="textValue">1015/15 bkk</span>
+				</div>
+			</div>
+		
+			<div class="row justify-content-center mt-5">
+				<div class="col-12 text-center">
+					<button class="btn btn-cancel" type="button">CANCEL</button>
+					<button class="btn btn-next" type="button">PAYMENT</button>
+				</div>
+			</div>
+		
 		</ng-container>
 	</div>
 </div>

@@ -12,12 +12,18 @@ export class HeaderComponent implements OnInit {
 
     private headerModel: HeaderModel[];
     private resizeTimeout: number = 0;
-    private isMobileSize: boolean = false;
-    private isSidebarOpen: boolean = false;
-    private showOverlay: boolean = false;
-    private isLoginOpen: boolean = false;
-    private isRegisterOpen: boolean = false;
-    private isShowForgotPassword: boolean = false;
+    isMobileSize: boolean = false;
+    isSidebarOpen: boolean = false;
+    showOverlay: boolean = false;
+    isLoginOpen: boolean = false;
+    isRegisterOpen: boolean = false;
+    isShowForgotPassword: boolean = false;
+
+    actionTrigger: triggerType = {
+        login: 'login',
+        signUp: 'signup',
+        forgotPassword: 'forgot'
+    }
 
     @ViewChild('navSideBar') private navSideBar: ElementRef;
     @ViewChild('modalBox') private modalBox: ElementRef;
@@ -74,16 +80,16 @@ export class HeaderComponent implements OnInit {
         this.showOverlay = true;
         this.renderer.addClass(this.modalBox.nativeElement, 'show');
         
-        if(type === 'login') {
+        if(type === this.actionTrigger.login) {
             this.isRegisterOpen = false;
             this.isShowForgotPassword = false;
             this.isLoginOpen = true;
             window.scrollTo(0, 0);
-        } else if(type === 'signUp') {
+        } else if(type === this.actionTrigger.signUp) {
             this.isLoginOpen = false;
             this.isShowForgotPassword = false;
             this.isRegisterOpen = true;
-        } else if(type === 'forgot') {
+        } else if(type === this.actionTrigger.forgotPassword) {
             this.isLoginOpen = false;
             this.isRegisterOpen = false;
             this.isShowForgotPassword = true;
@@ -117,4 +123,10 @@ export class HeaderComponent implements OnInit {
     overlayClicked(event) {
         this.closeAllDialog();
     }
+}
+
+interface triggerType {
+    login: string;
+    signUp: string;
+    forgotPassword: string;
 }

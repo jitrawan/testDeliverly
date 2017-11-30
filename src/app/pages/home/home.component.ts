@@ -12,7 +12,7 @@ declare var jQuery: any;
 export class HomeComponent implements OnInit {
 
 	private countImagesLoaded = 0;
-	private slideBannerImages: Image[] = [
+	slideBannerImages: Image[] = [
 		{ pathName: 'https://s3-ap-southeast-1.amazonaws.com/haball-assets/Slide+All+Ticket-01.png', imageName: 'alt' },
 		{ pathName: 'https://s3-ap-southeast-1.amazonaws.com/haball-assets/Slide+All+Ticket-02.png', imageName: 'alt' },
 		{ pathName: 'https://s3-ap-southeast-1.amazonaws.com/haball-assets/Slide+All+Ticket-03.png', imageName: 'alt' },
@@ -20,21 +20,21 @@ export class HomeComponent implements OnInit {
 		{ pathName: 'https://s3-ap-southeast-1.amazonaws.com/haball-assets/Slide+All+Ticket-05.png', imageName: 'alt' }
 	];
 
-	private cardTicketsRecommend: CardTicket[] = [
+	cardTicketsRecommend: CardTicket[] = [
 		{ performId: '17070', performName: 'Event 17070', performShowDate: '31 - 10', performShowMonth: 'Dec/2017', image_path: 'assets/images/bmmf.jpg' },
 		{ performId: '17071', performName: 'Event 17071', performShowDate: '31 - 10', performShowMonth: 'Dec/2017', image_path: 'assets/images/bmmf.jpg' },
 		{ performId: '17072', performName: 'Event 17072', performShowDate: '31 - 10', performShowMonth: 'Dec/2017', image_path: 'assets/images/bmmf.jpg' },
 		{ performId: '17073', performName: 'Event 17073', performShowDate: '31 - 10', performShowMonth: 'Dec/2017', image_path: 'assets/images/bmmf.jpg' }
 	];
 
-	private cardTicketsHot: CardTicket[] = [
+	cardTicketsHot: CardTicket[] = [
 		{ performId: '17074', performName: 'Event 17074', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
 		{ performId: '17075', performName: 'Event 17075', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
 		{ performId: '17076', performName: 'Event 17076', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
 		{ performId: '17077', performName: 'Event 17077', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
 	];
 
-	private cardShowAll: CardTicket[] = [
+	cardShowAll: CardTicket[] = [
 		{ performId: '17074', performName: 'Event 17074', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
 		{ performId: '17075', performName: 'Event 17075', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
 		{ performId: '17076', performName: 'Event 17076', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },

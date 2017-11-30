@@ -14,7 +14,7 @@
         </div>
         <div class="sidebar-content" *ngIf="isMobileSize">
             <div class="col-lg-5 login-wrapper">
-                <button class="btn btn-Login" (click)="triggerDialog('login')" id="loginBtn">
+                <button class="btn btn-Login" (click)="triggerDialog(actionTrigger.login)" id="loginBtn">
                     <a class="atk-size-3">Register / Log In</a>
                 </button>
             </div>
@@ -62,7 +62,7 @@
                             <img class="flag" src="../assets/images/th-flag.png" alt="ภาษาไทย" />
                         </div>
                         <div class="col-lg-5 login-wrapper">
-                            <button class="btn btn-Login" (click)="triggerDialog('login')" id="loginBtn">
+                            <button class="btn btn-Login" (click)="triggerDialog(actionTrigger.login)" id="loginBtn">
                                 <a class="atk-size-3">Register / Log In</a>
                             </button>
                         </div>
@@ -129,7 +129,7 @@
                                     </label>
                                 </div> -->
                         <div class="col-12 text-right">
-                            <a class = "cursor-pointer modal-text-primary" (click)="triggerDialog('forgot')" >Forgot password?</a>
+                            <a class = "cursor-pointer modal-text-primary" (click)="triggerDialog(actionTrigger.forgotPassword)" >Forgot password?</a>
                         </div>
                     </div>
                 </div>
@@ -139,7 +139,7 @@
                 <hr class="under-signin">
                 <div class="col-md-12 p-2">
                     <p class="font-weight-bold">Not a member ?</p>
-                    <div class="col-md-12" (click)="triggerDialog('signUp')" id="signUpBtn" style="margin-top: -10px">
+                    <div class="col-md-12" (click)="triggerDialog(actionTrigger.signUp)" id="signUpBtn" style="margin-top: -10px">
                         <a class = "cursor-pointer modal-text-primary" >Sign up</a>
                     </div>
                 </div>
@@ -155,7 +155,7 @@
                 <!-- <img class="login-facebook" src="../assets/images/facebook_btn.png"> -->
                 <div class="col-md-12 col-sm-12 mt-2">
                     Already member ?
-                    <a class = "cursor-pointer modal-text-primary" (click)="triggerDialog('login')"> Sign in</a>
+                    <a class = "cursor-pointer modal-text-primary" (click)="triggerDialog(actionTrigger.login)"> Sign in</a>
                 </div>
             </div>
             <!-- <div class="or">

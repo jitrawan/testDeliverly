@@ -106,7 +106,35 @@
     font-weight: 300;
 }
 
-.btn-next {
+.is-size-1 {
+  font-size: 3rem !important;
+}
+
+.is-size-2 {
+  font-size: 2.5rem !important;
+}
+
+.is-size-3 {
+  font-size: 2rem !important;
+}
+
+.is-size-4 {
+  font-size: 1.5rem !important;
+}
+
+.is-size-5 {
+  font-size: 1.25rem !important;
+}
+
+.is-size-6 {
+  font-size: 1rem !important;
+}
+
+.is-size-7 {
+  font-size: 0.75rem !important;
+}
+
+.btn-atk-primary {
     font-size: 20px;
     background-color : #37BDE0;
     border-bottom: 3px solid #389ABF;
@@ -117,11 +145,41 @@
     cursor: pointer;
 }
 
-.btn-next:hover {
+.btn-atk-primary:hover {
     background-color: #3dabc7;
 }
 
-.btn-cancel {
+.btn-atk-danger {
+    font-size: 20px;
+    background-color : #EC1D23;
+    border-bottom: 3px solid #ad1616;
+    color: #fff;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    border-radius: 2rem;
+    cursor: pointer;
+}
+
+.btn-atk-danger:hover {
+    background-color: #da1c21;
+}
+
+.btn-atk-success {
+    font-size: 20px;
+    background-color : #23d160;
+    border-bottom: 3px solid #33bf22;
+    color: #fff;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    border-radius: 2rem;
+    cursor: pointer;
+}
+
+.btn-atk-success:hover {
+    background-color: #26ab59;
+}
+
+.btn-atk-light {
     font-size: 20px;
     background-color : #ECECEC;
     border-bottom: 3px solid #C2C6C7;
@@ -132,28 +190,97 @@
     cursor: pointer;
 }
 
-.btn-cancel:focus,.btn-cancel:active {
+.btn-atk-light:hover {
+    background-color: #dedede;
+}
+
+.btn-atk-light:focus , .btn-atk-danger:focus , .btn-atk-success.focus ,
+.btn-atk-light:active , .btn-atk-danger.active , .btn-atk-success.active {
     outline: none;
     box-shadow: none;
     -webkit-box-shadow: none;
 }
 
-.btn-cancel:hover {
-    background-color: #dedede;
-}
-
 
 /* Slide */
 
+.owl-carousel .item {
+    cursor: pointer;
+}
+
+.owl-carousel .item:hover {
+    opacity: 0.8;
+}
+
+.owl-carousel .item.active {
+    font-weight: 500;
+    opacity: 0.8;
+}
 .owl-carousel .item img {
     margin: 0 auto;
+    cursor: pointer;
 }
 
 .owl-carousel .item i {
     top: 0;
-    right: -10%;
+    right: -2%;
     position: absolute;
     display : none;
+}
+
+.owl-carousel .item.active i {
+    color : #196dea;
+    display : block;
+}
+
+.owl-carousel .item img {
+    /* box-shadow: 0 0 2px #888888; */
+    width: 75%;
+    height: 80px;
+}
+
+
+.innerDiscount {
+    margin-top : 0.3rem;
+    padding : 1rem;
+}
+
+/* Payment Step */
+
+.payment-text-title {
+    color : #146bda;
+}
+
+.paymentWrapper {
+    background-color : white; 
+    border-radius: 5px;
+    box-shadow: 0 0 5px #009cde;
+    height: 140px;
+    width : 100%;
+    display : table-cell;
+    vertical-align: middle;
+    padding : 20px;
+    cursor: pointer;
+}
+
+.paymentWrapper:hover {
+    opacity: 0.8;
+}
+.paymentWrapper img {
+    width : 100%;
+    max-height : 100px;
+}
+
+.paymentWrapper i {
+    position: absolute;
+    top : -10px;
+    right : 5px;
+    color : #4285f4;
+    display : none;
+}
+
+.paymentWrapper.active i {
+    display : block;
 }
 
 @media (max-width: 1023px) {

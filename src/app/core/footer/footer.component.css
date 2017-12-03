@@ -14,7 +14,7 @@
 }
 
 .logo-facebook img {
-    margin-top : 2rem;
+    margin-top : 1rem;
 }
 
 .logo-youtube img {
@@ -23,7 +23,7 @@
 
 .logo-facebook img , .logo-youtube img {
     max-width: 200px;
-    max-height: 100px;
+    max-height: 50px;
 }
 
 .footer-detail {

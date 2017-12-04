@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="step-wrapper mt-5">
 		<ul class="step-process">
-			<li class="step-order" (click)="changeStep(constMenu.booking.routeTo)" [ngClass]="menuStep.routeTo==constMenu.booking.routeTo ? 'active' : '' ">
+			<li class="step-order" (click)="changeStep(constMenu.booking.routeTo,'iconClicked')" [ngClass]="menuStep.routeTo==constMenu.booking.routeTo ? 'active' : '' ">
 				<div>
 					1
 				</div>
@@ -12,7 +12,7 @@
 					<i class="fa fa-play" aria-hidden="true"></i>
 				</div>
 			</li>
-			<li class="step-order" (click)="changeStep(constMenu.payment.routeTo)" [ngClass]="menuStep.routeTo==constMenu.payment.routeTo ? 'active' : '' ">
+			<li class="step-order" (click)="changeStep(constMenu.payment.routeTo,'iconClicked')" [ngClass]="menuStep.routeTo==constMenu.payment.routeTo ? 'active' : '' ">
 				<div>
 					2
 				</div>
@@ -23,7 +23,7 @@
 					<i class="fa fa-play" aria-hidden="true"></i>
 				</div>
 			</li>
-			<li class="step-order" (click)="changeStep(constMenu.summary.routeTo)" [ngClass]="menuStep.routeTo==constMenu.summary.routeTo ? 'active' : '' ">
+			<li class="step-order" (click)="changeStep(constMenu.summary.routeTo,'iconClicked')" [ngClass]="menuStep.routeTo==constMenu.summary.routeTo ? 'active' : '' ">
 				<div>
 					3
 				</div>
@@ -50,42 +50,42 @@
 				</div>
 			</div>
 		
-			<div class="row mt-2">
+			<div class="row mt-2 customer-info">
 				<div class="col-12 col-md-4 offset-md-1">
 					<span class="titleText">Name - Surname</span>
 				</div>
-				<div class="col-12 col-sm-7">
+				<div class="col-11 offset-1 col-sm-7 offset-sm-0">
 					<span class="textValue">Burin Sangwan</span>
 				</div>
 				<div class="col-12 col-md-4 offset-md-1">
 					<span class="titleText">Email - Address</span>
 				</div>
-				<div class="col-12 col-sm-7">
+				<div class="col-11 offset-1 col-sm-7 offset-sm-0">
 					<span class="textValue">burinsan@gosoft.co.th</span>
 				</div>
 				<div class="col-12 col-md-4 offset-md-1">
 					<span class="titleText">Mobile No</span>
 				</div>
-				<div class="col-12 col-sm-7">
+				<div class="col-11 offset-1 col-sm-7 offset-sm-0">
 					<span class="textValue">085-199-2697</span>
 				</div>
 				<div class="col-12 col-md-4 offset-md-1">
 					<span class="titleText">ID Card / Passport ID</span>
 				</div>
-				<div class="col-12 col-sm-7">
+				<div class="col-11 offset-1 col-sm-7 offset-sm-0">
 					<span class="textValue">1103100207792</span>
 				</div>
 				<div class="col-12 col-md-4 offset-md-1">
 					<span class="titleText">Shipping Address</span>
 				</div>
-				<div class="col-12 col-sm-7">
+				<div class="col-11 offset-1 col-sm-7 offset-sm-0">
 					<span class="textValue">1015/15 bkk</span>
 				</div>
 			</div>
 		
 			<div class="row justify-content-center mt-5">
 				<div class="col-12 text-center">
-					<button class="btn btn-atk-primary" (click)="changeStep(constMenu.payment.routeTo)" type="button">Next</button>
+					<button class="btn btn-atk-primary px-6" (click)="changeStep(constMenu.payment.routeTo)" type="button">Next</button>
 				</div>
 			</div>
 
@@ -127,8 +127,8 @@
 
 						<div class="row">
 							<div class="col-12 text-center" [ngClass]="{ 'text-md-right': !showDiscountInput }" >
-								<button class="btn btn-atk-success is-size-6" *ngIf="showDiscountInput" (click)="useCashDiscount()">Use Discount</button>
-								<button class="btn btn-atk-danger is-size-6" (click)="notUseDiscount()">Not Use Discount</button>
+								<button class="btn btn-atk-success is-size-6 mt-2 px-4" *ngIf="showDiscountInput" (click)="useCashDiscount()">Use Discount</button>
+								<button class="btn btn-atk-danger is-size-6 mt-2 px-4" (click)="notUseDiscount()">Not Use Discount</button>
 							</div>
 						</div>
 
@@ -139,14 +139,14 @@
 							</div>
 
 							<div class="row mt-3">
-								<div class="col-12 col-md-5">
+								<div class="col-12 col-md-5 mt-3">
 									<div data-payment-type="cash" class="paymentWrapper" [ngClass]="{ 'active': paymentMethodSelected == 1 }" (click)="choosePaymentMethod(1)">
 									<i class="fa fa-check-circle fa-2x"></i>
 									<img src="../../assets/images/cs711.png">
 									</div>
 								</div>
 
-								<div class="col-12 col-md-7">
+								<div class="col-12 col-md-7 mt-3">
 									<div data-payment-type="credit" class="paymentWrapper" [ngClass]="{ 'active': paymentMethodSelected == 2 }" (click)="choosePaymentMethod(2)">
 									<i class="fa fa-check-circle fa-2x"></i>
 									<img src="../../assets/images/creditIcon.png">
@@ -178,7 +178,7 @@
 
 						<div class="row justify-content-center mt-5" *ngIf="paymentMethodSelected > 0">
 							<div class="col-12 text-center">
-								<button class="btn btn-atk-primary" (click)="changeStep(constMenu.summary.routeTo)" type="button">Next</button>
+								<button class="btn btn-atk-primary px-6" (click)="changeStep(constMenu.summary.routeTo)" type="button">Next</button>
 							</div>
 						</div>
 
@@ -192,50 +192,137 @@
 		
 		<ng-container *ngIf="menuStep.routeTo==constMenu.summary.routeTo">
 		
-			<div class="row pb-2">
-				<div class="col-12 info-header split-solid-border">
-					<i class="fa fa-calculator fa-2x fa-fw"></i>
-					<h4>Order Information</h4>
+			<div class = "row">
+				<div class = "col-sm-12 col-md-12 cardHeader split-solid-border">
+					<i class="fa fa-calculator fa-2x fa-fw"></i><h4>Order Information</h4>
 				</div>
 			</div>
-		
-			<div class="row mt-2">
-				<div class="col-12 col-md-4 offset-md-1">
-					<span class="titleText">Name - Surname</span>
+
+			<div class="orderInfo-wrapper">
+				<div class = "row">
+					<div class="col-6 col-sm-5 col-md-6 col-lg-6">
+						<span class = "titleText">Zone</span>
+					</div>
+					<div class="col-6 col-sm-7 col-md-6 col-lg-6">
+						<span class = "textValue">B1</span>
+					</div>
 				</div>
-				<div class="col-12 col-sm-7">
-					<span class="textValue">Burin Sangwan</span>
+	
+				<div class = "row">
+					<div class="col-6 col-sm-5 col-md-6 col-lg-6">
+						<span class = "titleText">Seat No</span>
+					</div>
+					<div class="col-6 col-sm-7 col-md-6 col-lg-6">
+						<span class = "textValue">A19,A20,A21</span>
+					</div>
 				</div>
-				<div class="col-12 col-md-4 offset-md-1">
-					<span class="titleText">Email - Address</span>
+				<div class = "row">
+					<div class="col-6 col-sm-5 col-md-6 col-lg-6">
+						<span class = "titleText">Quantity</span>
+					</div>
+					<div class="col-6 col-sm-7 col-md-6 col-lg-6">
+						<span class = "textValue">3</span>
+					</div>
 				</div>
-				<div class="col-12 col-sm-7">
-					<span class="textValue">burinsan@gosoft.co.th</span>
+				<div class = "row">
+					<div class="col-6 col-sm-5 col-md-6 col-lg-6">
+						<span class = "titleText">Price Per Unit</span>
+					</div>
+					<div class="col-6 col-sm-7 col-md-6 col-lg-6">
+						<span class = "textValue moneyFormat">1500 Baht</span>
+					</div>
 				</div>
-				<div class="col-12 col-md-4 offset-md-1">
-					<span class="titleText">Mobile No</span>
+				<div class = "row">
+					<div class="col-6 col-sm-5 col-md-6 col-lg-6">
+						<span class = "titleText">Discount</span>
+					</div>
+					<div class="col-6 col-sm-7 col-md-6 col-lg-6">
+						<span class = "textValue moneyFormat">0 Baht</span>
+					</div>
 				</div>
-				<div class="col-12 col-sm-7">
-					<span class="textValue">085-199-2697</span>
+				<div class = "row">
+					<div class="col-9 col-sm-6 col-md-6 col-lg-6">
+						<span class = "titleText">Service Fee ( 20 Baht per ticket)</span>
+					</div>
+					<div class="col-3 col-sm-6 col-md-6 col-lg-6">
+						<span class = "textValue moneyFormat">60 Baht</span>
+					</div>
 				</div>
-				<div class="col-12 col-md-4 offset-md-1">
-					<span class="titleText">ID Card / Passport ID</span>
+				<div class = "row">
+					<div class="col-6 col-sm-5 col-md-6 col-lg-6">
+						<span class = "titleText">Shipping Cost</span>
+					</div>
+					<div class="col-6 col-sm-7 col-md-6 col-lg-6">
+						<span class = "textValue moneyFormat">{{ desc_shipping_cost ? (desc_shipping_cost) : '0 Baht' }}</span>
+					</div>
 				</div>
-				<div class="col-12 col-sm-7">
-					<span class="textValue">1103100207792</span>
+	
+				<div class = "row">
+					<div class="col-6 col-sm-5 col-md-6 col-lg-6">
+						<span class = "titleText">Counter Service Fee</span>
+					</div>
+					<div class="col-6 col-sm-7 col-md-6 col-lg-6">
+						<span class = "textValue moneyFormat">{{ desc_cs_fee ? (desc_cs_fee) : '0 Baht' }}</span>
+					</div>
 				</div>
-				<div class="col-12 col-md-4 offset-md-1">
-					<span class="titleText">Shipping Address</span>
+	
+				<div class = "row">
+					<div class="col-6 col-sm-5 col-md-6 col-lg-6">
+						<span class = "titleText">Convenience fee</span>
+					</div>
+	
+					<div class="col-6 col-sm-7 col-md-6 col-lg-6">
+						<span class = "textValue moneyFormat">{{ desc_fee ? (desc_fee) : '0 Baht' }}</span>
+					</div>
 				</div>
-				<div class="col-12 col-sm-7">
-					<span class="textValue">1015/15 bkk</span>
+				<div class = "row">
+					<div class="col-6 col-sm-5 col-md-6 col-lg-6">
+						<span class = "titleText">Total Amount</span>
+					</div>
+					<div class="col-6 col-sm-7 col-md-6 col-lg-6">
+						<span class = "textValue totalAmount moneyFormat">4875 Baht</span>
+					</div>
+				</div>
+				<div class = "row">
+					<div class= "col-12 text-center mt-4">
+						<div id="cashPaymentTimeOut" class="text-md-center">
+								Please process payment at Counter Service (7-Eleven Shop) within 2 Hours
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row mt-3">
+				<div class="col-12">
+					<div class = "row">
+						<div class = "col-12 cardHeader split-solid-border">
+							<i class="fa fa-handshake-o fa-2x fa-fw"></i><h4>Conditions</h4>
+						</div>
+					</div>
+
+					<div class = "row cardDetail mt-3">
+						<div class = "col-12">
+							<ul class = "conditionDetail mt-2">
+								<li>To prevent order cancellation, please make payment by time shown on the payment form.</li>
+								<li>Tickets can be collected at Counter Service outlets.</li>
+								<li>All goods and Service are non-refundable.</li>
+								<li>Please retain the payment receipt for your reference.</li>
+								<li>In some case a convenience fee charge, when you payment by credit card.</li>
+							</ul>
+						</div>
+
+						<div class = "col-12 text-center agreeCondition mt-3">
+							<input type = "checkbox" id = "checkAgree"><label class="ml-2 label-input" for = "checkAgree">Please clicking you agree to the “Terms and Conditions” set forth by Counter Service Co., Ltd.</label>
+						</div>
+
+					</div>
 				</div>
 			</div>
 		
 			<div class="row justify-content-center mt-5">
 				<div class="col-12 text-center">
-					<button class="btn btn-atk-light" type="button">CANCEL</button>
-					<button class="btn btn-atk-primary" type="button">PAYMENT</button>
+					<button class="btn btn-atk-light px-5" type="button">CANCEL</button>
+					<button class="btn btn-atk-primary px-5" id="paymentBtn" type="button">PAYMENT</button>
 				</div>
 			</div>
 		

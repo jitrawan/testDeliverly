@@ -106,102 +106,6 @@
     font-weight: 300;
 }
 
-.is-size-1 {
-  font-size: 3rem !important;
-}
-
-.is-size-2 {
-  font-size: 2.5rem !important;
-}
-
-.is-size-3 {
-  font-size: 2rem !important;
-}
-
-.is-size-4 {
-  font-size: 1.5rem !important;
-}
-
-.is-size-5 {
-  font-size: 1.25rem !important;
-}
-
-.is-size-6 {
-  font-size: 1rem !important;
-}
-
-.is-size-7 {
-  font-size: 0.75rem !important;
-}
-
-.btn-atk-primary {
-    font-size: 20px;
-    background-color : #37BDE0;
-    border-bottom: 3px solid #389ABF;
-    color: #fff;
-    padding-left: 5.5rem;
-    padding-right: 5.5rem;
-    border-radius: 2rem;
-    cursor: pointer;
-}
-
-.btn-atk-primary:hover {
-    background-color: #3dabc7;
-}
-
-.btn-atk-danger {
-    font-size: 20px;
-    background-color : #EC1D23;
-    border-bottom: 3px solid #ad1616;
-    color: #fff;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    border-radius: 2rem;
-    cursor: pointer;
-}
-
-.btn-atk-danger:hover {
-    background-color: #da1c21;
-}
-
-.btn-atk-success {
-    font-size: 20px;
-    background-color : #23d160;
-    border-bottom: 3px solid #33bf22;
-    color: #fff;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    border-radius: 2rem;
-    cursor: pointer;
-}
-
-.btn-atk-success:hover {
-    background-color: #26ab59;
-}
-
-.btn-atk-light {
-    font-size: 20px;
-    background-color : #ECECEC;
-    border-bottom: 3px solid #C2C6C7;
-    color: #B3B3B3;
-    padding-left: 5.5rem;
-    padding-right: 5.5rem;
-    border-radius: 2rem;
-    cursor: pointer;
-}
-
-.btn-atk-light:hover {
-    background-color: #dedede;
-}
-
-.btn-atk-light:focus , .btn-atk-danger:focus , .btn-atk-success.focus ,
-.btn-atk-light:active , .btn-atk-danger.active , .btn-atk-success.active {
-    outline: none;
-    box-shadow: none;
-    -webkit-box-shadow: none;
-}
-
-
 /* Slide */
 
 .owl-carousel .item {
@@ -242,7 +146,7 @@
 
 .innerDiscount {
     margin-top : 0.3rem;
-    padding : 1rem;
+    padding : 1rem 2rem;
 }
 
 /* Payment Step */
@@ -266,6 +170,7 @@
 .paymentWrapper:hover {
     opacity: 0.8;
 }
+
 .paymentWrapper img {
     width : 100%;
     max-height : 100px;
@@ -283,8 +188,125 @@
     display : block;
 }
 
-@media (max-width: 1023px) {
+.card-eventInfo .cardHeader {
+    padding : 6px 10px 6px 20px;
+    color : #2b2e37;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.cardHeader > h4 {
+    font-size : 22px;
+    display: inline;
+}
+
+.cardHeader > h4 {
+    margin-left : 1%;
+}
+
+.split-solid-border {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+    padding-bottom : 10px;
+}
+
+.orderInfo-wrapper {
+    padding: 1rem;
+}
+
+.orderInfo-wrapper .row {
+    margin-top: 0.2rem;
+}
+
+#cashPaymentTimeOut {
+    color : red;
+    font-size : 1rem;
+    font-weight: 500;
+}
+
+.label-input {
+    display: inline;
+}
+
+.conditionDetail > li {
+    line-height: 2em;
+    font-size : 17px;
+}
+
+@media (max-width: 479px) {
+
+    #cashPaymentTimeOut {
+        text-align: left;
+    }
+
+    .step-process li h5 {
+        font-size: 1rem;
+    }
+
+    .step-process li.step-order {
+        margin-left: 0.5rem;
+    }
+    
+    .step-process .step-arrow {
+        margin-left: 0.5rem;
+        margin-top: -2.5rem;
+    }
+
+    .step-process li.step-order > div {
+        max-height: 4rem;
+        font-size: 3rem;
+    }
+
+    .btn {
+        font-size: 16px;
+    }
+}
+@media (min-width: 480px) and (max-width: 640px) {
+
+    .step-process li.step-order {
+        margin-left: 1rem;
+    }
+    
+    .step-process .step-arrow {
+        margin-left: 1rem;
+        margin-top: -2.5rem;
+    }
+
+    .step-process li.step-order > div {
+        max-height: 4.5rem;
+        font-size: 4rem;
+    }
+}
+
+@media (max-width: 640px) {
+    #paymentBtn {
+        margin-top: 1rem;
+    }
+    .titleText {
+        font-size: 16px
+    }
+
+    .customer-info .textValue {
+        margin : 0.5rem 0;
+        display: block;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .orderInfo-wrapper .row div:last-child {
+        text-align: right;
+    }
+
+}
+@media (max-width: 1024px) {
     .step-wrapper {
         max-width : 100%;
+    }
+}
+
+@media (min-width: 1366px) {
+    .conditionDetail > li {
+        line-height: 2.3em;
+        font-size: 17.5px;
     }
 }

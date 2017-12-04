@@ -1,5 +1,6 @@
 #slider .owl-carousel img {
     width : 100%;
+    min-height: 150px;
 }
 
 @media (max-width: 479px) {

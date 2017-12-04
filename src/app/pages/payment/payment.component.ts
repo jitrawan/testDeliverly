@@ -8,7 +8,7 @@ declare var jQuery: any;
 @Component({
 	selector: 'app-payment',
 	templateUrl: './payment.component.html',
-	styleUrls: ['./payment.component.css']
+	styleUrls: [ './payment.component.css' , '../../../assets/css/standard/utility.css' ]
 })
 export class PaymentComponent implements OnInit {
 
@@ -16,17 +16,18 @@ export class PaymentComponent implements OnInit {
 		routeTo: 'booking-review',  displayName: 'booking'
 	};
 
-	
 	CASH_DISCOUNT: string = "CASH_DISCOUNT";
 	CREDIT_DISCOUNT: string = "CREDIT_DISCOUNT";
 	
-
 	cashDiscountSelectedIndex: number = -1;
 	creditDiscountSelectedIndex: number = -1;
 	paymentMethodSelected: number = -1;
 	showDiscountInput: boolean = false;
 	showCreditDiscount: boolean = false;
 
+	// Validate step when user direct access via url
+	validateBooking = false;
+	validatePayment = false;
 
 	paymentMethod: boolean = false;
 	cashDiscount: DiscountList[] = [
@@ -99,9 +100,19 @@ export class PaymentComponent implements OnInit {
 		this.route.params.subscribe(params => {
 			this.menuStep.routeTo = params.step;
 			this.menuStep.displayName = this.getDisplayName(params.step);
-
+			
 			if(this.menuStep.routeTo == this.constMenu.payment.routeTo) {
-				this.doPayment();
+				if(this.validateBooking === false) {
+					this.router.navigate(['payment/'+this.constMenu.booking.routeTo]);
+					return;
+				}
+				this.intitialPaymentStep();
+
+			} else if(this.menuStep.routeTo == this.constMenu.summary.routeTo) {
+				if(this.validatePayment === false) {
+					this.router.navigate(['payment/'+this.constMenu.booking.routeTo]);
+					return;
+				}
 			}
 		});
 	}
@@ -118,8 +129,7 @@ export class PaymentComponent implements OnInit {
 	ngAfterViewInit() {
 	}
 	
-	doPayment() {
-
+	intitialPaymentStep() {
 		setTimeout(_ => {
 
 			jQuery('#discountCashSlider').owlCarousel({
@@ -219,9 +229,23 @@ export class PaymentComponent implements OnInit {
 		}
 	}
 
-	changeStep(stepName: string) {
-		this.menuStep.routeTo = this.constMenu.payment.routeTo;
-		this.menuStep.displayName = this.constMenu.payment.displayName;
+	changeStep(stepName: string , triggerType: string) {
+
+		if(triggerType == null) {
+			if(stepName === this.constMenu.payment.routeTo) {
+				this.validateBooking = true;
+			} else if(stepName === this.constMenu.summary.routeTo) {
+				this.validatePayment = true;
+			}
+		} else {
+			// When user try to change step by clicking icon on top of page
+			if(stepName === this.constMenu.payment.routeTo && !this.validateBooking) {
+				return;
+			} else if(stepName === this.constMenu.summary.routeTo && !this.validatePayment) {
+				return;
+			}
+		}
+		
 		this.router.navigate(['payment/'+stepName]);
 	}
 }

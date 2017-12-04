@@ -6,7 +6,7 @@ import { HeaderService } from '../../shared/service/header.service';
 @Component({
     selector: 'app-navbar',
     templateUrl: './header.component.html',
-    styleUrls: ['./header.component.css']
+    styleUrls: [ './header.component.css' , '../../../assets/css/standard/utility.css' ]
 })
 export class HeaderComponent implements OnInit {
 

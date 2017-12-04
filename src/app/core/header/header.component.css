@@ -331,22 +331,6 @@ a:focus {
     border-color: #358efb;
 }
 
-.u-form-group button {
-    background-color: #32c0e4;
-    -moz-border-radius: 28px;
-    -webkit-border-radius: 28px;
-    border-radius: 28px;
-    border: 1px solid #ddd;
-    display: inline-block;
-    cursor: pointer;
-    color: #ffffff;
-    font-size: 18px;
-    padding: 8px 60px;
-    text-decoration: none;
-    margin-top: 20px;
-    margin-bottom: 5px;
-}
-
 .under-signin {
     background: #ddd;
     height: 1px;
@@ -413,99 +397,7 @@ a:focus {
     height: auto;
 }
 
-/* Footer */
 
-.social-logo-wrapper {
-    padding-right : 15px;
-    padding-left : 15px;
-}
-
-.logo-facebook {
-    border-top : 12px solid #3a3ed6;
-    text-align: center;
-}
-
-.logo-youtube {
-    border-top : 12px solid #ff1e1e;
-    text-align: center;
-}
-
-.logo-facebook img {
-    margin-top : 2rem;
-}
-
-.logo-youtube img {
-    margin-top : 1rem;
-}
-
-.logo-facebook img , .logo-youtube img {
-    max-width: 200px;
-    max-height: 100px;
-}
-
-.footer-detail {
-    padding-left : 15px;
-    padding-right : 15px;
-    font-weight: 100;
-    padding : 2rem 4rem;
-    background-color : #333333;
-    color : white;
-}
-
-.footer-detail section h3 {
-    font-size : 26px;
-}
-
-#aboutUs p {
-    margin-top : 1.5rem;
-}
-
-ul.footer {
-    margin-top : 1.5rem;
-    list-style: none;
-    padding-left : 0;
-}
-
-#faq ul > li:after {
-    content: "";
-    display: block;
-    width: 70%;
-    border-bottom : 2px solid #fff;
-    padding-bottom : 0.5rem;
-    margin-bottom : 1.2rem;
-}
-
-#faq ul > li > i {
-    color : #F8A422;
-}
-
-#faq ul > li a {
-    color : white;
-    text-decoration: none;
-}
-
-#faq ul > li > span {
-    margin-left : 0.5rem;
-}
-
-#contactUs  ul  li {
-    margin-top : 1rem;
-}
-.contact-detail i {
-    color : #F8A422;
-}
-
-.contact-detail .contact-icon {
-    float : left;
-}
-
-.contact-detail .contact-desc {
-    margin-left : 3rem;
-}
-
-.cursor-pointer {
-    cursor: pointer;
-}
 @media (max-width: 479px) {
     #searchBox {
         height: 30px;
@@ -563,7 +455,12 @@ ul.footer {
     .mainMenu .open .dropdown-menu>li:hover {
         background-color: #3191f5;
     }
+
+    #navbar-menu {
+        padding: 0rem 1rem;
+    }
     /* Custom sidebar's scroll  */
+
     #nav-sidebar::-webkit-scrollbar {
         width: 4px;
         background-color: #F5F5F5;

@@ -90,7 +90,7 @@ body {
     color: #f4cc33;
     border: 1.4px solid #f4cc33;
     border-radius: 15px;
-    padding: 5px 15px;
+    /* padding: 5px 15px; */
     cursor: pointer;
 }
 
@@ -485,4 +485,37 @@ a:focus {
         padding: 0;
         margin-top: .2rem;
     }
+}
+
+.btn-username {
+    background-color: transparent;
+    color: #f4cc33;
+    border: 1.4px solid #f4cc33;
+    border-radius: 15px;
+    width: 70%;
+    cursor: pointer;
+}
+
+.btn-username:hover {
+    background-color: #F8A422;
+}
+
+.btn-username a {
+    color: #f4cc33;
+    letter-spacing: 1.5px;
+}
+
+.btn-username:hover a {
+    color: white;
+}
+
+.btn-username a:hover {
+    text-decoration: none;
+}
+
+.nav-item .show{
+    position: absolute!important;
+    background-color: #333333!important;
+    border: 1.4px solid !important;
+    border-radius: 15px;
 }

@@ -12,6 +12,8 @@ import { BusComponent } from './pages/eventTickets/bus/bus.component';
 import { ShoppingComponent } from './pages/eventTickets/shopping/shopping.component';
 import { TravelComponent } from './pages/eventTickets/travel/travel.component';
 import { PaymentComponent } from './pages/payment/payment.component';
+import { PurchaseHistoryComponent } from './pages/purchase-history/purchase-history.component';
+import { HistoryDetailComponent } from './pages/history-detail/history-detail.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/', pathMatch: 'full' },
@@ -27,6 +29,8 @@ const routes: Routes = [
     { path: 'transport/travel', component: TravelComponent },
     { path: 'allevent/:type', component: AllEventComponent },
     { path: 'payment/:step', component: PaymentComponent },
+    { path: 'purchaseHistory', component: PurchaseHistoryComponent },
+    { path: 'historyDetail', component: HistoryDetailComponent },
   ];
   
   @NgModule({

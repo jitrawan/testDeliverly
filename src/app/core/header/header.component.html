@@ -14,9 +14,25 @@
         </div>
         <div class="sidebar-content" *ngIf="isMobileSize">
             <div class="col-lg-5 login-wrapper">
-                <button class="btn btn-Login" (click)="triggerDialog(actionTrigger.login)" id="loginBtn">
+                <button class="btn btn-Login" (click)="triggerDialog(actionTrigger.login)" *ngIf="regAndLog" id="loginBtn">
                     <a class="atk-size-3">Register / Log In</a>
                 </button>
+                <div class="navbar-collapse justify-content-md-center btn-Login" *ngIf="!username">
+                    <ul class="navbar-nav ">
+                        <ng-container>
+                            <li class="nav-item dropdown " ngbDropdown>
+                                <a class="nav-link dropdown-toggle" ngbDropdownToggle>Burin Sangwan</a>
+                                <div class="dropdown-menu" ngbDropdownMenu>
+                                    <li><a  class="dropdown-item" (click)="userTriggerDialog(userActionTrigger.edit)"> Edit Profile</a></li>
+                                    <li><a  class="dropdown-item" routerLink='/purchaseHistory'> Purchase History</a></li>
+                                    <li><a  class="dropdown-item" routerLink='/changePassword'> Change Password</a></li>
+                                    <li class="divider"></li>
+                                    <li id="logOutLink" (click)='logout()'><a class="dropdown-item"><i class="icon-off"></i><p> Logout </a></li>
+                                </div>
+                            </li>
+                        </ng-container>
+                    </ul>
+                </div>
             </div>
 
             <div class="navbar-collapse justify-content-md-center">
@@ -62,9 +78,25 @@
                             <img class="flag" src="../assets/images/th-flag.png" alt="ภาษาไทย" />
                         </div>
                         <div class="col-lg-5 login-wrapper">
-                            <button class="btn btn-Login" (click)="triggerDialog(actionTrigger.login)" id="loginBtn">
+                            <button class="btn btn-Login" (click)="triggerDialog(actionTrigger.login)" *ngIf="regAndLog" id="loginBtn">
                                 <a class="atk-size-3">Register / Log In</a>
                             </button>
+                            <div class="navbar-collapse justify-content-md-center btn-username" *ngIf="!username">
+                                <ul class="navbar-nav ">
+                                    <ng-container>
+                                        <li class="nav-item dropdown " ngbDropdown>
+                                            <a class="nav-link dropdown-toggle" ngbDropdownToggle>Burin Sangwan</a>
+                                            <div class="dropdown-menu" ngbDropdownMenu>
+                                                <li><a  class="dropdown-item" (click)="userTriggerDialog(userActionTrigger.edit)"> Edit Profile</a></li>
+                                                <li><a  class="dropdown-item" routerLink='/purchaseHistory'> Purchase History</a></li>
+                                                <li><a  class="dropdown-item" (click)="userTriggerDialog(userActionTrigger.change)"> Change Password</a></li>
+                                                <li class="divider"></li>
+                                                <li id="logOutLink" (click)='logout()'><a class="dropdown-item"><i class="icon-off"></i><p> Logout </a></li>
+                                            </div>
+                                        </li>
+                                    </ng-container>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -114,10 +146,10 @@
                     </div> -->
             <form class="email-login mt-4">
                 <div class="u-form-group">
-                    <input type="email" class="form-control" placeholder="Email" />
+                    <input type="email" class="form-control"  id="email" placeholder="Email"  />
                 </div>
                 <div class="u-form-group mt-3">
-                    <input type="password" class="form-control" placeholder="Password" />
+                    <input type="password" class="form-control" id="password" placeholder="Password" />
                 </div>
                 <div class="u-form-group groupoption">
                     <div class="row">
@@ -134,7 +166,7 @@
                     </div>
                 </div>
                 <div class="u-form-group signin">
-                    <button class="btn btn-atk-primary mt-4">Sign in</button>
+                    <button class="btn btn-atk-primary mt-4" (click)="checklogin()">Sign in</button>
                 </div>
                 <hr class="under-signin">
                 <div class="col-md-12 p-2">
@@ -387,6 +419,204 @@
                 </div>
                 <div class="col-md-12 u-form-group text-center">
                     <button class="btn btn-atk-primary mt-3" type="button">Confirm</button>
+                </div>
+            </form>
+        </ng-container>
+    </div>
+
+
+
+    <div class="modal-box" #userModalBox>
+        <ng-container *ngIf="isEditProfileOpen">
+            <button type="button" class="close" (click)="closeAllDialog()" id="closeSignupModal" aria-label="Close">
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+            </button>
+            <div style="text-align: center">
+                <h3>Edit Profile</h3>
+            </div>
+            <form class="email-register">
+                <div class="col-md-12 col-sm-12 personinformation">Personal Information</div>
+                <div class="reg-form-group">
+                    <div class="col-md-12 col-sm-12 topic">
+                        <span>*</span> First name</div>
+                    <div class="col-md-12 col-sm-12 information">
+                        <input type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="reg-form-group">
+                    <div class="col-md-12 col-sm-12 topic">
+                        <span>*</span> Last name</div>
+                    <div class="col-md-12 col-sm-12 information">
+                        <input type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="reg-form-group">
+                    <div class="col-md-12 col-sm-12 topic">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-3">
+                                <label class="custom-control custom-radio">
+                                    <input id="radio1" name="gender" type="radio" class="custom-control-input">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Male</span>
+                                </label>
+                            </div>
+                            <div class="col-md-3 col-sm-3">
+                                <label class="custom-control custom-radio">
+                                    <input id="radio2" name="gender" type="radio" class="custom-control-input">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Female</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reg-form-group">
+                    <div class="col-md-12 col-sm-12 topic">
+                        Birthday(Date/Month/Year)</div>
+                    <div class="col-md-12 col-sm-12 information">
+                        <div class="row">
+                            <div class="form-group ">
+                                <select class="form-control dropdownCustom" id="select-date">
+                                    <option value="">01</option>
+                                    <option value="">02</option>
+                                    <option value="">03</option>
+                                    <option value="">04</option>
+                                    <option value="">05</option>
+                                    <option value="">06</option>
+                                    <option value="">07</option>
+                                    <option value="">08</option>
+                                    <option value="">09</option>
+                                    <option value="">10</option>
+                                    <option value="">11</option>
+                                    <option value="">12</option>
+                                    <option value="">13</option>
+                                    <option value="">14</option>
+                                    <option value="">15</option>
+                                    <option value="">16</option>
+                                    <option value="">17</option>
+                                    <option value="">18</option>
+                                    <option value="">19</option>
+                                    <option value="">20</option>
+                                    <option value="">21</option>
+                                    <option value="">22</option>
+                                    <option value="">23</option>
+                                    <option value="">24</option>
+                                    <option value="">25</option>
+                                    <option value="">26</option>
+                                    <option value="">27</option>
+                                    <option value="">28</option>
+                                    <option value="">29</option>
+                                    <option value="">30</option>
+                                    <option value="">31</option>
+                                </select>
+                            </div>
+                            <div class="form-group " style="padding: 0px 10px 0px 10px">
+                                <select class="form-control dropdownCustomMM" id="select-month">
+                                    <option>January</option>
+                                    <option>Feburay</option>
+                                    <option>March</option>
+                                    <option>April</option>
+                                    <option>May</option>
+                                    <option>June</option>
+                                    <option>July</option>
+                                    <option>August</option>
+                                    <option>September</option>
+                                    <option>October</option>
+                                    <option>November</option>
+                                    <option>December</option>
+                                </select>
+                            </div>
+                            <div class="form-group ">
+                                <select class="form-control dropdownCustom" id="select-year">
+                                    <option value="">1980</option>
+                                    <option value="">1981</option>
+                                    <option value="">1982</option>
+                                    <option value="">1983</option>
+                                    <option value="">1984</option>
+                                    <option value="">1985</option>
+                                    <option value="">1986</option>
+                                    <option value="">1987</option>
+                                    <option value="">1988</option>
+                                    <option value="">1989</option>
+                                    <option value="">1990</option>
+                                    <option value="">1991</option>
+                                    <option value="">1992</option>
+                                    <option value="">1993</option>
+                                    <option value="">1994</option>
+                                    <option value="">1995</option>
+                                    <option value="">1996</option>
+                                    <option value="">1997</option>
+                                    <option value="">1998</option>
+                                    <option value="">1999</option>
+                                    <option value="">2000</option>
+                                    <option value="">2001</option>
+                                    <option value="">2002</option>
+                                    <option value="">2003</option>
+                                    <option value="">2004</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reg-form-group">
+                        <div class="col-12 topic">
+                            <label class="custom-control custom-radio mr-0">
+                                <input id="radio1" name="identityRadio" type="radio" class="custom-control-input">
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">ID Card No.</span>
+                            </label>
+                            <span class = "mx-2 text-weight-bold">OR</span>
+                            <label class="custom-control custom-radio">
+                                <input id="radio2" name="identityRadio" type="radio" class="custom-control-input">
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">Passport No.</span>
+                            </label>
+                        </div>
+                        <div class="col-12 information">
+                            <input class="custom-control" type="text" />
+                        </div>
+                    </div>
+                    <div class="reg-form-group">
+                        <div class="col-md-12 col-sm-12 topic">
+                            Mobile Phone Number</div>
+                        <div class="col-md-12 col-sm-12 information">
+                            <div class="input-group">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle telcountry" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img src="../assets/images/th-flag.png" style="width: 20px">
+                                    </button>
+                                    <div class="dropdown-menu">
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control" placeholder="099 123 4567">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 u-form-group">
+                    <button class="btn btn-atk-primary mt-4" type="button">Confirm</button>
+                </div>
+            </form>
+        </ng-container>
+
+        <ng-container *ngIf="isChangePasswordOpen">
+            <button type="button" class="close" (click)="closeAllDialog()" id="closeLoginModal" aria-label="Close">
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+            </button>
+            <div class="p-3" style="text-align: center">
+                <h3>Change Password</h3>
+            </div>
+            <form class="email-login mt-4">
+                <div class="u-form-group mt-3">
+                    <input type="password" class="form-control" id="oldPassword" placeholder="Old Password" />
+                </div>
+                <div class="u-form-group mt-3">
+                    <input type="password" class="form-control" id="newPassword" placeholder="New Password" />
+                </div>
+                <div class="u-form-group mt-3">
+                    <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" />
+                </div>
+                <div class="u-form-group signin">
+                    <button class="btn btn-atk-primary mt-4" >Confirm</button>
                 </div>
             </form>
         </ng-container>

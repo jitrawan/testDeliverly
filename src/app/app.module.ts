@@ -22,6 +22,8 @@ import { BusComponent } from './pages/eventTickets/bus/bus.component';
 import { ShoppingComponent } from './pages/eventTickets/shopping/shopping.component';
 import { TravelComponent } from './pages/eventTickets/travel/travel.component';
 import { PaymentComponent } from './pages/payment/payment.component';
+import { PurchaseHistoryComponent } from './pages/purchase-history/purchase-history.component';
+import { HistoryDetailComponent } from './pages/history-detail/history-detail.component';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import { PaymentComponent } from './pages/payment/payment.component';
     BusComponent,
     ShoppingComponent,
     TravelComponent,
-    PaymentComponent
+    PaymentComponent,
+    PurchaseHistoryComponent,
+    HistoryDetailComponent,
   ],
   imports: [
     NgbModule.forRoot(), BrowserModule,

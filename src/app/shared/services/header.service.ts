@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { ConstMaster } from '../config/ConstMaster';
-import { HeaderModel } from '../model/header.model';
+import { HeaderModel } from '../models/header.model';
 
 @Injectable()
 export class HeaderService {

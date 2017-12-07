@@ -14,7 +14,7 @@ import { AllEventComponent } from './pages/eventTickets/all-event/all-event.comp
 import { HomeComponent } from './pages/home/home.component';
 import { BookingComponent } from './pages/booking/booking.component';
 
-import { HeaderService } from './shared/service/header.service';
+import { HeaderService } from './shared/services/header.service';
 import { FaqComponent } from './pages/faq/faq.component';
 import { PolicyComponent } from './pages/policy/policy.component';
 import { AirlinesComponent } from './pages/eventTickets/airlines/airlines.component';

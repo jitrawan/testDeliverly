@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, HostListener, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
-import { HeaderModel } from '../../shared/model/header.model';
-import { HeaderService } from '../../shared/service/header.service';
+import { HeaderModel } from '../../shared/models/header.model';
+import { HeaderService } from '../../shared/services/header.service';
 
 @Component({
     selector: 'app-navbar',

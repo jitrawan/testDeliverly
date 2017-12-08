@@ -53,27 +53,18 @@
   text-align: center;
 }
 
-.ticket-recommend:after {
-  content: "";
-  display: block;
-  width: 90%;
-  margin: 0 auto;
+.ticket-recommend {
   border-bottom: 1.5px solid #8a8a88;
   padding-bottom: 1rem;
 }
 
-.ticket-recommend .border-ticket-title:after {
-  content: "";
-  display: block;
-  width: 40%;
+.ticket-recommend .border-ticket-title {
   border-bottom: 5px solid;
-  border-radius: 10px;
-  bottom: -37%;
-  position: absolute;
+  padding-bottom: 1.8em;
 }
 
 .ticket-recommend img {
-  max-height: 50px;
+  height: 50px;
   max-width: 100%;
 }
 
@@ -201,16 +192,6 @@
     padding-left: 10px;
     height: auto;
     font-size: 18px;
-  }
-  .border-ticket-title {
-    margin-top: 1rem;
-  }
-  .ticket-recommend img {
-    max-height: 30px;
-  }
-  .ticket-recommend .border-ticket-title:after {
-    width: 80%;
-    bottom: -58%;
   }
   .eventName {
     font-size: 14px;

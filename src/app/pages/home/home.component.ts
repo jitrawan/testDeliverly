@@ -1,5 +1,9 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit , HostListener } from '@angular/core';
 import { Router , NavigationEnd } from '@angular/router';
+import { EventBanner } from '../../shared/models/eventBanner.model';
+import { ConstMaster } from '../../shared/config/ConstMaster';
+import { HomeService } from '../../shared/services/home.service';
+import * as underscore from 'underscore';
 import 'owl.carousel';
 declare var jQuery: any;
 
@@ -12,13 +16,10 @@ declare var jQuery: any;
 export class HomeComponent implements OnInit {
 
 	private countImagesLoaded = 0;
-	slideBannerImages: Image[] = [
-		{ pathName: 'https://s3-ap-southeast-1.amazonaws.com/haball-assets/Slide+All+Ticket-01.png', imageName: 'alt' },
-		{ pathName: 'https://s3-ap-southeast-1.amazonaws.com/haball-assets/Slide+All+Ticket-02.png', imageName: 'alt' },
-		{ pathName: 'https://s3-ap-southeast-1.amazonaws.com/haball-assets/Slide+All+Ticket-03.png', imageName: 'alt' },
-		{ pathName: 'https://s3-ap-southeast-1.amazonaws.com/haball-assets/Slide+All+Ticket-04.png', imageName: 'alt' },
-		{ pathName: 'https://s3-ap-southeast-1.amazonaws.com/haball-assets/Slide+All+Ticket-05.png', imageName: 'alt' }
-	];
+	S3_CONTEXT: string = ConstMaster.S3_ENDPOINT.url;
+	screenWidth: number;
+	screenType: string;
+	slideBannerImages: EventBanner[];
 
 	cardTicketsRecommend: CardTicket[] = [
 		{ performId: '17070', performName: 'Event 17070', performShowDate: '31 - 10', performShowMonth: 'Dec/2017', image_path: 'assets/images/bmmf.jpg' },
@@ -43,7 +44,9 @@ export class HomeComponent implements OnInit {
 		{ performId: '17079', performName: 'Event 17079', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
 		{ performId: '17080', performName: 'Event 17080', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
 	];
-	constructor( private router: Router ) { }
+	constructor( private router: Router , private homeService: HomeService ) { 
+		this.screenWidth = (window.innerWidth);
+	}
 
 	ngOnInit() {
 		this.router.events.subscribe((evt) => {
@@ -52,12 +55,28 @@ export class HomeComponent implements OnInit {
 			}
 			window.scrollTo(0, 0);
 		});
+
+		this.homeService.getEventBanner().subscribe(response => {
+			this.slideBannerImages = response['data'];
+			this.getScreenType();
+        });
+		
 	}
 
 	ngAfterViewInit() {
 		// console.log(jQuery('#slider'));
 	}
 
+	getScreenType() {
+
+		for(let breakpoint of ConstMaster.imageBreakpoint) {
+			if(this.screenWidth < breakpoint.breakpoint) {
+				this.screenType = breakpoint.beakpointName+"/";
+				break;
+			}
+		}
+	}
+	
 	slideLoaded() {
 		this.countImagesLoaded++;
 
@@ -100,13 +119,6 @@ export class HomeComponent implements OnInit {
 	goEventInfo(performId:string){
 		this.router.navigate(['/eventInfo']);
 	}
-}
-
-
-interface Image {
-	pathName: string;
-	imageName?: string;
-	breakpoint?: string;
 }
 
 interface CardTicket {

@@ -15,6 +15,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { BookingComponent } from './pages/booking/booking.component';
 
 import { HeaderService } from './shared/services/header.service';
+import { HomeService } from './shared/services/home.service';
 import { FaqComponent } from './pages/faq/faq.component';
 import { PolicyComponent } from './pages/policy/policy.component';
 import { AirlinesComponent } from './pages/eventTickets/airlines/airlines.component';
@@ -53,7 +54,7 @@ import { HistoryDetailComponent } from './pages/history-detail/history-detail.co
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [ HeaderService ],
+  providers: [ HeaderService , HomeService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

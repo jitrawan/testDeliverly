@@ -8,6 +8,7 @@ import * as Jquery from 'jquery';
   templateUrl: './event-info.component.html',
   styleUrls: ['./event-info.component.css',
     '../../../assets/css/standard/jquerysctipttop.css',
+    '../../../assets/css/standard/utility.css',
     '../../../assets/css/standard/layout.css']
 })
 export class EventInfoComponent implements OnInit {

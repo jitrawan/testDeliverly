@@ -2,7 +2,8 @@
 	<section id="slider">
 		<div class="owl-carousel">
 			<div class="item" *ngFor="let image of slideBannerImages; index as i;">
-				<img src="{{image.pathName}}" (load)="slideLoaded()" />
+				<img [src]="S3_CONTEXT+image.pathLocation+screenType+image.imageName" (load)="slideLoaded()" />
+				<!-- <img [src]="test()" (load)="slideLoaded()" /> -->
 			</div>
 		</div>
 	</section>
@@ -13,10 +14,12 @@
 			<div class="eventtopic">
 				<div class="container">
 					<div class="row ticket-recommend">
-						<div class="col-6 border-ticket-title text-primary">
-							<img src="./assets/images/icon_ticket_recommend.png" />
+						<div class="col-7 col-md-6 px-0">
+							<span class="text-primary border-ticket-title">
+								<img src="./assets/images/icon_ticket_recommend.png"/>
+							</span>
 						</div>
-						<div class="col-6 viewall">
+						<div class="col-5 col-md-6 viewall">
 							<a href="./eventTickets/allevent.html">
 								<i class="fa fa-plus"></i> view all</a>
 						</div>
@@ -54,10 +57,12 @@
 			<div class="eventtopic">
 				<div class="container">
 					<div class="row ticket-recommend">
-						<div class="col-6 text-danger border-ticket-title">
-							<img src="./assets/images/icon_ticket_hot.png" />
+						<div class="col-7 col-md-6 px-0">
+							<span class="text-danger border-ticket-title">
+								<img src="./assets/images/icon_ticket_hot.png" />
+							</span>
 						</div>
-						<div class="col-6 viewall">
+						<div class="col-5 col-md-6 viewall">
 							<a href="./eventTickets/allevent.html">
 								<i class="fa fa-plus"></i> view all</a>
 						</div>

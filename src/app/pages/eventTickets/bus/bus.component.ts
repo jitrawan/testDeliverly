@@ -11,6 +11,7 @@ export class BusComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }

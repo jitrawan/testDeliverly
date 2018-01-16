@@ -14,6 +14,8 @@ import { TravelComponent } from './pages/eventTickets/travel/travel.component';
 import { PaymentComponent } from './pages/payment/payment.component';
 import { PurchaseHistoryComponent } from './pages/purchase-history/purchase-history.component';
 import { HistoryDetailComponent } from './pages/history-detail/history-detail.component';
+import { SelectDestinationComponent } from './pages/eventTickets/bus/select-destination/select-destination.component';
+
 
 const routes: Routes = [
     { path: '', redirectTo: '/', pathMatch: 'full' },
@@ -25,6 +27,7 @@ const routes: Routes = [
     { path: 'faq', component: FaqComponent },
     { path: 'transport/airlines', component: AirlinesComponent },
     { path: 'transport/bus', component: BusComponent },
+    { path: 'transport/bus/selectDestination', component: SelectDestinationComponent },
     { path: 'shopping', component: ShoppingComponent },
     { path: 'transport/travel', component: TravelComponent },
     { path: 'allevent/:type', component: AllEventComponent },

@@ -4,6 +4,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { HttpModule } from '@angular/http';
+
+
+
 import { AppComponent } from './app.component';
 
 import { HeaderComponent } from './core/header/header.component';
@@ -25,7 +31,13 @@ import { TravelComponent } from './pages/eventTickets/travel/travel.component';
 import { PaymentComponent } from './pages/payment/payment.component';
 import { PurchaseHistoryComponent } from './pages/purchase-history/purchase-history.component';
 import { HistoryDetailComponent } from './pages/history-detail/history-detail.component';
+import { SelectDestinationComponent } from './pages/eventTickets/bus/select-destination/select-destination.component';
 
+
+/* Library */
+import { DateTimePickerComponent } from './library/datetimepicker/datetimepicker.component';
+import { CalendarModule } from './library/datetimepicker/primeng/calendar/calendar'
+import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 
 @NgModule({
   declarations: [
@@ -45,14 +57,23 @@ import { HistoryDetailComponent } from './pages/history-detail/history-detail.co
     PaymentComponent,
     PurchaseHistoryComponent,
     HistoryDetailComponent,
+    SelectDestinationComponent,
+
+    DateTimePickerComponent
   ],
   imports: [
-    NgbModule.forRoot(), BrowserModule,
+    NgbModule.forRoot(),
+    FormsModule, 
+    BrowserModule,
+    BrowserAnimationsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAGx0n_0P-3W46Pf77PqB25XtjNv8MpJDk'
     }),
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    HttpModule,
+    CalendarModule,
+    Ng2AutoCompleteModule,
   ],
   providers: [ HeaderService , HomeService ],
   bootstrap: [AppComponent]

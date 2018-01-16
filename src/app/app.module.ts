@@ -36,7 +36,8 @@ import { SelectDestinationComponent } from './pages/eventTickets/bus/select-dest
 
 /* Library */
 import { DateTimePickerComponent } from './library/datetimepicker/datetimepicker.component';
-import { CalendarModule } from './library/datetimepicker/primeng/calendar/calendar'
+import { CalendarModule } from './library/datetimepicker/primeng/calendar/calendar';
+import { DialogModule } from './library/dialog/dialog.component';
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 
 @NgModule({
@@ -73,6 +74,7 @@ import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
     HttpClientModule,
     HttpModule,
     CalendarModule,
+    DialogModule,
     Ng2AutoCompleteModule,
   ],
   providers: [ HeaderService , HomeService ],

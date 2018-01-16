@@ -1,4 +1,4 @@
-export class Province {
+export class ProvinceModel {
     id: string;
     desc: string;
 }

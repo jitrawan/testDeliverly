@@ -1,4 +1,5 @@
-import { Province } from './province.model';
+import { ProvinceModel } from './province.model';
+
 export class ParkModel {
     id: string;
     nameTh: string;
@@ -6,5 +7,5 @@ export class ParkModel {
     park: string;
     picking: string;
     updateDtm: Date;
-    province: Province;
+    province: ProvinceModel;
 }

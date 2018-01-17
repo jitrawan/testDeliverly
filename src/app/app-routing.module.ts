@@ -15,6 +15,7 @@ import { PaymentComponent } from './pages/payment/payment.component';
 import { PurchaseHistoryComponent } from './pages/purchase-history/purchase-history.component';
 import { HistoryDetailComponent } from './pages/history-detail/history-detail.component';
 import { SelectDestinationComponent } from './pages/eventTickets/bus/select-destination/select-destination.component';
+import { SelectSeatComponent } from './pages/eventTickets/bus/select-seat/select-seat.component';
 
 
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
     { path: 'transport/airlines', component: AirlinesComponent },
     { path: 'transport/bus', component: BusComponent },
     { path: 'transport/bus/selectDestination', component: SelectDestinationComponent },
+    { path: 'transport/bus/selectSeat', component: SelectSeatComponent },
     { path: 'shopping', component: ShoppingComponent },
     { path: 'transport/travel', component: TravelComponent },
     { path: 'allevent/:type', component: AllEventComponent },

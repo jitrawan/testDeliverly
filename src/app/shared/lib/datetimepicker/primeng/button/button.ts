@@ -1,5 +1,5 @@
 import {NgModule,Directive,ElementRef,AfterViewInit,OnDestroy,HostBinding,HostListener,Input} from '@angular/core';
-import {DomHandler} from '../dom/domhandler';
+import {DomHandler} from '../../../dom/domhandler';
 import {CommonModule} from '@angular/common';
 
 @Directive({

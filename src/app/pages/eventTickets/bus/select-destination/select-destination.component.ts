@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AvailableTrip } from '../../../../shared/models/availableTripSearch.model';
+import { AvailableTrip } from '../../../../shared/models/bus/availableTripSearch.model';
 import { ErrorMessage } from '../../../../shared/constant/error-message';
-
 import { BusService } from '../../../../shared/services/bus.service';
-import { ProvinceModel } from '../../../../shared/models/province.model';
-import { ParkModel } from '../../../../shared/models/park.model';
+import { ProvinceModel } from '../../../../shared/models/bus/province.model';
+import { ParkModel } from '../../../../shared/models/bus/park.model';
 
 @Component({
   selector: 'app-select-destination',
@@ -13,19 +12,6 @@ import { ParkModel } from '../../../../shared/models/park.model';
   providers: [BusService]
 })
 export class SelectDestinationComponent implements OnInit {
-
-  // private masProvince: ProvinceModel = new ProvinceModel();
-
-  constructor(
-    private busService: BusService
-  ) { }
-
-  ngOnInit() {
-    // this.dprtProvinceList = 
-    this.getProvinceList();
-    this.getParkList();
-  }
-
   private availableTripSeach: AvailableTrip = new AvailableTrip;
   private errorMessage: ErrorMessage = new ErrorMessage;
   private provinceList: ProvinceModel[];
@@ -41,7 +27,19 @@ export class SelectDestinationComponent implements OnInit {
   private selectedArrvPark: ParkModel;
   private selectedTripType: string;
   private isReturnDate: boolean = true;
-  private selectedNumOfPerson: any = 0;
+  private selectedNumOfPerson: number;
+
+  constructor(
+    private busService: BusService
+  ) { }
+
+  ngOnInit() {
+    this.getProvinceList();
+    this.getParkList();
+    this.selectedTripType = "R";
+    this.selectedNumOfPerson = 0;
+  }
+
 
   private getProvinceList() {
     this.busService.getMasProvince().subscribe((res) => {
@@ -51,21 +49,12 @@ export class SelectDestinationComponent implements OnInit {
           desc: obj.desc
         };
       });
-
-      // this.arrvProvinceList = res.data.map((obj: any) => {
-      //   return {
-      //     id: obj.id,
-      //     desc: obj.desc
-      //   };
-      // });
-
     });
   }
 
   private getParkList() {
     this.busService.getMasPark().subscribe((res) => {
       this.parkList = res.data.map((obj: any) => {
-        // console.log('obj-----', obj);
         return {
           id: obj.id,
           nameTh: obj.nameTh,
@@ -76,27 +65,12 @@ export class SelectDestinationComponent implements OnInit {
           province: obj.province
         };
       });
-
-      // this.arrvParkList = res.data.map((obj: any) => {
-      //   console.log('obj-----', obj);
-      //   return {
-      //     id: obj.id,
-      //     nameTh: obj.nameTh,
-      //     nameEn: obj.nameEn,
-      //     park: obj.park,
-      //     picking: obj.picking,
-      //     updateDtm: obj.updateDtm,
-      //     province: obj.province
-      //   };
-      // });
     });
   }
 
   private selectDprtProvince(event) {
     this.selectedDptrProvince = event;
     this.selectedDptrPark = undefined;
-    console.log('----this.selectedDptrProvince ====', this.selectedDptrProvince);
-
   }
 
   private selectArrvProvince(event) {
@@ -132,10 +106,10 @@ export class SelectDestinationComponent implements OnInit {
 
   private selectType(event) {
     if (event.target.value == "O") {
-      this.isReturnDate = false;
+      // this.isReturnDate = false;
       this.selectedTripType = "O";
     } else {
-      this.isReturnDate = true;
+      // this.isReturnDate = true;
       this.selectedTripType = "R";
     }
   }

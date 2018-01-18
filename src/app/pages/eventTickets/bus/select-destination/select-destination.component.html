@@ -1,3 +1,4 @@
+
 <div class="container">
   <div class="row form-group">
   </div>
@@ -60,22 +61,21 @@
     <div class="col-md-4">
       <label class="h5">วันที่ไป</label>
     </div>
-    <div class="col-md-2" *ngIf="isReturnDate">
+    <div class="col-md-2" *ngIf="selectedTripType == 'R'">
     </div>
-    <div class="col-md-4" *ngIf="isReturnDate">
+    <div class="col-md-4" *ngIf="selectedTripType == 'R'">
       <label class="h5">วันที่กลับ</label>
     </div>
   </div>
   <div class="row form-group">
     <div class="col-md-4">
-      <!-- <go-datetimepicker [(date)]="departDate" [showIcon]="true" (blur)="addDays(departDate,3)" ></go-datetimepicker> -->
-      <p-calendar [(ngModel)]="departDate" [showIcon]="true" calendarLanguage="th"></p-calendar>
+      <p-calendar [(ngModel)]="departDate" [showIcon]="true" calendarLanguage="th"  *ngIf="selectedTripType == 'O'"></p-calendar>
+      <p-calendar [(ngModel)]="departDate" [showIcon]="true" calendarLanguage="th" [maxDate]="returnDate" *ngIf="selectedTripType == 'R'"></p-calendar>
     </div>
-    <div class="col-md-2" *ngIf="isReturnDate">
+    <div class="col-md-2" *ngIf="selectedTripType == 'R'">
     </div>
-    <div class="col-md-4" *ngIf="isReturnDate">
-      <p-calendar [(ngModel)]="returnDate" [showIcon]="true" calendarLanguage="th"></p-calendar>
-      <!-- <go-datetimepicker [(date)]="returnDate" [showIcon]="true" [minDate]="departDate"></go-datetimepicker> -->
+    <div class="col-md-4" *ngIf="selectedTripType == 'R'">
+      <p-calendar [(ngModel)]="returnDate" [showIcon]="true" calendarLanguage="th" [minDate]="departDate"></p-calendar>
     </div>
   </div>
   <div class="row form-group">
@@ -114,6 +114,7 @@
   <div class="row form-group">
     <div class="col-md-3">
       <button type="button" class="btn btn-info btn-block" (click)="onNextPage()"> Next </button>
+      <!-- <button type="button" class="btn btn-info btn-block" (click)="onNextPage()"> Next </button> -->
     </div>
   </div>
 </div>

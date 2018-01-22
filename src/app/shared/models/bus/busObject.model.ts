@@ -7,8 +7,10 @@ export class BusObjectModel {
         y: number;
         z: number;
     }
-    dim
-    status
-    gender
-
+    dim: {
+        h: number;
+        w: number;
+    }
+    status: any;
+    gender: any;
 }

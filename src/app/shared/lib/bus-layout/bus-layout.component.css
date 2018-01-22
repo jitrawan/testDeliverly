@@ -146,7 +146,9 @@
     opacity: 0;
   }
   .seat input[type=checkbox]:checked + label {
-    background: #bada55;
+    background: #F42536;
+    
+    /* background: #bada55; */
     -webkit-animation-name: rubberBand;
     animation-name: rubberBand;
     animation-duration: 300ms;
@@ -179,7 +181,8 @@
     font-weight: bold;
     line-height: 1.5rem;
     padding: 4px 0;
-    background: #F42536;
+    background: #bada55;
+    
     border-radius: 5px;
     animation-duration: 300ms;
     animation-fill-mode: both;

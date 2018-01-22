@@ -1,3 +1,5 @@
+import { BusObjectModel } from './busObject.model';
+
 export class BusLayoutModel {
     id: number;
     code: string;
@@ -8,6 +10,6 @@ export class BusLayoutModel {
     platform: string;
     cols: number;
     rows: number;
-    // objects BusObject;
+    objects: BusObjectModel;
 
 }

@@ -32,8 +32,7 @@ import { PaymentComponent } from './pages/payment/payment.component';
 import { PurchaseHistoryComponent } from './pages/purchase-history/purchase-history.component';
 import { HistoryDetailComponent } from './pages/history-detail/history-detail.component';
 import { SelectDestinationComponent } from './pages/eventTickets/bus/select-destination/select-destination.component';
-import { SelectSeatComponent } from './pages/eventTickets/bus/select-seat/select-seat.component';
-
+import { PassengerInformationComponent } from './pages/eventTickets/bus/passenger-information/passenger-information.component';
 
 /* Library */
 import { DateTimePickerComponent } from './shared/lib/datetimepicker/datetimepicker.component';
@@ -60,10 +59,8 @@ import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
     PurchaseHistoryComponent,
     HistoryDetailComponent,
     SelectDestinationComponent,
-
     DateTimePickerComponent,
-
-    SelectSeatComponent
+    PassengerInformationComponent
   ],
   imports: [
     NgbModule.forRoot(),

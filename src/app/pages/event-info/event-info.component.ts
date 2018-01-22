@@ -16,9 +16,9 @@ export class EventInfoComponent implements OnInit {
   constructor() { }
   @ViewChild(AgmMap) agmMap: AgmMap
   
-  private lat: number = 13.913260;
-  private lng: number = 100.546502;
-  private isMapShow:boolean = false;
+   lat: number = 13.913260;
+   lng: number = 100.546502;
+   isMapShow:boolean = false;
   private showMap: boolean = false;
   private map: any;
   private marker: any;  

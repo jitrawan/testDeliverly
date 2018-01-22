@@ -5,8 +5,8 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { HttpModule } from '@angular/http';
 
-import { AvailableTrip } from '../models/availableTripSearch.model';
-import { ProvinceModel } from '../models/province.model';
+import { AvailableTrip } from '../models/bus/availableTripSearch.model';
+import { ProvinceModel } from '../models/bus/province.model';
 // import {} from '../../pages/eventTickets/bus/select-destination/'
 
 @Injectable()

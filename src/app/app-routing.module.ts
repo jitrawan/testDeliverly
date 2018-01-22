@@ -16,6 +16,8 @@ import { PurchaseHistoryComponent } from './pages/purchase-history/purchase-hist
 import { HistoryDetailComponent } from './pages/history-detail/history-detail.component';
 import { SelectDestinationComponent } from './pages/eventTickets/bus/select-destination/select-destination.component';
 import { SelectSeatComponent } from './pages/eventTickets/bus/select-seat/select-seat.component';
+import { SelectRoundComponent } from './pages/eventTickets/bus/select-round/select-round.component';
+import { BusLayoutComponent } from './shared/lib/bus-layout/bus-layout.component';
 
 
 const routes: Routes = [
@@ -30,12 +32,14 @@ const routes: Routes = [
     { path: 'transport/bus', component: BusComponent },
     { path: 'transport/bus/selectDestination', component: SelectDestinationComponent },
     { path: 'transport/bus/selectSeat', component: SelectSeatComponent },
+    { path: 'transport/bus/selectRound', component: SelectRoundComponent },
     { path: 'shopping', component: ShoppingComponent },
     { path: 'transport/travel', component: TravelComponent },
     { path: 'allevent/:type', component: AllEventComponent },
     { path: 'payment/:step', component: PaymentComponent },
     { path: 'purchaseHistory', component: PurchaseHistoryComponent },
     { path: 'historyDetail', component: HistoryDetailComponent },
+    { path: 'busLayout', component: BusLayoutComponent },
   ];
   
   @NgModule({

@@ -5,11 +5,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 
+/* Library */
+// import { DateTimePickerComponent } from './shared/lib/datetimepicker/datetimepicker.component';
+import { CalendarModule } from './shared/lib/datetimepicker/primeng/calendar/calendar';
+import { DialogModule } from './shared/lib/dialog/dialog.component';
+import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 
 
+/* Service */
+import { HeaderService } from './shared/services/header.service';
+import { HomeService } from './shared/services/home.service';
+
+/* Page */
 import { AppComponent } from './app.component';
 
 import { HeaderComponent } from './core/header/header.component';
@@ -19,9 +29,6 @@ import { EventInfoComponent } from './pages/event-info/event-info.component';
 import { AllEventComponent } from './pages/eventTickets/all-event/all-event.component';
 import { HomeComponent } from './pages/home/home.component';
 import { BookingComponent } from './pages/booking/booking.component';
-
-import { HeaderService } from './shared/services/header.service';
-import { HomeService } from './shared/services/home.service';
 import { FaqComponent } from './pages/faq/faq.component';
 import { PolicyComponent } from './pages/policy/policy.component';
 import { AirlinesComponent } from './pages/eventTickets/airlines/airlines.component';
@@ -33,13 +40,8 @@ import { PurchaseHistoryComponent } from './pages/purchase-history/purchase-hist
 import { HistoryDetailComponent } from './pages/history-detail/history-detail.component';
 import { SelectDestinationComponent } from './pages/eventTickets/bus/select-destination/select-destination.component';
 import { SelectSeatComponent } from './pages/eventTickets/bus/select-seat/select-seat.component';
-
-
-/* Library */
-import { DateTimePickerComponent } from './shared/lib/datetimepicker/datetimepicker.component';
-import { CalendarModule } from './shared/lib/datetimepicker/primeng/calendar/calendar';
-import { DialogModule } from './shared/lib/dialog/dialog.component';
-import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
+import { SelectRoundComponent } from './pages/eventTickets/bus/select-round/select-round.component';
+import { BusLayoutComponent } from './shared/lib/bus-layout/bus-layout.component';
 
 @NgModule({
   declarations: [
@@ -61,13 +63,14 @@ import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
     HistoryDetailComponent,
     SelectDestinationComponent,
 
-    DateTimePickerComponent,
-
-    SelectSeatComponent
+    // DateTimePickerComponent,
+    SelectSeatComponent,
+    SelectRoundComponent,
+    BusLayoutComponent,
   ],
   imports: [
     NgbModule.forRoot(),
-    FormsModule, 
+    FormsModule,
     BrowserModule,
     BrowserAnimationsModule,
     AgmCoreModule.forRoot({
@@ -80,7 +83,7 @@ import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
     DialogModule,
     Ng2AutoCompleteModule,
   ],
-  providers: [ HeaderService , HomeService ],
+  providers: [HeaderService, HomeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

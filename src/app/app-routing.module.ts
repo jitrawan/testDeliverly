@@ -16,7 +16,8 @@ import { PurchaseHistoryComponent } from './pages/purchase-history/purchase-hist
 import { HistoryDetailComponent } from './pages/history-detail/history-detail.component';
 import { SelectDestinationComponent } from './pages/eventTickets/bus/select-destination/select-destination.component';
 import { PassengerInformationComponent } from './pages/eventTickets/bus/passenger-information/passenger-information.component';
-
+import { SummaryComponent } from './pages/eventTickets/bus/summary/summary.component';
+import { SelectRoundComponent } from './pages/eventTickets/bus/select-round/select-round.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/', pathMatch: 'full' },
@@ -30,6 +31,8 @@ const routes: Routes = [
     { path: 'transport/bus', component: BusComponent },
     { path: 'transport/bus/selectDestination', component: SelectDestinationComponent },
     { path: 'transport/bus/passengerInfomation', component: PassengerInformationComponent },
+    { path: 'transport/bus/selectRound', component: SelectRoundComponent },
+    { path: 'transport/bus/summary', component: SummaryComponent },
     { path: 'shopping', component: ShoppingComponent },
     { path: 'transport/travel', component: TravelComponent },
     { path: 'allevent/:type', component: AllEventComponent },

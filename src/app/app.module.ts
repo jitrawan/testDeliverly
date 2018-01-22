@@ -33,12 +33,15 @@ import { PurchaseHistoryComponent } from './pages/purchase-history/purchase-hist
 import { HistoryDetailComponent } from './pages/history-detail/history-detail.component';
 import { SelectDestinationComponent } from './pages/eventTickets/bus/select-destination/select-destination.component';
 import { PassengerInformationComponent } from './pages/eventTickets/bus/passenger-information/passenger-information.component';
+import { SummaryComponent } from './pages/eventTickets/bus/summary/summary.component';
+import { SelectRoundComponent } from './pages/eventTickets/bus/select-round/select-round.component';
 
 /* Library */
 import { DateTimePickerComponent } from './shared/lib/datetimepicker/datetimepicker.component';
 import { CalendarModule } from './shared/lib/datetimepicker/primeng/calendar/calendar';
 import { DialogModule } from './shared/lib/dialog/dialog.component';
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
+
 
 @NgModule({
   declarations: [
@@ -60,7 +63,9 @@ import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
     HistoryDetailComponent,
     SelectDestinationComponent,
     DateTimePickerComponent,
-    PassengerInformationComponent
+    PassengerInformationComponent,
+    SummaryComponent,
+    SelectRoundComponent
   ],
   imports: [
     NgbModule.forRoot(),

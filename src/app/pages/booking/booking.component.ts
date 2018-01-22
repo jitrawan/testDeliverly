@@ -17,5 +17,19 @@ export class BookingComponent implements OnInit {
     ngOnInit() {
 
     }
+    zoomOver(event){
 
+    }
+
+    onScrollToContent(e){
+
+    }
+
+    routingPayment(){
+
+    }
+    
+    topfunction(){
+
+    }
 }

@@ -15,9 +15,13 @@ import { PaymentComponent } from './pages/payment/payment.component';
 import { PurchaseHistoryComponent } from './pages/purchase-history/purchase-history.component';
 import { HistoryDetailComponent } from './pages/history-detail/history-detail.component';
 import { SelectDestinationComponent } from './pages/eventTickets/bus/select-destination/select-destination.component';
+
+import { SelectSeatComponent } from './pages/eventTickets/bus/select-seat/select-seat.component';
+import { SelectRoundComponent } from './pages/eventTickets/bus/select-round/select-round.component';
 import { PassengerInformationComponent } from './pages/eventTickets/bus/passenger-information/passenger-information.component';
 import { SummaryComponent } from './pages/eventTickets/bus/summary/summary.component';
-import { SelectRoundComponent } from './pages/eventTickets/bus/select-round/select-round.component';
+
+import { BusLayoutComponent } from './shared/lib/bus-layout/bus-layout.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/', pathMatch: 'full' },
@@ -30,6 +34,8 @@ const routes: Routes = [
     { path: 'transport/airlines', component: AirlinesComponent },
     { path: 'transport/bus', component: BusComponent },
     { path: 'transport/bus/selectDestination', component: SelectDestinationComponent },
+    { path: 'transport/bus/selectSeat', component: SelectSeatComponent },
+    { path: 'transport/bus/selectRound', component: SelectRoundComponent },
     { path: 'transport/bus/passengerInfomation', component: PassengerInformationComponent },
     { path: 'transport/bus/selectRound', component: SelectRoundComponent },
     { path: 'transport/bus/summary', component: SummaryComponent },
@@ -39,6 +45,7 @@ const routes: Routes = [
     { path: 'payment/:step', component: PaymentComponent },
     { path: 'purchaseHistory', component: PurchaseHistoryComponent },
     { path: 'historyDetail', component: HistoryDetailComponent },
+    { path: 'busLayout', component: BusLayoutComponent },
   ];
   
   @NgModule({

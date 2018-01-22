@@ -19,6 +19,7 @@ import { SelectDestinationComponent } from './pages/eventTickets/bus/select-dest
 import { SelectSeatComponent } from './pages/eventTickets/bus/select-seat/select-seat.component';
 import { SelectRoundComponent } from './pages/eventTickets/bus/select-round/select-round.component';
 import { PassengerInformationComponent } from './pages/eventTickets/bus/passenger-information/passenger-information.component';
+import { SummaryComponent } from './pages/eventTickets/bus/summary/summary.component';
 
 import { BusLayoutComponent } from './shared/lib/bus-layout/bus-layout.component';
 
@@ -36,6 +37,8 @@ const routes: Routes = [
     { path: 'transport/bus/selectSeat', component: SelectSeatComponent },
     { path: 'transport/bus/selectRound', component: SelectRoundComponent },
     { path: 'transport/bus/passengerInfomation', component: PassengerInformationComponent },
+    { path: 'transport/bus/selectRound', component: SelectRoundComponent },
+    { path: 'transport/bus/summary', component: SummaryComponent },
     { path: 'shopping', component: ShoppingComponent },
     { path: 'transport/travel', component: TravelComponent },
     { path: 'allevent/:type', component: AllEventComponent },

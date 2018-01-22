@@ -1,0 +1,28 @@
+.selectRoundWrapper {
+  padding: 15px 15% 0px 15%;
+}
+
+.selectRoundWrapper .busTopic img {
+  max-width: 100px;
+  height: auto;
+}
+
+.selectRoundWrapper .busTopic span {
+  font-size: 22px;
+  padding-left: 15px;
+  padding-bottom: 15px;
+  font-weight: 700
+}
+
+.selectRoundWrapper .selectRoundTopic {
+  font-size: 22px;
+  padding-left: 15px;
+  padding-bottom: 15px;
+  font-weight: 700
+}
+
+.selectDate{
+    text-align: center;
+    border: 1px solid;
+    border-radius: 10px;
+}

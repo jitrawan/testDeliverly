@@ -40,14 +40,16 @@ import { HistoryDetailComponent } from './pages/history-detail/history-detail.co
 import { SelectDestinationComponent } from './pages/eventTickets/bus/select-destination/select-destination.component';
 
 import { SelectSeatComponent } from './pages/eventTickets/bus/select-seat/select-seat.component';
-import { SelectRoundComponent } from './pages/eventTickets/bus/select-round/select-round.component';
 import { BusLayoutComponent } from './shared/lib/bus-layout/bus-layout.component';
 import { PassengerInformationComponent } from './pages/eventTickets/bus/passenger-information/passenger-information.component';
+import { SummaryComponent } from './pages/eventTickets/bus/summary/summary.component';
+import { SelectRoundComponent } from './pages/eventTickets/bus/select-round/select-round.component';
 
 /* Library */
 // import { CalendarModule } from './shared/lib/datetimepicker/primeng/calendar/calendar';
 // import { DialogModule } from './shared/lib/dialog/dialog.component';
 // import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
+
 
 
 @NgModule({
@@ -69,6 +71,8 @@ import { PassengerInformationComponent } from './pages/eventTickets/bus/passenge
     PurchaseHistoryComponent,
     HistoryDetailComponent,
     SelectDestinationComponent,
+    PassengerInformationComponent,
+    SummaryComponent,
 
     SelectSeatComponent,
     SelectRoundComponent,

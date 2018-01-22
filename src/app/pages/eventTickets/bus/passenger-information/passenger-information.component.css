@@ -1,46 +1,46 @@
 .passengerInfoWrapper{
     padding: 15px 15% 0px 15%;
 }
-.busTopic img{
+.passengerInfoWrapper .busTopic img{
     max-width: 100px;
     height: auto;
 }
 
-.busTopic span{
+.passengerInfoWrapper .busTopic span{
     font-size: 22px;
     padding-left: 15px;
     padding-bottom: 15px;
     font-weight: 700
 }
 
-.passengerInfo {
+.passengerInfoWrapper .passengerInfo {
     padding-top: 15px;
     font-size: 18px;
 }
 
-.passengerInfo img {
+.passengerInfoWrapper .passengerInfo img {
     max-width: 50px;
     height: auto;
 }
 
-.passengerInfo span {
+.passengerInfoWrapper .passengerInfo span {
     font-weight: 700
 }
 
 
-.passengerBox{
+.passengerInfoWrapper .passengerBox{
     padding-top: 15px;
     padding-bottom: 15px;
 }
 
-.passengerBoxRow{
+.passengerInfoWrapper .passengerBoxRow{
     line-height: 40px
 }
 
-.passengerSeq{
+.passengerInfoWrapper .passengerSeq{
     padding: 5px 5px 5px 20px;
     background: #f48131;
-    border: 1px solid black;
+    border:  2px solid #bcbec0;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     font-size: 18px;
@@ -49,42 +49,42 @@
     font-weight: 500;
 }
 
-.title{
-    border-right: 1px solid black;
+.passengerInfoWrapper .title{
+    border-right:  2px solid #bcbec0;
 }
 
-.border1s{
-    border-bottom: 1px solid black;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
+.passengerInfoWrapper .border1s{
+    border-bottom:  2px solid #bcbec0;
+    border-left:  2px solid #bcbec0;
+    border-right:  2px solid #bcbec0;
 }
 
-.passengerBox .border1s:last-child {
+.passengerInfoWrapper .passengerBox .border1s:last-child {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
 
-.red{
+.passengerInfoWrapper .red{
     color: red;
 }
 
-.passengerBox  .form-control{
+.passengerInfoWrapper .passengerBox  .form-control{
     border: 0px;
 }
 
-.p0{
+.passengerInfoWrapper .p0{
     padding: 0px;
 }
 
-.noBorder{
+.passengerInfoWrapper .noBorder{
     border: 0px solid;
 }
 
-.borderRadius20{
+.passengerInfoWrapper .borderRadius20{
     border-bottom-right-radius: 10px;
 }
 
-.btn-atk-primary {
+.passengerInfoWrapper .btn-atk-primary {
     font-size: 18px;
     background-color: #37BDE0;
     border-bottom: 3px solid #389ABF;
@@ -95,7 +95,7 @@
     cursor: pointer;
 }
 
-.btn-atk-danger {
+.passengerInfoWrapper .btn-atk-danger {
     font-size: 18px;
     background-color: #EC1D23;
     border-bottom: 3px solid #ad1616;
@@ -106,51 +106,55 @@
     cursor: pointer;
 }
 
-.buttonWrapper{
+.passengerInfoWrapper .buttonWrapper{
     text-align: right;
+}
+
+.passengerInfoWrapper select.form-control{
+    color: black;
 }
 
 @media screen and (max-width: 766px) {
 
-    .title{
+    .passengerInfoWrapper .title{
         border: 0px solid;
-        border-bottom: 1px solid black;
+        border-bottom:  2px solid #bcbec0;
     }
-    .passengerBox .borderRadius20:last-child {
+    .passengerInfoWrapper .passengerBox .borderRadius20:last-child {
         border-bottom-left-radius: 10px;
     }
   }
 
   @media screen and (max-width: 480px) {
-    .passengerInfoWrapper{
+    .passengerInfoWrapper .passengerInfoWrapper{
         padding: 15px 5% 0px 5%;
     }
-    .btn-atk-danger {
+    .passengerInfoWrapper .btn-atk-danger {
         padding-left: 2rem;
         padding-right: 2rem;
     }
-    .btn-atk-primary {
+    .passengerInfoWrapper .btn-atk-primary {
         padding-left: 2rem;
         padding-right: 2rem;
     }
-    .passengerSeq{
+    .passengerInfoWrapper .passengerSeq{
         font-size: 18px;
         line-height: 30px;
         font-weight: 300;
     }
 
-    .busTopic{
+    .passengerInfoWrapper .busTopic{
         text-align: center;
     }
 
-    .busTopic img{
+    .passengerInfoWrapper .busTopic img{
         max-width: 80px;
     }
-    .passengerInfo span {
+    .passengerInfoWrapper .passengerInfo span {
         font-size: 16px;
         font-weight: 500;
     }
-    .busTopic span{
+    .passengerInfoWrapper .busTopic span{
         font-size: 16px;
         padding: 0px;
         font-weight: 600;
@@ -158,7 +162,7 @@
 }
 
 @media screen and (max-width: 480px) {
-    .passengerSeq{
+    .passengerInfoWrapper .passengerSeq{
         font-size: 14px;
     }
 }

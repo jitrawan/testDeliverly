@@ -15,10 +15,12 @@ import { PaymentComponent } from './pages/payment/payment.component';
 import { PurchaseHistoryComponent } from './pages/purchase-history/purchase-history.component';
 import { HistoryDetailComponent } from './pages/history-detail/history-detail.component';
 import { SelectDestinationComponent } from './pages/eventTickets/bus/select-destination/select-destination.component';
+
 import { SelectSeatComponent } from './pages/eventTickets/bus/select-seat/select-seat.component';
 import { SelectRoundComponent } from './pages/eventTickets/bus/select-round/select-round.component';
-import { BusLayoutComponent } from './shared/lib/bus-layout/bus-layout.component';
+import { PassengerInformationComponent } from './pages/eventTickets/bus/passenger-information/passenger-information.component';
 
+import { BusLayoutComponent } from './shared/lib/bus-layout/bus-layout.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/', pathMatch: 'full' },
@@ -33,6 +35,7 @@ const routes: Routes = [
     { path: 'transport/bus/selectDestination', component: SelectDestinationComponent },
     { path: 'transport/bus/selectSeat', component: SelectSeatComponent },
     { path: 'transport/bus/selectRound', component: SelectRoundComponent },
+    { path: 'transport/bus/passengerInfomation', component: PassengerInformationComponent },
     { path: 'shopping', component: ShoppingComponent },
     { path: 'transport/travel', component: TravelComponent },
     { path: 'allevent/:type', component: AllEventComponent },

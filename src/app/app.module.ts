@@ -9,7 +9,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 
 /* Library */
-// import { DateTimePickerComponent } from './shared/lib/datetimepicker/datetimepicker.component';
 import { CalendarModule } from './shared/lib/datetimepicker/primeng/calendar/calendar';
 import { DialogModule } from './shared/lib/dialog/dialog.component';
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
@@ -39,9 +38,17 @@ import { PaymentComponent } from './pages/payment/payment.component';
 import { PurchaseHistoryComponent } from './pages/purchase-history/purchase-history.component';
 import { HistoryDetailComponent } from './pages/history-detail/history-detail.component';
 import { SelectDestinationComponent } from './pages/eventTickets/bus/select-destination/select-destination.component';
+
 import { SelectSeatComponent } from './pages/eventTickets/bus/select-seat/select-seat.component';
 import { SelectRoundComponent } from './pages/eventTickets/bus/select-round/select-round.component';
 import { BusLayoutComponent } from './shared/lib/bus-layout/bus-layout.component';
+import { PassengerInformationComponent } from './pages/eventTickets/bus/passenger-information/passenger-information.component';
+
+/* Library */
+// import { CalendarModule } from './shared/lib/datetimepicker/primeng/calendar/calendar';
+// import { DialogModule } from './shared/lib/dialog/dialog.component';
+// import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
+
 
 @NgModule({
   declarations: [
@@ -63,10 +70,10 @@ import { BusLayoutComponent } from './shared/lib/bus-layout/bus-layout.component
     HistoryDetailComponent,
     SelectDestinationComponent,
 
-    // DateTimePickerComponent,
     SelectSeatComponent,
     SelectRoundComponent,
     BusLayoutComponent,
+    PassengerInformationComponent
   ],
   imports: [
     NgbModule.forRoot(),

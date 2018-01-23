@@ -1,0 +1,42 @@
+.selectDestinationWrapper {
+    padding: 15px 15% 0px 15%;
+}
+
+.selectDestinationWrapper .btn-atk-primary {
+    font-size: 18px;
+    background-color: #37BDE0;
+    border-bottom: 3px solid #389ABF;
+    color: #fff;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    border-radius: 2rem;
+    cursor: pointer;
+}
+
+.selectDestinationWrapper .btn-atk-danger {
+    font-size: 18px;
+    background-color: #EC1D23;
+    border-bottom: 3px solid #ad1616;
+    color: #fff;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    border-radius: 2rem;
+    cursor: pointer;
+}
+
+.selectDestinationWrapper .buttonWrapper {
+    text-align: right;
+}
+
+
+.selectDestinationWrapper .busTopic img{
+    max-width: 100px;
+    height: auto;
+}
+
+.selectDestinationWrapper .busTopic span{
+    font-size: 22px;
+    padding-left: 15px;
+    padding-bottom: 15px;
+    font-weight: 700
+}

@@ -1,120 +1,121 @@
-
-<div class="container">
-  <div class="row form-group">
-  </div>
-  <div class="row form-group">
-    <div class="col-md-2">
-      <label class="form-check-label h5">
-        <input class="form-check-input" type="radio" name="radioTypeTrip" id="inlineRadio1" value="O" (change)="selectType($event)"> เที่ยวเดียว
-      </label>
+<div class="selectDestinationWrapper">
+  <div class="container">
+    <div class="busTopic">
+      <img src="../../../../assets/images/pns-logo.png" />
+      <span>จองตั๋วรถโดยสาร บขส. ออนไลน์ </span>
     </div>
-    <div class="col-md-2">
-      <label class="form-check-label h5">
-        <input class="form-check-input" type="radio" name="radioTypeTrip" id="inlineRadio1" value="R" (change)="selectType($event)"> ไป - กลับ
-      </label>
+    <div class="row form-group">
     </div>
-  </div>
-  <div class="row form-group">
-  </div>
-  <div class="row ">
-    <div class="col-md-4">
-      <label class="h5">จุดขึ้นรถ</label>
+    <div class="row form-group">
+      <div class="col-md-2">
+        <label class="form-check-label h5">
+          <input class="form-check-input" type="radio" name="radioTypeTrip" id="inlineRadio1" value="O" (change)="selectType($event)"> เที่ยวเดียว
+        </label>
+      </div>
+      <div class="col-md-2">
+        <label class="form-check-label h5">
+          <input class="form-check-input" type="radio" name="radioTypeTrip" id="inlineRadio1" value="R" (change)="selectType($event)"
+            checked> ไป - กลับ
+        </label>
+      </div>
     </div>
-    <div class="col-md-2">
+    <div class="row form-group">
     </div>
-    <div class="col-md-4">
-      <label class="h5">จุดลงรถ</label>
+    <div class="row ">
+      <div class="col-md-4">
+        <label class="h5">จุดขึ้นรถ</label>
+      </div>
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-4">
+        <label class="h5">จุดลงรถ</label>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4">
-      <input class="form-control" type="text" placeholder="เลือกต้นทาง" auto-complete [source]="provinceList" 
-        (ngModelChange)="selectDprtProvince($event)" (blur)="findDprtParkList()" loading-text="กำลังดาวน์โหลด" list-formatter="desc"
-        [accept-user-input]="false">
+    <div class="row">
+      <div class="col-md-4">
+        <input class="form-control" type="text" placeholder="เลือกต้นทาง" auto-complete [source]="provinceList" (ngModelChange)="selectDprtProvince($event)"
+          (blur)="findDprtParkList()" loading-text="กำลังดาวน์โหลด" list-formatter="desc" [accept-user-input]="false">
+      </div>
+      <div class="col-md-2 text-center">
+        <i class="fa fa-exchange fa-2x" aria-hidden="true" style="color:#fe6716;"></i>
+      </div>
+      <div class="col-md-4">
+        <input class="form-control" type="text" placeholder="เลือกปลายทาง" auto-complete [source]="provinceList" (ngModelChange)="selectArrvProvince($event)"
+          (blur)="findArrvParkList()" loading-text="กำลังดาวน์โหลด" list-formatter="desc" [accept-user-input]="false">
+      </div>
     </div>
-    <div class="col-md-2 text-center">
-      <i class="fa fa-exchange fa-2x" aria-hidden="true" style="color:#fe6716;"></i>
+    <div class="row form-group">
     </div>
-    <div class="col-md-4">
-      <input class="form-control" type="text" placeholder="เลือกปลายทาง" auto-complete [source]="provinceList" 
-        (ngModelChange)="selectArrvProvince($event)" (blur)="findArrvParkList()" loading-text="กำลังดาวน์โหลด" list-formatter="desc"
-        [accept-user-input]="false">
+    <div class="row form-group">
+      <div class="col-md-4">
+        <input class="form-control" type="text" placeholder="เลือกจุดขึ้นรถ" auto-complete [source]="dptrParkList" [(ngModel)]="selectedDptrPark"
+          loading-text="กำลังดาวน์โหลด" list-formatter="nameTh" [accept-user-input]="false">
+      </div>
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-4">
+        <input class="form-control" type="text" placeholder="เลือกจุดลงรถ" auto-complete [source]="arrvParkList" [(ngModel)]="selectedArrvPark"
+          loading-text="กำลังดาวน์โหลด" list-formatter="nameTh" [accept-user-input]="false">
+      </div>
     </div>
-  </div>
-  <div class="row form-group">
-  </div>
-  <div class="row form-group">
-    <div class="col-md-4">
-      <input class="form-control" type="text" placeholder="เลือกจุดขึ้นรถ" auto-complete [source]="dptrParkList" [(ngModel)]="selectedDptrPark"
-        loading-text="กำลังดาวน์โหลด" list-formatter="nameTh" [accept-user-input]="false">
+    <div class="row form-group">
     </div>
-    <div class="col-md-2">
+    <div class="row ">
+      <div class="col-md-4">
+        <label class="h5">วันที่ไป</label>
+      </div>
+      <div class="col-md-2" *ngIf="selectedTripType == 'R'">
+      </div>
+      <div class="col-md-4" *ngIf="selectedTripType == 'R'">
+        <label class="h5">วันที่กลับ</label>
+      </div>
     </div>
-    <div class="col-md-4">
-      <input class="form-control" type="text" placeholder="เลือกจุดลงรถ" auto-complete [source]="arrvParkList" [(ngModel)]="selectedArrvPark"
-        loading-text="กำลังดาวน์โหลด" list-formatter="nameTh" [accept-user-input]="false">
+    <div class="row form-group">
+      <div class="col-md-4">
+        <p-calendar [(ngModel)]="departDate" [showIcon]="true" calendarLanguage="th" *ngIf="selectedTripType == 'O'"></p-calendar>
+        <p-calendar [(ngModel)]="departDate" [showIcon]="true" calendarLanguage="th" [maxDate]="returnDate" *ngIf="selectedTripType == 'R'"></p-calendar>
+      </div>
+      <div class="col-md-2" *ngIf="selectedTripType == 'R'">
+      </div>
+      <div class="col-md-4" *ngIf="selectedTripType == 'R'">
+        <p-calendar [(ngModel)]="returnDate" [showIcon]="true" calendarLanguage="th" [minDate]="departDate"></p-calendar>
+      </div>
     </div>
-  </div>
-  <div class="row form-group">
-  </div>
-  <div class="row ">
-    <div class="col-md-4">
-      <label class="h5">วันที่ไป</label>
+    <div class="row form-group">
     </div>
-    <div class="col-md-2" *ngIf="selectedTripType == 'R'">
+    <div class="row ">
+      <div class="col-md-4">
+        <label class="h5">จำนวนผู้เดินทาง</label>
+      </div>
     </div>
-    <div class="col-md-4" *ngIf="selectedTripType == 'R'">
-      <label class="h5">วันที่กลับ</label>
+    <div class="row form-group">
+      <div class="col-md-2">
+        <select class="form-control" [(ngModel)]="selectedNumOfPerson" *ngIf="!isReturnDate">
+          <option value="0">กรุณาเลือก</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+        <select class="form-control" [(ngModel)]="selectedNumOfPerson" *ngIf="isReturnDate">
+          <option value="0">กรุณาเลือก</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+        </select>
+      </div>
     </div>
-  </div>
-  <div class="row form-group">
-    <div class="col-md-4">
-      <p-calendar [(ngModel)]="departDate" [showIcon]="true" calendarLanguage="th"  *ngIf="selectedTripType == 'O'"></p-calendar>
-      <p-calendar [(ngModel)]="departDate" [showIcon]="true" calendarLanguage="th" [maxDate]="returnDate" *ngIf="selectedTripType == 'R'"></p-calendar>
+    <div class="row form-group">
     </div>
-    <div class="col-md-2" *ngIf="selectedTripType == 'R'">
+    <div class="row form-group">
+      <div class="col-md-6">
+        <p class="strong"> เงื่อนไขการซื้อ </p>
+        <label *ngFor="let data of condition"> {{data}} </label>
+      </div>
     </div>
-    <div class="col-md-4" *ngIf="selectedTripType == 'R'">
-      <p-calendar [(ngModel)]="returnDate" [showIcon]="true" calendarLanguage="th" [minDate]="departDate"></p-calendar>
-    </div>
-  </div>
-  <div class="row form-group">
-  </div>
-  <div class="row ">
-    <div class="col-md-4">
-      <label class="h5">จำนวนผู้เดินทาง</label>
-    </div>
-  </div>
-  <div class="row form-group">
-    <div class="col-md-2">
-      <select class="form-control" [(ngModel)]="selectedNumOfPerson" *ngIf="!isReturnDate">
-        <option value="0">กรุณาเลือก</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-      </select>
-      <select class="form-control" [(ngModel)]="selectedNumOfPerson" *ngIf="isReturnDate">
-        <option value="0">กรุณาเลือก</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-      </select>
-    </div>
-  </div>
-  <div class="row form-group">
-  </div>
-  <div class="row form-group">
-    <div class="col-md-6">
-      <p class="strong"> เงื่อนไขการซื้อ </p>
-      <label *ngFor="let data of condition"> {{data}} </label>
-    </div>
-  </div>
-  <div class="row form-group">
-  </div>
-  <div class="row form-group">
-    <div class="col-md-3">
-      <button type="button" class="btn btn-info btn-block" (click)="onNextPage()"> Next </button>
-      <!-- <button type="button" class="btn btn-info btn-block" (click)="onNextPage()"> Next </button> -->
+    <div class="row form-group">
+      <div class="col-12 buttonWrapper p-0">
+        <button class="btn btn-atk-primary mt-3 buttonSize" type="button" (click)="onNextPage()">NEXT</button>
+      </div>
     </div>
   </div>
 </div>

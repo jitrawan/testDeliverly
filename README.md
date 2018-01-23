@@ -1,26 +1,5 @@
 # NewAllTicketWebV2
 
-## 16/1/2561
-### select destination
- - model: province, park
- - service: bus
- - page: select-destination
-
-### error message
- - please select .....
-
-
-
-
-
-
-
-
-
-
-
-
-------------------------------------------------------------------------------------------------------
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.3.
 

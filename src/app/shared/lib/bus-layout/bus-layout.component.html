@@ -1,34 +1,38 @@
-<div class="plane">
-  <div class="cockpit">
-    <!-- <h1>Please select a seat</h1> -->
-  </div>
-  <div class="cabin fuselage">
-      <div class="row seats" type="A" *ngFor="let index of numbersOfRow; let row = index">
-        <div class="seat" style="display: block;" *ngFor="let col of numbersOfCol; let pos = index">
-          <div class="" *ngFor="let data of checkSeat(floorTwoList, row+1, pos+1)">
-            <input *ngIf="data.type == 1" type="checkbox" [id]="data.name" />
-            <label *ngIf="data.type == 1" [for]="data.name">{{data.name}}</label>
-            <span class="seatSize{{data.dim.w}} seatHeight{{data.dim.h}}" *ngIf="data.type == 2" [id]="data.name">{{data.name}}</span>
-          </div>
-        </div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="plane">
+      <div class="cockpit">
+        ชั้น 1
       </div>
-  </div>
-</div>
-
-<div class="plane">
-    <div class="cockpit">
-      <!-- <h1>Please select a seat</h1> -->
-    </div>
-    <div class="cabin fuselage">
-        <div class="row seats form-inline" type="A" *ngFor="let index of numbersOfRow; let row = index">
+      <div class="cabin fuselage">
+        <div class="row seats" type="A" *ngFor="let index of numbersOfRow; let row = index">
           <div class="seat" style="display: block;" *ngFor="let col of numbersOfCol; let pos = index">
             <div class="" *ngFor="let data of checkSeat(floorOneList, row+1, pos+1)">
-              <input *ngIf="data.type == 1" type="checkbox" [id]="data.name" />
+              <input *ngIf="data.type == 1" type="checkbox" [id]="data.name" (click)="selectSeat($event, data)" />
               <label *ngIf="data.type == 1" [for]="data.name">{{data.name}}</label>
-              <span class="seatSize{{data.dim.w}} seatHeight{{data.dim.h}} " *ngIf="data.type == 2" [id]="data.name">{{data.name}}</span>
+              <span *ngIf="data.type == 2" class="seatSize{{data.dim.w}} seatHeight{{data.dim.h}}" [id]="data.name">{{data.name}}</span>
             </div>
           </div>
         </div>
+      </div>
     </div>
   </div>
-  
+  <div class="col-md-6">
+    <div *ngIf="floorTwoList.length > 0" class="plane">
+      <div class="cockpit">
+        ชั้น 2
+      </div>
+      <div class="cabin fuselage">
+        <div class="row seats" type="A" *ngFor="let index of numbersOfRow; let row = index">
+          <div class="seat" style="display: block;" *ngFor="let col of numbersOfCol; let pos = index">
+            <div class="" *ngFor="let data of checkSeat(floorTwoList, row+1, pos+1)">
+              <input *ngIf="data.type == 1" type="checkbox" id="{{data.name}}up" (click)="selectSeat($event, data)" />
+              <label *ngIf="data.type == 1" for="{{data.name}}up">{{data.name}}</label>
+              <span *ngIf="data.type == 2" class="seatSize{{data.dim.w}} seatHeight{{data.dim.h}}" [id]="data.name">{{data.name}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

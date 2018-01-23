@@ -1,70 +1,73 @@
-<div class="container">
-  <div class="row form-group"> </div>
-  <div class="row form-group">
+<div class="selectSeatWrapper">
+  <div class="container">
+    <div class="row form-group"> </div>
+    <div class="row form-group">
 
-    <div class="col-md-6">
+      <div class="col-md-6">
 
-      <h5> ที่นั่ง </h5>
-      <!-- <bus-layout floor=1> </bus-layout> -->
-    </div>
-    <div class="col-md-6">
-      <div class="row" style="align-content: center;">
-        <div class="card col-md-12 col-sm-12">
-          <h5 class="row card-header"> {{tripName}} </h5>
-          <div class=" card-block ">
-            <div class="row text-center">
-              <div class="col-md-4 col-sm-12">
-                {{dptrPark}}
-              </div>
-              <div class="col-md-4 col-sm-12 ">
-                <i class="fa fa-long-arrow-right fa-2x" aria-hidden="true" style="color:#fe6716;"></i>
-              </div>
-              <div class="col-md-4  col-sm-12">
-                {{arrvPark}}
-              </div>
+        <h5> ที่นั่ง </h5>
+        <bus-layout [data]=data [numberOfSeat]=2> </bus-layout>
+      </div>
+      <div class="col-md-6">
+        <div class="infoBox">
+          <div class="row">
+            <div class="col-12 topicRow">{{tripName}}</div>
+          </div>
+          <div class="row border1s BoxRow text-center">
+            <div class="col-md-4 col-sm-12 rowSummary ">
+              {{dptrPark}}
             </div>
-            <div class="row text-center">
-              <div class="col-md-12 col-sm-12">
-                {{dptrDate}} ถึง {{arrvDate}}
-              </div>
+            <div class="col-md-4 col-sm-12 rowSummary ">
+              <i class="fa fa-long-arrow-right fa-2x" aria-hidden="true" style="color:#fe6716;"></i>
+            </div>
+            <div class="col-md-4  col-sm-12 rowSummary">
+              {{arrvPark}}
+            </div>
+          </div>
+          <div class="row border1s BoxRow text-center">
+            <div class="col-md-12 col-sm-12 rowSummary">
+              {{dptrDate}} ถึง {{arrvDate}}
             </div>
           </div>
         </div>
-      </div>
-      <div class="row form-group">
+        <div class="row form-group">
 
+        </div>
+        <div class="row form-group">
 
-      </div>
-
-      <div class="row form-group">
-      </div>
-      <div class="row form-group">
-        <div class="card col-md-12 col-sm-12">
-          <h5 class="row card-header"> เงื่อนไขรายละเอียดแต่ละที่นั่ง </h5>
-          <div class=" card-block ">
-            <div class="col-md-12">
-              <div class="row form-group">
-              </div>
-
-              <div class="row form-group">
-                <span class="col-md-1 seat red"></span>
-                <span class="col-md-11">{{detailContent.emptySeat}} </span>
-              </div>
-              <div class="row form-group">
-                <span class="col-md-1 seat blue"></span>
-                <div class="col-md-11">{{detailContent.sellSeat}} </div>
-              </div>
-              <div class="row form-group">
-                <span class="col-md-1 seat green"></span>
-                <div class="col-md-11">{{detailContent.markSeat}} </div>
-              </div>
+        </div>
+        <div class="infoBox">
+          <div class="row">
+            <div class="col-12 topicRow">เงื่อนไขรายละเอียดแต่ละที่นั่ง</div>
+          </div>
+          <div class="row border1s BoxRow "></div>
+          <div class="row border1s BoxRow ">
+            <div class="col-md-12 col-sm-12 rowSummary ">
+              <span class="col-md-1 seat red"></span>
+              <span class="col-md-11">{{detailContent.emptySeat}} </span>
+            </div>
+          </div>
+          <div class="row border1s BoxRow ">
+            <div class="col-md-12 col-sm-12 rowSummary">
+              <span class="col-md-1 seat blue" style=""></span>
+              <span class="col-md-11">{{detailContent.sellSeat}} </span>
+            </div>
+          </div>
+          <div class="row border1s BoxRow ">
+            <div class="col-md-12 col-sm-12 rowSummary">
+              <span class="col-md-1 seat green"></span>
+              <span class="col-md-11">{{detailContent.markSeat}} </span>
             </div>
           </div>
         </div>
-      </div>
+        <div class="row">
+          <div class="col-12 buttonWrapper p-0">
+            <button class="btn btn-atk-danger mt-3 buttonSize" type="button">BACK</button>
+            <button class="btn btn-atk-primary mt-3 buttonSize" type="button">NEXT</button>
+          </div>
+        </div>
 
+      </div>
     </div>
   </div>
 </div>
-
-<!-- </div> -->

@@ -1,5 +1,4 @@
 import { ParkModel } from './park.model';
-// import { } from './'
 
 export class TripModel {
     id: string;

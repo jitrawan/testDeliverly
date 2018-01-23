@@ -11,5 +11,5 @@ export class ReserveTripModel {
     busStd: BusStdModel;
     dptrPark: ReserveParkModel;
     arrvPark: ReserveParkModel;
-    reserves: ReserveModel;
+    reserves: ReserveModel[];
 }

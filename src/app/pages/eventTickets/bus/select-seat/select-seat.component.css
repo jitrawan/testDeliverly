@@ -1,4 +1,8 @@
-.seat {
+.selectSeatWrapper{
+  padding: 15px 15% 0px 15%;
+}
+
+.selectSeatWrapper .seat {
     float: left;
     display: block;
     width: 100%;
@@ -19,7 +23,7 @@
     background: #1eff00;
   }
 
-  .btn-atk-primary {
+  .selectSeatWrapper .btn-atk-primary {
     font-size: 18px;
     background-color: #37BDE0;
     border-bottom: 3px solid #389ABF;
@@ -30,7 +34,7 @@
     cursor: pointer;
 }
 
-.btn-atk-danger {
+.selectSeatWrapper .btn-atk-danger {
     font-size: 18px;
     background-color: #EC1D23;
     border-bottom: 3px solid #ad1616;
@@ -41,26 +45,26 @@
     cursor: pointer;
 }
 
-.buttonWrapper{
+.selectSeatWrapper .buttonWrapper{
     text-align: right;
 }
 
 
-.subInfoBoxWrapper .BoxRow:nth-child(2n+1){
+.selectSeatWrapper .subInfoBoxWrapper .BoxRow:nth-child(2n+1){
   background-color: #f3f6f6;
 }
 
-.infoBox{
+.selectSeatWrapper .infoBox{
   padding-bottom: 15px;
 }
 
-.infoBox .rowSummary{
+.selectSeatWrapper .infoBox .rowSummary{
   line-height: 40px;
   font-weight: 500;
   font-size: 18px;
 }
 
-.infoBox .topicRow{
+.selectSeatWrapper .infoBox .topicRow{
   padding: 5px 5px 5px 20px;
   background: #f48131;
   border: 2px solid #bcbec0;
@@ -72,12 +76,12 @@
   font-weight: 500;
 }
 
-.border1s{
+.selectSeatWrapper .border1s{
   border-left: 2px solid #bcbec0;
   border-right: 2px solid #bcbec0;
 }
 
-.infoBox .border1s:last-child {
+.selectSeatWrapper .infoBox .border1s:last-child {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   border-bottom: 2px solid #bcbec0; 

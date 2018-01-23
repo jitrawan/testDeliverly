@@ -106,10 +106,8 @@ export class SelectDestinationComponent implements OnInit {
 
   private selectType(event) {
     if (event.target.value == "O") {
-      // this.isReturnDate = false;
       this.selectedTripType = "O";
     } else {
-      // this.isReturnDate = true;
       this.selectedTripType = "R";
     }
   }

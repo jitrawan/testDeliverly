@@ -8,16 +8,16 @@
       <span>กรอกข้อมูลผู้โดยสาร</span>
       <img src="../../../../assets/images/borkorsor Website-07.png" />
     </div>
-    <div class="passengerBox">
+    <div class="passengerBox" *ngFor="let num of this.numOfPassengerBox; let index = index">
       <div class="row">
-        <div class="col-12 passengerSeq">ผู้โดยสารคนที่ 1 / PASSENGER NO.1</div>
+        <div class="col-12 passengerSeq">ผู้โดยสารคนที่ {{index+1}} / PASSENGER NO.{{index+1}}</div>
       </div>
       <div class="row border1s passengerBoxRow">
         <div class="col-12 col-md-6 title">เพศ / Gender
           <span class="red">*</span>
         </div>
         <div class="col-12 col-md-6 input p0">
-          <select class="form-control" aria-placeholder="กรุณาเลือก">
+          <select class="form-control" aria-placeholder="กรุณาเลือก" [(ngModel)]="passengerInfoList[index].gender">
             <option value="" disabled selected>กรุณาเลือก</option>
             <option>ชาย</option>
             <option>หญิง</option>
@@ -31,7 +31,8 @@
           <span class="red">*</span>
         </div>
         <div class="col-12 col-md-6 input p0">
-          <input class="col-12 noBorder" type="text" placeholder="ชื่อผู้โดยสาร" />
+          <input class="col-12 noBorder" type="text" placeholder="ชื่อผู้โดยสาร" [(ngModel)]="passengerInfoList[index].passengerName"
+          />
         </div>
       </div>
       <div class="row border1s passengerBoxRow">
@@ -39,66 +40,24 @@
           <span class="red">*</span>
         </div>
         <div class="col-12 col-md-6 input p0">
-          <input class="col-12 noBorder" type="text" placeholder="นามสกุล" />
+          <input class="col-12 noBorder" type="text" placeholder="นามสกุล" [(ngModel)]="passengerInfoList[index].passengerSurname"
+          />
         </div>
       </div>
       <div class="row border1s passengerBoxRow">
-        <div class="col-12 col-md-6 title">มือถือ / Mobile No.
+        <div class="col-12 col-md-6 title">เบอร์มือถือ / Mobile No.
           <span class="red">*</span>
         </div>
         <div class="col-12 col-md-6 input p0">
-          <input class="col-12 noBorder borderRadius20" type="text" placeholder="มือถือ" />
-        </div>
-      </div>
-    </div>
-
-    <div class="passengerBox">
-      <div class="row">
-        <div class="col-12 passengerSeq">ผู้โดยสารคนที่ 2 / PASSENGER NO.2</div>
-      </div>
-      <div class="row border1s passengerBoxRow">
-        <div class="col-12 col-md-6 title">เพศ / Gender
-          <span class="red">*</span>
-        </div>
-        <div class="col-12 col-md-6 input p0">
-          <select class="form-control" aria-placeholder="กรุณาเลือก">
-            <option value="" disabled selected>กรุณาเลือก</option>
-            <option>ชาย</option>
-            <option>หญิง</option>
-            <option>พระสงฆ์</option>
-            <option>ไม่ระบุ</option>
-          </select>
-        </div>
-      </div>
-      <div class="row border1s passengerBoxRow">
-        <div class="col-12 col-md-6 title">ชื่อผู้โดยสาร / Passenger name
-          <span class="red">*</span>
-        </div>
-        <div class="col-12 col-md-6 input p0">
-          <input class="col-12 noBorder" type="text" placeholder="ชื่อผู้โดยสาร" />
-        </div>
-      </div>
-      <div class="row border1s passengerBoxRow">
-        <div class="col-12 col-md-6 title">นามสกุล / Surname
-          <span class="red">*</span>
-        </div>
-        <div class="col-12 col-md-6 input p0">
-          <input class="col-12 noBorder" type="text" placeholder="นามสกุล" />
-        </div>
-      </div>
-      <div class="row border1s passengerBoxRow">
-        <div class="col-12 col-md-6 title">มือถือ / Mobile No.
-          <span class="red">*</span>
-        </div>
-        <div class="col-12 col-md-6 input p0">
-          <input class="col-12 noBorder borderRadius20" type="text" placeholder="มือถือ" />
+          <input class="col-12 noBorder borderRadius20" type="text" placeholder="เบอร์มือถือ" maxlength="10" (keypress)="onlyNumberKey($event)"
+            [(ngModel)]="passengerInfoList[index].passengerTel" />
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-12 buttonWrapper p-0">
         <button class="btn btn-atk-danger mt-3 buttonSize" type="button">BACK</button>
-        <button class="btn btn-atk-primary mt-3 buttonSize" type="button">NEXT</button>
+        <button class="btn btn-atk-primary mt-3 buttonSize" type="button" (click)="onClick()">NEXT</button>
       </div>
     </div>
   </div>

@@ -1,24 +1,24 @@
-.selectRoundWrapper {
+ /* {
   padding: 15px 15% 0px 15%;
-}
+} */
 
 .busTopic {
   padding-bottom: 20px;
 }
 
-.selectRoundWrapper .busTopic img {
+ .busTopic img {
   max-width: 100px;
   height: auto;
 }
 
-.selectRoundWrapper .busTopic span {
+ .busTopic span {
   font-size: 22px;
   padding-left: 15px;
   padding-bottom: 15px;
   font-weight: 700
 }
 
-.selectRoundWrapper .selectRoundTopic {
+ .selectRoundTopic {
   font-size: 22px;
   padding-left: 15px;
   padding-bottom: 15px;
@@ -131,9 +131,9 @@
 }
 
 @media screen and (max-width: 768px) {
-  .selectRoundWrapper {
+   /* {
     padding: 15px 10% 0px 10%;
-  }
+  } */
   .terms {
     font-size: 14px;
     padding-bottom: 2rem;
@@ -147,9 +147,9 @@
 }
 
 @media screen and (max-width: 520px) {
-  .selectRoundWrapper {
+   /* {
     padding: 15px 5% 0px 5%;
-  }
+  } */
 }
 
 .chooseDate {

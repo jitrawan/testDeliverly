@@ -36,7 +36,7 @@ const routes: Routes = [
   { path: 'transport/bus', component: BusComponent },
   // { path: 'transport/bus/selectDestination', component: SelectDestinationComponent },
   // { path: 'transport/bus/selectSeat', component: SelectSeatComponent },
-  // { path: 'transport/bus/selectRound', component: SelectRoundComponent },
+  { path: 'transport/bus/selectRound', component: SelectRoundComponent },
   // { path: 'transport/bus/passengerInfomation', component: PassengerInformationComponent },
   // { path: 'transport/bus/selectRound', component: SelectRoundComponent },
   // { path: 'transport/bus/summary', component: SummaryComponent },

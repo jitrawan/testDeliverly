@@ -20,7 +20,7 @@
         </div>
         <div class="col-2 chooseDate">
           <span>อ. 10 ม.ค. 61</span>
-        </div> 
+        </div>
         <div class="col-2 otherDate">
           <span>พ. 11 ม.ค. 61</span>
         </div>
@@ -49,24 +49,36 @@
         </div>
       </div>
     </div>
-    <div class="infoBox">
-      <div class="row topicRow">
-        <div class="col-4 info">ช่วงเวลาเดินทาง</div>
-        <div class="col-2 info">มาตราฐาน</div>
-        <div class="col-4 info">ที่นั่งคงเหลือ</div>
-        <div class="col-2 info">ราคา</div>
-      </div>
-      <div class="row infoSeq">
-        <div class="col-4 info">10.00 - 20.00</div>
-        <div class="col-2 info">ม.4ต</div>
-        <div class="col-4 info">39 / 54 ที่นั่ง</div>
-        <div class="col-2 info"><input type="radio" name="departure"/> 479 บาท</div>
-      </div>
-      <div class="row infoSeq">
-        <div class="col-4 info">10.00 - 20.00</div>
-        <div class="col-2 info">ม.4ต</div>
-        <div class="col-4 info">28 / 54 ที่นั่ง</div>
-        <div class="col-2 info"> <input type="radio" name="departure"/> 379 บาท</div>
+    <div class="outer">
+      <div class="infoBoxWrapper table-responsive-md">
+        <table class="table bordered">
+          <tbody>
+            <tr class="tableTopic">
+              <td>ช่วงเวลาเดินทาง</td>
+              <td>มาตราฐาน</td>
+              <td>ที่นั่งคงเหลือ</td>
+              <td>ราคา</td>
+            </tr>
+            <tr class="tableResult">
+              <td>10.00 - 20.00</td>
+              <td>ม.4ต</td>
+              <td>39 / 54 ที่นั่ง</td>
+              <td>
+                <input type="radio" id="departure1" name="departure" checked>
+                <label for="departure1">479 บาท</label>
+              </td>
+            </tr>
+            <tr class="tableResult">
+              <td>13.00 - 22.00</td>
+              <td>ม.4ต</td>
+              <td>28 / 54 ที่นั่ง</td>
+              <td>
+                <input type="radio" id="departure2" name="departure" checked>
+                <label for="departure2">379 บาท</label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -118,20 +130,27 @@
         </div>
       </div>
     </div>
-    <div class="infoBoxWrapper">
-      <div class="infoBox">
-        <div class="row topicRow">
-          <div class="col-4 info">ช่วงเวลาเดินทาง</div>
-          <div class="col-2 info">มาตราฐาน</div>
-          <div class="col-4 info">ที่นั่งคงเหลือ</div>
-          <div class="col-2 info">ราคา</div>
-        </div>
-        <div class="row infoSeq">
-          <div class="col-4 info">10.00 - 20.00</div>
-          <div class="col-2 info">ม.4ต</div>
-          <div class="col-4 info">39 / 54 ที่นั่ง</div>
-          <div class="col-2 info"><input type="radio" name="arrival"/> 479 บาท</div>
-        </div>
+    <div class="outer">
+      <div class="infoBoxWrapper table-responsive-md">
+        <table class="table bordered">
+          <tbody>
+            <tr class="tableTopic">
+              <td>ช่วงเวลาเดินทาง</td>
+              <td>มาตราฐาน</td>
+              <td>ที่นั่งคงเหลือ</td>
+              <td>ราคา</td>
+            </tr>
+            <tr class="tableResult">
+              <td>10.00 - 20.00</td>
+              <td>ม.4ต</td>
+              <td>39 / 54 ที่นั่ง</td>
+              <td>
+                <input type="radio" id="arrival1" name="arrival" checked>
+                <label for="arrival1">479 บาท</label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -152,41 +171,31 @@
           </span>
         </div>
       </div>
-      <div class="col-md-6 sum">
-        <div class="infoBox">
-          <div class="row">
-            <div class="col-12 topicRow">สรุปค่าโดยสาร</div>
-          </div>
-          <div class="row border1s BoxRow">
-            <div class="col-6">
-              <span>ค่าบัตรโดยสารเที่ยวไป :</span>
-            </div>
-            <div class="col-6">
-              <span>1,859.00 บาท</span>
-            </div>
-          </div>
-          <div class="row border1s BoxRow">
-            <div class="col-6">
-              <span>ค่าบัตรโดยสารเที่ยวกลับ :</span>
-            </div>
-            <div class="col-6">
-              <span>379.00 บาท</span>
-            </div>
-          </div>
-          <div class="row border1s BoxRow">
-            <div class="col-6">
-              <span>ค่าภาษี / ค่าธรรมเนียม :</span>
-            </div>
-            <div class="col-6">
-              <span>15.00 บาท</span>
-            </div>
-          </div>
-          <div class="row border1s BoxRow">
-            <div class="col-12 fontW600 textCenter">
-              <span>รวมราคาแล้วต่อ 1 คน 973.00 บาท</span>
-            </div>
-          </div>
-        </div>
+      <div class="col-md-6 sum table-responsive-sm">
+        <table class="table bordered">
+          <thead class="headerBox">
+            <tr>
+              <th scope="col" colspan="2">สรุปค่าโดยสาร</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ค่าบัตรโดยสารเที่ยวไป :</td>
+              <td>1,859.00 บาท</td>
+            </tr>
+            <tr>
+              <td>ค่าบัตรโดยสารเที่ยวกลับ :</td>
+              <td>379.00 บาท</td>
+            </tr>
+            <tr>
+              <td scope="row">ค่าภาษี / ค่าธรรมเนียม :</td>
+              <td>15.00 บาท</td>
+            </tr>
+            <tr>
+              <td class="rowSum" colspan="2">รวมราคาแล้วต่อ 1 คน 973.00 บาท</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -197,5 +206,4 @@
       <button class="btn btn-atk-primary mt-3 buttonSize" type="button">NEXT</button>
     </div>
   </div>
-
 </div>

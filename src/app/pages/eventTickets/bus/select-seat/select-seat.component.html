@@ -1,14 +1,14 @@
-<div class="selectSeatWrapper">
+<!-- <div class="selectSeatWrapper"> -->
   <div class="container">
     <div class="row form-group"> </div>
     <div class="row form-group">
 
-      <div class="col-md-6">
+      <div class="col-md-7">
 
         <h5> ที่นั่ง </h5>
         <bus-layout [data]=data [numberOfSeat]=2> </bus-layout>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-5">
         <div class="infoBox">
           <div class="row">
             <div class="col-12 topicRow">{{tripName}}</div>
@@ -63,11 +63,11 @@
         <div class="row">
           <div class="col-12 buttonWrapper p-0">
             <button class="btn btn-atk-danger mt-3 buttonSize" type="button">BACK</button>
-            <button class="btn btn-atk-primary mt-3 buttonSize" type="button">NEXT</button>
+            <button class="btn btn-atk-primary mt-3 buttonSize" type="button" (click)="onClick()">NEXT</button>
           </div>
         </div>
 
       </div>
     </div>
   </div>
-</div>
+<!-- </div> -->

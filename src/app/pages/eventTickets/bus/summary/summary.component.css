@@ -1,44 +1,44 @@
-.summaryWrapper{
+/* {
     padding: 15px 15% 0px 15%;
-}
-.summaryWrapper .busTopic img{
+} */
+ .busTopic img{
     max-width: 100px;
     height: auto;
 }
 
-.summaryWrapper .busTopic span{
+ .busTopic span{
     font-size: 22px;
     padding-left: 15px;
     padding-bottom: 15px;
     font-weight: 700
 }
 
-.summaryWrapper .summaryTopic {
+ .summaryTopic {
     padding-top: 15px;
     padding-bottom: 15px;
     font-size: 18px;
 }
 
-.summaryWrapper .summaryTopic img {
+ .summaryTopic img {
     max-width: 50px;
     height: auto;
 }
 
-.summaryWrapper .summaryTopic span {
+ .summaryTopic span {
     font-weight: 700
 }
 
-.summaryWrapper .infoBox{
+ .infoBox{
     padding-bottom: 15px;
 }
 
-.summaryWrapper .infoBox .rowSummary{
+ .infoBox .rowSummary{
     line-height: 40px;
     font-weight: 500;
     font-size: 18px;
 }
 
-.summaryWrapper .infoBox .topicRow{
+ .infoBox .topicRow{
     padding: 5px 5px 5px 20px;
     background: #f48131;
     border: 2px solid #bcbec0;
@@ -50,42 +50,42 @@
     font-weight: 500;
 }
 
-.summaryWrapper .border1s{
+ .border1s{
     border-left: 2px solid #bcbec0;
     border-right: 2px solid #bcbec0;
 }
 
-.summaryWrapper .infoBox .border1s:last-child {
+ .infoBox .border1s:last-child {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     border-bottom: 2px solid #bcbec0; 
 }
 
-.summaryWrapper .subInfoBox{
+ .subInfoBox{
     padding: 10px 3% 0px 3%;
 }
 
-.summaryWrapper .subInfoBox:nth-child(1){
+ .subInfoBox:nth-child(1){
     border-left:2px solid #bcbec0; 
     border-bottom-left-radius: 10px;
     border-bottom: 2px solid #bcbec0;
 }
 
-.summaryWrapper .subInfoBox:nth-child(2){
+ .subInfoBox:nth-child(2){
     border-right:2px solid #bcbec0; 
     border-bottom-right-radius: 10px;
     border-bottom: 2px solid #bcbec0;
 }
 
-.summaryWrapper .subInfoBoxWrapper .BoxRow:nth-child(2n+1){
+ .subInfoBoxWrapper .BoxRow:nth-child(2n+1){
     background-color: #f3f6f6;
 }
 
-.summaryWrapper .subInfoBoxGrey{
+ .subInfoBoxGrey{
     background-color: #a7a9ac!important;
 }
 
-.summaryWrapper .btn-atk-primary {
+ .btn-atk-primary {
     font-size: 18px;
     background-color: #37BDE0;
     border-bottom: 3px solid #389ABF;
@@ -96,7 +96,7 @@
     cursor: pointer;
 }
 
-.summaryWrapper .btn-atk-danger {
+ .btn-atk-danger {
     font-size: 18px;
     background-color: #EC1D23;
     border-bottom: 3px solid #ad1616;
@@ -107,45 +107,45 @@
     cursor: pointer;
 }
 
-.summaryWrapper .buttonWrapper{
+ .buttonWrapper{
     text-align: right;
 }
 
-@media screen and (max-width : 930px) {
-    .summaryWrapper{
+/* @media screen and (max-width : 930px) {
+    {
         padding: 15px 15% 0px 15%;
     }
-}
+} */
 
-@media screen and (max-width : 780px) {
-    .summaryWrapper{
+/* @media screen and (max-width : 780px) {
+    {
         padding: 15px 10% 0px 10%;
     }
 
-    .summaryWrapper .subInfoBox{
+     .subInfoBox{
         padding: 10px 5% 0px 5%;
     }
-}
+} */
 
-@media screen and (max-width : 420px) {
-    .summaryWrapper{
+/* @media screen and (max-width : 420px) {
+    {
         padding: 15px 5% 0px 5%;
     }
 
-    .summaryWrapper .subInfoBox{
+     .subInfoBox{
         padding: 10px 10% 0px 10%;
     }
-}
+} */
 
 @media screen and (max-width : 575px) {
-    .summaryWrapper .subInfoBox:nth-child(1){
+     .subInfoBox:nth-child(1){
         border-left:2px solid #bcbec0; 
         border-right:2px solid #bcbec0; 
         border-bottom-left-radius: 0px;
         border-bottom: 0px;
     }
     
-    .summaryWrapper .subInfoBox:nth-child(2){
+     .subInfoBox:nth-child(2){
         border-right:2px solid #bcbec0; 
         border-left:2px solid #bcbec0; 
         border-bottom: 2px solid #bcbec0;

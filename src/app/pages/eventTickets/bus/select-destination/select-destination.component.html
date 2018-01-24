@@ -1,9 +1,9 @@
-<div class="selectDestinationWrapper">
+<!-- <div class="selectDestinationWrapper"> -->
   <div class="container">
-    <div class="busTopic">
+    <!-- <div class="busTopic">
       <img src="../../../../assets/images/pns-logo.png" />
       <span>จองตั๋วรถโดยสาร บขส. ออนไลน์ </span>
-    </div>
+    </div> -->
     <div class="row form-group">
     </div>
     <div class="row form-group">
@@ -90,15 +90,15 @@
     </div>
     <div class="row form-group">
       <div class="col-md-2">
-        <select class="form-control" [(ngModel)]="selectedNumOfPerson" *ngIf="!isReturnDate">
-          <option value="0">กรุณาเลือก</option>
+        <select class="form-control" [(ngModel)]="selectedNumOfPerson" *ngIf="selectedTripType == 'O'">
+          <option value="0" disabled selected>กรุณาเลือก</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4</option>
         </select>
-        <select class="form-control" [(ngModel)]="selectedNumOfPerson" *ngIf="isReturnDate">
-          <option value="0">กรุณาเลือก</option>
+        <select class="form-control" [(ngModel)]="selectedNumOfPerson" *ngIf="selectedTripType == 'R'">
+          <option value="0" disabled selected>กรุณาเลือก</option>
           <option value="1">1</option>
           <option value="2">2</option>
         </select>
@@ -118,4 +118,4 @@
       </div>
     </div>
   </div>
-</div>
+<!-- </div> -->

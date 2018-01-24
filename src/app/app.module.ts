@@ -44,6 +44,7 @@ import { BusLayoutComponent } from './shared/lib/bus-layout/bus-layout.component
 import { PassengerInformationComponent } from './pages/eventTickets/bus/passenger-information/passenger-information.component';
 import { SummaryComponent } from './pages/eventTickets/bus/summary/summary.component';
 import { SelectRoundComponent } from './pages/eventTickets/bus/select-round/select-round.component';
+import { BuyTicketComponent } from './pages/eventTickets/bus/buy-ticket/buy-ticket.component';
 
 /* Library */
 // import { CalendarModule } from './shared/lib/datetimepicker/primeng/calendar/calendar';
@@ -77,7 +78,8 @@ import { SelectRoundComponent } from './pages/eventTickets/bus/select-round/sele
     SelectSeatComponent,
     SelectRoundComponent,
     BusLayoutComponent,
-    PassengerInformationComponent
+    PassengerInformationComponent,
+    BuyTicketComponent
   ],
   imports: [
     NgbModule.forRoot(),

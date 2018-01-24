@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { PassengerInformationModel } from '../../../../shared/models/bus/passengerInformation.model';
 import { ErrorMessage } from '../../../../shared/constant/error-message';
 
@@ -14,7 +15,8 @@ export class PassengerInformationComponent implements OnInit {
   passengerInfoList = new Array<PassengerInformationModel>();
   errorMessage = new ErrorMessage;
 
-  constructor() { }
+  constructor(private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.numOfPassengerBox = Array(this.totalPassenger).fill('');
@@ -25,21 +27,7 @@ export class PassengerInformationComponent implements OnInit {
   }
 
   onClick() {
-    for (let index = 0; index < this.passengerInfoList.length; index++) {
-      if (this.passengerInfoList[index].gender == undefined) {
-        alert(this.errorMessage.pleaseSelect + 'เพศ ' + 'ของผู้โดยสารคนที่ ' + (index + 1));
-        break;
-      } else if (this.passengerInfoList[index].passengerName == undefined) {
-        alert(this.errorMessage.pleaseSelect + 'ชื่อ ' + 'ของผู้โดยสารคนที่ ' + (index + 1));
-        break;
-      } else if (this.passengerInfoList[index].passengerSurname == undefined) {
-        alert(this.errorMessage.pleaseSelect + 'นามสกุล ' + 'ของผู้โดยสารคนที่ ' + (index + 1));
-        break;
-      } else if (this.passengerInfoList[index].passengerTel == undefined) {
-        alert(this.errorMessage.pleaseSelect + 'เบอร์มือถือ ' + 'ของผู้โดยสารคนที่ ' + (index + 1));
-        break;
-      }
-    }
+
   }
 
   onlyNumberKey(event) {
@@ -50,6 +38,29 @@ export class PassengerInformationComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  nextPage() {
+    var isFound = false;
+    for (let index = 0; index < this.passengerInfoList.length && !isFound; index++) {
+      if (this.passengerInfoList[index].gender == undefined) {
+        alert(this.errorMessage.pleaseSelect + 'เพศ ' + 'ของผู้โดยสารคนที่ ' + (index + 1));
+        isFound = true;
+        // break;
+      } else if (this.passengerInfoList[index].passengerName == undefined) {
+        alert(this.errorMessage.pleaseSelect + 'ชื่อ ' + 'ของผู้โดยสารคนที่ ' + (index + 1));
+        isFound = true;
+      } else if (this.passengerInfoList[index].passengerSurname == undefined) {
+        alert(this.errorMessage.pleaseSelect + 'นามสกุล ' + 'ของผู้โดยสารคนที่ ' + (index + 1));
+        isFound = true;
+      } else if (this.passengerInfoList[index].passengerTel == undefined) {
+        alert(this.errorMessage.pleaseSelect + 'เบอร์มือถือ ' + 'ของผู้โดยสารคนที่ ' + (index + 1));
+        isFound = true;
+      }
+    }
+    if (!isFound) {
+      this.router.navigate(['../summary'], { relativeTo: this.route });
+    }
   }
 
 }

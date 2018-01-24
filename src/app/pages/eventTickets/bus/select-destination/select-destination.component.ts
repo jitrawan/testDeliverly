@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AvailableTrip } from '../../../../shared/models/bus/availableTripSearch.model';
 import { ErrorMessage } from '../../../../shared/constant/error-message';
 import { BusService } from '../../../../shared/services/bus.service';
@@ -30,7 +31,9 @@ export class SelectDestinationComponent implements OnInit {
   private selectedNumOfPerson: number;
 
   constructor(
-    private busService: BusService
+    private busService: BusService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -141,6 +144,10 @@ export class SelectDestinationComponent implements OnInit {
       this.availableTripSeach.dropoffDesc = this.selectedArrvPark.nameTh;
       this.availableTripSeach.tripType = this.selectedTripType;
       console.log('------------>>> ', this.availableTripSeach);
+
+      /* --------------------- call API ---------------------*/
+
+      this.router.navigate(['selectRound'], { relativeTo: this.route });
     }
   }
 

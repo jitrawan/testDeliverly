@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-select-seat',
@@ -13,7 +14,9 @@ export class SelectSeatComponent implements OnInit {
   @Input() dptrDate: Date;
   @Input() arrvDate: Date;
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.tripName = "เที่ยวไป";
@@ -905,5 +908,9 @@ export class SelectSeatComponent implements OnInit {
         "gender": ""
       }
     ]
+  }
+
+  onClick() {
+    this.router.navigate(['../passengerInfomation'], { relativeTo: this.route });
   }
 }

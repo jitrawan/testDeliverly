@@ -76,13 +76,14 @@
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: flex-start; */
-    padding-left: 15%
+    padding-left: 15%;
+    margin-bottom: 2%;
   }
   
   .seat {
     /* display: flex; */
     flex: 0 0 14.28571428571429%;
-    padding: 5px;
+    /* padding: 5px; */
     position: relative;
     margin-left: 2.5%;
   }
@@ -94,9 +95,9 @@
     color: #ffffff;
     display: block;
     /* position: relative; */
-    position: absolute;
+    /* position: absolute; */
     text-align: center;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
     /* padding: 4px 0; */
     line-height: 2.5rem;

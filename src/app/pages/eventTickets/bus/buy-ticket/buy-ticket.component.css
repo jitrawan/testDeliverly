@@ -1,0 +1,15 @@
+.buyTicketWrapper{
+    padding: 15px 15% 0px 15%;
+}
+
+.busTopic img{
+    max-width: 100px;
+    height: auto;
+}
+
+.busTopic span{
+    font-size: 22px;
+    padding-left: 15px;
+    padding-bottom: 15px;
+    font-weight: 700
+}

@@ -1,5 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { SharedService } from '../../../../shared/services/shared-service.service';
 import { TransCheckoutModel } from '../../../../shared/models/bus/transCheckout.model';
+import { Subscription } from 'rxjs/Subscription';
+import { PassengerInformationModel } from '../../../../shared/models/bus/passengerInformation.model';
+
 
 @Component({
   selector: 'app-summary',
@@ -15,8 +19,14 @@ export class SummaryComponent implements OnInit {
   dprtDiscount: number = 0;
   rtrnPrice: number = 0;
   rtrnDiscount: number = 0;
+  // message: any;
+  // subscription: Subscription;
+  @Input() passengerInfoList = new Array<PassengerInformationModel>();
 
-  constructor() { }
+  constructor(private sharedService: SharedService) {
+    // this.sharedService.receiveData.subscribe(data => this.passengerInfoList = data);
+    console.log();
+  }
 
   ngOnInit() {
     // this.transCheckout = {
@@ -164,5 +174,9 @@ export class SummaryComponent implements OnInit {
     for (let index = 0; index < this.transCheckout.rtrnTrip.reserves.length; index++) {
       this.rtrnDiscount = this.rtrnDiscount + (Number(this.transCheckout.rtrnTrip.reserves[index].disFare) + Number(this.transCheckout.rtrnTrip.reserves[index].disFee));
     }
+  }
+
+  receiveMessage(msg: string) {
+    console.log('receive >>', msg); // your message from component A
   }
 }

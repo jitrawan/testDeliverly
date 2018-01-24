@@ -17,7 +17,7 @@ import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 /* Service */
 import { HeaderService } from './shared/services/header.service';
 import { HomeService } from './shared/services/home.service';
-
+import { SharedService } from './shared/services/shared-service.service';
 /* Page */
 import { AppComponent } from './app.component';
 
@@ -96,7 +96,7 @@ import { BuyTicketComponent } from './pages/eventTickets/bus/buy-ticket/buy-tick
     DialogModule,
     Ng2AutoCompleteModule,
   ],
-  providers: [HeaderService, HomeService],
+  providers: [HeaderService, HomeService, SharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

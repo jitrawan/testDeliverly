@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { SharedService } from '../../../../shared/services/shared-service.service';
 import { PassengerInformationModel } from '../../../../shared/models/bus/passengerInformation.model';
 import { ErrorMessage } from '../../../../shared/constant/error-message';
 
@@ -14,9 +15,13 @@ export class PassengerInformationComponent implements OnInit {
   numOfPassengerBox: any[];
   passengerInfoList = new Array<PassengerInformationModel>();
   errorMessage = new ErrorMessage;
+  displaySummary: boolean = false;
 
-  constructor(private router: Router,
-    private route: ActivatedRoute) { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private sharedService: SharedService
+  ) { }
 
   ngOnInit() {
     this.numOfPassengerBox = Array(this.totalPassenger).fill('');
@@ -24,10 +29,6 @@ export class PassengerInformationComponent implements OnInit {
       let passengerInfoModel: PassengerInformationModel = new PassengerInformationModel;
       this.passengerInfoList.push(passengerInfoModel);
     }
-  }
-
-  onClick() {
-
   }
 
   onlyNumberKey(event) {
@@ -59,8 +60,17 @@ export class PassengerInformationComponent implements OnInit {
       }
     }
     if (!isFound) {
-      this.router.navigate(['../summary'], { relativeTo: this.route });
+      this.displaySummary = true;
+      // this.sendMessage('test');
+      // this.router.navigate(['../summary'], { relativeTo: this.route });
     }
   }
+
+  sendMessage(msg : string) {
+    console.log(' sendMessage >>>');
+    this.sharedService.sendData(this.passengerInfoList);
+    // this.sharedService.subject.next('test');
+    // this.sharedService.sendMessage(msg);
+ }
 
 }

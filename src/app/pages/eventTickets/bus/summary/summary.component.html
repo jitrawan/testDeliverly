@@ -14,12 +14,12 @@
     </div>
     <div class="row border1s BoxRow">
       <div class="col-12 col-md-12 rowSummary">ชื่อ-นามสกุล :
-        <span>{{passengerName}}</span>
+        <span>{{passengerInfoList[0].passengerName}} {{passengerInfoList[0].passengerSurname}}</span>
       </div>
     </div>
     <div class="row border1s BoxRow">
       <div class="col-12 col-md-12 rowSummary"> มือถือ :
-        <span> {{passengerTel}} </span>
+        <span>{{passengerInfoList[0].passengerTel}} </span>
       </div>
     </div>
   </div>
@@ -67,7 +67,6 @@
               <div class="row border1s BoxRow">
                 <div class="col-12 col-md-5 rowSummary">ที่นั่ง</div>
                 <span class="col-12 col-md-7 rowSummary" *ngFor="let seat of transCheckout.dptrTrip.reserves"> {{seat.seatNo}}, </span>
-                <!-- <div class="col-12 col-md-7 rowSummary"> {{transCheckout.dptrTrip.reserves.seatNo}} </div> -->
               </div>
             </div>
           </div>

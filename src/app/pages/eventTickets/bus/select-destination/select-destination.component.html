@@ -22,24 +22,24 @@
     <div class="row form-group">
     </div>
     <div class="row ">
-      <div class="col-md-4">
+      <div class="col-md-5">
         <label class="h5">จุดขึ้นรถ</label>
       </div>
       <div class="col-md-2">
       </div>
-      <div class="col-md-4">
+      <div class="col-md-5">
         <label class="h5">จุดลงรถ</label>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-5">
         <input class="form-control" type="text" placeholder="เลือกต้นทาง" auto-complete [source]="provinceList" (ngModelChange)="selectDprtProvince($event)"
           (blur)="findDprtParkList()" loading-text="กำลังดาวน์โหลด" list-formatter="desc" [accept-user-input]="false">
       </div>
       <div class="col-md-2 text-center">
         <i class="fa fa-exchange fa-2x" aria-hidden="true" style="color:#fe6716;"></i>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-5">
         <input class="form-control" type="text" placeholder="เลือกปลายทาง" auto-complete [source]="provinceList" (ngModelChange)="selectArrvProvince($event)"
           (blur)="findArrvParkList()" loading-text="กำลังดาวน์โหลด" list-formatter="desc" [accept-user-input]="false">
       </div>
@@ -47,13 +47,13 @@
     <div class="row form-group">
     </div>
     <div class="row form-group">
-      <div class="col-md-4">
+      <div class="col-md-5">
         <input class="form-control" type="text" placeholder="เลือกจุดขึ้นรถ" auto-complete [source]="dptrParkList" [(ngModel)]="selectedDptrPark"
           loading-text="กำลังดาวน์โหลด" list-formatter="nameTh" [accept-user-input]="false">
       </div>
       <div class="col-md-2">
       </div>
-      <div class="col-md-4">
+      <div class="col-md-5">
         <input class="form-control" type="text" placeholder="เลือกจุดลงรถ" auto-complete [source]="arrvParkList" [(ngModel)]="selectedArrvPark"
           loading-text="กำลังดาวน์โหลด" list-formatter="nameTh" [accept-user-input]="false">
       </div>
@@ -61,30 +61,30 @@
     <div class="row form-group">
     </div>
     <div class="row ">
-      <div class="col-md-4">
+      <div class="col-md-5">
         <label class="h5">วันที่ไป</label>
       </div>
       <div class="col-md-2" *ngIf="selectedTripType == 'R'">
       </div>
-      <div class="col-md-4" *ngIf="selectedTripType == 'R'">
+      <div class="col-md-5" *ngIf="selectedTripType == 'R'">
         <label class="h5">วันที่กลับ</label>
       </div>
     </div>
     <div class="row form-group">
-      <div class="col-md-4">
+      <div class="col-md-5">
         <p-calendar [(ngModel)]="departDate" [showIcon]="true" calendarLanguage="th" *ngIf="selectedTripType == 'O'"></p-calendar>
         <p-calendar [(ngModel)]="departDate" [showIcon]="true" calendarLanguage="th" [maxDate]="returnDate" *ngIf="selectedTripType == 'R'"></p-calendar>
       </div>
       <div class="col-md-2" *ngIf="selectedTripType == 'R'">
       </div>
-      <div class="col-md-4" *ngIf="selectedTripType == 'R'">
+      <div class="col-md-5" *ngIf="selectedTripType == 'R'">
         <p-calendar [(ngModel)]="returnDate" [showIcon]="true" calendarLanguage="th" [minDate]="departDate"></p-calendar>
       </div>
     </div>
     <div class="row form-group">
     </div>
     <div class="row ">
-      <div class="col-md-4">
+      <div class="col-md-5">
         <label class="h5">จำนวนผู้เดินทาง</label>
       </div>
     </div>

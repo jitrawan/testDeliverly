@@ -1,15 +1,108 @@
-.buyTicketWrapper{
+.busTopic img {
+  max-width: 100px;
+  height: auto;
+}
+
+.busTopic span {
+  font-size: 22px;
+  padding-left: 15px;
+  padding-bottom: 15px;
+  font-weight: 700
+}
+
+.pageTopic {
+  padding-top: 15px;
+  font-size: 18px;
+}
+
+.pageTopic img {
+  max-width: 50px;
+  height: auto;
+}
+
+.pageTopic span {
+  font-weight: 700
+}
+
+.buyTicketWrapper {
+  padding: 15px 15% 0px 15%;
+}
+
+.busTopic img {
+  max-width: 100px;
+  height: auto;
+}
+
+.busTopic span {
+  font-size: 22px;
+  padding-left: 15px;
+  padding-bottom: 15px;
+  font-weight: 700
+}
+
+.btn-atk-primary {
+  font-size: 18px;
+  background-color: #37BDE0;
+  border-bottom: 3px solid #389ABF;
+  color: #fff;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  border-radius: 2rem;
+  cursor: pointer;
+}
+
+.btn-atk-danger {
+  font-size: 18px;
+  background-color: #EC1D23;
+  border-bottom: 3px solid #ad1616;
+  color: #fff;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  border-radius: 2rem;
+  cursor: pointer;
+}
+
+.buttonWrapper {
+  text-align: right;
+}
+
+@media screen and (max-width: 425px) {
+  /* .infoBoxWrapper {
     padding: 15px 15% 0px 15%;
+  } */
+  .buyTicketWrapper {
+    padding: 15px 5% 0px 5%;
+  }
 }
 
-.busTopic img{
-    max-width: 100px;
-    height: auto;
-}
-
-.busTopic span{
-    font-size: 22px;
-    padding-left: 15px;
-    padding-bottom: 15px;
-    font-weight: 700
+@media screen and (max-width: 575px) {
+  .btn-atk-primary {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  .btn-atk-danger {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  .buttonWrapper {
+    text-align: center;
+  }
+  .busTopic {
+    text-align: center;
+    padding-top: 15px;
+  }
+  .busTopic span {
+    font-size: 16px;
+    padding: 0px;
+  }
+  .busTopic img {
+    max-width: 60px;
+  }
+  .pageTopic {
+    text-align: center;
+  }
+  .pageTopic span {
+    font-size: 16px;
+    font-weight: 600;
+  }
 }

@@ -8,7 +8,7 @@ import { PassengerInformationModel } from '../../../../shared/models/bus/passeng
 @Component({
   selector: 'app-summary',
   templateUrl: './summary.component.html',
-  styleUrls: ['./summary.component.css']
+  styleUrls: ['./summary.component.css', '../buy-ticket/buy-ticket.component.css']
 })
 export class SummaryComponent implements OnInit {
 

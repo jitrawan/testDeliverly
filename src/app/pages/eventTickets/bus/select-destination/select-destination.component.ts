@@ -9,7 +9,7 @@ import { ParkModel } from '../../../../shared/models/bus/park.model';
 @Component({
   selector: 'app-select-destination',
   templateUrl: './select-destination.component.html',
-  styleUrls: ['./select-destination.component.css'],
+  styleUrls: ['./select-destination.component.css', '../buy-ticket/buy-ticket.component.css'],
   providers: [BusService]
 })
 export class SelectDestinationComponent implements OnInit {

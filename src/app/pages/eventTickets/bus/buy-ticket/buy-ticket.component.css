@@ -66,13 +66,8 @@
   text-align: right;
 }
 
-@media screen and (max-width: 425px) {
-  /* .infoBoxWrapper {
-    padding: 15px 15% 0px 15%;
-  } */
-  .buyTicketWrapper {
-    padding: 15px 5% 0px 5%;
-  }
+.p0 {
+  padding: 0px;
 }
 
 @media screen and (max-width: 575px) {
@@ -105,4 +100,8 @@
     font-size: 16px;
     font-weight: 600;
   }
+  .buyTicketWrapper {
+    padding: 15px 5% 0px 5%;
+  }
 }
+

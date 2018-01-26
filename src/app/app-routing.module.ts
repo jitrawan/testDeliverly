@@ -26,39 +26,46 @@ import { BuyTicketComponent } from './pages/eventTickets/bus/buy-ticket/buy-tick
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
-  { path: '', component: HomeComponent },
-  { path: 'booking', component: BookingComponent },
-  { path: 'Home', component: HomeComponent },
-  { path: 'eventInfo', component: EventInfoComponent },
-  { path: 'policy', component: PolicyComponent },
-  { path: 'faq', component: FaqComponent },
-  { path: 'transport/airlines', component: AirlinesComponent },
-  { path: 'transport/bus', component: BusComponent },
-  // { path: 'transport/bus/selectDestination', component: SelectDestinationComponent },
-  // { path: 'transport/bus/selectSeat', component: SelectSeatComponent },
-  { path: 'transport/bus/selectRound', component: SelectRoundComponent },
-  // { path: 'transport/bus/passengerInfomation', component: PassengerInformationComponent },
-  // { path: 'transport/bus/selectRound', component: SelectRoundComponent },
-  // { path: 'transport/bus/summary', component: SummaryComponent },
   {
-    path: 'transport/bus/buyTicket', component: BuyTicketComponent,
+    path: '', component: BuyTicketComponent,
     children: [
       { path: '', component: SelectDestinationComponent },
       { path: 'selectRound', component: SelectRoundComponent },
       { path: 'selectSeat', component: SelectSeatComponent },
       { path: 'passengerInfomation', component: PassengerInformationComponent },
-      { path: 'summary', component: SummaryComponent },
-
-      // { path: 'specs', component: Specs }
+      { path: 'summary', component: SummaryComponent }
     ]
   },
-  { path: 'shopping', component: ShoppingComponent },
-  { path: 'transport/travel', component: TravelComponent },
-  { path: 'allevent/:type', component: AllEventComponent },
-  { path: 'payment/:step', component: PaymentComponent },
-  { path: 'purchaseHistory', component: PurchaseHistoryComponent },
-  { path: 'historyDetail', component: HistoryDetailComponent },
-  { path: 'busLayout', component: BusLayoutComponent },
+  // { path: 'booking', component: BookingComponent },
+  // { path: 'Home', component: HomeComponent },
+  // { path: 'eventInfo', component: EventInfoComponent },
+  // { path: 'policy', component: PolicyComponent },
+  // { path: 'faq', component: FaqComponent },
+  // { path: 'transport/airlines', component: AirlinesComponent },
+  // { path: 'transport/bus', component: BusComponent },
+  // { path: 'transport/bus/selectDestination', component: SelectDestinationComponent },
+  // { path: 'transport/bus/selectSeat', component: SelectSeatComponent },
+  // { path: 'transport/bus/selectRound', component: SelectRoundComponent },
+  // { path: 'transport/bus/passengerInfomation', component: PassengerInformationComponent },
+  // { path: 'transport/bus/selectRound', component: SelectRoundComponent },
+  // { path: 'transport/bus/summary', component: SummaryComponent },
+  // {
+  //   path: 'transport/bus/buyTicket', component: BuyTicketComponent,
+  //   children: [
+  //     { path: '', component: SelectDestinationComponent },
+  //     { path: 'selectRound', component: SelectRoundComponent },
+  //     { path: 'selectSeat', component: SelectSeatComponent },
+  //     { path: 'passengerInfomation', component: PassengerInformationComponent },
+  //     { path: 'summary', component: SummaryComponent }
+  //   ]
+  // },
+  // { path: 'shopping', component: ShoppingComponent },
+  // { path: 'transport/travel', component: TravelComponent },
+  // { path: 'allevent/:type', component: AllEventComponent },
+  // { path: 'payment/:step', component: PaymentComponent },
+  // { path: 'purchaseHistory', component: PurchaseHistoryComponent },
+  // { path: 'historyDetail', component: HistoryDetailComponent },
+  // { path: 'busLayout', component: BusLayoutComponent },
 ];
 
 @NgModule({

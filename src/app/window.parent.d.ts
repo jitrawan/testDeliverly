@@ -1,3 +1,4 @@
 interface Window {
-    HelloFromChild(args:string):void
+    receiveMessage(args:string):void
+
 }

@@ -18,6 +18,7 @@ export class SelectRoundComponent implements OnInit {
   }
 
   goNextPage(){
-    
+    // parent.window.receiveMessage('checkAuthen');
+    this.router.navigate(['../selectSeat'], { relativeTo: this.route });
   }
 }

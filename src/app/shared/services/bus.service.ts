@@ -2,7 +2,7 @@
 // import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import { HttpModule } from '@angular/http';
 
 import { AvailableTrip } from '../models/bus/availableTripSearch.model';
@@ -23,7 +23,9 @@ export class BusService {
             .map((res: Response) => {
                 return res.json();
             })
-            .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
+            // .catch((error: any) => { 
+            //     return Observable.throw(error.json || error || 'Server Error');
+            //  });
     }
 
     getMasPark() {
@@ -31,7 +33,9 @@ export class BusService {
             .map((res: Response) => {
                 return res.json();
             })
-            .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
+            // .catch((error: any) => { 
+            //     return Observable.throw(error.json || error || 'Server Error');
+            //  });
     }
 }
 

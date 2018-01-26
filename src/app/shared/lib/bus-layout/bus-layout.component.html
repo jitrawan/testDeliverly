@@ -10,10 +10,15 @@
             <div class="" *ngFor="let data of checkSeat(floorOneList, row+1, pos+1)">
               <input *ngIf="data.type == 1" type="checkbox" [id]="data.name" (click)="selectSeat($event, data)" />
               <label *ngIf="data.type == 1" [for]="data.name">{{data.name}}</label>
-              <span *ngIf="data.type == 2" class="seatSize{{data.dim.w}} seatHeight{{data.dim.h}}" [id]="data.name">{{data.name}}</span>
+              <span *ngIf="data.type == 2" class="seatSize{{data.dim.w}} seatHeight{{data.dim.h}}" [id]="data.name"> {{data.name}}</span>
+              <!-- <input *ngIf="data.type == 2" class="seatSize{{data.dim.w}} seatHeight{{data.dim.h}}"/> -->
+              <label *ngIf="checkSeat(floorOneList, row+1, pos+1) == []" class="seatSize{{data.dim.w}} seatHeight{{data.dim.h}}">uuuu</label>
             </div>
+            
           </div>
+          
         </div>
+        <!-- <input class="seat" type="checkbox" id="{{data.name}}up" (click)="selectSeat($event, data)" /> -->
         <div class="end">
 
         </div>

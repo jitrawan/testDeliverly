@@ -13,22 +13,22 @@ import { ParkModel } from '../../../../shared/models/bus/park.model';
   providers: [BusService]
 })
 export class SelectDestinationComponent implements OnInit {
-  private availableTripSeach: AvailableTrip = new AvailableTrip;
-  private errorMessage: ErrorMessage = new ErrorMessage;
-  private provinceList: ProvinceModel[];
-  private arrvProvinceList: ProvinceModel[];
-  private parkList: ParkModel[];
-  private dptrParkList: ParkModel[] = [];
-  private arrvParkList: ParkModel[] = [];
-  private returnDate: Date = new Date(Date.now());
-  private departDate: Date = new Date(Date.now());
-  private selectedDptrProvince: ProvinceModel;
-  private selectedDptrPark: ParkModel;
-  private selectedArrvProvince: ProvinceModel;
-  private selectedArrvPark: ParkModel;
-  private selectedTripType: string;
-  private isReturnDate: boolean = true;
-  private selectedNumOfPerson: number;
+   availableTripSeach: AvailableTrip = new AvailableTrip;
+   errorMessage: ErrorMessage = new ErrorMessage;
+   provinceList: ProvinceModel[];
+   arrvProvinceList: ProvinceModel[];
+   parkList: ParkModel[];
+   dptrParkList: ParkModel[] = [];
+   arrvParkList: ParkModel[] = [];
+   returnDate: Date = new Date(Date.now());
+   departDate: Date = new Date(Date.now());
+   selectedDptrProvince: ProvinceModel;
+   selectedDptrPark: ParkModel;
+   selectedArrvProvince: ProvinceModel;
+   selectedArrvPark: ParkModel;
+   selectedTripType: string;
+   isReturnDate: boolean = true;
+   selectedNumOfPerson: number;
 
   constructor(
     private busService: BusService,
@@ -37,14 +37,21 @@ export class SelectDestinationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // document.domain = 'http://localhost:8080/';
     this.getProvinceList();
     this.getParkList();
     this.selectedTripType = "R";
     this.selectedNumOfPerson = 0;
+    console.log('>>> load')
+    window.addEventListener('message', function (event) {
+      console.log('event >>>', event)
+    });
+
+    
   }
 
 
-  private getProvinceList() {
+   getProvinceList() {
     this.busService.getMasProvince().subscribe((res) => {
       this.provinceList = res.data.map((obj: any) => {
         return {
@@ -55,7 +62,7 @@ export class SelectDestinationComponent implements OnInit {
     });
   }
 
-  private getParkList() {
+   getParkList() {
     this.busService.getMasPark().subscribe((res) => {
       this.parkList = res.data.map((obj: any) => {
         return {
@@ -71,17 +78,17 @@ export class SelectDestinationComponent implements OnInit {
     });
   }
 
-  private selectDprtProvince(event) {
+   selectDprtProvince(event) {
     this.selectedDptrProvince = event;
     this.selectedDptrPark = undefined;
   }
 
-  private selectArrvProvince(event) {
+   selectArrvProvince(event) {
     this.selectedArrvProvince = event;
     this.selectedArrvPark = undefined;
 
   }
-  private findDprtParkList() {
+   findDprtParkList() {
     if (this.selectedDptrProvince != undefined) {
       var listPark = this.parkList.filter(item =>
         item.province.id === this.selectedDptrProvince.id);
@@ -91,7 +98,7 @@ export class SelectDestinationComponent implements OnInit {
     }
   }
 
-  private findArrvParkList() {
+   findArrvParkList() {
     if (this.selectedArrvProvince != undefined) {
       var listPark = this.parkList.filter(item =>
         item.province.id === this.selectedArrvProvince.id);
@@ -101,13 +108,13 @@ export class SelectDestinationComponent implements OnInit {
     }
   }
 
-  private condition = [
+   condition = [
     '- สามารถจองตั๋ว ก่อนเวลาเดินทางของเที่ยววิ่ง 3 ชม.',
     '- วันที่เดินทางไป และกลับ มีระยะเวลาห่างกันไม่เกิน 30 วัน',
     '- สามารถซื้อตั๋วล่วงหน้าได้ 90 วัน'
   ];
 
-  private selectType(event) {
+   selectType(event) {
     if (event.target.value == "O") {
       this.selectedTripType = "O";
     } else {
@@ -115,12 +122,12 @@ export class SelectDestinationComponent implements OnInit {
     }
   }
 
-  private onNextPage() {
+   onNextPage() {
     console.log('submit');
     this.validateDate();
   }
 
-  private validateDate() {
+   validateDate() {
     if (this.selectedTripType == undefined) {
       alert(this.errorMessage.pleaseSelect + "ประเภทการเดินทาง เที่ยวเดียว หรือ ไปกลับ");
     } else if (this.selectedDptrProvince == undefined) {
@@ -150,5 +157,32 @@ export class SelectDestinationComponent implements OnInit {
       this.router.navigate(['selectRound'], { relativeTo: this.route });
     }
   }
+
+  onClick() {
+    console.log('>>> onClick <<<');
+    parent.postMessage('som', '*'); 
+    // window.addEventListener('message', function (event) {
+    //   console.log('event >>>', event)
+    // });
+    // parent.window.HelloFromChild('somm');
+    // window.addEventListener('message', function (event) {
+    //   console.log('event >>>', event)
+    //   // IMPORTANT: Check the origin of the data! 
+    //   // if (~event.origin.indexOf('http://yoursite.com')) { 
+    //   //     // The data has been sent from your site 
+
+    //   //     // The data sent with postMessage is stored in event.data 
+    //   //     console.log(event.data); 
+    //   // } else { 
+    //   //     // The data hasn't been sent from your site! 
+    //   //     // Be careful! Do not use it. 
+    //   //     return; 
+    //   // } 
+    // });
+
+    // window.parent.HelloFromChild('TEST');
+  }
+
+
 
 }

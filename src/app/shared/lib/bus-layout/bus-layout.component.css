@@ -84,7 +84,7 @@
     justify-content: flex-start; */
     padding-left: 15%;
     margin-bottom: 2%;
-    
+   height: 50px; 
   }
   
   .seat {
@@ -102,7 +102,7 @@
     color: #ffffff;
     display: block;
     /* position: relative; */
-    /* position: absolute; */
+    position: absolute;
     text-align: center;
     font-size: 12px;
     font-weight: bold;
@@ -122,13 +122,16 @@
     width: 200%; 
   }
   .seatSize5 {
-    width: 550%; 
+    width: 500%; 
+  }
+  .seatHeight1{
+    height: 100%
   }
   .seatHeight2{
-    height: 170%
+    height: 200%
   }
   .seatHeight4{
-    height: 1000%
+    height: 400%
   }
 
   .seat span[hsize=2] {

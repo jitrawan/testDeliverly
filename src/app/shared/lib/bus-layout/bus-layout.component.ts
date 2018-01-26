@@ -61,6 +61,7 @@ export class BusLayoutComponent implements OnInit {
 
   checkSeat(objList, row, pos) {
     objList = this.groupObjByRow(objList, row);
+    // console.log('objList>>', objList);
     return objList.filter(item => item.pos.x === pos);
   }
 

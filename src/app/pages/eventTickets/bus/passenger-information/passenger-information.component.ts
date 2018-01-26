@@ -7,7 +7,7 @@ import { ErrorMessage } from '../../../../shared/constant/error-message';
 @Component({
   selector: 'app-passenger-information',
   templateUrl: './passenger-information.component.html',
-  styleUrls: ['./passenger-information.component.css']
+  styleUrls: ['./passenger-information.component.css', '../buy-ticket/buy-ticket.component.css']
 })
 export class PassengerInformationComponent implements OnInit {
 

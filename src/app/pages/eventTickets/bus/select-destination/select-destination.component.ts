@@ -9,26 +9,26 @@ import { ParkModel } from '../../../../shared/models/bus/park.model';
 @Component({
   selector: 'app-select-destination',
   templateUrl: './select-destination.component.html',
-  styleUrls: ['./select-destination.component.css'],
+  styleUrls: ['./select-destination.component.css', '../buy-ticket/buy-ticket.component.css'],
   providers: [BusService]
 })
 export class SelectDestinationComponent implements OnInit {
-   availableTripSeach: AvailableTrip = new AvailableTrip;
-   errorMessage: ErrorMessage = new ErrorMessage;
-   provinceList: ProvinceModel[];
-   arrvProvinceList: ProvinceModel[];
-   parkList: ParkModel[];
-   dptrParkList: ParkModel[] = [];
-   arrvParkList: ParkModel[] = [];
-   returnDate: Date = new Date(Date.now());
-   departDate: Date = new Date(Date.now());
-   selectedDptrProvince: ProvinceModel;
-   selectedDptrPark: ParkModel;
-   selectedArrvProvince: ProvinceModel;
-   selectedArrvPark: ParkModel;
-   selectedTripType: string;
-   isReturnDate: boolean = true;
-   selectedNumOfPerson: number;
+  availableTripSeach: AvailableTrip = new AvailableTrip;
+  errorMessage: ErrorMessage = new ErrorMessage;
+  provinceList: ProvinceModel[];
+  arrvProvinceList: ProvinceModel[];
+  parkList: ParkModel[];
+  dptrParkList: ParkModel[] = [];
+  arrvParkList: ParkModel[] = [];
+  returnDate: Date = new Date(Date.now());
+  departDate: Date = new Date(Date.now());
+  selectedDptrProvince: ProvinceModel;
+  selectedDptrPark: ParkModel;
+  selectedArrvProvince: ProvinceModel;
+  selectedArrvPark: ParkModel;
+  selectedTripType: string;
+  isReturnDate: boolean = true;
+  selectedNumOfPerson: number;
 
   constructor(
     private busService: BusService,
@@ -37,21 +37,18 @@ export class SelectDestinationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // document.domain = 'http://localhost:8080/';
     this.getProvinceList();
     this.getParkList();
     this.selectedTripType = "R";
     this.selectedNumOfPerson = 0;
-    console.log('>>> load')
-    window.addEventListener('message', function (event) {
-      console.log('event >>>', event)
-    });
-
-    
+    // console.log('>>> load')
+    // window.addEventListener('message', function (event) {
+    //   console.log('event >>>', event)
+    // });
   }
 
 
-   getProvinceList() {
+  getProvinceList() {
     this.busService.getMasProvince().subscribe((res) => {
       this.provinceList = res.data.map((obj: any) => {
         return {
@@ -62,7 +59,7 @@ export class SelectDestinationComponent implements OnInit {
     });
   }
 
-   getParkList() {
+  getParkList() {
     this.busService.getMasPark().subscribe((res) => {
       this.parkList = res.data.map((obj: any) => {
         return {
@@ -78,17 +75,17 @@ export class SelectDestinationComponent implements OnInit {
     });
   }
 
-   selectDprtProvince(event) {
+  selectDprtProvince(event) {
     this.selectedDptrProvince = event;
     this.selectedDptrPark = undefined;
   }
 
-   selectArrvProvince(event) {
+  selectArrvProvince(event) {
     this.selectedArrvProvince = event;
     this.selectedArrvPark = undefined;
 
   }
-   findDprtParkList() {
+  findDprtParkList() {
     if (this.selectedDptrProvince != undefined) {
       var listPark = this.parkList.filter(item =>
         item.province.id === this.selectedDptrProvince.id);
@@ -98,7 +95,7 @@ export class SelectDestinationComponent implements OnInit {
     }
   }
 
-   findArrvParkList() {
+  findArrvParkList() {
     if (this.selectedArrvProvince != undefined) {
       var listPark = this.parkList.filter(item =>
         item.province.id === this.selectedArrvProvince.id);
@@ -108,13 +105,13 @@ export class SelectDestinationComponent implements OnInit {
     }
   }
 
-   condition = [
+  condition = [
     '- สามารถจองตั๋ว ก่อนเวลาเดินทางของเที่ยววิ่ง 3 ชม.',
     '- วันที่เดินทางไป และกลับ มีระยะเวลาห่างกันไม่เกิน 30 วัน',
     '- สามารถซื้อตั๋วล่วงหน้าได้ 90 วัน'
   ];
 
-   selectType(event) {
+  selectType(event) {
     if (event.target.value == "O") {
       this.selectedTripType = "O";
     } else {
@@ -122,12 +119,12 @@ export class SelectDestinationComponent implements OnInit {
     }
   }
 
-   onNextPage() {
+  onNextPage() {
     console.log('submit');
     this.validateDate();
   }
 
-   validateDate() {
+  validateDate() {
     if (this.selectedTripType == undefined) {
       alert(this.errorMessage.pleaseSelect + "ประเภทการเดินทาง เที่ยวเดียว หรือ ไปกลับ");
     } else if (this.selectedDptrProvince == undefined) {
@@ -160,7 +157,7 @@ export class SelectDestinationComponent implements OnInit {
 
   onClick() {
     console.log('>>> onClick <<<');
-    parent.postMessage('som', '*'); 
+    // parent.postMessage('som', '*'); 
     // window.addEventListener('message', function (event) {
     //   console.log('event >>>', event)
     // });

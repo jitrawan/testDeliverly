@@ -22,7 +22,7 @@
   <!------------------- BOX2 ---------------------->
   <div class="infoBox" *ngIf="transCheckout.dptrTrip != null">
     <div class="row">
-      <div class="col-12 topicRow">เที่ยวไป</div>
+      <div class="col-12 topicRow">เที่ยวไป :</div>
     </div>
     <div class="infoBox">
       <div class="subInfoBoxWrapper">
@@ -30,7 +30,7 @@
           <div class="col-md-6 col-sm-6 subInfoBox">
             <div class="infoBox">
               <div class="row">
-                <div class="col-12 topicRow subInfoBoxGrey">ข้อมูลการเดินทาง</div>
+                <div class="col-12 topicRow subInfoBoxGrey">ข้อมูลการเดินทาง :</div>
               </div>
               <div class="row border1s BoxRow">
                 <div class="col-12 col-md-5 rowSummary">วันที่เดินทาง :</div>
@@ -39,45 +39,45 @@
                 </div>
               </div>
               <div class="row border1s BoxRow">
-                <div class="col-12 col-md-5 rowSummary">เส้นทาง</div>
+                <div class="col-12 col-md-5 rowSummary">เส้นทาง :</div>
                 <div class="col-12 col-md-7 rowSummary">
                   <span class="varRow">{{transCheckout.dptrTrip.route.desc}}</span>
                 </div>
               </div>
               <div class="row border1s BoxRow">
-                <div class="col-12 col-md-5 rowSummary">จุดที่ขึ้นรถ</div>
+                <div class="col-12 col-md-5 rowSummary">จุดที่ขึ้นรถ :</div>
                 <div class="col-12 col-md-7 rowSummary">
                   <span class="varRow">{{transCheckout.dptrTrip.dptrPark.desc}}</span>
                 </div>
               </div>
               <div class="row border1s BoxRow">
-                <div class="col-12 col-md-5 rowSummary">จุดที่ลงรถ</div>
+                <div class="col-12 col-md-5 rowSummary">จุดที่ลงรถ :</div>
                 <div class="col-12 col-md-7 rowSummary">
                   <span class="varRow">{{transCheckout.dptrTrip.arrvPark.desc}} </span>
                 </div>
               </div>
               <div class="row border1s BoxRow">
-                <div class="col-12 col-md-5 rowSummary">มาตราฐาน</div>
+                <div class="col-12 col-md-5 rowSummary">มาตราฐาน :</div>
                 <div class="col-12 col-md-7 rowSummary">
                   <span class="varRow">{{transCheckout.dptrTrip.busStd.desc}} </span>
                 </div>
               </div>
               <div class="row border1s BoxRow">
-                <div class="col-12 col-md-5 rowSummary">สายรถ</div>
+                <div class="col-12 col-md-5 rowSummary">สายรถ :</div>
                 <div class="col-12 col-md-7 rowSummary">
                   <span class="varRow">{{transCheckout.dptrTrip.route.id}} </span>
                 </div>
               </div>
               <div class="row border1s BoxRow">
-                <div class="col-12 col-md-5 rowSummary">ชั้นที่นั่ง</div>
-                <div class="col-12 col-md-7 rowSummary" *ngFor="let seat of transCheckout.dptrTrip.reserves">
-                  <span class="varRow">{{seat.seatFloor}}, </span>
+                <div class="col-12 col-md-5 rowSummary">ชั้นที่นั่ง :</div>
+                <div class="col-12 col-md-7 rowSummary " *ngFor="let seat of transCheckout.dptrTrip.reserves">
+                  <span class="varRow">{{seat.seatFloor}}</span>
                 </div>
               </div>
               <div class="row border1s BoxRow">
-                <div class="col-12 col-md-5 rowSummary">ที่นั่ง</div>
-                <div class="col-12 col-md-7 rowSummary" *ngFor="let seat of transCheckout.dptrTrip.reserves">
-                  <span class="varRow">{{seat.seatNo}},</span>
+                <div class="col-12 col-md-5 rowSummary">ที่นั่ง :</div>
+                <div class="col-12 col-md-7 rowSummary " *ngFor="let seat of transCheckout.dptrTrip.reserves">
+                  <span class="varRow">{{seat.seatNo}}</span>
                 </div>
               </div>
             </div>
@@ -88,20 +88,28 @@
                 <div class="col-12 topicRow subInfoBoxGrey">รายละเอียดค่าโดยสาร</div>
               </div>
               <div class="row border1s BoxRow">
-                <div class="col-12 col-md-5 rowSummary">เดินทางไป</div>
-                <div class="col-12 col-md-7 rowSummary"><span class="varRow"></span></div>
+                <div class="col-12 col-md-5 rowSummary">เดินทางไป :</div>
+                <div class="col-12 col-md-7 rowSummary">
+                  <span class="varRow"></span>
+                </div>
               </div>
               <div class="row border1s BoxRow">
-                <div class="col-12 col-md-5 rowSummary">ราคาปกติ</div>
-                <div class="col-12 col-md-7 rowSummary"> <span class="varRow">{{dprtPrice}} </span></div>
+                <div class="col-12 col-md-5 rowSummary">ราคาปกติ :</div>
+                <div class="col-12 col-md-7 rowSummary">
+                  <span class="varRow">{{dprtPrice}} </span>
+                </div>
               </div>
               <div class="row border1s BoxRow">
-                <div class="col-12 col-md-5 rowSummary">ส่วนลด</div>
-                <div class="col-12 col-md-7 rowSummary"><span class="varRow"> {{dprtDiscount}} </span></div>
+                <div class="col-12 col-md-5 rowSummary">ส่วนลด :</div>
+                <div class="col-12 col-md-7 rowSummary">
+                  <span class="varRow"> {{dprtDiscount}} </span>
+                </div>
               </div>
               <div class="row border1s BoxRow">
-                <div class="col-12 col-md-5 rowSummary">ราคารวม</div>
-                <div class="col-12 col-md-7 rowSummary"><span class="varRow"></span> </div>
+                <div class="col-12 col-md-5 rowSummary">ราคารวม :</div>
+                <div class="col-12 col-md-7 rowSummary">
+                  <span class="varRow"></span>
+                </div>
               </div>
             </div>
           </div>
@@ -123,39 +131,52 @@
                 <div class="col-12 topicRow subInfoBoxGrey">ข้อมูลการเดินทาง</div>
               </div>
               <div class="row border1s BoxRow">
-                <div class="col-12 col-md-5 rowSummary">วันที่เดินทาง</div>
-                <div class="col-12 col-md-7 rowSummary"> {{transCheckout.rtrnTrip.date}} </div>
+                <div class="col-12 col-md-5 rowSummary">วันที่เดินทาง :</div>
+                <div class="col-12 col-md-7 rowSummary">
+                  <span class="varRow">{{transCheckout.rtrnTrip.date}}</span>
+                </div>
               </div>
               <div class="row border1s BoxRow">
-                <div class="col-12 col-md-5 rowSummary">เส้นทาง</div>
-                <div class="col-12 col-md-7 rowSummary"> {{transCheckout.rtrnTrip.route.desc}} </div>
+                <div class="col-12 col-md-5 rowSummary">เส้นทาง :</div>
+                <div class="col-12 col-md-7 rowSummary">
+                  <span class="varRow">{{transCheckout.rtrnTrip.route.desc}} </span>
+                </div>
               </div>
               <div class="row border1s BoxRow">
-                <div class="col-12 col-md-5 rowSummary">จุดที่ขึ้นรถ</div>
-                <div class="col-12 col-md-7 rowSummary">{{transCheckout.rtrnTrip.dptrPark.desc}} </div>
+                <div class="col-12 col-md-5 rowSummary">จุดที่ขึ้นรถ :</div>
+                <div class="col-12 col-md-7 rowSummary">
+                  <span class="varRow">{{transCheckout.rtrnTrip.dptrPark.desc}} </span>
+                </div>
               </div>
               <div class="row border1s BoxRow">
-                <div class="col-12 col-md-5 rowSummary">จุดที่ลงรถ</div>
-                <div class="col-12 col-md-7 rowSummary"> {{transCheckout.rtrnTrip.arrvPark.desc}} </div>
+                <div class="col-12 col-md-5 rowSummary">จุดที่ลงรถ :</div>
+                <div class="col-12 col-md-7 rowSummary">
+                  <span class="varRow">{{transCheckout.rtrnTrip.arrvPark.desc}} </span>
+                </div>
               </div>
               <div class="row border1s BoxRow">
-                <div class="col-12 col-md-5 rowSummary">มาตราฐาน</div>
-                <div class="col-12 col-md-7 rowSummary">{{transCheckout.rtrnTrip.busStd.desc}}</div>
+                <div class="col-12 col-md-5 rowSummary">มาตราฐาน :</div>
+                <div class="col-12 col-md-7 rowSummary">
+                  <span class="varRow">{{transCheckout.rtrnTrip.busStd.desc}} </span>
+                </div>
               </div>
               <div class="row border1s BoxRow">
-                <div class="col-12 col-md-5 rowSummary">สายรถ</div>
-                <div class="col-12 col-md-7 rowSummary"> {{transCheckout.rtrnTrip.route.id}} </div>
+                <div class="col-12 col-md-5 rowSummary">สายรถ :</div>
+                <div class="col-12 col-md-7 rowSummary">
+                  <span class="varRow">{{transCheckout.rtrnTrip.route.id}}</span>
+                </div>
               </div>
               <div class="row border1s BoxRow">
-                <div class="col-12 col-md-5 rowSummary">ชั้นที่นั่ง</div>
-                <span class="col-12 col-md-7 rowSummary" *ngFor="let seat of transCheckout.rtrnTrip.reserves"> {{seat.seatFloor}}, </span>
-                <!-- <div class="col-12 col-md-7 rowSummary"></div> -->
+                <div class="col-12 col-md-5 rowSummary">ชั้นที่นั่ง :</div>
+                <div class="col-12 col-md-7 rowSummary " *ngFor="let seat of transCheckout.rtrnTrip.reserves">
+                  <span class="varRow">{{seat.seatFloor}}</span>
+                </div>
               </div>
               <div class="row border1s BoxRow">
-                <div class="col-12 col-md-5 rowSummary">ที่นั่ง</div>
-                <span class="col-12 col-md-7 rowSummary" *ngFor="let seat of transCheckout.rtrnTrip.reserves"> {{seat.seatNo}}, </span>
-
-                <!-- <div class="col-12 col-md-7 rowSummary"></div> -->
+                <div class="col-12 col-md-5 rowSummary">ที่นั่ง :</div>
+                <div class="col-12 col-md-7 rowSummary " *ngFor="let seat of transCheckout.rtrnTrip.reserves">
+                  <span class="varRow"> {{seat.seatNo}}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -165,19 +186,23 @@
                 <div class="col-12 topicRow subInfoBoxGrey">รายละเอียดค่าโดยสาร</div>
               </div>
               <div class="row border1s BoxRow">
-                <div class="col-12 col-md-5 rowSummary">เดินทางไป</div>
+                <div class="col-12 col-md-5 rowSummary">เดินทางไป :</div>
                 <div class="col-12 col-md-7 rowSummary"> </div>
               </div>
               <div class="row border1s BoxRow">
-                <div class="col-12 col-md-5 rowSummary">ราคาปกติ</div>
-                <div class="col-12 col-md-7 rowSummary"> {{rtrnPrice}} </div>
+                <div class="col-12 col-md-5 rowSummary">ราคาปกติ :</div>
+                <div class="col-12 col-md-7 rowSummary">
+                  <span class="varRow"> {{rtrnPrice}}</span>
+                </div>
               </div>
               <div class="row border1s BoxRow">
-                <div class="col-12 col-md-5 rowSummary">ส่วนลด</div>
-                <div class="col-12 col-md-7 rowSummary"> {{rtrnDiscount}} </div>
+                <div class="col-12 col-md-5 rowSummary">ส่วนลด :</div>
+                <div class="col-12 col-md-7 rowSummary">
+                  <span class="varRow"> {{rtrnDiscount}}</span>
+                </div>
               </div>
               <div class="row border1s BoxRow">
-                <div class="col-12 col-md-5 rowSummary">ราคารวม</div>
+                <div class="col-12 col-md-5 rowSummary">ราคารวม :</div>
                 <div class="col-12 col-md-7 rowSummary"> </div>
               </div>
             </div>
@@ -193,7 +218,7 @@
     </div>
     <div class="row border1s BoxRow">
       <div class="col-12 col-md-12 rowSummary">ค่าธรรมเนียม :
-        <span>15 บาท</span>
+        <span class="varRow">15.00 บาท</span>
       </div>
     </div>
   </div>
@@ -204,7 +229,7 @@
     </div>
     <div class="row border1s BoxRow">
       <div class="col-12 col-md-12 rowSummary">ยอดเงินที่ต้องชำระ :
-        <span>1,859.00 บาท</span>
+        <span class="varRow">1,859.00 บาท</span>
       </div>
     </div>
   </div>

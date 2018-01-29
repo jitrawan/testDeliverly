@@ -180,6 +180,19 @@ export class SelectDestinationComponent implements OnInit {
     // window.parent.HelloFromChild('TEST');
   }
 
+  onSwap() {
+    var provinceTemp = this.selectedDptrProvince;
+    this.selectedDptrProvince = this.selectedArrvProvince;
+    this.selectedArrvProvince = provinceTemp;
+
+    var ParkListtemp = this.selectedDptrPark;
+    this.findDprtParkList();
+    this.selectedDptrPark = this.selectedArrvPark;
+    this.findArrvParkList();
+    this.selectedArrvPark = ParkListtemp;
+
+  }
+
 
 
 }

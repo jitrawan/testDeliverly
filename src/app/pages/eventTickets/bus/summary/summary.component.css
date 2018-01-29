@@ -52,12 +52,12 @@
 }
 
 .subInfoBoxGrey {
-  background-color: #a7a9ac!important;
+  background-color: #a7a9ac !important;
 }
 
 .varRow {
-    padding-left: 15px;
-  }
+  padding-left: 15px;
+}
 
 @media screen and (max-width: 780px) {
   .subInfoBox {
@@ -69,7 +69,7 @@
   .subInfoBox {
     padding: 10px 10% 0px 10%;
   }
-  .infoBoxWrapper{
+  .infoBoxWrapper {
     padding: 10px 5% 0px 5%;
   }
 }
@@ -87,5 +87,8 @@
     border-bottom: 2px solid #bcbec0;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
+  }
+  .ml15 {
+    margin-left: 15px;
   }
 }

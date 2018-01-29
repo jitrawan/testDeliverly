@@ -12,10 +12,10 @@ import { ProvinceModel } from '../models/bus/province.model';
 @Injectable()
 export class BusService {
 
-    private baseURL = '';
-    // private getMasProvinceAPI = '../../pages/eventTickets/bus/select-destination/province-thailand.json';
-    private getMasProvinceAPI = 'https://s3-ap-southeast-1.amazonaws.com/allticket-trs-masterinfo/ag_mas_province.txt';
-    private getMasParkAPI = 'https://s3-ap-southeast-1.amazonaws.com/allticket-trs-masterinfo/ag_mas_park.txt';
+    private baseURL = 'https://s3-ap-southeast-1.amazonaws.com';
+    private getMasProvinceAPI = '/allticket-trs-masterinfo/ag_mas_province.txt';
+    private getMasParkAPI = '/allticket-trs-masterinfo/ag_mas_park.txt';
+    private getAvailableTripAPI = '';
     constructor(private http: Http) { }
 
     getMasProvince() {
@@ -23,9 +23,9 @@ export class BusService {
             .map((res: Response) => {
                 return res.json();
             })
-            // .catch((error: any) => {
-            //     return Observable.throw(error.json || error || 'Server Error');
-            // });
+        // .catch((error: any) => {
+        //     return Observable.throw(error.json || error || 'Server Error');
+        // });
     }
 
     getMasPark() {
@@ -33,9 +33,21 @@ export class BusService {
             .map((res: Response) => {
                 return res.json();
             })
-            // .catch((error: any) => {
-            //     return Observable.throw(error.json || error || 'Server Error');
-            // });
+        // .catch((error: any) => {
+        //     return Observable.throw(error.json || error || 'Server Error');
+        // });
+    }
+
+    getAvailableTrip(availableTrip: AvailableTrip) {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        let body = {};
+        return this.http.post(this.getAvailableTripAPI, JSON.stringify(body), options)
+            .map((res: Response) => {
+                return res.json();
+            })
+            .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
+
     }
 }
 

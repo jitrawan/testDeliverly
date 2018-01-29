@@ -65,8 +65,8 @@
             <td> {{data.busStd.desc}} </td>
             <td> {{data.emptySeats}} / {{data.seats}} ที่นั่ง</td>
             <td>
-              <input type="radio" id="departure{{index}}" name="departure" (change)="selectArrvTrip(data)">
-              <label for="departure{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee)}} บาท</label>
+              <input type="radio" id="departure{{index}}" name="departure" (change)="selectDptrTrip(data)">
+              <label for="departure{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee) | number: '1.2'}} บาท</label>
             </td>
           </tr>
         </tbody>
@@ -75,9 +75,9 @@
   </div>
 </div>
 
-<div class="selectRoundBox">
+<div class="selectRoundBox" *ngIf="availableTripResultModel.rtrnTrips != null">
   <div class="pageTopic col-12">
-    <span>กรุณาเลือกวันที่ และ วันเดินทางไป</span>
+    <span>กรุณาเลือกวันที่ และ วันเดินทางกลับ</span>
   </div>
   <div class="dateRange">
     <div class="container">
@@ -88,19 +88,19 @@
           </span>
         </div>
         <div class="col-2 otherDate">
-          <span>{{rtrnDate[0]| thaidate:'medium' }} </span>
+          <span (click)="searchTrips('rtrn', rtrnDate[0])">{{rtrnDate[0]| thaidate:'medium' }} </span>
         </div>
         <div class="col-2 otherDate">
-          <span>{{rtrnDate[1]| thaidate:'medium' }}</span>
+          <span (click)="searchTrips('rtrn', rtrnDate[1])">{{rtrnDate[1]| thaidate:'medium' }}</span>
         </div>
         <div class="col-2 chooseDate">
-          <span> {{rtrnDate[2]| thaidate:'medium' }} </span>
+          <span > {{rtrnDate[2]| thaidate:'medium' }} </span>
         </div>
         <div class="col-2 otherDate">
-          <span>{{rtrnDate[3]| thaidate:'medium' }}</span>
+          <span (click)="searchTrips('rtrn', rtrnDate[3])">{{rtrnDate[3]| thaidate:'medium' }}</span>
         </div>
         <div class="col-2 otherDate">
-          <span>{{rtrnDate[4]| thaidate:'medium' }}</span>
+          <span (click)="searchTrips('rtrn', rtrnDate[4])">{{rtrnDate[4]| thaidate:'medium' }}</span>
         </div>
         <div class="col-1 arrow">
           <span class="right">
@@ -144,8 +144,8 @@
             <td> {{data.busStd.desc}} </td>
             <td> {{data.emptySeats}} / {{data.seats}} ที่นั่ง</td>
             <td>
-              <input type="radio" id="arrvTrip{{index}}" name="arrvTrip" (change)="selectDptrTrip(data)" >
-              <label for="arrvTrip{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee)}} บาท</label>
+              <input type="radio" id="arrvTrip{{index}}" name="arrvTrip" (change)="selectRtrnTrip(data)">
+              <label for="arrvTrip{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee) | number: '1.2'}} บาท</label>
             </td>
           </tr>
         </tbody>
@@ -166,18 +166,18 @@
         <tbody>
           <tr>
             <td>ค่าบัตรโดยสารเที่ยวไป :</td>
-            <td>1,859.00 บาท</td>
+            <td>{{dptrFare | number: '1.2'}} บาท</td>
           </tr>
           <tr>
             <td>ค่าบัตรโดยสารเที่ยวกลับ :</td>
-            <td>379.00 บาท</td>
+            <td>{{rtrnFare | number: '1.2'}} บาท</td>
           </tr>
           <tr>
             <td scope="row">ค่าภาษี / ค่าธรรมเนียม :</td>
-            <td>15.00 บาท</td>
+            <td> {{fee | number: '1.2'}} บาท</td>
           </tr>
           <tr>
-            <td class="rowSum" colspan="2">รวมราคาแล้วต่อ 1 คน 973.00 บาท</td>
+            <td class="rowSum" colspan="2">รวมราคาแล้วต่อ 1 คน {{dptrFare + rtrnFare + fee | number: '1.2'}} บาท</td>
           </tr>
         </tbody>
       </table>

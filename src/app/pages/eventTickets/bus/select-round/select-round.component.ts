@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BusService } from '../../../../shared/services/bus.service';
+import { SharedService } from '../../../../shared/services/shared-service.service';
 import { AvailableTripResultModel } from '../../../../shared/models/bus/availableTripResult.model';
 import { AvailableTrip } from '../../../../shared/models/bus/availableTripSearch.model';
 import { ErrorMessage } from '../../../../shared/constant/error-message';
@@ -36,7 +37,9 @@ export class SelectRoundComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private busService: BusService
+    private busService: BusService,
+    private sharedService: SharedService
+
   ) { }
 
   ngOnInit() {
@@ -215,7 +218,6 @@ export class SelectRoundComponent implements OnInit {
   }
 
   selectDptrTrip(data) {
-    console.log('data>>>> ', data);
     this.selectedDptrTrip = data;
     this.dptrFare = this.convertStringToNumber(this.selectedDptrTrip.fare) + this.convertStringToNumber(this.selectedDptrTrip.fee);
     this.fee = 15;
@@ -246,9 +248,9 @@ export class SelectRoundComponent implements OnInit {
     console.log('tripType >> ', tripType);
     console.log('tripDate >> ', new Date(tripDate));
     if (tripType == 'dptr') {
-      this.availableTripSearchModel.departDate = new Date(tripDate);
+      // this.availableTripSearchModel.departDate = new Date(tripDate);
     } else if (tripType == 'rtrn') {
-      this.availableTripSearchModel.returnDate = new Date(tripDate);
+      // this.availableTripSearchModel.returnDate = new Date(tripDate);
     }
 
     // this.availableTripResultModel = this.busService.getAvailableTrip(this.availableTripSearchModel);

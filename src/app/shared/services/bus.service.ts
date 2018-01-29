@@ -13,8 +13,8 @@ import { ProvinceModel } from '../models/bus/province.model';
 export class BusService {
 
     private baseURL = 'https://s3-ap-southeast-1.amazonaws.com';
-    private getMasProvinceAPI = '/allticket-trs-masterinfo/ag_mas_province.txt';
-    private getMasParkAPI = '/allticket-trs-masterinfo/ag_mas_park.txt';
+    private getMasProvinceAPI = this.baseURL + '/allticket-trs-masterinfo/ag_mas_province.txt';
+    private getMasParkAPI = this.baseURL + '/allticket-trs-masterinfo/ag_mas_park.txt';
     private getAvailableTripAPI = '';
     constructor(private http: Http) { }
 

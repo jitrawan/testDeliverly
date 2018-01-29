@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AvailableTrip } from '../../../../shared/models/bus/availableTripSearch.model';
+import { AvailableTripResultModel } from '../../../../shared/models/bus/availableTripResult.model';
 import { ErrorMessage } from '../../../../shared/constant/error-message';
 import { BusService } from '../../../../shared/services/bus.service';
+import { SharedService } from '../../../../shared/services/shared-service.service';
 import { ProvinceModel } from '../../../../shared/models/bus/province.model';
 import { ParkModel } from '../../../../shared/models/bus/park.model';
 
@@ -14,6 +16,7 @@ import { ParkModel } from '../../../../shared/models/bus/park.model';
 })
 export class SelectDestinationComponent implements OnInit {
   availableTripSeach: AvailableTrip = new AvailableTrip;
+  availableTripResult: AvailableTripResultModel;
   errorMessage: ErrorMessage = new ErrorMessage;
   provinceList: ProvinceModel[];
   arrvProvinceList: ProvinceModel[];
@@ -29,9 +32,11 @@ export class SelectDestinationComponent implements OnInit {
   selectedTripType: string;
   isReturnDate: boolean = true;
   selectedNumOfPerson: number;
+  isDisplay: boolean = true;
 
   constructor(
     private busService: BusService,
+    private sharedService: SharedService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
@@ -41,12 +46,7 @@ export class SelectDestinationComponent implements OnInit {
     this.getParkList();
     this.selectedTripType = "R";
     this.selectedNumOfPerson = 0;
-    // console.log('>>> load')
-    // window.addEventListener('message', function (event) {
-    //   console.log('event >>>', event)
-    // });
   }
-
 
   getProvinceList() {
     this.busService.getMasProvince().subscribe((res) => {
@@ -151,33 +151,18 @@ export class SelectDestinationComponent implements OnInit {
 
       /* --------------------- call API ---------------------*/
 
-      this.router.navigate(['selectRound'], { relativeTo: this.route });
+      // -------------- รอเทสกับ API -----------------
+      // availableTripResult = this.busService.getAvailableTrip(this.availableTripSeach);
+      // if (this.availableTripResult) {
+        this.isDisplay = false;
+        // }
+        
+        
+        
+        // this.sharedService.sendData(availableTrip);
+        // this.sharedService.sendData(this.availableTripSeach);
+        // this.router.navigate(['selectRound'], { relativeTo: this.route });
     }
-  }
-
-  onClick() {
-    console.log('>>> onClick <<<');
-    // parent.postMessage('som', '*'); 
-    // window.addEventListener('message', function (event) {
-    //   console.log('event >>>', event)
-    // });
-    // parent.window.HelloFromChild('somm');
-    // window.addEventListener('message', function (event) {
-    //   console.log('event >>>', event)
-    //   // IMPORTANT: Check the origin of the data! 
-    //   // if (~event.origin.indexOf('http://yoursite.com')) { 
-    //   //     // The data has been sent from your site 
-
-    //   //     // The data sent with postMessage is stored in event.data 
-    //   //     console.log(event.data); 
-    //   // } else { 
-    //   //     // The data hasn't been sent from your site! 
-    //   //     // Be careful! Do not use it. 
-    //   //     return; 
-    //   // } 
-    // });
-
-    // window.parent.HelloFromChild('TEST');
   }
 
   onSwap() {
@@ -190,9 +175,6 @@ export class SelectDestinationComponent implements OnInit {
     this.selectedDptrPark = this.selectedArrvPark;
     this.findArrvParkList();
     this.selectedArrvPark = ParkListtemp;
-
   }
-
-
 
 }

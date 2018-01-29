@@ -105,6 +105,10 @@
   transform: scale(1);
 }
 
+.swapDestination i {
+  cursor: pointer;
+}
+
 @media screen and (max-width: 767px) {
   .swapDestination {
     -webkit-transform: rotate(90deg);

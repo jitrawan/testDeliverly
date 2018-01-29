@@ -23,7 +23,8 @@
       </div>
       <div class="col-12 checkPoint">
         <input class="form-control" type="text" placeholder="เลือกต้นทาง" auto-complete [source]="provinceList" (ngModelChange)="selectDprtProvince($event)"
-          (blur)="findDprtParkList()" loading-text="กำลังดาวน์โหลด" list-formatter="desc" [accept-user-input]="false">
+          [(ngModel)]="selectedDptrProvince" (blur)="findDprtParkList()" loading-text="กำลังดาวน์โหลด" list-formatter="desc"
+          [accept-user-input]="false">
       </div>
       <div class="col-12 checkPoint">
         <input class="form-control" type="text" placeholder="เลือกจุดขึ้นรถ" auto-complete [source]="dptrParkList" [(ngModel)]="selectedDptrPark"
@@ -32,7 +33,7 @@
     </div>
 
     <div class="col-12 col-md-2 text-center swapDestination">
-      <i class="fa fa-exchange fa-2x" aria-hidden="true"></i>
+      <i class="fa fa-exchange fa-2x" aria-hidden="true" (click)='onSwap()'></i>
     </div>
 
 
@@ -42,7 +43,8 @@
       </div>
       <div class="col-12 checkPoint">
         <input class="form-control" type="text" placeholder="เลือกปลายทาง" auto-complete [source]="provinceList" (ngModelChange)="selectArrvProvince($event)"
-          (blur)="findArrvParkList()" loading-text="กำลังดาวน์โหลด" list-formatter="desc" [accept-user-input]="false">
+          [(ngModel)]="selectedArrvProvince" (blur)="findArrvParkList()" loading-text="กำลังดาวน์โหลด" list-formatter="desc"
+          [accept-user-input]="false">
       </div>
       <div class="col-12 checkPoint">
         <input class="form-control" type="text" placeholder="เลือกจุดลงรถ" auto-complete [source]="arrvParkList" [(ngModel)]="selectedArrvPark"

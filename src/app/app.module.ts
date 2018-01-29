@@ -12,6 +12,7 @@ import { HttpModule } from '@angular/http';
 import { CalendarModule } from './shared/lib/datetimepicker/primeng/calendar/calendar';
 import { DialogModule } from './shared/lib/dialog/dialog.component';
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
+import { ThaiDatePipe } from './shared/lib/date-format/thaidate.pipe';
 
 
 /* Service */
@@ -79,7 +80,9 @@ import { BuyTicketComponent } from './pages/eventTickets/bus/buy-ticket/buy-tick
     SelectRoundComponent,
     BusLayoutComponent,
     PassengerInformationComponent,
-    BuyTicketComponent
+    BuyTicketComponent,
+
+    ThaiDatePipe
   ],
   imports: [
     NgbModule.forRoot(),

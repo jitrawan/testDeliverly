@@ -36,11 +36,11 @@ const routes: Routes = [
       { path: 'summary', component: SummaryComponent }
     ]
   },
-  // { path: 'booking', component: BookingComponent },
-  // { path: 'Home', component: HomeComponent },
-  // { path: 'eventInfo', component: EventInfoComponent },
-  // { path: 'policy', component: PolicyComponent },
-  // { path: 'faq', component: FaqComponent },
+  { path: 'booking', component: BookingComponent },
+  { path: 'Home', component: HomeComponent },
+  { path: 'eventInfo', component: EventInfoComponent },
+  { path: 'policy', component: PolicyComponent },
+  { path: 'faq', component: FaqComponent },
   // { path: 'transport/airlines', component: AirlinesComponent },
   // { path: 'transport/bus', component: BusComponent },
   // { path: 'transport/bus/selectDestination', component: SelectDestinationComponent },
@@ -59,13 +59,13 @@ const routes: Routes = [
   //     { path: 'summary', component: SummaryComponent }
   //   ]
   // },
-  // { path: 'shopping', component: ShoppingComponent },
-  // { path: 'transport/travel', component: TravelComponent },
-  // { path: 'allevent/:type', component: AllEventComponent },
-  // { path: 'payment/:step', component: PaymentComponent },
-  // { path: 'purchaseHistory', component: PurchaseHistoryComponent },
-  // { path: 'historyDetail', component: HistoryDetailComponent },
-  // { path: 'busLayout', component: BusLayoutComponent },
+  { path: 'shopping', component: ShoppingComponent },
+  { path: 'transport/travel', component: TravelComponent },
+  { path: 'allevent/:type', component: AllEventComponent },
+  { path: 'payment/:step', component: PaymentComponent },
+  { path: 'purchaseHistory', component: PurchaseHistoryComponent },
+  { path: 'historyDetail', component: HistoryDetailComponent },
+  { path: 'busLayout', component: BusLayoutComponent },
 ];
 
 @NgModule({

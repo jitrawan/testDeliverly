@@ -1,4 +1,4 @@
 interface Window {
-    receiveMessage(args:string):void
+    receiveMessage(args:string):boolean
 
 }

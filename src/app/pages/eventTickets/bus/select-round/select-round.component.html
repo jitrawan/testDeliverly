@@ -10,19 +10,19 @@
         </span>
       </div>
       <div class="col-2 otherDate">
-          <span>อา. 8 ม.ค. 61</span>
-        </div>
+        <span>{{dptrDate[0]| thaidate:'medium' }} </span>
+      </div>
       <div class="col-2 otherDate">
-        <span>จ. 9 ม.ค. 61</span>
+        <span>{{dptrDate[1]| thaidate:'medium' }}</span>
       </div>
       <div class="col-2 chooseDate">
-        <span>อ. 10 ม.ค. 61</span>
+        <span> {{dptrDate[2]| thaidate:'medium' }} </span>
       </div>
       <div class="col-2 otherDate">
-        <span>พ. 11 ม.ค. 61</span>
+        <span>{{dptrDate[3]| thaidate:'medium' }}</span>
       </div>
       <div class="col-2 otherDate">
-        <span>พฤ. 12 ม.ค. 61</span>
+        <span>{{dptrDate[4]| thaidate:'medium' }}</span>
       </div>
       <div class="col-1 arrow">
         <span class="right">
@@ -42,7 +42,7 @@
       </div>
       <div class="col-12 col-lg-5 province"> เชียงใหม่
         <br>
-        <span class="subFromTo">สถานีขนส่งผู้โดยสาร จ.เชียงใหม่ (อาเขต)</span>
+        <span class="subFromTo"> สถานีขนส่งผู้โดยสาร จ.เชียงใหม่ (อาเขต)</span>
       </div>
     </div>
   </div>
@@ -51,27 +51,22 @@
       <table class="table bordered">
         <tbody>
           <tr class="tableTopic">
-            <td>ช่วงเวลาเดินทาง</td>
+            <td>ออกเดินทาง</td>
+            <td>ถึงปลายทาง </td>
             <td>มาตราฐาน</td>
             <td>ที่นั่งคงเหลือ</td>
             <td>ราคา</td>
           </tr>
-          <tr class="tableResult">
-            <td>10.00 - 20.00</td>
-            <td>ม.4ต</td>
-            <td>39 / 54 ที่นั่ง</td>
+          <tr class="tableResult" *ngFor="let data of availableTripResultModel.dptrTrips.trips; let index = index;">
+            <td> {{data.date | thaidate:'short'}}
+              <br> {{data.time}} น.</td>
+            <td> {{data.arrvDate | thaidate:'short'}}
+              <br> {{data.arrvTime}} น. </td>
+            <td> {{data.busStd.desc}} </td>
+            <td> {{data.emptySeats}} / {{data.seats}} ที่นั่ง</td>
             <td>
-              <input type="radio" id="departure1" name="departure">
-              <label for="departure1">479 บาท</label>
-            </td>
-          </tr>
-          <tr class="tableResult">
-            <td>13.00 - 22.00</td>
-            <td>ม.4ต</td>
-            <td>28 / 54 ที่นั่ง</td>
-            <td>
-              <input type="radio" id="departure2" name="departure">
-              <label for="departure2">379 บาท</label>
+              <input type="radio" id="departure{{index}}" name="departure" (change)="selectArrvTrip(data)">
+              <label for="departure{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee)}} บาท</label>
             </td>
           </tr>
         </tbody>
@@ -93,19 +88,19 @@
           </span>
         </div>
         <div class="col-2 otherDate">
-            <span>อ. 10 ม.ค. 61</span>
-          </div>
+          <span>{{rtrnDate[0]| thaidate:'medium' }} </span>
+        </div>
         <div class="col-2 otherDate">
-          <span>พ. 11 ม.ค. 61</span>
+          <span>{{rtrnDate[1]| thaidate:'medium' }}</span>
         </div>
         <div class="col-2 chooseDate">
-          <span>พฤ. 12 ม.ค. 61</span>
+          <span> {{rtrnDate[2]| thaidate:'medium' }} </span>
         </div>
         <div class="col-2 otherDate">
-          <span>ศ. 13 ม.ค. 61</span>
+          <span>{{rtrnDate[3]| thaidate:'medium' }}</span>
         </div>
         <div class="col-2 otherDate">
-          <span>ส. 14 ม.ค. 61</span>
+          <span>{{rtrnDate[4]| thaidate:'medium' }}</span>
         </div>
         <div class="col-1 arrow">
           <span class="right">
@@ -135,18 +130,22 @@
       <table class="table bordered">
         <tbody>
           <tr class="tableTopic">
-            <td>ช่วงเวลาเดินทาง</td>
+            <td>ออกเดินทาง</td>
+            <td>ถึงปลายทาง </td>
             <td>มาตราฐาน</td>
             <td>ที่นั่งคงเหลือ</td>
             <td>ราคา</td>
           </tr>
-          <tr class="tableResult">
-            <td>10.00 - 20.00</td>
-            <td>ม.4ต</td>
-            <td>39 / 54 ที่นั่ง</td>
+          <tr class="tableResult" *ngFor="let data of availableTripResultModel.rtrnTrips.trips; let index = index;">
+            <td> {{data.date | thaidate:'short'}}
+              <br> {{data.time}} น.</td>
+            <td> {{data.arrvDate | thaidate:'short'}}
+              <br> {{data.arrvTime}} น. </td>
+            <td> {{data.busStd.desc}} </td>
+            <td> {{data.emptySeats}} / {{data.seats}} ที่นั่ง</td>
             <td>
-              <input type="radio" id="arrival1" name="arrival">
-              <label for="arrival1">479 บาท</label>
+              <input type="radio" id="arrvTrip{{index}}" name="arrvTrip" (change)="selectDptrTrip(data)" >
+              <label for="arrvTrip{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee)}} บาท</label>
             </td>
           </tr>
         </tbody>
@@ -188,7 +187,7 @@
         <span class="red">กรณีตั๋วไปกลับ จะต้องเป็นเส้นทางเดียวกัน และ ราคาเท่ากัน</span>
       </div>
       <div class="col-12">
-        <span class="fontW500">จำนวนตั๋วผู้โดยสาร 1 คน</span>
+        <span class="fontW500">จำนวนตั๋วผู้โดยสาร {{totalPassenger}} คน</span>
         <span class="fontGrey">
           <br/>&nbsp;&nbsp; - อัตราค่าโดยสารนี้ยังไม่รวมค่าดำเนินการ
           <br/>&nbsp;&nbsp; - อัตราค่าโดยสารนี้อาจเปลี่ยนแปลงได้จนกว่าลูกค้าจะชำระเงิน

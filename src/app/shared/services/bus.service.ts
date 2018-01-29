@@ -23,9 +23,9 @@ export class BusService {
             .map((res: Response) => {
                 return res.json();
             })
-            // .catch((error: any) => { 
+            // .catch((error: any) => {
             //     return Observable.throw(error.json || error || 'Server Error');
-            //  });
+            // });
     }
 
     getMasPark() {
@@ -33,9 +33,9 @@ export class BusService {
             .map((res: Response) => {
                 return res.json();
             })
-            // .catch((error: any) => { 
+            // .catch((error: any) => {
             //     return Observable.throw(error.json || error || 'Server Error');
-            //  });
+            // });
     }
 }
 
@@ -47,3 +47,18 @@ export class BusService {
 //         return res.json();
 //     })
 //     .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
+
+
+// $.ajax({
+//     url: 'http://localhost:8080/BusTicketReserveWorker/api/trs/postApi' (http://localhost:8080/BusTicketReserveWorker/api/trs/postApi%27),
+//     timeout: 0,
+//     type: 'POST',
+//     data: '{a:1}',
+//     dataType: 'json',
+//     contentType: "application/json; charset=utf-8",
+//     cache : false,
+//     crossDomain: true,
+//     success: function (dat) {
+//         console.log(dat);
+//         $('p').html(dat);
+//     }, 

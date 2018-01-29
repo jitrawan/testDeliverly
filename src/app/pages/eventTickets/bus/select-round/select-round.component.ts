@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AvailableTripResultModel } from '../../../../shared/models/bus/availableTripResult.model';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-select-round',
@@ -7,6 +9,19 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./select-round.component.css', '../buy-ticket/buy-ticket.component.css']
 })
 export class SelectRoundComponent implements OnInit {
+  @Input() availableTripResultModel: any;
+  @Input() dptrProvince: any;
+  @Input() dptrPark: any;
+  @Input() rtrnProvince: any;
+  @Input() rtrnPark: any;
+  @Input() totalPassenger = 1;
+
+  dptrDate: any[] = [];
+  rtrnDate: any[] = [];
+  fee: number;
+
+  selectedDptrTrip: any;
+  
 
   constructor(
     private router: Router,
@@ -14,11 +29,201 @@ export class SelectRoundComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.availableTripResultModel = {
+      "dptrTrips": {
+        "tripDate": "2018-02-01",
+        "trips": [
+          {
+            "id": "3720857",
+            "dptrPark": {
+              "id": "1223",
+              "desc": "กรุงเทพ(สายใต้ใหม่)"
+            },
+            "arrvPark": {
+              "id": "846",
+              "desc": "จุดจอด อ.คลองท่อม"
+            },
+            "date": "2018-02-01",
+            "time": "18:30",
+            "arrvDate": "2018-02-02",
+            "arrvTime": "06:30",
+            "route": {
+              "id": "211",
+              "code": "2S99120042",
+              "desc": "กรุงเทพฯ-คลองท่อม-กระบี่",
+              "line": "9912"
+            },
+            "busStd": {
+              "id": "6",
+              "desc": "ม.4ข"
+            },
+            "fare": "304",
+            "fee": "243",
+            "seats": 46,
+            "emptySeats": 46,
+            "coupon": "Y",
+            "station": {
+              "id": "2",
+              "desc": "กรุงเทพ(สายใต้ใหม่)"
+            },
+            "platform": "32"
+          },
+          {
+            "id": "3715436",
+            "dptrPark": {
+              "id": "1223",
+              "desc": "กรุงเทพ(หมอชิตใหม่2)"
+            },
+            "arrvPark": {
+              "id": "846",
+              "desc": "จุดจอด อ.คลองท่อม"
+            },
+            "date": "2018-02-01",
+            "time": "18:35",
+            "arrvDate": "2018-02-02",
+            "arrvTime": "08:35",
+            "route": {
+              "id": "966",
+              "code": "9C09830142",
+              "desc": "กรุงเทพ(หมอชิต2)-กระบี่-(บ้านหัวหิน)",
+              "line": "0983"
+            },
+            "busStd": {
+              "id": "6",
+              "desc": "ม.4ข"
+            },
+            "fare": "343",
+            "fee": "274",
+            "seats": 48,
+            "emptySeats": 48,
+            "coupon": "Y",
+            "station": {
+              "id": "1",
+              "desc": "กรุงเทพ(หมอชิตใหม่2)"
+            },
+            "platform": "111(หมอชิต2)"
+          }
+        ]
+      },
+      "rtrnTrips": {
+        "tripDate": "2018-02-03",
+        "trips": [
+          {
+            "id": "3720984",
+            "dptrPark": {
+              "id": "846",
+              "desc": "จุดจอด อ.คลองท่อม"
+            },
+            "arrvPark": {
+              "id": "1223",
+              "desc": "กรุงเทพ(สายใต้ใหม่)"
+            },
+            "date": "2018-02-03",
+            "time": "16:00",
+            "arrvDate": "2018-02-04",
+            "arrvTime": "04:00",
+            "route": {
+              "id": "211",
+              "code": "2S99120042",
+              "desc": "กรุงเทพฯ-คลองท่อม-กระบี่",
+              "line": "9912"
+            },
+            "busStd": {
+              "id": "6",
+              "desc": "ม.4ข"
+            },
+            "fare": "304",
+            "fee": "243",
+            "seats": 46,
+            "emptySeats": 46,
+            "coupon": "Y",
+            "station": {
+              "id": "28",
+              "desc": "สถานีเดินรถกระบี่"
+            },
+            "platform": "1"
+          },
+          {
+            "id": "3715439",
+            "dptrPark": {
+              "id": "846",
+              "desc": "จุดจอด อ.คลองท่อม"
+            },
+            "arrvPark": {
+              "id": "1223",
+              "desc": "กรุงเทพ(หมอชิตใหม่2)"
+            },
+            "date": "2018-02-03",
+            "time": "16:31",
+            "arrvDate": "2018-02-04",
+            "arrvTime": "06:31",
+            "route": {
+              "id": "966",
+              "code": "9C09830142",
+              "desc": "กรุงเทพ(หมอชิต2)-กระบี่-(บ้านหัวหิน)",
+              "line": "0983"
+            },
+            "busStd": {
+              "id": "6",
+              "desc": "ม.4ข"
+            },
+            "fare": "343",
+            "fee": "274",
+            "seats": 48,
+            "emptySeats": 48,
+            "coupon": "Y",
+            "station": {
+              "id": "28",
+              "desc": "สถานีเดินรถกระบี่"
+            },
+            "platform": "กระบี่18.00"
+          }
+        ]
+      }
+    };
+
+    this.dptrDate = this.setCalendar(this.convertStringToDate(this.availableTripResultModel.dptrTrips.tripDate));
+    this.rtrnDate = this.setCalendar(this.convertStringToDate(this.availableTripResultModel.rtrnTrips.tripDate));
+    // this.setCalendar(this.convertStringToDate('2016-03-02'));
+    // this.dptrDate = new Date(this.availableTripResultModel.dptrTrips.tripDate);
+
 
   }
 
-  goNextPage(){
-    // parent.window.receiveMessage('checkAuthen');
-    this.router.navigate(['../selectSeat'], { relativeTo: this.route });
+  goNextPage() {
+    var returnCode = parent.window.receiveMessage('checkAuthen');
+    console.log('return >>> ', returnCode);
+    console.log('5 >>>');
+    if (returnCode) {
+      this.router.navigate(['../selectSeat'], { relativeTo: this.route });
+    }
+    console.log('6 >>>');
+  }
+
+  convertStringToNumber(str) {
+    return Number(str);
+  }
+
+  convertStringToDate(str) {
+    return new Date(str);
+  }
+
+  setCalendar(date) {
+    let day = new Date(date).getDate();
+    let dateList = [];
+    for (let d = -2; d <= 2; d++) {
+      dateList.push(new Date(date).setDate(day + d));
+    }
+    console.log('this.dptrDate >> ', this.dptrDate);
+    return dateList;
+  }
+
+
+  selectDptrTrip(data) {
+    console.log('data>>>> ', data);
+  }
+
+  selectArrvTrip(data) {
+
   }
 }

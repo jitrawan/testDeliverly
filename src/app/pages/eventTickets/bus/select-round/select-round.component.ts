@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BusService } from '../../../../shared/services/bus.service';
 import { SharedService } from '../../../../shared/services/shared-service.service';
+import { AlertsService } from '@jaspero/ng2-alerts';
 import { AvailableTripResultModel } from '../../../../shared/models/bus/availableTripResult.model';
 import { AvailableTrip } from '../../../../shared/models/bus/availableTripSearch.model';
 import { ErrorMessage } from '../../../../shared/constant/error-message';
@@ -33,12 +34,14 @@ export class SelectRoundComponent implements OnInit {
   selectedRtrnTrip: any;
 
   errorMessage: ErrorMessage = new ErrorMessage;
+  alertSettings: any;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private busService: BusService,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private _alert: AlertsService
 
   ) { }
 
@@ -229,11 +232,19 @@ export class SelectRoundComponent implements OnInit {
     this.fee = 15;
   }
 
+  openDialog(msg) {
+    console.log('>>>> ', msg);
+    // let _alert: AlertsService = new AlertsService();
+    let type: any = "warning";
+    this.alertSettings = { overlay: true, overlayClickToClose: false, showCloseButton: true, duration: 100000 };
+    this._alert.create(type, msg, this.alertSettings);
+  }
+
   goNextPage() {
     if (this.selectedDptrTrip == undefined) {
-      alert(this.errorMessage.pleaseSelect + 'วันที่และเวลาเดินทางไป');
+      this.openDialog(this.errorMessage.pleaseSelect + 'วันที่และเวลาเดินทางไป');
     } else if (this.availableTripResultModel.rtrnTrips != null && this.selectedRtrnTrip == undefined) {
-      alert(this.errorMessage.pleaseSelect + 'วันที่และเวลาเดินทางกลับ');
+      this.openDialog(this.errorMessage.pleaseSelect + 'วันที่และเวลาเดินทางกลับ');
     } else {
       // var returnCode = parent.window.receiveMessage('checkAuthen');
       // console.log('return >>> ', returnCode);

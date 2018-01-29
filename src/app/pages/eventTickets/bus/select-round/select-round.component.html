@@ -1,4 +1,4 @@
-<div class="selectRoundBox" >
+<div class="selectRoundBox">
   <div class="pageTopic col-12">
     <span>กรุณาเลือกวันที่ และ วันเดินทางไป</span>
   </div>
@@ -26,7 +26,7 @@
       </div>
       <div class="col-1 arrow">
         <span class="right" (click)="searchTrips('dptr', dptrDate[3])">
-          <i class="fa fa-chevron-right" aria-hidden="true" ></i>
+          <i class="fa fa-chevron-right" aria-hidden="true"></i>
         </span>
       </div>
     </div>
@@ -64,9 +64,13 @@
               <br> {{data.arrvTime}} น. </td>
             <td> {{data.busStd.desc}} </td>
             <td> {{data.emptySeats}} / {{data.seats}} ที่นั่ง</td>
-            <td>
+            <td *ngIf="data.emptySeats != data.seats">
               <input type="radio" id="departure{{index}}" name="departure" (change)="selectDptrTrip(data)">
               <label for="departure{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee) | number: '1.2'}} บาท</label>
+            </td>
+            <td *ngIf="data.emptySeats == data.seats">
+              <input type="radio" id="departure{{index}}" name="departure" (change)="selectDptrTrip(data)" disabled>
+              <label style="cursor: not-allowed;" for="departure{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee) | number: '1.2'}} บาท</label>
             </td>
           </tr>
         </tbody>
@@ -94,7 +98,7 @@
           <span (click)="searchTrips('rtrn', rtrnDate[1])">{{rtrnDate[1]| thaidate:'medium' }}</span>
         </div>
         <div class="col-2 chooseDate">
-          <span > {{rtrnDate[2]| thaidate:'medium' }} </span>
+          <span> {{rtrnDate[2]| thaidate:'medium' }} </span>
         </div>
         <div class="col-2 otherDate">
           <span (click)="searchTrips('rtrn', rtrnDate[3])">{{rtrnDate[3]| thaidate:'medium' }}</span>
@@ -143,9 +147,13 @@
               <br> {{data.arrvTime}} น. </td>
             <td> {{data.busStd.desc}} </td>
             <td> {{data.emptySeats}} / {{data.seats}} ที่นั่ง</td>
-            <td>
+            <td *ngIf="data.emptySeats != data.seats">
               <input type="radio" id="arrvTrip{{index}}" name="arrvTrip" (change)="selectRtrnTrip(data)">
               <label for="arrvTrip{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee) | number: '1.2'}} บาท</label>
+            </td>
+            <td *ngIf="data.emptySeats == data.seats">
+              <input class="form-check-input" type="radio" id="arrvTrip{{index}}" name="arrvTrip" (change)="selectRtrnTrip(data)" disabled>
+              <label style="cursor: not-allowed;" for="arrvTrip{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee) | number: '1.2'}} บาท</label>
             </td>
           </tr>
         </tbody>
@@ -209,3 +217,5 @@
     <button class="btn btn-atk-primary mt-3 buttonSize" type="button">NEXT</button>
   </div>
 </div> -->
+
+<!-- <jaspero-alerts [defaultSettings]="options"></jaspero-alerts> -->

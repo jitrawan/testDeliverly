@@ -2,25 +2,18 @@
   padding: 15px 15% 0px 15%;
 }
 
-.seat {
-  /* float: left; */
-  /* display: block; */
+.seatEx {
   width: 100%;
   height: 100%;
-  /* margin: 2px; */
-  border: 1px solid rgba(0, 0, 0, .2);
+  border: 2px solid #939598;
 }
 
-.blue {
-  background: #13b4ff;
+.selecting {
+  background: #fff200;
 }
 
-.red {
-  background: #ff0000;
-}
-
-.green {
-  background: #1eff00;
+.available {
+  background: #ffffff;
 }
 
 .btn-atk-primary {

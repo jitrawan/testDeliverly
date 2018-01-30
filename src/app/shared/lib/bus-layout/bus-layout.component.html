@@ -33,10 +33,10 @@
       <div class="cabin fuselage">
         <div class="row seats" type="A" *ngFor="let index of numbersOfRow; let row = index">
           <div class="seat" style="display: block;" *ngFor="let col of numbersOfCol; let pos = index">
-            <div class="" *ngFor="let data of checkSeat(floorTwoList, row+1, pos+1)">
+            <div  *ngFor="let data of checkSeat(floorTwoList, row+1, pos+1)">
               <input *ngIf="data.type == 1" type="checkbox" id="{{data.name}}up" (click)="selectSeat($event, data)" />
-              <label *ngIf="data.type == 1" for="{{data.name}}up">{{data.name}}</label>
-              <span *ngIf="data.type == 2" class="seatSize{{data.dim.w}} seatHeight{{data.dim.h}}" [id]="data.name">{{data.name}}</span>
+              <label *ngIf="data.type == 1" for="{{data.name}}up" >{{data.name}}</label>
+              <span  *ngIf="data.type == 2" class="seatSize{{data.dim.w}} seatHeight{{data.dim.h}}" [id]="data.name">{{data.name}}</span>
             </div>
           </div>
         </div>

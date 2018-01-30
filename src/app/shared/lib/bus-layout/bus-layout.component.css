@@ -1,281 +1,259 @@
-*, *:before, *:after {
-    box-sizing: border-box;
-  }
-  
-  html {
-    font-size: 16px;
-  }
-  
-  .plane {
-    margin: 20px auto;
-    max-width: 300px;
-  }
-  
-  .cockpit {
-    /* height: 250px; */
-    position: relative;
-    overflow: hidden;
-    text-align: center;
-    border-bottom: 5px solid #d8d8d8;
-  }
-  /* .cockpit:before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 500px;
-    width: 100%;
-    border-radius: 50%;
-    border-right: 5px solid #d8d8d8;
-    border-left: 5px solid #d8d8d8;
-  } */
-  .cockpit h1 {
-    width: 60%;
-    margin: 100px auto 35px auto;
-  }
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
 
-  .end {
-    border-top: 5px solid #d8d8d8;
-    position: relative;
-  }
-/*   
-  .exit {
-    border-top: 5px solid #d8d8d8;
-    position: relative;
-    height: 50px;
-  }
-  .exit:before, .exit:after {
-    content: "EXIT";
-    font-size: 14px;
-    line-height: 18px;
-    padding: 0px 2px;
-    font-family: "Arial Nar\a       ", Arial, sans-serif;
-    display: block;
-    position: absolute;
-    background: green;
-    color: white;
-    top: 50%;
-    transform: translate(0, -50%);
-  }
-  .exit:before {
-    left: 0;
-  }
-  .exit:after {
-    right: 0;
-  } */
-  
-  .fuselage {
-    border-right: 5px solid #d8d8d8;
-    border-left: 5px solid #d8d8d8;
-    /* align-content: center; */
-  }
-  
-  ol {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .seats {
-    /* display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: flex-start; */
-    padding-left: 15%;
-    margin-bottom: 2%;
-   height: 50px; 
-  }
-  
-  .seat {
-    /* display: flex; */
-    flex: 0 0 14.28571428571429%;
-    /* padding: 5px; */
-    position: relative;
-    margin-left: 2.5%;
-  }
-  /* .seat:nth-child(3) {
-    margin-right: 14.28571428571429%;
-  } */
+html {
+  font-size: 16px;
+}
 
-  .seat span {
-    color: #ffffff;
-    display: block;
-    /* position: relative; */
-    position: absolute;
-    text-align: center;
-    font-size: 12px;
-    font-weight: bold;
-    /* padding: 4px 0; */
-    line-height: 2.5rem;
-    background: #4169E1;
-    /* border-radius: 5px; */
-    /* animation-duration: 300ms; */
-    /* animation-fill-mode: both; */
-  }
+.plane {
+  margin: 20px auto;
+  max-width: 300px;
+}
 
-  .seatSize1 {
-    width: 100%; 
-    height: 100%;
-  }
-  .seatSize2 {
-    width: 220%; 
-  }
-  .seatSize5 {
-    width: 575%; 
-  }
-  .seatHeight1{
-    height: 80%
-  }
-  .seatHeight2{
-    height: 180%
-  }
-  .seatHeight4{
-    height: 400%
-  }
+.cockpit {
+  position: relative;
+  text-align: center;
+  border-bottom: 2px solid #999999;
+  background: black;
+  color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
 
-  .seat span[hsize=2] {
-    color: #ffffff;
-    display: block;
-    /* position: relative; */
-    /* width: 100%; */
-    text-align: center;
-    font-size: 14px;
-    font-weight: bold;
-    /* line-height: 1.5rem; */
-    /* padding: 4px 0; */
-    position: absolute;
+.cockpit h1 {
+  width: 60%;
+  margin: 100px auto 35px auto;
+}
 
-    background: #4169E1;
-    /* border-radius: 5px; */
-    /* animation-duration: 300ms; */
-    /* animation-fill-mode: both; */
-  }
+.end {
+  border-top: 5px solid #d8d8d8;
+  position: relative;
+}
 
-  .seat input[type=checkbox] {
-    position: absolute;
-    opacity: 0;
+.fuselage {
+  border-right: 2px solid #d8d8d8;
+  border-left: 2px solid #d8d8d8;
+  background-color: #999999;
+}
+
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.seats {
+  padding-left: 15%;
+  margin-bottom: 2%;
+  height: 50px;
+}
+
+.seat {
+  flex: 0 0 14.28571428571429%;
+  position: relative;
+  margin-left: 2.5%;
+}
+
+.seat span {
+  color: #ffffff;
+  display: block;
+  position: absolute;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 2.5rem;
+  background: #3366cc;
+}
+
+.seatSize1 {
+  width: 100%;
+  height: 100%;
+}
+
+.seatSize2 {
+  width: 220%;
+}
+
+.seatSize5 {
+  width: 575%;
+}
+
+.seatHeight1 {
+  height: 80%
+}
+
+.seatHeight2 {
+  height: 180%
+}
+
+.seatHeight4 {
+  height: 400%
+}
+
+.seat span[hsize=2] {
+  color: #ffffff;
+  display: block;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  position: absolute;
+  background: #4169E1;
+}
+
+.seat input[type=checkbox] {
+  position: absolute;
+  opacity: 0;
+}
+
+.seat input[type=checkbox]:checked+label {
+  background: #fff200;
+  -webkit-animation-name: rubberBand;
+  animation-name: rubberBand;
+  animation-duration: 300ms;
+  animation-fill-mode: both;
+}
+
+.seat input[type=checkbox]:disabled+label {
+  background: #828282;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+
+.seat input[type=checkbox]:disabled+label:after {
+  content: "X";
+  text-indent: 0;
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+
+.seat input[type=checkbox]:disabled+label:hover {
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.seat label {
+  display: block;
+  position: relative;
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.5rem;
+  padding: 4px 0;
+  background: #ffffff;
+  border-radius: 5px;
+  animation-duration: 300ms;
+  animation-fill-mode: both;
+}
+
+.seat label:before {
+  content: "";
+  position: absolute;
+  width: 75%;
+  height: 75%;
+  top: 1px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  border-radius: 3px;
+}
+
+.seat label:hover {
+  cursor: pointer;
+  box-shadow: 0 0 0px 2px #5C6AFF;
+}
+
+@-webkit-keyframes rubberBand {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
   }
-  .seat input[type=checkbox]:checked + label {
-    background: #F42536;
-    
-    /* background: #bada55; */
-    -webkit-animation-name: rubberBand;
-    animation-name: rubberBand;
-    animation-duration: 300ms;
-    animation-fill-mode: both;
-    
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1);
   }
-  .seat input[type=checkbox]:disabled + label {
-    background: #828282;
-    text-indent: -9999px;
-    overflow: hidden;
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1);
   }
-  .seat input[type=checkbox]:disabled + label:after {
-    content: "X";
-    text-indent: 0;
-    position: absolute;
-    top: 4px;
-    left: 50%;
-    transform: translate(-50%, 0%);
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+    transform: scale3d(1.15, 0.85, 1);
   }
-  .seat input[type=checkbox]:disabled + label:hover {
-    box-shadow: none;
-    cursor: not-allowed;
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+    transform: scale3d(0.95, 1.05, 1);
   }
-  .seat label {
-    display: block;
-    position: relative;
-    width: 100%;
-    text-align: center;
-    font-size: 14px;
-    font-weight: bold;
-    line-height: 1.5rem;
-    padding: 4px 0;
-    background: #bada55;
-    
-    border-radius: 5px;
-    animation-duration: 300ms;
-    animation-fill-mode: both;
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+    transform: scale3d(1.05, 0.95, 1);
   }
-  .seat label:before {
-    content: "";
-    position: absolute;
-    width: 75%;
-    height: 75%;
-    top: 1px;
-    left: 50%;
-    transform: translate(-50%, 0%);
-    background: rgba(255, 255, 255, 0.4);
-    border-radius: 3px;
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
   }
-  .seat label:hover {
-    cursor: pointer;
-    box-shadow: 0 0 0px 2px #5C6AFF;
+}
+
+@keyframes rubberBand {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
   }
-  
-  @-webkit-keyframes rubberBand {
-    0% {
-      -webkit-transform: scale3d(1, 1, 1);
-      transform: scale3d(1, 1, 1);
-    }
-    30% {
-      -webkit-transform: scale3d(1.25, 0.75, 1);
-      transform: scale3d(1.25, 0.75, 1);
-    }
-    40% {
-      -webkit-transform: scale3d(0.75, 1.25, 1);
-      transform: scale3d(0.75, 1.25, 1);
-    }
-    50% {
-      -webkit-transform: scale3d(1.15, 0.85, 1);
-      transform: scale3d(1.15, 0.85, 1);
-    }
-    65% {
-      -webkit-transform: scale3d(0.95, 1.05, 1);
-      transform: scale3d(0.95, 1.05, 1);
-    }
-    75% {
-      -webkit-transform: scale3d(1.05, 0.95, 1);
-      transform: scale3d(1.05, 0.95, 1);
-    }
-    100% {
-      -webkit-transform: scale3d(1, 1, 1);
-      transform: scale3d(1, 1, 1);
-    }
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1);
   }
-  @keyframes rubberBand {
-    0% {
-      -webkit-transform: scale3d(1, 1, 1);
-      transform: scale3d(1, 1, 1);
-    }
-    30% {
-      -webkit-transform: scale3d(1.25, 0.75, 1);
-      transform: scale3d(1.25, 0.75, 1);
-    }
-    40% {
-      -webkit-transform: scale3d(0.75, 1.25, 1);
-      transform: scale3d(0.75, 1.25, 1);
-    }
-    50% {
-      -webkit-transform: scale3d(1.15, 0.85, 1);
-      transform: scale3d(1.15, 0.85, 1);
-    }
-    65% {
-      -webkit-transform: scale3d(0.95, 1.05, 1);
-      transform: scale3d(0.95, 1.05, 1);
-    }
-    75% {
-      -webkit-transform: scale3d(1.05, 0.95, 1);
-      transform: scale3d(1.05, 0.95, 1);
-    }
-    100% {
-      -webkit-transform: scale3d(1, 1, 1);
-      transform: scale3d(1, 1, 1);
-    }
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1);
   }
-  .rubberBand {
-    -webkit-animation-name: rubberBand;
-    animation-name: rubberBand;
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+    transform: scale3d(1.15, 0.85, 1);
   }
-  
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.rubberBand {
+  -webkit-animation-name: rubberBand;
+  animation-name: rubberBand;
+}
+
+.Mgender {
+  content: url("../../../../assets/images/male.png");
+  width: 100%;
+  height: auto;
+}
+
+.Fgender {
+  content: url("../../../../assets/images/female.png");
+  width: 100%;
+  height: auto;
+}
+
+.Ogender {
+  content: url("../../../../assets/images/monk.png");
+  width: 100%;
+  height: auto;
+}
+
+.Ngender {
+  content: url("../../../../assets/images/none.png");
+  width: 100%;
+  height: auto;
+}

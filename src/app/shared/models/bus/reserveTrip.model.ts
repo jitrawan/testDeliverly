@@ -1,5 +1,5 @@
 import { ReserveParkModel } from './reservePark.model';
-import { RouteModel } from './route.model';
+import { ReserveRouteModel } from './reserveRoute.model';
 import { BusStdModel } from './busStd.model';
 import { ReserveModel } from './reserve.model';
 export class ReserveTripModel {
@@ -7,7 +7,7 @@ export class ReserveTripModel {
     code: string;
     date: string;
     time: string;
-    route: RouteModel;
+    route: ReserveRouteModel;
     busStd: BusStdModel;
     dptrPark: ReserveParkModel;
     arrvPark: ReserveParkModel;

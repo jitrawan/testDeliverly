@@ -4,7 +4,7 @@ import { BusService } from '../../../../shared/services/bus.service';
 import { SharedService } from '../../../../shared/services/shared-service.service';
 import { AlertsService } from '@jaspero/ng2-alerts';
 import { AvailableTripResultModel } from '../../../../shared/models/bus/availableTripResult.model';
-import { AvailableTrip } from '../../../../shared/models/bus/availableTripSearch.model';
+import { AvailableTripModel } from '../../../../shared/models/bus/availableTripSearch.model';
 import { ErrorMessage } from '../../../../shared/constant/error-message';
 // import { DatePipe } from '@angular/common';
 
@@ -17,7 +17,7 @@ import { ErrorMessage } from '../../../../shared/constant/error-message';
 })
 export class SelectRoundComponent implements OnInit {
   @Input() availableTripResultModel: any;
-  @Input() availableTripSearchModel: AvailableTrip;
+  @Input() availableTripSearchModel: AvailableTripModel;
   @Input() dptrProvince: any;
   @Input() dptrPark: any;
   @Input() rtrnProvince: any;

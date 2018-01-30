@@ -70,80 +70,100 @@ export class SummaryComponent implements OnInit {
     //   }
     // };
 
-    // this.transCheckout = {
-    //   "dptrTrip": {
-    //     "id": "3720857",
-    //     "code": "บขส2S99120042G01",
-    //     "date": "2018-02-01",
-    //     "time": "18:30",
-    //     "route": {
-    //       "id": "211",
-    //       "desc": "กรุงเทพฯ-คลองท่อม-กระบี่"
-    //     },
-    //     "busStd": {
-    //       "id": "6",
-    //       "desc": "ม.4ข"
-    //     },
-    //     "dptrPark": {
-    //       "id": "1223",
-    //       "desc": "กรุงเทพ(สายใต้ใหม่)"
-    //     },
-    //     "arrvPark": {
-    //       "id": "846",
-    //       "desc": "จุดจอด อ.คลองท่อม"
-    //     },
-    //     "reserves": [
-    //       {
-    //         "reserveId": "90560055",
-    //         "seatFloor": "2",
-    //         "seatNo": "B1",
-    //         "fee": "243",
-    //         "fare": "304",
-    //         "disFare": "30.00",
-    //         "disFee": "0.00",
-    //         "serviceMny": "0.00"
-    //       }
-    //     ]
-    //   },
-    //   "rtrnTrip": {
-    //     "id": "3720984",
-    //     "code": "บขส2S99120042B01",
-    //     "date": "2018-02-03",
-    //     "time": "16:00",
-    //     "route": {
-    //       "id": "211",
-    //       "desc": "กรุงเทพฯ-คลองท่อม-กระบี่"
-    //     },
-    //     "busStd": {
-    //       "id": "6",
-    //       "desc": "ม.4ข"
-    //     },
-    //     "dptrPark": {
-    //       "id": "846",
-    //       "desc": "จุดจอด อ.คลองท่อม"
-    //     },
-    //     "arrvPark": {
-    //       "id": "1223",
-    //       "desc": "กรุงเทพ(สายใต้ใหม่)"
-    //     },
-    //     "reserves": [
-    //       {
-    //         "reserveId": "90560056",
-    //         "seatFloor": "2",
-    //         "seatNo": "B1",
-    //         "fee": "243",
-    //         "fare": "304",
-    //         "disFare": "30.00",
-    //         "disFee": "0.00",
-    //         "serviceMny": "0.00"
-    //       }
-    //     ]
-    //   },
-    //   "discount": {
-    //     "id": "1",
-    //     "desc": "10% ตั๋วไป-กลับ"
-    //   }
-    // };
+    this.transCheckout = {
+      "dptrTrip": {
+        "id": "3720857",
+        "code": "บขส2S99120042G01",
+        "date": "2018-02-01",
+        "time": "18:30",
+        "route": {
+          "id": "211",
+          "desc": "กรุงเทพฯ-คลองท่อม-กระบี่"
+        },
+        "busStd": {
+          "id": "6",
+          "desc": "ม.4ข"
+        },
+        "dptrPark": {
+          "id": "1223",
+          "desc": "กรุงเทพ(สายใต้ใหม่)"
+        },
+        "arrvPark": {
+          "id": "846",
+          "desc": "จุดจอด อ.คลองท่อม"
+        },
+        "reserves": [
+          {
+            "reserveId": "90560055",
+            "seatFloor": "2",
+            "seatNo": "B1",
+            "fee": "243",
+            "fare": "304",
+            "disFare": "30.00",
+            "disFee": "0.00",
+            "serviceMny": "0.00"
+          },
+          {
+            "reserveId": "90560055",
+            "seatFloor": "2",
+            "seatNo": "B2",
+            "fee": "243",
+            "fare": "304",
+            "disFare": "30.00",
+            "disFee": "0.00",
+            "serviceMny": "0.00"
+          }
+        ]
+      },
+      "rtrnTrip": {
+        "id": "3720984",
+        "code": "บขส2S99120042B01",
+        "date": "2018-02-03",
+        "time": "16:00",
+        "route": {
+          "id": "211",
+          "desc": "กรุงเทพฯ-คลองท่อม-กระบี่"
+        },
+        "busStd": {
+          "id": "6",
+          "desc": "ม.4ข"
+        },
+        "dptrPark": {
+          "id": "846",
+          "desc": "จุดจอด อ.คลองท่อม"
+        },
+        "arrvPark": {
+          "id": "1223",
+          "desc": "กรุงเทพ(สายใต้ใหม่)"
+        },
+        "reserves": [
+          {
+            "reserveId": "90560056",
+            "seatFloor": "2",
+            "seatNo": "B1",
+            "fee": "243",
+            "fare": "304",
+            "disFare": "30.00",
+            "disFee": "0.00",
+            "serviceMny": "0.00"
+          },
+          {
+            "reserveId": "90560056",
+            "seatFloor": "1",
+            "seatNo": "B2",
+            "fee": "243",
+            "fare": "304",
+            "disFare": "30.00",
+            "disFee": "0.00",
+            "serviceMny": "0.00"
+          }
+        ]
+      },
+      "discount": {
+        "id": "1",
+        "desc": "10% ตั๋วไป-กลับ"
+      }
+    };
 
     this.calculateDprtPrice();
     this.calculateDprtDiscount();
@@ -178,5 +198,17 @@ export class SummaryComponent implements OnInit {
 
   receiveMessage(msg: string) {
     console.log('receive >>', msg); // your message from component A
+  }
+
+  getFloor(reserves) {
+    let floorList = [];
+    floorList.push(reserves[0].seatFloor);
+    let anotherFloor = reserves.filter(seat => seat.seatFloor != reserves[0].seatFloor);
+    if (anotherFloor.length > 0) {
+      floorList.push(anotherFloor[0].seatFloor);
+      return floorList;
+    } else {
+      return floorList;
+    }
   }
 }

@@ -1,5 +1,5 @@
 
-<div class="container" *ngIf="!displaySummary">
+<div class="container" *ngIf="isDisplay">
   <div class="pageTopic col-12">
     <span>กรอกข้อมูลผู้โดยสาร</span>
     <img src="../../../../assets/images/borkorsor Website-07.png" />
@@ -58,6 +58,6 @@
   </div>
 </div>
 
-<div class="container" *ngIf="displaySummary">
+<div class="container" *ngIf="!isDisplay">
   <app-summary [passengerInfoList]="passengerInfoList"></app-summary>
 </div>

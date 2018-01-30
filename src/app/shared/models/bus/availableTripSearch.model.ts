@@ -1,4 +1,4 @@
-export class AvailableTrip {
+export class AvailableTripModel {
 
     pickup: string;
     pickupDesc: string;

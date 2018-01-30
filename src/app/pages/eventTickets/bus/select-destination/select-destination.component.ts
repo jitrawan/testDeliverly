@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertsService } from '@jaspero/ng2-alerts';
-import { AvailableTrip } from '../../../../shared/models/bus/availableTripSearch.model';
+import { AvailableTripModel } from '../../../../shared/models/bus/availableTripSearch.model';
 import { AvailableTripResultModel } from '../../../../shared/models/bus/availableTripResult.model';
 import { ErrorMessage } from '../../../../shared/constant/error-message';
 import { BusService } from '../../../../shared/services/bus.service';
@@ -16,7 +16,7 @@ import { ParkModel } from '../../../../shared/models/bus/park.model';
   providers: [BusService]
 })
 export class SelectDestinationComponent implements OnInit {
-  availableTripSeach: AvailableTrip = new AvailableTrip;
+  availableTripSeach: AvailableTripModel = new AvailableTripModel;
   availableTripResult: AvailableTripResultModel;
   errorMessage: ErrorMessage = new ErrorMessage;
   provinceList: ProvinceModel[];

@@ -20,10 +20,13 @@ export class ThaiDatePipe implements PipeTransform {
             inputDate.getDay(), inputDate.getDate(), inputDate.getMonth(), inputDate.getFullYear()
         ];
         let outputDateFull = [
-            'วัน ' + longThaiDay[dataDate[0]],
-            'ที่ ' + dataDate[1],
-            'เดือน ' + longThaiMonth[dataDate[2]],
-            'พ.ศ. ' + (dataDate[3] + 543)
+            // 'วัน ' + longThaiDay[dataDate[0]],
+            // 'ที่ ' + 
+            dataDate[1],
+            // 'เดือน ' +
+             longThaiMonth[dataDate[2]],
+            // 'พ.ศ. ' + 
+            (dataDate[3] + 543)
         ];
         let outputDateShort = [
             dataDate[1],

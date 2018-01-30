@@ -5,7 +5,7 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { HttpModule } from '@angular/http';
 
-import { AvailableTrip } from '../models/bus/availableTripSearch.model';
+import { AvailableTripModel } from '../models/bus/availableTripSearch.model';
 import { ProvinceModel } from '../models/bus/province.model';
 // import {} from '../../pages/eventTickets/bus/select-destination/'
 
@@ -38,7 +38,7 @@ export class BusService {
         // });
     }
 
-    getAvailableTrip(availableTrip: AvailableTrip) {
+    getAvailableTrip(availableTrip: AvailableTripModel) {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         let body = {};

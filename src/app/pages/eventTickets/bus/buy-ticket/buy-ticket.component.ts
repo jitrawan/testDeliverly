@@ -12,4 +12,5 @@ export class BuyTicketComponent implements OnInit {
   ngOnInit() {
   }
 
+
 }

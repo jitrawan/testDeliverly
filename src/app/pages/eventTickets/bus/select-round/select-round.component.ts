@@ -1,15 +1,23 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { BusService } from '../../../../shared/services/bus.service';
+import { SharedService } from '../../../../shared/services/shared-service.service';
+import { AlertsService } from '@jaspero/ng2-alerts';
 import { AvailableTripResultModel } from '../../../../shared/models/bus/availableTripResult.model';
-import { DatePipe } from '@angular/common';
+import { AvailableTrip } from '../../../../shared/models/bus/availableTripSearch.model';
+import { ErrorMessage } from '../../../../shared/constant/error-message';
+// import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-select-round',
   templateUrl: './select-round.component.html',
-  styleUrls: ['./select-round.component.css', '../buy-ticket/buy-ticket.component.css']
+  styleUrls: ['./select-round.component.css', '../buy-ticket/buy-ticket.component.css'],
+  providers: [BusService]
+
 })
 export class SelectRoundComponent implements OnInit {
   @Input() availableTripResultModel: any;
+  @Input() availableTripSearchModel: AvailableTrip;
   @Input() dptrProvince: any;
   @Input() dptrPark: any;
   @Input() rtrnProvince: any;
@@ -18,14 +26,23 @@ export class SelectRoundComponent implements OnInit {
 
   dptrDate: any[] = [];
   rtrnDate: any[] = [];
-  fee: number;
+  dptrFare: number = 0;
+  rtrnFare: number = 0;
+  fee: number = 0;
 
   selectedDptrTrip: any;
-  
+  selectedRtrnTrip: any;
+
+  errorMessage: ErrorMessage = new ErrorMessage;
+  alertSettings: any;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private busService: BusService,
+    private sharedService: SharedService,
+    private _alert: AlertsService
+
   ) { }
 
   ngOnInit() {
@@ -184,20 +201,6 @@ export class SelectRoundComponent implements OnInit {
 
     this.dptrDate = this.setCalendar(this.convertStringToDate(this.availableTripResultModel.dptrTrips.tripDate));
     this.rtrnDate = this.setCalendar(this.convertStringToDate(this.availableTripResultModel.rtrnTrips.tripDate));
-    // this.setCalendar(this.convertStringToDate('2016-03-02'));
-    // this.dptrDate = new Date(this.availableTripResultModel.dptrTrips.tripDate);
-
-
-  }
-
-  goNextPage() {
-    var returnCode = parent.window.receiveMessage('checkAuthen');
-    console.log('return >>> ', returnCode);
-    console.log('5 >>>');
-    if (returnCode) {
-      this.router.navigate(['../selectSeat'], { relativeTo: this.route });
-    }
-    console.log('6 >>>');
   }
 
   convertStringToNumber(str) {
@@ -214,16 +217,56 @@ export class SelectRoundComponent implements OnInit {
     for (let d = -2; d <= 2; d++) {
       dateList.push(new Date(date).setDate(day + d));
     }
-    console.log('this.dptrDate >> ', this.dptrDate);
     return dateList;
   }
 
-
   selectDptrTrip(data) {
-    console.log('data>>>> ', data);
+    this.selectedDptrTrip = data;
+    this.dptrFare = this.convertStringToNumber(this.selectedDptrTrip.fare) + this.convertStringToNumber(this.selectedDptrTrip.fee);
+    this.fee = 15;
   }
 
-  selectArrvTrip(data) {
-
+  selectRtrnTrip(data) {
+    this.selectedRtrnTrip = data;
+    this.rtrnFare = this.convertStringToNumber(this.selectedRtrnTrip.fare) + this.convertStringToNumber(this.selectedRtrnTrip.fee);
+    this.fee = 15;
   }
+
+  openDialog(msg) {
+    console.log('>>>> ', msg);
+    // let _alert: AlertsService = new AlertsService();
+    let type: any = "warning";
+    this.alertSettings = { overlay: true, overlayClickToClose: false, showCloseButton: true, duration: 100000 };
+    this._alert.create(type, msg, this.alertSettings);
+  }
+
+  goNextPage() {
+    if (this.selectedDptrTrip == undefined) {
+      this.openDialog(this.errorMessage.pleaseSelect + 'วันที่และเวลาเดินทางไป');
+    } else if (this.availableTripResultModel.rtrnTrips != null && this.selectedRtrnTrip == undefined) {
+      this.openDialog(this.errorMessage.pleaseSelect + 'วันที่และเวลาเดินทางกลับ');
+    } else {
+      // var returnCode = parent.window.receiveMessage('checkAuthen');
+      // console.log('return >>> ', returnCode);
+      // console.log('5 >>>');
+      // if (returnCode) {
+      this.router.navigate(['../selectSeat'], { relativeTo: this.route });
+      // }
+    }
+  }
+
+  searchTrips(tripType, tripDate) {
+    console.log('tripType >> ', tripType);
+    console.log('tripDate >> ', new Date(tripDate));
+    if (tripType == 'dptr') {
+      // this.availableTripSearchModel.departDate = new Date(tripDate);
+    } else if (tripType == 'rtrn') {
+      // this.availableTripSearchModel.returnDate = new Date(tripDate);
+    }
+
+    // this.availableTripResultModel = this.busService.getAvailableTrip(this.availableTripSearchModel);
+    // this.dptrDate = this.setCalendar(this.convertStringToDate(this.availableTripResultModel.dptrTrips.tripDate));
+    // this.rtrnDate = this.setCalendar(this.convertStringToDate(this.availableTripResultModel.rtrnTrips.tripDate));
+  }
+
 }

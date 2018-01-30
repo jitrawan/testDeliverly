@@ -13,6 +13,7 @@ import { CalendarModule } from './shared/lib/datetimepicker/primeng/calendar/cal
 import { DialogModule } from './shared/lib/dialog/dialog.component';
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 import { ThaiDatePipe } from './shared/lib/date-format/thaidate.pipe';
+import { JasperoAlertsModule } from '@jaspero/ng2-alerts';
 
 
 /* Service */
@@ -98,10 +99,12 @@ import { BuyTicketComponent } from './pages/eventTickets/bus/buy-ticket/buy-tick
     CalendarModule,
     DialogModule,
     Ng2AutoCompleteModule,
+    JasperoAlertsModule
   ],
   providers: [HeaderService, HomeService, SharedService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
 
 

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AlertsService } from '@jaspero/ng2-alerts';
 
 declare var jquery: any;
 declare var $: any;
@@ -17,10 +18,31 @@ export class AppComponent {
     $('.title').slideToggle(); //
   }
 
-  display: boolean = false;
 
+
+  isDisable: boolean = false;
   showDialog() {
-    this.display = true;
+    console.log('----');
+    this.isDisable = !this.isDisable;
+  }
+  private alertSettings: any;
+
+  constructor(
+    private _alert: AlertsService,
+  ) { }
+  
+  open() {
+    let type: any = "wearning";
+    this.alertSettings = { overlay: true, overlayClickToClose: false, showCloseButton: true, duration: 100000 };
+    this._alert.create(type, "This is a message", this.alertSettings);
   }
 
 }
+
+
+// export interface AlertSettings {
+//   overlay?: boolean;
+//   overlayClickToClose?: boolean;
+//   showCloseButton?: boolean;
+//   duration?: number;
+// }

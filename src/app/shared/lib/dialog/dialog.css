@@ -102,3 +102,27 @@
     color: #222222; }
     .ui-widget-content a {
       color: #222222; }
+
+
+
+      /*   ----------------- */
+
+.ui-dialog .ui-dialog-titlebar-icon {
+    color: #1b1d1f; }
+.ui-dialog .ui-dialog-titlebar-icon:hover {
+    border-color: #c0c0c0;
+    background: #eeeeee;
+    color: #212121; }
+.ui-dialog .ui-dialog-titlebar-icon:hover a {
+    color: #212121; }
+
+/* Dialog */
+.ui-dialog.ui-widget .ui-dialog-titlebar {
+    padding: 1em 1.5em; }
+  
+.ui-dialog.ui-widget .ui-dialog-titlebar .ui-dialog-title {
+    font-size: 1.25em; }
+  
+.ui-dialog.ui-widget .ui-dialog-content {
+    padding: 1em 1.5em; }
+  

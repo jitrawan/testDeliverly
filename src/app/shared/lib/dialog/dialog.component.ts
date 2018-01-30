@@ -45,7 +45,8 @@ let idx: number = 0;
             transition('hidden => visible', animate('400ms ease-out'))
         ])
     ],
-    providers: [DomHandler]
+    providers: [DomHandler],
+    styleUrls: ['./dialog.css']
 })
 export class Dialog implements AfterViewInit,AfterViewChecked,OnDestroy {
     

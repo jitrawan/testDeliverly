@@ -5,27 +5,27 @@
   <div class="dateRange">
     <div class="row p0">
       <div class="col-1 arrow">
-        <span class="left">
+        <span class="left" (click)="searchTrips('dptr', dptrDate[1])">
           <i class="fa fa-chevron-left" aria-hidden="true"></i>
         </span>
       </div>
       <div class="col-2 otherDate">
-        <span>{{dptrDate[0]| thaidate:'medium' }} </span>
+        <span (click)="searchTrips('dptr', dptrDate[0])">{{dptrDate[0]| thaidate:'medium' }} </span>
       </div>
       <div class="col-2 otherDate">
-        <span>{{dptrDate[1]| thaidate:'medium' }}</span>
+        <span (click)="searchTrips('dptr', dptrDate[1])">{{dptrDate[1]| thaidate:'medium' }}</span>
       </div>
       <div class="col-2 chooseDate">
         <span> {{dptrDate[2]| thaidate:'medium' }} </span>
       </div>
       <div class="col-2 otherDate">
-        <span>{{dptrDate[3]| thaidate:'medium' }}</span>
+        <span (click)="searchTrips('dptr', dptrDate[3])">{{dptrDate[3]| thaidate:'medium' }}</span>
       </div>
       <div class="col-2 otherDate">
-        <span>{{dptrDate[4]| thaidate:'medium' }}</span>
+        <span (click)="searchTrips('dptr', dptrDate[4])">{{dptrDate[4]| thaidate:'medium' }}</span>
       </div>
       <div class="col-1 arrow">
-        <span class="right">
+        <span class="right" (click)="searchTrips('dptr', dptrDate[3])">
           <i class="fa fa-chevron-right" aria-hidden="true"></i>
         </span>
       </div>
@@ -33,16 +33,16 @@
   </div>
   <div class="fromTo">
     <div class="row">
-      <div class="col-12 col-lg-5 province"> กรุงเทพฯ
+      <div class="col-12 col-lg-5 province"> {{dptrProvince}}
         <br>
-        <span class="subFromTo">(หมอชิตใหม่ 2)</span>
+        <span class="subFromTo">{{dptrPark}}</span>
       </div>
       <div class="col-12 col-lg-2">
         <img src="../../../../assets/images/borkorsor Website-08.png" />
       </div>
-      <div class="col-12 col-lg-5 province"> เชียงใหม่
+      <div class="col-12 col-lg-5 province"> {{rtrnProvince}}
         <br>
-        <span class="subFromTo"> สถานีขนส่งผู้โดยสาร จ.เชียงใหม่ (อาเขต)</span>
+        <span class="subFromTo"> {{rtrnPark}}</span>
       </div>
     </div>
   </div>
@@ -64,9 +64,13 @@
               <br> {{data.arrvTime}} น. </td>
             <td> {{data.busStd.desc}} </td>
             <td> {{data.emptySeats}} / {{data.seats}} ที่นั่ง</td>
-            <td>
-              <input type="radio" id="departure{{index}}" name="departure" (change)="selectArrvTrip(data)">
-              <label for="departure{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee)}} บาท</label>
+            <td *ngIf="data.emptySeats != data.seats">
+              <input type="radio" id="departure{{index}}" name="departure" (change)="selectDptrTrip(data)">
+              <label for="departure{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee) | number: '1.2'}} บาท</label>
+            </td>
+            <td *ngIf="data.emptySeats == data.seats">
+              <input type="radio" id="departure{{index}}" name="departure" (change)="selectDptrTrip(data)" disabled>
+              <label style="cursor: not-allowed;" for="departure{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee) | number: '1.2'}} บาท</label>
             </td>
           </tr>
         </tbody>
@@ -75,35 +79,35 @@
   </div>
 </div>
 
-<div class="selectRoundBox">
+<div class="selectRoundBox" *ngIf="availableTripResultModel.rtrnTrips != null">
   <div class="pageTopic col-12">
-    <span>กรุณาเลือกวันที่ และ วันเดินทางไป</span>
+    <span>กรุณาเลือกวันที่ และ วันเดินทางกลับ</span>
   </div>
   <div class="dateRange">
     <div class="container">
       <div class="row p0">
         <div class="col-1 arrow">
-          <span class="left">
+          <span class="left" (click)="searchTrips('rtrn', rtrnDate[1])">
             <i class="fa fa-chevron-left" aria-hidden="true"></i>
           </span>
         </div>
         <div class="col-2 otherDate">
-          <span>{{rtrnDate[0]| thaidate:'medium' }} </span>
+          <span (click)="searchTrips('rtrn', rtrnDate[0])">{{rtrnDate[0]| thaidate:'medium' }} </span>
         </div>
         <div class="col-2 otherDate">
-          <span>{{rtrnDate[1]| thaidate:'medium' }}</span>
+          <span (click)="searchTrips('rtrn', rtrnDate[1])">{{rtrnDate[1]| thaidate:'medium' }}</span>
         </div>
         <div class="col-2 chooseDate">
           <span> {{rtrnDate[2]| thaidate:'medium' }} </span>
         </div>
         <div class="col-2 otherDate">
-          <span>{{rtrnDate[3]| thaidate:'medium' }}</span>
+          <span (click)="searchTrips('rtrn', rtrnDate[3])">{{rtrnDate[3]| thaidate:'medium' }}</span>
         </div>
         <div class="col-2 otherDate">
-          <span>{{rtrnDate[4]| thaidate:'medium' }}</span>
+          <span (click)="searchTrips('rtrn', rtrnDate[4])">{{rtrnDate[4]| thaidate:'medium' }}</span>
         </div>
         <div class="col-1 arrow">
-          <span class="right">
+          <span class="right" (click)="searchTrips('rtrn', rtrnDate[3])">
             <i class="fa fa-chevron-right" aria-hidden="true"></i>
           </span>
         </div>
@@ -112,16 +116,16 @@
   </div>
   <div class="fromTo">
     <div class="row">
-      <div class="col-12 col-lg-5 province"> เชียงใหม่
+      <div class="col-12 col-lg-5 province"> {{rtrnProvince}}
         <br>
-        <span class="subFromTo">สถานีขนส่งผู้โดยสาร จ.เชียงใหม่ (อาเขต)</span>
+        <span class="subFromTo"> {{rtrnPark}} </span>
       </div>
       <div class="col-12 col-lg-2">
         <img src="../../../../assets/images/borkorsor Website-08.png" />
       </div>
-      <div class="col-12 col-lg-5 province"> กรุงเทพฯ
+      <div class="col-12 col-lg-5 province"> {{dptrProvince}}
         <br>
-        <span class="subFromTo">(หมอชิตใหม่ 2)</span>
+        <span class="subFromTo"> {{dptrPark}} </span>
       </div>
     </div>
   </div>
@@ -143,9 +147,13 @@
               <br> {{data.arrvTime}} น. </td>
             <td> {{data.busStd.desc}} </td>
             <td> {{data.emptySeats}} / {{data.seats}} ที่นั่ง</td>
-            <td>
-              <input type="radio" id="arrvTrip{{index}}" name="arrvTrip" (change)="selectDptrTrip(data)" >
-              <label for="arrvTrip{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee)}} บาท</label>
+            <td *ngIf="data.emptySeats != data.seats">
+              <input type="radio" id="arrvTrip{{index}}" name="arrvTrip" (change)="selectRtrnTrip(data)">
+              <label for="arrvTrip{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee) | number: '1.2'}} บาท</label>
+            </td>
+            <td *ngIf="data.emptySeats == data.seats">
+              <input class="form-check-input" type="radio" id="arrvTrip{{index}}" name="arrvTrip" (change)="selectRtrnTrip(data)" disabled>
+              <label style="cursor: not-allowed;" for="arrvTrip{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee) | number: '1.2'}} บาท</label>
             </td>
           </tr>
         </tbody>
@@ -166,18 +174,18 @@
         <tbody>
           <tr>
             <td>ค่าบัตรโดยสารเที่ยวไป :</td>
-            <td>1,859.00 บาท</td>
+            <td>{{dptrFare | number: '1.2'}} บาท</td>
           </tr>
           <tr>
             <td>ค่าบัตรโดยสารเที่ยวกลับ :</td>
-            <td>379.00 บาท</td>
+            <td>{{rtrnFare | number: '1.2'}} บาท</td>
           </tr>
           <tr>
             <td scope="row">ค่าภาษี / ค่าธรรมเนียม :</td>
-            <td>15.00 บาท</td>
+            <td> {{fee | number: '1.2'}} บาท</td>
           </tr>
           <tr>
-            <td class="rowSum" colspan="2">รวมราคาแล้วต่อ 1 คน 973.00 บาท</td>
+            <td class="rowSum" colspan="2">รวมราคาแล้วต่อ 1 คน {{dptrFare + rtrnFare + fee | number: '1.2'}} บาท</td>
           </tr>
         </tbody>
       </table>
@@ -209,3 +217,5 @@
     <button class="btn btn-atk-primary mt-3 buttonSize" type="button">NEXT</button>
   </div>
 </div> -->
+
+<!-- <jaspero-alerts [defaultSettings]="options"></jaspero-alerts> -->

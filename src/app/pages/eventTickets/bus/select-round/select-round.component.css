@@ -65,7 +65,7 @@
  }
 
  .fontGrey {
-   color: #aeb0b3!important;
+   color: #aeb0b3 !important;
  }
 
  .BoxRow {
@@ -244,4 +244,51 @@
    opacity: 1;
    -webkit-transform: scale(1);
    transform: scale(1);
+ }
+
+ /* Let's get this party started */
+
+ ::-webkit-scrollbar {
+   width: 12px;
+ }
+
+ /* Track */
+
+ ::-webkit-scrollbar-track {
+   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+   -webkit-border-radius: 10px;
+   border-radius: 10px;
+ }
+
+ /* Handle */
+
+ ::-webkit-scrollbar-thumb {
+   -webkit-border-radius: 10px;
+   border-radius: 10px;
+   background: #f48131;
+ }
+
+ ::-webkit-scrollbar-thumb:hover {
+   background: #048bc1;
+ }
+
+ .slideToChoose {
+   font-size: 16px;
+   text-align: center;
+   margin: 0 auto;
+   padding-top: 10px;
+ }
+
+ .slideToChoose {
+   visibility: hidden;
+ }
+
+ @media screen and (max-width: 817px) {
+   .slideToChoose {
+     visibility: visible;
+     font-size: 16px;
+     text-align: center;
+     margin: 0 auto;
+     padding-top: 10px;
+   }
  }

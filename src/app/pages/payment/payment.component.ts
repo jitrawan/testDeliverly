@@ -199,34 +199,41 @@ export class PaymentComponent implements OnInit {
 	}
 
 	choosePaymentMethod(paymentMethodIndex: number) {
-		this.paymentMethodSelected = paymentMethodIndex;
+		// this.paymentMethodSelected = paymentMethodIndex;
 
-		if(paymentMethodIndex == 2) {
-			this.showCreditDiscount = true;
 
-			setTimeout(_ => {
+		if (this.paymentMethodSelected === 2) {
+			this.paymentMethodSelected = 0;
+		  }
+		  else {
+			this.paymentMethodSelected = paymentMethodIndex;
+		  }
+		// if(paymentMethodIndex == 2) {
+		// 	this.showCreditDiscount = true;
 
-				jQuery('#creditDiscount .owl-carousel').owlCarousel({
-					items: 1,
-					nav: true,
-					mouseDrag: false,
-					navText: ['<i class="fa fa-chevron-left mt-2 mr-1"></i>', '<i class="fa fa-chevron-right mt-2 ml-1"></i>'],
-					responsive : {
-						0 : {
-							items : 1
-						},
-						480 : {
-							items : 2
-						},
-						768 : {
-							items : 3
-						}
-					}
-				});
-			});
-		} else {
-			this.showCreditDiscount = false;
-		}
+		// 	setTimeout(_ => {
+
+		// 		jQuery('#creditDiscount .owl-carousel').owlCarousel({
+		// 			items: 1,
+		// 			nav: true,
+		// 			mouseDrag: false,
+		// 			navText: ['<i class="fa fa-chevron-left mt-2 mr-1"></i>', '<i class="fa fa-chevron-right mt-2 ml-1"></i>'],
+		// 			responsive : {
+		// 				0 : {
+		// 					items : 1
+		// 				},
+		// 				480 : {
+		// 					items : 2
+		// 				},
+		// 				768 : {
+		// 					items : 3
+		// 				}
+		// 			}
+		// 		});
+		// 	});
+		// } else {
+		// 	this.showCreditDiscount = false;
+		// }
 	}
 
 	changeStep(stepName: string , triggerType: string) {

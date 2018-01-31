@@ -1,331 +1,194 @@
-<div class="container">
-	<div class="step-wrapper mt-5">
-		<ul class="step-process">
-			<li class="step-order" (click)="changeStep(constMenu.booking.routeTo,'iconClicked')" [ngClass]="menuStep.routeTo==constMenu.booking.routeTo ? 'active' : '' ">
-				<div>
-					1
-				</div>
-				<h5>{{constMenu.booking.displayName}}</h5>
-			</li>
-			<li class="step-arrow" [ngClass]="menuStep.routeTo==constMenu.booking.routeTo ? 'active' : '' ">
-				<div>
-					<i class="fa fa-play" aria-hidden="true"></i>
-				</div>
-			</li>
-			<li class="step-order" (click)="changeStep(constMenu.payment.routeTo,'iconClicked')" [ngClass]="menuStep.routeTo==constMenu.payment.routeTo ? 'active' : '' ">
-				<div>
-					2
-				</div>
-				<h5>{{constMenu.payment.displayName}}</h5>
-			</li>
-			<li class="step-arrow" [ngClass]="menuStep.routeTo==constMenu.payment.routeTo ? 'active' : '' ">
-				<div>
-					<i class="fa fa-play" aria-hidden="true"></i>
-				</div>
-			</li>
-			<li class="step-order" (click)="changeStep(constMenu.summary.routeTo,'iconClicked')" [ngClass]="menuStep.routeTo==constMenu.summary.routeTo ? 'active' : '' ">
-				<div>
-					3
-				</div>
-				<h5>{{constMenu.summary.displayName}}</h5>
-			</li>
-		</ul>
+<div class="resultReservWrapper container">
+  <h2 class="heading text-center is-size-4-mobile mt-4">RESERVE SUMMARY</h2>
 
-		<hr class="mt-5">
-			<h3 class="step-title">
-				{{menuStep.displayName}}
-			</h3>
-		<hr>
+  <div class="divider divider-center">
+    <i class="fa fa-circle"></i>
+  </div>
 
-	</div>
+  <div class="row border-bottom">
+    <div class="col-12">
+      <div class="sub-heading with-icon">
+        <i class="fa fa-user fa-2x fa-fw" aria-hidden="true"></i>
+        <span>
+          Customer Information
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="row-wrapper py-3">
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Name - Surname</div>
+      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Email - Address</div>
+      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Mobile No</div>
+      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">ID CARD / Passport ID</div>
+      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4 border-bottom">
+    <div class="col-12">
+      <div class="sub-heading with-icon">
+        <i class="fa fa-credit-card fa-2x fa-fw" aria-hidden="true"></i>
+        <span>
+          Payment Methods
+        </span>
+      </div>
+    </div>
+  </div>
 
-	<div class="info-wrapper mt-5">
+  <div class="row" id="selectMethodsTxt">
+    <div class="col-12 mt-4">
+      <h3 class="text-center paymentTypeText">Please choose your payment method</h3>
+    </div>
+  </div>
 
-		<ng-container *ngIf="menuStep.routeTo==constMenu.booking.routeTo">
-		
-			<div class="row pb-2">
-				<div class="col-12 info-header split-solid-border">
-					<i class="fa fa-user fa-2x fa-fw"></i>
-					<h4>Customer Information</h4>
-				</div>
-			</div>
-		
-			<div class="row mt-2 customer-info">
-				<div class="col-12 col-md-4 offset-md-1">
-					<span class="titleText">Name - Surname</span>
-				</div>
-				<div class="col-11 offset-1 col-sm-7 offset-sm-0">
-					<span class="textValue">Burin Sangwan</span>
-				</div>
-				<div class="col-12 col-md-4 offset-md-1">
-					<span class="titleText">Email - Address</span>
-				</div>
-				<div class="col-11 offset-1 col-sm-7 offset-sm-0">
-					<span class="textValue">burinsan@gosoft.co.th</span>
-				</div>
-				<div class="col-12 col-md-4 offset-md-1">
-					<span class="titleText">Mobile No</span>
-				</div>
-				<div class="col-11 offset-1 col-sm-7 offset-sm-0">
-					<span class="textValue">085-199-2697</span>
-				</div>
-				<div class="col-12 col-md-4 offset-md-1">
-					<span class="titleText">ID Card / Passport ID</span>
-				</div>
-				<div class="col-11 offset-1 col-sm-7 offset-sm-0">
-					<span class="textValue">1103100207792</span>
-				</div>
-				<div class="col-12 col-md-4 offset-md-1">
-					<span class="titleText">Shipping Address</span>
-				</div>
-				<div class="col-11 offset-1 col-sm-7 offset-sm-0">
-					<span class="textValue">1015/15 bkk</span>
-				</div>
-			</div>
-		
-			<div class="row justify-content-center mt-5">
-				<div class="col-12 text-center">
-					<button class="btn btn-atk-primary px-6" (click)="changeStep(constMenu.payment.routeTo)" type="button">Next</button>
-				</div>
-			</div>
+  <div class="row mt-4">
+    <div class="col-10 offset-1 col-sm-6 mx-auto d-flex paymentWrapper" [ngClass]="{ 'selected': paymentMethodSelected == 2 }" (click)="choosePaymentMethod(2)" title="Cash Payment">
+      <i class="fa fa-check-circle fa-2x"></i>
+      <img class="img-fluid" src="https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/images/payment/creditIcon.png"
+      />
+    </div>
+  </div>
 
-		</ng-container>
+  <div class="row" id="display-credit-fee">
+    <div class="col-sm-7 offset-sm-5">
+      <div class="alert alert-primary mx-auto mt-3 text-center" role="alert">
+        Convenience fee ... Baht
+      </div>
+    </div>
+  </div>
 
-		<ng-container *ngIf="menuStep.routeTo==constMenu.payment.routeTo">
+  <div class="row-wrapper" id="credit-promo">
+    <input type="hidden" id="creditDiscount" />
+    <div class="row mt-4 border-bottom">
+      <div class="col-12">
+        <div class="sub-heading with-icon">
+          <i class="fa fa-credit-card fa-2x fa-fw" aria-hidden="true"></i>
+          <span>
+            Credit Card Promotion
+          </span>
+        </div>
+      </div>
+    </div>
 
-			<section id = "discount">
-				<div class="row justify-content-center">
-					<div class="col-12 col-lg-10 mt-1">
-						<h4 class="payment-text-title">Select discount</h4>
-						<div class="owl-carousel owl-theme mt-4" id="discountCashSlider">
-							<div class="item" *ngFor="let discount of cashDiscount; let i = index" [ngClass]="{ 'active': cashDiscountSelectedIndex == i }" (click)="discountSelected(i,discount.discountNo,CASH_DISCOUNT)">
-								<i class="fa fa-check-circle fa-2x fa-fw"></i>
-								<img class="img-fluid" src="{{discount.img_path}}"/>
-								<div class="innerDiscount">
-									<div class="titleDiscount">{{discount.title_discount}}</div>
-									<div class="discountDetail">{{discount.desc_discount}}</div>
-								</div>
-							</div>
-						</div>
+    <div class="row">
+      <div class="col-12 col-md-10 offset-md-1" id="creditDiscountWrapper">
+        <div class="owl-carousel">
+          <div class="discount-item">
+            <i class="fa fa-check-circle fa-2x"></i>
+            <div class="discount-image">
+              <img class="img-fluid" src="${context_s3}images/discount/${discount.sponsorLogo}" />
+            </div>
+            <div class="discount-desc">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-						<div class="discountInput mt-3" *ngIf="showDiscountInput">
-							<div class="row justify-content-center">
-								<div class="col-md-5 mb-3">
-									<label class="is-size-6" for="discountName">Discount name</label>
-									<input type="text" class="form-control" id="discountName" readonly value="{{ cashDiscount[cashDiscountSelectedIndex].discount_code.discount_name }}">
-								</div>
-							</div>
+  <div class="row mt-5 border-bottom">
+    <div class="col-12">
+      <div class="sub-heading with-icon">
+        <i class="fa fa-calculator fa-2x fa-fw" aria-hidden="true"></i>
+        <span>
+          Order Information
+        </span>
+      </div>
+    </div>
+  </div>
 
-							<div class="row justify-content-center">
-								<div class="col-md-5 mb-3">
-									<label class="is-size-6" for="discountCode">Discount code</label>
-									<input type="text" class="form-control" id="discountCode">
-								</div>
-							</div>
-							
-						</div>
+  <div class="row-wrapper py-3" id="order-info">
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Reserve ID</div>
+      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+        <div class="text-desc"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Flight Detail</div>
+      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+        <div class="text-desc"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Price (Baht)</div>
+      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+        <div class="text-desc"></div>
+      </div>
+    </div>
 
-						<div class="row">
-							<div class="col-12 text-center" [ngClass]="{ 'text-md-right': !showDiscountInput }" >
-								<button class="btn btn-atk-success is-size-6 mt-2 px-4" *ngIf="showDiscountInput" (click)="useCashDiscount()">Use Discount</button>
-								<button class="btn btn-atk-danger is-size-6 mt-2 px-4" (click)="notUseDiscount()">Not Use Discount</button>
-							</div>
-						</div>
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Service Fee</div>
+      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+        <div class="text-desc"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Convenience fee (Baht)</div>
+      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+        <div class="text-desc"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Total Amount (Baht)</div>
+      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+        <div class="text-desc"></div>
+      </div>
+    </div>
 
+    <div class="row mt-4 d-none" id="paymentTimeOutDesc">
+      <div class="col-12">
+        Please process payment at Counter Service (7-Eleven Shop) within ...
+      </div>
+    </div>
+  </div>
+  <div class="row-wrapper mt-4" id="term-condition">
+    <div class="row border-bottom">
+      <div class="col-12">
+        <div class="sub-heading with-icon">
+          <i class="fa fa-handshake-o fa-2x fa-fw" aria-hidden="true"></i>
+          <span>
+            Condition
+          </span>
+        </div>
+      </div>
+    </div>
 
-						<aside class="mt-5" id = "paymentMethod" *ngIf="paymentMethod">
-							<div class="row">
-								<div class="col-12"><h4 class="payment-text-title">Choose your payment method</h4></div>
-							</div>
+    <div class="row">
+      <div class="col-12 col-sm-11 offset-sm-1">
+        <ul class="term-condition">
+          <li>To prevent order cancellation, please make payment by time shown on the payment form.</li>
+          <li>Tickets can be collected at Counter Service outlets.</li>
+          <li>All goods and Service are non-refundable.</li>
+          <li>Please retain the payment receipt for your reference.</li>
+          <li>In some case a convenience fee charge, when you payment by credit card.</li>
+        </ul>
+      </div>
+      <div class="col-12 mt-2 d-flex justify-content-center">
+        <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+          <input type="checkbox" class="custom-control-input" name="acceptConditions" />
+          <span class="custom-control-indicator"></span>
+          <span class="agreeLabel">Please clicking you agree to the “Terms and Conditions” set forth by Counter Service Co., Ltd.</span>
+        </label>
+      </div>
 
-							<div class="row mt-3">
-								<div class="col-12 col-md-5 mt-3">
-									<div data-payment-type="cash" class="paymentWrapper" [ngClass]="{ 'active': paymentMethodSelected == 1 }" (click)="choosePaymentMethod(1)">
-									<i class="fa fa-check-circle fa-2x"></i>
-									<img src="../../assets/images/cs711.png">
-									</div>
-								</div>
-
-								<div class="col-12 col-md-7 mt-3">
-									<div data-payment-type="credit" class="paymentWrapper" [ngClass]="{ 'active': paymentMethodSelected == 2 }" (click)="choosePaymentMethod(2)">
-									<i class="fa fa-check-circle fa-2x"></i>
-									<img src="../../assets/images/creditIcon.png">
-									</div>
-								</div>
-							</div>
-						</aside>
-						
-
-						<aside id = "creditDiscount" class="mt-5" *ngIf="showCreditDiscount">
-							<div class="row">
-								<div class="col-12"><h4 class="payment-text-title">Credit card promotion</h4></div>
-							</div>
-							<div class = "row mt-3">
-								<div class = "col-lg-12">
-									<div class="owl-carousel owl-theme">
-										<div class="item" *ngFor="let discount of creditDiscount; let i = index" [ngClass]="{ 'active': creditDiscountSelectedIndex == i }" (click)="discountSelected(i,discount.discountNo,CREDIT_DISCOUNT)">
-											<i class="fa fa-check-circle fa-2x fa-fw"></i>
-											<img class="img-fluid" src="{{discount.img_path}}"/>
-											<div class="innerDiscount">
-												<div class="titleDiscount">{{discount.title_discount}}</div>
-												<div class="discountDetail">{{discount.desc_discount}}</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</aside>
-
-						<div class="row justify-content-center mt-5" *ngIf="paymentMethodSelected > 0">
-							<div class="col-12 text-center">
-								<button class="btn btn-atk-primary px-6" (click)="changeStep(constMenu.summary.routeTo)" type="button">Next</button>
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</section>
-
-		</ng-container>
-
-
-		
-		<ng-container *ngIf="menuStep.routeTo==constMenu.summary.routeTo">
-		
-			<div class = "row">
-				<div class = "col-sm-12 col-md-12 cardHeader split-solid-border">
-					<i class="fa fa-calculator fa-2x fa-fw"></i><h4>Order Information</h4>
-				</div>
-			</div>
-
-			<div class="orderInfo-wrapper">
-				<div class = "row">
-					<div class="col-6 col-sm-5 col-md-6 col-lg-6">
-						<span class = "titleText">Zone</span>
-					</div>
-					<div class="col-6 col-sm-7 col-md-6 col-lg-6">
-						<span class = "textValue">B1</span>
-					</div>
-				</div>
-	
-				<div class = "row">
-					<div class="col-6 col-sm-5 col-md-6 col-lg-6">
-						<span class = "titleText">Seat No</span>
-					</div>
-					<div class="col-6 col-sm-7 col-md-6 col-lg-6">
-						<span class = "textValue">A19,A20,A21</span>
-					</div>
-				</div>
-				<div class = "row">
-					<div class="col-6 col-sm-5 col-md-6 col-lg-6">
-						<span class = "titleText">Quantity</span>
-					</div>
-					<div class="col-6 col-sm-7 col-md-6 col-lg-6">
-						<span class = "textValue">3</span>
-					</div>
-				</div>
-				<div class = "row">
-					<div class="col-6 col-sm-5 col-md-6 col-lg-6">
-						<span class = "titleText">Price Per Unit</span>
-					</div>
-					<div class="col-6 col-sm-7 col-md-6 col-lg-6">
-						<span class = "textValue moneyFormat">1500 Baht</span>
-					</div>
-				</div>
-				<div class = "row">
-					<div class="col-6 col-sm-5 col-md-6 col-lg-6">
-						<span class = "titleText">Discount</span>
-					</div>
-					<div class="col-6 col-sm-7 col-md-6 col-lg-6">
-						<span class = "textValue moneyFormat">0 Baht</span>
-					</div>
-				</div>
-				<div class = "row">
-					<div class="col-9 col-sm-6 col-md-6 col-lg-6">
-						<span class = "titleText">Service Fee ( 20 Baht per ticket)</span>
-					</div>
-					<div class="col-3 col-sm-6 col-md-6 col-lg-6">
-						<span class = "textValue moneyFormat">60 Baht</span>
-					</div>
-				</div>
-				<div class = "row">
-					<div class="col-6 col-sm-5 col-md-6 col-lg-6">
-						<span class = "titleText">Shipping Cost</span>
-					</div>
-					<div class="col-6 col-sm-7 col-md-6 col-lg-6">
-						<span class = "textValue moneyFormat">{{ desc_shipping_cost ? (desc_shipping_cost) : '0 Baht' }}</span>
-					</div>
-				</div>
-	
-				<div class = "row">
-					<div class="col-6 col-sm-5 col-md-6 col-lg-6">
-						<span class = "titleText">Counter Service Fee</span>
-					</div>
-					<div class="col-6 col-sm-7 col-md-6 col-lg-6">
-						<span class = "textValue moneyFormat">{{ desc_cs_fee ? (desc_cs_fee) : '0 Baht' }}</span>
-					</div>
-				</div>
-	
-				<div class = "row">
-					<div class="col-6 col-sm-5 col-md-6 col-lg-6">
-						<span class = "titleText">Convenience fee</span>
-					</div>
-	
-					<div class="col-6 col-sm-7 col-md-6 col-lg-6">
-						<span class = "textValue moneyFormat">{{ desc_fee ? (desc_fee) : '0 Baht' }}</span>
-					</div>
-				</div>
-				<div class = "row">
-					<div class="col-6 col-sm-5 col-md-6 col-lg-6">
-						<span class = "titleText">Total Amount</span>
-					</div>
-					<div class="col-6 col-sm-7 col-md-6 col-lg-6">
-						<span class = "textValue totalAmount moneyFormat">4875 Baht</span>
-					</div>
-				</div>
-				<div class = "row">
-					<div class= "col-12 text-center mt-4">
-						<div id="cashPaymentTimeOut" class="text-md-center">
-								Please process payment at Counter Service (7-Eleven Shop) within 2 Hours
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="row mt-3">
-				<div class="col-12">
-					<div class = "row">
-						<div class = "col-12 cardHeader split-solid-border">
-							<i class="fa fa-handshake-o fa-2x fa-fw"></i><h4>Conditions</h4>
-						</div>
-					</div>
-
-					<div class = "row cardDetail mt-3">
-						<div class = "col-12">
-							<ul class = "conditionDetail mt-2">
-								<li>To prevent order cancellation, please make payment by time shown on the payment form.</li>
-								<li>Tickets can be collected at Counter Service outlets.</li>
-								<li>All goods and Service are non-refundable.</li>
-								<li>Please retain the payment receipt for your reference.</li>
-								<li>In some case a convenience fee charge, when you payment by credit card.</li>
-							</ul>
-						</div>
-
-						<div class = "col-12 text-center agreeCondition mt-3">
-							<input type = "checkbox" id = "checkAgree"><label class="ml-2 label-input" for = "checkAgree">Please clicking you agree to the “Terms and Conditions” set forth by Counter Service Co., Ltd.</label>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		
-			<div class="row justify-content-center mt-5">
-				<div class="col-12 text-center">
-					<button class="btn btn-atk-light px-5" type="button">CANCEL</button>
-					<button class="btn btn-atk-primary px-5" id="paymentBtn" type="button">PAYMENT</button>
-				</div>
-			</div>
-		
-		</ng-container>
-	</div>
+      <div class="col-12 col-sm-11 mt-4 d-flex justify-content-center justify-content-sm-end is-size-6-mobile">
+        <button class="btn btn-atk-danger" id="btnResultBack">Back</button>
+        <button class="btn btn-atk-primary ml-2" id="payBtn">Payment</button>
+      </div>
+    </div>
+  </div>
 </div>

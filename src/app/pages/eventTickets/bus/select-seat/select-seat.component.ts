@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AlertsService } from '@jaspero/ng2-alerts';
+import { ErrorMessage } from '../../../../shared/constant/error-message';
+
 
 @Component({
   selector: 'app-select-seat',
@@ -14,14 +17,25 @@ export class SelectSeatComponent implements OnInit {
   @Input() dptrDate: Date;
   @Input() arrvDate: Date;
 
+  selectedSeat: any[] = [];
+
+  errorMessage: ErrorMessage = new ErrorMessage;
+  alertSettings: any;
+
   constructor(
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private _alert: AlertsService) { }
 
   ngOnInit() {
     this.tripName = "เที่ยวไป";
   }
 
+  openDialog(msg) {
+    let type: any = "warning";
+    this.alertSettings = { overlay: true, overlayClickToClose: false, showCloseButton: true, duration: 100000 };
+    this._alert.create(type, msg, this.alertSettings);
+  }
 
   detailContent: any = {
     emptySeat: "ที่นั่งว่าง กดเลือกที่นั่งตามต้องการ",
@@ -57,7 +71,7 @@ export class SelectSeatComponent implements OnInit {
         name: "A7",
         reserveId: "",
         status: "",
-        gender: ""
+        gender: "N"
       },
       {
         "type": 1,
@@ -73,7 +87,7 @@ export class SelectSeatComponent implements OnInit {
         "name": "A8",
         "reserveId": "",
         "status": "",
-        "gender": ""
+        "gender": "N"
       },
       {
         "type": 1,
@@ -105,7 +119,7 @@ export class SelectSeatComponent implements OnInit {
         "name": "B2",
         "reserveId": "",
         "status": "",
-        "gender": ""
+        "gender": "F"
       },
       {
         "type": 1,
@@ -137,7 +151,7 @@ export class SelectSeatComponent implements OnInit {
         "name": "B3",
         "reserveId": "",
         "status": "",
-        "gender": ""
+        "gender": "M"
       },
       {
         "type": 1,
@@ -169,7 +183,7 @@ export class SelectSeatComponent implements OnInit {
         "name": "B4",
         "reserveId": "",
         "status": "",
-        "gender": ""
+        "gender": "O"
       },
       {
         "type": 1,
@@ -911,6 +925,14 @@ export class SelectSeatComponent implements OnInit {
   }
 
   onClick() {
-    this.router.navigate(['../passengerInfomation'], { relativeTo: this.route });
+    if (this.selectedSeat.length > 0) {
+      this.router.navigate(['../passengerInfomation'], { relativeTo: this.route });
+    } else {
+      this.openDialog(this.errorMessage.pleaseSelect + 'ที่นั่ง');
+    }
+  }
+
+  selectSeat(data) {
+    this.selectedSeat = data;
   }
 }

@@ -13,6 +13,7 @@ import { ProvinceModel } from '../models/bus/province.model';
 export class BusService {
 
     private baseURL = 'https://s3-ap-southeast-1.amazonaws.com';
+    // private baseURL = 'http://busticketreserve-env.ap-southeast-1.elasticbeanstalk.com/api/trs';
     private getMasProvinceAPI = this.baseURL + '/allticket-trs-masterinfo/ag_mas_province.txt';
     private getMasParkAPI = this.baseURL + '/allticket-trs-masterinfo/ag_mas_park.txt';
     private getAvailableTripAPI = '';
@@ -40,6 +41,7 @@ export class BusService {
 
     getAvailableTrip(availableTrip: AvailableTripModel) {
         let headers = new Headers({ 'Content-Type': 'application/json' });
+        //  let options = new RequestOptions({ headers: headers, withCredentials: true });
         let options = new RequestOptions({ headers: headers });
         let body = {};
         return this.http.post(this.getAvailableTripAPI, JSON.stringify(body), options)

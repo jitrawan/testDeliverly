@@ -2,11 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BusService } from '../../../../shared/services/bus.service';
 import { SharedService } from '../../../../shared/services/shared-service.service';
-import { AlertsService } from '@jaspero/ng2-alerts';
 import { AvailableTripResultModel } from '../../../../shared/models/bus/availableTripResult.model';
 import { AvailableTripModel } from '../../../../shared/models/bus/availableTripSearch.model';
+import { AlertsService } from '@jaspero/ng2-alerts';
 import { ErrorMessage } from '../../../../shared/constant/error-message';
-// import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-select-round',
@@ -233,8 +232,6 @@ export class SelectRoundComponent implements OnInit {
   }
 
   openDialog(msg) {
-    console.log('>>>> ', msg);
-    // let _alert: AlertsService = new AlertsService();
     let type: any = "warning";
     this.alertSettings = { overlay: true, overlayClickToClose: false, showCloseButton: true, duration: 100000 };
     this._alert.create(type, msg, this.alertSettings);

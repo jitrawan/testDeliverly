@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Pipe } from '@angular/core';
+import { Component, OnInit, Input, Pipe, EventEmitter, Output } from '@angular/core';
+import { AlertsService } from '@jaspero/ng2-alerts';
 import { BusLayoutModel } from '../../models/bus/busLayout.model';
 
 @Component({
@@ -10,36 +11,28 @@ export class BusLayoutComponent implements OnInit {
 
   @Input() data: any;
   @Input() numberOfSeat: number;
-
+  @Output() outputValue: EventEmitter<any> = new EventEmitter();
   selectedSeat: Array<any> = [];
-
-  // busLayoutObj: any[];
   floorOneList: any[];
   floorTwoList: any[];
-  // datas: any;
   numbersOfCol: Array<any>;
   numbersOfRow: Array<any>;
-  constructor() { }
+  alertSettings: any;
+
+  constructor(private _alert: AlertsService) { }
 
   ngOnInit() {
-
-    console.log('.>>', this.data);
-    console.log('. numberOfSeat>>', this.numberOfSeat);
     if (this.data != null) {
       this.numbersOfCol = Array(this.data.cols).fill('');
       this.numbersOfRow = Array(this.data.rows).fill('');
       if (this.data.totalFloor > 1) {
         this.floorOneList = this.sortObjects(this.groupObjByFloor(this.data.objects, 1));
         this.floorTwoList = this.sortObjects(this.groupObjByFloor(this.data.objects, 2));
-        console.log('this.floorOneList >>>', this.floorOneList);
-        console.log(' this.floorTwoList >>>', this.floorTwoList);
       } else {
         this.floorOneList = this.sortObjects(this.data.objects);
       }
     }
   }
-
-
 
   sortObjects(objList) {
     return objList.sort(function (a, b) {
@@ -61,25 +54,29 @@ export class BusLayoutComponent implements OnInit {
 
   checkSeat(objList, row, pos) {
     objList = this.groupObjByRow(objList, row);
-    // console.log('objList>>', objList);
     return objList.filter(item => item.pos.x === pos);
   }
 
-  selectSeat(event, data) {
-    console.log('event >>>', event);
-    console.log('data >>>', data);
-    console.log('length >>>', this.selectedSeat.length);
+  selectSeat(event, data, id) {
+    if (!event.target.checked) {
+      var indexOfSelectSeat = this.selectedSeat.indexOf(data);
+      this.selectedSeat.splice(indexOfSelectSeat, 1);
+    }
     if (this.selectedSeat.length < this.numberOfSeat) {
       if (event.target.checked) {
         this.selectedSeat.push(data);
-      } else {
-        var index = this.selectedSeat.indexOf(data);
-        this.selectedSeat.splice(index, 1);
       }
-      console.log('this.selectedSeat >>> ', this.selectedSeat);
-    } else {
-      alert('');
+      this.outputValue.emit(this.selectedSeat);
+    }
+    else {
+      this.openDialog('ไม่สามารถเลือกที่นั่งเกินจำนวนคนที่ท่านเลือกไว้ได้');
+      (document.getElementById(id) as HTMLInputElement).checked = false;
     }
   }
 
+  openDialog(msg) {
+    let type: any = "warning";
+    this.alertSettings = { overlay: true, overlayClickToClose: false, showCloseButton: true, duration: 100000 };
+    this._alert.create(type, msg, this.alertSettings);
+  }
 }

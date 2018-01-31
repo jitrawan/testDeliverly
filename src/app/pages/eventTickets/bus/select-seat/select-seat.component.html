@@ -31,12 +31,19 @@
           </div>
         </div>
       </div>
-      <div class="row form-group">
 
+      <div class="infoBox">
+        <div class="row">
+          <div class="col-12 topicRow">ที่นั่ง</div>
+        </div>
+        <div class="row border1s BoxRow">
+          <div class="col-md-12 col-sm-12 rowSummary ">
+            หมายเลขที่นั่งที่ท่านเลือก :
+            <span class="selectSeat" *ngFor="let data of selectedSeat"> {{data.name}} ชั้น {{data.pos.z}},</span>
+          </div>
+        </div>
       </div>
-      <div class="row form-group">
 
-      </div>
       <div class="infoBox">
         <div class="row">
           <div class="col-12 topicRow">เงื่อนไขรายละเอียดแต่ละที่นั่ง</div>
@@ -60,39 +67,41 @@
           </div>
           <div class="col-6">
             <div class="genderIcon">
-              <img src="../../../../../assets/images/male.png" /><br>
+              <img src="../../../../../assets/images/male.png" />
+              <br>
               <span>เพศชาย</span>
             </div>
           </div>
           <div class="col-6">
             <div class="genderIcon">
-              <img src="../../../../../assets/images/female.png" /><br>
+              <img src="../../../../../assets/images/female.png" />
+              <br>
               <span>เพศหญิง</span>
             </div>
           </div>
           <div class="col-6">
             <div class="genderIcon">
-              <img src="../../../../../assets/images/monk.png" /><br>
+              <img src="../../../../../assets/images/monk.png" />
+              <br>
               <span>พระสงฆ์</span>
             </div>
           </div>
           <div class="col-6">
             <div class="genderIcon">
-              <img src="../../../../../assets/images/none.png" /><br>
+              <img src="../../../../../assets/images/none.png" />
+              <br>
               <span>ไม่ระบุเพศ</span>
             </div>
           </div>
         </div>
       </div>
-
-      <div class="row">
-        <div class="col-12 buttonWrapper p-0">
-          <button class="btn btn-atk-danger mt-3 buttonSize" type="button">BACK</button>
-          <button class="btn btn-atk-primary mt-3 buttonSize" type="button" (click)="onClick()">NEXT</button>
-        </div>
-      </div>
-
     </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12 buttonWrapper p-0">
+    <button class="btn btn-atk-danger mt-3 buttonSize" type="button">BACK</button>
+    <button class="btn btn-atk-primary mt-3 buttonSize" type="button" (click)="onClick()">NEXT</button>
   </div>
 </div>
 <!-- </div> -->

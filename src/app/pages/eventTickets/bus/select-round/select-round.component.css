@@ -105,8 +105,12 @@
 
  .otherDate {
    color: #bdbfc0;
-   cursor: pointer;
+  }
+  
+.otherDate span {
+    cursor: pointer;
  }
+
 
  table {
    border-collapse: separate !important;

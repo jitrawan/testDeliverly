@@ -166,44 +166,12 @@ export class SelectDestinationComponent implements OnInit {
       /* --------------------- call API ---------------------*/
 
       // // -------------- รอเทสกับ API -----------------
-      // let test: any;
-      // this.busService.getAvailableTrip(this.availableTripSeach).subscribe((res) => {
-      //   test = res.data.map((obj: any) => {
+      this.busService.getAvailableTrip(this.availableTripSeach).subscribe((res) => {
+        this.availableTripResult = res.data;
+        console.log('res<<<', this.availableTripResult);
+        this.isDisplay = false;
+      });
 
-      //   });
-      //   // this.availableTripResult = res.data;
-
-
-      //   // .map((obj: any) => {
-
-      //   // });
-      //   // });
-      //   console.log('this.availableTripResult>> ', this.availableTripResult);
-
-      //   // this.busService.getAvailableTrip(this.availableTripSeach).subscribe((res) => {
-      //   //   console.log(res.data);
-      //   // this.availableTripResult = res.data;
-      //   // console.log('res<<<', this.availableTripResult);
-      //   // let test = res.data.map((obj: any) => {
-      //   // console.log('obj>', obj);});
-      //   // this.availableTripResult = res.data.map((obj: any) => {
-      //   //   console.log('obj>', obj);
-      //   //   return {
-      //   //     dptrTrips: obj.dptrTrips,
-      //   //     rtrnTrips: obj.rtrnTrips
-      //   //   };
-      //   // });
-      //   });
-      //   // this.busService.getAvailableTrip(this.availableTripSeach);
-      //   // if (this.availableTripResult) {
-      //   // this.isDisplay = false;
-      // // }
-
-
-
-      // // this.sharedService.sendData(availableTrip);
-      // // this.sharedService.sendData(this.availableTripSeach);
-      // // this.router.navigate(['selectRound'], { relativeTo: this.route });
     }
   }
 

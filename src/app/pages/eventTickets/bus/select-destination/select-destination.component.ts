@@ -36,6 +36,8 @@ export class SelectDestinationComponent implements OnInit {
   isReturnDate: boolean = true;
   selectedNumOfPerson: number;
   isDisplay: boolean = true;
+  isParkListLoading: boolean = true;
+  isProvinceLoading: boolean = true;
   alertSettings: any;
 
   constructor(
@@ -56,6 +58,7 @@ export class SelectDestinationComponent implements OnInit {
 
   getProvinceList() {
     this.busService.getMasProvince().subscribe((res) => {
+      this.isProvinceLoading = false;
       this.provinceList = res.data.map((obj: any) => {
         return {
           id: obj.id,
@@ -67,6 +70,7 @@ export class SelectDestinationComponent implements OnInit {
 
   getParkList() {
     this.busService.getMasPark().subscribe((res) => {
+      this.isParkListLoading = false;
       this.parkList = res.data.map((obj: any) => {
         return {
           id: obj.id,

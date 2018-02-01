@@ -24,12 +24,12 @@
       <div class="col-12 checkPoint">
         <input class="form-control" type="text" placeholder="เลือกต้นทาง" auto-complete [source]="provinceList" (ngModelChange)="selectDprtProvince($event)"
           [(ngModel)]="selectedDptrProvince" (blur)="findDprtParkList()" loading-text="กำลังดาวน์โหลด" list-formatter="desc"
-          [accept-user-input]="false">
+          [accept-user-input]="false" [disabled]="isProvinceLoading || isParkListLoading" [ngClass]="{'show-loading' : isProvinceLoading || isParkListLoading}">
       </div>
       <div class="col-12 checkPoint">
         <input class="form-control" type="text" placeholder="เลือกจุดขึ้นรถ" auto-complete [source]="dptrParkList" [(ngModel)]="selectedDptrPark"
         
-        loading-text="กำลังดาวน์โหลด" list-formatter="nameTh" [accept-user-input]="false">
+        loading-text="กำลังดาวน์โหลด" list-formatter="nameTh" [accept-user-input]="false" [disabled]="selectedDptrProvince == '' || selectedDptrProvince == undefined">
       </div>
     </div>
 
@@ -45,11 +45,11 @@
       <div class="col-12 checkPoint">
         <input class="form-control" type="text" placeholder="เลือกปลายทาง" auto-complete [source]="provinceList" (ngModelChange)="selectArrvProvince($event)"
           [(ngModel)]="selectedArrvProvince" (blur)="findArrvParkList()" loading-text="กำลังดาวน์โหลด" list-formatter="desc"
-          [accept-user-input]="false">
+          [accept-user-input]="false" [disabled]="isProvinceLoading || isParkListLoading" [ngClass]="{'show-loading' : isProvinceLoading || isParkListLoading}">
       </div>
       <div class="col-12 checkPoint">
         <input class="form-control" type="text" placeholder="เลือกจุดลงรถ" auto-complete [source]="arrvParkList" [(ngModel)]="selectedArrvPark"
-          loading-text="กำลังดาวน์โหลด" list-formatter="nameTh" [accept-user-input]="false">
+          loading-text="กำลังดาวน์โหลด" list-formatter="nameTh" [accept-user-input]="false" [disabled]="selectedArrvProvince == '' || selectedArrvProvince == undefined">
       </div>
     </div>
   </div>
@@ -74,7 +74,7 @@
     <div class="col-12 p0">
       <div class="col-md-12 h5 p0">จำนวนผู้เดินทาง</div>
       <div class="row">
-        <div class="col-12 col-md-2">
+        <div class="col-12 col-md-4 col-xl-2">
           <select class="form-control" [(ngModel)]="selectedNumOfPerson" *ngIf="selectedTripType == 'O'">
             <option value="0" disabled selected>กรุณาเลือก</option>
             <option value="1">1</option>
@@ -88,12 +88,12 @@
             <option value="2">2</option>
           </select>
         </div>
-        <div class="col-12 col-md-3 limit4">จำนวนผู้เดินทาง(ไม่เกิน 4 ที่นั่ง)</div>
+        <div class="col-12 col-md-6 col-xl-3 align-self-center mt-2 mt-md-0 limit4">จำนวนผู้เดินทาง(ไม่เกิน 4 ที่นั่ง)</div>
       </div>
     </div>
   </div>
 
-  <div class="row">
+  <div class="row mt-2">
     <div class="col-12 col-md-6 p0 conditon">
       <div class="col-12 p0"> เงื่อนไขการซื้อ </div>
       <label *ngFor="let data of condition"> {{data}} </label>

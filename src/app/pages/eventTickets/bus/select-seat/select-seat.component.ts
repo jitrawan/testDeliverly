@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertsService } from '@jaspero/ng2-alerts';
 import { ErrorMessage } from '../../../../shared/constant/error-message';
+import { BusLayoutModel } from '../../../.././shared/models/bus/busLayout.model';
+import { SharedService } from '../../../../shared/services/shared-service.service';
 
 
 @Component({
@@ -11,11 +13,15 @@ import { ErrorMessage } from '../../../../shared/constant/error-message';
 })
 export class SelectSeatComponent implements OnInit {
 
-  @Input() tripName: string;
+  // @Input() tripName: string;
   @Input() dptrPark: string;
   @Input() arrvPark: string;
+  dptrProvince: string;
+  arrvProvince: string;
   @Input() dptrDate: Date;
   @Input() arrvDate: Date;
+  @Input() busLayout: BusLayoutModel;
+
 
   selectedSeat: any[] = [];
 
@@ -25,10 +31,20 @@ export class SelectSeatComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private _alert: AlertsService) { }
+    private _alert: AlertsService,
+    private sharedService: SharedService,
+  ) { }
 
   ngOnInit() {
-    this.tripName = "เที่ยวไป";
+    let receiveData;
+    this.sharedService.receiveData.subscribe(data => receiveData = data);
+    console.log('receiveData >>', receiveData);
+    this.dptrPark = receiveData.dptrPark;
+    this.arrvPark = receiveData.arrvPark;
+    this.dptrProvince = receiveData.dptrProvince;
+    this.arrvProvince = receiveData.rtrnProvince;
+    this.busLayout = receiveData.busLayout;
+    // this.tripName = "เที่ยวไป";
   }
 
   openDialog(msg) {
@@ -43,7 +59,7 @@ export class SelectSeatComponent implements OnInit {
     markSeat: "ที่นั่งที่เลือก"
   };
 
-  data = {
+  data: BusLayoutModel = {
     id: "224",
     code: "4202",
     desc: "ม.4(ข)46ที่นั่ง/กรต.ปี56",

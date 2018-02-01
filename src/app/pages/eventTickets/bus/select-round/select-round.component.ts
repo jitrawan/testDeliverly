@@ -1,12 +1,17 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { DatePipe } from '@angular/common';
+
+/* ---------------------------------- services -------------------*/
 import { BusService } from '../../../../shared/services/bus.service';
 import { SharedService } from '../../../../shared/services/shared-service.service';
+import { AlertsService } from '@jaspero/ng2-alerts';
+
+/* ---------------------------------- models -------------------*/
 import { AvailableTripResultModel } from '../../../../shared/models/bus/availableTripResult.model';
 import { AvailableTripModel } from '../../../../shared/models/bus/availableTripSearch.model';
-import { AlertsService } from '@jaspero/ng2-alerts';
+import { BusLayoutModel } from '../../../.././shared/models/bus/busLayout.model';
 import { ErrorMessage } from '../../../../shared/constant/error-message';
-import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-select-round',
@@ -35,6 +40,7 @@ export class SelectRoundComponent implements OnInit {
 
   errorMessage: ErrorMessage = new ErrorMessage;
   alertSettings: any;
+  busLayout: BusLayoutModel;
 
   constructor(
     private router: Router,
@@ -56,13 +62,12 @@ export class SelectRoundComponent implements OnInit {
     }
   }
 
-
   getAvailableTrip(availableTripSearch) {
     this.busService.getAvailableTrip(availableTripSearch).subscribe((res) => {
       console.log("res >>", res.data);
       this.availableTripResultModel = res.data;
       this.dptrDate = this.setCalendar(this.convertStringToDate(this.availableTripResultModel.dptrTrips.tripDate));
-      if(this.availableTripResultModel.rtrnTrips != null){
+      if (this.availableTripResultModel.rtrnTrips != null) {
         this.rtrnDate = this.setCalendar(this.convertStringToDate(this.availableTripResultModel.rtrnTrips.tripDate));
       }
     });
@@ -109,11 +114,27 @@ export class SelectRoundComponent implements OnInit {
     } else if (this.availableTripResultModel.rtrnTrips != null && this.selectedRtrnTrip == undefined) {
       this.openDialog(this.errorMessage.pleaseSelect + 'วันที่และเวลาเดินทางกลับ');
     } else {
+      console.log('next page >>>>>>', this.selectedDptrTrip);
+      this.busService.getBusLayout(this.selectedDptrTrip.id, this.selectedDptrTrip.dptrPark.id, this.selectedDptrTrip.arrvPark.id).subscribe((res) => {
+        console.log("res >>", res.data);
+        this.busLayout = res.data;
+        let dataListForPassNextPage = {
+          // tripName: '',
+          dptrProvince: this.dptrProvince,
+          dptrPark: this.dptrPark,
+          arrvProvince: this.rtrnProvince,
+          arrvPark: this.rtrnPark,
+          busLayout: this.busLayout
+        };
+        console.log('************dataListForPassNextPage************', dataListForPassNextPage);
+        this.sharedService.sendData(dataListForPassNextPage);
+        this.router.navigate(['../selectSeat'], { relativeTo: this.route });
+      });
+      // this.getBusLayout(this.selectedDptrTrip.id, this.selectedDptrTrip.dptrPark.id, this.selectedDptrTrip.arrvPark.id);
       // var returnCode = parent.window.receiveMessage('checkAuthen');
       // console.log('return >>> ', returnCode);
       // console.log('5 >>>');
       // if (returnCode) {
-      this.router.navigate(['../selectSeat'], { relativeTo: this.route });
       // }
     }
   }
@@ -157,6 +178,14 @@ export class SelectRoundComponent implements OnInit {
       };
       this.getAvailableTrip(this.availableTripSearchModel);
     }
+  }
+
+  getBusLayout(tripId, pickup, dropoff) {
+    this.busService.getBusLayout(tripId, pickup, dropoff).subscribe((res) => {
+      console.log("res >>", res.data);
+      this.busLayout = res.data;
+    });
+
   }
 
 }

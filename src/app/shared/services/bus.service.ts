@@ -12,14 +12,15 @@ import { ProvinceModel } from '../models/bus/province.model';
 @Injectable()
 export class BusService {
 
-    // private baseURL = 'https://s3-ap-southeast-1.amazonaws.com';
+    // private baseURL = 'https://s3-ap-southeast-1.amazonaws.com/';
     private baseURL = 'http://busticketreserve-env.ap-southeast-1.elasticbeanstalk.com/api/trs/';
-    // private getMasProvinceAPI = this.baseURL + '/allticket-trs-masterinfo/ag_mas_province.txt';
-    // private getMasParkAPI = this.baseURL + '/allticket-trs-masterinfo/ag_mas_park.txt';
+    // private getMasProvinceAPI = this.baseURL + 'allticket-trs-masterinfo/ag_mas_province.txt';
+    // private getMasParkAPI = this.baseURL + 'allticket-trs-masterinfo/ag_mas_park.txt';
 
     private getMasProvinceAPI = this.baseURL + 'ag_mas_province'
     private getMasParkAPI = this.baseURL + 'ag_mas_park';
     private getAvailableTripAPI = this.baseURL + 'ag_available_trip';
+    private getBusLayoutAPI = this.baseURL + 'ag_get_bus_layout';
     constructor(private http: Http) { }
 
     getMasProvince() {
@@ -57,7 +58,23 @@ export class BusService {
                 return res.json();
             })
         // .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
+    }
 
+    getBusLayout(tripId, pickup, dropoff) {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        //  let options = new RequestOptions({ headers: headers, withCredentials: true });
+        let options = new RequestOptions({ headers: headers });
+        let body = {
+            tripId: tripId,
+            pickup: pickup,
+            dropoff: dropoff
+        };
+        return this.http.post(this.getBusLayoutAPI, JSON.stringify(body), options)
+            .map((res: Response) => {
+                console.log('res>>', res);
+                return res.json();
+            })
+        // .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
     }
 }
 

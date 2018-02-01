@@ -12,43 +12,51 @@ import { ProvinceModel } from '../models/bus/province.model';
 @Injectable()
 export class BusService {
 
-    private baseURL = 'https://s3-ap-southeast-1.amazonaws.com';
-    // private baseURL = 'http://busticketreserve-env.ap-southeast-1.elasticbeanstalk.com/api/trs';
-    private getMasProvinceAPI = this.baseURL + '/allticket-trs-masterinfo/ag_mas_province.txt';
-    private getMasParkAPI = this.baseURL + '/allticket-trs-masterinfo/ag_mas_park.txt';
-    private getAvailableTripAPI = '';
+    // private baseURL = 'https://s3-ap-southeast-1.amazonaws.com';
+    private baseURL = 'http://busticketreserve-env.ap-southeast-1.elasticbeanstalk.com/api/trs/';
+    // private getMasProvinceAPI = this.baseURL + '/allticket-trs-masterinfo/ag_mas_province.txt';
+    // private getMasParkAPI = this.baseURL + '/allticket-trs-masterinfo/ag_mas_park.txt';
+
+    private getMasProvinceAPI = this.baseURL + 'ag_mas_province'
+    private getMasParkAPI = this.baseURL + 'ag_mas_park';
+    private getAvailableTripAPI = this.baseURL + 'ag_available_trip';
     constructor(private http: Http) { }
 
     getMasProvince() {
-        return this.http.get(this.getMasProvinceAPI)
-            .map((res: Response) => {
-                return res.json();
-            })
-        // .catch((error: any) => {
-        //     return Observable.throw(error.json || error || 'Server Error');
-        // });
-    }
-
-    getMasPark() {
-        return this.http.get(this.getMasParkAPI)
-            .map((res: Response) => {
-                return res.json();
-            })
-        // .catch((error: any) => {
-        //     return Observable.throw(error.json || error || 'Server Error');
-        // });
-    }
-
-    getAvailableTrip(availableTrip: AvailableTripModel) {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         //  let options = new RequestOptions({ headers: headers, withCredentials: true });
         let options = new RequestOptions({ headers: headers });
         let body = {};
-        return this.http.post(this.getAvailableTripAPI, JSON.stringify(body), options)
+        return this.http.post(this.getMasProvinceAPI, JSON.stringify(body), options)
             .map((res: Response) => {
                 return res.json();
             })
-            .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
+        // .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
+    }
+
+    getMasPark() {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        //  let options = new RequestOptions({ headers: headers, withCredentials: true });
+        let options = new RequestOptions({ headers: headers });
+        let body = {};
+        return this.http.post(this.getMasParkAPI, JSON.stringify(body), options)
+            .map((res: Response) => {
+                return res.json();
+            })
+    }
+
+    getAvailableTrip(availableTrip: AvailableTripModel) {
+        console.log('availableTrip>>> ', availableTrip);
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        //  let options = new RequestOptions({ headers: headers, withCredentials: true });
+        let options = new RequestOptions({ headers: headers });
+        let body = availableTrip;
+        return this.http.post(this.getAvailableTripAPI, JSON.stringify(body), options)
+            .map((res: Response) => {
+                console.log('res>>', res);
+                return res.json();
+            })
+        // .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
 
     }
 }

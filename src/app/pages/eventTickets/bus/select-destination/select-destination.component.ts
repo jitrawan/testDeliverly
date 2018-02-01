@@ -8,20 +8,22 @@ import { BusService } from '../../../../shared/services/bus.service';
 import { SharedService } from '../../../../shared/services/shared-service.service';
 import { ProvinceModel } from '../../../../shared/models/bus/province.model';
 import { ParkModel } from '../../../../shared/models/bus/park.model';
+import { DatePipe } from '@angular/common'
 
 @Component({
   selector: 'app-select-destination',
   templateUrl: './select-destination.component.html',
   styleUrls: ['./select-destination.component.css', '../buy-ticket/buy-ticket.component.css'],
-  providers: [BusService]
+  providers: [BusService, DatePipe]
 })
 export class SelectDestinationComponent implements OnInit {
   availableTripSeach: AvailableTripModel = new AvailableTripModel;
   availableTripResult: AvailableTripResultModel;
+  // availableTripResult: any;
   errorMessage: ErrorMessage = new ErrorMessage;
-  provinceList: ProvinceModel[];
-  arrvProvinceList: ProvinceModel[];
-  parkList: ParkModel[];
+  provinceList: ProvinceModel[] = [];
+  arrvProvinceList: ProvinceModel[] = [];
+  parkList: ParkModel[] = [];
   dptrParkList: ParkModel[] = [];
   arrvParkList: ParkModel[] = [];
   returnDate: Date = new Date(Date.now());
@@ -42,6 +44,7 @@ export class SelectDestinationComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private _alert: AlertsService,
+    private datePipe: DatePipe
   ) { }
 
   ngOnInit() {
@@ -149,28 +152,58 @@ export class SelectDestinationComponent implements OnInit {
     } else if (this.selectedNumOfPerson == 0) {
       this.openDialog(this.errorMessage.pleaseSelect + "จำนวนผู้เดินทาง");
     } else {
-      this.availableTripSeach.departDate = this.departDate;
-      this.availableTripSeach.returnDate = this.returnDate;
+      // let latest_date =this.datePipe.transform(this.departDate, 'yyyy-MM-dd');
+      console.log(this.datePipe.transform(this.departDate, 'yyyy-MM-dd'));
+      this.availableTripSeach.departDate = this.datePipe.transform(this.departDate, 'yyyy-MM-dd');
+      this.availableTripSeach.returnDate = this.datePipe.transform(this.returnDate, 'yyyy-MM-dd');
       this.availableTripSeach.pickup = this.selectedDptrPark.id;
-      this.availableTripSeach.pickupDesc = this.selectedDptrPark.nameTh;
+      // this.availableTripSeach.pickupDesc = this.selectedDptrPark.nameTh;
       this.availableTripSeach.dropoff = this.selectedArrvPark.id;
-      this.availableTripSeach.dropoffDesc = this.selectedArrvPark.nameTh;
+      // this.availableTripSeach.dropoffDesc = this.selectedArrvPark.nameTh;
       this.availableTripSeach.tripType = this.selectedTripType;
       console.log('------------>>> ', this.availableTripSeach);
 
       /* --------------------- call API ---------------------*/
 
-      // -------------- รอเทสกับ API -----------------
-      // availableTripResult = this.busService.getAvailableTrip(this.availableTripSeach);
-      // if (this.availableTripResult) {
-      this.isDisplay = false;
-      // }
+      // // -------------- รอเทสกับ API -----------------
+      // let test: any;
+      // this.busService.getAvailableTrip(this.availableTripSeach).subscribe((res) => {
+      //   test = res.data.map((obj: any) => {
+
+      //   });
+      //   // this.availableTripResult = res.data;
+
+
+      //   // .map((obj: any) => {
+
+      //   // });
+      //   // });
+      //   console.log('this.availableTripResult>> ', this.availableTripResult);
+
+      //   // this.busService.getAvailableTrip(this.availableTripSeach).subscribe((res) => {
+      //   //   console.log(res.data);
+      //   // this.availableTripResult = res.data;
+      //   // console.log('res<<<', this.availableTripResult);
+      //   // let test = res.data.map((obj: any) => {
+      //   // console.log('obj>', obj);});
+      //   // this.availableTripResult = res.data.map((obj: any) => {
+      //   //   console.log('obj>', obj);
+      //   //   return {
+      //   //     dptrTrips: obj.dptrTrips,
+      //   //     rtrnTrips: obj.rtrnTrips
+      //   //   };
+      //   // });
+      //   });
+      //   // this.busService.getAvailableTrip(this.availableTripSeach);
+      //   // if (this.availableTripResult) {
+      //   // this.isDisplay = false;
+      // // }
 
 
 
-      // this.sharedService.sendData(availableTrip);
-      // this.sharedService.sendData(this.availableTripSeach);
-      // this.router.navigate(['selectRound'], { relativeTo: this.route });
+      // // this.sharedService.sendData(availableTrip);
+      // // this.sharedService.sendData(this.availableTripSeach);
+      // // this.router.navigate(['selectRound'], { relativeTo: this.route });
     }
   }
 

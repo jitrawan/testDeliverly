@@ -1,6 +1,6 @@
 import { TripModel } from './trip.model';
 
 export class TripsModel {
-    tripDate: Date;
+    tripDate: string;
     trips: TripModel[];
 }

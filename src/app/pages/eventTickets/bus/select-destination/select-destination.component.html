@@ -107,7 +107,8 @@
 </div>
 
 <div class="container" *ngIf="!isDisplay">
-  <app-select-round [availableTripResultModel]="" [availableTripSearchModel]="availableTripSeach" 
+  
+  <app-select-round [availableTripResultModel]="availableTripResult" [availableTripSearchModel]="availableTripSeach" 
   [dptrProvince]="selectedDptrProvince.desc" [dptrPark]="selectedDptrPark.nameTh" 
   [rtrnProvince]="selectedArrvProvince.desc" [rtrnPark]="selectedArrvPark.nameTh"
     [totalPassenger]="selectedNumOfPerson"></app-select-round>

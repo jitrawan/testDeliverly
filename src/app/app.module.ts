@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
+import { DatePipe } from '@angular/common';
 
 /* Library */
 import { CalendarModule } from './shared/lib/datetimepicker/primeng/calendar/calendar';
@@ -101,7 +102,7 @@ import { BuyTicketComponent } from './pages/eventTickets/bus/buy-ticket/buy-tick
     Ng2AutoCompleteModule,
     JasperoAlertsModule
   ],
-  providers: [HeaderService, HomeService, SharedService],
+  providers: [HeaderService, HomeService, SharedService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {

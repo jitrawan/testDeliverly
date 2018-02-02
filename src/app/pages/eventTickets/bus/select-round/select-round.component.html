@@ -48,6 +48,9 @@
   </div>
   <div class="outer">
     <div class="infoBoxWrapper table-responsive-md">
+      <div class="inner-loading" [ngClass]="{'show' : isTableLoading}">
+        <div class="loading-wheel"></div>
+      </div>
       <table class="table bordered">
         <tbody>
           <tr class="tableTopic">

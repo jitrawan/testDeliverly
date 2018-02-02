@@ -28,8 +28,8 @@
       </div>
       <div class="col-12 checkPoint">
         <input class="form-control" type="text" placeholder="เลือกจุดขึ้นรถ" auto-complete [source]="dptrParkList" [(ngModel)]="selectedDptrPark"
-        
-        loading-text="กำลังดาวน์โหลด" list-formatter="nameTh" [accept-user-input]="false" [disabled]="selectedDptrProvince == '' || selectedDptrProvince == undefined">
+        (blur)="getRoutePrvParkMap()"
+        loading-text="กำลังดาวน์โหลด" list-formatter="nameTh" [accept-user-input]="false" [disabled]="selectedDptrProvince == '' || selectedDptrProvince == undefined" >
       </div>
     </div>
 
@@ -43,13 +43,13 @@
         <label class="h5">จุดลงรถ</label>
       </div>
       <div class="col-12 checkPoint">
-        <input class="form-control" type="text" placeholder="เลือกปลายทาง" auto-complete [source]="provinceList" (ngModelChange)="selectArrvProvince($event)"
+        <input class="form-control" type="text" placeholder="เลือกปลายทาง" auto-complete [source]="arrvProvinceList" (ngModelChange)="selectArrvProvince($event)"
           [(ngModel)]="selectedArrvProvince" (blur)="findArrvParkList()" loading-text="กำลังดาวน์โหลด" list-formatter="desc"
-          [accept-user-input]="false" [disabled]="isProvinceLoading || isParkListLoading" [ngClass]="{'show-loading' : isProvinceLoading || isParkListLoading}">
+          [accept-user-input]="false" [disabled]="isArrvProvinceLoading" [ngClass]="{'show-loading' : isArrvProvinceLoading }" >
       </div>
       <div class="col-12 checkPoint">
         <input class="form-control" type="text" placeholder="เลือกจุดลงรถ" auto-complete [source]="arrvParkList" [(ngModel)]="selectedArrvPark"
-          loading-text="กำลังดาวน์โหลด" list-formatter="nameTh" [accept-user-input]="false" [disabled]="selectedArrvProvince == '' || selectedArrvProvince == undefined">
+          loading-text="กำลังดาวน์โหลด" list-formatter="desc" [accept-user-input]="false" [disabled]="selectedArrvProvince == '' || selectedArrvProvince == undefined">
       </div>
     </div>
   </div>
@@ -110,7 +110,7 @@
   
   <app-select-round [availableTripResultModel]="availableTripResult" [availableTripSearchModel]="availableTripSeach" 
   [dptrProvince]="selectedDptrProvince.desc" [dptrPark]="selectedDptrPark.nameTh" 
-  [rtrnProvince]="selectedArrvProvince.desc" [rtrnPark]="selectedArrvPark.nameTh"
+  [rtrnProvince]="selectedArrvProvince.desc" [rtrnPark]="selectedArrvPark.desc"
     [totalPassenger]="selectedNumOfPerson"></app-select-round>
 </div>
 

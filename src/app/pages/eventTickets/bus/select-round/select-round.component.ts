@@ -44,7 +44,8 @@ export class SelectRoundComponent implements OnInit {
   alertSettings: any;
   busLayout: BusLayoutModel;
 
-  isTableLoading: boolean = false;
+  dptrTableLoading: boolean = false;
+  retrnTableLoading: boolean = false;
 
   constructor(
     private router: Router,
@@ -76,10 +77,10 @@ export class SelectRoundComponent implements OnInit {
   }
 
   getAvailableTrip(availableTripSearch) {
-    this.isTableLoading = true;
     this.busService.getAvailableTrip(availableTripSearch).subscribe((res) => {
       console.log("res >>", res.data);
-      this.isTableLoading = false;
+      this.dptrTableLoading = false;
+      this.retrnTableLoading = false;
       this.availableTripResultModel = res.data;
       this.dptrDate = this.setCalendar(this.convertStringToDate(this.availableTripResultModel.dptrTrips.tripDate));
       if (this.availableTripResultModel.rtrnTrips != null) {
@@ -173,6 +174,7 @@ export class SelectRoundComponent implements OnInit {
             "returnDate": this.availableTripSearchModel.returnDate,
             "tripType": this.availableTripSearchModel.tripType
           };
+          this.dptrTableLoading = true;
           this.getAvailableTrip(this.availableTripSearchModel);
         }
       } else if (tripType == 'rtrn') {
@@ -186,6 +188,7 @@ export class SelectRoundComponent implements OnInit {
             "returnDate": this.datePipe.transform(tripDate, 'yyyy-MM-dd'),
             "tripType": this.availableTripSearchModel.tripType
           };
+          this.retrnTableLoading = true;
           this.getAvailableTrip(this.availableTripSearchModel);
         }
       }
@@ -197,6 +200,7 @@ export class SelectRoundComponent implements OnInit {
         "returnDate": this.availableTripSearchModel.returnDate,
         "tripType": this.availableTripSearchModel.tripType
       };
+      this.dptrTableLoading = true;
       this.getAvailableTrip(this.availableTripSearchModel);
     }
   }

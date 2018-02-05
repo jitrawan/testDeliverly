@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { DatePipe } from '@angular/common';
+
 import { AlertsService } from '@jaspero/ng2-alerts';
-import { AvailableTripModel } from '../../../../shared/models/bus/availableTripSearch.model';
-import { AvailableTripResultModel } from '../../../../shared/models/bus/availableTripResult.model';
-import { ErrorMessage } from '../../../../shared/constant/error-message';
 import { BusService } from '../../../../shared/services/bus.service';
 import { SharedService } from '../../../../shared/services/shared-service.service';
+
+import { ErrorMessage } from '../../../../shared/constant/error-message';
+import { AvailableTripModel } from '../../../../shared/models/bus/availableTripSearch.model';
+import { AvailableTripResultModel } from '../../../../shared/models/bus/availableTripResult.model';
 import { ProvinceModel } from '../../../../shared/models/bus/province.model';
 import { ParkModel } from '../../../../shared/models/bus/park.model';
-import { DatePipe } from '@angular/common'
+import { RoutePrvParkMapModel } from '../../../../shared/models/bus/routePrvParkMap.model';
 
 @Component({
   selector: 'app-select-destination',
@@ -19,26 +22,30 @@ import { DatePipe } from '@angular/common'
 export class SelectDestinationComponent implements OnInit {
   availableTripSeach: AvailableTripModel = new AvailableTripModel;
   availableTripResult: AvailableTripResultModel;
-  // availableTripResult: any;
   errorMessage: ErrorMessage = new ErrorMessage;
   provinceList: ProvinceModel[] = [];
   arrvProvinceList: ProvinceModel[] = [];
   parkList: ParkModel[] = [];
   dptrParkList: ParkModel[] = [];
-  arrvParkList: ParkModel[] = [];
-  returnDate: Date = new Date(Date.now());
-  departDate: Date = new Date(Date.now());
+  arrvParkList: any[] = [];
+  returnDate: Date = new Date();
+  departDate: Date = new Date();
+  minDate: Date = new Date();
   selectedDptrProvince: ProvinceModel;
-  selectedDptrPark: ParkModel;
+  selectedDptrPark: any;
   selectedArrvProvince: ProvinceModel;
-  selectedArrvPark: ParkModel;
+  selectedArrvPark: any;
   selectedTripType: string;
   isReturnDate: boolean = true;
   selectedNumOfPerson: number;
   isDisplay: boolean = true;
   isParkListLoading: boolean = true;
   isProvinceLoading: boolean = true;
+  isArrvProvinceLoading: boolean = true;
   alertSettings: any;
+  isShowLoading: boolean = false;
+  routeMap: RoutePrvParkMapModel[];
+  invalidDates: Array<Date>;
 
   constructor(
     private busService: BusService,
@@ -69,6 +76,7 @@ export class SelectDestinationComponent implements OnInit {
   }
 
   getParkList() {
+    this.isArrvProvinceLoading = true;
     this.busService.getMasPark().subscribe((res) => {
       this.isParkListLoading = false;
       this.parkList = res.data.map((obj: any) => {
@@ -85,17 +93,53 @@ export class SelectDestinationComponent implements OnInit {
     });
   }
 
+  getRoutePrvParkMap() {
+    if (this.selectedDptrPark != null) {
+      this.busService.getRoutePrvParkMap(this.selectedDptrPark.id).subscribe((res) => {
+        this.isArrvProvinceLoading = false;
+        this.isProvinceLoading = false;
+        this.routeMap = res.data;
+        this.getArrvProvince();
+      });
+    }
+  }
+
   selectDprtProvince(event) {
-    this.selectedDptrProvince = event;
-    this.selectedDptrPark = undefined;
+    console.log('event >>', event);
+    console.log('this.selectedDptrProvince >>', this.selectedDptrProvince);
+    var selectedDptrParkTemp = this.selectedDptrPark;
+    var selectedArrvProvinceTemp = this.selectedArrvProvince;
+    var selectedArrvParkTemp = this.selectedArrvPark;
+    if (event == this.selectedDptrProvince) {
+      this.selectedDptrPark = selectedDptrParkTemp;
+      this.selectedArrvProvince = selectedArrvProvinceTemp;
+      this.selectedArrvPark = selectedArrvParkTemp;
+    } else {
+      // this.selectedDptrProvince = event;
+      this.selectedDptrPark = undefined;
+      this.selectedArrvProvince = undefined;
+      this.selectedArrvPark = undefined;
+
+    }
+    // if (event == '') {
+    //   console.log('true');
+    //   this.selectedDptrProvince = undefined;
+    // } else {
+    // }
   }
 
   selectArrvProvince(event) {
     this.selectedArrvProvince = event;
     this.selectedArrvPark = undefined;
-
   }
+
+  selectdprtPark(event) {
+    this.selectedArrvProvince = undefined;
+    this.selectedArrvPark = undefined;
+  }
+
   findDprtParkList() {
+
     if (this.selectedDptrProvince != undefined) {
       var listPark = this.parkList.filter(item =>
         item.province.id === this.selectedDptrProvince.id);
@@ -106,11 +150,39 @@ export class SelectDestinationComponent implements OnInit {
   }
 
   findArrvParkList() {
-    if (this.selectedArrvProvince != undefined) {
-      var listPark = this.parkList.filter(item =>
-        item.province.id === this.selectedArrvProvince.id);
-      if (listPark.length > 0) {
-        this.arrvParkList = listPark;
+    this.arrvParkList = [];
+    if (this.selectedArrvProvince != undefined && this.routeMap.length > 0) {
+      for (let index = 0; index < this.routeMap.length; index++) {
+        var isFound = false;
+        if (this.routeMap[index].arrvProvince.id === this.selectedArrvProvince.id) {
+          for (let indexOfList = 0; indexOfList < this.arrvParkList.length; indexOfList++) {
+            if (this.routeMap[index].arrvPark.desc == this.arrvParkList[indexOfList].desc) {
+              isFound = true;
+              break;
+            }
+          }
+          if (!isFound) {
+            this.arrvParkList.push(this.routeMap[index].arrvPark);
+          }
+        }
+      }
+    }
+  }
+
+  getArrvProvince() {
+    if (this.routeMap != null) {
+      this.arrvProvinceList = [];
+      for (let index = 0; index < this.routeMap.length; index++) {
+        var isFound = false;
+        for (let indexOfList = 0; indexOfList < this.arrvProvinceList.length; indexOfList++) {
+          if ((this.arrvProvinceList[indexOfList].id == this.routeMap[index].arrvProvince.id)) {
+            isFound = true;
+            break;
+          }
+        }
+        if (!isFound) {
+          this.arrvProvinceList.push(this.routeMap[index].arrvProvince);
+        }
       }
     }
   }
@@ -130,7 +202,6 @@ export class SelectDestinationComponent implements OnInit {
   }
 
   onNextPage() {
-    console.log('submit');
     this.validateDate();
   }
 
@@ -156,8 +227,7 @@ export class SelectDestinationComponent implements OnInit {
     } else if (this.selectedNumOfPerson == 0) {
       this.openDialog(this.errorMessage.pleaseSelect + "จำนวนผู้เดินทาง");
     } else {
-      // let latest_date =this.datePipe.transform(this.departDate, 'yyyy-MM-dd');
-      console.log(this.datePipe.transform(this.departDate, 'yyyy-MM-dd'));
+      this.isShowLoading = true;
       this.availableTripSeach.departDate = this.datePipe.transform(this.departDate, 'yyyy-MM-dd');
       this.availableTripSeach.returnDate = this.datePipe.transform(this.returnDate, 'yyyy-MM-dd');
       this.availableTripSeach.pickup = this.selectedDptrPark.id;
@@ -166,29 +236,17 @@ export class SelectDestinationComponent implements OnInit {
       // this.availableTripSeach.dropoffDesc = this.selectedArrvPark.nameTh;
       this.availableTripSeach.tripType = this.selectedTripType;
       console.log('------------>>> ', this.availableTripSeach);
-
-      /* --------------------- call API ---------------------*/
-
-      // // -------------- รอเทสกับ API -----------------
       this.busService.getAvailableTrip(this.availableTripSeach).subscribe((res) => {
-        this.availableTripResult = res.data;
-        console.log('res<<<', this.availableTripResult);
-        this.isDisplay = false;
+        if (res.code == 0) {
+          this.availableTripResult = res.data;
+          console.log('res<<<', this.availableTripResult);
+          this.isDisplay = false;
+        } else {
+          console.log('Error code ----', res.code);
+        }
       });
 
     }
-  }
-
-  onSwap() {
-    var provinceTemp = this.selectedDptrProvince;
-    this.selectedDptrProvince = this.selectedArrvProvince;
-    this.selectedArrvProvince = provinceTemp;
-
-    var ParkListtemp = this.selectedDptrPark;
-    this.findDprtParkList();
-    this.selectedDptrPark = this.selectedArrvPark;
-    this.findArrvParkList();
-    this.selectedArrvPark = ParkListtemp;
   }
 
 }

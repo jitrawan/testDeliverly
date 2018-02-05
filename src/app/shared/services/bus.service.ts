@@ -21,6 +21,12 @@ export class BusService {
     private getMasParkAPI = this.baseURL + 'ag_mas_park';
     private getAvailableTripAPI = this.baseURL + 'ag_available_trip';
     private getBusLayoutAPI = this.baseURL + 'ag_get_bus_layout';
+    private getRoutePrvParkMapAPI = this.baseURL + 'ag_route_prv_park_map';
+
+
+
+
+
     constructor(private http: Http) { }
 
     getMasProvince() {
@@ -54,24 +60,37 @@ export class BusService {
         let body = availableTrip;
         return this.http.post(this.getAvailableTripAPI, JSON.stringify(body), options)
             .map((res: Response) => {
+                return res.json();
+            })
+        // .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
+    }
+
+    getRoutePrvParkMap(pickupId) {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        //  let options = new RequestOptions({ headers: headers, withCredentials: true });
+        let options = new RequestOptions({ headers: headers });
+        let body = {
+            pickup: pickupId
+        };
+        return this.http.post(this.getRoutePrvParkMapAPI, JSON.stringify(body), options)
+            .map((res: Response) => {
                 console.log('res>>', res);
                 return res.json();
             })
         // .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
     }
 
-    getBusLayout(tripId, pickup, dropoff) {
+    getBusLayout(tripId, pickupId, dropoffId) {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         //  let options = new RequestOptions({ headers: headers, withCredentials: true });
         let options = new RequestOptions({ headers: headers });
         let body = {
             tripId: tripId,
-            pickup: pickup,
-            dropoff: dropoff
+            pickup: pickupId,
+            dropoff: dropoffId
         };
         return this.http.post(this.getBusLayoutAPI, JSON.stringify(body), options)
             .map((res: Response) => {
-                console.log('res>>', res);
                 return res.json();
             })
         // .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });

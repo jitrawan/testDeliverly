@@ -21,20 +21,27 @@
       <div class="col-12 p0">
         <label class="h5">จุดขึ้นรถ</label>
       </div>
-      <div class="col-12 checkPoint">
+      <div class="col-12  checkPoint">
         <input class="form-control" type="text" placeholder="เลือกต้นทาง" auto-complete [source]="provinceList" (ngModelChange)="selectDprtProvince($event)"
           [(ngModel)]="selectedDptrProvince" (blur)="findDprtParkList()" loading-text="กำลังดาวน์โหลด" list-formatter="desc"
-          [accept-user-input]="false" [disabled]="isProvinceLoading || isParkListLoading" [ngClass]="{'show-loading' : isProvinceLoading || isParkListLoading}">
+          [accept-user-input]="false" [disabled]="isProvinceLoading || isParkListLoading" [ngClass]="{'show-loading' : isProvinceLoading || isParkListLoading}"
+          aria-describedby="basic-addon2">
+        <!-- <div class="input-group-prepend">
+            <button class="btn btn-outline-secondary" type="button">Button</button>
+          </div> -->
+
+
+        <!-- <button (click)="selectedDptrProvince=''">Clear</button> -->
       </div>
       <div class="col-12 checkPoint">
         <input class="form-control" type="text" placeholder="เลือกจุดขึ้นรถ" auto-complete [source]="dptrParkList" [(ngModel)]="selectedDptrPark"
-        
-        loading-text="กำลังดาวน์โหลด" list-formatter="nameTh" [accept-user-input]="false" [disabled]="selectedDptrProvince == '' || selectedDptrProvince == undefined">
+          (ngModelChange)="selectdprtPark($event)" (blur)="getRoutePrvParkMap()" loading-text="กำลังดาวน์โหลด" list-formatter="nameTh"
+          [accept-user-input]="false" [disabled]="selectedDptrProvince == '' || selectedDptrProvince == undefined">
       </div>
     </div>
 
     <div class="col-12 col-md-2 text-center swapDestination">
-      <i class="fa fa-exchange fa-2x" aria-hidden="true" (click)='onSwap()'></i>
+      <p class="fa fa-exchange fa-2x" aria-hidden="true"></p>
     </div>
 
 
@@ -43,13 +50,13 @@
         <label class="h5">จุดลงรถ</label>
       </div>
       <div class="col-12 checkPoint">
-        <input class="form-control" type="text" placeholder="เลือกปลายทาง" auto-complete [source]="provinceList" (ngModelChange)="selectArrvProvince($event)"
+        <input class="form-control" type="text" placeholder="เลือกปลายทาง" auto-complete [source]="arrvProvinceList" (ngModelChange)="selectArrvProvince($event)"
           [(ngModel)]="selectedArrvProvince" (blur)="findArrvParkList()" loading-text="กำลังดาวน์โหลด" list-formatter="desc"
-          [accept-user-input]="false" [disabled]="isProvinceLoading || isParkListLoading" [ngClass]="{'show-loading' : isProvinceLoading || isParkListLoading}">
+          [accept-user-input]="false" [disabled]="isArrvProvinceLoading" [ngClass]="{'show-loading' : isArrvProvinceLoading }">
       </div>
       <div class="col-12 checkPoint">
         <input class="form-control" type="text" placeholder="เลือกจุดลงรถ" auto-complete [source]="arrvParkList" [(ngModel)]="selectedArrvPark"
-          loading-text="กำลังดาวน์โหลด" list-formatter="nameTh" [accept-user-input]="false" [disabled]="selectedArrvProvince == '' || selectedArrvProvince == undefined">
+          loading-text="กำลังดาวน์โหลด" list-formatter="desc" [accept-user-input]="false" [disabled]="selectedArrvProvince == '' || selectedArrvProvince == undefined">
       </div>
     </div>
   </div>
@@ -58,8 +65,8 @@
     <div class="col-12 col-md-5 date">
       <label class="h5">วันที่ไป</label>
       <div class="col-12 p0">
-        <p-calendar [(ngModel)]="departDate" [showIcon]="true" calendarLanguage="th" *ngIf="selectedTripType == 'O'"></p-calendar>
-        <p-calendar [(ngModel)]="departDate" [showIcon]="true" calendarLanguage="th" [maxDate]="returnDate" *ngIf="selectedTripType == 'R'"></p-calendar>
+        <p-calendar [(ngModel)]="departDate" [showIcon]="true" [minDate]="minDate" calendarLanguage="th" *ngIf="selectedTripType == 'O'"></p-calendar>
+        <p-calendar [(ngModel)]="departDate" [showIcon]="true" calendarLanguage="th" [minDate]="minDate" *ngIf="selectedTripType == 'R'"></p-calendar>
       </div>
     </div>
     <div class="col-12 offset-md-2 col-md-5 date" *ngIf="selectedTripType == 'R'">
@@ -95,23 +102,21 @@
 
   <div class="row mt-2">
     <div class="col-12 col-md-6 p0 conditon">
-      <div class="col-12 p0"> เงื่อนไขการซื้อ </div>
+      <div class="col-12 px-0 pb-2"> เงื่อนไขการซื้อ </div>
       <label *ngFor="let data of condition"> {{data}} </label>
     </div>
   </div>
   <div class="row form-group">
     <div class="col-12 buttonWrapper p-0">
-      <button class="btn btn-atk-primary mt-3 buttonSize" type="button" (click)="onNextPage()">NEXT</button>
+      <button class="btn btn-atk-primary mt-3 buttonSize" type="button" (click)="onNextPage()" [ngClass]="{'disabled' : isShowLoading}"><span *ngIf="!isShowLoading; else showLoad">NEXT</span><ng-template #showLoad>Loading <i class="fa fa-circle-o-notch fa-spin"></i></ng-template></button>
     </div>
   </div>
 </div>
 
 <div class="container" *ngIf="!isDisplay">
-  
-  <app-select-round [availableTripResultModel]="availableTripResult" [availableTripSearchModel]="availableTripSeach" 
-  [dptrProvince]="selectedDptrProvince.desc" [dptrPark]="selectedDptrPark.nameTh" 
-  [rtrnProvince]="selectedArrvProvince.desc" [rtrnPark]="selectedArrvPark.nameTh"
-    [totalPassenger]="selectedNumOfPerson"></app-select-round>
+
+  <app-select-round [availableTripResultModel]="availableTripResult" [availableTripSearchModel]="availableTripSeach" [dptrProvince]="selectedDptrProvince.desc"
+    [dptrPark]="selectedDptrPark.nameTh" [rtrnProvince]="selectedArrvProvince.desc" [rtrnPark]="selectedArrvPark.desc" [totalPassenger]="selectedNumOfPerson"></app-select-round>
 </div>
 
 

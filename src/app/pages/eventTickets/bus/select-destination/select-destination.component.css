@@ -113,9 +113,49 @@
   max-height: 250px;
   overflow-x: hidden;
   overflow-y: auto;
+  cursor: pointer;
 }
 
-.form-control.show-loading {    
+::ng-deep ng2-auto-complete li {
+  cursor: pointer;
+}
+
+::ng-deep p-calendar input , ::ng-deep p-calendar span , input {
+  cursor: pointer;
+}
+
+.clearable {
+  position: relative;
+  display: block;
+}
+
+.clearable input[type=text] {
+  padding-right: 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.clearable_clear {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 10px;
+  padding: 0 8px;
+  font-style: normal;
+  font-size: 1em;
+  user-select: none;
+  cursor: pointer;
+}
+
+.clearable_clear.show {
+  display: block;
+}
+
+.clearable input::-ms-clear {
+  display: none;
+}
+
+.form-control.show-loading {
   background-color: #ffffff;
   background-image: url("../../../../../assets/images/s-loading.gif");
   background-size: 25px 25px;

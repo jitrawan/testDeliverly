@@ -249,4 +249,18 @@ export class SelectDestinationComponent implements OnInit {
     }
   }
 
+  deselect(_el) {
+    if(_el === 'selectedDptrProvince') {
+      this.selectedDptrProvince = undefined;
+      this.selectedDptrPark = undefined;
+    } else if(_el === 'selectedDptrPark') {
+      this.selectedDptrPark = undefined;
+    } else if(_el === 'selectedArrvProvince') {
+      this.selectedArrvProvince = undefined;
+      this.selectedArrvPark = undefined;
+    } else if(_el === 'selectedArrvPark') {
+      this.selectedArrvPark = undefined;
+    }
+  }
+  
 }

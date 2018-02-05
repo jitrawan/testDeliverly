@@ -13,8 +13,8 @@ export class BusLayoutComponent implements OnInit {
   @Input() numberOfSeat: number;
   @Output() outputValue: EventEmitter<any> = new EventEmitter();
   selectedSeat: Array<any> = [];
-  floorOneList: any[];
-  floorTwoList: any[];
+  floorOneList: any[] = [];
+  floorTwoList: any[] = [];
   numbersOfCol: Array<any>;
   numbersOfRow: Array<any>;
   alertSettings: any;

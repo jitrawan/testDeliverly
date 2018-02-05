@@ -11,7 +11,9 @@ import { AlertsService } from '@jaspero/ng2-alerts';
 import { AvailableTripResultModel } from '../../../../shared/models/bus/availableTripResult.model';
 import { AvailableTripModel } from '../../../../shared/models/bus/availableTripSearch.model';
 import { BusLayoutModel } from '../../../.././shared/models/bus/busLayout.model';
+import { TripModel } from '../../../.././shared/models/bus/trip.model';
 import { ErrorMessage } from '../../../../shared/constant/error-message';
+
 
 @Component({
   selector: 'app-select-round',
@@ -35,13 +37,13 @@ export class SelectRoundComponent implements OnInit {
   rtrnFare: number = 0;
   fee: number = 0;
 
-  selectedDptrTrip: any;
-  selectedRtrnTrip: any;
+  selectedDptrTrip: TripModel;
+  selectedRtrnTrip: TripModel;
 
   errorMessage: ErrorMessage = new ErrorMessage;
   alertSettings: any;
   busLayout: BusLayoutModel;
-  
+
   isTableLoading: boolean = false;
 
   constructor(
@@ -50,12 +52,21 @@ export class SelectRoundComponent implements OnInit {
     private busService: BusService,
     private sharedService: SharedService,
     private _alert: AlertsService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
 
   ) { }
 
   ngOnInit() {
-    console.log('availableTripResultModel >> ', this.availableTripResultModel);
+    let receiveData;
+    this.sharedService.receiveData.subscribe(data => receiveData = data);
+    this.availableTripResultModel = receiveData.availableTripResultModel;
+    this.availableTripSearchModel = receiveData.availableTripSearchModel;
+    this.dptrProvince = receiveData.dptrProvince;
+    this.dptrPark = receiveData.dptrPark;
+    this.rtrnProvince = receiveData.rtrnProvince;
+    this.rtrnPark = receiveData.rtrnPark;
+    this.totalPassenger = receiveData.totalPassenger;
+    // console.log('availableTripResultModel >> ', this.availableTripResultModel);
     if (this.availableTripResultModel != undefined) {
       this.dptrDate = this.setCalendar(this.convertStringToDate(this.availableTripResultModel.dptrTrips.tripDate));
       if (this.availableTripResultModel.rtrnTrips != null) {
@@ -96,6 +107,7 @@ export class SelectRoundComponent implements OnInit {
 
   selectDptrTrip(data) {
     this.selectedDptrTrip = data;
+    console.log("this.selectedDptrTrip is" , this.selectedDptrTrip);
     this.dptrFare = this.convertStringToNumber(this.selectedDptrTrip.fare) + this.convertStringToNumber(this.selectedDptrTrip.fee);
     this.fee = 15;
   }
@@ -128,7 +140,12 @@ export class SelectRoundComponent implements OnInit {
           dptrPark: this.dptrPark,
           arrvProvince: this.rtrnProvince,
           arrvPark: this.rtrnPark,
-          busLayout: this.busLayout
+          busLayout: this.busLayout,
+          arrvDate: this.selectedDptrTrip.arrvDate,
+          arrvTime: this.selectedDptrTrip.arrvTime,
+          dptrDate: this.selectedDptrTrip.date,
+          dptrTime: this.selectedDptrTrip.time,
+          
         };
         console.log('************dataListForPassNextPage************', dataListForPassNextPage);
         this.sharedService.sendData(dataListForPassNextPage);

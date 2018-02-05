@@ -38,9 +38,13 @@ export class SelectSeatComponent implements OnInit {
   ngOnInit() {
     let receiveData;
     this.sharedService.receiveData.subscribe(data => receiveData = data);
-    console.log('receiveData >>', receiveData);
+    // console.log('receiveData >>', receiveData);
     this.dptrPark = receiveData.dptrPark;
     this.arrvPark = receiveData.arrvPark;
+    this.dptrDate = receiveData.dptrDate;
+    this.arrvDate = receiveData.arrvDate;
+    console.log('dptrDate is' + this.dptrDate);
+    console.log('arrvDate is' + this.arrvDate);
     this.dptrProvince = receiveData.dptrProvince;
     this.arrvProvince = receiveData.rtrnProvince;
     this.busLayout = receiveData.busLayout;

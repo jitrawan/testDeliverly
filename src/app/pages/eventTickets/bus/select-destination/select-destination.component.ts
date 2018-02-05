@@ -32,20 +32,20 @@ export class SelectDestinationComponent implements OnInit {
   departDate: Date = new Date();
   minDate: Date = new Date();
   selectedDptrProvince: ProvinceModel;
-  selectedDptrPark: any;
+  selectedDptrPark: any = '';
   selectedArrvProvince: ProvinceModel;
   selectedArrvPark: any;
   selectedTripType: string;
   isReturnDate: boolean = true;
   selectedNumOfPerson: number;
-  isDisplay: boolean = true;
+  // isDisplay: boolean = true;
   isParkListLoading: boolean = true;
   isProvinceLoading: boolean = true;
-  isArrvProvinceLoading: boolean = true;
+  isArrvProvinceLoading: boolean = false;
   alertSettings: any;
   isShowLoading: boolean = false;
   routeMap: RoutePrvParkMapModel[];
-  invalidDates: Array<Date>;
+  // invalidDates: Array<Date>;
 
   constructor(
     private busService: BusService,
@@ -76,8 +76,9 @@ export class SelectDestinationComponent implements OnInit {
   }
 
   getParkList() {
-    this.isArrvProvinceLoading = true;
+    // this.isArrvProvinceLoading = true;
     this.busService.getMasPark().subscribe((res) => {
+    
       this.isParkListLoading = false;
       this.parkList = res.data.map((obj: any) => {
         return {
@@ -94,10 +95,9 @@ export class SelectDestinationComponent implements OnInit {
   }
 
   getRoutePrvParkMap() {
+    this.isArrvProvinceLoading = true;
     if (this.selectedDptrPark != null) {
       this.busService.getRoutePrvParkMap(this.selectedDptrPark.id).subscribe((res) => {
-        this.isArrvProvinceLoading = false;
-        this.isProvinceLoading = false;
         this.routeMap = res.data;
         this.getArrvProvince();
       });
@@ -105,27 +105,16 @@ export class SelectDestinationComponent implements OnInit {
   }
 
   selectDprtProvince(event) {
-    console.log('event >>', event);
-    console.log('this.selectedDptrProvince >>', this.selectedDptrProvince);
-    var selectedDptrParkTemp = this.selectedDptrPark;
-    var selectedArrvProvinceTemp = this.selectedArrvProvince;
-    var selectedArrvParkTemp = this.selectedArrvPark;
-    if (event == this.selectedDptrProvince) {
-      this.selectedDptrPark = selectedDptrParkTemp;
-      this.selectedArrvProvince = selectedArrvProvinceTemp;
-      this.selectedArrvPark = selectedArrvParkTemp;
-    } else {
-      // this.selectedDptrProvince = event;
-      this.selectedDptrPark = undefined;
-      this.selectedArrvProvince = undefined;
-      this.selectedArrvPark = undefined;
-
+    console.log(event);
+    if(event == ''){
+      this.selectedDptrProvince = undefined;
     }
-    // if (event == '') {
-    //   console.log('true');
-    //   this.selectedDptrProvince = undefined;
-    // } else {
-    // }
+    this.selectedDptrPark = undefined;
+    this.selectedArrvProvince = undefined;
+    this.selectedArrvPark = undefined;
+    this.dptrParkList = [];
+    this.arrvParkList = [];
+    this.arrvProvinceList = [];
   }
 
   selectArrvProvince(event) {
@@ -139,7 +128,6 @@ export class SelectDestinationComponent implements OnInit {
   }
 
   findDprtParkList() {
-
     if (this.selectedDptrProvince != undefined) {
       var listPark = this.parkList.filter(item =>
         item.province.id === this.selectedDptrProvince.id);
@@ -184,6 +172,7 @@ export class SelectDestinationComponent implements OnInit {
           this.arrvProvinceList.push(this.routeMap[index].arrvProvince);
         }
       }
+      this.isArrvProvinceLoading = false;      
     }
   }
 
@@ -256,7 +245,6 @@ export class SelectDestinationComponent implements OnInit {
           this.isShowLoading = false;
         }
       });
-
     }
   }
 

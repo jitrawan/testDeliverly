@@ -1,4 +1,4 @@
-<div class="container" *ngIf="isDisplay">
+<div class="container">
   <div class="row tripOption">
     <div class="col-6  col-md-3 p0">
       <div class="form-check-label h5">
@@ -24,14 +24,8 @@
       <div class="col-12  checkPoint">
         <input class="form-control" type="text" placeholder="เลือกต้นทาง" auto-complete [source]="provinceList" (ngModelChange)="selectDprtProvince($event)"
           [(ngModel)]="selectedDptrProvince" (blur)="findDprtParkList()" loading-text="กำลังดาวน์โหลด" list-formatter="desc"
-          [accept-user-input]="false" [disabled]="isProvinceLoading || isParkListLoading" [ngClass]="{'show-loading' : isProvinceLoading || isParkListLoading}"
-          aria-describedby="basic-addon2">
-        <!-- <div class="input-group-prepend">
-            <button class="btn btn-outline-secondary" type="button">Button</button>
-          </div> -->
-
-
-        <!-- <button (click)="selectedDptrProvince=''">Clear</button> -->
+          [accept-user-input]="true" [disabled]="isProvinceLoading || isParkListLoading" [ngClass]="{'show-loading' : isProvinceLoading || isParkListLoading}"
+          >
       </div>
       <div class="col-12 checkPoint">
         <input class="form-control" type="text" placeholder="เลือกจุดขึ้นรถ" auto-complete [source]="dptrParkList" [(ngModel)]="selectedDptrPark"
@@ -52,7 +46,7 @@
       <div class="col-12 checkPoint">
         <input class="form-control" type="text" placeholder="เลือกปลายทาง" auto-complete [source]="arrvProvinceList" (ngModelChange)="selectArrvProvince($event)"
           [(ngModel)]="selectedArrvProvince" (blur)="findArrvParkList()" loading-text="กำลังดาวน์โหลด" list-formatter="desc"
-          [accept-user-input]="false" [disabled]="isArrvProvinceLoading" [ngClass]="{'show-loading' : isArrvProvinceLoading }">
+          [accept-user-input]="false" [disabled]="arrvProvinceList.length == 0" [ngClass]="{'show-loading' : isArrvProvinceLoading }">
       </div>
       <div class="col-12 checkPoint">
         <input class="form-control" type="text" placeholder="เลือกจุดลงรถ" auto-complete [source]="arrvParkList" [(ngModel)]="selectedArrvPark"

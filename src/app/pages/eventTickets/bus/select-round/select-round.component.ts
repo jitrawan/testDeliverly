@@ -14,6 +14,7 @@ import { BusLayoutModel } from '../../../.././shared/models/bus/busLayout.model'
 import { TripModel } from '../../../.././shared/models/bus/trip.model';
 import { ErrorMessage } from '../../../../shared/constant/error-message';
 
+
 @Component({
   selector: 'app-select-round',
   templateUrl: './select-round.component.html',
@@ -37,7 +38,7 @@ export class SelectRoundComponent implements OnInit {
   fee: number = 0;
 
   selectedDptrTrip: TripModel;
-  selectedRtrnTrip: any;
+  selectedRtrnTrip: TripModel;
 
   errorMessage: ErrorMessage = new ErrorMessage;
   alertSettings: any;
@@ -51,7 +52,7 @@ export class SelectRoundComponent implements OnInit {
     private busService: BusService,
     private sharedService: SharedService,
     private _alert: AlertsService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
 
   ) { }
 
@@ -106,13 +107,13 @@ export class SelectRoundComponent implements OnInit {
 
   selectDptrTrip(data) {
     this.selectedDptrTrip = data;
+    console.log("this.selectedDptrTrip is" , this.selectedDptrTrip);
     this.dptrFare = this.convertStringToNumber(this.selectedDptrTrip.fare) + this.convertStringToNumber(this.selectedDptrTrip.fee);
     this.fee = 15;
   }
 
   selectRtrnTrip(data) {
     this.selectedRtrnTrip = data;
-    console.log('');
     this.rtrnFare = this.convertStringToNumber(this.selectedRtrnTrip.fare) + this.convertStringToNumber(this.selectedRtrnTrip.fee);
     this.fee = 15;
   }
@@ -139,7 +140,12 @@ export class SelectRoundComponent implements OnInit {
           dptrPark: this.dptrPark,
           arrvProvince: this.rtrnProvince,
           arrvPark: this.rtrnPark,
-          busLayout: this.busLayout
+          busLayout: this.busLayout,
+          arrvDate: this.selectedDptrTrip.arrvDate,
+          arrvTime: this.selectedDptrTrip.arrvTime,
+          dptrDate: this.selectedDptrTrip.date,
+          dptrTime: this.selectedDptrTrip.time,
+          
         };
         console.log('************dataListForPassNextPage************', dataListForPassNextPage);
         this.sharedService.sendData(dataListForPassNextPage);

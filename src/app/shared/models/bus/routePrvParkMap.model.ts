@@ -1,14 +1,20 @@
 import { ReserveRouteModel } from './reserveRoute.model';
-import { ParkModel } from './park.model';
-import { ProvinceModel } from './province.model';
+import { ReserveParkModel } from './reservePark.model';
+// import { ProvincModel } from './r';
 
 export class RoutePrvParkMapModel {
     route: ReserveRouteModel;
     trip: string;
-    dptrPark: ParkModel;
-    arrvPark: ParkModel;
-    dptrProvince: ProvinceModel;
-    arrvProvince: ProvinceModel;
+    dptrPark: ReserveParkModel;
+    arrvPark: ReserveParkModel;
+    dptrProvince: {
+        id: string,
+        desc: string
+    };
+    arrvProvince: {
+        id: string,
+        desc: string
+    };
     fee: string;
     fare: string;
 }

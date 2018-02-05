@@ -27,9 +27,10 @@ export class SelectDestinationComponent implements OnInit {
   arrvProvinceList: ProvinceModel[] = [];
   parkList: ParkModel[] = [];
   dptrParkList: ParkModel[] = [];
-  arrvParkList: ParkModel[] = [];
-  returnDate: Date = new Date(Date.now());
-  departDate: Date = new Date(Date.now());
+  arrvParkList: any[] = [];
+  returnDate: Date = new Date();
+  departDate: Date = new Date();
+  minDate: Date = new Date();
   selectedDptrProvince: ProvinceModel;
   selectedDptrPark: any;
   selectedArrvProvince: ProvinceModel;
@@ -43,6 +44,7 @@ export class SelectDestinationComponent implements OnInit {
   isArrvProvinceLoading: boolean = true;
   alertSettings: any;
   routeMap: RoutePrvParkMapModel[];
+  invalidDates: Array<Date>;
 
   constructor(
     private busService: BusService,
@@ -73,6 +75,7 @@ export class SelectDestinationComponent implements OnInit {
   }
 
   getParkList() {
+    this.isArrvProvinceLoading = true;
     this.busService.getMasPark().subscribe((res) => {
       this.isParkListLoading = false;
       this.parkList = res.data.map((obj: any) => {
@@ -90,19 +93,38 @@ export class SelectDestinationComponent implements OnInit {
   }
 
   getRoutePrvParkMap() {
-    this.busService.getRoutePrvParkMap(this.selectedDptrPark.id).subscribe((res) => {
-      this.isArrvProvinceLoading = false;
-      this.isProvinceLoading = false;
-      this.routeMap = res.data;
-      this.getArrvProvince();
-    });
+    if (this.selectedDptrPark != null) {
+      this.busService.getRoutePrvParkMap(this.selectedDptrPark.id).subscribe((res) => {
+        this.isArrvProvinceLoading = false;
+        this.isProvinceLoading = false;
+        this.routeMap = res.data;
+        this.getArrvProvince();
+      });
+    }
   }
 
   selectDprtProvince(event) {
-    this.selectedDptrProvince = event;
-    this.selectedDptrPark = undefined;
-    this.selectedArrvProvince = undefined;
-    this.selectedArrvPark = undefined;
+    console.log('event >>', event);
+    console.log('this.selectedDptrProvince >>', this.selectedDptrProvince);
+    var selectedDptrParkTemp = this.selectedDptrPark;
+    var selectedArrvProvinceTemp = this.selectedArrvProvince;
+    var selectedArrvParkTemp = this.selectedArrvPark;
+    if (event == this.selectedDptrProvince) {
+      this.selectedDptrPark = selectedDptrParkTemp;
+      this.selectedArrvProvince = selectedArrvProvinceTemp;
+      this.selectedArrvPark = selectedArrvParkTemp;
+    } else {
+      // this.selectedDptrProvince = event;
+      this.selectedDptrPark = undefined;
+      this.selectedArrvProvince = undefined;
+      this.selectedArrvPark = undefined;
+
+    }
+    // if (event == '') {
+    //   console.log('true');
+    //   this.selectedDptrProvince = undefined;
+    // } else {
+    // }
   }
 
   selectArrvProvince(event) {
@@ -133,39 +155,33 @@ export class SelectDestinationComponent implements OnInit {
         var isFound = false;
         if (this.routeMap[index].arrvProvince.id === this.selectedArrvProvince.id) {
           for (let indexOfList = 0; indexOfList < this.arrvParkList.length; indexOfList++) {
-            if ((this.arrvParkList[indexOfList].id == this.routeMap[index].arrvPark.id)) {
+            if (this.routeMap[index].arrvPark.desc == this.arrvParkList[indexOfList].desc) {
               isFound = true;
               break;
             }
           }
           if (!isFound) {
             this.arrvParkList.push(this.routeMap[index].arrvPark);
-            // this.arrvProvinceList.push(this.routeMap[index].arrvProvince);
           }
         }
-        // if (this.routeMap[index].arrvProvince.id === this.selectedArrvProvince.id) {
-        // }
       }
-      // if (listPark.length > 0) {
-      //   this.arrvParkList = listPark;
-      // }
     }
   }
 
   getArrvProvince() {
-    
-    this.arrvProvinceList = [];
-
-    for (let index = 0; index < this.routeMap.length; index++) {
-      var isFound = false;
-      for (let indexOfList = 0; indexOfList < this.arrvProvinceList.length; indexOfList++) {
-        if ((this.arrvProvinceList[indexOfList].id == this.routeMap[index].arrvProvince.id)) {
-          isFound = true;
-          break;
+    if (this.routeMap != null) {
+      this.arrvProvinceList = [];
+      for (let index = 0; index < this.routeMap.length; index++) {
+        var isFound = false;
+        for (let indexOfList = 0; indexOfList < this.arrvProvinceList.length; indexOfList++) {
+          if ((this.arrvProvinceList[indexOfList].id == this.routeMap[index].arrvProvince.id)) {
+            isFound = true;
+            break;
+          }
         }
-      }
-      if (!isFound) {
-        this.arrvProvinceList.push(this.routeMap[index].arrvProvince);
+        if (!isFound) {
+          this.arrvProvinceList.push(this.routeMap[index].arrvProvince);
+        }
       }
     }
   }
@@ -219,9 +235,13 @@ export class SelectDestinationComponent implements OnInit {
       this.availableTripSeach.tripType = this.selectedTripType;
       console.log('------------>>> ', this.availableTripSeach);
       this.busService.getAvailableTrip(this.availableTripSeach).subscribe((res) => {
-        this.availableTripResult = res.data;
-        console.log('res<<<', this.availableTripResult);
-        this.isDisplay = false;
+        if (res.code == 0) {
+          this.availableTripResult = res.data;
+          console.log('res<<<', this.availableTripResult);
+          this.isDisplay = false;
+        } else {
+          console.log('Error code ----', res.code);
+        }
       });
 
     }

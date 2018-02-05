@@ -43,6 +43,7 @@ export class SelectDestinationComponent implements OnInit {
   isProvinceLoading: boolean = true;
   isArrvProvinceLoading: boolean = true;
   alertSettings: any;
+  isShowLoading: boolean = false;
   routeMap: RoutePrvParkMapModel[];
   invalidDates: Array<Date>;
 
@@ -226,6 +227,7 @@ export class SelectDestinationComponent implements OnInit {
     } else if (this.selectedNumOfPerson == 0) {
       this.openDialog(this.errorMessage.pleaseSelect + "จำนวนผู้เดินทาง");
     } else {
+      this.isShowLoading = true;
       this.availableTripSeach.departDate = this.datePipe.transform(this.departDate, 'yyyy-MM-dd');
       this.availableTripSeach.returnDate = this.datePipe.transform(this.returnDate, 'yyyy-MM-dd');
       this.availableTripSeach.pickup = this.selectedDptrPark.id;

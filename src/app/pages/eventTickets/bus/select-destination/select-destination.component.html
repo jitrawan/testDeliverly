@@ -102,13 +102,13 @@
 
   <div class="row mt-2">
     <div class="col-12 col-md-6 p0 conditon">
-      <div class="col-12 p0"> เงื่อนไขการซื้อ </div>
+      <div class="col-12 px-0 pb-2"> เงื่อนไขการซื้อ </div>
       <label *ngFor="let data of condition"> {{data}} </label>
     </div>
   </div>
   <div class="row form-group">
     <div class="col-12 buttonWrapper p-0">
-      <button class="btn btn-atk-primary mt-3 buttonSize" type="button" (click)="onNextPage()">NEXT</button>
+      <button class="btn btn-atk-primary mt-3 buttonSize" type="button" (click)="onNextPage()" [ngClass]="{'disabled' : isShowLoading}"><span *ngIf="!isShowLoading; else showLoad">NEXT</span><ng-template #showLoad>Loading <i class="fa fa-circle-o-notch fa-spin"></i></ng-template></button>
     </div>
   </div>
 </div>

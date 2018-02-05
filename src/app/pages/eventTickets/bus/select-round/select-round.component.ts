@@ -41,6 +41,8 @@ export class SelectRoundComponent implements OnInit {
   errorMessage: ErrorMessage = new ErrorMessage;
   alertSettings: any;
   busLayout: BusLayoutModel;
+  
+  isTableLoading: boolean = false;
 
   constructor(
     private router: Router,
@@ -63,8 +65,10 @@ export class SelectRoundComponent implements OnInit {
   }
 
   getAvailableTrip(availableTripSearch) {
+    this.isTableLoading = true;
     this.busService.getAvailableTrip(availableTripSearch).subscribe((res) => {
       console.log("res >>", res.data);
+      this.isTableLoading = false;
       this.availableTripResultModel = res.data;
       this.dptrDate = this.setCalendar(this.convertStringToDate(this.availableTripResultModel.dptrTrips.tripDate));
       if (this.availableTripResultModel.rtrnTrips != null) {

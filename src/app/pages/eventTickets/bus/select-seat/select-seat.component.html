@@ -15,19 +15,21 @@
           <div class="col-12 topicRow">{{tripName}}</div>
         </div>
         <div class="row border1s BoxRow text-center">
-          <div class="col-md-4 col-sm-12 rowSummary ">
+          <div class="col-md-12 col-sm-12 rowSummary ">
             {{dptrPark}}
           </div>
-          <div class="col-md-4 col-sm-12 rowSummary ">
-            <i class="fa fa-long-arrow-right fa-2x" aria-hidden="true" style="color:#fe6716;"></i>
+          <div class="col-md-12 col-sm-12 rowSummary ">
+            <i class="fa fa-long-arrow-right fa-2x rotate90" aria-hidden="true" style="color:#fe6716;"></i>
           </div>
-          <div class="col-md-4  col-sm-12 rowSummary">
+          <div class="col-md-12  col-sm-12 rowSummary">
             {{arrvPark}}
           </div>
         </div>
         <div class="row border1s BoxRow text-center">
           <div class="col-md-12 col-sm-12 rowSummary">
-            {{dptrDate}} ถึง {{arrvDate}}
+            <div class="col-12">วันที่ {{dptrDate | thaidate:'short'}} เวลา {{dptrTime}} น.</div>
+            <div class="col-12"> ถึง</div>
+            <div class="col-12"> วันที่ {{arrvDate | thaidate:'short'}} เวลา {{arrvTime}} น.</div>
           </div>
         </div>
       </div>

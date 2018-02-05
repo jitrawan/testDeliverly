@@ -11,6 +11,7 @@ import { AlertsService } from '@jaspero/ng2-alerts';
 import { AvailableTripResultModel } from '../../../../shared/models/bus/availableTripResult.model';
 import { AvailableTripModel } from '../../../../shared/models/bus/availableTripSearch.model';
 import { BusLayoutModel } from '../../../.././shared/models/bus/busLayout.model';
+import { TripModel } from '../../../.././shared/models/bus/trip.model';
 import { ErrorMessage } from '../../../../shared/constant/error-message';
 
 @Component({
@@ -35,13 +36,13 @@ export class SelectRoundComponent implements OnInit {
   rtrnFare: number = 0;
   fee: number = 0;
 
-  selectedDptrTrip: any;
+  selectedDptrTrip: TripModel;
   selectedRtrnTrip: any;
 
   errorMessage: ErrorMessage = new ErrorMessage;
   alertSettings: any;
   busLayout: BusLayoutModel;
-  
+
   isTableLoading: boolean = false;
 
   constructor(
@@ -55,7 +56,16 @@ export class SelectRoundComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('availableTripResultModel >> ', this.availableTripResultModel);
+    let receiveData;
+    this.sharedService.receiveData.subscribe(data => receiveData = data);
+    this.availableTripResultModel = receiveData.availableTripResultModel;
+    this.availableTripSearchModel = receiveData.availableTripSearchModel;
+    this.dptrProvince = receiveData.dptrProvince;
+    this.dptrPark = receiveData.dptrPark;
+    this.rtrnProvince = receiveData.rtrnProvince;
+    this.rtrnPark = receiveData.rtrnPark;
+    this.totalPassenger = receiveData.totalPassenger;
+    // console.log('availableTripResultModel >> ', this.availableTripResultModel);
     if (this.availableTripResultModel != undefined) {
       this.dptrDate = this.setCalendar(this.convertStringToDate(this.availableTripResultModel.dptrTrips.tripDate));
       if (this.availableTripResultModel.rtrnTrips != null) {
@@ -102,6 +112,7 @@ export class SelectRoundComponent implements OnInit {
 
   selectRtrnTrip(data) {
     this.selectedRtrnTrip = data;
+    console.log('');
     this.rtrnFare = this.convertStringToNumber(this.selectedRtrnTrip.fare) + this.convertStringToNumber(this.selectedRtrnTrip.fee);
     this.fee = 15;
   }

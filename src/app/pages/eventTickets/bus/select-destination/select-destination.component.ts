@@ -239,10 +239,21 @@ export class SelectDestinationComponent implements OnInit {
       this.busService.getAvailableTrip(this.availableTripSeach).subscribe((res) => {
         if (res.code == 0) {
           this.availableTripResult = res.data;
-          console.log('res<<<', this.availableTripResult);
-          this.isDisplay = false;
+          let dataForSend = {
+            availableTripResultModel: this.availableTripResult,
+            availableTripSearchModel: this.availableTripSeach,
+            dptrProvince: this.selectedDptrProvince.desc,
+            dptrPark: this.selectedDptrPark.nameTh,
+            rtrnProvince: this.selectedArrvProvince.desc,
+            rtrnPark: this.selectedArrvPark.desc,
+            totalPassenger: this.selectedNumOfPerson
+          }
+          this.sharedService.sendData(dataForSend);
+          this.router.navigate(['../selectRound'], { relativeTo: this.route });
         } else {
           console.log('Error code ----', res.code);
+          this.openDialog(res.msg);
+          this.isShowLoading = false;
         }
       });
 

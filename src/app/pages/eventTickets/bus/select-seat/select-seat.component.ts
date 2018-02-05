@@ -20,6 +20,8 @@ export class SelectSeatComponent implements OnInit {
   arrvProvince: string;
   @Input() dptrDate: Date;
   @Input() arrvDate: Date;
+  @Input() dptrTime: Date;
+  @Input() arrvTime: Date;
   @Input() busLayout: BusLayoutModel;
 
 
@@ -43,8 +45,8 @@ export class SelectSeatComponent implements OnInit {
     this.arrvPark = receiveData.arrvPark;
     this.dptrDate = receiveData.dptrDate;
     this.arrvDate = receiveData.arrvDate;
-    console.log('dptrDate is' + this.dptrDate);
-    console.log('arrvDate is' + this.arrvDate);
+    this.dptrTime = receiveData.dptrTime;
+    this.arrvTime = receiveData.arrvTime;
     this.dptrProvince = receiveData.dptrProvince;
     this.arrvProvince = receiveData.rtrnProvince;
     this.busLayout = receiveData.busLayout;

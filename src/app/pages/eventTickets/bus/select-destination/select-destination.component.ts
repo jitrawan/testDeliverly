@@ -78,7 +78,7 @@ export class SelectDestinationComponent implements OnInit {
   getParkList() {
     // this.isArrvProvinceLoading = true;
     this.busService.getMasPark().subscribe((res) => {
-    
+
       this.isParkListLoading = false;
       this.parkList = res.data.map((obj: any) => {
         return {
@@ -106,7 +106,7 @@ export class SelectDestinationComponent implements OnInit {
 
   selectDprtProvince(event) {
     console.log(event);
-    if(event == ''){
+    if (event == '') {
       this.selectedDptrProvince = undefined;
     }
     this.selectedDptrPark = undefined;
@@ -154,6 +154,13 @@ export class SelectDestinationComponent implements OnInit {
           }
         }
       }
+      this.arrvParkList.sort((a, b) => {
+        if (a.desc < b.desc) return -1;
+        else if (a.desc > b.desc) return 1;
+        else return 0;
+      });
+      console.log('this.arrvParkList >> ', this.arrvParkList);
+      // this.sortObjects();
     }
   }
 
@@ -172,7 +179,12 @@ export class SelectDestinationComponent implements OnInit {
           this.arrvProvinceList.push(this.routeMap[index].arrvProvince);
         }
       }
-      this.isArrvProvinceLoading = false;      
+      this.isArrvProvinceLoading = false;
+      this.arrvProvinceList.sort((a, b) => {
+        if (a.desc < b.desc) return -1;
+        else if (a.desc > b.desc) return 1;
+        else return 0;
+      });
     }
   }
 
@@ -245,6 +257,29 @@ export class SelectDestinationComponent implements OnInit {
           this.isShowLoading = false;
         }
       });
+    }
+  }
+
+  deselect(_el) {
+    if (_el === 'selectedDptrProvince') {
+      this.selectedDptrProvince = undefined;
+      this.selectedDptrPark = undefined;
+      this.selectedArrvProvince = undefined;
+      this.selectedArrvPark = undefined;
+      this.dptrParkList = [];
+      this.arrvParkList = [];
+      this.arrvProvinceList = [];
+    } else if (_el === 'selectedDptrPark') {
+      this.selectedDptrPark = undefined;
+      this.selectedArrvProvince = undefined;
+      this.selectedArrvPark = undefined;
+      this.arrvParkList = [];
+      this.arrvProvinceList = [];
+    } else if (_el === 'selectedArrvProvince') {
+      this.selectedArrvProvince = undefined;
+      this.selectedArrvPark = undefined;
+    } else if (_el === 'selectedArrvPark') {
+      this.selectedArrvPark = undefined;
     }
   }
 

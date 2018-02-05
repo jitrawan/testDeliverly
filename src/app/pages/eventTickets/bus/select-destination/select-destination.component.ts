@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute , NavigationEnd } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
 import { AlertsService } from '@jaspero/ng2-alerts';
@@ -61,6 +61,12 @@ export class SelectDestinationComponent implements OnInit {
     this.getParkList();
     this.selectedTripType = "R";
     this.selectedNumOfPerson = 0;
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      window.scrollTo(0, 0)
+    });
   }
 
   getProvinceList() {

@@ -48,7 +48,7 @@
   </div>
   <div class="outer">
     <div class="infoBoxWrapper table-responsive-md">
-      <div class="inner-loading" [ngClass]="{'show' : isTableLoading}">
+      <div class="inner-loading" [ngClass]="{'show' : dptrTableLoading}">
         <div class="loading-wheel"></div>
       </div>
       <table class="table bordered">
@@ -137,6 +137,9 @@
   </div>
   <div class="outer">
     <div class="infoBoxWrapper table-responsive-md">
+      <div class="inner-loading" [ngClass]="{'show' : retrnTableLoading}">
+        <div class="loading-wheel"></div>
+      </div>
       <table class="table bordered">
         <tbody>
           <tr class="tableTopic">

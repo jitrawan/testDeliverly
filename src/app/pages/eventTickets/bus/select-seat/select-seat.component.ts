@@ -4,8 +4,11 @@ import { AlertsService } from '@jaspero/ng2-alerts';
 import { ErrorMessage } from '../../../../shared/constant/error-message';
 import { BusLayoutModel } from '../../../.././shared/models/bus/busLayout.model';
 import { SharedService } from '../../../../shared/services/shared-service.service';
+import { Location } from '@angular/common';
 
-
+import { AvailableTripModel } from '../../../../shared/models/bus/availableTripSearch.model';
+import { AvailableTripResultModel } from '../../../../shared/models/bus/availableTripResult.model';
+import { ProvinceModel } from '../../../../shared/models/bus/province.model';
 @Component({
   selector: 'app-select-seat',
   templateUrl: './select-seat.component.html',
@@ -30,11 +33,20 @@ export class SelectSeatComponent implements OnInit {
   errorMessage: ErrorMessage = new ErrorMessage;
   alertSettings: any;
 
+  availableTripResultModel: AvailableTripModel = new AvailableTripModel;
+  availableTripSearchModel: AvailableTripResultModel;
+  selectedDptrProvince: ProvinceModel;
+  selectedDptrPark: any = '';
+  selectedArrvProvince: ProvinceModel;
+  selectedArrvPark: any;
+  selectedNumOfPerson: number;
+  totalPassenger: any;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private _alert: AlertsService,
     private sharedService: SharedService,
+    private location: Location,
   ) { }
 
   ngOnInit() {
@@ -48,10 +60,27 @@ export class SelectSeatComponent implements OnInit {
     this.dptrTime = receiveData.dptrTime;
     this.arrvTime = receiveData.arrvTime;
     this.dptrProvince = receiveData.dptrProvince;
-    this.arrvProvince = receiveData.rtrnProvince;
+    this.arrvProvince = receiveData.arrvProvince;
     this.busLayout = receiveData.busLayout;
+    this.totalPassenger = receiveData.totalPassenger;
+    this.availableTripResultModel = receiveData.availableTripResultModel;
+    this.availableTripSearchModel = receiveData.availableTripSearchModel;
     // this.tripName = "เที่ยวไป";
   }
+
+  // dptrProvince: this.dptrProvince,
+  // dptrPark: this.dptrPark,
+  // arrvProvince: this.rtrnProvince,
+  // arrvPark: this.rtrnPark,
+  // busLayout: this.busLayout,
+  // arrvDate: this.selectedDptrTrip.arrvDate,
+  // arrvTime: this.selectedDptrTrip.arrvTime,
+  // dptrDate: this.selectedDptrTrip.date,
+  // dptrTime: this.selectedDptrTrip.time,
+  // totalPassenger: this.totalPassenger,
+  // availableTripResultModel: this.availableTripResultModel,
+  // availableTripSearchModel: this.availableTripSearchModel,
+
 
   openDialog(msg) {
     let type: any = "warning";
@@ -957,4 +986,20 @@ export class SelectSeatComponent implements OnInit {
   selectSeat(data) {
     this.selectedSeat = data;
   }
+
+  goPreviousPage() {
+    let dataBack = {
+      availableTripResultModel: this.availableTripResultModel,
+      availableTripSearchModel: this.availableTripSearchModel,
+      dptrProvince: this.selectedDptrProvince,
+      dptrPark: this.selectedDptrPark,
+      arrvProvince: this.arrvProvince,
+      arrvPark: this.arrvPark,
+      totalPassenger: this.selectedNumOfPerson
+    }
+    this.sharedService.sendData(dataBack);
+    this.location.back();
+  }
 }
+
+

@@ -4,6 +4,7 @@ import { SharedService } from '../../../../shared/services/shared-service.servic
 import { PassengerInformationModel } from '../../../../shared/models/bus/passengerInformation.model';
 import { ErrorMessage } from '../../../../shared/constant/error-message';
 import { AlertsService } from '@jaspero/ng2-alerts';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-passenger-information',
@@ -24,6 +25,7 @@ export class PassengerInformationComponent implements OnInit {
     private route: ActivatedRoute,
     private sharedService: SharedService,
     private _alert: AlertsService,
+    private location : Location,
   ) { }
 
   ngOnInit() {
@@ -82,4 +84,7 @@ export class PassengerInformationComponent implements OnInit {
     // this.sharedService.sendMessage(msg);
   }
 
+  goPreviousPage() {
+    this.location.back();
+  }
 }

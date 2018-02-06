@@ -33,7 +33,7 @@
           <input class="form-control" type="text" placeholder="เลือกจุดขึ้นรถ" auto-complete [source]="dptrParkList" [(ngModel)]="selectedDptrPark"
           (ngModelChange)="selectdprtPark($event)" (blur)="getRoutePrvParkMap()" loading-text="กำลังดาวน์โหลด" list-formatter="nameTh"
           [accept-user-input]="false" [disabled]="selectedDptrProvince == '' || selectedDptrProvince == undefined">
-          <i class="fa fa-times clearable_clear" (click)="deselect('selectedDptrPark')" [ngClass]="{ show: !selectedDptrPark == '' || !selectedDptrPark == undefined }"></i>
+          <i class="fa fa-times clearable_clear" (click)="deselect('selectedDptrPark')" [ngClass]="{ show: !selectedDptrPark == ' ' || !selectedDptrPark == undefined }"></i>
         </span>
       </div>
     </div>

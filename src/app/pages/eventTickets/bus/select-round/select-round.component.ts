@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DatePipe } from '@angular/common';
+import { DatePipe, Location } from '@angular/common';
 
 /* ---------------------------------- services -------------------*/
 import { BusService } from '../../../../shared/services/bus.service';
@@ -54,6 +54,7 @@ export class SelectRoundComponent implements OnInit {
     private sharedService: SharedService,
     private _alert: AlertsService,
     private datePipe: DatePipe,
+    private location: Location,
 
   ) { }
 
@@ -75,6 +76,8 @@ export class SelectRoundComponent implements OnInit {
       }
     }
   }
+
+
 
   getAvailableTrip(availableTripSearch) {
     this.busService.getAvailableTrip(availableTripSearch).subscribe((res) => {
@@ -108,7 +111,7 @@ export class SelectRoundComponent implements OnInit {
 
   selectDptrTrip(data) {
     this.selectedDptrTrip = data;
-    console.log("this.selectedDptrTrip is" , this.selectedDptrTrip);
+    console.log("this.selectedDptrTrip is", this.selectedDptrTrip);
     this.dptrFare = this.convertStringToNumber(this.selectedDptrTrip.fare) + this.convertStringToNumber(this.selectedDptrTrip.fee);
     this.fee = 15;
   }
@@ -146,7 +149,9 @@ export class SelectRoundComponent implements OnInit {
           arrvTime: this.selectedDptrTrip.arrvTime,
           dptrDate: this.selectedDptrTrip.date,
           dptrTime: this.selectedDptrTrip.time,
-          
+          totalPassenger: this.totalPassenger,
+          availableTripResultModel: this.availableTripResultModel,
+          availableTripSearchModel: this.availableTripSearchModel,
         };
         console.log('************dataListForPassNextPage************', dataListForPassNextPage);
         this.sharedService.sendData(dataListForPassNextPage);
@@ -205,6 +210,9 @@ export class SelectRoundComponent implements OnInit {
     }
   }
 
+  goPreviousPage() {
+    this.location.back();
+  }
   // getBusLayout(tripId, pickup, dropoff) {
   //   this.busService.getBusLayout(tripId, pickup, dropoff).subscribe((res) => {
   //     console.log("res >>", res.data);

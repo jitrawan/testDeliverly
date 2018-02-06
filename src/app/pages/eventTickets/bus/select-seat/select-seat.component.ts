@@ -5,6 +5,7 @@ import { ErrorMessage } from '../../../../shared/constant/error-message';
 import { BusLayoutModel } from '../../../.././shared/models/bus/busLayout.model';
 import { SharedService } from '../../../../shared/services/shared-service.service';
 import { Location } from '@angular/common';
+import { BusService } from '../../../../shared/services/bus.service';
 
 import { AvailableTripModel } from '../../../../shared/models/bus/availableTripSearch.model';
 import { AvailableTripResultModel } from '../../../../shared/models/bus/availableTripResult.model';
@@ -12,11 +13,12 @@ import { ProvinceModel } from '../../../../shared/models/bus/province.model';
 @Component({
   selector: 'app-select-seat',
   templateUrl: './select-seat.component.html',
-  styleUrls: ['./select-seat.component.css']
+  styleUrls: ['./select-seat.component.css'],
+  providers: [BusService]
 })
 export class SelectSeatComponent implements OnInit {
 
-  // @Input() tripName: string;
+  @Input() tripName: string;
   @Input() dptrPark: string;
   @Input() arrvPark: string;
   dptrProvince: string;
@@ -26,7 +28,8 @@ export class SelectSeatComponent implements OnInit {
   @Input() dptrTime: Date;
   @Input() arrvTime: Date;
   @Input() busLayout: BusLayoutModel;
-
+  totalPassenger: number;
+  receiveData: any;
 
   selectedSeat: any[] = [];
 
@@ -40,47 +43,40 @@ export class SelectSeatComponent implements OnInit {
   selectedArrvProvince: ProvinceModel;
   selectedArrvPark: any;
   selectedNumOfPerson: number;
-  totalPassenger: any;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private _alert: AlertsService,
     private sharedService: SharedService,
-    private location: Location,
+    private busService: BusService,
+    private location: Location
   ) { }
 
   ngOnInit() {
-    let receiveData;
-    this.sharedService.receiveData.subscribe(data => receiveData = data);
-    // console.log('receiveData >>', receiveData);
-    this.dptrPark = receiveData.dptrPark;
-    this.arrvPark = receiveData.arrvPark;
-    this.dptrDate = receiveData.dptrDate;
-    this.arrvDate = receiveData.arrvDate;
-    this.dptrTime = receiveData.dptrTime;
-    this.arrvTime = receiveData.arrvTime;
-    this.dptrProvince = receiveData.dptrProvince;
-    this.arrvProvince = receiveData.arrvProvince;
-    this.busLayout = receiveData.busLayout;
-    this.totalPassenger = receiveData.totalPassenger;
-    this.availableTripResultModel = receiveData.availableTripResultModel;
-    this.availableTripSearchModel = receiveData.availableTripSearchModel;
-    // this.tripName = "เที่ยวไป";
+    this.sharedService.receiveData.subscribe(data => this.receiveData = data);
+    console.log('this.receiveData >>', this.receiveData);
+    if (this.receiveData != null) {
+      this.dptrPark = this.receiveData.dptrPark;
+      this.arrvPark = this.receiveData.arrvPark;
+      this.totalPassenger = this.receiveData.totalPassenger;
+      this.dptrProvince = this.receiveData.dptrProvince;
+      this.arrvProvince = this.receiveData.rtrnProvince;
+      this.busLayout = this.receiveData.busLayout;
+      if (this.receiveData.tripName == 'dptrTrip') {
+        this.tripName = "เที่ยวไป";
+        this.dptrDate = this.receiveData.dptrTrip.date;
+        this.arrvDate = this.receiveData.dptrTrip.arrvDate;
+        this.dptrTime = this.receiveData.dptrTrip.time;
+        this.arrvTime = this.receiveData.dptrTrip.arrvTime;
+      } else {
+        this.tripName = "เที่ยวกลับ";
+        this.dptrDate = this.receiveData.rtrnTrip.date;
+        this.arrvDate = this.receiveData.rtrnTrip.arrvDate;
+        this.dptrTime = this.receiveData.rtrnTrip.time;
+        this.arrvTime = this.receiveData.rtrnTrip.arrvTime;
+      }
+    }
   }
-
-  // dptrProvince: this.dptrProvince,
-  // dptrPark: this.dptrPark,
-  // arrvProvince: this.rtrnProvince,
-  // arrvPark: this.rtrnPark,
-  // busLayout: this.busLayout,
-  // arrvDate: this.selectedDptrTrip.arrvDate,
-  // arrvTime: this.selectedDptrTrip.arrvTime,
-  // dptrDate: this.selectedDptrTrip.date,
-  // dptrTime: this.selectedDptrTrip.time,
-  // totalPassenger: this.totalPassenger,
-  // availableTripResultModel: this.availableTripResultModel,
-  // availableTripSearchModel: this.availableTripSearchModel,
-
 
   openDialog(msg) {
     let type: any = "warning";
@@ -94,890 +90,30 @@ export class SelectSeatComponent implements OnInit {
     markSeat: "ที่นั่งที่เลือก"
   };
 
-  // data: BusLayoutModel = {
-  //   id: "224",
-  //   code: "4202",
-  //   desc: "ม.4(ข)46ที่นั่ง/กรต.ปี56",
-  //   std: {
-  //     "id": "6",
-  //     "desc": "ม.4ข"
-  //   },
-  //   totalFloor: 2,
-  //   totalSeat: 46,
-  //   cols: 5,
-  //   rows: 11,
-  //   platform: "32",
-  //   objects: [
-  //     {
-  //       type: 1,
-  //       pos: {
-  //         x: 1,
-  //         y: 10,
-  //         z: 2
-  //       },
-  //       dim: {
-  //         h: 1,
-  //         w: 1
-  //       },
-  //       name: "A7",
-  //       reserveId: "",
-  //       status: "",
-  //       gender: "N"
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 1,
-  //         "y": 11,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "A8",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": "N"
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 2,
-  //         "y": 2,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "B1",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 2,
-  //         "y": 3,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "B2",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": "F"
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 2,
-  //         "y": 4,
-  //         "z": 1
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "B1",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 2,
-  //         "y": 4,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "B3",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": "M"
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 2,
-  //         "y": 5,
-  //         "z": 1
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "B2",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 2,
-  //         "y": 5,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "B4",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": "O"
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 2,
-  //         "y": 8,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "B5",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 2,
-  //         "y": 9,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "B6",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 2,
-  //         "y": 10,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "B7",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 2,
-  //         "y": 11,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "B8",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 2,
-  //       "pos": {
-  //         "x": 4,
-  //         "y": 1,
-  //         "z": 1
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 2
-  //       },
-  //       "name": "พขร.",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 4,
-  //         "y": 1,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "C1",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 4,
-  //         "y": 2,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "C2",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 4,
-  //         "y": 3,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "C3",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 4,
-  //         "y": 4,
-  //         "z": 1
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "C1",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 4,
-  //         "y": 4,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "C4",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 4,
-  //         "y": 5,
-  //         "z": 1
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "C2",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 4,
-  //         "y": 5,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "C5",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 4,
-  //         "y": 6,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "C6",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 2,
-  //       "pos": {
-  //         "x": 4,
-  //         "y": 7,
-  //         "z": 1
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 2
-  //       },
-  //       "name": "ห้องน้ำ",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 4,
-  //         "y": 7,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "C7",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 4,
-  //         "y": 8,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "C8",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 4,
-  //         "y": 9,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "C9",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 4,
-  //         "y": 10,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "C10",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 4,
-  //         "y": 11,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "C11",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 5,
-  //         "y": 1,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "D1",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 5,
-  //         "y": 2,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "D2",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 5,
-  //         "y": 3,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "D3",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 5,
-  //         "y": 4,
-  //         "z": 1
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "D1",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 5,
-  //         "y": 4,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "D4",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 5,
-  //         "y": 5,
-  //         "z": 1
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "D2",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 5,
-  //         "y": 5,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "D5",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 5,
-  //         "y": 6,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "D6",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 5,
-  //         "y": 7,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "D7",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 5,
-  //         "y": 8,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "D8",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 5,
-  //         "y": 9,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "D9",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 5,
-  //         "y": 10,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "D10",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 5,
-  //         "y": 11,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "D11",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 2,
-  //       "pos": {
-  //         "x": 1,
-  //         "y": 1,
-  //         "z": 1
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 2
-  //       },
-  //       "name": "บันไดล่าง1",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 2,
-  //       "pos": {
-  //         "x": 1,
-  //         "y": 1,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 2
-  //       },
-  //       "name": "บันไดบน 1",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 2,
-  //       "pos": {
-  //         "x": 1,
-  //         "y": 2,
-  //         "z": 1
-  //       },
-  //       "dim": {
-  //         "h": 2,
-  //         "w": 5
-  //       },
-  //       "name": "ห้องพัก พขร.",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 1,
-  //         "y": 2,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "A1",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 1,
-  //         "y": 3,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "A2",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 1,
-  //         "y": 4,
-  //         "z": 1
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "A1",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 1,
-  //         "y": 4,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "A3",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 1,
-  //         "y": 5,
-  //         "z": 1
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "A2",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 1,
-  //         "y": 5,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "A4",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 2,
-  //       "pos": {
-  //         "x": 1,
-  //         "y": 6,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 2,
-  //         "w": 2
-  //       },
-  //       "name": "บันไดบน 2",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 2,
-  //       "pos": {
-  //         "x": 1,
-  //         "y": 7,
-  //         "z": 1
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 2
-  //       },
-  //       "name": "บันไดล่าง 2",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 2,
-  //       "pos": {
-  //         "x": 1,
-  //         "y": 8,
-  //         "z": 1
-  //       },
-  //       "dim": {
-  //         "h": 4,
-  //         "w": 5
-  //       },
-  //       "name": "ห้องเก็บสัมภาระ",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 1,
-  //         "y": 8,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "A5",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     },
-  //     {
-  //       "type": 1,
-  //       "pos": {
-  //         "x": 1,
-  //         "y": 9,
-  //         "z": 2
-  //       },
-  //       "dim": {
-  //         "h": 1,
-  //         "w": 1
-  //       },
-  //       "name": "A6",
-  //       "reserveId": "",
-  //       "status": "",
-  //       "gender": ""
-  //     }
-  //   ]
-  // }
-
   onClick() {
     if (this.selectedSeat.length > 0) {
-      this.router.navigate(['../passengerInfomation'], { relativeTo: this.route });
+      console.log('this.receiveData.selectedRtrnTrip>>>', this.receiveData.rtrnTrip);
+      let layout;
+      if (this.tripName == 'เที่ยวไป' && this.receiveData.rtrnTrip != null) {
+        this.busService.getBusLayout(this.receiveData.rtrnTrip.id, this.receiveData.rtrnTrip.dptrPark.id, this.receiveData.rtrnTrip.arrvPark.id).subscribe((res) => {
+          layout = res.data;
+          this.receiveData = {
+            tripName: 'rtrnTrip',
+            dptrProvince: this.receiveData.dptrProvince,
+            dptrPark: this.receiveData.arrvPark,
+            arrvPark: this.receiveData.dptrPark,
+            arrvProvince: this.receiveData.rtrnProvince,
+            busLayout: layout, // layout เที่ยวกลับ
+            dptrTrip: this.receiveData.dptrTrip, // เที่ยวไป
+            rtrnTrip: this.receiveData.rtrnTrip, // เที่ยวกลับ
+            totalPassenger: this.receiveData.totalPassenger
+          }
+          this.sharedService.sendData(this.receiveData);
+          this.router.navigate(['../selectSeat2'], { relativeTo: this.route });
+        });
+      } else {
+        this.router.navigate(['../passengerInfomation'], { relativeTo: this.route });
+      }
     } else {
       this.openDialog(this.errorMessage.pleaseSelect + 'ที่นั่ง');
     }

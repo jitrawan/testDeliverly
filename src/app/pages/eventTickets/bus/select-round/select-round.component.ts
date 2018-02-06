@@ -139,25 +139,22 @@ export class SelectRoundComponent implements OnInit {
         console.log("res >>", res.data);
         this.busLayout = res.data;
         let dataListForPassNextPage = {
-          // tripName: '',
+          tripName: 'dptrTrip',
           dptrProvince: this.dptrProvince,
           dptrPark: this.dptrPark,
           arrvProvince: this.rtrnProvince,
           arrvPark: this.rtrnPark,
-          busLayout: this.busLayout,
-          arrvDate: this.selectedDptrTrip.arrvDate,
-          arrvTime: this.selectedDptrTrip.arrvTime,
-          dptrDate: this.selectedDptrTrip.date,
-          dptrTime: this.selectedDptrTrip.time,
-          totalPassenger: this.totalPassenger,
           availableTripResultModel: this.availableTripResultModel,
           availableTripSearchModel: this.availableTripSearchModel,
+          busLayout: this.busLayout, // layout เที่ยวไป
+          dptrTrip: this.selectedDptrTrip, // เที่ยวไป
+          rtrnTrip: this.selectedRtrnTrip, // เที่ยวกลับ
+          totalPassenger: this.totalPassenger
         };
         console.log('************dataListForPassNextPage************', dataListForPassNextPage);
         this.sharedService.sendData(dataListForPassNextPage);
         this.router.navigate(['../selectSeat'], { relativeTo: this.route });
       });
-      // this.getBusLayout(this.selectedDptrTrip.id, this.selectedDptrTrip.dptrPark.id, this.selectedDptrTrip.arrvPark.id);
       // var returnCode = parent.window.receiveMessage('checkAuthen');
       // console.log('return >>> ', returnCode);
       // console.log('5 >>>');
@@ -213,12 +210,4 @@ export class SelectRoundComponent implements OnInit {
   goPreviousPage() {
     this.location.back();
   }
-  // getBusLayout(tripId, pickup, dropoff) {
-  //   this.busService.getBusLayout(tripId, pickup, dropoff).subscribe((res) => {
-  //     console.log("res >>", res.data);
-  //     this.busLayout = res.data;
-  //   });
-
-  // }
-
 }

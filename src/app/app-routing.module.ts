@@ -32,6 +32,7 @@ const routes: Routes = [
       { path: '', component: SelectDestinationComponent },
       { path: 'selectRound', component: SelectRoundComponent },
       { path: 'selectSeat', component: SelectSeatComponent },
+      { path: 'selectSeat2', component: SelectSeatComponent },
       { path: 'passengerInfomation', component: PassengerInformationComponent },
       { path: 'summary', component: SummaryComponent }
     ]

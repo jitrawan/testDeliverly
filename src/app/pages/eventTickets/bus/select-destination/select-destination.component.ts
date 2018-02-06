@@ -31,9 +31,9 @@ export class SelectDestinationComponent implements OnInit {
   returnDate: Date = new Date();
   departDate: Date = new Date();
   minDate: Date = new Date();
-  selectedDptrProvince: ProvinceModel;
-  selectedDptrPark: any = '';
-  selectedArrvProvince: ProvinceModel;
+  selectedDptrProvince: any;
+  selectedDptrPark: any;
+  selectedArrvProvince: any;
   selectedArrvPark: any;
   selectedTripType: string;
   isReturnDate: boolean = true;
@@ -111,7 +111,6 @@ export class SelectDestinationComponent implements OnInit {
   }
 
   selectDprtProvince(event) {
-    console.log(event);
     if (event == '') {
       this.selectedDptrProvince = undefined;
     }
@@ -165,8 +164,6 @@ export class SelectDestinationComponent implements OnInit {
         else if (a.desc > b.desc) return 1;
         else return 0;
       });
-      console.log('this.arrvParkList >> ', this.arrvParkList);
-      // this.sortObjects();
     }
   }
 
@@ -242,7 +239,6 @@ export class SelectDestinationComponent implements OnInit {
       this.availableTripSeach.dropoff = this.selectedArrvPark.id;
       // this.availableTripSeach.dropoffDesc = this.selectedArrvPark.nameTh;
       this.availableTripSeach.tripType = this.selectedTripType;
-      console.log('------------>>> ', this.availableTripSeach);
       this.busService.getAvailableTrip(this.availableTripSeach).subscribe((res) => {
         if (res.code == 0) {
           this.availableTripResult = res.data;
@@ -258,7 +254,6 @@ export class SelectDestinationComponent implements OnInit {
           this.sharedService.sendData(dataForSend);
           this.router.navigate(['../selectRound'], { relativeTo: this.route });
         } else {
-          console.log('Error code ----', res.code);
           this.openDialog(res.msg);
           this.isShowLoading = false;
         }

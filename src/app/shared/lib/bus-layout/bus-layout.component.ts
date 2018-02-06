@@ -31,6 +31,7 @@ export class BusLayoutComponent implements OnInit {
       } else {
         this.floorOneList = this.sortObjects(this.data.objects);
       }
+      this.selectedSeat = [];
     }
   }
 
@@ -58,6 +59,7 @@ export class BusLayoutComponent implements OnInit {
   }
 
   selectSeat(event, data, id) {
+    console.log('this.selectedSeat >>', this.selectedSeat);
     if (!event.target.checked) {
       var indexOfSelectSeat = this.selectedSeat.indexOf(data);
       this.selectedSeat.splice(indexOfSelectSeat, 1);

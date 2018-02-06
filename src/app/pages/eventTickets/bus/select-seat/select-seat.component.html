@@ -2,12 +2,12 @@
 <div class="container">
   <div class="row">
 
-    <h5> ที่นั่ง </h5>
   </div>
   <div class="row form-group">
 
     <div class="col-md-7">
-      <bus-layout [data]=busLayout [numberOfSeat]=2 (outputValue)="selectSeat($event)"> </bus-layout>
+      <h5> ที่นั่ง </h5>
+      <bus-layout [data]="busLayout" [numberOfSeat]="totalPassenger" (outputValue)="selectSeat($event)"> </bus-layout>
     </div>
     <div class="col-md-5">
       <div class="infoBox">
@@ -27,9 +27,9 @@
         </div>
         <div class="row border1s BoxRow text-center">
           <div class="col-md-12 col-sm-12 rowSummary">
-            <div class="col-12">วันที่ {{dptrDate | thaidate:'short'}} เวลา {{dptrTime}} น.</div>
+            <div class="col-12">วันที่ {{dptrDate | thaidate:'full'}} เวลา {{dptrTime}} น.</div>
             <div class="col-12"> ถึง</div>
-            <div class="col-12"> วันที่ {{arrvDate | thaidate:'short'}} เวลา {{arrvTime}} น.</div>
+            <div class="col-12"> วันที่ {{arrvDate | thaidate:'full'}} เวลา {{arrvTime}} น.</div>
           </div>
         </div>
       </div>

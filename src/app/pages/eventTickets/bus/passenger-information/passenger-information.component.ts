@@ -25,6 +25,7 @@ export class PassengerInformationComponent implements OnInit {
   errorMessage = new ErrorMessage;
   isDisplay: boolean = true;
   alertSettings: any;
+  tripName: any;
   receiveData: any;
   transId: string;
   transCheckoutModel: TransCheckoutModel;
@@ -46,6 +47,9 @@ export class PassengerInformationComponent implements OnInit {
     for (let index = 0; index < this.totalPassenger; index++) {
       let passengerInfoModel: PassengerInformationModel = new PassengerInformationModel;
       this.passengerInfoList.push(passengerInfoModel);
+      let receiveData;
+      this.sharedService.receiveData.subscribe(data => receiveData = data);
+      this.receiveData = receiveData.forwardData;
     }
   }
 
@@ -95,7 +99,13 @@ export class PassengerInformationComponent implements OnInit {
     }
   }
 
+  sendMessage(msg: string) {
+    this.sharedService.sendData(this.passengerInfoList);
+  }
+
   goPreviousPage() {
     this.location.back();
   }
 }
+
+

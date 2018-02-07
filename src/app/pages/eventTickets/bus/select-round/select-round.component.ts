@@ -150,6 +150,7 @@ export class SelectRoundComponent implements OnInit {
         this.sharedService.sendData(dataListForPassNextPage);
         this.router.navigate(['../selectSeat'], { relativeTo: this.route });
       });
+      
       // var returnCode = parent.window.receiveMessage('checkAuthen');
       // console.log('return >>> ', returnCode);
       // console.log('5 >>>');

@@ -109,10 +109,6 @@ export class SelectRoundComponent implements OnInit {
 
   selectDptrTrip(data) {
     this.selectedDptrTrip = data;
-<<<<<<< HEAD
-=======
-    console.log("this.selectedDptrTrip is", this.selectedDptrTrip);
->>>>>>> e1cbcc05c5454c507446575b71d3cc20f1938bae
     this.dptrFare = this.convertStringToNumber(this.selectedDptrTrip.fare) + this.convertStringToNumber(this.selectedDptrTrip.fee);
     this.fee = 15;
   }

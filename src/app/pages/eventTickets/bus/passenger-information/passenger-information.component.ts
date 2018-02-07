@@ -1,15 +1,21 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { SharedService } from '../../../../shared/services/shared-service.service';
-import { PassengerInformationModel } from '../../../../shared/models/bus/passengerInformation.model';
-import { ErrorMessage } from '../../../../shared/constant/error-message';
-import { AlertsService } from '@jaspero/ng2-alerts';
 import { Location } from '@angular/common';
+import { AlertsService } from '@jaspero/ng2-alerts';
+
+import { ErrorMessage } from '../../../../shared/constant/error-message';
+import { PassengerInformationModel } from '../../../../shared/models/bus/passengerInformation.model';
+import { TransCheckoutModel } from '../../../../shared/models/bus/transCheckout.model';
+
+import { SharedService } from '../../../../shared/services/shared-service.service';
+import { BusService } from '../../../../shared/services/bus.service';
 
 @Component({
   selector: 'app-passenger-information',
   templateUrl: './passenger-information.component.html',
-  styleUrls: ['./passenger-information.component.css', '../buy-ticket/buy-ticket.component.css']
+  styleUrls: ['./passenger-information.component.css', '../buy-ticket/buy-ticket.component.css'],
+  providers: [BusService]
+
 })
 export class PassengerInformationComponent implements OnInit {
 
@@ -20,18 +26,22 @@ export class PassengerInformationComponent implements OnInit {
   isDisplay: boolean = true;
   alertSettings: any;
   receiveData: any;
+  transId: string;
+  transCheckoutModel: TransCheckoutModel;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private sharedService: SharedService,
+    private busService: BusService,
     private _alert: AlertsService,
-    private location : Location,
+    private location: Location,
   ) { }
 
   ngOnInit() {
     this.sharedService.receiveData.subscribe(data => this.receiveData = data);
     this.totalPassenger = this.receiveData.totalPassenger;
+    this.transId = this.receiveData.transId;
     this.numOfPassengerBox = Array(Number(this.totalPassenger)).fill('');
     for (let index = 0; index < this.totalPassenger; index++) {
       let passengerInfoModel: PassengerInformationModel = new PassengerInformationModel;
@@ -61,7 +71,6 @@ export class PassengerInformationComponent implements OnInit {
       if (this.passengerInfoList[index].gender == undefined) {
         this.openDialog(this.errorMessage.pleaseSelect + 'เพศ ' + 'ของผู้โดยสารคนที่ ' + (index + 1));
         isFound = true;
-        // break;
       } else if (this.passengerInfoList[index].passengerName == undefined) {
         this.openDialog(this.errorMessage.pleaseSelect + 'ชื่อ ' + 'ของผู้โดยสารคนที่ ' + (index + 1));
         isFound = true;
@@ -74,17 +83,16 @@ export class PassengerInformationComponent implements OnInit {
       }
     }
     if (!isFound) {
-      this.isDisplay = false;
-      // this.sendMessage('test');
-      // this.router.navigate(['../summary'], { relativeTo: this.route });
+      this.sharedService.sendData('');
+      this.busService.getTransCheckout(this.transId).subscribe((res) => {
+        if(res.code == 0){
+          this.transCheckoutModel = res.data;
+        }
+      });
+      //   this.isDisplay = false;
+      //   // this.sendMessage('test');
+      //   // this.router.navigate(['../summary'], { relativeTo: this.route });
     }
-  }
-
-  sendMessage(msg: string) {
-    console.log(' sendMessage >>>');
-    this.sharedService.sendData(this.passengerInfoList);
-    // this.sharedService.subject.next('test');
-    // this.sharedService.sendMessage(msg);
   }
 
   goPreviousPage() {

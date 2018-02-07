@@ -68,7 +68,6 @@ export class SelectRoundComponent implements OnInit {
     this.rtrnProvince = receiveData.rtrnProvince;
     this.rtrnPark = receiveData.rtrnPark;
     this.totalPassenger = receiveData.totalPassenger;
-    // console.log('availableTripResultModel >> ', this.availableTripResultModel);
     if (this.availableTripResultModel != undefined) {
       this.dptrDate = this.setCalendar(this.convertStringToDate(this.availableTripResultModel.dptrTrips.tripDate));
       if (this.availableTripResultModel.rtrnTrips != null) {
@@ -81,7 +80,6 @@ export class SelectRoundComponent implements OnInit {
 
   getAvailableTrip(availableTripSearch) {
     this.busService.getAvailableTrip(availableTripSearch).subscribe((res) => {
-      console.log("res >>", res.data);
       this.dptrTableLoading = false;
       this.retrnTableLoading = false;
       this.availableTripResultModel = res.data;
@@ -111,7 +109,6 @@ export class SelectRoundComponent implements OnInit {
 
   selectDptrTrip(data) {
     this.selectedDptrTrip = data;
-    console.log("this.selectedDptrTrip is", this.selectedDptrTrip);
     this.dptrFare = this.convertStringToNumber(this.selectedDptrTrip.fare) + this.convertStringToNumber(this.selectedDptrTrip.fee);
     this.fee = 15;
   }
@@ -134,9 +131,8 @@ export class SelectRoundComponent implements OnInit {
     } else if (this.availableTripResultModel.rtrnTrips != null && this.selectedRtrnTrip == undefined) {
       this.openDialog(this.errorMessage.pleaseSelect + 'วันที่และเวลาเดินทางกลับ');
     } else {
-      console.log('next page >>>>>>', this.selectedDptrTrip);
+      // parent.window.receiveMessage('checkAuthen');
       this.busService.getBusLayout(this.selectedDptrTrip.id, this.selectedDptrTrip.dptrPark.id, this.selectedDptrTrip.arrvPark.id).subscribe((res) => {
-        console.log("res >>", res.data);
         this.busLayout = res.data;
         let dataListForPassNextPage = {
           tripName: 'dptrTrip',
@@ -151,7 +147,6 @@ export class SelectRoundComponent implements OnInit {
           rtrnTrip: this.selectedRtrnTrip, // เที่ยวกลับ
           totalPassenger: this.totalPassenger
         };
-        console.log('************dataListForPassNextPage************', dataListForPassNextPage);
         this.sharedService.sendData(dataListForPassNextPage);
         this.router.navigate(['../selectSeat'], { relativeTo: this.route });
       });

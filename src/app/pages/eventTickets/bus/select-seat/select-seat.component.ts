@@ -1,16 +1,19 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertsService } from '@jaspero/ng2-alerts';
-import { ErrorMessage } from '../../../../shared/constant/error-message';
-import { BusLayoutModel } from '../../../.././shared/models/bus/busLayout.model';
 import { SharedService } from '../../../../shared/services/shared-service.service';
-import { Location } from '@angular/common';
 import { BusService } from '../../../../shared/services/bus.service';
+import { Location } from '@angular/common';
 
 import { AvailableTripModel } from '../../../../shared/models/bus/availableTripSearch.model';
 import { AvailableTripResultModel } from '../../../../shared/models/bus/availableTripResult.model';
 import { ProvinceModel } from '../../../../shared/models/bus/province.model';
 import { TripModel } from '../../../.././shared/models/bus/trip.model';
+import { ErrorMessage } from '../../../../shared/constant/error-message';
+import { BusLayoutModel } from '../../../.././shared/models/bus/busLayout.model';
+import { MarkSeatModel } from '../../../../shared/models/bus/markSeat.model';
+import { TransIdModel } from '../../../../shared/models/bus/transection/transId.model';
+
 @Component({
   selector: 'app-select-seat',
   templateUrl: './select-seat.component.html',
@@ -36,6 +39,8 @@ export class SelectSeatComponent implements OnInit {
 
   errorMessage: ErrorMessage = new ErrorMessage;
   alertSettings: any;
+  markSeatModel: MarkSeatModel;
+  transId: TransIdModel;
 
   availableTripResultModel: AvailableTripModel;
   availableTripSearchModel: AvailableTripResultModel;
@@ -54,7 +59,7 @@ export class SelectSeatComponent implements OnInit {
     private _alert: AlertsService,
     private sharedService: SharedService,
     private busService: BusService,
-    private location: Location
+    private location : Location,
   ) { }
 
   ngOnInit() {
@@ -98,10 +103,37 @@ export class SelectSeatComponent implements OnInit {
     markSeat: "ที่นั่งที่เลือก"
   };
 
+  markSeat(trip){
+    this.busService.getTransId('M').subscribe((res) => {
+      console.log('>>>>', res.data);
+      this.transId = res.data;
+      this.markSeatModel = new MarkSeatModel();
+      this.markSeatModel.transId = this.transId.transId;
+      this.markSeatModel.tripId = this.receiveData.dptrTrip.id;
+      this.markSeatModel.pickup = this.receiveData.dptrTrip.dptrPark.id;
+      this.markSeatModel.pickupDesc = this.receiveData.dptrTrip.dptrPark.desc;
+      this.markSeatModel.dropoff = this.receiveData.dptrTrip.arrvPark.id;
+      this.markSeatModel.dropoffDesc = this.receiveData.dptrTrip.arrvPark.desc;
+      this.markSeatModel.seatCnt = this.receiveData.totalPassenger;
+      this.markSeatModel.seatFloor = [];
+      this.markSeatModel.seatNo = [];
+      for (let index = 0; index < this.selectedSeat.length; index++) {
+        this.markSeatModel.seatFloor.push(this.selectedSeat[index].pos.z);
+        this.markSeatModel.seatNo.push(this.selectedSeat[index].name);
+      }
+      this.markSeatModel.gender = Array(Number(this.receiveData.totalPassenger)).fill('N');
+      console.log(' this.markSeat >>', this.markSeatModel);
+      this.busService.markSeat(this.markSeatModel).subscribe((res) => {
+        console.log('res markseat >>>', res);
+      });
+    });
+  }
   onClick() {
     if (this.selectedSeat.length > 0) {
       console.log('this.receiveData.selectedRtrnTrip>>>', this.receiveData.rtrnTrip);
       let layout;
+      this.markSeat(this.receiveData.dptrTrip);
+
       if (this.tripName == 'เที่ยวไป' && this.receiveData.rtrnTrip != null) {
         this.busService.getBusLayout(this.receiveData.rtrnTrip.id, this.receiveData.rtrnTrip.dptrPark.id, this.receiveData.rtrnTrip.arrvPark.id).subscribe((res) => {
           layout = res.data;

@@ -19,13 +19,14 @@ export class PassengerInformationComponent implements OnInit {
   errorMessage = new ErrorMessage;
   isDisplay: boolean = true;
   alertSettings: any;
-
+  tripName: any;
+  receiveData: any;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private sharedService: SharedService,
     private _alert: AlertsService,
-    private location : Location,
+    private location: Location,
   ) { }
 
   ngOnInit() {
@@ -33,6 +34,9 @@ export class PassengerInformationComponent implements OnInit {
     for (let index = 0; index < this.totalPassenger; index++) {
       let passengerInfoModel: PassengerInformationModel = new PassengerInformationModel;
       this.passengerInfoList.push(passengerInfoModel);
+      let receiveData;
+      this.sharedService.receiveData.subscribe(data => receiveData = data);
+      this.receiveData = receiveData.forwardData;
     }
   }
 
@@ -78,13 +82,12 @@ export class PassengerInformationComponent implements OnInit {
   }
 
   sendMessage(msg: string) {
-    console.log(' sendMessage >>>');
     this.sharedService.sendData(this.passengerInfoList);
-    // this.sharedService.subject.next('test');
-    // this.sharedService.sendMessage(msg);
   }
 
   goPreviousPage() {
     this.location.back();
   }
 }
+
+

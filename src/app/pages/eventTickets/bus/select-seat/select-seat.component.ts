@@ -10,6 +10,7 @@ import { BusService } from '../../../../shared/services/bus.service';
 import { AvailableTripModel } from '../../../../shared/models/bus/availableTripSearch.model';
 import { AvailableTripResultModel } from '../../../../shared/models/bus/availableTripResult.model';
 import { ProvinceModel } from '../../../../shared/models/bus/province.model';
+import { TripModel } from '../../../.././shared/models/bus/trip.model';
 @Component({
   selector: 'app-select-seat',
   templateUrl: './select-seat.component.html',
@@ -36,13 +37,17 @@ export class SelectSeatComponent implements OnInit {
   errorMessage: ErrorMessage = new ErrorMessage;
   alertSettings: any;
 
-  availableTripResultModel: AvailableTripModel = new AvailableTripModel;
+  availableTripResultModel: AvailableTripModel;
   availableTripSearchModel: AvailableTripResultModel;
   selectedDptrProvince: ProvinceModel;
   selectedDptrPark: any = '';
   selectedArrvProvince: ProvinceModel;
   selectedArrvPark: any;
   selectedNumOfPerson: number;
+  dptrTrip: any;
+  rtrnTrip: any;
+  selectedDptrTrip: TripModel;
+  selectedRtrnTrip: TripModel;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -54,14 +59,17 @@ export class SelectSeatComponent implements OnInit {
 
   ngOnInit() {
     this.sharedService.receiveData.subscribe(data => this.receiveData = data);
-    console.log('this.receiveData >>', this.receiveData);
     if (this.receiveData != null) {
       this.dptrPark = this.receiveData.dptrPark;
       this.arrvPark = this.receiveData.arrvPark;
       this.totalPassenger = this.receiveData.totalPassenger;
       this.dptrProvince = this.receiveData.dptrProvince;
-      this.arrvProvince = this.receiveData.rtrnProvince;
+      this.arrvProvince = this.receiveData.arrvProvince;
       this.busLayout = this.receiveData.busLayout;
+      this.availableTripResultModel = this.receiveData.availableTripResultModel;
+      this.availableTripSearchModel = this.receiveData.availableTripSearchModel;
+      this.selectedDptrTrip = this.receiveData.dptrTrip;
+      this.selectedRtrnTrip = this.receiveData.rtrnTrip;
       if (this.receiveData.tripName == 'dptrTrip') {
         this.tripName = "เที่ยวไป";
         this.dptrDate = this.receiveData.dptrTrip.date;
@@ -102,16 +110,24 @@ export class SelectSeatComponent implements OnInit {
             dptrProvince: this.receiveData.dptrProvince,
             dptrPark: this.receiveData.arrvPark,
             arrvPark: this.receiveData.dptrPark,
-            arrvProvince: this.receiveData.rtrnProvince,
+            arrvProvince: this.receiveData.arrvProvince,
             busLayout: layout, // layout เที่ยวกลับ
             dptrTrip: this.receiveData.dptrTrip, // เที่ยวไป
             rtrnTrip: this.receiveData.rtrnTrip, // เที่ยวกลับ
-            totalPassenger: this.receiveData.totalPassenger
+            totalPassenger: this.receiveData.totalPassenger,
+            availableTripResultModel: this.availableTripResultModel,
+            availableTripSearchModel: this.availableTripSearchModel,
           }
           this.sharedService.sendData(this.receiveData);
+          console.log('data to send', this.receiveData);
+
           this.router.navigate(['../selectSeat2'], { relativeTo: this.route });
         });
       } else {
+        let forwardData = {
+          forwardData: this.receiveData,
+        }
+        this.sharedService.sendData(forwardData);
         this.router.navigate(['../passengerInfomation'], { relativeTo: this.route });
       }
     } else {
@@ -124,18 +140,35 @@ export class SelectSeatComponent implements OnInit {
   }
 
   goPreviousPage() {
-    let dataBack = {
-      availableTripResultModel: this.availableTripResultModel,
-      availableTripSearchModel: this.availableTripSearchModel,
-      dptrProvince: this.selectedDptrProvince,
-      dptrPark: this.selectedDptrPark,
-      arrvProvince: this.arrvProvince,
-      arrvPark: this.arrvPark,
-      totalPassenger: this.selectedNumOfPerson
+    if (this.router.url == '/selectSeat') {
+      let dataBackRound = {
+        availableTripResultModel: this.availableTripResultModel,
+        availableTripSearchModel: this.availableTripSearchModel,
+        dptrProvince: this.dptrProvince,
+        dptrPark: this.dptrPark,
+        rtrnProvince: this.arrvProvince,
+        rtrnPark: this.arrvPark,
+        totalPassenger: this.totalPassenger,
+      }
+      this.sharedService.sendData(dataBackRound);
+      this.location.back();
+    } else {
+      let dataBackSeat = {
+        tripName: 'dptrTrip',
+        dptrProvince: this.dptrProvince,
+        dptrPark: this.dptrPark,
+        arrvPark: this.arrvPark,
+        arrvProvince: this.arrvProvince,
+        busLayout: this.busLayout,
+        availableTripResultModel: this.availableTripResultModel,
+        availableTripSearchModel: this.availableTripSearchModel,
+        totalPassenger: this.totalPassenger,
+        dptrTrip: this.selectedDptrTrip,
+        rtrnTrip: this.selectedRtrnTrip,
+      }
+      this.sharedService.sendData(dataBackSeat);
+      this.location.back();
     }
-    this.sharedService.sendData(dataBack);
-    this.location.back();
   }
 }
-
 

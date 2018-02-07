@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DatePipe } from '@angular/common';
+import { DatePipe, Location } from '@angular/common';
 
 /* ---------------------------------- services -------------------*/
 import { BusService } from '../../../../shared/services/bus.service';
@@ -54,6 +54,7 @@ export class SelectRoundComponent implements OnInit {
     private sharedService: SharedService,
     private _alert: AlertsService,
     private datePipe: DatePipe,
+    private location: Location,
 
   ) { }
 
@@ -74,6 +75,8 @@ export class SelectRoundComponent implements OnInit {
       }
     }
   }
+
+
 
   getAvailableTrip(availableTripSearch) {
     this.busService.getAvailableTrip(availableTripSearch).subscribe((res) => {
@@ -106,6 +109,10 @@ export class SelectRoundComponent implements OnInit {
 
   selectDptrTrip(data) {
     this.selectedDptrTrip = data;
+<<<<<<< HEAD
+=======
+    console.log("this.selectedDptrTrip is", this.selectedDptrTrip);
+>>>>>>> e1cbcc05c5454c507446575b71d3cc20f1938bae
     this.dptrFare = this.convertStringToNumber(this.selectedDptrTrip.fare) + this.convertStringToNumber(this.selectedDptrTrip.fee);
     this.fee = 15;
   }
@@ -137,6 +144,8 @@ export class SelectRoundComponent implements OnInit {
           dptrPark: this.dptrPark,
           arrvProvince: this.rtrnProvince,
           arrvPark: this.rtrnPark,
+          availableTripResultModel: this.availableTripResultModel,
+          availableTripSearchModel: this.availableTripSearchModel,
           busLayout: this.busLayout, // layout เที่ยวไป
           dptrTrip: this.selectedDptrTrip, // เที่ยวไป
           rtrnTrip: this.selectedRtrnTrip, // เที่ยวกลับ
@@ -195,5 +204,9 @@ export class SelectRoundComponent implements OnInit {
       this.dptrTableLoading = true;
       this.getAvailableTrip(this.availableTripSearchModel);
     }
+  }
+
+  goPreviousPage() {
+    this.location.back();
   }
 }

@@ -1,11 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertsService } from '@jaspero/ng2-alerts';
-import { ErrorMessage } from '../../../../shared/constant/error-message';
-import { BusLayoutModel } from '../../../.././shared/models/bus/busLayout.model';
 import { SharedService } from '../../../../shared/services/shared-service.service';
 import { BusService } from '../../../../shared/services/bus.service';
 
+import { ErrorMessage } from '../../../../shared/constant/error-message';
+import { BusLayoutModel } from '../../../.././shared/models/bus/busLayout.model';
+import { MarkSeatModel } from '../../../../shared/models/bus/markSeat.model';
+import { TransIdModel } from '../../../../shared/models/bus/transection/transId.model';
 
 @Component({
   selector: 'app-select-seat',
@@ -32,6 +34,8 @@ export class SelectSeatComponent implements OnInit {
 
   errorMessage: ErrorMessage = new ErrorMessage;
   alertSettings: any;
+  markSeat: MarkSeatModel;
+  transId: TransIdModel;
 
   constructor(
     private router: Router,
@@ -83,6 +87,32 @@ export class SelectSeatComponent implements OnInit {
     if (this.selectedSeat.length > 0) {
       console.log('this.receiveData.selectedRtrnTrip>>>', this.receiveData.rtrnTrip);
       let layout;
+      this.busService.getTransId('M').subscribe((res) => {
+        console.log('>>>>', res.data);
+        this.transId = res.data;
+        this.markSeat = new MarkSeatModel();
+        this.markSeat.transId = this.transId.transId;
+        this.markSeat.tripId = this.receiveData.dptrTrip.id;
+        this.markSeat.pickup = this.receiveData.dptrTrip.dptrPark.id;
+        this.markSeat.pickupDesc = this.receiveData.dptrTrip.dptrPark.desc;
+        this.markSeat.dropoff = this.receiveData.dptrTrip.arrvPark.id;
+        this.markSeat.dropoffDesc = this.receiveData.dptrTrip.arrvPark.desc;
+        this.markSeat.seatCnt = this.receiveData.totalPassenger;
+        this.markSeat.seatFloor = [];
+        this.markSeat.seatNo = [];
+        for (let index = 0; index < this.selectedSeat.length; index++) {
+          this.markSeat.seatFloor.push(this.selectedSeat[index].pos.z);
+          this.markSeat.seatNo.push(this.selectedSeat[index].name);
+        }
+        this.markSeat.gender = Array(Number(this.receiveData.totalPassenger)).fill('N');
+        console.log(' this.markSeat >>', this.markSeat);
+        this.busService.markSeat(this.markSeat).subscribe((res) => {
+          console.log('res markseat >>>', res);
+          // layout = res.data;
+        });
+      });
+
+
       if (this.tripName == 'เที่ยวไป' && this.receiveData.rtrnTrip != null) {
         this.busService.getBusLayout(this.receiveData.rtrnTrip.id, this.receiveData.rtrnTrip.dptrPark.id, this.receiveData.rtrnTrip.arrvPark.id).subscribe((res) => {
           layout = res.data;
@@ -101,6 +131,11 @@ export class SelectSeatComponent implements OnInit {
           this.router.navigate(['../selectSeat2'], { relativeTo: this.route });
         });
       } else {
+        let dataForSend = {
+          totalPassenger: this.receiveData.totalPassenger,
+          transId: this.transId
+        }
+        this.sharedService.sendData(dataForSend);
         this.router.navigate(['../passengerInfomation'], { relativeTo: this.route });
       }
     } else {

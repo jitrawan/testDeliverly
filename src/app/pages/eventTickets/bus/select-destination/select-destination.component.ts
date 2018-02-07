@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute , NavigationEnd } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
 import { AlertsService } from '@jaspero/ng2-alerts';
@@ -57,6 +57,8 @@ export class SelectDestinationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log('window.location.href >>', window.location.href);
+    console.log('document.location.href >>', document.location.href);
     this.getProvinceList();
     this.getParkList();
     this.selectedTripType = "R";
@@ -82,9 +84,7 @@ export class SelectDestinationComponent implements OnInit {
   }
 
   getParkList() {
-    // this.isArrvProvinceLoading = true;
     this.busService.getMasPark().subscribe((res) => {
-
       this.isParkListLoading = false;
       this.parkList = res.data.map((obj: any) => {
         return {

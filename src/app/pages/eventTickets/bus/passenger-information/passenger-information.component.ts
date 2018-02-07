@@ -18,6 +18,7 @@ export class PassengerInformationComponent implements OnInit {
   errorMessage = new ErrorMessage;
   isDisplay: boolean = true;
   alertSettings: any;
+  receiveData: any;
 
   constructor(
     private router: Router,
@@ -27,7 +28,9 @@ export class PassengerInformationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.numOfPassengerBox = Array(this.totalPassenger).fill('');
+    this.sharedService.receiveData.subscribe(data => this.receiveData = data);
+    this.totalPassenger = this.receiveData.totalPassenger;
+    this.numOfPassengerBox = Array(Number(this.totalPassenger)).fill('');
     for (let index = 0; index < this.totalPassenger; index++) {
       let passengerInfoModel: PassengerInformationModel = new PassengerInformationModel;
       this.passengerInfoList.push(passengerInfoModel);

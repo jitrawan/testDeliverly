@@ -1,88 +1,86 @@
-<div class="selectRoundBox">
-  <div class="pageTopic col-12">
-    <span>กรุณาเลือกวันที่ และ วันเดินทางไป</span>
-  </div>
-  <div class="dateRange">
-    <div class="row p0">
-      <div class="col-1 arrow">
-        <span class="left" (click)="searchTrips('dptr', dptrDate[1])">
-          <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        </span>
-      </div>
-      <div class="col-2 otherDate">
-        <span (click)="searchTrips('dptr', dptrDate[0])">{{dptrDate[0]| thaidate:'medium' }} </span>
-      </div>
-      <div class="col-2 otherDate">
-        <span (click)="searchTrips('dptr', dptrDate[1])">{{dptrDate[1]| thaidate:'medium' }}</span>
-      </div>
-      <div class="col-2 chooseDate">
-        <span> {{dptrDate[2]| thaidate:'medium' }} </span>
-      </div>
-      <div class="col-2 otherDate">
-        <span (click)="searchTrips('dptr', dptrDate[3])">{{dptrDate[3]| thaidate:'medium' }}</span>
-      </div>
-      <div class="col-2 otherDate">
-        <span (click)="searchTrips('dptr', dptrDate[4])">{{dptrDate[4]| thaidate:'medium' }}</span>
-      </div>
-      <div class="col-1 arrow">
-        <span class="right" (click)="searchTrips('dptr', dptrDate[3])">
-          <i class="fa fa-chevron-right" aria-hidden="true"></i>
-        </span>
-      </div>
+<div class="pageTopic col-12">
+  <span>กรุณาเลือกวันที่ และ วันเดินทางไป</span>
+</div>
+<div class="dateRange">
+  <div class="row p0">
+    <div class="col-1 arrow">
+      <span class="left" (click)="searchTrips('dptr', dptrDate[1])">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+      </span>
+    </div>
+    <div class="col-2 otherDate">
+      <span (click)="searchTrips('dptr', dptrDate[0])">{{dptrDate[0]| thaidate:'medium' }} </span>
+    </div>
+    <div class="col-2 otherDate">
+      <span (click)="searchTrips('dptr', dptrDate[1])">{{dptrDate[1]| thaidate:'medium' }}</span>
+    </div>
+    <div class="col-2 chooseDate">
+      <span> {{dptrDate[2]| thaidate:'medium' }} </span>
+    </div>
+    <div class="col-2 otherDate">
+      <span (click)="searchTrips('dptr', dptrDate[3])">{{dptrDate[3]| thaidate:'medium' }}</span>
+    </div>
+    <div class="col-2 otherDate">
+      <span (click)="searchTrips('dptr', dptrDate[4])">{{dptrDate[4]| thaidate:'medium' }}</span>
+    </div>
+    <div class="col-1 arrow">
+      <span class="right" (click)="searchTrips('dptr', dptrDate[3])">
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </span>
     </div>
   </div>
-  <div class="fromTo">
-    <div class="row">
-      <div class="col-12 col-lg-5 province"> {{dptrProvince}}
-        <br>
-        <span class="subFromTo">{{dptrPark}}</span>
-      </div>
-      <div class="col-12 col-lg-2">
-        <img src="../../../../assets/images/borkorsor Website-08.png" />
-      </div>
-      <div class="col-12 col-lg-5 province"> {{rtrnProvince}}
-        <br>
-        <span class="subFromTo"> {{rtrnPark}}</span>
-      </div>
-    </div>
-  </div>
-  <div class="outer">
-    <div class="infoBoxWrapper table-responsive-md">
-      <div class="inner-loading" [ngClass]="{'show' : dptrTableLoading}">
-        <div class="loading-wheel"></div>
-      </div>
-      <table class="table bordered">
-        <tbody>
-          <tr class="tableTopic">
-            <td>ออกเดินทาง</td>
-            <td>ถึงปลายทาง </td>
-            <td>มาตราฐาน</td>
-            <td>ที่นั่งคงเหลือ</td>
-            <td>ราคา</td>
-          </tr>
-          <tr class="tableResult" *ngFor="let data of availableTripResultModel.dptrTrips.trips; let index = index;">
-            <td> {{data.date | thaidate:'short'}}
-              <br> {{data.time}} น.</td>
-            <td> {{data.arrvDate | thaidate:'short'}}
-              <br> {{data.arrvTime}} น. </td>
-            <td> {{data.busStd.desc}} </td>
-            <td> {{data.emptySeats}} / {{data.seats}} ที่นั่ง</td>
-            <td *ngIf="data.emptySeats != 0">
-              <input type="radio" id="departure{{index}}" name="departure" (change)="selectDptrTrip(data)">
-              <label for="departure{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee) | number: '1.2'}} บาท</label>
-            </td>
-            <td *ngIf="data.emptySeats == 0">
-              <input type="radio" id="departure{{index}}" name="departure" (change)="selectDptrTrip(data)" disabled>
-              <label style="cursor: not-allowed;" for="departure{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee) | number: '1.2'}} บาท</label>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+</div>
+<div class="fromTo">
   <div class="row">
-    <div class="slideToChoose">Please slide the scrollbar to view more detail.</div>
+    <div class="col-12 col-lg-5 province"> {{dptrProvince}}
+      <br>
+      <span class="subFromTo">{{dptrPark}}</span>
+    </div>
+    <div class="col-12 col-lg-2">
+      <img src="../../../../assets/images/borkorsor Website-08.png" />
+    </div>
+    <div class="col-12 col-lg-5 province"> {{rtrnProvince}}
+      <br>
+      <span class="subFromTo"> {{rtrnPark}}</span>
+    </div>
   </div>
+</div>
+<div class="outer">
+  <div class="infoBoxWrapper table-responsive-md">
+    <div class="inner-loading" [ngClass]="{'show' : dptrTableLoading}">
+      <div class="loading-wheel"></div>
+    </div>
+    <table class="table bordered">
+      <tbody>
+        <tr class="tableTopic">
+          <td>ออกเดินทาง</td>
+          <td>ถึงปลายทาง </td>
+          <td>มาตราฐาน</td>
+          <td>ที่นั่งคงเหลือ</td>
+          <td>ราคา</td>
+        </tr>
+        <tr class="tableResult" *ngFor="let data of availableTripResultModel.dptrTrips.trips; let index = index;">
+          <td> {{data.date | thaidate:'short'}}
+            <br> {{data.time}} น.</td>
+          <td> {{data.arrvDate | thaidate:'short'}}
+            <br> {{data.arrvTime}} น. </td>
+          <td> {{data.busStd.desc}} </td>
+          <td> {{data.emptySeats}} / {{data.seats}} ที่นั่ง</td>
+          <td *ngIf="data.emptySeats != 0">
+            <input type="radio" id="departure{{index}}" name="departure" (change)="selectDptrTrip(data)">
+            <label for="departure{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee) | number: '1.2'}} บาท</label>
+          </td>
+          <td *ngIf="data.emptySeats == 0">
+            <input type="radio" id="departure{{index}}" name="departure" (change)="selectDptrTrip(data)" disabled>
+            <label style="cursor: not-allowed;" for="departure{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee) | number: '1.2'}} บาท</label>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <div class="slideToChoose">Please slide the scrollbar to view more detail.</div>
 </div>
 
 <div class="selectRoundBox" *ngIf="availableTripResultModel.rtrnTrips != null">

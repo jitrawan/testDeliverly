@@ -68,7 +68,7 @@
             <td> {{data.busStd.desc}} </td>
             <td> {{data.emptySeats}} / {{data.seats}} ที่นั่ง</td>
             <td *ngIf="data.emptySeats != 0">
-              <input type="radio" id="departure{{index}}" name="departure" (change)="selectDptrTrip(data)">
+              <input type="radio" id="departure{{index}}" name="departure" (change)="selectDptrTrip(data)" [checked]="this.selectedDptrTrip != undefined && this.selectedDptrTrip.id == data.id">
               <label for="departure{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee) | number: '1.2'}} บาท</label>
             </td>
             <td *ngIf="data.emptySeats == 0">
@@ -166,7 +166,7 @@
               </ng-container>
 
               <ng-template #normalInput>
-                <input type="radio" id="arrvTrip{{index}}" name="arrvTrip" (change)="selectRtrnTrip(data,$event)">
+                <input type="radio" id="arrvTrip{{index}}" name="arrvTrip" (change)="selectRtrnTrip(data,$event)" [checked]="this.selectedRtrnTrip != undefined && this.selectedRtrnTrip.id == data.id">
                 <label for="arrvTrip{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee) | number: '1.2'}} บาท</label>
               </ng-template>
 

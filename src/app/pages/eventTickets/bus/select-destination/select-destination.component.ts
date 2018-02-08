@@ -64,6 +64,7 @@ export class SelectDestinationComponent implements OnInit {
     console.log('window.location.href >>', window.location.href);
     console.log('document.location.href >>', document.location.href);
     this.maxDate.setDate(this.maxDate.getDate()+90);
+    this.maxDateForReturn.setDate(this.maxDateForReturn.getDate()+90);
     this.getProvinceList();
     this.getParkList();
     this.selectedTripType = "R";
@@ -78,6 +79,7 @@ export class SelectDestinationComponent implements OnInit {
 
   setMaxDateForReturn(_event) {
     var tempMaxDate = new Date(_event);
+    this.returnDate = undefined;
     tempMaxDate.setDate(tempMaxDate.getDate() + 30);
     this.maxDateForReturn = tempMaxDate;
     if (this.maxDateForReturn > this.maxDate) {

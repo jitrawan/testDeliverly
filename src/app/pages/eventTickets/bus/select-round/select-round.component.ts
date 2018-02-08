@@ -150,7 +150,7 @@ export class SelectRoundComponent implements OnInit {
         this.sharedService.sendData(dataListForPassNextPage);
         this.router.navigate(['../selectSeat'], { relativeTo: this.route });
       });
-      
+
       // var returnCode = parent.window.receiveMessage('checkAuthen');
       // console.log('return >>> ', returnCode);
       // console.log('5 >>>');
@@ -206,4 +206,22 @@ export class SelectRoundComponent implements OnInit {
   goPreviousPage() {
     this.location.back();
   }
-}
+  test(data) {
+    console.log('data >>', data);
+    console.log('this.selectedDptrTrip >>>', this.selectedDptrTrip);
+    if (this.selectedDptrTrip != undefined) {
+      if (data.emptySeats != 0) {
+        if (this.selectedDptrTrip.busStd.desc != data.busStd.desc) {
+          return 'false';
+        } else {
+          return 'true';
+        } 
+      } else {
+        return 'false';
+      }
+    } else {
+      return 'true';
+    }
+  }
+
+  }

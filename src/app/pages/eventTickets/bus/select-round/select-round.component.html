@@ -156,11 +156,11 @@
               <br> {{data.arrvTime}} น. </td>
             <td> {{data.busStd.desc}} </td>
             <td> {{data.emptySeats}} / {{data.seats}} ที่นั่ง</td>
-            <td *ngIf="data.emptySeats != 0">
+            <td *ngIf="test(data) == 'true'">
               <input type="radio" id="arrvTrip{{index}}" name="arrvTrip" (change)="selectRtrnTrip(data)">
               <label for="arrvTrip{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee) | number: '1.2'}} บาท</label>
             </td>
-            <td *ngIf="data.emptySeats == 0">
+            <td *ngIf="test(data) == 'false'">
               <input class="form-check-input" type="radio" id="arrvTrip{{index}}" name="arrvTrip" (change)="selectRtrnTrip(data)" disabled>
               <label style="cursor: not-allowed;" for="arrvTrip{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee) | number: '1.2'}} บาท</label>
             </td>

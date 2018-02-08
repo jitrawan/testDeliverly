@@ -216,25 +216,5 @@ export class SelectRoundComponent implements OnInit {
   goPreviousPage() {
     this.location.back();
   }
-<<<<<<< HEAD
-  test(data) {
-    // console.log('data >>', data);
-    // console.log('this.selectedDptrTrip >>>', this.selectedDptrTrip);
-    if (this.selectedDptrTrip != undefined) {
-      if (data.emptySeats != 0) {
-        if (this.selectedDptrTrip.busStd.desc != data.busStd.desc) {
-          return 'false';
-        } else {
-          return 'true';
-        } 
-      } else {
-        return 'false';
-      }
-    } else {
-      return 'true';
-    }
-  }
-=======
->>>>>>> 1f2db30825988cdebe1d9dc84d1ee3ede2f2d5c8
 
 }

@@ -35,7 +35,7 @@ export class SelectSeatComponent implements OnInit {
   totalPassenger: number;
   receiveData: any;
 
-  selectedSeat: any[] = [];
+  selectedSeat: any = [];
 
   errorMessage: ErrorMessage = new ErrorMessage;
   alertSettings: any;
@@ -53,6 +53,10 @@ export class SelectSeatComponent implements OnInit {
   rtrnTrip: any;
   selectedDptrTrip: TripModel;
   selectedRtrnTrip: TripModel;
+  trip: any;
+
+
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -85,6 +89,7 @@ export class SelectSeatComponent implements OnInit {
           console.log('>>>>', res.data);
           this.transId = res.data;
         });
+        this.trip = this.receiveData.dptrTrip;
       } else {
         this.tripName = "เที่ยวกลับ";
         this.dptrDate = this.receiveData.rtrnTrip.date;
@@ -92,6 +97,7 @@ export class SelectSeatComponent implements OnInit {
         this.dptrTime = this.receiveData.rtrnTrip.time;
         this.arrvTime = this.receiveData.rtrnTrip.arrvTime;
         this.transId = this.receiveData.transId;
+        this.trip = this.receiveData.rtrnTrip;
       }
     }
 
@@ -109,83 +115,82 @@ export class SelectSeatComponent implements OnInit {
     markSeat: "ที่นั่งที่เลือก"
   };
 
-  markSeat(trip, tripName) {
-    // this.busService.getTransId('M').subscribe((res) => {
-    // console.log('>>>>', res.data);
-    // this.transId = res.data;
-    this.markSeatModel = new MarkSeatModel();
-    this.markSeatModel.transId = this.transId.transId;
-    this.markSeatModel.tripId = trip.id;
-    this.markSeatModel.pickup = trip.dptrPark.id;
-    this.markSeatModel.pickupDesc = trip.dptrPark.id;
-    this.markSeatModel.dropoff = trip.arrvPark.id;
-    this.markSeatModel.dropoffDesc = trip.arrvPark.id;
-    this.markSeatModel.seatCnt = this.receiveData.totalPassenger;
-    this.markSeatModel.seatFloor = [];
-    this.markSeatModel.seatNo = [];
-    for (let index = 0; index < this.selectedSeat.length; index++) {
-      this.markSeatModel.seatFloor.push(this.selectedSeat[index].pos.z);
-      this.markSeatModel.seatNo.push(this.selectedSeat[index].name);
-    }
-    this.markSeatModel.gender = Array(Number(this.receiveData.totalPassenger)).fill('N');
-    console.log(' this.markSeat >>', this.markSeatModel);
-    this.busService.markSeat(this.markSeatModel).subscribe((res) => {
-      if (res.code == 0) {
-        console.log('res markseat CALL API >>>', res);
-        if (tripName == 'rtrnTrip' || this.receiveData.rtrnTrip == null) {
-          let dataForSend = {
-            totalPassenger: this.receiveData.totalPassenger,
-            transId: this.transId
+  // markSeat(trip, tripName,) {
+  //   // this.busService.getTransId('M').subscribe((res) => {
+  //   // console.log('>>>>', res.data);
+  //   // this.transId = res.data;
+  //   this.markSeatModel = new MarkSeatModel();
+  //   this.markSeatModel.transId = this.transId.transId;
+  //   this.markSeatModel.tripId = trip.id;
+  //   this.markSeatModel.pickup = trip.dptrPark.id;
+  //   this.markSeatModel.pickupDesc = trip.dptrPark.id;
+  //   this.markSeatModel.dropoff = trip.arrvPark.id;
+  //   this.markSeatModel.dropoffDesc = trip.arrvPark.id;
+  //   this.markSeatModel.seatCnt = this.receiveData.totalPassenger;
+  //   this.markSeatModel.seatFloor = [this.selectedSeat.pos.z];
+  //   this.markSeatModel.seatNo = [this.selectedSeat.name];
+  //   this.markSeatModel.gender = ['N']
+  //   // for (let index = 0; index < this.selectedSeat.length; index++) {
+  //   //   this.markSeatModel.seatFloor.push(this.selectedSeat[index].pos.z);
+  //   //   this.markSeatModel.seatNo.push(this.selectedSeat[index].name);
+  //   // }
+  //   // this.markSeatModel.gender = Array(Number(this.receiveData.totalPassenger)).fill('N');
+  //   console.log(' this.markSeat >>', this.markSeatModel);
+  //   this.busService.markSeat(this.markSeatModel).subscribe((res) => {
+  //     if (res.code == 0) {
+  //       console.log('res markseat CALL API >>>', res);
+  //       if (tripName == 'rtrnTrip' || this.receiveData.rtrnTrip == null) {
+  //         let dataForSend = {
+  //           totalPassenger: this.receiveData.totalPassenger,
+  //           transId: this.transId
+  //         }
+  //         this.sharedService.sendData(dataForSend);
+  //         this.router.navigate(['../passengerInfomation'], { relativeTo: this.route });
+  //       }
+  //     } else {
+  //       console.log('error ---- res markseat CALL API >>>', res);
+  //       this.openDialog(res.msg);
+  //     }
+  //   });
+  //   // });
+  // }
+  onClick() {
+    if (this.selectedSeat.seat.length > 0) {
+      if (this.selectedSeat.seat.length < this.totalPassenger) {
+        this.openDialog(this.errorMessage.pleaseSelect + 'ที่นั่ง');
+      } else {
+        let layout;
+        if (this.tripName == 'เที่ยวไป' && this.receiveData.rtrnTrip != null) {
+          this.busService.getBusLayout(this.receiveData.rtrnTrip.id, this.receiveData.rtrnTrip.dptrPark.id, this.receiveData.rtrnTrip.arrvPark.id).subscribe((res) => {
+            layout = res.data;
+            this.receiveData = {
+              transId: this.transId,
+              tripName: 'rtrnTrip',
+              dptrProvince: this.receiveData.dptrProvince,
+              dptrPark: this.receiveData.arrvPark,
+              arrvPark: this.receiveData.dptrPark,
+              arrvProvince: this.receiveData.arrvProvince,
+              busLayout: layout, // layout เที่ยวกลับ
+              dptrTrip: this.receiveData.dptrTrip, // เที่ยวไป
+              rtrnTrip: this.receiveData.rtrnTrip, // เที่ยวกลับ
+              totalPassenger: this.receiveData.totalPassenger,
+              availableTripResultModel: this.availableTripResultModel,
+              availableTripSearchModel: this.availableTripSearchModel,
+            }
+            this.sharedService.sendData(this.receiveData);
+            console.log('data to send >>', this.receiveData);
+
+            this.router.navigate(['../selectSeat2'], { relativeTo: this.route });
+          });
+        } else {
+          let forwardData = {
+            forwardData: this.receiveData,
           }
-          this.sharedService.sendData(dataForSend);
+          this.sharedService.sendData(forwardData);
           this.router.navigate(['../passengerInfomation'], { relativeTo: this.route });
         }
-      } else {
-        console.log('error ---- res markseat CALL API >>>', res);
-        this.openDialog(res.msg);
       }
-    });
-    // });
-  }
-  onClick() {
-    if (this.selectedSeat.length > 0) {
-      // console.log('this.receiveData.selectedRtrnTrip>>>', this.receiveData.rtrnTrip);
-      let layout;
-      // if(this.receiveData.tripName == 'dptrTrip'){
-      //   this.markSeat(this.receiveData.dptrTrip, this.receiveData.tripName);
-      // } else {
-      //   this.markSeat(this.receiveData.rtrnTrip, this.receiveData.tripName);
-      // }
 
-      if (this.tripName == 'เที่ยวไป' && this.receiveData.rtrnTrip != null) {
-        this.busService.getBusLayout(this.receiveData.rtrnTrip.id, this.receiveData.rtrnTrip.dptrPark.id, this.receiveData.rtrnTrip.arrvPark.id).subscribe((res) => {
-          layout = res.data;
-          this.receiveData = {
-            transId: this.transId,
-            tripName: 'rtrnTrip',
-            dptrProvince: this.receiveData.dptrProvince,
-            dptrPark: this.receiveData.arrvPark,
-            arrvPark: this.receiveData.dptrPark,
-            arrvProvince: this.receiveData.arrvProvince,
-            busLayout: layout, // layout เที่ยวกลับ
-            dptrTrip: this.receiveData.dptrTrip, // เที่ยวไป
-            rtrnTrip: this.receiveData.rtrnTrip, // เที่ยวกลับ
-            totalPassenger: this.receiveData.totalPassenger,
-            availableTripResultModel: this.availableTripResultModel,
-            availableTripSearchModel: this.availableTripSearchModel,
-          }
-          this.sharedService.sendData(this.receiveData);
-          console.log('data to send >>', this.receiveData);
-
-          this.router.navigate(['../selectSeat2'], { relativeTo: this.route });
-        });
-      } else {
-        let forwardData = {
-          forwardData: this.receiveData,
-        }
-        this.sharedService.sendData(forwardData);
-        this.router.navigate(['../passengerInfomation'], { relativeTo: this.route });
-      }
     } else {
       this.openDialog(this.errorMessage.pleaseSelect + 'ที่นั่ง');
     }
@@ -196,9 +201,9 @@ export class SelectSeatComponent implements OnInit {
     this.selectedSeat = data;
     if (this.selectedSeat.length > 0) {
       if (this.receiveData.tripName == 'dptrTrip') {
-        this.markSeat(this.receiveData.dptrTrip, this.receiveData.tripName);
+        // this.markSeat(this.receiveData.dptrTrip, this.receiveData.tripName);
       } else {
-        this.markSeat(this.receiveData.rtrnTrip, this.receiveData.tripName);
+        // this.markSeat(this.receiveData.rtrnTrip, this.receiveData.tripName);
       }
     }
   }

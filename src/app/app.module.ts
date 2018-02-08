@@ -21,6 +21,8 @@ import { JasperoAlertsModule } from '@jaspero/ng2-alerts';
 import { HeaderService } from './shared/services/header.service';
 import { HomeService } from './shared/services/home.service';
 import { SharedService } from './shared/services/shared-service.service';
+import { BusService } from './shared/services/bus.service';
+
 /* Page */
 import { AppComponent } from './app.component';
 
@@ -102,7 +104,13 @@ import { BuyTicketComponent } from './pages/eventTickets/bus/buy-ticket/buy-tick
     Ng2AutoCompleteModule,
     JasperoAlertsModule
   ],
-  providers: [HeaderService, HomeService, SharedService, DatePipe],
+  providers: [
+    HeaderService, 
+    HomeService, 
+    SharedService, 
+    DatePipe,
+    BusService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

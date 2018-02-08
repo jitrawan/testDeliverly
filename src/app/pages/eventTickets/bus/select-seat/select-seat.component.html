@@ -7,7 +7,9 @@
 
     <div class="col-md-7">
       <h5> ที่นั่ง </h5>
-      <bus-layout [data]="busLayout" [numberOfSeat]="totalPassenger" (outputValue)="selectSeat($event)"> </bus-layout>
+      <bus-layout [data]="busLayout" [numberOfSeat]="totalPassenger" 
+      [transId]="transId" [trip]="receiveData.dptrTrip"
+      (outputValue)="selectSeat($event)" *ngIf="transId != undefined"> </bus-layout>
     </div>
     <div class="col-md-5">
       <div class="infoBox">
@@ -41,7 +43,7 @@
         <div class="row border1s BoxRow">
           <div class="col-md-12 col-sm-12 rowSummary ">
             หมายเลขที่นั่งที่ท่านเลือก :
-            <span class="selectSeat" *ngFor="let data of selectedSeat"> {{data.name}} ชั้น {{data.pos.z}},</span>
+            <span class="selectSeat" *ngFor="let data of selectedSeat.seat"> {{data.name}} ชั้น {{data.pos.z}},</span>
           </div>
         </div>
       </div>

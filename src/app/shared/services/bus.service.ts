@@ -24,6 +24,7 @@ export class BusService {
     private getBusLayoutAPI = this.baseURL + 'ag_get_bus_layout';
     private getRoutePrvParkMapAPI = this.baseURL + 'ag_route_prv_park_map';
     private markSeatAPI = this.baseURL + 'ag_mark_seat';
+    private unMarkSeatAPI = this.baseURL + 'ag_unmark_seat';
     private getTransIdAPI = this.baseURL + 'ag_get_trans_id';
     private getTransCheckoutAPI = this.baseURL + 'ag_trans_checkout';
 
@@ -114,7 +115,6 @@ export class BusService {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         //  let options = new RequestOptions({ headers: headers, withCredentials: true });
         let options = new RequestOptions({ headers: headers });
-        // let body = markSeat;
         let body = {
             transId: markSeat.transId + "",
             tripId: markSeat.tripId + "",
@@ -124,14 +124,41 @@ export class BusService {
             dropoffDesc: markSeat.dropoffDesc + "",
             seatCnt: markSeat.seatCnt + ""
         };
-        // let seatFloor;
         for (let index = 0; index < markSeat.seatFloor.length; index++) {
             body["seatNo[" + index + "]"] = markSeat.seatNo[index] + "";
             body["gender[" + index + "]"] = markSeat.gender[index] + "";
             body["seatFloor[" + index + "]"] = markSeat.seatFloor[index] + "";
         }
-        console.log('body >>>>>> ', body);
+        console.log('body>>', body);
         return this.http.post(this.markSeatAPI, JSON.stringify(body), options)
+            .map((res: Response) => {
+                return res.json();
+            })
+        // .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
+    }
+
+    unMarkSeat(markSeat: MarkSeatModel, reserveId) {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        //  let options = new RequestOptions({ headers: headers, withCredentials: true });
+        let options = new RequestOptions({ headers: headers });
+        let body = {
+            transId: markSeat.transId + "",
+            tripId: markSeat.tripId + "",
+            pickup: markSeat.pickup + "",
+            // pickupDesc: markSeat.pickupDesc + "",
+            dropoff: markSeat.dropoff + "",
+            // dropoffDesc: markSeat.dropoffDesc + "",
+            seatCnt: markSeat.seatCnt + "",
+            // reserveId[0]: reserveId.reserveId + ""
+
+        };
+        for (let index = 0; index < markSeat.seatFloor.length; index++) {
+            body["seatNo[" + index + "]"] = markSeat.seatNo[index] + "";
+            body["seatFloor[" + index + "]"] = markSeat.seatFloor[index] + "";
+        }
+        body["reserveId[" + 0 + "]"] = reserveId.reserveId + "";
+        console.log('body>>', body);
+        return this.http.post(this.unMarkSeatAPI, JSON.stringify(body), options)
             .map((res: Response) => {
                 return res.json();
             })

@@ -26,10 +26,12 @@ import { BuyTicketComponent } from './pages/eventTickets/bus/buy-ticket/buy-tick
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
+  // { path: '**', component: SelectDestinationComponent },
   {
     path: '', component: BuyTicketComponent,
     children: [
       { path: '', component: SelectDestinationComponent },
+      { path: 'index.html/selectDestination/:payment_channel/:cust_email', component: SelectDestinationComponent },
       { path: 'selectRound', component: SelectRoundComponent },
       { path: 'selectSeat', component: SelectSeatComponent },
       { path: 'selectSeat2', component: SelectSeatComponent },
@@ -71,7 +73,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, { useHash: true })
   ],
   exports: [
     RouterModule

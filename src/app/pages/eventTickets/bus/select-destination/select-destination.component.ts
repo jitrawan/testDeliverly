@@ -45,6 +45,7 @@ export class SelectDestinationComponent implements OnInit {
   alertSettings: any;
   isShowLoading: boolean = false;
   routeMap: RoutePrvParkMapModel[];
+  sub: any;
   // invalidDates: Array<Date>;
 
   constructor(
@@ -56,9 +57,14 @@ export class SelectDestinationComponent implements OnInit {
     private datePipe: DatePipe
   ) { }
 
+  paymentChannel: string = 'mobile';
   ngOnInit() {
-    console.log('window.location.href >>', window.location.href);
-    console.log('document.location.href >>', document.location.href);
+    // alert(this.paymentChannel);
+    // this.sub = this.route.params.subscribe(params => {
+    //   console.log('params >>', params);
+    // });
+    // console.log('window.location.href >>', window.location.href);
+    // console.log('document.location.href >>', document.location.href);
     this.getProvinceList();
     this.getParkList();
     this.selectedTripType = "R";

@@ -30,6 +30,8 @@ export class SelectDestinationComponent implements OnInit {
   arrvParkList: any[] = [];
   returnDate: Date = new Date();
   departDate: Date = new Date();
+  maxDate: Date = new Date();
+  maxDateForReturn: Date = new Date();
   minDate: Date = new Date();
   selectedDptrProvince: any;
   selectedDptrPark: any;
@@ -59,6 +61,7 @@ export class SelectDestinationComponent implements OnInit {
   ngOnInit() {
     console.log('window.location.href >>', window.location.href);
     console.log('document.location.href >>', document.location.href);
+    this.maxDate.setDate(this.maxDate.getDate()+90);
     this.getProvinceList();
     this.getParkList();
     this.selectedTripType = "R";
@@ -69,6 +72,15 @@ export class SelectDestinationComponent implements OnInit {
       }
       window.scrollTo(0, 0)
     });
+  }
+
+  setMaxDateForReturn(_event) {
+    var tempMaxDate = new Date(_event);
+    tempMaxDate.setDate(tempMaxDate.getDate() + 30);
+    this.maxDateForReturn = tempMaxDate;
+    if (this.maxDateForReturn > this.maxDate) {
+      this.maxDateForReturn = this.maxDate;
+    }
   }
 
   getProvinceList() {

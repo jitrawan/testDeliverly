@@ -113,10 +113,15 @@ export class SelectRoundComponent implements OnInit {
     this.fee = 15;
   }
 
-  selectRtrnTrip(data) {
-    this.selectedRtrnTrip = data;
-    this.rtrnFare = this.convertStringToNumber(this.selectedRtrnTrip.fare) + this.convertStringToNumber(this.selectedRtrnTrip.fee);
-    this.fee = 15;
+  selectRtrnTrip(data,event) {
+    if(this.selectedDptrTrip == undefined) {
+      event.target.checked = false;
+      this.openDialog("กรุณาเลือกวันเดินทางไป");
+    } else {
+      this.selectedRtrnTrip = data;
+      this.rtrnFare = this.convertStringToNumber(this.selectedRtrnTrip.fare) + this.convertStringToNumber(this.selectedRtrnTrip.fee);
+      this.fee = 15;
+    }
   }
 
   openDialog(msg) {
@@ -172,6 +177,9 @@ export class SelectRoundComponent implements OnInit {
             "tripType": this.availableTripSearchModel.tripType
           };
           this.dptrTableLoading = true;
+          this.selectedDptrTrip = undefined;
+          this.dptrFare = 0;
+
           this.getAvailableTrip(this.availableTripSearchModel);
         }
       } else if (tripType == 'rtrn') {
@@ -186,6 +194,8 @@ export class SelectRoundComponent implements OnInit {
             "tripType": this.availableTripSearchModel.tripType
           };
           this.retrnTableLoading = true;
+          this.selectedRtrnTrip = undefined;
+          this.rtrnFare = 0;
           this.getAvailableTrip(this.availableTripSearchModel);
         }
       }
@@ -198,6 +208,8 @@ export class SelectRoundComponent implements OnInit {
         "tripType": this.availableTripSearchModel.tripType
       };
       this.dptrTableLoading = true;
+      this.selectedDptrTrip = undefined;
+      this.dptrFare = 0;
       this.getAvailableTrip(this.availableTripSearchModel);
     }
   }

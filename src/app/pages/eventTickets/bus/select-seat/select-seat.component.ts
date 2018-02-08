@@ -3,7 +3,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AlertsService } from '@jaspero/ng2-alerts';
 import { SharedService } from '../../../../shared/services/shared-service.service';
 import { BusService } from '../../../../shared/services/bus.service';
+import { Location } from '@angular/common';
 
+import { AvailableTripModel } from '../../../../shared/models/bus/availableTripSearch.model';
+import { AvailableTripResultModel } from '../../../../shared/models/bus/availableTripResult.model';
+import { ProvinceModel } from '../../../../shared/models/bus/province.model';
+import { TripModel } from '../../../.././shared/models/bus/trip.model';
 import { ErrorMessage } from '../../../../shared/constant/error-message';
 import { BusLayoutModel } from '../../../.././shared/models/bus/busLayout.model';
 import { MarkSeatModel } from '../../../../shared/models/bus/markSeat.model';
@@ -37,24 +42,39 @@ export class SelectSeatComponent implements OnInit {
   markSeatModel: MarkSeatModel;
   transId: TransIdModel;
 
+  availableTripResultModel: AvailableTripModel;
+  availableTripSearchModel: AvailableTripResultModel;
+  selectedDptrProvince: ProvinceModel;
+  selectedDptrPark: any = '';
+  selectedArrvProvince: ProvinceModel;
+  selectedArrvPark: any;
+  selectedNumOfPerson: number;
+  dptrTrip: any;
+  rtrnTrip: any;
+  selectedDptrTrip: TripModel;
+  selectedRtrnTrip: TripModel;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private _alert: AlertsService,
     private sharedService: SharedService,
-    private busService: BusService
+    private busService: BusService,
+    private location : Location,
   ) { }
 
   ngOnInit() {
     this.sharedService.receiveData.subscribe(data => this.receiveData = data);
-    console.log('this.receiveData >>', this.receiveData);
     if (this.receiveData != null) {
       this.dptrPark = this.receiveData.dptrPark;
       this.arrvPark = this.receiveData.arrvPark;
       this.totalPassenger = this.receiveData.totalPassenger;
       this.dptrProvince = this.receiveData.dptrProvince;
-      this.arrvProvince = this.receiveData.rtrnProvince;
+      this.arrvProvince = this.receiveData.arrvProvince;
       this.busLayout = this.receiveData.busLayout;
+      this.availableTripResultModel = this.receiveData.availableTripResultModel;
+      this.availableTripSearchModel = this.receiveData.availableTripSearchModel;
+      this.selectedDptrTrip = this.receiveData.dptrTrip;
+      this.selectedRtrnTrip = this.receiveData.rtrnTrip;
       if (this.receiveData.tripName == 'dptrTrip') {
         this.tripName = "เที่ยวไป";
         this.dptrDate = this.receiveData.dptrTrip.date;
@@ -83,17 +103,17 @@ export class SelectSeatComponent implements OnInit {
     markSeat: "ที่นั่งที่เลือก"
   };
 
-  markSeat(trip){
+  markSeat(trip, tripName) {
     this.busService.getTransId('M').subscribe((res) => {
       console.log('>>>>', res.data);
       this.transId = res.data;
       this.markSeatModel = new MarkSeatModel();
       this.markSeatModel.transId = this.transId.transId;
-      this.markSeatModel.tripId = this.receiveData.dptrTrip.id;
-      this.markSeatModel.pickup = this.receiveData.dptrTrip.dptrPark.id;
-      this.markSeatModel.pickupDesc = this.receiveData.dptrTrip.dptrPark.desc;
-      this.markSeatModel.dropoff = this.receiveData.dptrTrip.arrvPark.id;
-      this.markSeatModel.dropoffDesc = this.receiveData.dptrTrip.arrvPark.desc;
+      this.markSeatModel.tripId = trip.id;
+      this.markSeatModel.pickup = trip.dptrPark.id;
+      this.markSeatModel.pickupDesc = trip.dptrPark.id;
+      this.markSeatModel.dropoff = trip.arrvPark.id;
+      this.markSeatModel.dropoffDesc = trip.arrvPark.id;
       this.markSeatModel.seatCnt = this.receiveData.totalPassenger;
       this.markSeatModel.seatFloor = [];
       this.markSeatModel.seatNo = [];
@@ -104,7 +124,20 @@ export class SelectSeatComponent implements OnInit {
       this.markSeatModel.gender = Array(Number(this.receiveData.totalPassenger)).fill('N');
       console.log(' this.markSeat >>', this.markSeatModel);
       this.busService.markSeat(this.markSeatModel).subscribe((res) => {
-        console.log('res markseat >>>', res);
+        if(res.code == 0){
+          console.log('res markseat CALL API >>>', res);
+          if (tripName == 'rtrnTrip' || this.receiveData.rtrnTrip == null) {
+            let dataForSend = {
+              totalPassenger: this.receiveData.totalPassenger,
+              transId: this.transId
+            }
+            this.sharedService.sendData(dataForSend);
+            this.router.navigate(['../passengerInfomation'], { relativeTo: this.route });
+          }
+        } else {
+          console.log('error ---- res markseat CALL API >>>', res);
+          this.openDialog(res.msg);
+        }
       });
     });
   }
@@ -112,7 +145,11 @@ export class SelectSeatComponent implements OnInit {
     if (this.selectedSeat.length > 0) {
       console.log('this.receiveData.selectedRtrnTrip>>>', this.receiveData.rtrnTrip);
       let layout;
-      this.markSeat(this.receiveData.dptrTrip);
+      if(this.receiveData.tripName == 'dptrTrip'){
+        this.markSeat(this.receiveData.dptrTrip, this.receiveData.tripName);
+      } else {
+        this.markSeat(this.receiveData.rtrnTrip, this.receiveData.tripName);
+      }
 
       if (this.tripName == 'เที่ยวไป' && this.receiveData.rtrnTrip != null) {
         this.busService.getBusLayout(this.receiveData.rtrnTrip.id, this.receiveData.rtrnTrip.dptrPark.id, this.receiveData.rtrnTrip.arrvPark.id).subscribe((res) => {
@@ -122,21 +159,24 @@ export class SelectSeatComponent implements OnInit {
             dptrProvince: this.receiveData.dptrProvince,
             dptrPark: this.receiveData.arrvPark,
             arrvPark: this.receiveData.dptrPark,
-            arrvProvince: this.receiveData.rtrnProvince,
+            arrvProvince: this.receiveData.arrvProvince,
             busLayout: layout, // layout เที่ยวกลับ
             dptrTrip: this.receiveData.dptrTrip, // เที่ยวไป
             rtrnTrip: this.receiveData.rtrnTrip, // เที่ยวกลับ
-            totalPassenger: this.receiveData.totalPassenger
+            totalPassenger: this.receiveData.totalPassenger,
+            availableTripResultModel: this.availableTripResultModel,
+            availableTripSearchModel: this.availableTripSearchModel,
           }
           this.sharedService.sendData(this.receiveData);
+          console.log('data to send', this.receiveData);
+
           this.router.navigate(['../selectSeat2'], { relativeTo: this.route });
         });
       } else {
-        let dataForSend = {
-          totalPassenger: this.receiveData.totalPassenger,
-          transId: this.transId
+        let forwardData = {
+          forwardData: this.receiveData,
         }
-        this.sharedService.sendData(dataForSend);
+        this.sharedService.sendData(forwardData);
         this.router.navigate(['../passengerInfomation'], { relativeTo: this.route });
       }
     } else {
@@ -147,4 +187,37 @@ export class SelectSeatComponent implements OnInit {
   selectSeat(data) {
     this.selectedSeat = data;
   }
+
+  goPreviousPage() {
+    if (this.router.url == '/selectSeat') {
+      let dataBackRound = {
+        availableTripResultModel: this.availableTripResultModel,
+        availableTripSearchModel: this.availableTripSearchModel,
+        dptrProvince: this.dptrProvince,
+        dptrPark: this.dptrPark,
+        rtrnProvince: this.arrvProvince,
+        rtrnPark: this.arrvPark,
+        totalPassenger: this.totalPassenger,
+      }
+      this.sharedService.sendData(dataBackRound);
+      this.location.back();
+    } else {
+      let dataBackSeat = {
+        tripName: 'dptrTrip',
+        dptrProvince: this.dptrProvince,
+        dptrPark: this.dptrPark,
+        arrvPark: this.arrvPark,
+        arrvProvince: this.arrvProvince,
+        busLayout: this.busLayout,
+        availableTripResultModel: this.availableTripResultModel,
+        availableTripSearchModel: this.availableTripSearchModel,
+        totalPassenger: this.totalPassenger,
+        dptrTrip: this.selectedDptrTrip,
+        rtrnTrip: this.selectedRtrnTrip,
+      }
+      this.sharedService.sendData(dataBackSeat);
+      this.location.back();
+    }
+  }
 }
+

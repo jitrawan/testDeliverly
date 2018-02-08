@@ -47,6 +47,7 @@ export class SelectDestinationComponent implements OnInit {
   alertSettings: any;
   isShowLoading: boolean = false;
   routeMap: RoutePrvParkMapModel[];
+  sub: any;
   // invalidDates: Array<Date>;
 
   constructor(
@@ -58,6 +59,7 @@ export class SelectDestinationComponent implements OnInit {
     private datePipe: DatePipe
   ) { }
 
+  paymentChannel: string = 'mobile';
   ngOnInit() {
     console.log('window.location.href >>', window.location.href);
     console.log('document.location.href >>', document.location.href);

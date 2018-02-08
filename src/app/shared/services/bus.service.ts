@@ -13,7 +13,8 @@ import { MarkSeatModel } from '../models/bus/markSeat.model';
 export class BusService {
 
     // private baseURL = 'https://s3-ap-southeast-1.amazonaws.com/';
-    private baseURL = 'http://busticketreserve-env.ap-southeast-1.elasticbeanstalk.com/api/trs/';
+    private baseURL = 'http://d11aliyfxni7iy.cloudfront.net/api/trs/'
+    // private baseURL = 'http://busticketreserve-env.ap-southeast-1.elasticbeanstalk.com/api/trs/';
     // private getMasProvinceAPI = this.baseURL + 'allticket-trs-masterinfo/ag_mas_province.txt';
     // private getMasParkAPI = this.baseURL + 'allticket-trs-masterinfo/ag_mas_park.txt';
 
@@ -23,7 +24,8 @@ export class BusService {
     private getBusLayoutAPI = this.baseURL + 'ag_get_bus_layout';
     private getRoutePrvParkMapAPI = this.baseURL + 'ag_route_prv_park_map';
     private markSeatAPI = this.baseURL + 'ag_mark_seat';
-    private getTransIdAPI = this.baseURL + 'ag_get_trans_id'
+    private getTransIdAPI = this.baseURL + 'ag_get_trans_id';
+    private getTransCheckoutAPI = this.baseURL + 'ag_trans_checkout';
 
     constructor(private http: Http) { }
 
@@ -135,28 +137,18 @@ export class BusService {
             })
         // .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
     }
+
+    getTransCheckout(transId: string) {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        //  let options = new RequestOptions({ headers: headers, withCredentials: true });
+        let options = new RequestOptions({ headers: headers });
+        let body = {
+            transId: transId
+        };
+        return this.http.post(this.getTransCheckoutAPI, JSON.stringify(body), options)
+            .map((res: Response) => {
+                return res.json();
+            })
+        // .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
+    }
 }
-
-// let headers = new Headers({ 'Content-Type': 'application/json' });
-// let options = new RequestOptions({ headers: headers });
-// let body = {};
-// return this.http.post(this.getMasProvinceAPI, JSON.stringify(body), options)
-//     .map((res: Response) => {
-//         return res.json();
-//     })
-//     .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
-
-
-// $.ajax({
-//     url: 'http://localhost:8080/BusTicketReserveWorker/api/trs/postApi' (http://localhost:8080/BusTicketReserveWorker/api/trs/postApi%27),
-//     timeout: 0,
-//     type: 'POST',
-//     data: '{a:1}',
-//     dataType: 'json',
-//     contentType: "application/json; charset=utf-8",
-//     cache : false,
-//     crossDomain: true,
-//     success: function (dat) {
-//         console.log(dat);
-//         $('p').html(dat);
-//     }, 

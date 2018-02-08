@@ -59,8 +59,10 @@ export class BusLayoutComponent implements OnInit {
   }
 
   selectSeat(event, data, id) {
+    let unseat = null;
     console.log('this.selectedSeat >>', this.selectedSeat);
     if (!event.target.checked) {
+      unseat = data;
       var indexOfSelectSeat = this.selectedSeat.indexOf(data);
       this.selectedSeat.splice(indexOfSelectSeat, 1);
     }
@@ -68,7 +70,12 @@ export class BusLayoutComponent implements OnInit {
       if (event.target.checked) {
         this.selectedSeat.push(data);
       }
-      this.outputValue.emit(this.selectedSeat);
+      var dataToEmit = {
+        seat: this.selectedSeat,
+        unseat: unseat,
+      }
+      this.outputValue.emit(dataToEmit);
+      // this.outputValue.emit(this.selectedSeat);
     }
     else {
       this.openDialog('ไม่สามารถเลือกที่นั่งเกินจำนวนคนที่ท่านเลือกไว้ได้');

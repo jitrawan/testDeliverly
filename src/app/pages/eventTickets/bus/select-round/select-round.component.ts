@@ -207,8 +207,8 @@ export class SelectRoundComponent implements OnInit {
     this.location.back();
   }
   test(data) {
-    console.log('data >>', data);
-    console.log('this.selectedDptrTrip >>>', this.selectedDptrTrip);
+    // console.log('data >>', data);
+    // console.log('this.selectedDptrTrip >>>', this.selectedDptrTrip);
     if (this.selectedDptrTrip != undefined) {
       if (data.emptySeats != 0) {
         if (this.selectedDptrTrip.busStd.desc != data.busStd.desc) {

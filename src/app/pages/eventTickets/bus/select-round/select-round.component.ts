@@ -75,9 +75,7 @@ export class SelectRoundComponent implements OnInit {
       }
     }
   }
-
-
-
+  
   getAvailableTrip(availableTripSearch) {
     this.busService.getAvailableTrip(availableTripSearch).subscribe((res) => {
       this.dptrTableLoading = false;
@@ -113,10 +111,15 @@ export class SelectRoundComponent implements OnInit {
     this.fee = 15;
   }
 
-  selectRtrnTrip(data) {
-    this.selectedRtrnTrip = data;
-    this.rtrnFare = this.convertStringToNumber(this.selectedRtrnTrip.fare) + this.convertStringToNumber(this.selectedRtrnTrip.fee);
-    this.fee = 15;
+  selectRtrnTrip(data,event) {
+    if(this.selectedDptrTrip == undefined) {
+      event.target.checked = false;
+      this.openDialog("กรุณาเลือกวันเดินทางไป");
+    } else {
+      this.selectedRtrnTrip = data;
+      this.rtrnFare = this.convertStringToNumber(this.selectedRtrnTrip.fare) + this.convertStringToNumber(this.selectedRtrnTrip.fee);
+      this.fee = 15;
+    }
   }
 
   openDialog(msg) {
@@ -173,6 +176,9 @@ export class SelectRoundComponent implements OnInit {
             "tripType": this.availableTripSearchModel.tripType
           };
           this.dptrTableLoading = true;
+          this.selectedDptrTrip = undefined;
+          this.dptrFare = 0;
+
           this.getAvailableTrip(this.availableTripSearchModel);
         }
       } else if (tripType == 'rtrn') {
@@ -187,6 +193,8 @@ export class SelectRoundComponent implements OnInit {
             "tripType": this.availableTripSearchModel.tripType
           };
           this.retrnTableLoading = true;
+          this.selectedRtrnTrip = undefined;
+          this.rtrnFare = 0;
           this.getAvailableTrip(this.availableTripSearchModel);
         }
       }
@@ -199,6 +207,8 @@ export class SelectRoundComponent implements OnInit {
         "tripType": this.availableTripSearchModel.tripType
       };
       this.dptrTableLoading = true;
+      this.selectedDptrTrip = undefined;
+      this.dptrFare = 0;
       this.getAvailableTrip(this.availableTripSearchModel);
     }
   }
@@ -206,6 +216,7 @@ export class SelectRoundComponent implements OnInit {
   goPreviousPage() {
     this.location.back();
   }
+<<<<<<< HEAD
   test(data) {
     // console.log('data >>', data);
     // console.log('this.selectedDptrTrip >>>', this.selectedDptrTrip);
@@ -223,5 +234,7 @@ export class SelectRoundComponent implements OnInit {
       return 'true';
     }
   }
+=======
+>>>>>>> 1f2db30825988cdebe1d9dc84d1ee3ede2f2d5c8
 
-  }
+}

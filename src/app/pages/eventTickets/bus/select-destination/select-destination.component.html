@@ -69,14 +69,14 @@
     <div class="col-12 col-md-5 date">
       <label class="h5">วันที่ไป</label>
       <div class="col-12 p0">
-        <p-calendar [(ngModel)]="departDate" [showIcon]="true" [minDate]="minDate" calendarLanguage="th" *ngIf="selectedTripType == 'O'"></p-calendar>
-        <p-calendar [(ngModel)]="departDate" [showIcon]="true" calendarLanguage="th" [minDate]="minDate" *ngIf="selectedTripType == 'R'"></p-calendar>
+        <p-calendar [(ngModel)]="departDate" [showIcon]="true" [minDate]="minDate" calendarLanguage="th" [maxDate]="maxDate" *ngIf="selectedTripType == 'O'"></p-calendar>
+        <p-calendar [(ngModel)]="departDate" [showIcon]="true" calendarLanguage="th" [minDate]="minDate" [maxDate]="maxDate" *ngIf="selectedTripType == 'R'" (onSelect)="setMaxDateForReturn($event)"></p-calendar>
       </div>
     </div>
     <div class="col-12 offset-md-2 col-md-5 date" *ngIf="selectedTripType == 'R'">
       <label class="h5">วันที่กลับ</label>
-      <div class="col-12 p0" *ngIf="selectedTripType == 'R'">
-        <p-calendar [(ngModel)]="returnDate" [showIcon]="true" calendarLanguage="th" [minDate]="departDate"></p-calendar>
+      <div class="col-12 p0">
+        <p-calendar [(ngModel)]="returnDate" [showIcon]="true" calendarLanguage="th" [minDate]="departDate" [maxDate]="maxDateForReturn"></p-calendar>
       </div>
     </div>
   </div>

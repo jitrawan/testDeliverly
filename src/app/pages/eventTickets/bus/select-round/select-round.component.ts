@@ -76,7 +76,6 @@ export class SelectRoundComponent implements OnInit {
       }
     }
   }
-
   getAvailableTrip(availableTripSearch) {
     this.busService.getAvailableTrip(availableTripSearch).subscribe((res) => {
       if (res.code == 0) {
@@ -115,14 +114,29 @@ export class SelectRoundComponent implements OnInit {
 
   selectDptrTrip(data) {
     this.selectedDptrTrip = data;
+    this.selectedRtrnTrip = undefined;
     this.dptrFare = this.convertStringToNumber(this.selectedDptrTrip.fare) + this.convertStringToNumber(this.selectedDptrTrip.fee);
     this.fee = 15;
   }
 
-  selectRtrnTrip(data) {
-    this.selectedRtrnTrip = data;
-    this.rtrnFare = this.convertStringToNumber(this.selectedRtrnTrip.fare) + this.convertStringToNumber(this.selectedRtrnTrip.fee);
-    this.fee = 15;
+  selectRtrnTrip(data, event) {
+    if (this.selectedDptrTrip == undefined) {
+      event.target.checked = false;
+      this.openDialog("กรุณาเลือกวันเดินทางไป");
+    } else {
+      if (this.selectedDptrTrip.arrvDate != null && this.selectedDptrTrip.arrvTime && data != undefined) {
+        var selectedDptrDate = new Date(this.selectedDptrTrip.arrvDate + " " + this.selectedDptrTrip.arrvTime);
+        var selectedRtrnDate = new Date(data.arrvDate + " " + data.arrvTime);
+        if (selectedDptrDate > selectedRtrnDate) {
+          event.target.checked = false;
+          this.openDialog('กรุณาเลือกเที่ยวกลับ ที่มีวันและเวลา มากกว่าเที่ยวไป');
+          return;
+        }
+      }
+      this.selectedRtrnTrip = data;
+      this.rtrnFare = this.convertStringToNumber(this.selectedRtrnTrip.fare) + this.convertStringToNumber(this.selectedRtrnTrip.fee);
+      this.fee = 15;
+    }
   }
 
   openDialog(msg) {
@@ -179,6 +193,9 @@ export class SelectRoundComponent implements OnInit {
             "tripType": this.availableTripSearchModel.tripType
           };
           this.dptrTableLoading = true;
+          this.selectedDptrTrip = undefined;
+          this.dptrFare = 0;
+
           this.getAvailableTrip(this.availableTripSearchModel);
         }
       } else if (tripType == 'rtrn') {
@@ -193,6 +210,8 @@ export class SelectRoundComponent implements OnInit {
             "tripType": this.availableTripSearchModel.tripType
           };
           this.retrnTableLoading = true;
+          this.selectedRtrnTrip = undefined;
+          this.rtrnFare = 0;
           this.getAvailableTrip(this.availableTripSearchModel);
         }
       }
@@ -205,6 +224,8 @@ export class SelectRoundComponent implements OnInit {
         "tripType": this.availableTripSearchModel.tripType
       };
       this.dptrTableLoading = true;
+      this.selectedDptrTrip = undefined;
+      this.dptrFare = 0;
       this.getAvailableTrip(this.availableTripSearchModel);
 
     }
@@ -212,23 +233,6 @@ export class SelectRoundComponent implements OnInit {
 
   goPreviousPage() {
     this.location.back();
-  }
-  test(data) {
-    console.log('data >>', data);
-    console.log('this.selectedDptrTrip >>>', this.selectedDptrTrip);
-    if (this.selectedDptrTrip != undefined) {
-      if (data.emptySeats != 0) {
-        if (this.selectedDptrTrip.busStd.desc != data.busStd.desc) {
-          return 'false';
-        } else {
-          return 'true';
-        }
-      } else {
-        return 'false';
-      }
-    } else {
-      return 'true';
-    }
   }
 
 }

@@ -47,6 +47,7 @@ export class SelectRoundComponent implements OnInit {
 
   dptrTableLoading: boolean = false;
   retrnTableLoading: boolean = false;
+  isShowLoading: boolean = false;
 
   constructor(
     private router: Router,
@@ -87,8 +88,9 @@ export class SelectRoundComponent implements OnInit {
           this.rtrnDate = this.setCalendar(this.convertStringToDate(this.availableTripResultModel.rtrnTrips.tripDate));
         }
       } else {
-        // alert(res.msg);
         this.openDialog(res.msg);
+        this.availableTripResultModel.dptrTrips.trips = null;
+        this.availableTripResultModel.rtrnTrips.trips = null;
         this.dptrTableLoading = false;
         this.retrnTableLoading = false;
       }
@@ -152,23 +154,29 @@ export class SelectRoundComponent implements OnInit {
       this.openDialog(this.errorMessage.pleaseSelect + 'วันที่และเวลาเดินทางกลับ');
     } else {
       // parent.window.receiveMessage('checkAuthen');
+      this.isShowLoading = true;
       this.busService.getBusLayout(this.selectedDptrTrip.id, this.selectedDptrTrip.dptrPark.id, this.selectedDptrTrip.arrvPark.id).subscribe((res) => {
-        this.busLayout = res.data;
-        let dataListForPassNextPage = {
-          tripName: 'dptrTrip',
-          dptrProvince: this.dptrProvince,
-          dptrPark: this.dptrPark,
-          arrvProvince: this.rtrnProvince,
-          arrvPark: this.rtrnPark,
-          availableTripResultModel: this.availableTripResultModel,
-          availableTripSearchModel: this.availableTripSearchModel,
-          busLayout: this.busLayout, // layout เที่ยวไป
-          dptrTrip: this.selectedDptrTrip, // เที่ยวไป
-          rtrnTrip: this.selectedRtrnTrip, // เที่ยวกลับ
-          totalPassenger: this.totalPassenger
-        };
-        this.sharedService.sendData(dataListForPassNextPage);
-        this.router.navigate(['../selectSeat'], { relativeTo: this.route });
+        if(res.code == 0) {
+          this.busLayout = res.data;
+          let dataListForPassNextPage = {
+            tripName: 'dptrTrip',
+            dptrProvince: this.dptrProvince,
+            dptrPark: this.dptrPark,
+            arrvProvince: this.rtrnProvince,
+            arrvPark: this.rtrnPark,
+            availableTripResultModel: this.availableTripResultModel,
+            availableTripSearchModel: this.availableTripSearchModel,
+            busLayout: this.busLayout, // layout เที่ยวไป
+            dptrTrip: this.selectedDptrTrip, // เที่ยวไป
+            rtrnTrip: this.selectedRtrnTrip, // เที่ยวกลับ
+            totalPassenger: this.totalPassenger
+          };
+          this.sharedService.sendData(dataListForPassNextPage);
+          this.router.navigate(['../selectSeat'], { relativeTo: this.route });
+        } else {
+          this.openDialog(res.msg);
+          this.isShowLoading = false;
+        }
       });
 
       // var returnCode = parent.window.receiveMessage('checkAuthen');
@@ -227,7 +235,6 @@ export class SelectRoundComponent implements OnInit {
       this.selectedDptrTrip = undefined;
       this.dptrFare = 0;
       this.getAvailableTrip(this.availableTripSearchModel);
-
     }
   }
 

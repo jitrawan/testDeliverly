@@ -91,6 +91,12 @@ export class PassengerInformationComponent implements OnInit {
     }
     if (!isFound) {
       this.sharedService.sendData('');
+      this.passengerBookingModel = new PassengerBookingModel;
+      this.passengerBookingModel.transId = this.transId;
+      // if(){
+
+      // }
+      // this.passengerBookingModel.tripCnt = 1;
       this.busService.booking(this.passengerBookingModel).subscribe((res) => {
         if (res.code == 0) {
           // ------------booking ----

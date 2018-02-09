@@ -1,5 +1,5 @@
 export class PassengerBookingModel {
-    token: string;
+    // token: string;
     transId: string;
     tripCnt: string;
     seatCnt: string;

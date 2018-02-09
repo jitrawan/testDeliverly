@@ -179,7 +179,7 @@ export class BusService {
         // .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
     }
 
-    booking() {
+    booking(passengerBooking) {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         //  let options = new RequestOptions({ headers: headers, withCredentials: true });
         let options = new RequestOptions({ headers: headers });

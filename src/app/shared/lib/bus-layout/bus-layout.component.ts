@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, Renderer2 } from '@angular/core';
 import { AlertsService } from '@jaspero/ng2-alerts';
 
 import { BusService } from '../../services/bus.service';
@@ -20,8 +20,6 @@ export class BusLayoutComponent implements OnInit {
   @Input() trip: any;
 
   @Output() outputValue: EventEmitter<any> = new EventEmitter();
-
-
   selectedSeat: any = {
     seat: [],
     reserve: []
@@ -36,9 +34,14 @@ export class BusLayoutComponent implements OnInit {
   constructor(
     private _alert: AlertsService,
     private busService: BusService,
+    private renderer: Renderer2,
   ) { }
 
   ngOnInit() {
+    this.init();
+  }
+
+  init() {
     if (this.data != null) {
       this.numbersOfCol = Array(this.data.cols).fill('');
       this.numbersOfRow = Array(this.data.rows).fill('');
@@ -69,7 +72,7 @@ export class BusLayoutComponent implements OnInit {
     return objList.filter(item => item.pos.y === row);
   }
 
-  checkSeat(objList, row, pos) {
+  fatchRowData(objList, row, pos) {
     objList = this.groupObjByRow(objList, row);
     return objList.filter(item => item.pos.x === pos);
   }
@@ -84,17 +87,14 @@ export class BusLayoutComponent implements OnInit {
 
     if (this.selectedSeat.seat.length < this.numberOfSeat) {
       if (event.target.checked) {
-        // this.selectedSeat.seat.push(data);
-        this.markSeat(this.trip, data, id);
+        this.markSeat(this.trip, data, id, event);
       }
 
     } else {
       this.openDialog('ไม่สามารถเลือกที่นั่งเกินจำนวนคนที่ท่านเลือกไว้ได้');
       (document.getElementById(id) as HTMLInputElement).checked = false;
     }
-    console.log('after this.selectedSeat >>', this.selectedSeat);
     this.outputValue.emit(this.selectedSeat);
-
   }
 
   openDialog(msg) {
@@ -103,7 +103,7 @@ export class BusLayoutComponent implements OnInit {
     this._alert.create(type, msg, this.alertSettings);
   }
 
-  markSeat(trip, seat, id) {
+  markSeat(trip, seat, id, event) {
     this.markSeatModel = new MarkSeatModel();
     this.markSeatModel.transId = this.transId.transId;
     this.markSeatModel.tripId = trip.id;
@@ -127,6 +127,7 @@ export class BusLayoutComponent implements OnInit {
       } else {
         this.openDialog(res.msg);
         (document.getElementById(id) as HTMLInputElement).checked = false;
+        this.renderer.addClass(event.target.parentElement, 'Ngender');
       }
     });
   }

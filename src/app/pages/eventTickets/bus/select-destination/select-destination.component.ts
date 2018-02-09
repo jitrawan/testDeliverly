@@ -61,8 +61,6 @@ export class SelectDestinationComponent implements OnInit {
 
   paymentChannel: string = 'mobile';
   ngOnInit() {
-    console.log('window.location.href >>', window.location.href);
-    console.log('document.location.href >>', document.location.href);
     this.maxDate.setDate(this.maxDate.getDate() + 90);
     this.maxDateForReturn.setDate(this.maxDateForReturn.getDate() + 90);
     this.getProvinceList();
@@ -89,7 +87,6 @@ export class SelectDestinationComponent implements OnInit {
 
   getProvinceList() {
     this.busService.getMasProvince().subscribe((res) => {
-      // console.log('getProvinceList>> ', res.data);
       this.isProvinceLoading = false;
       this.provinceList = res.data.map((obj: any) => {
         return {
@@ -97,7 +94,6 @@ export class SelectDestinationComponent implements OnInit {
           desc: obj.desc
         };
       });
-      console.log(this.provinceList);
     });
   }
 
@@ -146,7 +142,6 @@ export class SelectDestinationComponent implements OnInit {
   }
 
   selectdprtPark(event) {
-    console.log('select Park >> ', event);
     this.selectedArrvProvince = undefined;
     this.selectedArrvPark = undefined;
   }
@@ -259,13 +254,13 @@ export class SelectDestinationComponent implements OnInit {
       this.availableTripSeach.returnDate = this.datePipe.transform(this.returnDate, 'yyyy-MM-dd');
       this.availableTripSeach.pickup = this.selectedDptrPark.id;
       // this.availableTripSeach.pickupDesc = '';
-      if (this.selectedDptrPark.id == '1223') {
-        this.availableTripSeach.pickupDesc = this.selectedDptrPark.nameTh;
-      }
+      // if (this.selectedDptrPark.id == '1223') {
+      //   this.availableTripSeach.pickupDesc = this.selectedDptrPark.nameTh;
+      // }
       this.availableTripSeach.dropoff = this.selectedArrvPark.id;
-      if (this.selectedArrvPark.id == '1223') {
-        this.availableTripSeach.dropoffDesc = this.selectedArrvPark.nameTh;
-      }
+      // if (this.selectedArrvPark.id == '1223') {
+      //   this.availableTripSeach.dropoffDesc = this.selectedArrvPark.nameTh;
+      // }
       this.availableTripSeach.tripType = this.selectedTripType;
       this.busService.getAvailableTrip(this.availableTripSeach).subscribe((res) => {
         if (res.code == 0) {

@@ -26,6 +26,7 @@ export class BusService {
     private unMarkSeatAPI = this.baseURL + 'ag_unmark_seat';
     private getTransIdAPI = this.baseURL + 'ag_get_trans_id';
     private getTransCheckoutAPI = this.baseURL + 'ag_trans_checkout';
+    private bookingAPI = this.baseURL + 'ag_booking';
 
     constructor(private http: Http) { }
 
@@ -172,6 +173,20 @@ export class BusService {
             transId: transId
         };
         return this.http.post(this.getTransCheckoutAPI, JSON.stringify(body), options)
+            .map((res: Response) => {
+                return res.json();
+            })
+        // .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
+    }
+
+    booking() {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        //  let options = new RequestOptions({ headers: headers, withCredentials: true });
+        let options = new RequestOptions({ headers: headers });
+        let body = {
+
+        };
+        return this.http.post(this.bookingAPI, JSON.stringify(body), options)
             .map((res: Response) => {
                 return res.json();
             })

@@ -6,6 +6,7 @@ import { AlertsService } from '@jaspero/ng2-alerts';
 import { ErrorMessage } from '../../../../shared/constant/error-message';
 import { PassengerInformationModel } from '../../../../shared/models/bus/passengerInformation.model';
 import { TransCheckoutModel } from '../../../../shared/models/bus/transCheckout.model';
+import { PassengerBookingModel } from '../../../../shared/models/bus/passengerBooking.model';
 
 import { SharedService } from '../../../../shared/services/shared-service.service';
 import { BusService } from '../../../../shared/services/bus.service';
@@ -23,12 +24,13 @@ export class PassengerInformationComponent implements OnInit {
   numOfPassengerBox: any[];
   passengerInfoList = new Array<PassengerInformationModel>();
   errorMessage = new ErrorMessage;
-  isDisplay: boolean = true;
+  // isDisplay: boolean = true;
   alertSettings: any;
   tripName: any;
   receiveData: any;
   transId: string;
   transCheckoutModel: TransCheckoutModel;
+  passengerBookingModel: PassengerBookingModel;
 
   constructor(
     private router: Router,
@@ -41,9 +43,10 @@ export class PassengerInformationComponent implements OnInit {
 
   ngOnInit() {
     this.sharedService.receiveData.subscribe(data => this.receiveData = data);
+    console.log('this.receiveData >>>>', this.receiveData);
     this.totalPassenger = this.receiveData.totalPassenger;
     this.transId = this.receiveData.transId;
-    this.numOfPassengerBox = Array(this.totalPassenger).fill('');
+    this.numOfPassengerBox = Array(Number(this.totalPassenger)).fill('');
     for (let index = 0; index < this.totalPassenger; index++) {
       let passengerInfoModel: PassengerInformationModel = new PassengerInformationModel;
       this.passengerInfoList.push(passengerInfoModel);
@@ -88,9 +91,9 @@ export class PassengerInformationComponent implements OnInit {
     }
     if (!isFound) {
       this.sharedService.sendData('');
-      this.busService.getTransCheckout(this.transId).subscribe((res) => {
-        if(res.code == 0){
-          this.transCheckoutModel = res.data;
+      this.busService.booking(this.passengerBookingModel).subscribe((res) => {
+        if (res.code == 0) {
+          // ------------booking ----
         }
       });
       //   this.isDisplay = false;

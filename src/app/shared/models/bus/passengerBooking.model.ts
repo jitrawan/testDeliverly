@@ -1,4 +1,4 @@
-export class BookingModel {
+export class PassengerBookingModel {
     token: string;
     transId: string;
     tripCnt: string;

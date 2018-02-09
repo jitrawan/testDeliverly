@@ -60,6 +60,10 @@
             <td>ที่นั่งคงเหลือ</td>
             <td>ราคา</td>
           </tr>
+          <tr class="tableResult" *ngIf="availableTripResultModel.dptrTrips.trips == null">
+            <td colspan="5">ไม่พบข้อมูล เที่ยววิ่ง</td>
+          </tr>
+
           <tr class="tableResult" *ngFor="let data of availableTripResultModel.dptrTrips.trips; let index = index;">
             <td> {{data.date | thaidate:'short'}}
               <br> {{data.time}} น.</td>
@@ -149,6 +153,9 @@
             <td>ที่นั่งคงเหลือ</td>
             <td>ราคา</td>
           </tr>
+          <tr class="tableResult" *ngIf="availableTripResultModel.rtrnTrips.trips == null">
+            <td colspan="5">ไม่พบข้อมูล เที่ยววิ่ง</td>
+          </tr>
           <tr class="tableResult" *ngFor="let data of availableTripResultModel.rtrnTrips.trips; let index = index;">
             <td> {{data.date | thaidate:'short'}}
               <br> {{data.time}} น.</td>
@@ -228,7 +235,7 @@
       </div>
       <div class="col-12 buttonWrapper p-0">
         <button class="btn btn-atk-danger mt-3 buttonSize" (click)="goPreviousPage()" type="button">BACK</button>
-        <button class="btn btn-atk-primary mt-3 buttonSize" (click)="goNextPage()" type="button">NEXT</button>
+        <button class="btn btn-atk-primary mt-3 buttonSize" (click)="goNextPage()" type="button" [ngClass]="{'disabled' : isShowLoading}"><span *ngIf="!isShowLoading; else showLoad">NEXT</span><ng-template #showLoad>Loading <i class="fa fa-circle-o-notch fa-spin"></i></ng-template></button>
       </div>
     </div>
   </div>

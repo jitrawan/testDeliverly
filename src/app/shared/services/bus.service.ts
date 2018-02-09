@@ -13,13 +13,12 @@ import { MarkSeatModel } from '../models/bus/markSeat.model';
 export class BusService {
 
     // private baseURL = 'https://s3-ap-southeast-1.amazonaws.com/';
-    private baseURL = 'http://d11aliyfxni7iy.cloudfront.net/api/trs/'
-    // private baseURL = 'http://busticketreserve-env.ap-southeast-1.elasticbeanstalk.com/api/trs/';
-    // private getMasProvinceAPI = this.baseURL + 'allticket-trs-masterinfo/ag_mas_province.txt';
-    // private getMasParkAPI = this.baseURL + 'allticket-trs-masterinfo/ag_mas_park.txt';
+    private baseURL = 'http://d11aliyfxni7iy.cloudfront.net/api/trs/';
+    private staticURL = 'http://d11aliyfxni7iy.cloudfront.net/master/';
+    private staticFile = '.txt';
 
-    private getMasProvinceAPI = this.baseURL + 'ag_mas_province'
-    private getMasParkAPI = this.baseURL + 'ag_mas_park';
+    private getMasProvinceAPI = this.staticURL + 'ag_mas_province' + this.staticFile;
+    private getMasParkAPI = this.staticURL + 'ag_mas_park' + this.staticFile;
     private getAvailableTripAPI = this.baseURL + 'ag_available_trip';
     private getBusLayoutAPI = this.baseURL + 'ag_get_bus_layout';
     private getRoutePrvParkMapAPI = this.baseURL + 'ag_route_prv_park_map';
@@ -34,8 +33,8 @@ export class BusService {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         //  let options = new RequestOptions({ headers: headers, withCredentials: true });
         let options = new RequestOptions({ headers: headers });
-        let body = {};
-        return this.http.post(this.getMasProvinceAPI, JSON.stringify(body), options)
+        // let body = {};
+        return this.http.get(this.getMasProvinceAPI)
             .map((res: Response) => {
                 return res.json();
             })
@@ -47,7 +46,7 @@ export class BusService {
         //  let options = new RequestOptions({ headers: headers, withCredentials: true });
         let options = new RequestOptions({ headers: headers });
         let body = {};
-        return this.http.post(this.getMasParkAPI, JSON.stringify(body), options)
+        return this.http.get(this.getMasParkAPI)
             .map((res: Response) => {
                 return res.json();
             })

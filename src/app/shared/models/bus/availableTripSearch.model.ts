@@ -1,9 +1,9 @@
 export class AvailableTripModel {
 
     pickup: string;
-    // pickupDesc: string;
+    pickupDesc: string;
     dropoff: string;
-    // dropoffDesc: string;
+    dropoffDesc: string;
     departDate: string;
     returnDate: string;
     tripType: string;

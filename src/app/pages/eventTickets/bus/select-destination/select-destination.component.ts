@@ -63,8 +63,8 @@ export class SelectDestinationComponent implements OnInit {
   ngOnInit() {
     console.log('window.location.href >>', window.location.href);
     console.log('document.location.href >>', document.location.href);
-    this.maxDate.setDate(this.maxDate.getDate()+90);
-    this.maxDateForReturn.setDate(this.maxDateForReturn.getDate()+90);
+    this.maxDate.setDate(this.maxDate.getDate() + 90);
+    this.maxDateForReturn.setDate(this.maxDateForReturn.getDate() + 90);
     this.getProvinceList();
     this.getParkList();
     this.selectedTripType = "R";
@@ -89,6 +89,7 @@ export class SelectDestinationComponent implements OnInit {
 
   getProvinceList() {
     this.busService.getMasProvince().subscribe((res) => {
+      // console.log('getProvinceList>> ', res.data);
       this.isProvinceLoading = false;
       this.provinceList = res.data.map((obj: any) => {
         return {
@@ -96,6 +97,7 @@ export class SelectDestinationComponent implements OnInit {
           desc: obj.desc
         };
       });
+      console.log(this.provinceList);
     });
   }
 
@@ -144,6 +146,7 @@ export class SelectDestinationComponent implements OnInit {
   }
 
   selectdprtPark(event) {
+    console.log('select Park >> ', event);
     this.selectedArrvProvince = undefined;
     this.selectedArrvPark = undefined;
   }
@@ -242,6 +245,10 @@ export class SelectDestinationComponent implements OnInit {
       this.openDialog(this.errorMessage.pleaseSelect + "จังหวัดปลายทาง");
     } else if (this.selectedArrvPark == undefined) {
       this.openDialog(this.errorMessage.pleaseSelect + "จุดลงรถ");
+    } else if (this.departDate == undefined) {
+      this.openDialog(this.errorMessage.pleaseSelect + "วันที่เดินทางไป");
+    } else if (this.selectedTripType == "R" && this.returnDate == undefined) {
+      this.openDialog(this.errorMessage.pleaseSelect + "วันที่เดินทางกลับ");
     } else if (this.selectedTripType == "R" && this.returnDate < this.departDate) {
       this.openDialog(this.errorMessage.pleaseSelect + "วันที่เดินทางกลับมากกว่าวันที่ไป");
     } else if (this.selectedNumOfPerson == 0) {
@@ -251,9 +258,14 @@ export class SelectDestinationComponent implements OnInit {
       this.availableTripSeach.departDate = this.datePipe.transform(this.departDate, 'yyyy-MM-dd');
       this.availableTripSeach.returnDate = this.datePipe.transform(this.returnDate, 'yyyy-MM-dd');
       this.availableTripSeach.pickup = this.selectedDptrPark.id;
-      // this.availableTripSeach.pickupDesc = this.selectedDptrPark.nameTh;
+      // this.availableTripSeach.pickupDesc = '';
+      if (this.selectedDptrPark.id == '1223') {
+        this.availableTripSeach.pickupDesc = this.selectedDptrPark.nameTh;
+      }
       this.availableTripSeach.dropoff = this.selectedArrvPark.id;
-      // this.availableTripSeach.dropoffDesc = this.selectedArrvPark.nameTh;
+      if (this.selectedArrvPark.id == '1223') {
+        this.availableTripSeach.dropoffDesc = this.selectedArrvPark.nameTh;
+      }
       this.availableTripSeach.tripType = this.selectedTripType;
       this.busService.getAvailableTrip(this.availableTripSeach).subscribe((res) => {
         if (res.code == 0) {

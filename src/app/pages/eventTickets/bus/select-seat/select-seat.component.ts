@@ -68,6 +68,7 @@ export class SelectSeatComponent implements OnInit {
 
   ngOnInit() {
     this.sharedService.receiveData.subscribe(data => this.receiveData = data);
+    console.log('this.receiveData >>>', this.receiveData);
     if (this.receiveData != null) {
       this.dptrPark = this.receiveData.dptrPark;
       this.arrvPark = this.receiveData.arrvPark;
@@ -157,7 +158,7 @@ export class SelectSeatComponent implements OnInit {
   onClick() {
     if (this.selectedSeat.seat.length > 0) {
       if (this.selectedSeat.seat.length < this.totalPassenger) {
-        this.openDialog(this.errorMessage.pleaseSelect + 'ที่นั่ง');
+        this.openDialog(this.errorMessage.pleaseSelect + 'ที่นั่งให้ครบตามจำนวนคนที่ท่านได้เลือกไว้');
       } else {
         let layout;
         if (this.tripName == 'เที่ยวไป' && this.receiveData.rtrnTrip != null) {
@@ -170,7 +171,7 @@ export class SelectSeatComponent implements OnInit {
               dptrPark: this.receiveData.arrvPark,
               arrvPark: this.receiveData.dptrPark,
               arrvProvince: this.receiveData.arrvProvince,
-              busLayout: layout, // layout เที่ยวกลับ
+              busLayout: layout, // layout ของเที่ยวกลับ อันใหม่
               dptrTrip: this.receiveData.dptrTrip, // เที่ยวไป
               rtrnTrip: this.receiveData.rtrnTrip, // เที่ยวกลับ
               totalPassenger: this.receiveData.totalPassenger,
@@ -179,7 +180,6 @@ export class SelectSeatComponent implements OnInit {
             }
             this.sharedService.sendData(this.receiveData);
             console.log('data to send >>', this.receiveData);
-
             this.router.navigate(['../selectSeat2'], { relativeTo: this.route });
           });
         } else {
@@ -190,7 +190,6 @@ export class SelectSeatComponent implements OnInit {
           this.router.navigate(['../passengerInfomation'], { relativeTo: this.route });
         }
       }
-
     } else {
       this.openDialog(this.errorMessage.pleaseSelect + 'ที่นั่ง');
     }
@@ -199,13 +198,6 @@ export class SelectSeatComponent implements OnInit {
   selectSeat(data) {
     console.log('.... selece seat .....', data);
     this.selectedSeat = data;
-    if (this.selectedSeat.length > 0) {
-      if (this.receiveData.tripName == 'dptrTrip') {
-        // this.markSeat(this.receiveData.dptrTrip, this.receiveData.tripName);
-      } else {
-        // this.markSeat(this.receiveData.rtrnTrip, this.receiveData.tripName);
-      }
-    }
   }
 
   goPreviousPage() {

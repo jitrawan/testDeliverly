@@ -43,7 +43,7 @@ export class PassengerInformationComponent implements OnInit {
     this.sharedService.receiveData.subscribe(data => this.receiveData = data);
     this.totalPassenger = this.receiveData.totalPassenger;
     this.transId = this.receiveData.transId;
-    this.numOfPassengerBox = Array(Number(this.totalPassenger)).fill('');
+    this.numOfPassengerBox = Array(this.totalPassenger).fill('');
     for (let index = 0; index < this.totalPassenger; index++) {
       let passengerInfoModel: PassengerInformationModel = new PassengerInformationModel;
       this.passengerInfoList.push(passengerInfoModel);

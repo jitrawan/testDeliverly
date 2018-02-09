@@ -13,6 +13,7 @@ import { AvailableTripModel } from '../../../../shared/models/bus/availableTripS
 import { BusLayoutModel } from '../../../.././shared/models/bus/busLayout.model';
 import { TripModel } from '../../../.././shared/models/bus/trip.model';
 import { ErrorMessage } from '../../../../shared/constant/error-message';
+import { log } from 'util';
 
 
 @Component({
@@ -23,13 +24,13 @@ import { ErrorMessage } from '../../../../shared/constant/error-message';
 
 })
 export class SelectRoundComponent implements OnInit {
-  @Input() availableTripResultModel: AvailableTripResultModel;
-  @Input() availableTripSearchModel: AvailableTripModel;
-  @Input() dptrProvince: any;
-  @Input() dptrPark: any;
-  @Input() rtrnProvince: any;
-  @Input() rtrnPark: any;
-  @Input() totalPassenger = 1;
+  availableTripResultModel: AvailableTripResultModel;
+  availableTripSearchModel: AvailableTripModel;
+  dptrProvince: any;
+  dptrPark: any;
+  rtrnProvince: any;
+  rtrnPark: any;
+  totalPassenger = 1;
 
   dptrDate: any[] = [];
   rtrnDate: any[] = [];
@@ -75,15 +76,21 @@ export class SelectRoundComponent implements OnInit {
       }
     }
   }
-  
   getAvailableTrip(availableTripSearch) {
     this.busService.getAvailableTrip(availableTripSearch).subscribe((res) => {
-      this.dptrTableLoading = false;
-      this.retrnTableLoading = false;
-      this.availableTripResultModel = res.data;
-      this.dptrDate = this.setCalendar(this.convertStringToDate(this.availableTripResultModel.dptrTrips.tripDate));
-      if (this.availableTripResultModel.rtrnTrips != null) {
-        this.rtrnDate = this.setCalendar(this.convertStringToDate(this.availableTripResultModel.rtrnTrips.tripDate));
+      if (res.code == 0) {
+        this.dptrTableLoading = false;
+        this.retrnTableLoading = false;
+        this.availableTripResultModel = res.data;
+        this.dptrDate = this.setCalendar(this.convertStringToDate(this.availableTripResultModel.dptrTrips.tripDate));
+        if (this.availableTripResultModel.rtrnTrips != null) {
+          this.rtrnDate = this.setCalendar(this.convertStringToDate(this.availableTripResultModel.rtrnTrips.tripDate));
+        }
+      } else {
+        // alert(res.msg);
+        this.openDialog(res.msg);
+        this.dptrTableLoading = false;
+        this.retrnTableLoading = false;
       }
     });
   }
@@ -107,15 +114,25 @@ export class SelectRoundComponent implements OnInit {
 
   selectDptrTrip(data) {
     this.selectedDptrTrip = data;
+    this.selectedRtrnTrip = undefined;
     this.dptrFare = this.convertStringToNumber(this.selectedDptrTrip.fare) + this.convertStringToNumber(this.selectedDptrTrip.fee);
     this.fee = 15;
   }
 
-  selectRtrnTrip(data,event) {
-    if(this.selectedDptrTrip == undefined) {
+  selectRtrnTrip(data, event) {
+    if (this.selectedDptrTrip == undefined) {
       event.target.checked = false;
       this.openDialog("กรุณาเลือกวันเดินทางไป");
     } else {
+      if (this.selectedDptrTrip.arrvDate != null && this.selectedDptrTrip.arrvTime && data != undefined) {
+        var selectedDptrDate = new Date(this.selectedDptrTrip.arrvDate + " " + this.selectedDptrTrip.arrvTime);
+        var selectedRtrnDate = new Date(data.arrvDate + " " + data.arrvTime);
+        if (selectedDptrDate > selectedRtrnDate) {
+          event.target.checked = false;
+          this.openDialog('กรุณาเลือกเที่ยวกลับ ที่มีวันและเวลา มากกว่าเที่ยวไป');
+          return;
+        }
+      }
       this.selectedRtrnTrip = data;
       this.rtrnFare = this.convertStringToNumber(this.selectedRtrnTrip.fare) + this.convertStringToNumber(this.selectedRtrnTrip.fee);
       this.fee = 15;
@@ -210,6 +227,7 @@ export class SelectRoundComponent implements OnInit {
       this.selectedDptrTrip = undefined;
       this.dptrFare = 0;
       this.getAvailableTrip(this.availableTripSearchModel);
+
     }
   }
 

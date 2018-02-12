@@ -8,6 +8,9 @@ import { HttpModule } from '@angular/http';
 import { AvailableTripModel } from '../models/bus/availableTripSearch.model';
 import { ProvinceModel } from '../models/bus/province.model';
 import { MarkSeatModel } from '../models/bus/markSeat.model';
+import { PassengerBookingModel } from '../models/bus/passengerBooking.model';
+
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class BusService {
@@ -39,7 +42,7 @@ export class BusService {
             .map((res: Response) => {
                 return res.json();
             })
-        // .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
+            .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
     }
 
     getMasPark() {
@@ -51,6 +54,7 @@ export class BusService {
             .map((res: Response) => {
                 return res.json();
             })
+            .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
     }
 
     getAvailableTrip(availableTrip: AvailableTripModel) {
@@ -63,7 +67,7 @@ export class BusService {
             .map((res: Response) => {
                 return res.json();
             })
-        // .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
+            .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
     }
 
     getRoutePrvParkMap(pickupId) {
@@ -78,7 +82,7 @@ export class BusService {
                 console.log('res>>', res);
                 return res.json();
             })
-        // .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
+            .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
     }
 
     getBusLayout(tripId, pickupId, dropoffId) {
@@ -94,7 +98,7 @@ export class BusService {
             .map((res: Response) => {
                 return res.json();
             })
-        // .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
+            .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
     }
 
     getTransId(transType: string) {
@@ -108,7 +112,7 @@ export class BusService {
             .map((res: Response) => {
                 return res.json();
             })
-        // .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
+            .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
     }
 
     markSeat(markSeat: MarkSeatModel) {
@@ -129,12 +133,11 @@ export class BusService {
             body["gender[" + index + "]"] = markSeat.gender[index] + "";
             body["seatFloor[" + index + "]"] = markSeat.seatFloor[index] + "";
         }
-        console.log('body>>', body);
         return this.http.post(this.markSeatAPI, JSON.stringify(body), options)
             .map((res: Response) => {
                 return res.json();
             })
-        // .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
+            .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
     }
 
     unMarkSeat(markSeat: MarkSeatModel, reserveId) {
@@ -158,7 +161,7 @@ export class BusService {
             .map((res: Response) => {
                 return res.json();
             })
-        // .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
+            .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
     }
 
     getTransCheckout(transId: string) {
@@ -172,20 +175,44 @@ export class BusService {
             .map((res: Response) => {
                 return res.json();
             })
-        // .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
+            .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
     }
 
-    booking(passengerBooking) {
+    booking(passengerBooking: PassengerBookingModel) {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         //  let options = new RequestOptions({ headers: headers, withCredentials: true });
         let options = new RequestOptions({ headers: headers });
         let body = {
-
+            transId: passengerBooking.transId,
+            tripCnt: passengerBooking.tripCnt,
+            contactName: passengerBooking.contactName,
+            telNo: passengerBooking.telNo
         };
+        body["seatCnt[0]"] = passengerBooking.seatCnt[0] + "";
+        body["pickupPark[0]"] = passengerBooking.pickupPark[0] + "";
+        for (let index = 0; index < Number(passengerBooking.seatCnt[0]); index++) {
+            body["gender[0][" + index + "]"] = passengerBooking.gender[index] + "";
+            body["passengerName[0][" + index + "]"] = passengerBooking.passengerName[index] + "";
+            body["passengerTel[0][" + index + "]"] = passengerBooking.passengerTel[index] + "";
+            body["reserveId[0][" + index + "]"] = passengerBooking.reserveId[index] + "";
+        }
+        if (passengerBooking.seatCnt.length > 0) {
+            body["seatCnt[1]"] = passengerBooking.seatCnt[1] + "";
+            body["pickupPark[1]"] = passengerBooking.pickupPark[1] + "";
+            let indexInBody = 0;
+            for (let index = Number(passengerBooking.seatCnt[1]); index < passengerBooking.reserveId.length; index++) {
+                body["gender[1][" + indexInBody + "]"] = passengerBooking.gender[index] + "";
+                body["passengerName[1][" + indexInBody + "]"] = passengerBooking.passengerName[index] + "";
+                body["passengerTel[1][" + indexInBody + "]"] = passengerBooking.passengerTel[index] + "";
+                body["reserveId[1][" + indexInBody + "]"] = passengerBooking.reserveId[index] + "";
+                indexInBody = indexInBody + 1;
+            }
+        }
+
         return this.http.post(this.bookingAPI, JSON.stringify(body), options)
             .map((res: Response) => {
                 return res.json();
             })
-        // .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
+            .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
     }
 }

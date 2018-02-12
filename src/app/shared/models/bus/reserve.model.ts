@@ -7,4 +7,9 @@ export class ReserveModel {
     disFare: string;
     disFee: string;
     serviceMny: string;
+
+    gender?: string;
+    passengerName?: string;
+    passengerTel?: string;
+    passengerIdCard?: string;
 }

@@ -105,7 +105,6 @@ export class BusLayoutComponent implements OnInit {
   }
 
   markSeat(trip :TripModel, seat, id, event) {
-    console.log('trip>>>', trip);
     this.markSeatModel = new MarkSeatModel();
     this.markSeatModel.transId = this.transId.transId;
     this.markSeatModel.tripId = trip.id;

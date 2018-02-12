@@ -96,53 +96,6 @@ export class PassengerInformationComponent implements OnInit {
     }
     if (!isFound) {
       this.prepareDataForBooking();
-
-
-    }
-  }
-
-  prepareDataForBooking() {
-    // this.busService.getTransId("B").subscribe((res) => {
-      // if (res.code == 0) {
-        // this.transId = res.data;
-          this.passengerBookingModel = new PassengerBookingModel;
-        this.passengerBookingModel.transId = this.transId.transId;
-        // console.log('transid', this);
-        if (this.transCheckoutModel.rtrnTrip != null) {
-          this.passengerBookingModel.tripCnt = "2";
-        } else {
-          this.passengerBookingModel.tripCnt = "1";
-        }
-        this.passengerBookingModel.contactName = this.passengerInfoList[0].passengerName + ' ' + this.passengerInfoList[0].passengerSurname;
-        this.passengerBookingModel.telNo = this.passengerInfoList[0].passengerTel;
-
-        this.passengerBookingModel.seatCnt = [];
-        this.passengerBookingModel.pickupPark = [];
-        this.passengerBookingModel.reserveId = [];
-        this.passengerBookingModel.gender = [];
-        this.passengerBookingModel.passengerName = [];
-        this.passengerBookingModel.passengerTel = [];
-
-        this.passengerBookingModel.seatCnt.push(this.totalPassenger + '');
-        this.passengerBookingModel.pickupPark.push(this.transCheckoutModel.dptrTrip.dptrPark.id);
-        for (let index = 0; index < this.transCheckoutModel.dptrTrip.reserves.length; index++) {
-          this.passengerBookingModel.reserveId.push(this.transCheckoutModel.dptrTrip.reserves[index].reserveId);
-          this.passengerBookingModel.gender.push(this.passengerInfoList[index].gender);
-          this.passengerBookingModel.passengerName.push(this.passengerInfoList[index].passengerName + ' ' + this.passengerInfoList[index].passengerSurname);
-          this.passengerBookingModel.passengerTel.push(this.passengerInfoList[index].passengerTel);
-        }
-
-        if (this.transCheckoutModel.rtrnTrip != null) {
-          this.passengerBookingModel.seatCnt.push(this.totalPassenger + '');
-          this.passengerBookingModel.pickupPark.push(this.transCheckoutModel.rtrnTrip.dptrPark.id);
-          for (let index = 0; index < this.transCheckoutModel.rtrnTrip.reserves.length; index++) {
-            this.passengerBookingModel.reserveId.push(this.transCheckoutModel.rtrnTrip.reserves[index].reserveId);
-            this.passengerBookingModel.gender.push(this.passengerInfoList[index].gender);
-            this.passengerBookingModel.passengerName.push(this.passengerInfoList[index].passengerName + ' ' + this.passengerInfoList[index].passengerSurname);
-            this.passengerBookingModel.passengerTel.push(this.passengerInfoList[index].passengerTel);
-          }
-        }
-      // }
       this.busService.booking(this.passengerBookingModel).subscribe((res) => {
         if (res.code == 0) {
           this.bookingResultModel = res.data;
@@ -154,7 +107,46 @@ export class PassengerInformationComponent implements OnInit {
         }
       });
 
-    // });
+    }
+  }
+
+  prepareDataForBooking() {
+    this.passengerBookingModel = new PassengerBookingModel;
+    this.passengerBookingModel.transId = this.transId.transId;
+    if (this.transCheckoutModel.rtrnTrip != null) {
+      this.passengerBookingModel.tripCnt = "2";
+    } else {
+      this.passengerBookingModel.tripCnt = "1";
+    }
+    this.passengerBookingModel.contactName = this.passengerInfoList[0].passengerName + ' ' + this.passengerInfoList[0].passengerSurname;
+    this.passengerBookingModel.telNo = this.passengerInfoList[0].passengerTel;
+
+    this.passengerBookingModel.seatCnt = [];
+    this.passengerBookingModel.pickupPark = [];
+    this.passengerBookingModel.reserveId = [];
+    this.passengerBookingModel.gender = [];
+    this.passengerBookingModel.passengerName = [];
+    this.passengerBookingModel.passengerTel = [];
+
+    this.passengerBookingModel.seatCnt.push(this.totalPassenger + '');
+    this.passengerBookingModel.pickupPark.push(this.transCheckoutModel.dptrTrip.dptrPark.id);
+    for (let index = 0; index < this.transCheckoutModel.dptrTrip.reserves.length; index++) {
+      this.passengerBookingModel.reserveId.push(this.transCheckoutModel.dptrTrip.reserves[index].reserveId);
+      this.passengerBookingModel.gender.push(this.passengerInfoList[index].gender);
+      this.passengerBookingModel.passengerName.push(this.passengerInfoList[index].passengerName + ' ' + this.passengerInfoList[index].passengerSurname);
+      this.passengerBookingModel.passengerTel.push(this.passengerInfoList[index].passengerTel);
+    }
+
+    if (this.transCheckoutModel.rtrnTrip != null) {
+      this.passengerBookingModel.seatCnt.push(this.totalPassenger + '');
+      this.passengerBookingModel.pickupPark.push(this.transCheckoutModel.rtrnTrip.dptrPark.id);
+      for (let index = 0; index < this.transCheckoutModel.rtrnTrip.reserves.length; index++) {
+        this.passengerBookingModel.reserveId.push(this.transCheckoutModel.rtrnTrip.reserves[index].reserveId);
+        this.passengerBookingModel.gender.push(this.passengerInfoList[index].gender);
+        this.passengerBookingModel.passengerName.push(this.passengerInfoList[index].passengerName + ' ' + this.passengerInfoList[index].passengerSurname);
+        this.passengerBookingModel.passengerTel.push(this.passengerInfoList[index].passengerTel);
+      }
+    }
   }
 
   goPreviousPage() {

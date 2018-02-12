@@ -66,6 +66,11 @@ export class SummaryComponent implements OnInit {
     }
   }
 
+  summaryPrice: number
+  totalPrice() {
+    this.summaryPrice = (this.dprtPrice - this.dprtDiscount) + (this.rtrnPrice - this.rtrnDiscount);
+  }
+
   receiveMessage(msg: string) {
     console.log('receive >>', msg); // your message from component A
   }

@@ -1,4 +1,3 @@
-// import { ParkModel } from './park.model';
 import { ReserveParkModel } from './reservePark.model';
 import { RouteModel } from './route.model';
 import { BusStdModel } from './busStd.model';
@@ -21,5 +20,4 @@ export class TripModel {
     coupon: string;
     station: StationModel;
     platform: string;
-
 }

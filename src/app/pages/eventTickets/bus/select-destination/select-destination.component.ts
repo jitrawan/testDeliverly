@@ -255,11 +255,11 @@ export class SelectDestinationComponent implements OnInit {
       this.availableTripSeach.pickup = this.selectedDptrPark.id;
       // this.availableTripSeach.pickupDesc = '';
       // if (this.selectedDptrPark.id == '1223') {
-      //   this.availableTripSeach.pickupDesc = this.selectedDptrPark.nameTh;
+        this.availableTripSeach.pickupDesc = this.selectedDptrPark.nameTh;
       // }
       this.availableTripSeach.dropoff = this.selectedArrvPark.id;
       // if (this.selectedArrvPark.id == '1223') {
-      //   this.availableTripSeach.dropoffDesc = this.selectedArrvPark.nameTh;
+        this.availableTripSeach.dropoffDesc = this.selectedArrvPark.desc;
       // }
       this.availableTripSeach.tripType = this.selectedTripType;
       this.busService.getAvailableTrip(this.availableTripSeach).subscribe((res) => {

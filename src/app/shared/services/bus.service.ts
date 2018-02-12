@@ -145,12 +145,8 @@ export class BusService {
             transId: markSeat.transId + "",
             tripId: markSeat.tripId + "",
             pickup: markSeat.pickup + "",
-            // pickupDesc: markSeat.pickupDesc + "",
             dropoff: markSeat.dropoff + "",
-            // dropoffDesc: markSeat.dropoffDesc + "",
             seatCnt: markSeat.seatCnt + "",
-            // reserveId[0]: reserveId.reserveId + ""
-
         };
         for (let index = 0; index < markSeat.seatFloor.length; index++) {
             body["seatNo[" + index + "]"] = markSeat.seatNo[index] + "";

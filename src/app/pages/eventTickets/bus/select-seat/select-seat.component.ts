@@ -54,10 +54,8 @@ export class SelectSeatComponent implements OnInit {
   rtrnTrip: any;
   selectedDptrTrip: TripModel;
   selectedRtrnTrip: TripModel;
-  trip: any;
+  trip: TripModel;
   transCheckoutModel: TransCheckoutModel;
-
-
 
   constructor(
     private router: Router,

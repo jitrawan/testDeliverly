@@ -6,6 +6,7 @@ import { BusService } from '../../services/bus.service';
 import { BusLayoutModel } from '../../models/bus/busLayout.model';
 import { MarkSeatModel } from '../../models/bus/markSeat.model';
 import { ReserveSeatModel } from '../../models/bus/reserveSeat.model';
+import { TripModel } from '../../models/bus/trip.model';
 
 @Component({
   selector: 'bus-layout',
@@ -17,7 +18,7 @@ export class BusLayoutComponent implements OnInit {
   @Input() data: any;
   @Input() numberOfSeat: number;
   @Input() transId: any;
-  @Input() trip: any;
+  @Input() trip: TripModel;
 
   @Output() outputValue: EventEmitter<any> = new EventEmitter();
   selectedSeat: any = {
@@ -103,14 +104,15 @@ export class BusLayoutComponent implements OnInit {
     this._alert.create(type, msg, this.alertSettings);
   }
 
-  markSeat(trip, seat, id, event) {
+  markSeat(trip :TripModel, seat, id, event) {
+    console.log('trip>>>', trip);
     this.markSeatModel = new MarkSeatModel();
     this.markSeatModel.transId = this.transId.transId;
     this.markSeatModel.tripId = trip.id;
     this.markSeatModel.pickup = trip.dptrPark.id;
-    this.markSeatModel.pickupDesc = trip.dptrPark.id;
+    this.markSeatModel.pickupDesc = trip.dptrPark.desc;
     this.markSeatModel.dropoff = trip.arrvPark.id;
-    this.markSeatModel.dropoffDesc = trip.arrvPark.id;
+    this.markSeatModel.dropoffDesc = trip.arrvPark.desc;
     this.markSeatModel.seatCnt = 1;
     this.markSeatModel.seatFloor = [seat.pos.z];
     this.markSeatModel.seatNo = [seat.name];

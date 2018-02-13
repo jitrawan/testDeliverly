@@ -44,10 +44,14 @@ export class PassengerInformationComponent implements OnInit {
 
   ngOnInit() {
     this.sharedService.receiveData.subscribe(data => this.receiveData = data);
+    console.log('this.receiveData>>>', this.receiveData);
+    this.trips = this.receiveData.forwardData;
+    console.log('this.trips >>', this.trips);
     this.totalPassenger = this.receiveData.totalPassenger;
     this.transId = this.receiveData.transId;
     this.numOfPassengerBox = Array(Number(this.totalPassenger)).fill('');
     this.transCheckoutModel = this.receiveData.transCheckoutModel;
+    console.log('transId >>', this.transId);
 
     for (let index = 0; index < this.totalPassenger; index++) {
       let passengerInfoModel: PassengerInformationModel = new PassengerInformationModel;
@@ -96,6 +100,7 @@ export class PassengerInformationComponent implements OnInit {
       this.busService.booking(this.passengerBookingModel).subscribe((res) => {
         if (res.code == 0) {
           this.bookingResultModel = res.data;
+          console.log('this.bookingResultModel >>', this.bookingResultModel);
           this.sharedService.sendData(this.bookingResultModel);
           this.router.navigate(['../summary'], { relativeTo: this.route });
         } else {
@@ -145,7 +150,38 @@ export class PassengerInformationComponent implements OnInit {
   }
 
   goPreviousPage() {
-    this.location.back();
+
+    this.busService.clearTransSeatMark(this.transId.transId).subscribe((res) => {
+      if (res.code == 0) {
+        console.log('resss >> ', res);
+        this.busService.getBusLayout(
+          this.trips.dptrTrip.id,
+          this.trips.dptrTrip.dptrPark.id,
+          this.trips.dptrTrip.arrvPark.id
+        ).subscribe((res) => {
+          if (res.code == 0) {
+            let busLayout = res.data;
+            let forwardData = {
+              tripName: 'dptrTrip',
+              dptrProvince: this.trips.dptrProvince,
+              dptrPark: this.trips.dptrPark,
+              arrvProvince: this.trips.arrvProvince,
+              arrvPark: this.trips.arrvPark,
+              availableTripResultModel: this.trips.availableTripResultModel,
+              availableTripSearchModel: this.trips.availableTripSearchModel,
+              busLayout: busLayout, // layout เที่ยวไป
+              dptrTrip: this.trips.dptrTrip, // เที่ยวไป
+              rtrnTrip: this.trips.rtrnTrip, // เที่ยวกลับ
+              totalPassenger: this.trips.totalPassenger
+            };
+            this.sharedService.sendData(forwardData);
+            this.router.navigate(['../selectSeat'], { relativeTo: this.route });
+          } else {
+            this.openDialog(res.msg);
+          }
+        });
+      }
+    });
   }
 }
 

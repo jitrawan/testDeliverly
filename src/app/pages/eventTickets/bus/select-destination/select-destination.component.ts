@@ -63,8 +63,8 @@ export class SelectDestinationComponent implements OnInit {
     let receiveData;
     this.sharedService.receiveData.subscribe(data => receiveData = data);
     this.queryString = {
-      payment_channel: this.queryString.get('payment_channel'),
-      cust_email: this.queryString.get('cust_email')
+      payment_channel: receiveData.get('payment_channel'),
+      cust_email: receiveData.get('cust_email')
     }
 
     this.maxDate.setDate(this.maxDate.getDate() + 90);

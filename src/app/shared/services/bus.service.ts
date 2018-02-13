@@ -30,6 +30,7 @@ export class BusService {
     private getTransIdAPI = this.baseURL + 'ag_get_trans_id';
     private getTransCheckoutAPI = this.baseURL + 'ag_trans_checkout';
     private bookingAPI = this.baseURL + 'ag_booking';
+    private cancelBookingAPI = this.baseURL + 'ag_cancel_booking';
 
     constructor(private http: Http) { }
 
@@ -178,6 +179,22 @@ export class BusService {
             .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
     }
 
+    cancelBooking(transId,bookId,bookCode) {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        let body = {
+            transId: transId + "",
+            bookId: bookId + "",
+            bookCode: bookCode + ""
+        };
+
+        return this.http.post(this.cancelBookingAPI, JSON.stringify(body), options)
+            .map((res: Response) => {
+                return res.json();
+            })
+            .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
+
+    }
     booking(passengerBooking: PassengerBookingModel) {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         //  let options = new RequestOptions({ headers: headers, withCredentials: true });

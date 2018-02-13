@@ -59,6 +59,11 @@
   padding-left: 15px;
 }
 
+button.primary {
+  background-color: #ec4a1d;
+  color: white;
+}
+
 @media screen and (max-width: 780px) {
   .subInfoBox {
     padding: 10px 5% 0px 5%;

@@ -14,13 +14,12 @@ import { BookingResultModel } from '../../../../shared/models/bus/bookingResult.
 })
 export class SummaryComponent implements OnInit {
 
-  @Input() passengerName: string = "นาย เคาท์เตอร์ เซอร์วิส";
-  @Input() passengerTel: string = "092-826-7788";
   @Input() bookingResult: BookingResultModel;
   dprtPrice: number = 0;
   dprtDiscount: number = 0;
   rtrnPrice: number = 0;
   rtrnDiscount: number = 0;
+  fee: number = 15;
   receiveData: any;
 
   constructor(
@@ -35,44 +34,32 @@ export class SummaryComponent implements OnInit {
 
     this.sharedService.receiveData.subscribe(data => this.receiveData = data);
     this.bookingResult = this.receiveData;
-    this.calculateDprtPrice();
-    this.calculateDprtDiscount();
-    this.calculateRtrnPrice();
-    this.calculateRtrnDiscount();
-
-  }
-
-  calculateDprtPrice() {
-    for (let index = 0; index < this.bookingResult.dptrTrip.reserves.length; index++) {
-      this.dprtPrice = this.dprtPrice + (Number(this.bookingResult.dptrTrip.reserves[index].fare) + Number(this.bookingResult.dptrTrip.reserves[index].fee));
+    this.dprtPrice = this.dprtPrice + (Number(this.bookingResult.dptrTrip.reserves[0].fare) + Number(this.bookingResult.dptrTrip.reserves[0].fee));
+    this.dprtDiscount = this.dprtDiscount + (Number(this.bookingResult.dptrTrip.reserves[0].disFare) + Number(this.bookingResult.dptrTrip.reserves[0].disFee));
+    if (this.bookingResult.rtrnTrip != null) {
+      this.rtrnPrice = this.rtrnPrice + (Number(this.bookingResult.rtrnTrip.reserves[0].fare) + Number(this.bookingResult.rtrnTrip.reserves[0].fee));
+      this.rtrnDiscount = this.rtrnDiscount + (Number(this.bookingResult.rtrnTrip.reserves[0].disFare) + Number(this.bookingResult.rtrnTrip.reserves[0].disFee));
     }
   }
 
-  calculateDprtDiscount() {
-    for (let index = 0; index < this.bookingResult.dptrTrip.reserves.length; index++) {
-      this.dprtDiscount = this.dprtDiscount + (Number(this.bookingResult.dptrTrip.reserves[index].disFare) + Number(this.bookingResult.dptrTrip.reserves[index].disFee));
-    }
-  }
-
-  calculateRtrnPrice() {
-    for (let index = 0; index < this.bookingResult.rtrnTrip.reserves.length; index++) {
-      this.rtrnPrice = this.rtrnPrice + (Number(this.bookingResult.rtrnTrip.reserves[index].fare) + Number(this.bookingResult.rtrnTrip.reserves[index].fee));
-    }
-  }
-
-  calculateRtrnDiscount() {
-    for (let index = 0; index < this.bookingResult.rtrnTrip.reserves.length; index++) {
-      this.rtrnDiscount = this.rtrnDiscount + (Number(this.bookingResult.rtrnTrip.reserves[index].disFare) + Number(this.bookingResult.rtrnTrip.reserves[index].disFee));
-    }
-  }
-
-  summaryPrice: number
   totalPrice() {
-    this.summaryPrice = (this.dprtPrice - this.dprtDiscount) + (this.rtrnPrice - this.rtrnDiscount);
-  }
+    let totalDprtPrice = 0;
+    let totalDprtDiscount = 0;
+    let totalRtrnPrice = 0;
+    let totalRtrnDiscount = 0;
+    for (let index = 0; index < this.bookingResult.dptrTrip.reserves.length; index++) {
+      totalDprtPrice = totalDprtPrice + (Number(this.bookingResult.dptrTrip.reserves[index].fare) + Number(this.bookingResult.dptrTrip.reserves[index].fee));
+      totalDprtDiscount = totalDprtDiscount + (Number(this.bookingResult.dptrTrip.reserves[index].disFare) + Number(this.bookingResult.dptrTrip.reserves[index].disFee));
+    }
+    if(this.bookingResult.rtrnTrip != null){
+      for (let index = 0; index < this.bookingResult.rtrnTrip.reserves.length; index++) {
+        totalRtrnPrice = totalRtrnPrice + (Number(this.bookingResult.rtrnTrip.reserves[index].fare) + Number(this.bookingResult.rtrnTrip.reserves[index].fee));
+        totalRtrnDiscount = totalRtrnDiscount + (Number(this.bookingResult.rtrnTrip.reserves[index].disFare) + Number(this.bookingResult.rtrnTrip.reserves[index].disFee));
+      }
+    }
 
-  receiveMessage(msg: string) {
-    console.log('receive >>', msg); // your message from component A
+    let summaryPrice = (totalDprtPrice - totalDprtDiscount) + (totalRtrnPrice - totalRtrnDiscount) + this.fee;
+    return summaryPrice;
   }
 
   getFloor(reserves) {

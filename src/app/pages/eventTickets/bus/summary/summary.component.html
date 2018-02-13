@@ -235,7 +235,7 @@
     </div>
     <div class="row border1s BoxRow">
       <div class="col-12 col-md-12 rowSummary">ค่าธรรมเนียม :
-        <span class="varRow">15.00 บาท</span>
+        <span class="varRow">{{fee | number : '1.2'}} บาท</span>
       </div>
     </div>
   </div>
@@ -246,7 +246,7 @@
     </div>
     <div class="row border1s BoxRow">
       <div class="col-12 col-md-12 rowSummary">ยอดเงินที่ต้องชำระ :
-        <span class="varRow"> {{ summaryPrice | number : '1.2' }} บาท</span>
+        <span class="varRow"> {{ totalPrice() | number : '1.2' }} บาท</span>
       </div>
     </div>
   </div>

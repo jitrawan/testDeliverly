@@ -21,6 +21,7 @@ export class SummaryComponent implements OnInit {
   rtrnDiscount: number = 0;
   fee: number = 15;
   receiveData: any;
+  trips: any;
 
   constructor(
     private sharedService: SharedService,
@@ -33,7 +34,8 @@ export class SummaryComponent implements OnInit {
   ngOnInit() {
 
     this.sharedService.receiveData.subscribe(data => this.receiveData = data);
-    this.bookingResult = this.receiveData;
+    this.trips = this.receiveData.forwardData;
+    this.bookingResult = this.receiveData.bookingResultModel;
     this.dprtPrice = this.dprtPrice + (Number(this.bookingResult.dptrTrip.reserves[0].fare) + Number(this.bookingResult.dptrTrip.reserves[0].fee));
     this.dprtDiscount = this.dprtDiscount + (Number(this.bookingResult.dptrTrip.reserves[0].disFare) + Number(this.bookingResult.dptrTrip.reserves[0].disFee));
     if (this.bookingResult.rtrnTrip != null) {
@@ -51,7 +53,7 @@ export class SummaryComponent implements OnInit {
       totalDprtPrice = totalDprtPrice + (Number(this.bookingResult.dptrTrip.reserves[index].fare) + Number(this.bookingResult.dptrTrip.reserves[index].fee));
       totalDprtDiscount = totalDprtDiscount + (Number(this.bookingResult.dptrTrip.reserves[index].disFare) + Number(this.bookingResult.dptrTrip.reserves[index].disFee));
     }
-    if(this.bookingResult.rtrnTrip != null){
+    if (this.bookingResult.rtrnTrip != null) {
       for (let index = 0; index < this.bookingResult.rtrnTrip.reserves.length; index++) {
         totalRtrnPrice = totalRtrnPrice + (Number(this.bookingResult.rtrnTrip.reserves[index].fare) + Number(this.bookingResult.rtrnTrip.reserves[index].fee));
         totalRtrnDiscount = totalRtrnDiscount + (Number(this.bookingResult.rtrnTrip.reserves[index].disFare) + Number(this.bookingResult.rtrnTrip.reserves[index].disFee));

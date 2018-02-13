@@ -100,8 +100,12 @@ export class PassengerInformationComponent implements OnInit {
       this.busService.booking(this.passengerBookingModel).subscribe((res) => {
         if (res.code == 0) {
           this.bookingResultModel = res.data;
+          let forwardData = {
+            forwardData: this.trips,
+            bookingResultModel: this.bookingResultModel
+          }
           console.log('this.bookingResultModel >>', this.bookingResultModel);
-          this.sharedService.sendData(this.bookingResultModel);
+          this.sharedService.sendData(forwardData);
           this.router.navigate(['../summary'], { relativeTo: this.route });
         } else {
           this.openDialog(res.msg);

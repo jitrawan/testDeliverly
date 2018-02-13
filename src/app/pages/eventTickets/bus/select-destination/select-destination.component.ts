@@ -40,7 +40,6 @@ export class SelectDestinationComponent implements OnInit {
   selectedTripType: string;
   isReturnDate: boolean = true;
   selectedNumOfPerson: number;
-  // isDisplay: boolean = true;
   isParkListLoading: boolean = true;
   isProvinceLoading: boolean = true;
   isArrvProvinceLoading: boolean = false;
@@ -48,7 +47,6 @@ export class SelectDestinationComponent implements OnInit {
   isShowLoading: boolean = false;
   routeMap: RoutePrvParkMapModel[];
   sub: any;
-  // invalidDates: Array<Date>;
 
   constructor(
     private busService: BusService,
@@ -253,14 +251,9 @@ export class SelectDestinationComponent implements OnInit {
       this.availableTripSeach.departDate = this.datePipe.transform(this.departDate, 'yyyy-MM-dd');
       this.availableTripSeach.returnDate = this.datePipe.transform(this.returnDate, 'yyyy-MM-dd');
       this.availableTripSeach.pickup = this.selectedDptrPark.id;
-      // this.availableTripSeach.pickupDesc = '';
-      // if (this.selectedDptrPark.id == '1223') {
-        this.availableTripSeach.pickupDesc = this.selectedDptrPark.nameTh;
-      // }
+      this.availableTripSeach.pickupDesc = this.selectedDptrPark.nameTh;
       this.availableTripSeach.dropoff = this.selectedArrvPark.id;
-      // if (this.selectedArrvPark.id == '1223') {
-        this.availableTripSeach.dropoffDesc = this.selectedArrvPark.desc;
-      // }
+      this.availableTripSeach.dropoffDesc = this.selectedArrvPark.desc;
       this.availableTripSeach.tripType = this.selectedTripType;
       this.busService.getAvailableTrip(this.availableTripSeach).subscribe((res) => {
         if (res.code == 0) {

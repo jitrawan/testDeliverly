@@ -32,6 +32,8 @@ export class BusService {
     private bookingAPI = this.baseURL + 'ag_booking';
     private cancelBookingAPI = this.baseURL + 'ag_cancel_booking';
 
+    private clearTransSeatmarkAPI = this.baseURL + 'ag_clear_trans_seatmark';
+
     constructor(private http: Http) { }
 
     getMasProvince() {
@@ -227,6 +229,20 @@ export class BusService {
         }
 
         return this.http.post(this.bookingAPI, JSON.stringify(body), options)
+            .map((res: Response) => {
+                return res.json();
+            })
+            .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
+    }
+
+    clearTransSeatMark(transId: string) {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        //  let options = new RequestOptions({ headers: headers, withCredentials: true });
+        let options = new RequestOptions({ headers: headers });
+        let body = {
+            transId: transId
+        };
+        return this.http.post(this.clearTransSeatmarkAPI, JSON.stringify(body), options)
             .map((res: Response) => {
                 return res.json();
             })

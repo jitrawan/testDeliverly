@@ -164,20 +164,22 @@ export class SelectSeatComponent implements OnInit {
   }
 
   goPreviousPage() {
+    let dataBackSeat;
+    let routerUrl;
     if (this.router.url == '/selectSeat') {
-      let dataBackRound = {
+      dataBackSeat = {
         availableTripResultModel: this.availableTripResultModel,
         availableTripSearchModel: this.availableTripSearchModel,
         dptrProvince: this.dptrProvince,
         dptrPark: this.dptrPark,
         rtrnProvince: this.arrvProvince,
         rtrnPark: this.arrvPark,
-        totalPassenger: this.totalPassenger,
+        totalPassenger: this.totalPassenger
       }
-      this.sharedService.sendData(dataBackRound);
-      this.location.back();
+      routerUrl = '../selectRound'
+
     } else {
-      let dataBackSeat = {
+      dataBackSeat = {
         tripName: 'dptrTrip',
         dptrProvince: this.dptrProvince,
         dptrPark: this.dptrPark,
@@ -188,11 +190,18 @@ export class SelectSeatComponent implements OnInit {
         availableTripSearchModel: this.availableTripSearchModel,
         totalPassenger: this.totalPassenger,
         dptrTrip: this.selectedDptrTrip,
-        rtrnTrip: this.selectedRtrnTrip,
+        rtrnTrip: this.selectedRtrnTrip
       }
-      this.sharedService.sendData(dataBackSeat);
-      this.location.back();
+      routerUrl = '../selectSeat'
     }
+    this.busService.clearTransSeatMark(this.transId.transId).subscribe((res) => {
+      if (res.code == 0) {
+        console.log('resss >> ', res);
+        this.sharedService.sendData(dataBackSeat);
+        this.router.navigate([routerUrl], { relativeTo: this.route });
+      }
+    });
+
   }
 }
 

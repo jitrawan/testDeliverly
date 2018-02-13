@@ -31,7 +31,7 @@ const routes: Routes = [
     path: '', component: BuyTicketComponent,
     children: [
       { path: '', component: SelectDestinationComponent },
-      { path: 'index.html/selectDestination/:payment_channel/:cust_email', component: SelectDestinationComponent },
+      // { path: 'index.html/selectDestination/:payment_channel/:cust_email', component: SelectDestinationComponent },
       { path: 'selectRound', component: SelectRoundComponent },
       { path: 'selectSeat', component: SelectSeatComponent },
       { path: 'selectSeat2', component: SelectSeatComponent },

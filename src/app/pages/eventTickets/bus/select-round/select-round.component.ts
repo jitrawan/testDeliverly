@@ -89,8 +89,6 @@ export class SelectRoundComponent implements OnInit {
         }
       } else {
         this.openDialog(res.msg);
-        // this.availableTripResultModel.dptrTrips.trips = null;
-        // this.availableTripResultModel.rtrnTrips.trips = null;
         this.dptrTableLoading = false;
         this.retrnTableLoading = false;
       }
@@ -241,7 +239,7 @@ export class SelectRoundComponent implements OnInit {
   }
 
   goPreviousPage() {
-    this.location.back();
+    this.router.navigate(['..'], { relativeTo: this.route });
   }
 
 }

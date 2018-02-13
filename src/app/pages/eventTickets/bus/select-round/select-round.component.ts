@@ -89,8 +89,8 @@ export class SelectRoundComponent implements OnInit {
         }
       } else {
         this.openDialog(res.msg);
-        this.availableTripResultModel.dptrTrips.trips = null;
-        this.availableTripResultModel.rtrnTrips.trips = null;
+        // this.availableTripResultModel.dptrTrips.trips = null;
+        // this.availableTripResultModel.rtrnTrips.trips = null;
         this.dptrTableLoading = false;
         this.retrnTableLoading = false;
       }
@@ -156,7 +156,7 @@ export class SelectRoundComponent implements OnInit {
       // parent.window.receiveMessage('checkAuthen');
       this.isShowLoading = true;
       this.busService.getBusLayout(this.selectedDptrTrip.id, this.selectedDptrTrip.dptrPark.id, this.selectedDptrTrip.arrvPark.id).subscribe((res) => {
-        if(res.code == 0) {
+        if (res.code == 0) {
           this.busLayout = res.data;
           let dataListForPassNextPage = {
             tripName: 'dptrTrip',
@@ -188,53 +188,55 @@ export class SelectRoundComponent implements OnInit {
   }
 
   searchTrips(tripType, tripDate) {
-    if (this.availableTripResultModel.rtrnTrips != null) {
-      if (tripType == 'dptr') {
-        if (new Date(tripDate) > new Date(this.availableTripResultModel.rtrnTrips.tripDate)) {
-          this.openDialog(this.errorMessage.pleaseSelect + 'วันที่ไปน้อยกว่าวันที่กลับ');
-        } else {
-          this.availableTripSearchModel = {
-            "departDate": this.datePipe.transform(tripDate, 'yyyy-MM-dd'),
-            "dropoff": this.availableTripSearchModel.dropoff,
-            "pickup": this.availableTripSearchModel.pickup,
-            "returnDate": this.availableTripSearchModel.returnDate,
-            "tripType": this.availableTripSearchModel.tripType
-          };
-          this.dptrTableLoading = true;
-          this.selectedDptrTrip = undefined;
-          this.dptrFare = 0;
+    if (new Date(new Date().setHours(0,0,0,0)) <= new Date(new Date(tripDate).setHours(0,0,0,0))) {
+      if (this.availableTripResultModel.rtrnTrips != null) {
+        if (tripType == 'dptr') {
+          if (new Date(tripDate) > new Date(this.availableTripResultModel.rtrnTrips.tripDate)) {
+            this.openDialog(this.errorMessage.pleaseSelect + 'วันที่ไปน้อยกว่าวันที่กลับ');
+          } else {
+            this.availableTripSearchModel.departDate = this.datePipe.transform(tripDate, 'yyyy-MM-dd');
+            this.availableTripSearchModel.returnDate = this.availableTripSearchModel.returnDate;
+            this.availableTripSearchModel.pickup = this.availableTripSearchModel.pickup;
+            this.availableTripSearchModel.pickupDesc = this.availableTripSearchModel.pickupDesc;
+            this.availableTripSearchModel.dropoff = this.availableTripSearchModel.dropoff;
+            this.availableTripSearchModel.dropoffDesc = this.availableTripSearchModel.dropoffDesc;
+            this.availableTripSearchModel.tripType = this.availableTripSearchModel.tripType;
+            this.dptrTableLoading = true;
+            this.selectedDptrTrip = undefined;
+            this.dptrFare = 0;
 
-          this.getAvailableTrip(this.availableTripSearchModel);
+            this.getAvailableTrip(this.availableTripSearchModel);
+          }
+        } else if (tripType == 'rtrn') {
+          if (new Date(tripDate) < new Date(this.availableTripResultModel.dptrTrips.tripDate)) {
+            this.openDialog(this.errorMessage.pleaseSelect + 'วันที่กลับมากกว่าวันที่ไป');
+          } else {
+            this.availableTripSearchModel.departDate = this.availableTripSearchModel.departDate;
+            this.availableTripSearchModel.returnDate = this.datePipe.transform(tripDate, 'yyyy-MM-dd');
+            this.availableTripSearchModel.pickup = this.availableTripSearchModel.pickup;
+            this.availableTripSearchModel.pickupDesc = this.availableTripSearchModel.pickupDesc;
+            this.availableTripSearchModel.dropoff = this.availableTripSearchModel.dropoff;
+            this.availableTripSearchModel.dropoffDesc = this.availableTripSearchModel.dropoffDesc;
+            this.availableTripSearchModel.tripType = this.availableTripSearchModel.tripType;
+            this.retrnTableLoading = true;
+            this.selectedRtrnTrip = undefined;
+            this.rtrnFare = 0;
+            this.getAvailableTrip(this.availableTripSearchModel);
+          }
         }
-      } else if (tripType == 'rtrn') {
-        if (new Date(tripDate) < new Date(this.availableTripResultModel.dptrTrips.tripDate)) {
-          this.openDialog(this.errorMessage.pleaseSelect + 'วันที่กลับมากกว่าวันที่ไป');
-        } else {
-          this.availableTripSearchModel = {
-            "departDate": this.availableTripSearchModel.departDate,
-            "dropoff": this.availableTripSearchModel.dropoff,
-            "pickup": this.availableTripSearchModel.pickup,
-            "returnDate": this.datePipe.transform(tripDate, 'yyyy-MM-dd'),
-            "tripType": this.availableTripSearchModel.tripType
-          };
-          this.retrnTableLoading = true;
-          this.selectedRtrnTrip = undefined;
-          this.rtrnFare = 0;
-          this.getAvailableTrip(this.availableTripSearchModel);
-        }
+      } else {
+        this.availableTripSearchModel.departDate = this.datePipe.transform(tripDate, 'yyyy-MM-dd');
+        this.availableTripSearchModel.returnDate = this.availableTripSearchModel.returnDate;
+        this.availableTripSearchModel.pickup = this.availableTripSearchModel.pickup;
+        this.availableTripSearchModel.pickupDesc = this.availableTripSearchModel.pickupDesc;
+        this.availableTripSearchModel.dropoff = this.availableTripSearchModel.dropoff;
+        this.availableTripSearchModel.dropoffDesc = this.availableTripSearchModel.dropoffDesc;
+        this.availableTripSearchModel.tripType = this.availableTripSearchModel.tripType;
+        this.dptrTableLoading = true;
+        this.selectedDptrTrip = undefined;
+        this.dptrFare = 0;
+        this.getAvailableTrip(this.availableTripSearchModel);
       }
-    } else {
-      this.availableTripSearchModel = {
-        "departDate": this.datePipe.transform(tripDate, 'yyyy-MM-dd'),
-        "dropoff": this.availableTripSearchModel.dropoff,
-        "pickup": this.availableTripSearchModel.pickup,
-        "returnDate": this.availableTripSearchModel.returnDate,
-        "tripType": this.availableTripSearchModel.tripType
-      };
-      this.dptrTableLoading = true;
-      this.selectedDptrTrip = undefined;
-      this.dptrFare = 0;
-      this.getAvailableTrip(this.availableTripSearchModel);
     }
   }
 

@@ -6,6 +6,9 @@ import { AlertsService } from '@jaspero/ng2-alerts';
 import { ErrorMessage } from '../../../../shared/constant/error-message';
 import { PassengerInformationModel } from '../../../../shared/models/bus/passengerInformation.model';
 import { TransCheckoutModel } from '../../../../shared/models/bus/transCheckout.model';
+import { PassengerBookingModel } from '../../../../shared/models/bus/passengerBooking.model';
+import { BookingResultModel } from '../../../../shared/models/bus/bookingResult.model';
+import { TransIdModel } from '../../../../shared/models/bus/transection/transId.model';
 
 import { SharedService } from '../../../../shared/services/shared-service.service';
 import { BusService } from '../../../../shared/services/bus.service';
@@ -13,9 +16,7 @@ import { BusService } from '../../../../shared/services/bus.service';
 @Component({
   selector: 'app-passenger-information',
   templateUrl: './passenger-information.component.html',
-  styleUrls: ['./passenger-information.component.css', '../buy-ticket/buy-ticket.component.css'],
-  providers: [BusService]
-
+  styleUrls: ['./passenger-information.component.css', '../buy-ticket/buy-ticket.component.css']
 })
 export class PassengerInformationComponent implements OnInit {
 
@@ -23,12 +24,16 @@ export class PassengerInformationComponent implements OnInit {
   numOfPassengerBox: any[];
   passengerInfoList = new Array<PassengerInformationModel>();
   errorMessage = new ErrorMessage;
-  isDisplay: boolean = true;
+  // isDisplay: boolean = true;
   alertSettings: any;
   tripName: any;
   receiveData: any;
-  transId: string;
+  transId: TransIdModel;
   transCheckoutModel: TransCheckoutModel;
+  passengerBookingModel: PassengerBookingModel;
+  trips: any;
+  bookingResultModel: BookingResultModel;
+
 
   constructor(
     private router: Router,
@@ -41,9 +46,12 @@ export class PassengerInformationComponent implements OnInit {
 
   ngOnInit() {
     this.sharedService.receiveData.subscribe(data => this.receiveData = data);
+    console.log('this.receiveData >>>>', this.receiveData);
     this.totalPassenger = this.receiveData.totalPassenger;
     this.transId = this.receiveData.transId;
-    this.numOfPassengerBox = Array(this.totalPassenger).fill('');
+    this.numOfPassengerBox = Array(Number(this.totalPassenger)).fill('');
+    this.transCheckoutModel = this.receiveData.transCheckoutModel;
+
     for (let index = 0; index < this.totalPassenger; index++) {
       let passengerInfoModel: PassengerInformationModel = new PassengerInformationModel;
       this.passengerInfoList.push(passengerInfoModel);
@@ -87,20 +95,58 @@ export class PassengerInformationComponent implements OnInit {
       }
     }
     if (!isFound) {
-      this.sharedService.sendData('');
-      this.busService.getTransCheckout(this.transId).subscribe((res) => {
-        if(res.code == 0){
-          this.transCheckoutModel = res.data;
+      this.prepareDataForBooking();
+      this.busService.booking(this.passengerBookingModel).subscribe((res) => {
+        if (res.code == 0) {
+          this.bookingResultModel = res.data;
+          console.log('this.bookingResultModel >>>', this.bookingResultModel);
+          this.sharedService.sendData(this.bookingResultModel);
+          this.router.navigate(['../summary'], { relativeTo: this.route });
+        } else {
+          this.openDialog(res.msg);
         }
       });
-      //   this.isDisplay = false;
-      //   // this.sendMessage('test');
-      //   // this.router.navigate(['../summary'], { relativeTo: this.route });
+
     }
   }
 
-  sendMessage(msg: string) {
-    this.sharedService.sendData(this.passengerInfoList);
+  prepareDataForBooking() {
+    this.passengerBookingModel = new PassengerBookingModel;
+    this.passengerBookingModel.transId = this.transId.transId;
+    if (this.transCheckoutModel.rtrnTrip != null) {
+      this.passengerBookingModel.tripCnt = "2";
+    } else {
+      this.passengerBookingModel.tripCnt = "1";
+    }
+    this.passengerBookingModel.contactName = this.passengerInfoList[0].passengerName + ' ' + this.passengerInfoList[0].passengerSurname;
+    this.passengerBookingModel.telNo = this.passengerInfoList[0].passengerTel;
+
+    this.passengerBookingModel.seatCnt = [];
+    this.passengerBookingModel.pickupPark = [];
+    this.passengerBookingModel.reserveId = [];
+    this.passengerBookingModel.gender = [];
+    this.passengerBookingModel.passengerName = [];
+    this.passengerBookingModel.passengerTel = [];
+
+    this.passengerBookingModel.seatCnt.push(this.totalPassenger + '');
+    this.passengerBookingModel.pickupPark.push(this.transCheckoutModel.dptrTrip.dptrPark.id);
+    for (let index = 0; index < this.transCheckoutModel.dptrTrip.reserves.length; index++) {
+      this.passengerBookingModel.reserveId.push(this.transCheckoutModel.dptrTrip.reserves[index].reserveId);
+      this.passengerBookingModel.gender.push(this.passengerInfoList[index].gender);
+      this.passengerBookingModel.passengerName.push(this.passengerInfoList[index].passengerName + ' ' + this.passengerInfoList[index].passengerSurname);
+      this.passengerBookingModel.passengerTel.push(this.passengerInfoList[index].passengerTel);
+    }
+
+    if (this.transCheckoutModel.rtrnTrip != null) {
+      this.passengerBookingModel.seatCnt.push(this.totalPassenger + '');
+      this.passengerBookingModel.pickupPark.push(this.transCheckoutModel.rtrnTrip.dptrPark.id);
+      for (let index = 0; index < this.transCheckoutModel.rtrnTrip.reserves.length; index++) {
+        this.passengerBookingModel.reserveId.push(this.transCheckoutModel.rtrnTrip.reserves[index].reserveId);
+        this.passengerBookingModel.gender.push(this.passengerInfoList[index].gender);
+        this.passengerBookingModel.passengerName.push(this.passengerInfoList[index].passengerName + ' ' + this.passengerInfoList[index].passengerSurname);
+        this.passengerBookingModel.passengerTel.push(this.passengerInfoList[index].passengerTel);
+      }
+    }
   }
 
   goPreviousPage() {

@@ -8,7 +8,7 @@
     <div class="col-md-7">
       <h5> ที่นั่ง </h5>
       <bus-layout [data]="busLayout" [numberOfSeat]="totalPassenger" 
-      [transId]="transId" [trip]="receiveData.dptrTrip"
+      [transId]="transId" [trip]="trip"
       (outputValue)="selectSeat($event)" *ngIf="transId != undefined"> </bus-layout>
     </div>
     <div class="col-md-5">

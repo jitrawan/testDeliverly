@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, Renderer2 } from '@angular/core';
 import { AlertsService } from '@jaspero/ng2-alerts';
 
 import { BusService } from '../../services/bus.service';
@@ -6,6 +6,7 @@ import { BusService } from '../../services/bus.service';
 import { BusLayoutModel } from '../../models/bus/busLayout.model';
 import { MarkSeatModel } from '../../models/bus/markSeat.model';
 import { ReserveSeatModel } from '../../models/bus/reserveSeat.model';
+import { TripModel } from '../../models/bus/trip.model';
 
 @Component({
   selector: 'bus-layout',
@@ -17,11 +18,9 @@ export class BusLayoutComponent implements OnInit {
   @Input() data: any;
   @Input() numberOfSeat: number;
   @Input() transId: any;
-  @Input() trip: any;
+  @Input() trip: TripModel;
 
   @Output() outputValue: EventEmitter<any> = new EventEmitter();
-
-
   selectedSeat: any = {
     seat: [],
     reserve: []
@@ -36,9 +35,14 @@ export class BusLayoutComponent implements OnInit {
   constructor(
     private _alert: AlertsService,
     private busService: BusService,
+    private renderer: Renderer2,
   ) { }
 
   ngOnInit() {
+    this.init();
+  }
+
+  init() {
     if (this.data != null) {
       this.numbersOfCol = Array(this.data.cols).fill('');
       this.numbersOfRow = Array(this.data.rows).fill('');
@@ -69,7 +73,7 @@ export class BusLayoutComponent implements OnInit {
     return objList.filter(item => item.pos.y === row);
   }
 
-  checkSeat(objList, row, pos) {
+  fatchRowData(objList, row, pos) {
     objList = this.groupObjByRow(objList, row);
     return objList.filter(item => item.pos.x === pos);
   }
@@ -84,17 +88,14 @@ export class BusLayoutComponent implements OnInit {
 
     if (this.selectedSeat.seat.length < this.numberOfSeat) {
       if (event.target.checked) {
-        // this.selectedSeat.seat.push(data);
-        this.markSeat(this.trip, data, id);
+        this.markSeat(this.trip, data, id, event);
       }
 
     } else {
       this.openDialog('ไม่สามารถเลือกที่นั่งเกินจำนวนคนที่ท่านเลือกไว้ได้');
       (document.getElementById(id) as HTMLInputElement).checked = false;
     }
-    console.log('after this.selectedSeat >>', this.selectedSeat);
     this.outputValue.emit(this.selectedSeat);
-
   }
 
   openDialog(msg) {
@@ -103,14 +104,14 @@ export class BusLayoutComponent implements OnInit {
     this._alert.create(type, msg, this.alertSettings);
   }
 
-  markSeat(trip, seat, id) {
+  markSeat(trip :TripModel, seat, id, event) {
     this.markSeatModel = new MarkSeatModel();
     this.markSeatModel.transId = this.transId.transId;
     this.markSeatModel.tripId = trip.id;
     this.markSeatModel.pickup = trip.dptrPark.id;
-    this.markSeatModel.pickupDesc = trip.dptrPark.id;
+    this.markSeatModel.pickupDesc = trip.dptrPark.desc;
     this.markSeatModel.dropoff = trip.arrvPark.id;
-    this.markSeatModel.dropoffDesc = trip.arrvPark.id;
+    this.markSeatModel.dropoffDesc = trip.arrvPark.desc;
     this.markSeatModel.seatCnt = 1;
     this.markSeatModel.seatFloor = [seat.pos.z];
     this.markSeatModel.seatNo = [seat.name];
@@ -127,6 +128,7 @@ export class BusLayoutComponent implements OnInit {
       } else {
         this.openDialog(res.msg);
         (document.getElementById(id) as HTMLInputElement).checked = false;
+        this.renderer.addClass(event.target.parentElement, 'Ngender');
       }
     });
   }

@@ -1,5 +1,5 @@
 
-<div class="container" *ngIf="isDisplay">
+<div class="container" >
   <div class="pageTopic col-12">
     <span>กรอกข้อมูลผู้โดยสาร</span>
     <img src="../../../../assets/images/borkorsor Website-07.png" />
@@ -56,8 +56,4 @@
       <button class="btn btn-atk-primary mt-3 buttonSize" type="button" (click)="nextPage()">NEXT</button>
     </div>
   </div>
-</div>
-
-<div class="container" *ngIf="!isDisplay">
-  <app-summary [passengerInfoList]="passengerInfoList"></app-summary>
 </div>

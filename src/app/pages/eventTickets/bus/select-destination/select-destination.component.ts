@@ -259,13 +259,13 @@ export class SelectDestinationComponent implements OnInit {
       this.availableTripSeach.returnDate = this.datePipe.transform(this.returnDate, 'yyyy-MM-dd');
       this.availableTripSeach.pickup = this.selectedDptrPark.id;
       // this.availableTripSeach.pickupDesc = '';
-      if (this.selectedDptrPark.id == '1223') {
-        this.availableTripSeach.pickupDesc = this.selectedDptrPark.nameTh;
-      }
+      // if (this.selectedDptrPark.id == '1223') {
+      //   this.availableTripSeach.pickupDesc = this.selectedDptrPark.nameTh;
+      // }
       this.availableTripSeach.dropoff = this.selectedArrvPark.id;
-      if (this.selectedArrvPark.id == '1223') {
-        this.availableTripSeach.dropoffDesc = this.selectedArrvPark.nameTh;
-      }
+      // if (this.selectedArrvPark.id == '1223') {
+      //   this.availableTripSeach.dropoffDesc = this.selectedArrvPark.nameTh;
+      // }
       this.availableTripSeach.tripType = this.selectedTripType;
       this.busService.getAvailableTrip(this.availableTripSeach).subscribe((res) => {
         if (res.code == 0) {

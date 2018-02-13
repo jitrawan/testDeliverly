@@ -104,7 +104,7 @@ export class BusLayoutComponent implements OnInit {
     this._alert.create(type, msg, this.alertSettings);
   }
 
-  markSeat(trip :TripModel, seat, id, event) {
+  markSeat(trip: TripModel, seat, id, event) {
     this.markSeatModel = new MarkSeatModel();
     this.markSeatModel.transId = this.transId.transId;
     this.markSeatModel.tripId = trip.id;
@@ -125,10 +125,14 @@ export class BusLayoutComponent implements OnInit {
         };
         this.selectedSeat.seat.push(seat);
         this.selectedSeat.reserve.push(data);
-      } else {
+      } else if (res.code == 1004) {
+        console.log(res.code);
         this.openDialog(res.msg);
         (document.getElementById(id) as HTMLInputElement).checked = false;
         this.renderer.addClass(event.target.parentElement, 'Ngender');
+      } else {
+        this.openDialog(res.msg);
+        (document.getElementById(id) as HTMLInputElement).checked = false;
       }
     });
   }

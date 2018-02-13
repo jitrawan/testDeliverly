@@ -1,10 +1,11 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, Input } from '@angular/core';
-
+import { Router, ActivatedRoute } from '@angular/router';
 import { AlertsService } from '@jaspero/ng2-alerts';
+import { ConfirmationService } from '@jaspero/ng2-confirmations';
 import { SharedService } from '../../../../shared/services/shared-service.service';
 import { BusService } from '../../../../shared/services/bus.service';
-
+import { ConfirmBoxEmit } from '../../../../shared/models/confirmBoxEmit';
 import { BookingResultModel } from '../../../../shared/models/bus/bookingResult.model';
 
 @Component({
@@ -22,14 +23,17 @@ export class SummaryComponent implements OnInit {
   fee: number = 15;
   receiveData: any;
   trips: any;
+  confirmSettings: any;
+  alertSettings: any;
 
   constructor(
     private sharedService: SharedService,
     private busService: BusService,
-    private _alert: AlertsService
-  ) {
-    console.log();
-  }
+    private _alert: AlertsService,
+    private _confirm: ConfirmationService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
 
@@ -75,4 +79,43 @@ export class SummaryComponent implements OnInit {
       return floorList;
     }
   }
+
+  openDialog(msg) {
+    let type: any = "warning";
+    this.alertSettings = { overlay: true, overlayClickToClose: false, showCloseButton: true, duration: 100000 };
+    this._alert.create(type, msg, this.alertSettings);
+  }
+  
+  cancelBooking() {
+    this.confirmSettings = { confirmText: 'ใช่', declineText: 'ไม่' };
+    let isConfirm:any;
+    this._confirm.create('กรุณายืนยัน','คุณต้องการยกเลิกการจองหรือไม่' , this.confirmSettings)
+      .subscribe((callback: ConfirmBoxEmit) => {
+        console.log(callback)
+        if(callback.resolved != undefined && callback.resolved == true) {
+          this.executeCancelBooking();
+        }
+      });
+
+    
+  }
+  
+  executeCancelBooking() {
+
+    this.busService.getTransId('C').subscribe((res) => {
+      if(res.code == 0) {
+        this.busService.cancelBooking(res.data.transId,this.bookingResult.bookId,this.bookingResult.bookCode).subscribe((res) => {
+          console.log("cancelBooking",res);
+          if (res.code == 0) {
+            this.router.navigate(['..'], { relativeTo: this.route });
+          } else {
+            this.openDialog(res.msg);
+          }
+        });
+      } else {
+        this.openDialog(res.msg);
+      }
+    });
+  }
+  
 }

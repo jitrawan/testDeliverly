@@ -166,6 +166,10 @@
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/@jaspero/ng2-alerts/-/ng2-alerts-0.0.7.tgz#439141c6ff5a71d732f2dac5c88a6de56887e04e"
 
+"@jaspero/ng2-confirmations@^0.3.3":
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/@jaspero/ng2-confirmations/-/ng2-confirmations-0.3.3.tgz#6dddec7f3bd1e8e26de679f788787ad8eac4ffa2"
+
 "@ng-bootstrap/ng-bootstrap@^1.0.0-beta.5":
   version "1.0.0-beta.8"
   resolved "https://registry.yarnpkg.com/@ng-bootstrap/ng-bootstrap/-/ng-bootstrap-1.0.0-beta.8.tgz#04871e24d1c8a78bcf5a0476edc25044d28abb09"

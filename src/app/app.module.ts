@@ -15,6 +15,7 @@ import { DialogModule } from './shared/lib/dialog/dialog.component';
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 import { ThaiDatePipe } from './shared/lib/date-format/thaidate.pipe';
 import { JasperoAlertsModule } from '@jaspero/ng2-alerts';
+import { JasperoConfirmationsModule } from '@jaspero/ng2-confirmations' 
 
 
 /* Service */
@@ -102,7 +103,8 @@ import { BuyTicketComponent } from './pages/eventTickets/bus/buy-ticket/buy-tick
     CalendarModule,
     DialogModule,
     Ng2AutoCompleteModule,
-    JasperoAlertsModule
+    JasperoAlertsModule,
+    JasperoConfirmationsModule
   ],
   providers: [
     HeaderService, 

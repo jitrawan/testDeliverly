@@ -24,9 +24,7 @@ export class PassengerInformationComponent implements OnInit {
   numOfPassengerBox: any[];
   passengerInfoList = new Array<PassengerInformationModel>();
   errorMessage = new ErrorMessage;
-  // isDisplay: boolean = true;
   alertSettings: any;
-  tripName: any;
   receiveData: any;
   transId: TransIdModel;
   transCheckoutModel: TransCheckoutModel;
@@ -46,7 +44,6 @@ export class PassengerInformationComponent implements OnInit {
 
   ngOnInit() {
     this.sharedService.receiveData.subscribe(data => this.receiveData = data);
-    console.log('this.receiveData >>>>', this.receiveData);
     this.totalPassenger = this.receiveData.totalPassenger;
     this.transId = this.receiveData.transId;
     this.numOfPassengerBox = Array(Number(this.totalPassenger)).fill('');
@@ -99,14 +96,12 @@ export class PassengerInformationComponent implements OnInit {
       this.busService.booking(this.passengerBookingModel).subscribe((res) => {
         if (res.code == 0) {
           this.bookingResultModel = res.data;
-          console.log('this.bookingResultModel >>>', this.bookingResultModel);
           this.sharedService.sendData(this.bookingResultModel);
           this.router.navigate(['../summary'], { relativeTo: this.route });
         } else {
           this.openDialog(res.msg);
         }
       });
-
     }
   }
 

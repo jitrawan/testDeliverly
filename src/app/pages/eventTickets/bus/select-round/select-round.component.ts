@@ -151,7 +151,7 @@ export class SelectRoundComponent implements OnInit {
     } else if (this.availableTripResultModel.rtrnTrips != null && this.selectedRtrnTrip == undefined) {
       this.openDialog(this.errorMessage.pleaseSelect + 'วันที่และเวลาเดินทางกลับ');
     } else {
-      // parent.window.receiveMessage('checkAuthen');
+      parent.window.receiveMessage('checkAuthen');
       this.isShowLoading = true;
       this.busService.getBusLayout(this.selectedDptrTrip.id, this.selectedDptrTrip.dptrPark.id, this.selectedDptrTrip.arrvPark.id).subscribe((res) => {
         if (res.code == 0) {

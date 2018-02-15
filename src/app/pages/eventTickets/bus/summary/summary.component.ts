@@ -7,6 +7,7 @@ import { SharedService } from '../../../../shared/services/shared-service.servic
 import { BusService } from '../../../../shared/services/bus.service';
 import { ConfirmBoxEmit } from '../../../../shared/models/confirmBoxEmit';
 import { BookingResultModel } from '../../../../shared/models/bus/bookingResult.model';
+import { InsertBookingInfoModel , listTripByReserve } from '../../../../shared/models/bus/insertBookingInfo.model';
 
 @Component({
   selector: 'app-summary',
@@ -16,6 +17,7 @@ import { BookingResultModel } from '../../../../shared/models/bus/bookingResult.
 export class SummaryComponent implements OnInit {
 
   @Input() bookingResult: BookingResultModel;
+  insertBooking: InsertBookingInfoModel;
   dprtPrice: number = 0;
   dprtDiscount: number = 0;
   rtrnPrice: number = 0;
@@ -86,6 +88,104 @@ export class SummaryComponent implements OnInit {
     this._alert.create(type, msg, this.alertSettings);
   }
   
+
+  insertBookingInfo() {
+    
+    let listDptrTripByReserve = new listTripByReserve();
+    let listRtrnTripByReserve = new listTripByReserve();
+
+    for(let el of this.bookingResult.dptrTrip.reserves) {
+      listDptrTripByReserve.passengerName.push(el.passengerName);
+      listDptrTripByReserve.passengerTel.push(el.passengerTel);
+      listDptrTripByReserve.seatFloor.push(el.seatFloor);
+      listDptrTripByReserve.seatNo.push(el.seatNo);
+      listDptrTripByReserve.fare.push(el.fare);
+      listDptrTripByReserve.fee.push(el.fee);
+      listDptrTripByReserve.disFare.push(el.disFare);
+      listDptrTripByReserve.disFee.push(el.disFee);
+    }
+    
+    this.insertBooking = {
+      bookCode: this.bookingResult.bookCode,
+      bookId: this.bookingResult.bookId,
+      passengerName: listDptrTripByReserve.passengerName.toString(),
+      passengerTel: listDptrTripByReserve.passengerTel.toString(),
+      noOfSeat: this.bookingResult.dptrTrip.reserves.length+"",
+      totalAmt: this.totalPrice()+"",
+      dptrTrip: {
+        dptrProvinceDesc: this.bookingResult.dptrTrip.dptrProvince.desc,
+        dptrParkDesc: this.bookingResult.dptrTrip.dptrPark.desc,
+        arrvProvinceDesc: this.bookingResult.dptrTrip.arrvProvince.desc,
+        arrvParkDesc: this.bookingResult.dptrTrip.arrvPark.desc,
+        dptrTripDate: this.bookingResult.dptrTrip.date,
+        dptrTripTime: this.bookingResult.dptrTrip.time,
+        routeId: this.bookingResult.dptrTrip.route.id,
+        busStdDesc: this.bookingResult.dptrTrip.busStd.desc,
+        stationDesc: this.bookingResult.dptrTrip.dptrPark.desc,
+        platform: this.trips.dptrTrip.platform,
+        seatFloor: listDptrTripByReserve.seatFloor.toString(),
+        seatNo: listDptrTripByReserve.seatNo.toString(),
+        contactName: this.bookingResult.contactName,
+        telNo: this.bookingResult.telNo,
+        fare: listDptrTripByReserve.fare.toString(),
+        fee: listDptrTripByReserve.fee.toString(),
+        disFare: listDptrTripByReserve.disFare.toString(),
+        disFee: listDptrTripByReserve.disFee.toString(),
+        coupon: this.trips.dptrTrip.coupon
+      }
+    }
+
+    if(this.bookingResult.rtrnTrip != null && this.bookingResult.rtrnTrip != undefined) {
+
+      for(let el of this.bookingResult.rtrnTrip.reserves) {
+        listRtrnTripByReserve.passengerName.push(el.passengerName);
+        listRtrnTripByReserve.passengerTel.push(el.passengerTel);
+        listRtrnTripByReserve.seatFloor.push(el.seatFloor);
+        listRtrnTripByReserve.seatNo.push(el.seatNo);
+        listRtrnTripByReserve.fare.push(el.fare);
+        listRtrnTripByReserve.fee.push(el.fee);
+        listRtrnTripByReserve.disFare.push(el.disFare);
+        listRtrnTripByReserve.disFee.push(el.disFee);
+      }
+      
+      this.insertBooking.rtrnTrip = {
+        dptrProvinceDesc: this.bookingResult.dptrTrip.dptrProvince.desc,
+        dptrParkDesc: this.bookingResult.dptrTrip.dptrPark.desc,
+        arrvProvinceDesc: this.bookingResult.dptrTrip.arrvProvince.desc,
+        arrvParkDesc: this.bookingResult.dptrTrip.arrvPark.desc,
+        dptrTripDate: this.bookingResult.dptrTrip.date,
+        dptrTripTime: this.bookingResult.dptrTrip.time,
+        routeId: this.bookingResult.dptrTrip.route.id,
+        busStdDesc: this.bookingResult.dptrTrip.busStd.desc,
+        stationDesc: this.bookingResult.dptrTrip.dptrPark.desc,
+        platform: this.trips.dptrTrip.platform,
+        seatFloor: listRtrnTripByReserve.seatFloor.toString(),
+        seatNo: listRtrnTripByReserve.seatNo.toString(),
+        contactName: this.bookingResult.contactName,
+        telNo: this.bookingResult.telNo,
+        fare: listRtrnTripByReserve.fare.toString(),
+        fee: listRtrnTripByReserve.fee.toString(),
+        disFare: listRtrnTripByReserve.disFare.toString(),
+        disFee: listRtrnTripByReserve.disFee.toString(),
+        coupon: this.trips.dptrTrip.coupon
+      }
+    }
+    
+    this.busService.insertBookingInfo(this.insertBooking).subscribe((res) => {
+      if(res.code == 0) {
+        console.log("SUCCESS",res);
+      } else {
+        console.log("error",res);
+        this.openDialog(res.msg);
+      }
+    });
+
+    // console.log(this.insertBooking)
+    // console.log("______________")
+    // console.log(this.trips);
+    // console.log("______________")
+    // console.log(this.bookingResult)
+  }
   cancelBooking() {
     this.confirmSettings = { confirmText: 'ใช่', declineText: 'ไม่' };
     let isConfirm:any;

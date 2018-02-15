@@ -59,9 +59,9 @@
   padding-left: 15px;
 }
 
-button.primary {
-  background-color: #ec4a1d;
-  color: white;
+::ng-deep button.primary {
+  background-color: #ec4a1d !important;
+  color: white !important;
 }
 
 @media screen and (max-width: 780px) {

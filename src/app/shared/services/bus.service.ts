@@ -11,12 +11,14 @@ import { MarkSeatModel } from '../models/bus/markSeat.model';
 import { PassengerBookingModel } from '../models/bus/passengerBooking.model';
 
 import 'rxjs/add/operator/catch';
+import { InsertBookingInfoModel } from '../models/bus/insertBookingInfo.model';
 
 @Injectable()
 export class BusService {
 
     // private baseURL = 'https://s3-ap-southeast-1.amazonaws.com/';
-    private baseURL = 'http://d11aliyfxni7iy.cloudfront.net/api/trs/';
+    // private baseURL = 'http://d11aliyfxni7iy.cloudfront.net/api/trs/';
+    private baseURL = 'http://busticketreserve-env.ap-southeast-1.elasticbeanstalk.com/api/trs/';
     private staticURL = 'http://d11aliyfxni7iy.cloudfront.net/master/';
     private staticFile = '.txt';
 
@@ -31,7 +33,7 @@ export class BusService {
     private getTransCheckoutAPI = this.baseURL + 'ag_trans_checkout';
     private bookingAPI = this.baseURL + 'ag_booking';
     private cancelBookingAPI = this.baseURL + 'ag_cancel_booking';
-
+    private insertBookingInfoAPI = this.baseURL + 'insert_booking_info';
     private clearTransSeatmarkAPI = this.baseURL + 'ag_clear_trans_seatmark';
 
     constructor(private http: Http) { }
@@ -243,6 +245,19 @@ export class BusService {
             transId: transId
         };
         return this.http.post(this.clearTransSeatmarkAPI, JSON.stringify(body), options)
+            .map((res: Response) => {
+                return res.json();
+            })
+            .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
+    }
+
+    insertBookingInfo(insertBooking: InsertBookingInfoModel){
+
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        let body = insertBooking;
+        console.log('body>>', body);
+        return this.http.post(this.insertBookingInfoAPI, JSON.stringify(body), options)
             .map((res: Response) => {
                 return res.json();
             })

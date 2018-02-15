@@ -62,11 +62,14 @@ export class SelectDestinationComponent implements OnInit {
   ngOnInit() {
     let receiveData;
     this.sharedService.receiveData.subscribe(data => receiveData = data);
-    this.queryString = {
-      payment_channel: receiveData.get('payment_channel'),
-      cust_email: receiveData.get('cust_email')
-    }
 
+    if(receiveData instanceof URLSearchParams) {
+      this.queryString = {
+        payment_channel: receiveData.get('payment_channel'),
+        cust_email: receiveData.get('cust_email')
+      }
+    }
+    
     this.maxDate.setDate(this.maxDate.getDate() + 90);
     this.maxDateForReturn.setDate(this.maxDateForReturn.getDate() + 90);
     this.getProvinceList();

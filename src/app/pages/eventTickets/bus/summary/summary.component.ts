@@ -170,7 +170,7 @@ export class SummaryComponent implements OnInit {
         coupon: this.trips.dptrTrip.coupon
       }
     }
-    
+
     this.busService.insertBookingInfo(this.insertBooking).subscribe((res) => {
       if(res.code == 0) {
         console.log("SUCCESS",res);
@@ -179,12 +179,7 @@ export class SummaryComponent implements OnInit {
         this.openDialog(res.msg);
       }
     });
-
-    // console.log(this.insertBooking)
-    // console.log("______________")
-    // console.log(this.trips);
-    // console.log("______________")
-    // console.log(this.bookingResult)
+    
   }
   cancelBooking() {
     this.confirmSettings = { confirmText: 'ใช่', declineText: 'ไม่' };

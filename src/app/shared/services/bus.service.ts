@@ -17,9 +17,9 @@ import { InsertBookingInfoModel } from '../models/bus/insertBookingInfo.model';
 export class BusService {
 
     // private baseURL = 'https://s3-ap-southeast-1.amazonaws.com/';
-    // private baseURL = 'http://d11aliyfxni7iy.cloudfront.net/api/trs/';
-    private baseURL = 'http://busticketreserve-env.ap-southeast-1.elasticbeanstalk.com/api/trs/';
-    private staticURL = 'http://d11aliyfxni7iy.cloudfront.net/master/';
+    private baseURL = '//d11aliyfxni7iy.cloudfront.net/api/trs/';
+    // private baseURL = '//busticketreserve-env.ap-southeast-1.elasticbeanstalk.com/api/trs/';
+    private staticURL = '//d11aliyfxni7iy.cloudfront.net/master/';
     private staticFile = '.txt';
 
     private getMasProvinceAPI = this.staticURL + 'ag_mas_province' + this.staticFile;
@@ -262,5 +262,15 @@ export class BusService {
                 return res.json();
             })
             .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
+    }
+
+    checkAuthen(currentUrl){
+        let checkAuthAPI = '//'+currentUrl+'/fcheckauthen.html';
+
+        return this.http.get(checkAuthAPI)
+            .map((res: Response) => {
+                return res.json();
+            })
+        .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
     }
 }

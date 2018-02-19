@@ -7,7 +7,7 @@ import { SharedService } from '../../../../shared/services/shared-service.servic
 import { BusService } from '../../../../shared/services/bus.service';
 import { ConfirmBoxEmit } from '../../../../shared/models/confirmBoxEmit';
 import { BookingResultModel } from '../../../../shared/models/bus/bookingResult.model';
-import { InsertBookingInfoModel , listTripByReserve } from '../../../../shared/models/bus/insertBookingInfo.model';
+import { InsertBookingInfoModel, listTripByReserve } from '../../../../shared/models/bus/insertBookingInfo.model';
 
 @Component({
   selector: 'app-summary',
@@ -27,6 +27,7 @@ export class SummaryComponent implements OnInit {
   trips: any;
   confirmSettings: any;
   alertSettings: any;
+  queryString: any;
 
   constructor(
     private sharedService: SharedService,
@@ -35,7 +36,7 @@ export class SummaryComponent implements OnInit {
     private _confirm: ConfirmationService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit() {
 
@@ -87,14 +88,18 @@ export class SummaryComponent implements OnInit {
     this.alertSettings = { overlay: true, overlayClickToClose: false, showCloseButton: true, duration: 100000 };
     this._alert.create(type, msg, this.alertSettings);
   }
-  
+
 
   insertBookingInfo() {
+    this.queryString = {
+      payment_channel: localStorage.getItem('payment_channel'),
+      cust_email: localStorage.getItem('cust_email')
+    }
     
     let listDptrTripByReserve = new listTripByReserve();
     let listRtrnTripByReserve = new listTripByReserve();
 
-    for(let el of this.bookingResult.dptrTrip.reserves) {
+    for (let el of this.bookingResult.dptrTrip.reserves) {
       listDptrTripByReserve.passengerName.push(el.passengerName);
       listDptrTripByReserve.passengerTel.push(el.passengerTel);
       listDptrTripByReserve.seatFloor.push(el.seatFloor);
@@ -104,14 +109,14 @@ export class SummaryComponent implements OnInit {
       listDptrTripByReserve.disFare.push(el.disFare);
       listDptrTripByReserve.disFee.push(el.disFee);
     }
-    
+
     this.insertBooking = {
       bookCode: this.bookingResult.bookCode,
       bookId: this.bookingResult.bookId,
       passengerName: listDptrTripByReserve.passengerName.toString(),
       passengerTel: listDptrTripByReserve.passengerTel.toString(),
-      noOfSeat: this.bookingResult.dptrTrip.reserves.length+"",
-      totalAmt: this.totalPrice()+"",
+      noOfSeat: this.bookingResult.dptrTrip.reserves.length + "",
+      totalAmt: this.totalPrice() + "",
       dptrTrip: {
         dptrProvinceDesc: this.bookingResult.dptrTrip.dptrProvince.desc,
         dptrParkDesc: this.bookingResult.dptrTrip.dptrPark.desc,
@@ -135,9 +140,9 @@ export class SummaryComponent implements OnInit {
       }
     }
 
-    if(this.bookingResult.rtrnTrip != null && this.bookingResult.rtrnTrip != undefined) {
+    if (this.bookingResult.rtrnTrip != null && this.bookingResult.rtrnTrip != undefined) {
 
-      for(let el of this.bookingResult.rtrnTrip.reserves) {
+      for (let el of this.bookingResult.rtrnTrip.reserves) {
         listRtrnTripByReserve.passengerName.push(el.passengerName);
         listRtrnTripByReserve.passengerTel.push(el.passengerTel);
         listRtrnTripByReserve.seatFloor.push(el.seatFloor);
@@ -147,7 +152,7 @@ export class SummaryComponent implements OnInit {
         listRtrnTripByReserve.disFare.push(el.disFare);
         listRtrnTripByReserve.disFee.push(el.disFee);
       }
-      
+
       this.insertBooking.rtrnTrip = {
         dptrProvinceDesc: this.bookingResult.dptrTrip.dptrProvince.desc,
         dptrParkDesc: this.bookingResult.dptrTrip.dptrPark.desc,
@@ -172,35 +177,35 @@ export class SummaryComponent implements OnInit {
     }
 
     this.busService.insertBookingInfo(this.insertBooking).subscribe((res) => {
-      if(res.code == 0) {
-        console.log("SUCCESS",res);
+      if (res.code == 0) {
+        console.log("SUCCESS", res);
       } else {
-        console.log("error",res);
+        console.log("error", res);
         this.openDialog(res.msg);
       }
     });
-    
+
   }
   cancelBooking() {
     this.confirmSettings = { confirmText: 'ใช่', declineText: 'ไม่' };
-    let isConfirm:any;
-    this._confirm.create('กรุณายืนยัน','คุณต้องการยกเลิกการจองหรือไม่' , this.confirmSettings)
+    let isConfirm: any;
+    this._confirm.create('กรุณายืนยัน', 'คุณต้องการยกเลิกการจองหรือไม่', this.confirmSettings)
       .subscribe((callback: ConfirmBoxEmit) => {
         console.log(callback)
-        if(callback.resolved != undefined && callback.resolved == true) {
+        if (callback.resolved != undefined && callback.resolved == true) {
           this.executeCancelBooking();
         }
       });
 
-    
+
   }
-  
+
   executeCancelBooking() {
 
     this.busService.getTransId('C').subscribe((res) => {
-      if(res.code == 0) {
-        this.busService.cancelBooking(res.data.transId,this.bookingResult.bookId,this.bookingResult.bookCode).subscribe((res) => {
-          console.log("cancelBooking",res);
+      if (res.code == 0) {
+        this.busService.cancelBooking(res.data.transId, this.bookingResult.bookId, this.bookingResult.bookCode).subscribe((res) => {
+          console.log("cancelBooking", res);
           if (res.code == 0) {
             this.router.navigate(['..'], { relativeTo: this.route });
           } else {
@@ -212,5 +217,5 @@ export class SummaryComponent implements OnInit {
       }
     });
   }
-  
+
 }

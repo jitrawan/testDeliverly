@@ -196,7 +196,6 @@ export class SummaryComponent implements OnInit {
     let isConfirm: any;
     this._confirm.create('กรุณายืนยัน', 'คุณต้องการยกเลิกการจองหรือไม่', this.confirmSettings)
       .subscribe((callback: ConfirmBoxEmit) => {
-        console.log(callback)
         if (callback.resolved != undefined && callback.resolved == true) {
           this.executeCancelBooking();
         } else {
@@ -209,7 +208,6 @@ export class SummaryComponent implements OnInit {
     this.busService.getTransId('C').subscribe((res) => {
       if (res.code == 0) {
         this.busService.cancelBooking(res.data.transId, this.bookingResult.bookId, this.bookingResult.bookCode).subscribe((res) => {
-          console.log("cancelBooking", res);
           if (res.code == 0) {
             this.router.navigate(['..'], { relativeTo: this.route });
           } else {

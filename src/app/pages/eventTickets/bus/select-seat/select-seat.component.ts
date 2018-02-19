@@ -209,7 +209,6 @@ export class SelectSeatComponent implements OnInit {
     }
     this.busService.clearTransSeatMark(this.transId.transId).subscribe((res) => {
       if (res.code == 0) {
-        console.log('resss >> ', res);
         this.sharedService.sendData(dataBackSeat);
         this.router.navigate([routerUrl], { relativeTo: this.route });
       } else {

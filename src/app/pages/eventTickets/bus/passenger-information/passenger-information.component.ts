@@ -46,14 +46,11 @@ export class PassengerInformationComponent implements OnInit {
 
   ngOnInit() {
     this.sharedService.receiveData.subscribe(data => this.receiveData = data);
-    console.log('this.receiveData>>>', this.receiveData);
     this.trips = this.receiveData.forwardData;
-    console.log('this.trips >>', this.trips);
     this.totalPassenger = this.receiveData.totalPassenger;
     this.transId = this.receiveData.transId;
     this.numOfPassengerBox = Array(Number(this.totalPassenger)).fill('');
     this.transCheckoutModel = this.receiveData.transCheckoutModel;
-    console.log('transId >>', this.transId);
 
     for (let index = 0; index < this.totalPassenger; index++) {
       let passengerInfoModel: PassengerInformationModel = new PassengerInformationModel;
@@ -107,7 +104,6 @@ export class PassengerInformationComponent implements OnInit {
             forwardData: this.trips,
             bookingResultModel: this.bookingResultModel
           }
-          console.log('this.bookingResultModel >>', this.bookingResultModel);
           this.sharedService.sendData(forwardData);
           this.router.navigate(['../summary'], { relativeTo: this.route });
         } else {

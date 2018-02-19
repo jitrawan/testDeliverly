@@ -1,4 +1,4 @@
-export class ErrorMessage{
+export class ErrorMessage {
     public pleaseSelect: string = "กรุณาระบุ";
-    // public pleaseEnter: string = "กรุณาระบุ";
+    public unknowException: string = "Unknow Exception";
 }

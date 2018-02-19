@@ -11,6 +11,7 @@ import { MarkSeatModel } from '../models/bus/markSeat.model';
 import { PassengerBookingModel } from '../models/bus/passengerBooking.model';
 
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 import { InsertBookingInfoModel } from '../models/bus/insertBookingInfo.model';
 
 @Injectable()
@@ -18,7 +19,7 @@ export class BusService {
 
     // private baseURL = 'https://s3-ap-southeast-1.amazonaws.com/';
     private baseURL = '//d11aliyfxni7iy.cloudfront.net/api/trs/';
-    private baseURLForInsert = '//d11aliyfxni7iy.cloudfront.net/api/bus/';
+    private baseURLForInsert = '//busticketreserve-env.ap-southeast-1.elasticbeanstalk.com/api/bus/';
     // private baseURL = '//busticketreserve-env.ap-southeast-1.elasticbeanstalk.com/api/trs/';
     private staticURL = '//d11aliyfxni7iy.cloudfront.net/master/';
     // private staticURL = '//s3-ap-southeast-1.amazonaws.com/allticket-trs-masterinfo/master/';
@@ -64,9 +65,22 @@ export class BusService {
             .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
     }
 
-    getAvailableTrip(availableTrip: AvailableTripModel) {
-        console.log('availableTrip>>> ', availableTrip);
+    getRoutePrvParkMap(pickupId) {
         let headers = new Headers({ 'Content-Type': 'application/json' });
+        //  let options = new RequestOptions({ headers: headers, withCredentials: true });
+        let options = new RequestOptions({ headers: headers });
+        let body = {
+            pickup: pickupId
+        };
+        return this.http.post(this.getRoutePrvParkMapAPI, JSON.stringify(body), options)
+            .map((res: Response) => {
+                return res.json();
+            })
+            .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
+    }
+
+    getAvailableTrip(availableTrip: AvailableTripModel) {
+        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': localStorage.getItem("ALLTICKET:authToken") });
         //  let options = new RequestOptions({ headers: headers, withCredentials: true });
         let options = new RequestOptions({ headers: headers });
         let body = availableTrip;
@@ -77,23 +91,8 @@ export class BusService {
             .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
     }
 
-    getRoutePrvParkMap(pickupId) {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        //  let options = new RequestOptions({ headers: headers, withCredentials: true });
-        let options = new RequestOptions({ headers: headers });
-        let body = {
-            pickup: pickupId
-        };
-        return this.http.post(this.getRoutePrvParkMapAPI, JSON.stringify(body), options)
-            .map((res: Response) => {
-                console.log('res>>', res);
-                return res.json();
-            })
-            .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
-    }
-
     getBusLayout(tripId, pickupId, dropoffId) {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': localStorage.getItem("authToken") });
         //  let options = new RequestOptions({ headers: headers, withCredentials: true });
         let options = new RequestOptions({ headers: headers });
         let body = {
@@ -109,7 +108,7 @@ export class BusService {
     }
 
     getTransId(transType: string) {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': localStorage.getItem("authToken") });
         //  let options = new RequestOptions({ headers: headers, withCredentials: true });
         let options = new RequestOptions({ headers: headers });
         let body = {
@@ -123,7 +122,7 @@ export class BusService {
     }
 
     markSeat(markSeat: MarkSeatModel) {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': localStorage.getItem("ALLTICKET:authToken") });
         //  let options = new RequestOptions({ headers: headers, withCredentials: true });
         let options = new RequestOptions({ headers: headers });
         let body = {
@@ -148,7 +147,7 @@ export class BusService {
     }
 
     unMarkSeat(markSeat: MarkSeatModel, reserveId) {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': localStorage.getItem("ALLTICKET:authToken") });
         //  let options = new RequestOptions({ headers: headers, withCredentials: true });
         let options = new RequestOptions({ headers: headers });
         let body = {
@@ -163,16 +162,15 @@ export class BusService {
             body["seatFloor[" + index + "]"] = markSeat.seatFloor[index] + "";
         }
         body["reserveId[" + 0 + "]"] = reserveId.reserveId + "";
-        console.log('body>>', body);
         return this.http.post(this.unMarkSeatAPI, JSON.stringify(body), options)
             .map((res: Response) => {
                 return res.json();
             })
-            .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
+        // .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
     }
 
     getTransCheckout(transId: string) {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': localStorage.getItem("ALLTICKET:authToken") });
         //  let options = new RequestOptions({ headers: headers, withCredentials: true });
         let options = new RequestOptions({ headers: headers });
         let body = {
@@ -185,8 +183,8 @@ export class BusService {
             .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
     }
 
-    cancelBooking(transId,bookId,bookCode) {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
+    cancelBooking(transId, bookId, bookCode) {
+        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': localStorage.getItem("ALLTICKET:authToken") });
         let options = new RequestOptions({ headers: headers });
         let body = {
             transId: transId + "",
@@ -202,7 +200,7 @@ export class BusService {
 
     }
     booking(passengerBooking: PassengerBookingModel) {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': localStorage.getItem("ALLTICKET:authToken") });
         //  let options = new RequestOptions({ headers: headers, withCredentials: true });
         let options = new RequestOptions({ headers: headers });
         let body = {
@@ -240,7 +238,7 @@ export class BusService {
     }
 
     clearTransSeatMark(transId: string) {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': localStorage.getItem("ALLTICKET:authToken") });
         //  let options = new RequestOptions({ headers: headers, withCredentials: true });
         let options = new RequestOptions({ headers: headers });
         let body = {
@@ -253,9 +251,9 @@ export class BusService {
             .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
     }
 
-    insertBookingInfo(insertBooking: InsertBookingInfoModel){
+    insertBookingInfo(insertBooking: InsertBookingInfoModel) {
 
-        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': localStorage.getItem("ALLTICKET:authToken") });
         let options = new RequestOptions({ headers: headers });
         let body = insertBooking;
         console.log('body>>', body);
@@ -266,13 +264,13 @@ export class BusService {
             .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
     }
 
-    checkAuthen(currentUrl){
-        let checkAuthAPI = '//'+currentUrl+'/fcheckauthen.html';
+    checkAuthen(currentUrl) {
+        let checkAuthAPI = '//' + currentUrl + '/fcheckauthen.html';
 
         return this.http.get(checkAuthAPI)
             .map((res: Response) => {
                 return res.json();
             })
-        .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
+            .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
     }
 }

@@ -841,11 +841,9 @@ export class Calendar implements AfterViewInit, OnInit, OnDestroy, ControlValueA
 
     onInput(event) {
         let val = event.target.value;
-        // console.log('oninput ---- yearAddition');        
         try {
             this.value = this.parseValueFromString(val);
             this.value.setFullYear(this.value.getFullYear() - this.yearAddition);
-            // console.log('oninput ---- yearAddition',this.value);
             this.updateUI();
             this._isValid = true;
         }

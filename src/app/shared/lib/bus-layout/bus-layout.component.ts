@@ -132,7 +132,6 @@ export class BusLayoutComponent implements OnInit {
         this.selectedSeat.seat.push(seat);
         this.selectedSeat.reserve.push(data);
       } else if (res.code == 1004) {
-        console.log(res.code);
         this.openDialog(res.msg);
         (document.getElementById(id) as HTMLInputElement).checked = false;
         this.renderer.addClass(event.target.parentElement, 'Ngender');

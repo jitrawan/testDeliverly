@@ -31,6 +31,8 @@ export class PassengerInformationComponent implements OnInit {
   passengerBookingModel: PassengerBookingModel;
   trips: any;
   bookingResultModel: BookingResultModel;
+  isShowLoading: boolean = false;
+  isShowLoadingBack: boolean = false;
 
 
   constructor(
@@ -44,14 +46,11 @@ export class PassengerInformationComponent implements OnInit {
 
   ngOnInit() {
     this.sharedService.receiveData.subscribe(data => this.receiveData = data);
-    console.log('this.receiveData>>>', this.receiveData);
     this.trips = this.receiveData.forwardData;
-    console.log('this.trips >>', this.trips);
     this.totalPassenger = this.receiveData.totalPassenger;
     this.transId = this.receiveData.transId;
     this.numOfPassengerBox = Array(Number(this.totalPassenger)).fill('');
     this.transCheckoutModel = this.receiveData.transCheckoutModel;
-    console.log('transId >>', this.transId);
 
     for (let index = 0; index < this.totalPassenger; index++) {
       let passengerInfoModel: PassengerInformationModel = new PassengerInformationModel;
@@ -96,6 +95,7 @@ export class PassengerInformationComponent implements OnInit {
       }
     }
     if (!isFound) {
+      this.isShowLoading = true;
       this.prepareDataForBooking();
       this.busService.booking(this.passengerBookingModel).subscribe((res) => {
         if (res.code == 0) {
@@ -104,11 +104,11 @@ export class PassengerInformationComponent implements OnInit {
             forwardData: this.trips,
             bookingResultModel: this.bookingResultModel
           }
-          console.log('this.bookingResultModel >>', this.bookingResultModel);
           this.sharedService.sendData(forwardData);
           this.router.navigate(['../summary'], { relativeTo: this.route });
         } else {
           this.openDialog(res.msg);
+          this.isShowLoading = false;
         }
       });
     }
@@ -154,10 +154,9 @@ export class PassengerInformationComponent implements OnInit {
   }
 
   goPreviousPage() {
-
+    this.isShowLoadingBack = true;
     this.busService.clearTransSeatMark(this.transId.transId).subscribe((res) => {
       if (res.code == 0) {
-        console.log('resss >> ', res);
         this.busService.getBusLayout(
           this.trips.dptrTrip.id,
           this.trips.dptrTrip.dptrPark.id,
@@ -182,8 +181,12 @@ export class PassengerInformationComponent implements OnInit {
             this.router.navigate(['../selectSeat'], { relativeTo: this.route });
           } else {
             this.openDialog(res.msg);
+            this.isShowLoadingBack = false;
           }
         });
+      } else {
+        this.openDialog(res.msg);
+        this.isShowLoadingBack = false;
       }
     });
   }

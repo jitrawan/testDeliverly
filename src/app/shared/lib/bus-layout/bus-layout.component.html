@@ -1,10 +1,14 @@
 <div class="row justify-content-center" *ngIf="data != null">
+
   <div class="col-md-6">
     <div class="plane">
       <div class="cockpit">
         ชั้น 1
       </div>
-      <div class="cabin fuselage">
+      <div class="cabin fuselage" [ngStyle]="{'pointer-events': seatLoading  ? 'none' : 'initial'}">
+        <div class="inner-loading" [ngClass]="{'show' : seatLoading}">
+          <div class="loading-wheel"></div>
+        </div>
         <div class="row seats" type="A" *ngFor="let index of numbersOfRow; let row = index">
           <div class="seat" style="display: block;" *ngFor="let col of numbersOfCol; let pos = index">
             <div class="{{data.gender}}gender" *ngFor="let data of fatchRowData(floorOneList, row+1, pos+1); let index = index">
@@ -22,7 +26,10 @@
       <div class="cockpit">
         ชั้น 2
       </div>
-      <div class="cabin fuselage">
+      <div class="cabin fuselage" [ngStyle]="{'pointer-events': seatLoading  ? 'none' : 'initial'}">
+        <div class="inner-loading" [ngClass]="{'show' : seatLoading}">
+          <div class="loading-wheel"></div>
+        </div>
         <div class="row seats" type="A" *ngFor="let index of numbersOfRow; let row = index">
           <div class="seat" style="display: block;" *ngFor="let col of numbersOfCol; let pos = index">
             <div class="{{data.gender}}gender" *ngFor="let data of fatchRowData(floorTwoList, row+1, pos+1);">

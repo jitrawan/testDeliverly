@@ -1,15 +1,13 @@
 <!-- <div class="selectSeatWrapper"> -->
-<div class="container mt-2">
-  <div class="row">
 
-  </div>
+<div class="container mt-2">
   <div class="row form-group">
 
     <div class="col-md-7">
       <h5> ที่นั่ง </h5>
-      <bus-layout [data]="busLayout" [numberOfSeat]="totalPassenger" 
-      [transId]="transId" [trip]="trip"
-      (outputValue)="selectSeat($event)" *ngIf="transId != undefined"> </bus-layout>
+      <bus-layout [data]="busLayout" [numberOfSeat]="totalPassenger" [transId]="transId" [trip]="trip" (outputValue)="selectSeat($event)"
+        *ngIf="transId != undefined">
+      </bus-layout>
     </div>
     <div class="col-md-5">
       <div class="infoBox">
@@ -112,4 +110,5 @@
     <button class="btn btn-atk-primary mt-3 buttonSize" type="button" (click)="onClick()">NEXT</button>
   </div>
 </div>
+
 <!-- </div> -->

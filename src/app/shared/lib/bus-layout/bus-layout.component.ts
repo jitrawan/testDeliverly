@@ -32,6 +32,8 @@ export class BusLayoutComponent implements OnInit {
   alertSettings: any;
   markSeatModel: MarkSeatModel;
 
+  seatLoading: boolean = false;
+  
   constructor(
     private _alert: AlertsService,
     private busService: BusService,
@@ -84,11 +86,15 @@ export class BusLayoutComponent implements OnInit {
       this.unMark(this.trip, data, this.selectedSeat.reserve[indexOfSelectSeat]);
       this.selectedSeat.seat.splice(indexOfSelectSeat, 1);
       this.selectedSeat.reserve.splice(indexOfSelectSeat, 1);
+      this.seatLoading = true;
+
     }
 
     if (this.selectedSeat.seat.length < this.numberOfSeat) {
       if (event.target.checked) {
         this.markSeat(this.trip, data, id, event);
+        this.seatLoading = true;
+
       }
 
     } else {
@@ -134,6 +140,7 @@ export class BusLayoutComponent implements OnInit {
         this.openDialog(res.msg);
         (document.getElementById(id) as HTMLInputElement).checked = false;
       }
+      this.seatLoading = false;
     });
   }
 
@@ -146,7 +153,8 @@ export class BusLayoutComponent implements OnInit {
     this.markSeatModel.seatCnt = 1;
     this.markSeatModel.seatFloor = [seat.pos.z];
     this.markSeatModel.seatNo = [seat.name];
-    this.busService.unMarkSeat(this.markSeatModel, reserve).subscribe((res) => { });
-
+    this.busService.unMarkSeat(this.markSeatModel, reserve).subscribe((res) => {
+      this.seatLoading = false;
+    });
   }
 }

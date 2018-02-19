@@ -48,6 +48,7 @@ export class SelectRoundComponent implements OnInit {
   dptrTableLoading: boolean = false;
   retrnTableLoading: boolean = false;
   isShowLoading: boolean = false;
+  isShowLoadingBack: boolean = false;
 
   constructor(
     private router: Router,
@@ -151,7 +152,7 @@ export class SelectRoundComponent implements OnInit {
     } else if (this.availableTripResultModel.rtrnTrips != null && this.selectedRtrnTrip == undefined) {
       this.openDialog(this.errorMessage.pleaseSelect + 'วันที่และเวลาเดินทางกลับ');
     } else {
-      // this.isShowLoading = true;
+      this.isShowLoading = true;
       // this.busService.checkAuthen(window.location.host).subscribe((response) => {
       //   if (response.result) {
           this.busService.getBusLayout(this.selectedDptrTrip.id, this.selectedDptrTrip.dptrPark.id, this.selectedDptrTrip.arrvPark.id).subscribe((res) => {
@@ -239,6 +240,7 @@ export class SelectRoundComponent implements OnInit {
   }
 
   goPreviousPage() {
+    this.isShowLoadingBack = true;
     this.router.navigate(['..'], { relativeTo: this.route });
   }
 

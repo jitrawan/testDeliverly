@@ -31,6 +31,8 @@ export class PassengerInformationComponent implements OnInit {
   passengerBookingModel: PassengerBookingModel;
   trips: any;
   bookingResultModel: BookingResultModel;
+  isShowLoading: boolean = false;
+  isShowLoadingBack: boolean = false;
 
 
   constructor(
@@ -96,6 +98,7 @@ export class PassengerInformationComponent implements OnInit {
       }
     }
     if (!isFound) {
+      this.isShowLoading = true;
       this.prepareDataForBooking();
       this.busService.booking(this.passengerBookingModel).subscribe((res) => {
         if (res.code == 0) {
@@ -109,6 +112,7 @@ export class PassengerInformationComponent implements OnInit {
           this.router.navigate(['../summary'], { relativeTo: this.route });
         } else {
           this.openDialog(res.msg);
+          this.isShowLoading = false;
         }
       });
     }
@@ -154,10 +158,9 @@ export class PassengerInformationComponent implements OnInit {
   }
 
   goPreviousPage() {
-
+    this.isShowLoadingBack = true;
     this.busService.clearTransSeatMark(this.transId.transId).subscribe((res) => {
       if (res.code == 0) {
-        console.log('resss >> ', res);
         this.busService.getBusLayout(
           this.trips.dptrTrip.id,
           this.trips.dptrTrip.dptrPark.id,
@@ -182,8 +185,12 @@ export class PassengerInformationComponent implements OnInit {
             this.router.navigate(['../selectSeat'], { relativeTo: this.route });
           } else {
             this.openDialog(res.msg);
+            this.isShowLoadingBack = false;
           }
         });
+      } else {
+        this.openDialog(res.msg);
+        this.isShowLoadingBack = false;
       }
     });
   }

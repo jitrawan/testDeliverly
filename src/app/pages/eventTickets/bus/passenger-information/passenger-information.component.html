@@ -1,5 +1,4 @@
-
-<div class="container" >
+<div class="container">
   <div class="pageTopic col-12">
     <span>กรอกข้อมูลผู้โดยสาร</span>
     <img src="assets/images/borkorsor Website-07.png" />
@@ -52,8 +51,20 @@
   </div>
   <div class="row">
     <div class="col-12 buttonWrapper p-0">
-      <button class="btn btn-atk-danger mt-3 buttonSize" type="button" (click)="goPreviousPage()">BACK</button>
-      <button class="btn btn-atk-primary mt-3 buttonSize" type="button" (click)="nextPage()">NEXT</button>
+      <button class="btn btn-atk-danger mt-3 buttonSize" type="button" (click)="goPreviousPage()" [ngClass]="{'disabled' : isShowLoadingBack}">
+        <span *ngIf="!isShowLoadingBack; else showLoad">
+          BACK
+        </span>
+      </button>
+      <button class="btn btn-atk-primary mt-3 buttonSize" type="button" (click)="nextPage()" [ngClass]="{'disabled' : isShowLoading}">
+        <span *ngIf="!isShowLoading; else showLoad">
+          NEXT
+        </span>
+      </button>
+      <ng-template #showLoad>
+        Loading
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+      </ng-template>
     </div>
   </div>
 </div>

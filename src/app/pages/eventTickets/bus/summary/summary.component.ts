@@ -28,6 +28,8 @@ export class SummaryComponent implements OnInit {
   confirmSettings: any;
   alertSettings: any;
   queryString: any;
+  isShowLoading: boolean = false;
+  isShowLoadingBack: boolean = false;
 
   constructor(
     private sharedService: SharedService,
@@ -91,11 +93,12 @@ export class SummaryComponent implements OnInit {
 
 
   insertBookingInfo() {
+    this.isShowLoading = true;
     this.queryString = {
       payment_channel: localStorage.getItem('payment_channel'),
       cust_email: localStorage.getItem('cust_email')
     }
-    
+
     let listDptrTripByReserve = new listTripByReserve();
     let listRtrnTripByReserve = new listTripByReserve();
 
@@ -182,11 +185,13 @@ export class SummaryComponent implements OnInit {
       } else {
         console.log("error", res);
         this.openDialog(res.msg);
+        this.isShowLoading = false;
       }
     });
 
   }
   cancelBooking() {
+    this.isShowLoadingBack = true;
     this.confirmSettings = { confirmText: 'ใช่', declineText: 'ไม่' };
     let isConfirm: any;
     this._confirm.create('กรุณายืนยัน', 'คุณต้องการยกเลิกการจองหรือไม่', this.confirmSettings)
@@ -194,14 +199,13 @@ export class SummaryComponent implements OnInit {
         console.log(callback)
         if (callback.resolved != undefined && callback.resolved == true) {
           this.executeCancelBooking();
+        } else {
+          this.isShowLoadingBack = false;
         }
       });
-
-
   }
 
   executeCancelBooking() {
-
     this.busService.getTransId('C').subscribe((res) => {
       if (res.code == 0) {
         this.busService.cancelBooking(res.data.transId, this.bookingResult.bookId, this.bookingResult.bookCode).subscribe((res) => {
@@ -210,10 +214,12 @@ export class SummaryComponent implements OnInit {
             this.router.navigate(['..'], { relativeTo: this.route });
           } else {
             this.openDialog(res.msg);
+            this.isShowLoadingBack = false;
           }
         });
       } else {
         this.openDialog(res.msg);
+        this.isShowLoadingBack = false;
       }
     });
   }

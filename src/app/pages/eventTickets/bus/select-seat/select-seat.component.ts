@@ -57,6 +57,9 @@ export class SelectSeatComponent implements OnInit {
   trip: TripModel;
   transCheckoutModel: TransCheckoutModel;
 
+  isShowLoading: boolean = false;
+  isShowLoadingBack: boolean = false;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -119,38 +122,47 @@ export class SelectSeatComponent implements OnInit {
       if (this.selectedSeat.seat.length < this.totalPassenger) {
         this.openDialog(this.errorMessage.pleaseSelect + 'ที่นั่งให้ครบตามจำนวนคนที่ท่านได้เลือกไว้');
       } else {
+        this.isShowLoading = true;
         let layout;
         if (this.tripName == 'เที่ยวไป' && this.receiveData.rtrnTrip != null) {
           this.busService.getBusLayout(this.receiveData.rtrnTrip.id, this.receiveData.rtrnTrip.dptrPark.id, this.receiveData.rtrnTrip.arrvPark.id).subscribe((res) => {
-            layout = res.data;
-            this.receiveData = {
-              transId: this.transId,
-              tripName: 'rtrnTrip',
-              dptrProvince: this.receiveData.dptrProvince,
-              dptrPark: this.receiveData.arrvPark,
-              arrvPark: this.receiveData.dptrPark,
-              arrvProvince: this.receiveData.arrvProvince,
-              busLayout: layout, // layout ของเที่ยวกลับ อันใหม่
-              dptrTrip: this.receiveData.dptrTrip, // เที่ยวไป
-              rtrnTrip: this.receiveData.rtrnTrip, // เที่ยวกลับ
-              totalPassenger: this.receiveData.totalPassenger,
-              availableTripResultModel: this.availableTripResultModel,
-              availableTripSearchModel: this.availableTripSearchModel,
+            if (res.code == 0) {
+              layout = res.data;
+              this.receiveData = {
+                transId: this.transId,
+                tripName: 'rtrnTrip',
+                dptrProvince: this.receiveData.dptrProvince,
+                dptrPark: this.receiveData.arrvPark,
+                arrvPark: this.receiveData.dptrPark,
+                arrvProvince: this.receiveData.arrvProvince,
+                busLayout: layout, // layout ของเที่ยวกลับ อันใหม่
+                dptrTrip: this.receiveData.dptrTrip, // เที่ยวไป
+                rtrnTrip: this.receiveData.rtrnTrip, // เที่ยวกลับ
+                totalPassenger: this.receiveData.totalPassenger,
+                availableTripResultModel: this.availableTripResultModel,
+                availableTripSearchModel: this.availableTripSearchModel,
+              }
+              this.sharedService.sendData(this.receiveData);
+              this.router.navigate(['../selectSeat2'], { relativeTo: this.route });
+            } else {
+              this.isShowLoading = false;
             }
-            this.sharedService.sendData(this.receiveData);
-            this.router.navigate(['../selectSeat2'], { relativeTo: this.route });
           });
         } else {
           this.busService.getTransCheckout(this.transId.transId).subscribe((res) => {
-            this.transCheckoutModel = res.data;
-            let forwardData = {
-              forwardData: this.receiveData,
-              transId: this.transId,
-              transCheckoutModel: this.transCheckoutModel,
-              totalPassenger: this.totalPassenger
+            if (res.code == 0) {
+              this.transCheckoutModel = res.data;
+              let forwardData = {
+                forwardData: this.receiveData,
+                transId: this.transId,
+                transCheckoutModel: this.transCheckoutModel,
+                totalPassenger: this.totalPassenger
+              }
+              this.sharedService.sendData(forwardData);
+              this.router.navigate(['../passengerInfomation'], { relativeTo: this.route });
+            } else {
+              this.isShowLoading = false;
             }
-            this.sharedService.sendData(forwardData);
-            this.router.navigate(['../passengerInfomation'], { relativeTo: this.route });
           });
         }
       }
@@ -164,6 +176,7 @@ export class SelectSeatComponent implements OnInit {
   }
 
   goPreviousPage() {
+    this.isShowLoadingBack = true;
     let dataBackSeat;
     let routerUrl;
     if (this.router.url == '/selectSeat') {
@@ -199,6 +212,8 @@ export class SelectSeatComponent implements OnInit {
         console.log('resss >> ', res);
         this.sharedService.sendData(dataBackSeat);
         this.router.navigate([routerUrl], { relativeTo: this.route });
+      } else {
+        this.isShowLoadingBack = false;
       }
     });
 

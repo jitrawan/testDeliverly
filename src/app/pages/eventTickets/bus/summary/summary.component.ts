@@ -115,7 +115,7 @@ export class SummaryComponent implements OnInit {
 
     this.insertBooking = {
       bookCode: this.bookingResult.bookCode,
-      bookId: this.bookingResult.bookId,
+      bookID: this.bookingResult.bookId,
       passengerName: listDptrTripByReserve.passengerName.toString(),
       passengerTel: listDptrTripByReserve.passengerTel.toString(),
       noOfSeat: this.bookingResult.dptrTrip.reserves.length + "",

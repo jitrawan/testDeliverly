@@ -19,9 +19,10 @@ export class BusService {
 
     // private baseURL = 'https://s3-ap-southeast-1.amazonaws.com/';
     private baseURL = '//d11aliyfxni7iy.cloudfront.net/api/trs/';
+    private baseURLForInsert = '//busticketreserve-env.ap-southeast-1.elasticbeanstalk.com/api/bus/';
     // private baseURL = '//busticketreserve-env.ap-southeast-1.elasticbeanstalk.com/api/trs/';
-    // private staticURL = '//d11aliyfxni7iy.cloudfront.net/master/';
-    private staticURL = '//s3-ap-southeast-1.amazonaws.com/allticket-trs-masterinfo/master/';
+    private staticURL = '//d11aliyfxni7iy.cloudfront.net/master/';
+    // private staticURL = '//s3-ap-southeast-1.amazonaws.com/allticket-trs-masterinfo/master/';
     private staticFile = '.txt';
 
     private getMasProvinceAPI = this.staticURL + 'ag_mas_province' + this.staticFile;
@@ -35,7 +36,7 @@ export class BusService {
     private getTransCheckoutAPI = this.baseURL + 'ag_trans_checkout';
     private bookingAPI = this.baseURL + 'ag_booking';
     private cancelBookingAPI = this.baseURL + 'ag_cancel_booking';
-    private insertBookingInfoAPI = this.baseURL + 'insert_booking_info';
+    private insertBookingInfoAPI = this.baseURLForInsert + 'insert_booking_info';
     private clearTransSeatmarkAPI = this.baseURL + 'ag_clear_trans_seatmark';
 
     constructor(private http: Http) { }

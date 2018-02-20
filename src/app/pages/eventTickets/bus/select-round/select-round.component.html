@@ -3,25 +3,25 @@
     <span>กรุณาเลือกวันที่ และ วันเดินทางไป</span>
   </div>
   <div class="dateRange">
-    <div class="row p0">
+    <div class="row mx-0 p-0">
       <div class="col-1 arrow">
         <span class="left" (click)="searchTrips('dptr', dptrDate[1])">
           <i class="fa fa-chevron-left" aria-hidden="true"></i>
         </span>
       </div>
-      <div class="col-2 otherDate">
+      <div class="col d-none d-sm-block otherDate">
         <span (click)="searchTrips('dptr', dptrDate[0])">{{dptrDate[0]| thaidate:'medium' }} </span>
       </div>
-      <div class="col-2 otherDate">
+      <div class="col otherDate">
         <span (click)="searchTrips('dptr', dptrDate[1])">{{dptrDate[1]| thaidate:'medium' }}</span>
       </div>
-      <div class="col-2 chooseDate">
+      <div class="col chooseDate">
         <span> {{dptrDate[2]| thaidate:'medium' }} </span>
       </div>
-      <div class="col-2 otherDate">
+      <div class="col otherDate">
         <span (click)="searchTrips('dptr', dptrDate[3])">{{dptrDate[3]| thaidate:'medium' }}</span>
       </div>
-      <div class="col-2 otherDate">
+      <div class="col d-none d-sm-block otherDate">
         <span (click)="searchTrips('dptr', dptrDate[4])">{{dptrDate[4]| thaidate:'medium' }}</span>
       </div>
       <div class="col-1 arrow">
@@ -194,7 +194,7 @@
 
 <div class="sumAndTerms">
   <div class="row">
-    <div class="col-md-6 sum table-responsive-sm">
+    <div class="col-md-6 sum d-flex justify-content-center justify-content-sm-start">
       <table class="table bordered">
         <thead class="headerBox">
           <tr>
@@ -212,7 +212,7 @@
           </tr>
           <tr>
             <td scope="row">ค่าภาษี / ค่าธรรมเนียม :</td>
-            <td> {{fee | number: '1.2'}} บาท</td>
+            <td>{{fee | number: '1.2'}} บาท</td>
           </tr>
           <tr>
             <td class="rowSum" colspan="2">รวมราคาแล้วต่อ 1 คน {{dptrFare + rtrnFare + fee | number: '1.2'}} บาท</td>

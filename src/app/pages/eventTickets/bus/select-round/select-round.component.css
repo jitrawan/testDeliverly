@@ -369,6 +369,11 @@ table {
   }
 }
 
+@media screen and (max-width: 576px) {
+  table {
+    max-width: 300px
+  }
+}
 @media screen and (max-width: 817px) {
   .slideToChoose {
     visibility: visible;

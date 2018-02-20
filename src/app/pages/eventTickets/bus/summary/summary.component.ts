@@ -191,7 +191,7 @@ export class SummaryComponent implements OnInit {
           window.parent.postMessage(param, '*');
         }
       } else {
-        this.openDialog(res.msg);
+        this.openDialog(this.errorMsgService.getErrorMsg(res.code));
         this.isShowLoading = false;
       }
     });

@@ -32,11 +32,7 @@ export class AppComponent implements OnInit {
       if (!(evt instanceof NavigationEnd)) {
         return;
       }
-      
-      setTimeout(function() {
-        window.scrollTo(0, 0);
-      }, 200);
-      
+      window.parent.scroll(0,0);
     });
   }
 }

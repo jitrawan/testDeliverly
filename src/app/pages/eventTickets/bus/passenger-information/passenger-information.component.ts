@@ -61,7 +61,6 @@ export class PassengerInformationComponent implements OnInit {
       this.sharedService.receiveData.subscribe(data => receiveData = data);
       this.receiveData = receiveData.forwardData;
     }
-    window.scrollTo(0, 0)
   }
 
   onlyNumberKey(event) {

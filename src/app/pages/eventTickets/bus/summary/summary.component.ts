@@ -184,17 +184,21 @@ export class SummaryComponent implements OnInit {
 
     this.busService.insertBookingInfo(this.insertBooking).subscribe((res) => {
       if (res.code == 0) {
-        console.log("SUCCESS", res);
+        if(res.transID != undefined && res.transID != '') {
+          let CHANNEL_ID = 'C07';
+          let param = 'CHANNEL_ID='+CHANNEL_ID+'&TRANSACTION_ID='+res.transID+'&TOTAL_AMT='+this.totalPrice();
+          window.parent.postMessage(param,'*');
+        }
       } else {
-        console.log("error", res);
-        this.openDialog(this.errorMsgService.getErrorMsg(res.code));
+        this.openDialog(res.msg);
+        this.isShowLoading = false;
       }
     });
 
   }
   cancelBooking() {
     this.isShowLoadingBack = true;
-    this.confirmSettings = { confirmText: 'ใช่', declineText: 'ไม่' };
+    this.confirmSettings = { confirmText: 'ใช่', declineText: 'ไม่ใช่' };
     let isConfirm: any;
     this._confirm.create('กรุณายืนยัน', 'คุณต้องการยกเลิกการจองหรือไม่', this.confirmSettings)
       .subscribe((callback: ConfirmBoxEmit) => {

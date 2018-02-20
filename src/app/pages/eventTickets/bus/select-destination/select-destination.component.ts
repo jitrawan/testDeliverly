@@ -71,6 +71,10 @@ export class SelectDestinationComponent implements OnInit {
       sessionStorage.setItem('authToken', receiveData.get('authToken'));
     }
 
+    if (sessionStorage.getItem('paymentChannel') == 'C07') {
+      sessionStorage.setItem('authToken', sessionStorage.getItem('ALLTICKET:authToken'));
+    }
+
     this.getErrorFile();
     this.maxDate.setDate(this.maxDate.getDate() + 90);
     this.maxDateForReturn.setDate(this.maxDateForReturn.getDate() + 90);

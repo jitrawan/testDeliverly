@@ -184,10 +184,10 @@ export class SummaryComponent implements OnInit {
 
     this.busService.insertBookingInfo(this.insertBooking).subscribe((res) => {
       if (res.code == 0) {
-        if(res.transID != undefined && res.transID != '') {
-          let CHANNEL_ID = 'C07';
-          let param = 'CHANNEL_ID='+CHANNEL_ID+'&TRANSACTION_ID='+res.transID+'&TOTAL_AMT='+this.totalPrice();
-          window.parent.postMessage(param,'*');
+        if (res.transID != undefined && res.transID != '') {
+          let CHANNEL_ID = sessionStorage.getItem("authToken");
+          let param = 'CHANNEL_ID=' + CHANNEL_ID + '&TRANSACTION_ID=' + res.transID + '&TOTAL_AMT=' + this.totalPrice();
+          window.parent.postMessage(param, '*');
         }
       } else {
         this.openDialog(res.msg);

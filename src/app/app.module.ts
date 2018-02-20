@@ -53,13 +53,6 @@ import { SummaryComponent } from './pages/eventTickets/bus/summary/summary.compo
 import { SelectRoundComponent } from './pages/eventTickets/bus/select-round/select-round.component';
 import { BuyTicketComponent } from './pages/eventTickets/bus/buy-ticket/buy-ticket.component';
 
-/* Library */
-// import { CalendarModule } from './shared/lib/datetimepicker/primeng/calendar/calendar';
-// import { DialogModule } from './shared/lib/dialog/dialog.component';
-// import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
-
-
-
 @NgModule({
   declarations: [
     AppComponent,

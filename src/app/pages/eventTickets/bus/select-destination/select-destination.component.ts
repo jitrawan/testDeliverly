@@ -50,7 +50,6 @@ export class SelectDestinationComponent implements OnInit {
   routeMap: RoutePrvParkMapModel[];
   sub: any;
   queryString: any;
-  // errorCodeModel: ErrorCodeModel[];
 
   constructor(
     private busService: BusService,
@@ -68,13 +67,12 @@ export class SelectDestinationComponent implements OnInit {
     this.sharedService.receiveData.subscribe(data => receiveData = data);
 
     if (receiveData instanceof URLSearchParams) {
-      this.queryString = {
-        paymentChannel: receiveData.get('paymentChannel'),
-        authToken: receiveData.get('authToken')
-      }
+      sessionStorage.setItem('paymentChannel', receiveData.get('paymentChannel'));
+      sessionStorage.setItem('authToken', receiveData.get('authToken'));
+    }
 
-      sessionStorage.setItem('paymentChannel', this.queryString.paymentChannel);
-      sessionStorage.setItem('authToken', this.queryString.authToken);
+    if (sessionStorage.getItem('paymentChannel') == 'C07') {
+      sessionStorage.setItem('authToken', sessionStorage.getItem('ALLTICKET:authToken'));
     }
 
     this.getErrorFile();
@@ -103,7 +101,6 @@ export class SelectDestinationComponent implements OnInit {
   }
 
   getErrorFile() {
-    localStorage.clear();
     if (JSON.parse(localStorage.getItem('errorCodeList')) == null) {
       this.errorMsgService.getErrorFile().subscribe((res) => {
         if (res.code == 0) {

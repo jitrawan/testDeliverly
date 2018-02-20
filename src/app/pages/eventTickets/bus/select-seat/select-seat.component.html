@@ -105,7 +105,7 @@
 </div>
 <div class="row">
   <div class="col-12 buttonWrapper p-0">
-    <button class="btn btn-atk-danger mt-3 buttonSize" href="#alert" type="button" (click)="goPreviousPage()" [ngClass]="{'disabled' : isShowLoadingBack}">
+    <button class="btn btn-atk-danger mt-3 buttonSize"  type="button" (click)="goPreviousPage()" [ngClass]="{'disabled' : isShowLoadingBack}">
       <span *ngIf="!isShowLoadingBack; else showLoad">
         BACK
       </span>

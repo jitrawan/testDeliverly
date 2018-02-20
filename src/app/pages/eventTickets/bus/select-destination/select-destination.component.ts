@@ -88,7 +88,9 @@ export class SelectDestinationComponent implements OnInit {
       if (!(evt instanceof NavigationEnd)) {
         return;
       }
-      window.scrollTo(0, 0)
+      setTimeout(function(){
+          window.scrollTo(0, 1);
+      }, 0);
     });
   }
 

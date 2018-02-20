@@ -4,6 +4,7 @@ import { DatePipe, Location } from '@angular/common';
 
 /* ---------------------------------- services -------------------*/
 import { BusService } from '../../../../shared/services/bus.service';
+import { ErrorMsgService } from '../../../../shared/services/errorMsg.service';
 import { SharedService } from '../../../../shared/services/shared-service.service';
 import { AlertsService } from '@jaspero/ng2-alerts';
 
@@ -54,6 +55,7 @@ export class SelectRoundComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private busService: BusService,
+    private errorMsgService: ErrorMsgService,
     private sharedService: SharedService,
     private _alert: AlertsService,
     private datePipe: DatePipe,
@@ -89,7 +91,7 @@ export class SelectRoundComponent implements OnInit {
           this.rtrnDate = this.setCalendar(this.convertStringToDate(this.availableTripResultModel.rtrnTrips.tripDate));
         }
       } else {
-        this.openDialog(res.msg);
+        this.openDialog(this.errorMsgService.getErrorMsg(res.code));
         this.dptrTableLoading = false;
         this.retrnTableLoading = false;
       }
@@ -174,7 +176,7 @@ export class SelectRoundComponent implements OnInit {
               this.sharedService.sendData(dataListForPassNextPage);
               this.router.navigate(['../selectSeat'], { relativeTo: this.route });
             } else {
-              this.openDialog(res.msg);
+              this.openDialog(this.errorMsgService.getErrorMsg(res.code));
               this.isShowLoading = false;
             }
           });

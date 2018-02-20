@@ -5,6 +5,7 @@ import { DatePipe } from '@angular/common';
 import { AlertsService } from '@jaspero/ng2-alerts';
 import { BusService } from '../../../../shared/services/bus.service';
 import { SharedService } from '../../../../shared/services/shared-service.service';
+import { ErrorMsgService } from '../../../../shared/services/errorMsg.service';
 
 import { ErrorMessage } from '../../../../shared/constant/error-message';
 import { AvailableTripModel } from '../../../../shared/models/bus/availableTripSearch.model';
@@ -12,12 +13,13 @@ import { AvailableTripResultModel } from '../../../../shared/models/bus/availabl
 import { ProvinceModel } from '../../../../shared/models/bus/province.model';
 import { ParkModel } from '../../../../shared/models/bus/park.model';
 import { RoutePrvParkMapModel } from '../../../../shared/models/bus/routePrvParkMap.model';
+import { ErrorCodeModel } from '../../../../shared/models/error/error.model';
 
 @Component({
   selector: 'app-select-destination',
   templateUrl: './select-destination.component.html',
   styleUrls: ['./select-destination.component.css', '../buy-ticket/buy-ticket.component.css'],
-  providers: [BusService, DatePipe]
+  providers: [DatePipe]
 })
 export class SelectDestinationComponent implements OnInit {
   availableTripSeach: AvailableTripModel = new AvailableTripModel;
@@ -48,9 +50,11 @@ export class SelectDestinationComponent implements OnInit {
   routeMap: RoutePrvParkMapModel[];
   sub: any;
   queryString: any;
+  // errorCodeModel: ErrorCodeModel[];
 
   constructor(
     private busService: BusService,
+    private errorMsgService: ErrorMsgService,
     private sharedService: SharedService,
     private router: Router,
     private route: ActivatedRoute,
@@ -65,14 +69,15 @@ export class SelectDestinationComponent implements OnInit {
 
     if (receiveData instanceof URLSearchParams) {
       this.queryString = {
-        payment_channel: receiveData.get('payment_channel'),
-        cust_email: receiveData.get('cust_email')
+        paymentChannel: receiveData.get('paymentChannel'),
+        authToken: receiveData.get('authToken')
       }
 
-      localStorage.setItem('payment_channel', this.queryString.payment_channel); 
-      localStorage.setItem('cust_email', this.queryString.cust_email); 
+      sessionStorage.setItem('paymentChannel', this.queryString.paymentChannel);
+      sessionStorage.setItem('authToken', this.queryString.authToken);
     }
 
+    this.getErrorFile();
     this.maxDate.setDate(this.maxDate.getDate() + 90);
     this.maxDateForReturn.setDate(this.maxDateForReturn.getDate() + 90);
     this.getProvinceList();
@@ -97,32 +102,53 @@ export class SelectDestinationComponent implements OnInit {
     }
   }
 
+  getErrorFile() {
+    localStorage.clear();
+    if (JSON.parse(localStorage.getItem('errorCodeList')) == null) {
+      this.errorMsgService.getErrorFile().subscribe((res) => {
+        if (res.code == 0) {
+          localStorage.setItem('errorCodeList', JSON.stringify(res.data));
+        } else {
+          this.openDialog(this.errorMsgService.getErrorMsg(res.code));
+        }
+      });
+    }
+  }
+
   getProvinceList() {
     this.busService.getMasProvince().subscribe((res) => {
-      this.isProvinceLoading = false;
-      this.provinceList = res.data.map((obj: any) => {
-        return {
-          id: obj.id,
-          desc: obj.desc
-        };
-      });
+      if (res.code == 0) {
+        this.isProvinceLoading = false;
+        this.provinceList = res.data.map((obj: any) => {
+          return {
+            id: obj.id,
+            desc: obj.desc
+          };
+        });
+      } else {
+        this.openDialog(this.errorMsgService.getErrorMsg(res.code));
+      }
     });
   }
 
   getParkList() {
     this.busService.getMasPark().subscribe((res) => {
-      this.isParkListLoading = false;
-      this.parkList = res.data.map((obj: any) => {
-        return {
-          id: obj.id,
-          nameTh: obj.nameTh,
-          nameEn: obj.nameEn,
-          park: obj.park,
-          picking: obj.picking,
-          updateDtm: obj.updateDtm,
-          province: obj.province
-        };
-      });
+      if (res.code == 0) {
+        this.isParkListLoading = false;
+        this.parkList = res.data.map((obj: any) => {
+          return {
+            id: obj.id,
+            nameTh: obj.nameTh,
+            nameEn: obj.nameEn,
+            park: obj.park,
+            picking: obj.picking,
+            updateDtm: obj.updateDtm,
+            province: obj.province
+          };
+        });
+      } else {
+        this.openDialog(this.errorMsgService.getErrorMsg(res.code));
+      }
     });
   }
 
@@ -130,8 +156,12 @@ export class SelectDestinationComponent implements OnInit {
     this.isArrvProvinceLoading = true;
     if (this.selectedDptrPark != null) {
       this.busService.getRoutePrvParkMap(this.selectedDptrPark.id).subscribe((res) => {
-        this.routeMap = res.data;
-        this.getArrvProvince();
+        if (res.code == 0) {
+          this.routeMap = res.data;
+          this.getArrvProvince();
+        } else {
+          this.openDialog(this.errorMsgService.getErrorMsg(res.code));
+        }
       });
     }
   }
@@ -284,7 +314,7 @@ export class SelectDestinationComponent implements OnInit {
           this.sharedService.sendData(dataForSend);
           this.router.navigate(['../selectRound'], { relativeTo: this.route });
         } else {
-          this.openDialog(res.msg);
+          this.openDialog(this.errorMsgService.getErrorMsg(res.code));
           this.isShowLoading = false;
         }
       });

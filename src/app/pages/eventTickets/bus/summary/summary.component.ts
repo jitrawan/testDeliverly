@@ -53,6 +53,7 @@ export class SummaryComponent implements OnInit {
       this.rtrnPrice = this.rtrnPrice + (Number(this.bookingResult.rtrnTrip.reserves[0].fare) + Number(this.bookingResult.rtrnTrip.reserves[0].fee));
       this.rtrnDiscount = this.rtrnDiscount + (Number(this.bookingResult.rtrnTrip.reserves[0].disFare) + Number(this.bookingResult.rtrnTrip.reserves[0].disFee));
     }
+    window.scrollTo(0, 0)
   }
 
   totalPrice() {
@@ -183,10 +184,10 @@ export class SummaryComponent implements OnInit {
 
     this.busService.insertBookingInfo(this.insertBooking).subscribe((res) => {
       if (res.code == 0) {
-        if(res.transID != undefined && res.transID != '') {
+        if (res.transID != undefined && res.transID != '') {
           let CHANNEL_ID = 'C07';
-          let param = 'CHANNEL_ID='+CHANNEL_ID+'&TRANSACTION_ID='+res.transID+'&TOTAL_AMT='+this.totalPrice();
-          window.parent.postMessage(param,'*');
+          let param = 'CHANNEL_ID=' + CHANNEL_ID + '&TRANSACTION_ID=' + res.transID + '&TOTAL_AMT=' + this.totalPrice();
+          window.parent.postMessage(param, '*');
         }
       } else {
         this.openDialog(res.msg);
@@ -207,6 +208,7 @@ export class SummaryComponent implements OnInit {
           this.isShowLoadingBack = false;
         }
       });
+    window.scrollTo(0, 0)
   }
 
   executeCancelBooking() {

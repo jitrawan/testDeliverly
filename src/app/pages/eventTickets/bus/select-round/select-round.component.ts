@@ -79,6 +79,7 @@ export class SelectRoundComponent implements OnInit {
         this.rtrnDate = this.setCalendar(this.convertStringToDate(this.availableTripResultModel.rtrnTrips.tripDate));
       }
     }
+    window.scrollTo(0, 0)
   }
   getAvailableTrip(availableTripSearch) {
     this.busService.getAvailableTrip(availableTripSearch).subscribe((res) => {
@@ -155,8 +156,8 @@ export class SelectRoundComponent implements OnInit {
       this.openDialog(this.errorMessage.pleaseSelect + 'วันที่และเวลาเดินทางกลับ');
     } else {
       this.isShowLoading = true;
-      this.busService.checkAuthen(window.location.host).subscribe((response) => {
-        if (response.result) {
+      // this.busService.checkAuthen(window.location.host).subscribe((response) => {
+      //   if (response.result) {
           this.busService.getBusLayout(this.selectedDptrTrip.id, this.selectedDptrTrip.dptrPark.id, this.selectedDptrTrip.arrvPark.id).subscribe((res) => {
             if (res.code == 0) {
               this.busLayout = res.data;
@@ -180,11 +181,11 @@ export class SelectRoundComponent implements OnInit {
               this.isShowLoading = false;
             }
           });
-        } else {
-          this.isShowLoading = false;
-          parent.window.receiveMessage('showLogin');
-        }
-      });
+      //   } else {
+      //     this.isShowLoading = false;
+      //     parent.window.receiveMessage('showLogin');
+      //   }
+      // });
     }
   }
 

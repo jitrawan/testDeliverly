@@ -102,7 +102,7 @@ export class SelectSeatComponent implements OnInit {
         this.trip = this.receiveData.rtrnTrip;
       }
     }
-
+    window.scrollTo(0, 0)
   }
 
   openDialog(msg) {

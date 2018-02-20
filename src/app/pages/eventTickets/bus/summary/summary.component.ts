@@ -8,6 +8,7 @@ import { BusService } from '../../../../shared/services/bus.service';
 import { ConfirmBoxEmit } from '../../../../shared/models/confirmBoxEmit';
 import { BookingResultModel } from '../../../../shared/models/bus/bookingResult.model';
 import { InsertBookingInfoModel, listTripByReserve } from '../../../../shared/models/bus/insertBookingInfo.model';
+import { ErrorMsgService } from '../../../../shared/services/errorMsg.service';
 
 @Component({
   selector: 'app-summary',
@@ -34,6 +35,7 @@ export class SummaryComponent implements OnInit {
   constructor(
     private sharedService: SharedService,
     private busService: BusService,
+    private errorMsgService: ErrorMsgService,
     private _alert: AlertsService,
     private _confirm: ConfirmationService,
     private router: Router,
@@ -184,8 +186,7 @@ export class SummaryComponent implements OnInit {
         console.log("SUCCESS", res);
       } else {
         console.log("error", res);
-        this.openDialog(res.msg);
-        this.isShowLoading = false;
+        this.openDialog(this.errorMsgService.getErrorMsg(res.code));
       }
     });
 
@@ -211,12 +212,12 @@ export class SummaryComponent implements OnInit {
           if (res.code == 0) {
             this.router.navigate(['..'], { relativeTo: this.route });
           } else {
-            this.openDialog(res.msg);
+            this.openDialog(this.errorMsgService.getErrorMsg(res.code));
             this.isShowLoadingBack = false;
           }
         });
       } else {
-        this.openDialog(res.msg);
+        this.openDialog(this.errorMsgService.getErrorMsg(res.code));
         this.isShowLoadingBack = false;
       }
     });

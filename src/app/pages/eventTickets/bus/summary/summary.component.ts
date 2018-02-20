@@ -192,7 +192,7 @@ export class SummaryComponent implements OnInit {
   }
   cancelBooking() {
     this.isShowLoadingBack = true;
-    this.confirmSettings = { confirmText: 'ใช่', declineText: 'ไม่' };
+    this.confirmSettings = { confirmText: 'ใช่', declineText: 'ไม่ใช่' };
     let isConfirm: any;
     this._confirm.create('กรุณายืนยัน', 'คุณต้องการยกเลิกการจองหรือไม่', this.confirmSettings)
       .subscribe((callback: ConfirmBoxEmit) => {

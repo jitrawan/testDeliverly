@@ -60,7 +60,12 @@
 }
 
 ::ng-deep button.primary {
-  background-color: #ec4a1d !important;
+  background-color: #EC1D23 !important;
+  color: white !important;
+}
+
+::ng-deep button.default {
+  background-color: #37BDE0 !important;
   color: white !important;
 }
 

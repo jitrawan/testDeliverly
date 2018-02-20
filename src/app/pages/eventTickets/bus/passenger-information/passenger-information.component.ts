@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { AlertsService } from '@jaspero/ng2-alerts';
+import { ErrorMsgService } from '../../../../shared/services/errorMsg.service';
 
 import { ErrorMessage } from '../../../../shared/constant/error-message';
 import { PassengerInformationModel } from '../../../../shared/models/bus/passengerInformation.model';
@@ -39,6 +40,7 @@ export class PassengerInformationComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private sharedService: SharedService,
+    private errorMsgService: ErrorMsgService,
     private busService: BusService,
     private _alert: AlertsService,
     private location: Location,
@@ -107,7 +109,7 @@ export class PassengerInformationComponent implements OnInit {
           this.sharedService.sendData(forwardData);
           this.router.navigate(['../summary'], { relativeTo: this.route });
         } else {
-          this.openDialog(res.msg);
+          this.openDialog(this.errorMsgService.getErrorMsg(res.code));
           this.isShowLoading = false;
         }
       });
@@ -180,12 +182,12 @@ export class PassengerInformationComponent implements OnInit {
             this.sharedService.sendData(forwardData);
             this.router.navigate(['../selectSeat'], { relativeTo: this.route });
           } else {
-            this.openDialog(res.msg);
+            this.openDialog(this.errorMsgService.getErrorMsg(res.code));
             this.isShowLoadingBack = false;
           }
         });
       } else {
-        this.openDialog(res.msg);
+        this.openDialog(this.errorMsgService.getErrorMsg(res.code));
         this.isShowLoadingBack = false;
       }
     });

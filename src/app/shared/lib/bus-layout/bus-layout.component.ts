@@ -2,11 +2,15 @@ import { Component, OnInit, Input, EventEmitter, Output, Renderer2 } from '@angu
 import { AlertsService } from '@jaspero/ng2-alerts';
 
 import { BusService } from '../../services/bus.service';
+import { ErrorMsgService } from '../../services/errorMsg.service';
 
+import { ErrorMessage } from '../../constant/error-message';
 import { BusLayoutModel } from '../../models/bus/busLayout.model';
 import { MarkSeatModel } from '../../models/bus/markSeat.model';
 import { ReserveSeatModel } from '../../models/bus/reserveSeat.model';
 import { TripModel } from '../../models/bus/trip.model';
+import { ErrorCodeModel } from '../../models/error/error.model';
+
 
 @Component({
   selector: 'bus-layout',
@@ -31,11 +35,13 @@ export class BusLayoutComponent implements OnInit {
   numbersOfRow: Array<any>;
   alertSettings: any;
   markSeatModel: MarkSeatModel;
-
+  errorMessage: ErrorMessage = new ErrorMessage;
+  errorCodeModel: ErrorCodeModel[];
   seatLoading: boolean = false;
-  
+
   constructor(
     private _alert: AlertsService,
+    private errorMsgService: ErrorMsgService,
     private busService: BusService,
     private renderer: Renderer2,
   ) { }
@@ -132,11 +138,11 @@ export class BusLayoutComponent implements OnInit {
         this.selectedSeat.seat.push(seat);
         this.selectedSeat.reserve.push(data);
       } else if (res.code == 1004) {
-        this.openDialog(res.msg);
+        this.openDialog(this.errorMsgService.getErrorMsg(res.code));
         (document.getElementById(id) as HTMLInputElement).checked = false;
         this.renderer.addClass(event.target.parentElement, 'Ngender');
       } else {
-        this.openDialog(res.msg);
+        this.openDialog(this.errorMsgService.getErrorMsg(res.code));
         (document.getElementById(id) as HTMLInputElement).checked = false;
       }
       this.seatLoading = false;

@@ -23,6 +23,7 @@ import { HeaderService } from './shared/services/header.service';
 import { HomeService } from './shared/services/home.service';
 import { SharedService } from './shared/services/shared-service.service';
 import { BusService } from './shared/services/bus.service';
+import { ErrorMsgService } from './shared/services/errorMsg.service'
 
 /* Page */
 import { AppComponent } from './app.component';
@@ -111,7 +112,8 @@ import { BuyTicketComponent } from './pages/eventTickets/bus/buy-ticket/buy-tick
     HomeService, 
     SharedService, 
     DatePipe,
-    BusService
+    BusService,
+    ErrorMsgService
   ],
   bootstrap: [AppComponent]
 })

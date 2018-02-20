@@ -19,7 +19,7 @@ export class BusService {
 
     // private baseURL = 'https://s3-ap-southeast-1.amazonaws.com/';
     private baseURL = '//d11aliyfxni7iy.cloudfront.net/api/trs/';
-    private baseURLForInsert = '//busticketreserve-env.ap-southeast-1.elasticbeanstalk.com/api/bus/';
+    private baseURLForInsert = '//d11aliyfxni7iy.cloudfront.net/api/bus/';
     // private baseURL = '//busticketreserve-env.ap-southeast-1.elasticbeanstalk.com/api/trs/';
     private staticURL = '//d11aliyfxni7iy.cloudfront.net/master/';
     // private staticURL = '//s3-ap-southeast-1.amazonaws.com/allticket-trs-masterinfo/master/';

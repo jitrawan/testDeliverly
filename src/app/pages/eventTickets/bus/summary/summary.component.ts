@@ -45,6 +45,7 @@ export class SummaryComponent implements OnInit {
   ngOnInit() {
 
     this.sharedService.receiveData.subscribe(data => this.receiveData = data);
+    console.log('session>>', sessionStorage.getItem('paymentChannel'));
     this.trips = this.receiveData.forwardData;
     this.bookingResult = this.receiveData.bookingResultModel;
     this.dprtPrice = this.dprtPrice + (Number(this.bookingResult.dptrTrip.reserves[0].fare) + Number(this.bookingResult.dptrTrip.reserves[0].fee));

@@ -95,7 +95,7 @@
   </div>
   <div class="dateRange">
     <div class="container">
-      <div class="row p0">
+      <div class="row mx-0 p-0">
         <div class="col-1 arrow">
           <span class="left" (click)="searchTrips('rtrn', rtrnDate[1])">
             <i class="fa fa-chevron-left" aria-hidden="true"></i>
@@ -104,13 +104,13 @@
         <div class="col d-none d-sm-block otherDate">
           <span (click)="searchTrips('rtrn', rtrnDate[0])">{{rtrnDate[0]| thaidate:'medium' }} </span>
         </div>
-        <div class="col d-none d-sm-block otherDate">
+        <div class="col otherDate">
           <span (click)="searchTrips('rtrn', rtrnDate[1])">{{rtrnDate[1]| thaidate:'medium' }}</span>
         </div>
         <div class="col chooseDate">
           <span> {{rtrnDate[2]| thaidate:'medium' }} </span>
         </div>
-        <div class="col d-none d-sm-block otherDate">
+        <div class="col otherDate">
           <span (click)="searchTrips('rtrn', rtrnDate[3])">{{rtrnDate[3]| thaidate:'medium' }}</span>
         </div>
         <div class="col d-none d-sm-block otherDate">

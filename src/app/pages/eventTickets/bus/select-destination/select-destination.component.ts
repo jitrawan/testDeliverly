@@ -82,14 +82,6 @@ export class SelectDestinationComponent implements OnInit {
     this.getParkList();
     this.selectedTripType = "R";
     this.selectedNumOfPerson = 0;
-    this.router.events.subscribe((evt) => {
-      if (!(evt instanceof NavigationEnd)) {
-        return;
-      }
-      setTimeout(function(){
-          window.scrollTo(0, 1);
-      }, 0);
-    });
   }
 
   setMaxDateForReturn(_event) {

@@ -54,6 +54,7 @@ export class SummaryComponent implements OnInit {
       this.rtrnPrice = this.rtrnPrice + (Number(this.bookingResult.rtrnTrip.reserves[0].fare) + Number(this.bookingResult.rtrnTrip.reserves[0].fee));
       this.rtrnDiscount = this.rtrnDiscount + (Number(this.bookingResult.rtrnTrip.reserves[0].disFare) + Number(this.bookingResult.rtrnTrip.reserves[0].disFee));
     }
+    window.scrollTo(0, 0)
   }
 
   totalPrice() {
@@ -190,7 +191,7 @@ export class SummaryComponent implements OnInit {
           window.parent.postMessage(param, '*');
         }
       } else {
-        this.openDialog(res.msg);
+        this.openDialog(this.errorMsgService.getErrorMsg(res.code));
         this.isShowLoading = false;
       }
     });
@@ -208,6 +209,7 @@ export class SummaryComponent implements OnInit {
           this.isShowLoadingBack = false;
         }
       });
+    window.scrollTo(0, 0)
   }
 
   executeCancelBooking() {

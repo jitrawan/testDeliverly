@@ -79,6 +79,7 @@ export class SelectRoundComponent implements OnInit {
         this.rtrnDate = this.setCalendar(this.convertStringToDate(this.availableTripResultModel.rtrnTrips.tripDate));
       }
     }
+    window.scrollTo(0, 0)
   }
   getAvailableTrip(availableTripSearch) {
     this.busService.getAvailableTrip(availableTripSearch).subscribe((res) => {

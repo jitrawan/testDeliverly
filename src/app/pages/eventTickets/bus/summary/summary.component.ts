@@ -45,6 +45,7 @@ export class SummaryComponent implements OnInit {
   ngOnInit() {
 
     this.sharedService.receiveData.subscribe(data => this.receiveData = data);
+    console.log('session>>', sessionStorage.getItem('paymentChannel'));
     this.trips = this.receiveData.forwardData;
     this.bookingResult = this.receiveData.bookingResultModel;
     this.dprtPrice = this.dprtPrice + (Number(this.bookingResult.dptrTrip.reserves[0].fare) + Number(this.bookingResult.dptrTrip.reserves[0].fee));
@@ -183,10 +184,10 @@ export class SummaryComponent implements OnInit {
 
     this.busService.insertBookingInfo(this.insertBooking).subscribe((res) => {
       if (res.code == 0) {
-        if(res.transID != undefined && res.transID != '') {
-          let CHANNEL_ID = 'C07';
-          let param = 'CHANNEL_ID='+CHANNEL_ID+'&TRANSACTION_ID='+res.transID+'&TOTAL_AMT='+this.totalPrice();
-          window.parent.postMessage(param,'*');
+        if (res.transID != undefined && res.transID != '') {
+          let CHANNEL_ID = sessionStorage.getItem("authToken");
+          let param = 'CHANNEL_ID=' + CHANNEL_ID + '&TRANSACTION_ID=' + res.transID + '&TOTAL_AMT=' + this.totalPrice();
+          window.parent.postMessage(param, '*');
         }
       } else {
         this.openDialog(res.msg);
@@ -197,7 +198,7 @@ export class SummaryComponent implements OnInit {
   }
   cancelBooking() {
     this.isShowLoadingBack = true;
-    this.confirmSettings = { confirmText: 'ใช่', declineText: 'ไม่' };
+    this.confirmSettings = { confirmText: 'ใช่', declineText: 'ไม่ใช่' };
     let isConfirm: any;
     this._confirm.create('กรุณายืนยัน', 'คุณต้องการยกเลิกการจองหรือไม่', this.confirmSettings)
       .subscribe((callback: ConfirmBoxEmit) => {

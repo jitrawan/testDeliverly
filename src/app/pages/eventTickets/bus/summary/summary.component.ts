@@ -160,16 +160,16 @@ export class SummaryComponent implements OnInit {
       }
 
       this.insertBooking.rtrnTrip = {
-        dptrProvinceDesc: this.bookingResult.dptrTrip.dptrProvince.desc,
-        dptrParkDesc: this.bookingResult.dptrTrip.dptrPark.desc,
-        arrvProvinceDesc: this.bookingResult.dptrTrip.arrvProvince.desc,
-        arrvParkDesc: this.bookingResult.dptrTrip.arrvPark.desc,
-        dptrTripDate: this.bookingResult.dptrTrip.date,
-        dptrTripTime: this.bookingResult.dptrTrip.time,
-        routeId: this.bookingResult.dptrTrip.route.id,
-        busStdDesc: this.bookingResult.dptrTrip.busStd.desc,
-        stationDesc: this.bookingResult.dptrTrip.dptrPark.desc,
-        platform: this.trips.dptrTrip.platform,
+        dptrProvinceDesc: this.bookingResult.rtrnTrip.dptrProvince.desc,
+        dptrParkDesc: this.bookingResult.rtrnTrip.dptrPark.desc,
+        arrvProvinceDesc: this.bookingResult.rtrnTrip.arrvProvince.desc,
+        arrvParkDesc: this.bookingResult.rtrnTrip.arrvPark.desc,
+        dptrTripDate: this.bookingResult.rtrnTrip.date,
+        dptrTripTime: this.bookingResult.rtrnTrip.time,
+        routeId: this.bookingResult.rtrnTrip.route.id,
+        busStdDesc: this.bookingResult.rtrnTrip.busStd.desc,
+        stationDesc: this.bookingResult.rtrnTrip.station.desc,
+        platform: this.trips.rtrnTrip.platform,
         seatFloor: listRtrnTripByReserve.seatFloor.toString(),
         seatNo: listRtrnTripByReserve.seatNo.toString(),
         contactName: this.bookingResult.contactName,
@@ -178,7 +178,7 @@ export class SummaryComponent implements OnInit {
         fee: listRtrnTripByReserve.fee.toString(),
         disFare: listRtrnTripByReserve.disFare.toString(),
         disFee: listRtrnTripByReserve.disFee.toString(),
-        coupon: this.trips.dptrTrip.coupon
+        coupon: this.trips.rtrnTrip.coupon
       }
     }
 

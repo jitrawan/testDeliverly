@@ -57,6 +57,7 @@
 
 .varRow {
   padding-left: 15px;
+  word-wrap : break-word;
 }
 
 ::ng-deep button.primary {

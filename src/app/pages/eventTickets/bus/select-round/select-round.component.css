@@ -294,10 +294,6 @@ table {
   visibility: hidden;
 }
 
-.infoBoxWrapper {
-  position: relative;
-}
-
 .inner-loading {
   position: absolute;
   width: 100%;

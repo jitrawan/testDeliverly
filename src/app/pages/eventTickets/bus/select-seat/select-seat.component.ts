@@ -102,13 +102,15 @@ export class SelectSeatComponent implements OnInit {
         this.trip = this.receiveData.rtrnTrip;
       }
     }
-
   }
 
   openDialog(msg) {
     let type: any = "warning";
     this.alertSettings = { overlay: true, overlayClickToClose: false, showCloseButton: true, duration: 100000 };
     this._alert.create(type, msg, this.alertSettings);
+    jQuery('html,body', window.parent.document).animate({
+      scrollTop: jQuery("#alert-box .jaspero__dialog").offset().top-100
+    }, 300);
   }
 
   detailContent: any = {

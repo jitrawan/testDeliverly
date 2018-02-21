@@ -92,6 +92,9 @@ export class SummaryComponent implements OnInit {
     let type: any = "warning";
     this.alertSettings = { overlay: true, overlayClickToClose: false, showCloseButton: true, duration: 100000 };
     this._alert.create(type, msg, this.alertSettings);
+    jQuery('html,body', window.parent.document).animate({
+      scrollTop: jQuery("#alert-box .jaspero__dialog").offset().top-100
+    }, 300);
   }
 
 
@@ -190,7 +193,7 @@ export class SummaryComponent implements OnInit {
           window.parent.postMessage(param, '*');
         }
       } else {
-        this.openDialog(res.msg);
+        this.openDialog(this.errorMsgService.getErrorMsg(res.code));
         this.isShowLoading = false;
       }
     });
@@ -208,6 +211,10 @@ export class SummaryComponent implements OnInit {
           this.isShowLoadingBack = false;
         }
       });
+
+    jQuery('html,body', window.parent.document).animate({
+      scrollTop: jQuery("#confirm-box .jaspero__dialog").offset().top-100
+    }, 300);
   }
 
   executeCancelBooking() {

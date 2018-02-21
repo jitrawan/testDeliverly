@@ -82,12 +82,6 @@ export class SelectDestinationComponent implements OnInit {
     this.getParkList();
     this.selectedTripType = "R";
     this.selectedNumOfPerson = 0;
-    this.router.events.subscribe((evt) => {
-      if (!(evt instanceof NavigationEnd)) {
-        return;
-      }
-      window.scrollTo(0, 0)
-    });
   }
 
   setMaxDateForReturn(_event) {
@@ -266,6 +260,11 @@ export class SelectDestinationComponent implements OnInit {
     let type: any = "warning";
     this.alertSettings = { overlay: true, overlayClickToClose: false, showCloseButton: true, duration: 100000 };
     this._alert.create(type, msg, this.alertSettings);
+
+    jQuery('html,body', window.parent.document).animate({
+      scrollTop: jQuery("#alert-box .jaspero__dialog").offset().top-100
+    }, 300);
+    
   }
 
   validateDate() {

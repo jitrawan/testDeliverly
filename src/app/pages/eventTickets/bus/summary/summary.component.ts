@@ -93,12 +93,13 @@ export class SummaryComponent implements OnInit {
     this.alertSettings = { overlay: true, overlayClickToClose: false, showCloseButton: true, duration: 100000 };
     this._alert.create(type, msg, this.alertSettings);
     jQuery('html,body', window.parent.document).animate({
-      scrollTop: jQuery("#alert-box .jaspero__dialog").offset().top-100
+      scrollTop: jQuery("#alert-box .jaspero__dialog").offset().top - 100
     }, 300);
   }
 
 
   insertBookingInfo() {
+    console.log(this.bookingResult);
     this.isShowLoading = true;
     this.queryString = {
       payment_channel: localStorage.getItem('payment_channel'),
@@ -171,7 +172,7 @@ export class SummaryComponent implements OnInit {
         dptrTripTime: this.bookingResult.rtrnTrip.time,
         routeId: this.bookingResult.rtrnTrip.route.id,
         busStdDesc: this.bookingResult.rtrnTrip.busStd.desc,
-        stationDesc: this.bookingResult.rtrnTrip.station.desc,
+        stationDesc: this.bookingResult.rtrnTrip.dptrPark.desc,
         platform: this.trips.rtrnTrip.platform,
         seatFloor: listRtrnTripByReserve.seatFloor.toString(),
         seatNo: listRtrnTripByReserve.seatNo.toString(),
@@ -213,7 +214,7 @@ export class SummaryComponent implements OnInit {
       });
 
     jQuery('html,body', window.parent.document).animate({
-      scrollTop: jQuery("#confirm-box .jaspero__dialog").offset().top-100
+      scrollTop: jQuery("#confirm-box .jaspero__dialog").offset().top - 100
     }, 300);
   }
 

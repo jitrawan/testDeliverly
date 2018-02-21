@@ -24,11 +24,13 @@ import { SummaryComponent } from './pages/eventTickets/bus/summary/summary.compo
 import { BusLayoutComponent } from './shared/lib/bus-layout/bus-layout.component';
 import { BuyTicketComponent } from './pages/eventTickets/bus/buy-ticket/buy-ticket.component';
 
+import { BusReceiveComponent } from './pages/payment-receive/bus-receive/bus-receive.component';
+
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
   // { path: '**', component: SelectDestinationComponent },
   {
-    path: '', component: BuyTicketComponent,
+    path: '', component: BusReceiveComponent,
     children: [
       { path: '', component: SelectDestinationComponent },
       // { path: 'index.html/selectDestination/:payment_channel/:cust_email', component: SelectDestinationComponent },

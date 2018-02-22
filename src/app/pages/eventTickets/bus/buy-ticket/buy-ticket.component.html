@@ -1,11 +1,8 @@
-<div class="buyTicketWrapper">
-
+<div class="buyTicketWrapper" *ngIf="isEnable">
   <div class="busTopic">
     <img src="assets/images/pns-logo.png" />
     <span>จองตั๋วรถโดยสาร บขส. ออนไลน์ </span>
   </div>
-
-
-  <router-outlet></router-outlet>
-  <!-- <app-select-destination> </app-select-destination> -->
+  <router-outlet ></router-outlet>
 </div>
+<bus-error [msgError]="msgError" *ngIf="!isEnable"></bus-error>

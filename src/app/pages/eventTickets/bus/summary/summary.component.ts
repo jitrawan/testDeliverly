@@ -9,6 +9,7 @@ import { ConfirmBoxEmit } from '../../../../shared/models/confirmBoxEmit';
 import { BookingResultModel } from '../../../../shared/models/bus/bookingResult.model';
 import { InsertBookingInfoModel, listTripByReserve } from '../../../../shared/models/bus/insertBookingInfo.model';
 import { ErrorMsgService } from '../../../../shared/services/errorMsg.service';
+import { BuyTicketComponent } from '../buy-ticket/buy-ticket.component';
 
 @Component({
   selector: 'app-summary',
@@ -39,7 +40,8 @@ export class SummaryComponent implements OnInit {
     private _alert: AlertsService,
     private _confirm: ConfirmationService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private buyTicketComponent: BuyTicketComponent
   ) { }
 
   ngOnInit() {
@@ -223,7 +225,9 @@ export class SummaryComponent implements OnInit {
       if (res.code == 0) {
         this.busService.cancelBooking(res.data.transId, this.bookingResult.bookId, this.bookingResult.bookCode).subscribe((res) => {
           if (res.code == 0) {
-            this.router.navigate(['..'], { relativeTo: this.route });
+            this.buyTicketComponent.checkTime();
+            this.router.navigate([''], { relativeTo: this.route });
+            // this.router.navigate(['/'], { relativeTo: this.route });
           } else {
             this.openDialog(this.errorMsgService.getErrorMsg(res.code));
             this.isShowLoadingBack = false;

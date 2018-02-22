@@ -145,7 +145,7 @@ export class SelectSeatComponent implements OnInit {
                 availableTripSearchModel: this.availableTripSearchModel,
               }
               this.sharedService.sendData(this.receiveData);
-              this.router.navigate(['../selectSeat2'], { relativeTo: this.route });
+              this.router.navigate(['/selectSeat2'], { relativeTo: this.route });
             } else {
               this.isShowLoading = false;
             }
@@ -161,7 +161,7 @@ export class SelectSeatComponent implements OnInit {
                 totalPassenger: this.totalPassenger
               }
               this.sharedService.sendData(forwardData);
-              this.router.navigate(['../passengerInfomation'], { relativeTo: this.route });
+              this.router.navigate(['/passengerInfomation'], { relativeTo: this.route });
             } else {
               this.isShowLoading = false;
             }
@@ -207,7 +207,7 @@ export class SelectSeatComponent implements OnInit {
         dptrTrip: this.selectedDptrTrip,
         rtrnTrip: this.selectedRtrnTrip
       }
-      routerUrl = '../selectSeat'
+      routerUrl = '/selectSeat'
     }
     this.busService.clearTransSeatMark(this.transId.transId).subscribe((res) => {
       if (res.code == 0) {

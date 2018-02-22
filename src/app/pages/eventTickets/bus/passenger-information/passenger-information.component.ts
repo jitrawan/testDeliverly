@@ -110,7 +110,7 @@ export class PassengerInformationComponent implements OnInit {
             bookingResultModel: this.bookingResultModel
           }
           this.sharedService.sendData(forwardData);
-          this.router.navigate(['../summary'], { relativeTo: this.route });
+          this.router.navigate(['/summary'], { relativeTo: this.route });
         } else {
           this.openDialog(this.errorMsgService.getErrorMsg(res.code));
           this.isShowLoading = false;
@@ -183,7 +183,7 @@ export class PassengerInformationComponent implements OnInit {
               totalPassenger: this.trips.totalPassenger
             };
             this.sharedService.sendData(forwardData);
-            this.router.navigate(['../selectSeat'], { relativeTo: this.route });
+            this.router.navigate(['/selectSeat'], { relativeTo: this.route });
           } else {
             this.openDialog(this.errorMsgService.getErrorMsg(res.code));
             this.isShowLoadingBack = false;

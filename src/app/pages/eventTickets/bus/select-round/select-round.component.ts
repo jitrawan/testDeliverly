@@ -16,6 +16,7 @@ import { TripModel } from '../../../.././shared/models/bus/trip.model';
 import { ErrorMessage } from '../../../../shared/constant/error-message';
 import { log } from 'util';
 
+import { BuyTicketComponent } from '../buy-ticket/buy-ticket.component';
 
 @Component({
   selector: 'app-select-round',
@@ -60,6 +61,7 @@ export class SelectRoundComponent implements OnInit {
     private _alert: AlertsService,
     private datePipe: DatePipe,
     private location: Location,
+    private buyTicketComponent: BuyTicketComponent
 
   ) { }
 
@@ -147,7 +149,7 @@ export class SelectRoundComponent implements OnInit {
     this.alertSettings = { overlay: true, overlayClickToClose: false, showCloseButton: true, duration: 100000 };
     this._alert.create(type, msg, this.alertSettings);
     jQuery('html,body', window.parent.document).animate({
-      scrollTop: jQuery("#alert-box .jaspero__dialog").offset().top-100
+      scrollTop: jQuery("#alert-box .jaspero__dialog").offset().top - 100
     }, 300);
   }
 
@@ -160,29 +162,29 @@ export class SelectRoundComponent implements OnInit {
       this.isShowLoading = true;
       this.busService.checkAuthen(window.location.host).subscribe((response) => {
         if (response.result) {
-          this.busService.getBusLayout(this.selectedDptrTrip.id, this.selectedDptrTrip.dptrPark.id, this.selectedDptrTrip.arrvPark.id).subscribe((res) => {
-            if (res.code == 0) {
-              this.busLayout = res.data;
-              let dataListForPassNextPage = {
-                tripName: 'dptrTrip',
-                dptrProvince: this.dptrProvince,
-                dptrPark: this.dptrPark,
-                arrvProvince: this.rtrnProvince,
-                arrvPark: this.rtrnPark,
-                availableTripResultModel: this.availableTripResultModel,
-                availableTripSearchModel: this.availableTripSearchModel,
-                busLayout: this.busLayout, // layout เที่ยวไป
-                dptrTrip: this.selectedDptrTrip, // เที่ยวไป
-                rtrnTrip: this.selectedRtrnTrip, // เที่ยวกลับ
-                totalPassenger: this.totalPassenger
-              };
-              this.sharedService.sendData(dataListForPassNextPage);
-              this.router.navigate(['../selectSeat'], { relativeTo: this.route });
-            } else {
-              this.openDialog(this.errorMsgService.getErrorMsg(res.code));
-              this.isShowLoading = false;
-            }
-          });
+      this.busService.getBusLayout(this.selectedDptrTrip.id, this.selectedDptrTrip.dptrPark.id, this.selectedDptrTrip.arrvPark.id).subscribe((res) => {
+        if (res.code == 0) {
+          this.busLayout = res.data;
+          let dataListForPassNextPage = {
+            tripName: 'dptrTrip',
+            dptrProvince: this.dptrProvince,
+            dptrPark: this.dptrPark,
+            arrvProvince: this.rtrnProvince,
+            arrvPark: this.rtrnPark,
+            availableTripResultModel: this.availableTripResultModel,
+            availableTripSearchModel: this.availableTripSearchModel,
+            busLayout: this.busLayout, // layout เที่ยวไป
+            dptrTrip: this.selectedDptrTrip, // เที่ยวไป
+            rtrnTrip: this.selectedRtrnTrip, // เที่ยวกลับ
+            totalPassenger: this.totalPassenger
+          };
+          this.sharedService.sendData(dataListForPassNextPage);
+          this.router.navigate(['/selectSeat'], { relativeTo: this.route });
+        } else {
+          this.openDialog(this.errorMsgService.getErrorMsg(res.code));
+          this.isShowLoading = false;
+        }
+      });
         } else {
           this.isShowLoading = false;
           parent.window.receiveMessage('showLogin');
@@ -192,7 +194,7 @@ export class SelectRoundComponent implements OnInit {
   }
 
   searchTrips(tripType, tripDate) {
-    if (new Date(new Date().setHours(0,0,0,0)) <= new Date(new Date(tripDate).setHours(0,0,0,0))) {
+    if (new Date(new Date().setHours(0, 0, 0, 0)) <= new Date(new Date(tripDate).setHours(0, 0, 0, 0))) {
       if (this.availableTripResultModel.rtrnTrips != null) {
         if (tripType == 'dptr') {
           if (new Date(tripDate) > new Date(this.availableTripResultModel.rtrnTrips.tripDate)) {
@@ -246,7 +248,8 @@ export class SelectRoundComponent implements OnInit {
 
   goPreviousPage() {
     this.isShowLoadingBack = true;
-    this.router.navigate(['..'], { relativeTo: this.route });
+    this.buyTicketComponent.checkTime();
+    this.router.navigate([''], { relativeTo: this.route });
   }
 
 }

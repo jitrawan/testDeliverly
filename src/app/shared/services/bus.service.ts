@@ -36,8 +36,19 @@ export class BusService {
     private cancelBookingAPI = this.baseURL + 'ag_cancel_booking';
     private insertBookingInfoAPI = this.baseURLForInsert + 'insert_booking_info';
     private clearTransSeatmarkAPI = this.baseURL + 'ag_clear_trans_seatmark';
+    private checkAllowReserveAPI = 'https://ad5xsmjzzj.execute-api.ap-southeast-1.amazonaws.com/v1/checkallowreserve';
 
     constructor(private http: Http) { }
+
+    checkAllowReserve() {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.get(this.checkAllowReserveAPI)
+            .map((res: Response) => {
+                return res.json();
+            })
+            .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
+    }
 
     getMasProvince() {
         let headers = new Headers({ 'Content-Type': 'application/json' });

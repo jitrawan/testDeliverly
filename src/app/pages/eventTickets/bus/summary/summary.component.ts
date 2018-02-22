@@ -9,6 +9,7 @@ import { ConfirmBoxEmit } from '../../../../shared/models/confirmBoxEmit';
 import { BookingResultModel } from '../../../../shared/models/bus/bookingResult.model';
 import { InsertBookingInfoModel, listTripByReserve } from '../../../../shared/models/bus/insertBookingInfo.model';
 import { ErrorMsgService } from '../../../../shared/services/errorMsg.service';
+import { BuyTicketComponent } from '../buy-ticket/buy-ticket.component';
 
 @Component({
   selector: 'app-summary',
@@ -39,13 +40,13 @@ export class SummaryComponent implements OnInit {
     private _alert: AlertsService,
     private _confirm: ConfirmationService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private buyTicketComponent: BuyTicketComponent
   ) { }
 
   ngOnInit() {
 
     this.sharedService.receiveData.subscribe(data => this.receiveData = data);
-    console.log('session>>', sessionStorage.getItem('paymentChannel'));
     this.trips = this.receiveData.forwardData;
     this.bookingResult = this.receiveData.bookingResultModel;
     this.dprtPrice = this.dprtPrice + (Number(this.bookingResult.dptrTrip.reserves[0].fare) + Number(this.bookingResult.dptrTrip.reserves[0].fee));
@@ -93,7 +94,7 @@ export class SummaryComponent implements OnInit {
     this.alertSettings = { overlay: true, overlayClickToClose: false, showCloseButton: true, duration: 100000 };
     this._alert.create(type, msg, this.alertSettings);
     jQuery('html,body', window.parent.document).animate({
-      scrollTop: jQuery("#alert-box .jaspero__dialog").offset().top-100
+      scrollTop: jQuery("#alert-box .jaspero__dialog").offset().top - 100
     }, 300);
   }
 
@@ -213,7 +214,7 @@ export class SummaryComponent implements OnInit {
       });
 
     jQuery('html,body', window.parent.document).animate({
-      scrollTop: jQuery("#confirm-box .jaspero__dialog").offset().top-100
+      scrollTop: jQuery("#confirm-box .jaspero__dialog").offset().top - 100
     }, 300);
   }
 
@@ -222,7 +223,9 @@ export class SummaryComponent implements OnInit {
       if (res.code == 0) {
         this.busService.cancelBooking(res.data.transId, this.bookingResult.bookId, this.bookingResult.bookCode).subscribe((res) => {
           if (res.code == 0) {
-            this.router.navigate(['..'], { relativeTo: this.route });
+            this.buyTicketComponent.checkTime();
+            this.router.navigate([''], { relativeTo: this.route });
+            // this.router.navigate(['/'], { relativeTo: this.route });
           } else {
             this.openDialog(this.errorMsgService.getErrorMsg(res.code));
             this.isShowLoadingBack = false;

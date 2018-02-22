@@ -24,14 +24,16 @@ import { SummaryComponent } from './pages/eventTickets/bus/summary/summary.compo
 import { BusLayoutComponent } from './shared/lib/bus-layout/bus-layout.component';
 import { BuyTicketComponent } from './pages/eventTickets/bus/buy-ticket/buy-ticket.component';
 
+import { BusReceiveComponent } from './pages/eventTickets/bus/bus-receive/bus-receive.component';
+import { BusErrorComponent } from './pages/eventTickets/bus/bus-error/bus-error.component';
+
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
   // { path: '**', component: SelectDestinationComponent },
   {
     path: '', component: BuyTicketComponent,
     children: [
-      { path: '', component: SelectDestinationComponent },
-      // { path: 'index.html/selectDestination/:payment_channel/:cust_email', component: SelectDestinationComponent },
+      { path: 'selectDestination', component: SelectDestinationComponent },
       { path: 'selectRound', component: SelectRoundComponent },
       { path: 'selectSeat', component: SelectSeatComponent },
       { path: 'selectSeat2', component: SelectSeatComponent },
@@ -68,7 +70,7 @@ const routes: Routes = [
   { path: 'checkOut', component: PaymentComponent },
   { path: 'purchaseHistory', component: PurchaseHistoryComponent },
   { path: 'historyDetail', component: HistoryDetailComponent },
-  { path: 'busLayout', component: BusLayoutComponent },
+  // { path: 'busLayout', component: BusLayoutComponent },
 ];
 
 @NgModule({

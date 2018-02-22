@@ -61,7 +61,6 @@ export class SelectDestinationComponent implements OnInit {
     private datePipe: DatePipe
   ) { }
 
-  paymentChannel: string = 'mobile';
   ngOnInit() {
     let receiveData;
     this.sharedService.receiveData.subscribe(data => receiveData = data);
@@ -308,7 +307,7 @@ export class SelectDestinationComponent implements OnInit {
             totalPassenger: this.selectedNumOfPerson
           }
           this.sharedService.sendData(dataForSend);
-          this.router.navigate(['../selectRound'], { relativeTo: this.route });
+          this.router.navigate(['/selectRound'], { relativeTo: this.route });
         } else {
           this.openDialog(this.errorMsgService.getErrorMsg(res.code));
           this.isShowLoading = false;

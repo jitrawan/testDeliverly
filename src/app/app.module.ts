@@ -52,7 +52,7 @@ import { PassengerInformationComponent } from './pages/eventTickets/bus/passenge
 import { SummaryComponent } from './pages/eventTickets/bus/summary/summary.component';
 import { SelectRoundComponent } from './pages/eventTickets/bus/select-round/select-round.component';
 import { BuyTicketComponent } from './pages/eventTickets/bus/buy-ticket/buy-ticket.component';
-import { BusReceiveComponent } from './pages/payment-receive/bus-receive/bus-receive.component';
+import { BusReceiveComponent } from './pages/eventTickets/bus/bus-receive/bus-receive.component';
 
 @NgModule({
   declarations: [

@@ -251,7 +251,6 @@ export class BusService {
         let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("authToken") });
         let options = new RequestOptions({ headers: headers });
         let body = insertBooking;
-        console.log('body>>', body);
         return this.http.post(this.insertBookingInfoAPI, JSON.stringify(body), options)
             .map((res: Response) => {
                 return res.json();

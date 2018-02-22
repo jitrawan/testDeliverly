@@ -61,9 +61,7 @@ export class SelectDestinationComponent implements OnInit {
     private datePipe: DatePipe
   ) { }
 
-  paymentChannel: string = 'mobile';
   ngOnInit() {
-    console.log('============ select des ====== ');
     let receiveData;
     this.sharedService.receiveData.subscribe(data => receiveData = data);
 

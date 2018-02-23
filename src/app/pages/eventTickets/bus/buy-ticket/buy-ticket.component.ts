@@ -11,7 +11,6 @@ export class BuyTicketComponent implements OnInit {
 
   isEnable: boolean = true;
   msgError: string;
-  // public static updateList: Subject<boolean> = new Subject();
   constructor(
     private router: Router,
     private route: ActivatedRoute,

@@ -26,6 +26,7 @@ import { BuyTicketComponent } from './pages/eventTickets/bus/buy-ticket/buy-tick
 
 import { BusReceiveComponent } from './pages/eventTickets/bus/bus-receive/bus-receive.component';
 import { BusErrorComponent } from './pages/eventTickets/bus/bus-error/bus-error.component';
+import { ReserveTransithistoryComponent } from './pages/reserve-history/reserve-transithistory/reserve-transithistory.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
@@ -70,7 +71,8 @@ const routes: Routes = [
   { path: 'payment/:step', component: PaymentComponent },
   { path: 'purchaseHistory', component: PurchaseHistoryComponent },
   { path: 'historyDetail', component: HistoryDetailComponent },
-  // { path: 'busLayout', component: BusLayoutComponent },
+  { path: 'reserveTransithistory', component: ReserveTransithistoryComponent },
+  { path: 'busReceive', component: BusReceiveComponent },
 ];
 
 @NgModule({

@@ -68,7 +68,7 @@ const routes: Routes = [
   { path: 'shopping', component: ShoppingComponent },
   { path: 'transport/travel', component: TravelComponent },
   { path: 'allevent/:type', component: AllEventComponent },
-  { path: 'payment/:step', component: PaymentComponent },
+  { path: 'checkOut', component: PaymentComponent },
   { path: 'purchaseHistory', component: PurchaseHistoryComponent },
   { path: 'historyDetail', component: HistoryDetailComponent },
   { path: 'reserveTransithistory', component: ReserveTransithistoryComponent },

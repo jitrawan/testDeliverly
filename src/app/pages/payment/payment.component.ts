@@ -12,26 +12,20 @@ declare var jQuery: any;
 })
 export class PaymentComponent implements OnInit {
 
-	menuStep: RouteDetail = {
-		routeTo: 'booking-review',  displayName: 'booking'
-	};
-
 	CASH_DISCOUNT: string = "CASH_DISCOUNT";
 	CREDIT_DISCOUNT: string = "CREDIT_DISCOUNT";
 	
+	allowPayOutlet: boolean = false;
+	allowPayCredit: boolean = false;
 	cashDiscountSelectedIndex: number = -1;
 	creditDiscountSelectedIndex: number = -1;
 	paymentMethodSelected: number = -1;
 	showDiscountInput: boolean = false;
 	showCreditDiscount: boolean = false;
 
-	// Validate step when user direct access via url
-	validateBooking = false;
-	validatePayment = false;
-
 	paymentMethod: boolean = false;
 	cashDiscount: DiscountList[] = [
-		{ 	
+		{
 			discountNo: 'MCARD',
 			img_path: '../../assets/images/discount/mcard.png',
 			title_discount: 'M Card',
@@ -40,19 +34,19 @@ export class PaymentComponent implements OnInit {
 				discount_name : 'MCARD'
 			}
 		},
-		{ 	
+		{
 			discountNo: 'DTAC',
 			img_path: '../../assets/images/discount/dtac.png',
 			title_discount: 'DTAC REWARD',
 			desc_discount: 'กด *123*222# เพื่อรับส่วนลด 200 บาทสำหรับสมาชิก Dtac Silver ขึ้นไป'
 		},
-		{ 	
+		{
 			discountNo: 'TRUEH',
 			img_path: '../../assets/images/discount/trueh.png',
 			title_discount: 'TRUE MOVE H',
 			desc_discount: 'กด *142*10# สำหรับสมาชิกรายเดือนรับส่วนลด 100 บาท'
 		},
-		{ 	
+		{
 			discountNo: 'AIS',
 			img_path: '../../assets/images/discount/ais.png',
 			title_discount: 'Senenade Privillage',
@@ -61,7 +55,7 @@ export class PaymentComponent implements OnInit {
 				discount_name : 'AIS SERENADE'
 			}
 		}
-	]
+	];
 
 	creditDiscount: DiscountList[] = [
 		{ 	
@@ -88,33 +82,9 @@ export class PaymentComponent implements OnInit {
 			title_discount: 'KTC CASH BACK',
 			desc_discount: 'รับเครดิตเงินคืนสูงสุด 3% เมื่อชำระสินค้ายอดรวม 800 บาทขึ้นไป'
 		}
-	]
+	];
 	
-	constMenu: ConstMenu = {
-		booking: { routeTo: 'booking-review', displayName: 'booking' },
-		payment: { routeTo: 'payment-channel', displayName: 'payment' },
-		summary: { routeTo: 'summary-review', displayName: 'summary' }
-	};
-
 	constructor(private router: Router , private route: ActivatedRoute , private renderer: Renderer2) {
-		this.route.params.subscribe(params => {
-			this.menuStep.routeTo = params.step;
-			this.menuStep.displayName = this.getDisplayName(params.step);
-			
-			if(this.menuStep.routeTo == this.constMenu.payment.routeTo) {
-				if(this.validateBooking === false) {
-					this.router.navigate(['payment/'+this.constMenu.booking.routeTo]);
-					return;
-				}
-				this.intitialPaymentStep();
-
-			} else if(this.menuStep.routeTo == this.constMenu.summary.routeTo) {
-				if(this.validatePayment === false) {
-					this.router.navigate(['payment/'+this.constMenu.booking.routeTo]);
-					return;
-				}
-			}
-		});
 	}
 
 	ngOnInit() {
@@ -124,42 +94,44 @@ export class PaymentComponent implements OnInit {
 			}
 			window.scrollTo(0, 0);
 		});
+
+		this.allowPayOutlet = true;
+		this.allowPayCredit = true;
+		
+		// this.renderer.addClass(this.navSideBar.nativeElement, 'show');
 	}
 
 	ngAfterViewInit() {
+		// var paymentSelection = document.querySelectorAll('.paymentWrapper');
+		// if(paymentSelection.length <= 1) {
+		// 	console.log(paymentSelection)
+		// 	this.renderer.removeAttribute(paymentSelection[0],'class');
+		// }
+		// console.log(paymentSelection)
 	}
 	
 	intitialPaymentStep() {
 		setTimeout(_ => {
-
-			jQuery('#discountCashSlider').owlCarousel({
-				items: 1,
-				nav: true,
-				mouseDrag: false,
-				navText: ['<i class="fa fa-chevron-left mt-2 mr-1"></i>', '<i class="fa fa-chevron-right mt-2 ml-1"></i>'],
-				responsive : {
-					0 : {
-						items : 1
-					},
-					480 : {
-						items : 2
-					},
-					768 : {
-						items : 3
+			if($('#discountCashSlider').length > 0) {
+				jQuery('#discountCashSlider').owlCarousel({
+					items: 1,
+					nav: true,
+					mouseDrag: false,
+					navText: ['<i class="fa fa-chevron-left mt-2 mr-1"></i>', '<i class="fa fa-chevron-right mt-2 ml-1"></i>'],
+					responsive : {
+						0 : {
+							items : 1
+						},
+						480 : {
+							items : 2
+						},
+						768 : {
+							items : 3
+						}
 					}
-				}
-			});
-		});
-
-	}
-
-	getDisplayName(routeName: string) {
-		let array = underscore.values(this.constMenu);
-		for(let i = 0; i < array.length; i++){
-			if(array[i].routeTo === routeName) {
-				return array[i].displayName;
+				});
 			}
-		}
+		});
 	}
 
 	discountSelected(index: number,discountCode: string , discountType: string) {
@@ -199,15 +171,14 @@ export class PaymentComponent implements OnInit {
 	}
 
 	choosePaymentMethod(paymentMethodIndex: number) {
-		// this.paymentMethodSelected = paymentMethodIndex;
 
-
-		if (this.paymentMethodSelected === 2) {
+		if (this.paymentMethodSelected === paymentMethodIndex) {
 			this.paymentMethodSelected = 0;
-		  }
-		  else {
+		} else {
 			this.paymentMethodSelected = paymentMethodIndex;
-		  }
+		}
+
+		
 		// if(paymentMethodIndex == 2) {
 		// 	this.showCreditDiscount = true;
 
@@ -234,26 +205,6 @@ export class PaymentComponent implements OnInit {
 		// } else {
 		// 	this.showCreditDiscount = false;
 		// }
-	}
-
-	changeStep(stepName: string , triggerType: string) {
-
-		if(triggerType == null) {
-			if(stepName === this.constMenu.payment.routeTo) {
-				this.validateBooking = true;
-			} else if(stepName === this.constMenu.summary.routeTo) {
-				this.validatePayment = true;
-			}
-		} else {
-			// When user try to change step by clicking icon on top of page
-			if(stepName === this.constMenu.payment.routeTo && !this.validateBooking) {
-				return;
-			} else if(stepName === this.constMenu.summary.routeTo && !this.validatePayment) {
-				return;
-			}
-		}
-		
-		this.router.navigate(['payment/'+stepName]);
 	}
 }
 

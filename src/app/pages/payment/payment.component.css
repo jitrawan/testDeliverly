@@ -3,7 +3,7 @@
 }
 
 .border-bottom {
-  border-bottom: 2px solid rgba(0, 0, 0, .4);
+  border-bottom: 2px solid rgba(0,0,0,.4);
   padding-bottom: 10px;
 }
 
@@ -74,7 +74,7 @@
   visibility: visible;
 }
 
-#paymentTimeOutDesc>div {
+#paymentTimeOutDesc > div {
   text-align: center;
   color: red;
   font-weight: 700;
@@ -102,15 +102,15 @@
 
 .discount-item {
   position: relative;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  min-width: 0;
-  padding: 1rem;
-  margin-top: 1.5rem;
-  cursor: pointer;
-  -webkit-transition: all .3s ease;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    padding: 1rem;
+    margin-top: 1.5rem;
+    cursor: pointer;
+    -webkit-transition: all .3s ease;
   -o-transition: all .3s ease;
   -moz-transition: all .3s ease;
   transition: all .3s ease;
@@ -128,10 +128,10 @@
 
 .discount-item i {
   position: absolute;
-  right: 0.5rem;
-  top: -0.5rem;
-  color: #07ab07;
-  display: none;
+    right: 0.5rem;
+    top: -0.5rem;
+    color: #07ab07;
+    display: none;
 }
 
 .discount-item.selected i {
@@ -143,7 +143,7 @@
   padding-right: 0.5rem;
   padding-left: 0.5rem;
   display: flex;
-  justify-content: center;
+    justify-content: center;
 }
 
 .term-condition {
@@ -152,7 +152,7 @@
   margin-top: 1rem;
 }
 
-.term-condition>li {
+.term-condition > li {
   line-height: 2.2rem;
   font-size: 17px;
 }
@@ -165,19 +165,22 @@
   .sub-heading span {
     font-size: 1.3rem;
   }
+
   .paymentTypeText {
     font-size: 1.1rem;
   }
+  
   #display-credit-fee .alert-primary {
     width: 100%;
   }
+
   .text-desc {
     background-color: #f3f3f3;
     border-radius: 5px;
     padding: 0.3rem;
     margin-left: 1rem;
-    margin-right: 1rem;
-    word-wrap: break-word;
+      margin-right: 1rem;
+      word-wrap: break-word;
   }
 }
 
@@ -188,15 +191,16 @@
 }
 
 @media (min-width: 425px) and (max-width:576px) {
+  
   .col-title-wrapper {
     -ms-flex: 0 0 45%;
-    flex: 0 0 45%;
-    max-width: 45%;
+      flex: 0 0 45%;
+      max-width: 45%;
   }
   .col-desc-wrapper {
     -ms-flex: 0 0 55%;
-    flex: 0 0 55%;
-    max-width: 55%;
+      flex: 0 0 55%;
+      max-width: 55%;
   }
 }
 
@@ -204,6 +208,7 @@
   .paymentWrapper:last-child {
     margin-top: 2rem
   }
+  
   .title-text {
     font-size: 1rem;
   }
@@ -218,134 +223,45 @@
     margin-top: 0.6rem;
     font-size: 16px;
   }
+
   .sub-heading span {
-    margin-left: 0.5rem;
+      margin-left: 0.5rem;
   }
+
   .paymentTypeText {
     font-size: 1.3rem;
   }
+  
   .paymentWrapper img {
     max-width: 150px;
   }
+
   .paymentWrapper:last-child img {
     max-width: 100%;
   }
+  
   .discount-item .discount-desc {
     padding-right: 1rem;
     padding-left: 1rem;
   }
+  
   .owl-carousel:hover .owl-nav .owl-next {
-    right: -12px;
+      right: -12px;
   }
+  
   .owl-carousel:hover .owl-nav .owl-next {
-    left: -12px;
+      left: -12px;
   }
-  .term-condition>li {
+
+  .term-condition > li {
     font-size: 16px;
   }
 }
 
 @media (min-width: 1024px) {
-  .title-text,
-  .text-desc {
+  .title-text , .text-desc {
     margin-top: 0.5rem;
   }
 }
 
-.divider {
-  position: relative;
-  overflow: hidden;
-  margin: 25px 0;
-  color: #E5E5E5;
-  width: 100%
-}
-
-.divider.divider-margin {
-  margin: 70px 0
-}
-
-.divider:after,
-.divider.divider-center:before,
-.divider.divider-center.divider-short:before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  top: 8px;
-  left: 30px;
-  height: 0;
-  border-top: 1px solid #EEE
-}
-
-.divider.divider-thick:after,
-.divider.divider-center.divider-thick:before,
-.divider.divider-center.divider-short.divider-thick:before {
-  border-top-width: 3px
-}
-
-.divider.divider-short:after {
-  width: 30%
-}
-
-.divider.divider-vshort:after {
-  width: 12%
-}
-
-.divider i {
-  position: relative;
-  width: 18px;
-  height: 18px;
-  line-height: 1;
-  font-size: 18px !important;
-  text-align: center
-}
-
-.divider a {
-  position: relative;
-  display: inline-block;
-  color: inherit;
-  -webkit-transition: all .3s ease;
-  -o-transition: all .3s ease;
-  transition: all .3s ease
-}
-
-.divider a:hover {
-  color: #888
-}
-
-.divider.divider-center,
-.divider.divider-center.divider-short {
-  text-align: center
-}
-
-.divider.divider-center:before {
-  left: -50% !important;
-  right: 0;
-  margin-left: -20px
-}
-
-.divider.divider-center:after {
-  left: 50% !important;
-  right: 0;
-  margin-left: 20px
-}
-
-.divider.divider-center.divider-short:before {
-  left: auto !important;
-  right: 50%;
-  margin-right: 20px;
-  width: 15%
-}
-
-.divider.divider-center.divider-short:after {
-  left: 50% !important;
-  right: auto !important;
-  margin-left: 20px;
-  width: 15%
-}
-
-.divider.divider-center.divider-vshort:before,
-.divider.divider-center.divider-vshort:after {
-  width: 6%
-}
-
-
+.divider{position:relative;overflow:hidden;margin:25px 0;color:#E5E5E5;width:100%}.divider.divider-margin{margin:70px 0}.divider:after,.divider.divider-center:before,.divider.divider-center.divider-short:before{content:'';position:absolute;width:100%;top:8px;left:30px;height:0;border-top:1px solid #EEE}.divider.divider-thick:after,.divider.divider-center.divider-thick:before,.divider.divider-center.divider-short.divider-thick:before{border-top-width:3px}.divider.divider-short:after{width:30%}.divider.divider-vshort:after{width:12%}.divider i{position:relative;width:18px;height:18px;line-height:1;font-size:18px!important;text-align:center}.divider a{position:relative;display:inline-block;color:inherit;-webkit-transition:all .3s ease;-o-transition:all .3s ease;transition:all .3s ease}.divider a:hover{color:#888}.divider.divider-center,.divider.divider-center.divider-short{text-align:center}.divider.divider-center:before{left:-50%!important;right:0;margin-left:-20px}.divider.divider-center:after{left:50%!important;right:0;margin-left:20px}.divider.divider-center.divider-short:before{left:auto!important;right:50%;margin-right:20px;width:15%}.divider.divider-center.divider-short:after{left:50%!important;right:auto!important;margin-left:20px;width:15%}.divider.divider-center.divider-vshort:before,.divider.divider-center.divider-vshort:after{width:6%}

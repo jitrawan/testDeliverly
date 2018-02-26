@@ -78,7 +78,7 @@ export class PassengerInformationComponent implements OnInit {
     this.alertSettings = { overlay: true, overlayClickToClose: false, showCloseButton: true, duration: 100000 };
     this._alert.create(type, msg, this.alertSettings);
     jQuery('html,body', window.parent.document).animate({
-      scrollTop: jQuery("#alert-box .jaspero__dialog").offset().top-100
+      scrollTop: jQuery("#alert-box .jaspero__dialog").offset().top - 100
     }, 300);
   }
 
@@ -96,6 +96,9 @@ export class PassengerInformationComponent implements OnInit {
         isFound = true;
       } else if (this.passengerInfoList[index].passengerTel == undefined) {
         this.openDialog(this.errorMessage.pleaseSelect + 'เบอร์มือถือ ' + 'ของผู้โดยสารคนที่ ' + (index + 1));
+        isFound = true;
+      } else if (this.passengerInfoList[index].passengerTel.length < 10) {
+        this.openDialog('เบอร์มือถือ ' + 'ของผู้โดยสารคนที่ ' + (index + 1) + ' ต้องมี 10 ตัวอักษร');
         isFound = true;
       }
     }

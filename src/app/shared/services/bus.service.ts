@@ -284,7 +284,6 @@ export class BusService {
 
     handleError(error) {
         if (error.name == 'TimeoutError') {
-            console.log('----------------------');
             let err = { code: 40125 };
             return err;
         }

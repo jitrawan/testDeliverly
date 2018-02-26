@@ -107,7 +107,7 @@ export class BusLayoutComponent implements OnInit {
       this.openDialog('ไม่สามารถเลือกที่นั่งเกินจำนวนคนที่ท่านเลือกไว้ได้');
       (document.getElementById(id) as HTMLInputElement).checked = false;
     }
-    this.outputValue.emit(this.selectedSeat);
+    this.outputValue.emit(this.selectedSeat.seat);
   }
 
   openDialog(msg) {

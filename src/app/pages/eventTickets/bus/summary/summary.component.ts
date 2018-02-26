@@ -120,35 +120,34 @@ export class SummaryComponent implements OnInit {
       listDptrTripByReserve.disFee.push(el.disFee);
     }
 
-    this.insertBooking = {
-      bookCode: this.bookingResult.bookCode,
-      bookID: this.bookingResult.bookId,
-      passengerName: listDptrTripByReserve.passengerName.toString(),
-      passengerTel: listDptrTripByReserve.passengerTel.toString(),
-      noOfSeat: this.bookingResult.dptrTrip.reserves.length + "",
-      totalAmt: this.totalPrice() + "",
-      dptrTrip: {
-        dptrProvinceDesc: this.bookingResult.dptrTrip.dptrProvince.desc,
-        dptrParkDesc: this.bookingResult.dptrTrip.dptrPark.desc,
-        arrvProvinceDesc: this.bookingResult.dptrTrip.arrvProvince.desc,
-        arrvParkDesc: this.bookingResult.dptrTrip.arrvPark.desc,
-        dptrTripDate: this.bookingResult.dptrTrip.date,
-        dptrTripTime: this.bookingResult.dptrTrip.time,
-        routeId: this.bookingResult.dptrTrip.route.id,
-        busStdDesc: this.bookingResult.dptrTrip.busStd.desc,
-        stationDesc: this.bookingResult.dptrTrip.dptrPark.desc,
-        platform: this.trips.dptrTrip.platform,
-        seatFloor: listDptrTripByReserve.seatFloor.toString(),
-        seatNo: listDptrTripByReserve.seatNo.toString(),
-        contactName: this.bookingResult.contactName,
-        telNo: this.bookingResult.telNo,
-        fare: listDptrTripByReserve.fare.toString(),
-        fee: listDptrTripByReserve.fee.toString(),
-        disFare: listDptrTripByReserve.disFare.toString(),
-        disFee: listDptrTripByReserve.disFee.toString(),
-        coupon: this.trips.dptrTrip.coupon
-      }
-    }
+    this.insertBooking = new InsertBookingInfoModel;
+    this.insertBooking.bookCode = this.bookingResult.bookCode;
+    this.insertBooking.bookID = this.bookingResult.bookId;
+    this.insertBooking.passengerName = listDptrTripByReserve.passengerName.toString();
+    this.insertBooking.passengerTel = listDptrTripByReserve.passengerTel.toString();
+    this.insertBooking.noOfSeat = this.bookingResult.dptrTrip.reserves.length + "";
+    this.insertBooking.totalAmt = this.totalPrice() + "";
+    this.insertBooking.dptrTrip = {
+      dptrProvinceDesc: this.bookingResult.dptrTrip.dptrProvince.desc,
+      dptrParkDesc: this.bookingResult.dptrTrip.dptrPark.desc,
+      arrvProvinceDesc: this.bookingResult.dptrTrip.arrvProvince.desc,
+      arrvParkDesc: this.bookingResult.dptrTrip.arrvPark.desc,
+      dptrTripDate: this.bookingResult.dptrTrip.date,
+      dptrTripTime: this.bookingResult.dptrTrip.time,
+      routeId: this.bookingResult.dptrTrip.route.id,
+      busStdDesc: this.bookingResult.dptrTrip.busStd.desc,
+      stationDesc: this.bookingResult.dptrTrip.dptrPark.desc,
+      platform: this.trips.dptrTrip.platform,
+      seatFloor: listDptrTripByReserve.seatFloor.toString(),
+      seatNo: listDptrTripByReserve.seatNo.toString(),
+      contactName: this.bookingResult.contactName,
+      telNo: this.bookingResult.telNo,
+      fare: listDptrTripByReserve.fare.toString(),
+      fee: listDptrTripByReserve.fee.toString(),
+      disFare: listDptrTripByReserve.disFare.toString(),
+      disFee: listDptrTripByReserve.disFee.toString(),
+      coupon: this.trips.dptrTrip.coupon
+    };
 
     if (this.bookingResult.rtrnTrip != null && this.bookingResult.rtrnTrip != undefined) {
 
@@ -162,6 +161,7 @@ export class SummaryComponent implements OnInit {
         listRtrnTripByReserve.disFare.push(el.disFare);
         listRtrnTripByReserve.disFee.push(el.disFee);
       }
+      this.insertBooking.noOfSeat = Number(this.insertBooking.noOfSeat) + this.bookingResult.rtrnTrip.reserves.length + "";
 
       this.insertBooking.rtrnTrip = {
         dptrProvinceDesc: this.bookingResult.rtrnTrip.dptrProvince.desc,
@@ -189,7 +189,7 @@ export class SummaryComponent implements OnInit {
     this.busService.insertBookingInfo(this.insertBooking).subscribe((res) => {
       if (res.code == 0) {
         if (res.transID != undefined && res.transID != '') {
-          let CHANNEL_ID = sessionStorage.getItem("authToken");
+          let CHANNEL_ID = sessionStorage.getItem("ALLTICKET:authToken");
           let param = 'CHANNEL_ID=' + CHANNEL_ID + '&TRANSACTION_ID=' + res.transID + '&TOTAL_AMT=' + this.totalPrice();
           window.parent.postMessage(param, '*');
         }
@@ -225,7 +225,6 @@ export class SummaryComponent implements OnInit {
           if (res.code == 0) {
             this.buyTicketComponent.checkTime();
             this.router.navigate([''], { relativeTo: this.route });
-            // this.router.navigate(['/'], { relativeTo: this.route });
           } else {
             this.openDialog(this.errorMsgService.getErrorMsg(res.code));
             this.isShowLoadingBack = false;

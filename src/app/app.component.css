@@ -1,0 +1,7 @@
+::ng-deep .jaspero__dialog-content { 
+    overflow: hidden !important; 
+} 
+  
+::ng-deep .jaspero__dialog { 
+    max-height: 100% !important; 
+}

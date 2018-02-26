@@ -35,7 +35,7 @@
               <div class="row border1s BoxRow">
                 <div class="col-12 col-md-5 rowSummary">วันที่เดินทาง :</div>
                 <div class="col-12 col-md-7 rowSummary">
-                  <span class="varRow">{{bookingResult.dptrTrip.date | thaidate:'full'}}</span>
+                  <span class="varRow">{{bookingResult.dptrTrip.date | thaidate:'full'}} {{bookingResult.dptrTrip.time}} น. </span>
                 </div>
               </div>
               <div class="row border1s BoxRow">
@@ -139,7 +139,7 @@
               <div class="row border1s BoxRow">
                 <div class="col-12 col-md-5 rowSummary">วันที่เดินทาง :</div>
                 <div class="col-12 col-md-7 rowSummary">
-                  <span class="varRow">{{bookingResult.rtrnTrip.date | thaidate:'full'}}</span>
+                  <span class="varRow">{{bookingResult.rtrnTrip.date | thaidate:'full'}} {{bookingResult.dptrTrip.time}} น. </span>
                 </div>
               </div>
               <div class="row border1s BoxRow">

@@ -62,18 +62,6 @@ export class SelectDestinationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    let receiveData;
-    this.sharedService.receiveData.subscribe(data => receiveData = data);
-
-    if (receiveData instanceof URLSearchParams) {
-      sessionStorage.setItem('paymentChannel', receiveData.get('paymentChannel'));
-      sessionStorage.setItem('authToken', receiveData.get('authToken'));
-    }
-
-    if (sessionStorage.getItem('paymentChannel') == 'C07') {
-      sessionStorage.setItem('authToken', sessionStorage.getItem('ALLTICKET:authToken'));
-    }
-
     this.getErrorFile();
     this.maxDate.setDate(this.maxDate.getDate() + 90);
     this.maxDateForReturn.setDate(this.maxDateForReturn.getDate() + 90);
@@ -145,14 +133,20 @@ export class SelectDestinationComponent implements OnInit {
   getRoutePrvParkMap() {
     this.isArrvProvinceLoading = true;
     if (this.selectedDptrPark != null) {
-      this.busService.getRoutePrvParkMap(this.selectedDptrPark.id).subscribe((res) => {
+      this.busService.getRoutePrvParkMap(this.selectedDptrPark.id).subscribe(
+        // error => console.error('err ====', error),
+        (res) => {
+        console.log('res>>>', res);
         if (res.code == 0) {
           this.routeMap = res.data;
           this.getArrvProvince();
         } else {
           this.openDialog(this.errorMsgService.getErrorMsg(res.code));
         }
-      });
+      }
+        
+
+      );
     }
   }
 
@@ -261,9 +255,9 @@ export class SelectDestinationComponent implements OnInit {
     this._alert.create(type, msg, this.alertSettings);
 
     jQuery('html,body', window.parent.document).animate({
-      scrollTop: jQuery("#alert-box .jaspero__dialog").offset().top-100
+      scrollTop: jQuery("#alert-box .jaspero__dialog").offset().top - 100
     }, 300);
-    
+
   }
 
   validateDate() {

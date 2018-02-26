@@ -40,7 +40,7 @@
         <div class="row border1s BoxRow">
           <div class="col-md-12 col-sm-12 rowSummary ">
             หมายเลขที่นั่งที่ท่านเลือก :
-            <span class="selectSeat" *ngFor="let data of selectedSeat.seat"> {{data.name}} ชั้น {{data.pos.z}},</span>
+            <span class="selectSeat" *ngFor="let data of selectedSeat; let index = index;"><span *ngIf="index > 0">,</span> {{data.name}} ชั้น {{data.pos.z}}</span>
           </div>
         </div>
       </div>

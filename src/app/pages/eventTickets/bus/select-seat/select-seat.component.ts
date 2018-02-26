@@ -88,7 +88,7 @@ export class SelectSeatComponent implements OnInit {
         this.arrvDate = this.receiveData.dptrTrip.arrvDate;
         this.dptrTime = this.receiveData.dptrTrip.time;
         this.arrvTime = this.receiveData.dptrTrip.arrvTime;
-        this.busService.getTransId('M').subscribe((res) => {
+        this.busService.getTransId('B').subscribe((res) => {
           this.transId = res.data;
         });
         this.trip = this.receiveData.dptrTrip;
@@ -120,8 +120,8 @@ export class SelectSeatComponent implements OnInit {
   };
 
   onClick() {
-    if (this.selectedSeat.seat.length > 0) {
-      if (this.selectedSeat.seat.length < this.totalPassenger) {
+    if (this.selectedSeat.length > 0) {
+      if (this.selectedSeat.length < this.totalPassenger) {
         this.openDialog(this.errorMessage.pleaseSelect + 'ที่นั่งให้ครบตามจำนวนคนที่ท่านได้เลือกไว้');
       } else {
         this.isShowLoading = true;

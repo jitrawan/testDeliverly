@@ -134,18 +134,17 @@ export class SelectDestinationComponent implements OnInit {
     this.isArrvProvinceLoading = true;
     if (this.selectedDptrPark != null) {
       this.busService.getRoutePrvParkMap(this.selectedDptrPark.id).subscribe(
-        // error => console.error('err ====', error),
         (res) => {
-        console.log('res>>>', res);
-        if (res.code == 0) {
-          this.routeMap = res.data;
-          this.getArrvProvince();
-        } else {
-          this.openDialog(this.errorMsgService.getErrorMsg(res.code));
+          if (res.code == 0) {
+            this.routeMap = res.data;
+            this.getArrvProvince();
+          } else {
+            this.openDialog(this.errorMsgService.getErrorMsg(res.code));
+          }
+        },
+        (err) => {
+          this.openDialog(this.errorMsgService.getErrorMsg(err.code));
         }
-      }
-        
-
       );
     }
   }

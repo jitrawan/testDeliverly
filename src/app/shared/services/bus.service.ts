@@ -51,7 +51,7 @@ export class BusService {
             .map((res: Response) => {
                 return res.json();
             })
-            .catch((error: any) => this.handleError(error));
+            .catch((error: Response) => { return Observable.throw(this.handleError(error)); });
     }
 
     getMasProvince() {
@@ -61,7 +61,7 @@ export class BusService {
             .map((res: Response) => {
                 return res.json();
             })
-            .catch((error: any) => this.handleError(error));
+            .catch((error: Response) => { return Observable.throw(this.handleError(error)); });
     }
 
     getMasPark() {
@@ -71,7 +71,9 @@ export class BusService {
             .map((res: Response) => {
                 return res.json();
             })
-            .catch((error: any) => this.handleError(error));
+            .catch((error: Response) => {
+                return Observable.throw(this.handleError(error));
+            });
     }
 
     getRoutePrvParkMap(pickupId) {
@@ -81,14 +83,12 @@ export class BusService {
             pickup: pickupId
         };
         return this.http.post(this.getRoutePrvParkMapAPI, JSON.stringify(body), options)
-            .timeout(100000)
+            .timeout(1000)
             .map((res: Response) => {
                 return res.json();
             })
             .catch((error: Response) => {
-                let err = this.handleError1(error);
-                console.log('err >', err);
-                return err.toString();
+                return Observable.throw(this.handleError(error));
             });
     }
 
@@ -100,7 +100,7 @@ export class BusService {
             .map((res: Response) => {
                 return res.json();
             })
-            .catch((error: any) => this.handleError(error));
+            .catch((error: Response) => { return Observable.throw(this.handleError(error)); });
     }
 
     getBusLayout(tripId, pickupId, dropoffId) {
@@ -115,7 +115,7 @@ export class BusService {
             .map((res: Response) => {
                 return res.json();
             })
-            .catch((error: any) => this.handleError(error));
+            .catch((error: Response) => { return Observable.throw(this.handleError(error)); });
     }
 
     getTransId(transType: string) {
@@ -128,7 +128,7 @@ export class BusService {
             .map((res: Response) => {
                 return res.json();
             })
-            .catch((error: any) => this.handleError(error));
+            .catch((error: Response) => { return Observable.throw(this.handleError(error)); });
     }
 
     markSeat(markSeat: MarkSeatModel) {
@@ -152,7 +152,10 @@ export class BusService {
             .map((res: Response) => {
                 return res.json();
             })
-            .catch((error: any) => this.handleMarkSeatError(error, markSeat.transId + ''));
+            .catch((error: any) => {
+                return Observable.throw(this.handleMarkSeatError(error, markSeat.transId + ''))
+            }
+            );
     }
 
     unMarkSeat(markSeat: MarkSeatModel, reserveId) {
@@ -174,7 +177,7 @@ export class BusService {
             .map((res: Response) => {
                 return res.json();
             })
-            .catch((error: any) => this.handleError(error));
+            .catch((error: Response) => { return Observable.throw(this.handleError(error)); });
     }
 
     getTransCheckout(transId: string) {
@@ -187,7 +190,7 @@ export class BusService {
             .map((res: Response) => {
                 return res.json();
             })
-            .catch((error: any) => this.handleError(error));
+            .catch((error: Response) => { return Observable.throw(this.handleError(error)); });
     }
 
     cancelBooking(transId, bookId, bookCode) {
@@ -203,7 +206,7 @@ export class BusService {
             .map((res: Response) => {
                 return res.json();
             })
-            .catch((error: any) => this.handleError(error));
+            .catch((error: Response) => { return Observable.throw(this.handleError(error)); });
 
     }
     booking(passengerBooking: PassengerBookingModel) {
@@ -240,7 +243,7 @@ export class BusService {
             .map((res: Response) => {
                 return res.json();
             })
-            .catch((error: any) => this.handleError(error));
+            .catch((error: Response) => { return Observable.throw(this.handleError(error)); });
     }
 
     clearTransSeatMark(transId: string) {
@@ -253,7 +256,7 @@ export class BusService {
             .map((res: Response) => {
                 return res.json();
             })
-            .catch((error: any) => this.handleError(error));
+            .catch((error: Response) => { return Observable.throw(this.handleError(error)); });
     }
 
     insertBookingInfo(insertBooking: InsertBookingInfoModel) {
@@ -264,7 +267,10 @@ export class BusService {
             .map((res: Response) => {
                 return res.json();
             })
-            .catch((error: any) => this.handleBookingError(error, ''));
+            .catch((error: any) => {
+                return Observable.throw(this.handleBookingError(error, ''));
+            }
+            );
     }
 
     checkAuthen(currentUrl) {
@@ -273,22 +279,10 @@ export class BusService {
             .map((res: Response) => {
                 return res.json();
             })
-            .catch((error: any) => this.handleError(error));
+            .catch((error: Response) => { return Observable.throw(this.handleError(error)); });
     }
 
     handleError(error) {
-        console.log('error>>', error);
-        console.log('error.name>>', error.name);
-        if (error.name == 'TimeoutError') {
-            console.log('----------------------');
-            let err = { code: 40125 };
-            return 'err';
-        }
-        return 'error'
-    }
-    handleError1(error) {
-        console.log('error>>', error);
-        console.log('error.name>>', error.name);
         if (error.name == 'TimeoutError') {
             console.log('----------------------');
             let err = { code: 40125 };
@@ -300,7 +294,8 @@ export class BusService {
     handleMarkSeatError(error, transId) {
         if (error.name == 'TimeoutError') {
             this.clearTransSeatMark(transId);
-            return 'error';
+            let err = { code: 40125 };
+            return err;
         }
         return 'error';
     }
@@ -308,8 +303,9 @@ export class BusService {
     handleBookingError(error, transId) {
         if (error.name == 'TimeoutError') {
             transId = this.getTransId('C');
+            let err = { code: 40125 };
             // this.cancelBooking(transId,);
-            return 'error';
+            return err;
         }
         return 'error';
     }

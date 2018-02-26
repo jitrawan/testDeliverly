@@ -54,7 +54,7 @@
       <table class="table bordered">
         <tbody>
           <tr class="tableTopic">
-            <td>ออกเดินทาง</td>
+            <td><b>ออกเดินทาง</b></td>
             <td>ถึงปลายทาง </td>
             <td>มาตราฐาน</td>
             <td>ที่นั่งคงเหลือ</td>
@@ -66,9 +66,9 @@
 
           <tr class="tableResult" *ngFor="let data of availableTripResultModel.dptrTrips.trips; let index = index;">
             <td> {{data.date | thaidate:'short'}}
-              <br> {{data.time}} น.</td>
+              <br> <b>เวลา {{data.time}} น.</b></td>
             <td> {{data.arrvDate | thaidate:'short'}}
-              <br> {{data.arrvTime}} น. </td>
+              <br> <b>เวลา {{data.arrvTime}} น.</b> </td>
             <td> {{data.busStd.desc}} </td>
             <td> {{data.emptySeats}} / {{data.seats}} ที่นั่ง</td>
             <td *ngIf="data.emptySeats != 0">
@@ -147,7 +147,7 @@
       <table class="table bordered">
         <tbody>
           <tr class="tableTopic">
-            <td>ออกเดินทาง</td>
+            <td><b>ออกเดินทาง</b></td>
             <td>ถึงปลายทาง </td>
             <td>มาตราฐาน</td>
             <td>ที่นั่งคงเหลือ</td>
@@ -158,9 +158,9 @@
           </tr>
           <tr class="tableResult" *ngFor="let data of availableTripResultModel.rtrnTrips.trips; let index = index;">
             <td> {{data.date | thaidate:'short'}}
-              <br> {{data.time}} น.</td>
+              <br> <b>เวลา {{data.time}} น.</b></td>
             <td> {{data.arrvDate | thaidate:'short'}}
-              <br> {{data.arrvTime}} น. </td>
+              <br> <b>เวลา {{data.arrvTime}} น. </b></td>
             <td> {{data.busStd.desc}} </td>
             <td> {{data.emptySeats}} / {{data.seats}} ที่นั่ง</td>
             <td *ngIf="data.emptySeats != 0">
@@ -221,9 +221,6 @@
       </table>
     </div>
     <div class="col-md-6 terms">
-      <div class="col-12">
-        <span class="red">กรณีตั๋วไปกลับ จะต้องเป็นเส้นทางเดียวกัน และ ราคาเท่ากัน</span>
-      </div>
       <div class="col-12">
         <span class="fontW500">จำนวนตั๋วผู้โดยสาร {{totalPassenger}} คน</span>
         <span class="fontGrey">

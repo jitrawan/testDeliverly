@@ -100,6 +100,9 @@ export class PassengerInformationComponent implements OnInit {
       } else if (this.passengerInfoList[index].passengerTel.length < 10) {
         this.openDialog('เบอร์มือถือ ' + 'ของผู้โดยสารคนที่ ' + (index + 1) + ' ต้องมี 10 ตัวอักษร');
         isFound = true;
+      } else if (this.validatePhoneNumber(this.passengerInfoList[index].passengerTel)) {
+        this.openDialog('เบอร์มือถือ ' + 'ของผู้โดยสารคนที่ ' + (index + 1) + ' '+this.errorMessage.wrongFormat);
+        isFound = true;
       }
     }
     if (!isFound) {
@@ -122,6 +125,14 @@ export class PassengerInformationComponent implements OnInit {
     }
   }
 
+  validatePhoneNumber(phoneNumber: string) {
+    for (var i = 0; i < phoneNumber.length; i++ ) {
+			if ( ((i == 0) && (phoneNumber.charCodeAt(i) == 48)) || ((i == 1) && (phoneNumber.charCodeAt(i) == 56) && (phoneNumber.charCodeAt(i) == 57) && (i == 1) && (phoneNumber.charCodeAt(i) == 54)) ) {
+				return false;
+			}
+    }
+    return true;
+  }
   prepareDataForBooking() {
     this.passengerBookingModel = new PassengerBookingModel;
     this.passengerBookingModel.transId = this.transId.transId;

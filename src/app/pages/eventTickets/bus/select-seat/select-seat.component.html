@@ -12,19 +12,19 @@
         <div class="row">
           <div class="col-12 topicRow">{{tripName}}</div>
         </div>
-        <div class="row border1s BoxRow text-center">
+        <div class="row border1s BoxRow py-1 text-center">
           <div class="col-12 rowSummary ">
-            <b>{{dptrPark}}</b>
+            <b>ต้นทาง : </b><br>{{dptrPark}}
           </div>
           <div class="col-12">
             <b>วันที่ {{dptrDate | thaidate:'full'}} เวลา {{dptrTime}} น.</b>
           </div>
-          <div class="col-12"> ถึง</div>
+          <div class="col-12 py-2"> ถึง</div>
           <div class="col-12 rowSummary">
-            <b> {{arrvPark}} </b>
+            <b>ปลายทาง : </b><br>{{arrvPark}}
           </div>
           <div class="col-12">
-            <b> วันที่ {{arrvDate | thaidate:'full'}} เวลา {{arrvTime}} น.</b>
+            <b>วันที่ {{arrvDate | thaidate:'full'}} เวลา {{arrvTime}} น.</b>
           </div>
         </div>
         <div class="row border1s BoxRow text-center">

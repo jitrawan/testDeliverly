@@ -310,7 +310,6 @@ export class BusService {
     }
 
     handleError(error) {
-        console.log('handleError >>>>', error);
         let err;
         if (error.name == 'TimeoutError') {
             err = { code: 40125 };
@@ -340,8 +339,6 @@ export class BusService {
     }
 
     handleBookingError(error, transId) {
-        console.log('error', error);
-
         let err;
         if (error.name == 'TimeoutError') {
             err = { code: 40125 };

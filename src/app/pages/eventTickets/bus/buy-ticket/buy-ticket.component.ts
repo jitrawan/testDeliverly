@@ -47,7 +47,6 @@ export class BuyTicketComponent implements OnInit {
 
   public checkTime() {
     this.checkAllowService.checkAllowReserve().subscribe((res) => {
-      console.log('res >', res);
       if (res.code == this.const.successCode) {
         this.isEnable = true;
         this.router.navigate(['/selectDestination'], { relativeTo: this.route });

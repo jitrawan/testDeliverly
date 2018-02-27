@@ -56,7 +56,6 @@
 }
 
 .varRow {
-  padding-left: 15px;
   word-wrap : break-word;
 }
 
@@ -73,6 +72,11 @@
 @media screen and (max-width: 780px) {
   .subInfoBox {
     padding: 10px 5% 0px 5%;
+  }
+
+  .varRow {
+    padding-left: 15px;
+    font-size: 0.9rem;
   }
 }
 

@@ -51,9 +51,7 @@
 }
 
 .infoBox .rowSummary {
-  line-height: 40px;
-  font-weight: 500;
-  font-size: 18px;
+  line-height: 30px;
 }
 
 .infoBox .topicRow {

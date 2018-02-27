@@ -136,7 +136,8 @@
 }
 
 .clearable_clear {
-  display: none;
+  opacity: 0;
+  visibility: hidden;
   position: absolute;
   right: 0;
   top: 10px;
@@ -145,10 +146,14 @@
   font-size: 1em;
   user-select: none;
   cursor: pointer;
+  transition: all .5s;
+  -webkit-transition: all .2s;
+  -moz-transition: all .2s;
 }
 
 .clearable_clear.show {
-  display: block;
+  visibility: visible;
+  opacity: 1;
 }
 
 .clearable input::-ms-clear {

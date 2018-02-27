@@ -53,11 +53,16 @@ export class SummaryComponent implements OnInit {
     this.transId = this.receiveData.transId;
     this.trips = this.receiveData.forwardData;
     this.bookingResult = this.receiveData.bookingResultModel;
-    this.dprtPrice = this.dprtPrice + (Number(this.bookingResult.dptrTrip.reserves[0].fare) + Number(this.bookingResult.dptrTrip.reserves[0].fee));
-    this.dprtDiscount = this.dprtDiscount + (Number(this.bookingResult.dptrTrip.reserves[0].disFare) + Number(this.bookingResult.dptrTrip.reserves[0].disFee));
+    for(let i = 0; i < this.bookingResult.dptrTrip.reserves.length; i++) {
+      this.dprtPrice = this.dprtPrice + (Number(this.bookingResult.dptrTrip.reserves[i].fare) + Number(this.bookingResult.dptrTrip.reserves[i].fee));
+      this.dprtDiscount = this.dprtDiscount + (Number(this.bookingResult.dptrTrip.reserves[i].disFare) + Number(this.bookingResult.dptrTrip.reserves[i].disFee));
+    }
+
     if (this.bookingResult.rtrnTrip != null) {
-      this.rtrnPrice = this.rtrnPrice + (Number(this.bookingResult.rtrnTrip.reserves[0].fare) + Number(this.bookingResult.rtrnTrip.reserves[0].fee));
-      this.rtrnDiscount = this.rtrnDiscount + (Number(this.bookingResult.rtrnTrip.reserves[0].disFare) + Number(this.bookingResult.rtrnTrip.reserves[0].disFee));
+      for(let i = 0; i < this.bookingResult.rtrnTrip.reserves.length; i++) {
+        this.rtrnPrice = this.rtrnPrice + (Number(this.bookingResult.rtrnTrip.reserves[i].fare) + Number(this.bookingResult.rtrnTrip.reserves[i].fee));
+        this.rtrnDiscount = this.rtrnDiscount + (Number(this.bookingResult.rtrnTrip.reserves[i].disFare) + Number(this.bookingResult.rtrnTrip.reserves[i].disFee));
+      }
     }
   }
 

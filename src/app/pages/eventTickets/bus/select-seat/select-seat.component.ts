@@ -10,10 +10,12 @@ import { AvailableTripResultModel } from '../../../../shared/models/bus/availabl
 import { ProvinceModel } from '../../../../shared/models/bus/province.model';
 import { TripModel } from '../../../.././shared/models/bus/trip.model';
 import { ErrorMessage } from '../../../../shared/constant/error-message';
+import { Constant } from '../../../../shared/constant/constant';
 import { BusLayoutModel } from '../../../.././shared/models/bus/busLayout.model';
 import { MarkSeatModel } from '../../../../shared/models/bus/markSeat.model';
-import { TransIdModel } from '../../../../shared/models/bus/transection/transId.model';
+import { TransIdModel } from '../../../../shared/models/bus/transaction/transId.model';
 import { TransCheckoutModel } from '../../../../shared/models/bus/transCheckout.model';
+import { ErrorMsgService } from '../../../../shared/services/errorMsg.service';
 
 @Component({
   selector: 'app-select-seat',
@@ -39,6 +41,7 @@ export class SelectSeatComponent implements OnInit {
   selectedSeat: any = [];
 
   errorMessage: ErrorMessage = new ErrorMessage;
+  const = new Constant;
   alertSettings: any;
   markSeatModel: MarkSeatModel;
   transId: TransIdModel;
@@ -67,6 +70,7 @@ export class SelectSeatComponent implements OnInit {
     private sharedService: SharedService,
     private busService: BusService,
     private location: Location,
+    private errorMsgService: ErrorMsgService
   ) { }
 
   ngOnInit() {
@@ -89,8 +93,15 @@ export class SelectSeatComponent implements OnInit {
         this.dptrTime = this.receiveData.dptrTrip.time;
         this.arrvTime = this.receiveData.dptrTrip.arrvTime;
         this.busService.getTransId('B').subscribe((res) => {
-          this.transId = res.data;
-        });
+          if (res.code == this.const.successCode) {
+            this.transId = res.data;
+          } else {
+            this.openDialog(this.errorMsgService.getErrorMsg(res.code));
+          }
+        },
+          (err) => {
+            this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+          });
         this.trip = this.receiveData.dptrTrip;
       } else {
         this.tripName = "เที่ยวกลับ";
@@ -109,7 +120,7 @@ export class SelectSeatComponent implements OnInit {
     this.alertSettings = { overlay: true, overlayClickToClose: false, showCloseButton: true, duration: 100000 };
     this._alert.create(type, msg, this.alertSettings);
     jQuery('html,body', window.parent.document).animate({
-      scrollTop: jQuery("#alert-box .jaspero__dialog").offset().top-100
+      scrollTop: jQuery("#alert-box .jaspero__dialog").offset().top - 100
     }, 300);
   }
 
@@ -128,7 +139,7 @@ export class SelectSeatComponent implements OnInit {
         let layout;
         if (this.tripName == 'เที่ยวไป' && this.receiveData.rtrnTrip != null) {
           this.busService.getBusLayout(this.receiveData.rtrnTrip.id, this.receiveData.rtrnTrip.dptrPark.id, this.receiveData.rtrnTrip.arrvPark.id).subscribe((res) => {
-            if (res.code == 0) {
+            if (res.code == this.const.successCode) {
               layout = res.data;
               this.receiveData = {
                 transId: this.transId,
@@ -149,10 +160,14 @@ export class SelectSeatComponent implements OnInit {
             } else {
               this.isShowLoading = false;
             }
-          });
+          },
+            (err) => {
+              this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+            }
+          );
         } else {
           this.busService.getTransCheckout(this.transId.transId).subscribe((res) => {
-            if (res.code == 0) {
+            if (res.code == this.const.successCode) {
               this.transCheckoutModel = res.data;
               let forwardData = {
                 forwardData: this.receiveData,
@@ -165,7 +180,11 @@ export class SelectSeatComponent implements OnInit {
             } else {
               this.isShowLoading = false;
             }
-          });
+          },
+            (err) => {
+              this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+            }
+          );
         }
       }
     } else {
@@ -210,13 +229,17 @@ export class SelectSeatComponent implements OnInit {
       routerUrl = '/selectSeat'
     }
     this.busService.clearTransSeatMark(this.transId.transId).subscribe((res) => {
-      if (res.code == 0) {
+      if (res.code == this.const.successCode) {
         this.sharedService.sendData(dataBackSeat);
         this.router.navigate([routerUrl], { relativeTo: this.route });
       } else {
         this.isShowLoadingBack = false;
       }
-    });
+    },
+      (err) => {
+        this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+      }
+    );
 
   }
 }

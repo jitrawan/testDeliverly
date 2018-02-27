@@ -10,6 +10,7 @@ import { BookingResultModel } from '../../../../shared/models/bus/bookingResult.
 import { InsertBookingInfoModel, listTripByReserve } from '../../../../shared/models/bus/insertBookingInfo.model';
 import { ErrorMsgService } from '../../../../shared/services/errorMsg.service';
 import { BuyTicketComponent } from '../buy-ticket/buy-ticket.component';
+import { Constant } from '../../../../shared/constant/constant';
 
 @Component({
   selector: 'app-summary',
@@ -32,6 +33,8 @@ export class SummaryComponent implements OnInit {
   queryString: any;
   isShowLoading: boolean = false;
   isShowLoadingBack: boolean = false;
+  const = new Constant;
+  transId: string;
 
   constructor(
     private sharedService: SharedService,
@@ -47,6 +50,7 @@ export class SummaryComponent implements OnInit {
   ngOnInit() {
 
     this.sharedService.receiveData.subscribe(data => this.receiveData = data);
+    this.transId = this.receiveData.transId;
     this.trips = this.receiveData.forwardData;
     this.bookingResult = this.receiveData.bookingResultModel;
     this.dprtPrice = this.dprtPrice + (Number(this.bookingResult.dptrTrip.reserves[0].fare) + Number(this.bookingResult.dptrTrip.reserves[0].fee));
@@ -121,6 +125,7 @@ export class SummaryComponent implements OnInit {
     }
 
     this.insertBooking = new InsertBookingInfoModel;
+    this.insertBooking.ID = this.transId; 
     this.insertBooking.bookCode = this.bookingResult.bookCode;
     this.insertBooking.bookID = this.bookingResult.bookId;
     this.insertBooking.passengerName = listDptrTripByReserve.passengerName.toString();
@@ -187,7 +192,7 @@ export class SummaryComponent implements OnInit {
     }
 
     this.busService.insertBookingInfo(this.insertBooking).subscribe((res) => {
-      if (res.code == 0) {
+      if (res.code == this.const.successCode) {
         if (res.transID != undefined && res.transID != '') {
           let CHANNEL_ID = sessionStorage.getItem("ALLTICKET:authToken");
           let param = 'CHANNEL_ID=' + CHANNEL_ID + '&TRANSACTION_ID=' + res.transID + '&TOTAL_AMT=' + this.totalPrice();
@@ -197,7 +202,11 @@ export class SummaryComponent implements OnInit {
         this.openDialog(this.errorMsgService.getErrorMsg(res.code));
         this.isShowLoading = false;
       }
-    });
+    },
+      (err) => {
+        this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+      }
+    );
 
   }
   cancelBooking() {
@@ -220,21 +229,29 @@ export class SummaryComponent implements OnInit {
 
   executeCancelBooking() {
     this.busService.getTransId('C').subscribe((res) => {
-      if (res.code == 0) {
+      if (res.code == this.const.successCode) {
         this.busService.cancelBooking(res.data.transId, this.bookingResult.bookId, this.bookingResult.bookCode).subscribe((res) => {
-          if (res.code == 0) {
+          if (res.code == this.const.successCode) {
             this.buyTicketComponent.checkTime();
             this.router.navigate([''], { relativeTo: this.route });
           } else {
             this.openDialog(this.errorMsgService.getErrorMsg(res.code));
             this.isShowLoadingBack = false;
           }
-        });
+        },
+          (err) => {
+            this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+          }
+        );
       } else {
         this.openDialog(this.errorMsgService.getErrorMsg(res.code));
         this.isShowLoadingBack = false;
       }
-    });
+    },
+      (err) => {
+        this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+      }
+    );
   }
 
 }

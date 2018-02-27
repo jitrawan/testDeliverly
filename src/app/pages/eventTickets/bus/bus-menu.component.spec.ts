@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BusComponent } from './bus.component';
+import { BusComponent } from './bus-menu.component';
 
 describe('BusComponent', () => {
   let component: BusComponent;

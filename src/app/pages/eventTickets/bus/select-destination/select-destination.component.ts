@@ -8,6 +8,7 @@ import { SharedService } from '../../../../shared/services/shared-service.servic
 import { ErrorMsgService } from '../../../../shared/services/errorMsg.service';
 
 import { ErrorMessage } from '../../../../shared/constant/error-message';
+import { Constant } from '../../../../shared/constant/constant';
 import { AvailableTripModel } from '../../../../shared/models/bus/availableTripSearch.model';
 import { AvailableTripResultModel } from '../../../../shared/models/bus/availableTripResult.model';
 import { ProvinceModel } from '../../../../shared/models/bus/province.model';
@@ -25,6 +26,7 @@ export class SelectDestinationComponent implements OnInit {
   availableTripSeach: AvailableTripModel = new AvailableTripModel;
   availableTripResult: AvailableTripResultModel;
   errorMessage: ErrorMessage = new ErrorMessage;
+  const = new Constant;
   provinceList: ProvinceModel[] = [];
   arrvProvinceList: ProvinceModel[] = [];
   parkList: ParkModel[] = [];
@@ -84,18 +86,22 @@ export class SelectDestinationComponent implements OnInit {
   getErrorFile() {
     if (JSON.parse(localStorage.getItem('errorCodeList')) == null) {
       this.errorMsgService.getErrorFile().subscribe((res) => {
-        if (res.code == 0) {
+        if (res.code == this.const.successCode) {
           localStorage.setItem('errorCodeList', JSON.stringify(res.data));
         } else {
           this.openDialog(this.errorMsgService.getErrorMsg(res.code));
         }
-      });
+      },
+        (err) => {
+          this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+        }
+      );
     }
   }
 
   getProvinceList() {
     this.busService.getMasProvince().subscribe((res) => {
-      if (res.code == 0) {
+      if (res.code == this.const.successCode) {
         this.isProvinceLoading = false;
         this.provinceList = res.data.map((obj: any) => {
           return {
@@ -106,12 +112,16 @@ export class SelectDestinationComponent implements OnInit {
       } else {
         this.openDialog(this.errorMsgService.getErrorMsg(res.code));
       }
-    });
+    },
+      (err) => {
+        this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+      }
+    );
   }
 
   getParkList() {
     this.busService.getMasPark().subscribe((res) => {
-      if (res.code == 0) {
+      if (res.code == this.const.successCode) {
         this.isParkListLoading = false;
         this.parkList = res.data.map((obj: any) => {
           return {
@@ -127,7 +137,10 @@ export class SelectDestinationComponent implements OnInit {
       } else {
         this.openDialog(this.errorMsgService.getErrorMsg(res.code));
       }
-    });
+    },
+      (err) => {
+        this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+      });
   }
 
   getRoutePrvParkMap() {
@@ -135,7 +148,7 @@ export class SelectDestinationComponent implements OnInit {
     if (this.selectedDptrPark != null) {
       this.busService.getRoutePrvParkMap(this.selectedDptrPark.id).subscribe(
         (res) => {
-          if (res.code == 0) {
+          if (res.code == this.const.successCode) {
             this.routeMap = res.data;
             this.getArrvProvince();
           } else {
@@ -144,6 +157,8 @@ export class SelectDestinationComponent implements OnInit {
         },
         (err) => {
           this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+          // this.buyTicketComponent.checkTime();
+          this.router.navigate([''], { relativeTo: this.route });
         }
       );
     }
@@ -288,7 +303,7 @@ export class SelectDestinationComponent implements OnInit {
       this.availableTripSeach.dropoffDesc = this.selectedArrvPark.desc;
       this.availableTripSeach.tripType = this.selectedTripType;
       this.busService.getAvailableTrip(this.availableTripSeach).subscribe((res) => {
-        if (res.code == 0) {
+        if (res.code == this.const.successCode) {
           this.availableTripResult = res.data;
           let dataForSend = {
             availableTripResultModel: this.availableTripResult,
@@ -305,7 +320,11 @@ export class SelectDestinationComponent implements OnInit {
           this.openDialog(this.errorMsgService.getErrorMsg(res.code));
           this.isShowLoading = false;
         }
-      });
+      },
+        (err) => {
+          this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+        }
+      );
     }
   }
 

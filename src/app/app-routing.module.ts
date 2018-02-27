@@ -8,7 +8,7 @@ import { BookingComponent } from './pages/booking/booking.component';
 import { PolicyComponent } from './pages/policy/policy.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { AirlinesComponent } from './pages/eventTickets/airlines/airlines.component';
-import { BusComponent } from './pages/eventTickets/bus/bus.component';
+import { BusComponent } from './pages/eventTickets/bus/bus-menu.component';
 import { ShoppingComponent } from './pages/eventTickets/shopping/shopping.component';
 import { TravelComponent } from './pages/eventTickets/travel/travel.component';
 import { PaymentComponent } from './pages/payment/payment.component';

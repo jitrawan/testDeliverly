@@ -14,6 +14,7 @@ import { AvailableTripModel } from '../../../../shared/models/bus/availableTripS
 import { BusLayoutModel } from '../../../.././shared/models/bus/busLayout.model';
 import { TripModel } from '../../../.././shared/models/bus/trip.model';
 import { ErrorMessage } from '../../../../shared/constant/error-message';
+import { Constant } from '../../../../shared/constant/constant';
 import { log } from 'util';
 
 import { BuyTicketComponent } from '../buy-ticket/buy-ticket.component';
@@ -44,6 +45,7 @@ export class SelectRoundComponent implements OnInit {
   selectedRtrnTrip: TripModel;
 
   errorMessage: ErrorMessage = new ErrorMessage;
+  const = new Constant;
   alertSettings: any;
   busLayout: BusLayoutModel;
 
@@ -84,7 +86,7 @@ export class SelectRoundComponent implements OnInit {
   }
   getAvailableTrip(availableTripSearch) {
     this.busService.getAvailableTrip(availableTripSearch).subscribe((res) => {
-      if (res.code == 0) {
+      if (res.code == this.const.successCode) {
         this.dptrTableLoading = false;
         this.retrnTableLoading = false;
         this.availableTripResultModel = res.data;
@@ -97,7 +99,11 @@ export class SelectRoundComponent implements OnInit {
         this.dptrTableLoading = false;
         this.retrnTableLoading = false;
       }
-    });
+    },
+      (err) => {
+        this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+      }
+    );
   }
 
   convertStringToNumber(str) {
@@ -162,34 +168,42 @@ export class SelectRoundComponent implements OnInit {
       this.isShowLoading = true;
       // this.busService.checkAuthen(window.location.host).subscribe((response) => {
       //   if (response.result) {
-          this.busService.getBusLayout(this.selectedDptrTrip.id, this.selectedDptrTrip.dptrPark.id, this.selectedDptrTrip.arrvPark.id).subscribe((res) => {
-            if (res.code == 0) {
-              this.busLayout = res.data;
-              let dataListForPassNextPage = {
-                tripName: 'dptrTrip',
-                dptrProvince: this.dptrProvince,
-                dptrPark: this.dptrPark,
-                arrvProvince: this.rtrnProvince,
-                arrvPark: this.rtrnPark,
-                availableTripResultModel: this.availableTripResultModel,
-                availableTripSearchModel: this.availableTripSearchModel,
-                busLayout: this.busLayout, // layout เที่ยวไป
-                dptrTrip: this.selectedDptrTrip, // เที่ยวไป
-                rtrnTrip: this.selectedRtrnTrip, // เที่ยวกลับ
-                totalPassenger: this.totalPassenger
-              };
-              this.sharedService.sendData(dataListForPassNextPage);
-              this.router.navigate(['/selectSeat'], { relativeTo: this.route });
-            } else {
-              this.openDialog(this.errorMsgService.getErrorMsg(res.code));
-              this.isShowLoading = false;
-            }
-          });
-      //   } else {
-      //     this.isShowLoading = false;
-      //     parent.window.receiveMessage('showLogin');
+      this.busService.getBusLayout(this.selectedDptrTrip.id, this.selectedDptrTrip.dptrPark.id, this.selectedDptrTrip.arrvPark.id).subscribe((res) => {
+        if (res.code == this.const.successCode) {
+          this.busLayout = res.data;
+          let dataListForPassNextPage = {
+            tripName: 'dptrTrip',
+            dptrProvince: this.dptrProvince,
+            dptrPark: this.dptrPark,
+            arrvProvince: this.rtrnProvince,
+            arrvPark: this.rtrnPark,
+            availableTripResultModel: this.availableTripResultModel,
+            availableTripSearchModel: this.availableTripSearchModel,
+            busLayout: this.busLayout, // layout เที่ยวไป
+            dptrTrip: this.selectedDptrTrip, // เที่ยวไป
+            rtrnTrip: this.selectedRtrnTrip, // เที่ยวกลับ
+            totalPassenger: this.totalPassenger
+          };
+          this.sharedService.sendData(dataListForPassNextPage);
+          this.router.navigate(['/selectSeat'], { relativeTo: this.route });
+        } else {
+          this.openDialog(this.errorMsgService.getErrorMsg(res.code));
+          this.isShowLoading = false;
+        }
+      },
+        (err) => {
+          this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+        }
+      );
+      // } else {
+      //   this.isShowLoading = false;
+      //   parent.window.receiveMessage('showLogin');
+      // }
+      // },
+      //   (err) => {
+      //     this.openDialog(this.errorMsgService.getErrorMsg(err.code));
       //   }
-      // });
+      // );
     }
   }
 

@@ -4,7 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import { HttpModule } from '@angular/http';
 
 import { ErrorCodeModel } from '../models/error/error.model';
-import { ErrorMessage } from '../constant/error-message'
+import { ErrorMessage } from '../constant/error-message';
+import { Constant } from '../constant/constant';
 
 @Injectable()
 export class ErrorMsgService {
@@ -13,6 +14,7 @@ export class ErrorMsgService {
     private getErrorFileAPI = this.staticURL + 'mst_error_iticket' + this.staticFile;
     private errorCodeModel: ErrorCodeModel[];
     private errorMessage: ErrorMessage = new ErrorMessage;
+    private const = new Constant;
 
     constructor(private http: Http) { }
 
@@ -20,21 +22,35 @@ export class ErrorMsgService {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         return this.http.get(this.getErrorFileAPI)
+            .timeout(this.const.timeoutSec)
             .map((res: Response) => {
                 return res.json();
             })
-            .catch((error: any) => { return Observable.throw(error.json || error || 'Server Error'); });
+            .catch((error: Response) => {
+                return Observable.throw(this.handleError(error));
+            });
     }
 
     getErrorMsg(code) {
         this.errorCodeModel = JSON.parse(localStorage.getItem('errorCodeList'));
         if (this.errorCodeModel != null) {
-            let error = this.errorCodeModel.filter(item => item.errorID === code);
+            let error = this.errorCodeModel.filter(item => { item.errorID === code || item.vendor_error_id === code });
             if (error.length > 0) {
                 return error[0].descThai;
             } else {
                 return this.errorMessage.unknowException;
             }
         }
+    }
+
+    handleError(error) {
+        let err;
+        if (error.name == 'TimeoutError') {
+            err = { code: 40125 };
+
+        } else {
+            err = { code: 99999 };
+        }
+        return err;
     }
 }

@@ -15,7 +15,7 @@ import { DialogModule } from './shared/lib/dialog/dialog.component';
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 import { ThaiDatePipe } from './shared/lib/date-format/thaidate.pipe';
 import { JasperoAlertsModule } from '@jaspero/ng2-alerts';
-import { JasperoConfirmationsModule } from '@jaspero/ng2-confirmations' 
+import { JasperoConfirmationsModule } from '@jaspero/ng2-confirmations'
 
 
 /* Service */
@@ -23,7 +23,8 @@ import { HeaderService } from './shared/services/header.service';
 import { HomeService } from './shared/services/home.service';
 import { SharedService } from './shared/services/shared-service.service';
 import { BusService } from './shared/services/bus.service';
-import { ErrorMsgService } from './shared/services/errorMsg.service'
+import { ErrorMsgService } from './shared/services/errorMsg.service';
+import { CheckAllowService } from './shared/services/checkAllow.service';
 
 /* Page */
 import { AppComponent } from './app.component';
@@ -38,7 +39,7 @@ import { BookingComponent } from './pages/booking/booking.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { PolicyComponent } from './pages/policy/policy.component';
 import { AirlinesComponent } from './pages/eventTickets/airlines/airlines.component';
-import { BusComponent } from './pages/eventTickets/bus/bus.component';
+import { BusComponent } from './pages/eventTickets/bus/bus-menu.component';
 import { ShoppingComponent } from './pages/eventTickets/shopping/shopping.component';
 import { TravelComponent } from './pages/eventTickets/travel/travel.component';
 import { PaymentComponent } from './pages/payment/payment.component';
@@ -108,12 +109,14 @@ import { ReserveTransithistoryComponent } from './pages/reserve-history/reserve-
     JasperoConfirmationsModule
   ],
   providers: [
-    HeaderService, 
-    HomeService, 
-    SharedService, 
+    HeaderService,
+    HomeService,
+    SharedService,
     DatePipe,
     BusService,
-    ErrorMsgService
+    ErrorMsgService,
+    CheckAllowService,
+    BuyTicketComponent
   ],
   bootstrap: [AppComponent]
 })

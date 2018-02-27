@@ -5,11 +5,12 @@ import { AlertsService } from '@jaspero/ng2-alerts';
 import { ErrorMsgService } from '../../../../shared/services/errorMsg.service';
 
 import { ErrorMessage } from '../../../../shared/constant/error-message';
+import { Constant } from '../../../../shared/constant/constant';
 import { PassengerInformationModel } from '../../../../shared/models/bus/passengerInformation.model';
 import { TransCheckoutModel } from '../../../../shared/models/bus/transCheckout.model';
 import { PassengerBookingModel } from '../../../../shared/models/bus/passengerBooking.model';
 import { BookingResultModel } from '../../../../shared/models/bus/bookingResult.model';
-import { TransIdModel } from '../../../../shared/models/bus/transection/transId.model';
+import { TransIdModel } from '../../../../shared/models/bus/transaction/transId.model'
 
 import { SharedService } from '../../../../shared/services/shared-service.service';
 import { BusService } from '../../../../shared/services/bus.service';
@@ -25,6 +26,7 @@ export class PassengerInformationComponent implements OnInit {
   numOfPassengerBox: any[];
   passengerInfoList = new Array<PassengerInformationModel>();
   errorMessage = new ErrorMessage;
+  const = new Constant;
   alertSettings: any;
   receiveData: any;
   transId: TransIdModel;
@@ -35,7 +37,6 @@ export class PassengerInformationComponent implements OnInit {
   isShowLoading: boolean = false;
   isShowLoadingBack: boolean = false;
 
-
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -43,7 +44,7 @@ export class PassengerInformationComponent implements OnInit {
     private errorMsgService: ErrorMsgService,
     private busService: BusService,
     private _alert: AlertsService,
-    private location: Location,
+    private location: Location
   ) { }
 
   ngOnInit() {
@@ -106,11 +107,12 @@ export class PassengerInformationComponent implements OnInit {
       this.isShowLoading = true;
       this.prepareDataForBooking();
       this.busService.booking(this.passengerBookingModel).subscribe((res) => {
-        if (res.code == 0) {
+        if (res.code == this.const.successCode) {
           this.bookingResultModel = res.data;
           let forwardData = {
             forwardData: this.trips,
-            bookingResultModel: this.bookingResultModel
+            bookingResultModel: this.bookingResultModel,
+            transId: this.transId
           }
           this.sharedService.sendData(forwardData);
           this.router.navigate(['/summary'], { relativeTo: this.route });
@@ -118,7 +120,11 @@ export class PassengerInformationComponent implements OnInit {
           this.openDialog(this.errorMsgService.getErrorMsg(res.code));
           this.isShowLoading = false;
         }
-      });
+      },
+        (err) => {
+          this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+        }
+      );
     }
   }
 
@@ -164,13 +170,13 @@ export class PassengerInformationComponent implements OnInit {
   goPreviousPage() {
     this.isShowLoadingBack = true;
     this.busService.clearTransSeatMark(this.transId.transId).subscribe((res) => {
-      if (res.code == 0) {
+      if (res.code == this.const.successCode) {
         this.busService.getBusLayout(
           this.trips.dptrTrip.id,
           this.trips.dptrTrip.dptrPark.id,
           this.trips.dptrTrip.arrvPark.id
         ).subscribe((res) => {
-          if (res.code == 0) {
+          if (res.code == this.const.successCode) {
             let busLayout = res.data;
             let forwardData = {
               tripName: 'dptrTrip',
@@ -191,12 +197,20 @@ export class PassengerInformationComponent implements OnInit {
             this.openDialog(this.errorMsgService.getErrorMsg(res.code));
             this.isShowLoadingBack = false;
           }
-        });
+        },
+          (err) => {
+            this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+          }
+          );
       } else {
         this.openDialog(this.errorMsgService.getErrorMsg(res.code));
         this.isShowLoadingBack = false;
       }
-    });
+    },
+      (err) => {
+        this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+      }
+    );
   }
 }
 

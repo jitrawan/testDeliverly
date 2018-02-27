@@ -1,12 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { HttpModule } from '@angular/http';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { AvailableTripModel } from '../models/bus/availableTripSearch.model';
 import { ProvinceModel } from '../models/bus/province.model';
 import { MarkSeatModel } from '../models/bus/markSeat.model';
 import { PassengerBookingModel } from '../models/bus/passengerBooking.model';
+import { Constant } from '../../shared/constant/constant';
+import { AlertsService } from '@jaspero/ng2-alerts';
+import { ErrorMsgService } from './errorMsg.service';
+
+import { BuyTicketComponent } from '../../pages/eventTickets/bus/buy-ticket/buy-ticket.component';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
@@ -38,26 +44,24 @@ export class BusService {
     private cancelBookingAPI = this.baseURL + 'ag_cancel_booking';
     private insertBookingInfoAPI = this.baseURLForInsert + 'insert_booking_info';
     private clearTransSeatmarkAPI = this.baseURL + 'ag_clear_trans_seatmark';
-    private checkAllowReserveAPI = 'https://ad5xsmjzzj.execute-api.ap-southeast-1.amazonaws.com/v1/checkallowreserve';
+    // private checkAllowReserveAPI = 'https://ad5xsmjzzj.execute-api.ap-southeast-1.amazonaws.com/v1/checkallowreserve';
+    private const = new Constant;
+    alertSettings: any;
+    // private buyTicketComponent = new BuyTicketComponent;
 
     constructor(
-        private http: Http
+        private http: Http,
+        private _alert: AlertsService,
+        private errorMsgService: ErrorMsgService,
+        private router: Router,
+        private buyTicketComponent: BuyTicketComponent
     ) { }
-
-    checkAllowReserve() {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-        return this.http.get(this.checkAllowReserveAPI)
-            .map((res: Response) => {
-                return res.json();
-            })
-            .catch((error: Response) => { return Observable.throw(this.handleError(error)); });
-    }
 
     getMasProvince() {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         return this.http.get(this.getMasProvinceAPI)
+            .timeout(this.const.timeoutSec)
             .map((res: Response) => {
                 return res.json();
             })
@@ -68,6 +72,7 @@ export class BusService {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         return this.http.get(this.getMasParkAPI)
+            .timeout(this.const.timeoutSec)
             .map((res: Response) => {
                 return res.json();
             })
@@ -83,7 +88,7 @@ export class BusService {
             pickup: pickupId
         };
         return this.http.post(this.getRoutePrvParkMapAPI, JSON.stringify(body), options)
-            .timeout(1000)
+            .timeout(this.const.timeoutSec)
             .map((res: Response) => {
                 return res.json();
             })
@@ -97,6 +102,7 @@ export class BusService {
         let options = new RequestOptions({ headers: headers });
         let body = availableTrip;
         return this.http.post(this.getAvailableTripAPI, JSON.stringify(body), options)
+            .timeout(this.const.timeoutSec)
             .map((res: Response) => {
                 return res.json();
             })
@@ -112,6 +118,7 @@ export class BusService {
             dropoff: dropoffId
         };
         return this.http.post(this.getBusLayoutAPI, JSON.stringify(body), options)
+            .timeout(this.const.timeoutSec)
             .map((res: Response) => {
                 return res.json();
             })
@@ -125,6 +132,7 @@ export class BusService {
             transType: transType
         };
         return this.http.post(this.getTransIdAPI, JSON.stringify(body), options)
+            .timeout(this.const.timeoutSec)
             .map((res: Response) => {
                 return res.json();
             })
@@ -149,6 +157,7 @@ export class BusService {
             body["seatFloor[" + index + "]"] = markSeat.seatFloor[index] + "";
         }
         return this.http.post(this.markSeatAPI, JSON.stringify(body), options)
+            .timeout(this.const.timeoutSec)
             .map((res: Response) => {
                 return res.json();
             })
@@ -174,10 +183,11 @@ export class BusService {
         }
         body["reserveId[" + 0 + "]"] = reserveId.reserveId + "";
         return this.http.post(this.unMarkSeatAPI, JSON.stringify(body), options)
+            .timeout(this.const.timeoutSec)
             .map((res: Response) => {
                 return res.json();
             })
-            .catch((error: Response) => { return Observable.throw(this.handleError(error)); });
+            .catch((error: Response) => { return Observable.throw(this.handleMarkSeatError(error, markSeat.transId + '')) });
     }
 
     getTransCheckout(transId: string) {
@@ -187,6 +197,7 @@ export class BusService {
             transId: transId
         };
         return this.http.post(this.getTransCheckoutAPI, JSON.stringify(body), options)
+            .timeout(this.const.timeoutSec)
             .map((res: Response) => {
                 return res.json();
             })
@@ -203,6 +214,7 @@ export class BusService {
         };
 
         return this.http.post(this.cancelBookingAPI, JSON.stringify(body), options)
+            .timeout(this.const.timeoutSec)
             .map((res: Response) => {
                 return res.json();
             })
@@ -240,10 +252,13 @@ export class BusService {
         }
 
         return this.http.post(this.bookingAPI, JSON.stringify(body), options)
+            .timeout(this.const.timeoutSec)
             .map((res: Response) => {
                 return res.json();
             })
-            .catch((error: Response) => { return Observable.throw(this.handleError(error)); });
+            .catch((error: Response) => {
+                return Observable.throw(this.handleBookingError(error, passengerBooking.transId));
+            });
     }
 
     clearTransSeatMark(transId: string) {
@@ -253,6 +268,7 @@ export class BusService {
             transId: transId
         };
         return this.http.post(this.clearTransSeatmarkAPI, JSON.stringify(body), options)
+            .timeout(this.const.timeoutSec)
             .map((res: Response) => {
                 return res.json();
             })
@@ -264,11 +280,12 @@ export class BusService {
         let options = new RequestOptions({ headers: headers });
         let body = insertBooking;
         return this.http.post(this.insertBookingInfoAPI, JSON.stringify(body), options)
+            .timeout(this.const.timeoutSec)
             .map((res: Response) => {
                 return res.json();
             })
             .catch((error: any) => {
-                return Observable.throw(this.handleBookingError(error, ''));
+                return Observable.throw(this.handleBookingError(error, insertBooking.ID));
             }
             );
     }
@@ -276,36 +293,62 @@ export class BusService {
     checkAuthen(currentUrl) {
         let checkAuthAPI = '//' + currentUrl + '/fcheckauthen.html';
         return this.http.get(checkAuthAPI)
+            .timeout(this.const.timeoutSec)
             .map((res: Response) => {
                 return res.json();
             })
             .catch((error: Response) => { return Observable.throw(this.handleError(error)); });
     }
 
+    openDialog(msg) {
+        let type: any = "warning";
+        this.alertSettings = { overlay: true, overlayClickToClose: false, showCloseButton: true, duration: 100000 };
+        this._alert.create(type, msg, this.alertSettings);
+        jQuery('html,body', window.parent.document).animate({
+            scrollTop: jQuery("#alert-box .jaspero__dialog").offset().top - 100
+        }, 300);
+    }
+
     handleError(error) {
+        console.log('handleError >>>>', error);
+        let err;
         if (error.name == 'TimeoutError') {
-            let err = { code: 40125 };
-            return err;
+            err = { code: 40125 };
+            this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+            // this.buyTicketComponent.checkTime();
+            // this.router.navigate(['/selectDestination']);
+        } else {
+            err = { code: 99999 };
         }
-        return 'error'
+        return err;
     }
 
     handleMarkSeatError(error, transId) {
+        let err;
         if (error.name == 'TimeoutError') {
-            this.clearTransSeatMark(transId);
-            let err = { code: 40125 };
-            return err;
+            this.clearTransSeatMark(transId).subscribe((res) => {
+
+            });
+            err = { code: 40125 };
+        } else {
+            err = { code: 99999 };
         }
-        return 'error';
+        return err;
     }
 
     handleBookingError(error, transId) {
+        console.log('error', error);
+
+        let err;
         if (error.name == 'TimeoutError') {
-            transId = this.getTransId('C');
-            let err = { code: 40125 };
-            // this.cancelBooking(transId,);
-            return err;
+            err = { code: 40125 };
+            this.cancelBooking(transId, '', '').subscribe((res) => {
+                console.log('err resss >', res);
+
+            });
+        } else {
+            err = { code: 99999 };
         }
-        return 'error';
+        return err;
     }
 }

@@ -5,6 +5,7 @@ import { BusService } from '../../services/bus.service';
 import { ErrorMsgService } from '../../services/errorMsg.service';
 
 import { ErrorMessage } from '../../constant/error-message';
+import { Constant } from '../../constant/constant';
 import { BusLayoutModel } from '../../models/bus/busLayout.model';
 import { MarkSeatModel } from '../../models/bus/markSeat.model';
 import { ReserveSeatModel } from '../../models/bus/reserveSeat.model';
@@ -36,6 +37,7 @@ export class BusLayoutComponent implements OnInit {
   alertSettings: any;
   markSeatModel: MarkSeatModel;
   errorMessage: ErrorMessage = new ErrorMessage;
+  const = new Constant;
   errorCodeModel: ErrorCodeModel[];
   seatLoading: boolean = false;
 
@@ -115,7 +117,7 @@ export class BusLayoutComponent implements OnInit {
     this.alertSettings = { overlay: true, overlayClickToClose: false, showCloseButton: true, duration: 100000 };
     this._alert.create(type, msg, this.alertSettings);
     jQuery('html,body', window.parent.document).animate({
-      scrollTop: jQuery("#alert-box .jaspero__dialog").offset().top-100
+      scrollTop: jQuery("#alert-box .jaspero__dialog").offset().top - 100
     }, 300);
   }
 
@@ -132,7 +134,7 @@ export class BusLayoutComponent implements OnInit {
     this.markSeatModel.seatNo = [seat.name];
     this.markSeatModel.gender = ['N'];
     this.busService.markSeat(this.markSeatModel).subscribe((res) => {
-      if (res.code == 0) {
+      if (res.code == this.const.successCode) {
         let data = {
           reserveId: res.data[0].reserveId,
           seatFloor: res.data[0].seatFloor,
@@ -140,7 +142,7 @@ export class BusLayoutComponent implements OnInit {
         };
         this.selectedSeat.seat.push(seat);
         this.selectedSeat.reserve.push(data);
-      } else if (res.code == 1004) {
+      } else if (res.code == this.const.markSeatDuplicateCode) {
         this.openDialog(this.errorMsgService.getErrorMsg(res.code));
         (document.getElementById(id) as HTMLInputElement).checked = false;
         this.renderer.addClass(event.target.parentElement, 'Ngender');
@@ -149,7 +151,11 @@ export class BusLayoutComponent implements OnInit {
         (document.getElementById(id) as HTMLInputElement).checked = false;
       }
       this.seatLoading = false;
-    });
+    },
+      (err) => {
+        this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+      }
+    );
   }
 
   unMark(trip, seat, reserve) {
@@ -162,7 +168,15 @@ export class BusLayoutComponent implements OnInit {
     this.markSeatModel.seatFloor = [seat.pos.z];
     this.markSeatModel.seatNo = [seat.name];
     this.busService.unMarkSeat(this.markSeatModel, reserve).subscribe((res) => {
-      this.seatLoading = false;
-    });
+      if (res.code == this.const.successCode) {
+        this.seatLoading = false;
+      } else {
+        this.openDialog(this.errorMsgService.getErrorMsg(res.code));
+      }
+    },
+      (err) => {
+        this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+      }
+    );
   }
 }

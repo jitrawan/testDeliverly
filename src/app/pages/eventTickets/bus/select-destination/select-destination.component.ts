@@ -86,6 +86,7 @@ export class SelectDestinationComponent implements OnInit {
   getErrorFile() {
     if (JSON.parse(localStorage.getItem('errorCodeList')) == null) {
       this.errorMsgService.getErrorFile().subscribe((res) => {
+        console.log('res <<', res)
         if (res.code == this.const.successCode) {
           localStorage.setItem('errorCodeList', JSON.stringify(res.data));
         } else {

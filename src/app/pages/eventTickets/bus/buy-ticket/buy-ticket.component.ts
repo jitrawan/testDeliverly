@@ -15,7 +15,7 @@ import { Constant } from '../../../../shared/constant/constant';
 })
 export class BuyTicketComponent implements OnInit {
 
-  private isEnable: boolean = true;
+   isEnable: boolean = true;
   private msgError: string;
   private alertSettings: any;
   private const = new Constant;
@@ -39,9 +39,9 @@ export class BuyTicketComponent implements OnInit {
     this.sharedService.receiveData.subscribe(data => receiveData = data);
     if (receiveData instanceof URLSearchParams) {
       sessionStorage.setItem('paymentChannel', receiveData.get('paymentChannel'));
-      // sessionStorage.setItem('ALLTICKET:authToken', receiveData.get('authToken'));
-      let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwYXlsb2FkIjoie1wiZW1haWxcIjpcImJ1cmluc2FuQGdvc29mdC5jby50aFwiLFwicGF5bWVudENoYW5uZWxcIjpcIkMwN1wiLFwidGltZVN0ZW1wXCI6MTUxOTczMTc0MzcxOSxcImlzc3VlclwiOlwiY3NhdGsxOFwiLFwidXNlcklkXCI6XCJcIixcInRpY2tldFR5cGVcIjpcIjAxXCIsXCJsYW5nXCI6XCJUXCIsXCJ1cmxiYWNrXCI6XCJ3d3cuYWxsdGlja2V0LmNvbVwifSIsImlzcyI6ImNzYXRrMTgiLCJleHAiOjE1MTk3MzUzNDN9.bC1W9ZNUJEbfqotg1o22A0GC-3nGIqYSsqCmQ2SJBao'
-      sessionStorage.setItem('ALLTICKET:authToken', token);
+      sessionStorage.setItem('ALLTICKET:authToken', receiveData.get('authToken'));
+      // let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwYXlsb2FkIjoie1wiZW1haWxcIjpcImJ1cmluc2FuQGdvc29mdC5jby50aFwiLFwicGF5bWVudENoYW5uZWxcIjpcIkMwN1wiLFwidGltZVN0ZW1wXCI6MTUxOTczMTc0MzcxOSxcImlzc3VlclwiOlwiY3NhdGsxOFwiLFwidXNlcklkXCI6XCJcIixcInRpY2tldFR5cGVcIjpcIjAxXCIsXCJsYW5nXCI6XCJUXCIsXCJ1cmxiYWNrXCI6XCJ3d3cuYWxsdGlja2V0LmNvbVwifSIsImlzcyI6ImNzYXRrMTgiLCJleHAiOjE1MTk3MzUzNDN9.bC1W9ZNUJEbfqotg1o22A0GC-3nGIqYSsqCmQ2SJBao'
+      // sessionStorage.setItem('ALLTICKET:authToken', token);
     }
   }
 

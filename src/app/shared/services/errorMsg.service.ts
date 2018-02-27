@@ -9,12 +9,13 @@ import { Constant } from '../constant/constant';
 
 @Injectable()
 export class ErrorMsgService {
-    private staticURL = '//d11aliyfxni7iy.cloudfront.net/master/';
+
+    private const = new Constant;
+    private staticURL = this.const.baseUrl + this.const.staticFileBusUrl; 
     private staticFile = '.txt';
     private getErrorFileAPI = this.staticURL + 'mst_error_iticket' + this.staticFile;
     private errorCodeModel: ErrorCodeModel[];
     private errorMessage: ErrorMessage = new ErrorMessage;
-    private const = new Constant;
 
     constructor(private http: Http) { }
 
@@ -34,7 +35,7 @@ export class ErrorMsgService {
     getErrorMsg(code) {
         this.errorCodeModel = JSON.parse(localStorage.getItem('errorCodeList'));
         if (this.errorCodeModel != null) {
-            let error = this.errorCodeModel.filter(item => { item.errorID === code || item.vendor_error_id === code });
+            let error = this.errorCodeModel.filter((item) => item.errorID === code + "" || item.vendor_error_id === code + "");
             if (error.length > 0) {
                 return error[0].descThai;
             } else {

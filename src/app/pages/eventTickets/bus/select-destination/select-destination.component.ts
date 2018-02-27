@@ -86,7 +86,6 @@ export class SelectDestinationComponent implements OnInit {
   getErrorFile() {
     if (JSON.parse(localStorage.getItem('errorCodeList')) == null) {
       this.errorMsgService.getErrorFile().subscribe((res) => {
-        console.log('res <<', res)
         if (res.code == this.const.successCode) {
           localStorage.setItem('errorCodeList', JSON.stringify(res.data));
         } else {
@@ -158,8 +157,6 @@ export class SelectDestinationComponent implements OnInit {
         },
         (err) => {
           this.openDialog(this.errorMsgService.getErrorMsg(err.code));
-          // this.buyTicketComponent.checkTime();
-          this.router.navigate([''], { relativeTo: this.route });
         }
       );
     }

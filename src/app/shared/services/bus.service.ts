@@ -23,29 +23,26 @@ import { InsertBookingInfoModel } from '../models/bus/insertBookingInfo.model';
 @Injectable()
 export class BusService {
 
-    // private baseURL = 'https://s3-ap-southeast-1.amazonaws.com/';
-    private baseURL = '//d11aliyfxni7iy.cloudfront.net/api/trs/';
-    private baseURLForInsert = '//d11aliyfxni7iy.cloudfront.net/api/bus/';
-    // private baseURL = '//busticketreserve-env.ap-southeast-1.elasticbeanstalk.com/api/trs/';
-    private staticURL = '//d11aliyfxni7iy.cloudfront.net/master/';
-    // private staticURL = '//s3-ap-southeast-1.amazonaws.com/allticket-trs-masterinfo/master/';
+    private const = new Constant;
+    private apiTrsUrl = this.const.baseUrl + this.const.apiTrsUrl;
+    private apiBusUrl = this.const.baseUrl + this.const.apiBusUrl;
+    private staticURL = this.const.baseUrl + this.const.staticFileBusUrl; 
     private staticFile = '.txt';
 
     private getMasProvinceAPI = this.staticURL + 'ag_mas_province' + this.staticFile;
     private getMasParkAPI = this.staticURL + 'ag_mas_park' + this.staticFile;
-    private getAvailableTripAPI = this.baseURL + 'ag_available_trip';
-    private getBusLayoutAPI = this.baseURL + 'ag_get_bus_layout';
-    private getRoutePrvParkMapAPI = this.baseURL + 'ag_route_prv_park_map;';
-    private markSeatAPI = this.baseURL + 'ag_mark_seat';
-    private unMarkSeatAPI = this.baseURL + 'ag_unmark_seat';
-    private getTransIdAPI = this.baseURL + 'ag_get_trans_id';
-    private getTransCheckoutAPI = this.baseURL + 'ag_trans_checkout';
-    private bookingAPI = this.baseURL + 'ag_booking';
-    private cancelBookingAPI = this.baseURL + 'ag_cancel_booking';
-    private insertBookingInfoAPI = this.baseURLForInsert + 'insert_booking_info';
-    private clearTransSeatmarkAPI = this.baseURL + 'ag_clear_trans_seatmark';
+    private getAvailableTripAPI = this.apiTrsUrl + 'ag_available_trip';
+    private getBusLayoutAPI = this.apiTrsUrl + 'ag_get_bus_layout';
+    private getRoutePrvParkMapAPI = this.apiTrsUrl + 'ag_route_prv_park_map;';
+    private markSeatAPI = this.apiTrsUrl + 'ag_mark_seat';
+    private unMarkSeatAPI = this.apiTrsUrl + 'ag_unmark_seat';
+    private getTransIdAPI = this.apiTrsUrl + 'ag_get_trans_id';
+    private getTransCheckoutAPI = this.apiTrsUrl + 'ag_trans_checkout';
+    private bookingAPI = this.apiTrsUrl + 'ag_booking';
+    private cancelBookingAPI = this.apiTrsUrl + 'ag_cancel_booking';
+    private insertBookingInfoAPI = this.apiBusUrl + 'insert_booking_info';
+    private clearTransSeatmarkAPI = this.apiTrsUrl + 'ag_clear_trans_seatmark';
     // private checkAllowReserveAPI = 'https://ad5xsmjzzj.execute-api.ap-southeast-1.amazonaws.com/v1/checkallowreserve';
-    private const = new Constant;
     alertSettings: any;
     // private buyTicketComponent = new BuyTicketComponent;
 
@@ -343,7 +340,7 @@ export class BusService {
         if (error.name == 'TimeoutError') {
             err = { code: 40125 };
             this.cancelBooking(transId, '', '').subscribe((res) => {
-                
+
             });
             this.openDialog(this.errorMsgService.getErrorMsg(err.code));
             this.buyTicketComponent.checkTime();

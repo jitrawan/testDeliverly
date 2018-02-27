@@ -14,7 +14,7 @@ export class CheckAllowService {
     private const = new Constant;
     alertSettings: any;
 
-    private checkAllowReserveAPI = 'https://ad5xsmjzzj.execute-api.ap-southeast-1.amazonaws.com/v1/checkallowreserve';
+    private checkAllowReserveAPI = this.const.apiCheckAllowUrl;
 
     constructor(
         private http: Http,

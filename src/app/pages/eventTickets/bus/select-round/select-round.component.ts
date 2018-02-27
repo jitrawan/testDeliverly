@@ -166,44 +166,44 @@ export class SelectRoundComponent implements OnInit {
       this.openDialog(this.errorMessage.pleaseSelect + 'วันที่และเวลาเดินทางกลับ');
     } else {
       this.isShowLoading = true;
-      // this.busService.checkAuthen(window.location.host).subscribe((response) => {
-      //   if (response.result) {
-      this.busService.getBusLayout(this.selectedDptrTrip.id, this.selectedDptrTrip.dptrPark.id, this.selectedDptrTrip.arrvPark.id).subscribe((res) => {
-        if (res.code == this.const.successCode) {
-          this.busLayout = res.data;
-          let dataListForPassNextPage = {
-            tripName: 'dptrTrip',
-            dptrProvince: this.dptrProvince,
-            dptrPark: this.dptrPark,
-            arrvProvince: this.rtrnProvince,
-            arrvPark: this.rtrnPark,
-            availableTripResultModel: this.availableTripResultModel,
-            availableTripSearchModel: this.availableTripSearchModel,
-            busLayout: this.busLayout, // layout เที่ยวไป
-            dptrTrip: this.selectedDptrTrip, // เที่ยวไป
-            rtrnTrip: this.selectedRtrnTrip, // เที่ยวกลับ
-            totalPassenger: this.totalPassenger
-          };
-          this.sharedService.sendData(dataListForPassNextPage);
-          this.router.navigate(['/selectSeat'], { relativeTo: this.route });
+      this.busService.checkAuthen(window.location.host).subscribe((response) => {
+        if (response.result) {
+          this.busService.getBusLayout(this.selectedDptrTrip.id, this.selectedDptrTrip.dptrPark.id, this.selectedDptrTrip.arrvPark.id).subscribe((res) => {
+            if (res.code == this.const.successCode) {
+              this.busLayout = res.data;
+              let dataListForPassNextPage = {
+                tripName: 'dptrTrip',
+                dptrProvince: this.dptrProvince,
+                dptrPark: this.dptrPark,
+                arrvProvince: this.rtrnProvince,
+                arrvPark: this.rtrnPark,
+                availableTripResultModel: this.availableTripResultModel,
+                availableTripSearchModel: this.availableTripSearchModel,
+                busLayout: this.busLayout, // layout เที่ยวไป
+                dptrTrip: this.selectedDptrTrip, // เที่ยวไป
+                rtrnTrip: this.selectedRtrnTrip, // เที่ยวกลับ
+                totalPassenger: this.totalPassenger
+              };
+              this.sharedService.sendData(dataListForPassNextPage);
+              this.router.navigate(['/selectSeat'], { relativeTo: this.route });
+            } else {
+              this.openDialog(this.errorMsgService.getErrorMsg(res.code));
+              this.isShowLoading = false;
+            }
+          },
+            (err) => {
+              this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+            }
+          );
         } else {
-          this.openDialog(this.errorMsgService.getErrorMsg(res.code));
           this.isShowLoading = false;
+          parent.window.receiveMessage('showLogin');
         }
       },
         (err) => {
           this.openDialog(this.errorMsgService.getErrorMsg(err.code));
         }
       );
-      // } else {
-      //   this.isShowLoading = false;
-      //   parent.window.receiveMessage('showLogin');
-      // }
-      // },
-      //   (err) => {
-      //     this.openDialog(this.errorMsgService.getErrorMsg(err.code));
-      //   }
-      // );
     }
   }
 

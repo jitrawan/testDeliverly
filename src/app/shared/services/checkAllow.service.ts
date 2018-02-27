@@ -35,7 +35,6 @@ export class CheckAllowService {
     }
 
     handleError(error) {
-        console.log('handleError >>>>', error);
         let err;
         if (error.name == 'TimeoutError') {
             err = { code: 40125 };

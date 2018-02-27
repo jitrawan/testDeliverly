@@ -315,8 +315,8 @@ export class BusService {
         if (error.name == 'TimeoutError') {
             err = { code: 40125 };
             this.openDialog(this.errorMsgService.getErrorMsg(err.code));
-            // this.buyTicketComponent.checkTime();
-            // this.router.navigate(['/selectDestination']);
+            this.buyTicketComponent.checkTime();
+            this.router.navigate(['']);
         } else {
             err = { code: 99999 };
         }
@@ -330,6 +330,9 @@ export class BusService {
 
             });
             err = { code: 40125 };
+            this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+            this.buyTicketComponent.checkTime();
+            this.router.navigate(['']);
         } else {
             err = { code: 99999 };
         }
@@ -343,9 +346,11 @@ export class BusService {
         if (error.name == 'TimeoutError') {
             err = { code: 40125 };
             this.cancelBooking(transId, '', '').subscribe((res) => {
-                console.log('err resss >', res);
-
+                
             });
+            this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+            this.buyTicketComponent.checkTime();
+            this.router.navigate(['']);
         } else {
             err = { code: 99999 };
         }

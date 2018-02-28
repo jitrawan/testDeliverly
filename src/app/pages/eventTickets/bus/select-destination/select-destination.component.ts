@@ -75,7 +75,8 @@ export class SelectDestinationComponent implements OnInit {
 
   setMaxDateForReturn(_event) {
     var tempMaxDate = new Date(_event);
-    this.returnDate = undefined;
+    var nextDate = tempMaxDate.setDate(tempMaxDate.getDate() + 1);
+    this.returnDate = new Date(nextDate);
     tempMaxDate.setDate(tempMaxDate.getDate() + 30);
     this.maxDateForReturn = tempMaxDate;
     if (this.maxDateForReturn > this.maxDate) {

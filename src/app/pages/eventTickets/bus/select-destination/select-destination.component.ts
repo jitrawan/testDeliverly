@@ -84,10 +84,11 @@ export class SelectDestinationComponent implements OnInit {
   }
 
   getErrorFile() {
-    if (JSON.parse(localStorage.getItem('errorCodeList')) == null) {
+    if (this.checkExpireLocalStorage()) {
       this.errorMsgService.getErrorFile().subscribe((res) => {
         if (res.code == this.const.successCode) {
-          localStorage.setItem('errorCodeList', JSON.stringify(res.data));
+          var record = { value: res.data, timestamp: new Date().setHours(0, 0, 0, 0) }
+          localStorage.setItem('errorCodeList', JSON.stringify(record));
         } else {
           this.openDialog(this.errorMsgService.getErrorMsg(res.code));
         }
@@ -97,6 +98,13 @@ export class SelectDestinationComponent implements OnInit {
         }
       );
     }
+  }
+
+  checkExpireLocalStorage() {
+    var record = JSON.parse(localStorage.getItem('errorCodeList'));
+    if (!record) { return true; }
+    var today = new Date().setHours(0, 0, 0, 0)
+    return (new Date(record.timestamp) < new Date(today));
   }
 
   getProvinceList() {

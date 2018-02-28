@@ -40,7 +40,7 @@ export class BuyTicketComponent implements OnInit {
     if (receiveData instanceof URLSearchParams) {
       sessionStorage.setItem('paymentChannel', receiveData.get('paymentChannel'));
       sessionStorage.setItem('ALLTICKET:authToken', receiveData.get('authToken'));
-      // let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwYXlsb2FkIjoie1wiZW1haWxcIjpcImJ1cmluc2FuQGdvc29mdC5jby50aFwiLFwicGF5bWVudENoYW5uZWxcIjpcIkMwN1wiLFwidGltZVN0ZW1wXCI6MTUxOTc4Njc2MzMwMyxcImlzc3VlclwiOlwiY3NhdGsxOFwiLFwidXNlcklkXCI6XCJcIixcInRpY2tldFR5cGVcIjpcIjAxXCIsXCJsYW5nXCI6XCJUXCIsXCJ1cmxiYWNrXCI6XCJ3d3cuYWxsdGlja2V0LmNvbVwifSIsImlzcyI6ImNzYXRrMTgiLCJleHAiOjE1MTk3OTAzNjN9.d9tegzO8SakJ2nTKliBmX_qbqKPqpmzUlvdu4uEVxMc';
+      // let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwYXlsb2FkIjoie1wiZW1haWxcIjpcImJ1cmluc2FuQGdvc29mdC5jby50aFwiLFwicGF5bWVudENoYW5uZWxcIjpcIkMwN1wiLFwidGltZVN0ZW1wXCI6MTUxOTgwNjU3OTgzNCxcImlzc3VlclwiOlwiY3NhdGsxOFwiLFwidXNlcklkXCI6XCJcIixcInRpY2tldFR5cGVcIjpcIjAxXCIsXCJsYW5nXCI6XCJUXCIsXCJ1cmxiYWNrXCI6XCJ3d3cuYWxsdGlja2V0LmNvbVwifSIsImlzcyI6ImNzYXRrMTgiLCJleHAiOjE1MTk4MTAxNzl9.wEOQRe6AHn-vfMWjxIPuXuuforXIinDa1KWA1DKHoR0';
       // sessionStorage.setItem('ALLTICKET:authToken', token);
     }
   }

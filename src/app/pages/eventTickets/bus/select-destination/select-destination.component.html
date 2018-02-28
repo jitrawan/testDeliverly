@@ -76,7 +76,7 @@
     <div class="col-12 offset-md-2 col-md-5 date" *ngIf="selectedTripType == 'R'">
       <label class="h5">วันที่กลับ</label>
       <div class="col-12 p0">
-        <p-calendar [(ngModel)]="returnDate" [showIcon]="true" calendarLanguage="th" [minDate]="departDate" [maxDate]="maxDateForReturn"></p-calendar>
+        <p-calendar [(ngModel)]="returnDate" [showIcon]="true" [defaultDate]="departDate" calendarLanguage="th" [showOtherMonths]="false" [minDate]="departDate" [maxDate]="maxDateForReturn"></p-calendar>
       </div>
     </div>
   </div>

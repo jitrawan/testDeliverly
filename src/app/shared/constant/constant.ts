@@ -7,7 +7,8 @@ export class Constant{
     public timeoutSec: number = 10000;
 
     /* ----------------------- URL --------------------------*/
-    public baseUrl: string = document.location.origin; // '//d11aliyfxni7iy.cloudfront.net/';
+    // public baseUrl: string = document.location.origin; //
+    public baseUrl: string = '//d11aliyfxni7iy.cloudfront.net';
     public apiTrsUrl: string = '/api/trs/';
     public apiBusUrl: string = '/api/bus/';
     public staticFileBusUrl: string = '/trs/master/';

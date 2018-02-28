@@ -201,7 +201,7 @@ export class SummaryComponent implements OnInit {
       if (res.code == this.const.successCode) {
         if (res.transId != undefined && res.transId != '') {
           let CHANNEL_Id = sessionStorage.getItem("ALLTICKET:authToken");
-          let param = 'CHANNEL_Id=' + CHANNEL_Id + '&TRANSACTION_Id=' + res.transId + '&TOTAL_AMT=' + this.totalPrice();
+          let param = 'CHANNEL_ID=' + CHANNEL_Id + '&TRANSACTION_ID=' + res.transId + '&TOTAL_AMT=' + this.totalPrice();
           window.parent.postMessage(param, '*');
         }
       } else {

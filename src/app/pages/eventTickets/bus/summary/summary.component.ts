@@ -133,7 +133,7 @@ export class SummaryComponent implements OnInit {
     this.insertBooking = new InsertBookingInfoModel;
     this.insertBooking.transId = this.transId.transId; 
     this.insertBooking.bookCode = this.bookingResult.bookCode;
-    this.insertBooking.bookID = this.bookingResult.bookId;
+    this.insertBooking.bookId = this.bookingResult.bookId;
     this.insertBooking.passengerName = listDptrTripByReserve.passengerName.toString();
     this.insertBooking.passengerTel = listDptrTripByReserve.passengerTel.toString();
     this.insertBooking.noOfSeat = this.bookingResult.dptrTrip.reserves.length + "";
@@ -199,9 +199,9 @@ export class SummaryComponent implements OnInit {
 
     this.busService.insertBookingInfo(this.insertBooking).subscribe((res) => {
       if (res.code == this.const.successCode) {
-        if (res.transID != undefined && res.transID != '') {
-          let CHANNEL_ID = sessionStorage.getItem("ALLTICKET:authToken");
-          let param = 'CHANNEL_ID=' + CHANNEL_ID + '&TRANSACTION_ID=' + res.transID + '&TOTAL_AMT=' + this.totalPrice();
+        if (res.transId != undefined && res.transId != '') {
+          let CHANNEL_Id = sessionStorage.getItem("ALLTICKET:authToken");
+          let param = 'CHANNEL_Id=' + CHANNEL_Id + '&TRANSACTION_Id=' + res.transId + '&TOTAL_AMT=' + this.totalPrice();
           window.parent.postMessage(param, '*');
         }
       } else {
@@ -211,6 +211,7 @@ export class SummaryComponent implements OnInit {
     },
       (err) => {
         this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+        this.isShowLoading = false;
       }
     );
 

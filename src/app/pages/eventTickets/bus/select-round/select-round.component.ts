@@ -193,6 +193,7 @@ export class SelectRoundComponent implements OnInit {
           },
             (err) => {
               this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+              this.isShowLoading = false;
             }
           );
         } else {
@@ -202,6 +203,7 @@ export class SelectRoundComponent implements OnInit {
       },
         (err) => {
           this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+          this.isShowLoading = false;
         }
       );
     }

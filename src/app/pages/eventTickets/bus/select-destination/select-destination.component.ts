@@ -329,6 +329,7 @@ export class SelectDestinationComponent implements OnInit {
       },
         (err) => {
           this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+          this.isShowLoading = false;
         }
       );
     }

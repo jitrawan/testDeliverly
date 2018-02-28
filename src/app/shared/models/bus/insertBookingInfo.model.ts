@@ -1,7 +1,7 @@
 export class InsertBookingInfoModel {
     transId: string;
     bookCode: string;
-    bookID: string;
+    bookId: string;
     passengerName: string;
     passengerTel: string;
     noOfSeat: string;

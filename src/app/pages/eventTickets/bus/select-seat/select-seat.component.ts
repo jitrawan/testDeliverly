@@ -163,6 +163,7 @@ export class SelectSeatComponent implements OnInit {
           },
             (err) => {
               this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+              this.isShowLoading = false;
             }
           );
         } else {
@@ -183,6 +184,7 @@ export class SelectSeatComponent implements OnInit {
           },
             (err) => {
               this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+              this.isShowLoading = false;
             }
           );
         }
@@ -238,6 +240,7 @@ export class SelectSeatComponent implements OnInit {
     },
       (err) => {
         this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+        this.isShowLoadingBack = false;
       }
     );
 

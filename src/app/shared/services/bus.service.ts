@@ -26,7 +26,7 @@ export class BusService {
     private const = new Constant;
     private apiTrsUrl = this.const.baseUrl + this.const.apiTrsUrl;
     private apiBusUrl = this.const.baseUrl + this.const.apiBusUrl;
-    private staticURL = this.const.baseUrl + this.const.staticFileBusUrl; 
+    private staticURL = this.const.baseUrl + this.const.staticFileBusUrl;
     private staticFile = '.txt';
 
     private getMasProvinceAPI = this.staticURL + 'ag_mas_province' + this.staticFile;
@@ -282,7 +282,7 @@ export class BusService {
                 return res.json();
             })
             .catch((error: any) => {
-                return Observable.throw(this.handleBookingError(error, insertBooking.transId));
+                return Observable.throw(this.handleInsertBookingError(error, insertBooking.bookId, insertBooking.bookCode));
             }
             );
     }
@@ -342,6 +342,27 @@ export class BusService {
             this.cancelBooking(transId, '', '').subscribe((res) => {
 
             });
+            this.openDialog(this.errorMsgService.getErrorMsg(err.code));
+            this.buyTicketComponent.checkTime();
+            this.router.navigate(['']);
+        } else {
+            err = { code: 99999 };
+        }
+        return err;
+    }
+
+    handleInsertBookingError(error, bookId, bookCode) {
+        let err;
+        if (error.name == 'TimeoutError') {
+            err = { code: 40125 };
+            let transId;
+            this.getTransId('C').subscribe((res) => {
+                transId = res.data;
+                this.cancelBooking(transId.transId, bookId, bookCode).subscribe((res) => {
+
+                });
+            });
+
             this.openDialog(this.errorMsgService.getErrorMsg(err.code));
             this.buyTicketComponent.checkTime();
             this.router.navigate(['']);

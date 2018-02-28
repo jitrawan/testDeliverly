@@ -33,7 +33,8 @@ export class ErrorMsgService {
     }
 
     getErrorMsg(code) {
-        this.errorCodeModel = JSON.parse(localStorage.getItem('errorCodeList'));
+        let record = JSON.parse(localStorage.getItem('errorCodeList'));
+        this.errorCodeModel = record.value;
         if (this.errorCodeModel != null) {
             let error = this.errorCodeModel.filter((item) => item.errorID === code + "" || item.vendor_error_id === code + "");
             if (error.length > 0) {

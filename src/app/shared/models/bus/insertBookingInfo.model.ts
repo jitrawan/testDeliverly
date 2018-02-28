@@ -1,5 +1,5 @@
 export class InsertBookingInfoModel {
-    ID: string;
+    transId: string;
     bookCode: string;
     bookID: string;
     passengerName: string;

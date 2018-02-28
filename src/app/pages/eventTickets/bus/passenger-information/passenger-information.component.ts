@@ -10,7 +10,7 @@ import { PassengerInformationModel } from '../../../../shared/models/bus/passeng
 import { TransCheckoutModel } from '../../../../shared/models/bus/transCheckout.model';
 import { PassengerBookingModel } from '../../../../shared/models/bus/passengerBooking.model';
 import { BookingResultModel } from '../../../../shared/models/bus/bookingResult.model';
-import { TransIdModel } from '../../../../shared/models/bus/transaction/transId.model'
+import { TransIdModel } from '../../../../shared/models/bus/transaction/transId.model';
 
 import { SharedService } from '../../../../shared/services/shared-service.service';
 import { BusService } from '../../../../shared/services/bus.service';

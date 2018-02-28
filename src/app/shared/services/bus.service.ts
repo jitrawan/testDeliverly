@@ -282,7 +282,7 @@ export class BusService {
                 return res.json();
             })
             .catch((error: any) => {
-                return Observable.throw(this.handleBookingError(error, insertBooking.ID));
+                return Observable.throw(this.handleBookingError(error, insertBooking.transId));
             }
             );
     }

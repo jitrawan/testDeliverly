@@ -11,6 +11,7 @@ import { InsertBookingInfoModel, listTripByReserve } from '../../../../shared/mo
 import { ErrorMsgService } from '../../../../shared/services/errorMsg.service';
 import { BuyTicketComponent } from '../buy-ticket/buy-ticket.component';
 import { Constant } from '../../../../shared/constant/constant';
+import { TransIdModel } from '../../../../shared/models/bus/transaction/transId.model';
 
 @Component({
   selector: 'app-summary',
@@ -34,7 +35,7 @@ export class SummaryComponent implements OnInit {
   isShowLoading: boolean = false;
   isShowLoadingBack: boolean = false;
   const = new Constant;
-  transId: string;
+  transId: TransIdModel;
 
   constructor(
     private sharedService: SharedService,
@@ -130,7 +131,7 @@ export class SummaryComponent implements OnInit {
     }
 
     this.insertBooking = new InsertBookingInfoModel;
-    this.insertBooking.ID = this.transId; 
+    this.insertBooking.transId = this.transId.transId; 
     this.insertBooking.bookCode = this.bookingResult.bookCode;
     this.insertBooking.bookID = this.bookingResult.bookId;
     this.insertBooking.passengerName = listDptrTripByReserve.passengerName.toString();

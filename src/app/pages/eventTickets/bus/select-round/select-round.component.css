@@ -228,7 +228,7 @@ table {
   height: 18px;
   border: 1px solid #ddd;
   border-radius: 100%;
-  background: #a7a9ac;
+  background: #ffffff;
 }
 
 [type="radio"]:checked+label:after,
@@ -320,7 +320,8 @@ table {
   height: 94px;
   position: relative;
   margin: 0 auto;
-  border: 6px solid #fe6716;;
+  border: 6px solid #fe6716;
+  ;
   border-radius: 50%;
   border-left-color: transparent;
   border-right-color: transparent;
@@ -331,37 +332,50 @@ table {
   -moz-animation: cssload-spin 575ms infinite linear
 }
 
+[type="radio"]:checked+.notallow:before,
+[type="radio"]:not(:checked)+.notallow:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #ddd;
+  border-radius: 100%;
+  background: #a7a9ac;
+}
+
 @keyframes cssload-spin {
   100% {
-      transform: rotate(360deg)
+    transform: rotate(360deg)
   }
 }
 
 @-o-keyframes cssload-spin {
   100% {
-      -o-transform: rotate(360deg);
-      transform: rotate(360deg)
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg)
   }
 }
 
 @-ms-keyframes cssload-spin {
   100% {
-      -ms-transform: rotate(360deg);
-      transform: rotate(360deg)
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg)
   }
 }
 
 @-webkit-keyframes cssload-spin {
   100% {
-      -webkit-transform: rotate(360deg);
-      transform: rotate(360deg)
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg)
   }
 }
 
 @-moz-keyframes cssload-spin {
   100% {
-      -moz-transform: rotate(360deg);
-      transform: rotate(360deg)
+    -moz-transform: rotate(360deg);
+    transform: rotate(360deg)
   }
 }
 
@@ -370,6 +384,7 @@ table {
     max-width: 300px
   }
 }
+
 @media screen and (max-width: 817px) {
   .slideToChoose {
     visibility: visible;

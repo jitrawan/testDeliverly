@@ -76,8 +76,8 @@
               <label for="departure{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee) | number: '1.2'}} บาท</label>
             </td>
             <td *ngIf="data.emptySeats == 0">
-              <input type="radio" id="departure{{index}}" name="departure" (change)="selectDptrTrip(data)" disabled>
-              <label style="cursor: not-allowed;" for="departure{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee) | number: '1.2'}} บาท</label>
+              <input class="notallow"type="radio" id="departure{{index}}" name="departure" (change)="selectDptrTrip(data)" disabled>
+              <label class="notallow" style="cursor: not-allowed;" for="departure{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee) | number: '1.2'}} บาท</label>
             </td>
           </tr>
         </tbody>
@@ -168,8 +168,8 @@
               <ng-container *ngIf="this.selectedDptrTrip != null && this.selectedDptrTrip != undefined 
                                 && (this.selectedDptrTrip.busStd.desc != data.busStd.desc || this.dptrFare != convertStringToNumber(data.fare) + convertStringToNumber(data.fee)) 
                                 else normalInput">
-                <input class="form-check-input" type="radio" id="arrvTrip{{index}}" name="arrvTrip" disabled>
-                <label style="cursor: not-allowed;" for="arrvTrip{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee) | number: '1.2'}} บาท</label>
+                <input class="notallow" class="form-check-input" type="radio" id="arrvTrip{{index}}" name="arrvTrip" disabled>
+                <label class="notallow" style="cursor: not-allowed;" for="arrvTrip{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee) | number: '1.2'}} บาท</label>
               </ng-container>
 
               <ng-template #normalInput>
@@ -179,8 +179,8 @@
 
             </td>
             <td *ngIf="data.emptySeats == 0">
-              <input class="form-check-input" type="radio" id="arrvTrip{{index}}" name="arrvTrip" disabled>
-              <label style="cursor: not-allowed;" for="arrvTrip{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee) | number: '1.2'}} บาท</label>
+              <input class="form-check-input notallow" type="radio" id="arrvTrip{{index}}" name="arrvTrip" disabled>
+              <label class="notallow" style="cursor: not-allowed;" for="arrvTrip{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee) | number: '1.2'}} บาท</label>
             </td>
           </tr>
         </tbody>

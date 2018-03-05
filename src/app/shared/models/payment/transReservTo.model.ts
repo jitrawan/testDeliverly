@@ -1,3 +1,11 @@
+import { EventZoneTOModel } from './eventZoneTo.model';
+import { RoundTOModel } from './roundTO.model';
+import { ZoneTOModel } from './zoneTO.model';
+import { SeatTOModel } from './seatTO.model';
+import { SeatToReserves } from './seatToReserves.model';
+import { DiscountRequestTo } from './discountRequestTo.model';
+import { CustomerSportTo } from './customerSportTo.model';
+
 export class transReservToModel {
     reserveId: string
     csReserveId: string;
@@ -7,11 +15,12 @@ export class transReservToModel {
     eventId: string;
     roundNo: string;
 
-    // EventZoneTO eventZoneTO;
-    // RoundTO roundTO;
-    // ZoneTO zoneTO;
-    // List<SeatTO> seatTOs;
-    // List<cs.iticket.bean.SeatTO> seatToReserves;
+    eventZoneTO: EventZoneTOModel;
+    roundTO: RoundTOModel;
+    zoneTO: ZoneTOModel;
+    seatTOs: SeatTOModel[];
+    seatToReserves: SeatToReserves[];
+
     noOfSeat: string;
     priceAmt: number;
 
@@ -44,9 +53,9 @@ export class transReservToModel {
     transDetail: string;
     transSlip: string;
 
-    // DiscountRequestTo discountRequestTo;
-
-    // List<CustomerSportTo> customerSportTOs;
+    discountRequestTo:DiscountRequestTo;
+    customerSportTOs:CustomerSportTo[];
+    
     // Map<String, ShirtSizeTO> shirtSizeTO;
 
     data1: string;

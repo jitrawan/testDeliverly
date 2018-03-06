@@ -270,7 +270,7 @@
         CANCEL BOOKING
       </span>
     </button>
-    <button class="btn btn-atk-primary mt-3 buttonSize" (click)="insertBookingInfo()" type="button" [ngClass]="{'disabled' : isShowLoading}">
+    <button class="btn btn-atk-primary mt-3 buttonSize" (click)="onNextPage()" type="button" [ngClass]="{'disabled' : isShowLoading}">
       <span *ngIf="!isShowLoading; else showLoad">
         NEXT
       </span>

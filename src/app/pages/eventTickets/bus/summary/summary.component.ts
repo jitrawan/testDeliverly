@@ -110,7 +110,7 @@ export class SummaryComponent implements OnInit {
 
   onNextPage() {
     this.isShowLoading = true;
-    this.prepareDataForInsertBookingInfo();
+    this.insertBooking = this.prepareDataForInsertBookingInfo();
     this.insertBookingInfo();
   }
 
@@ -129,15 +129,15 @@ export class SummaryComponent implements OnInit {
       listDptrTripByReserve.disFee.push(el.disFee);
     }
 
-    this.insertBooking = new InsertBookingInfoModel;
-    this.insertBooking.transId = this.transId.transId;
-    this.insertBooking.bookCode = this.bookingResult.bookCode;
-    this.insertBooking.bookId = this.bookingResult.bookId;
-    this.insertBooking.passengerName = listDptrTripByReserve.passengerName.toString();
-    this.insertBooking.passengerTel = listDptrTripByReserve.passengerTel.toString();
-    this.insertBooking.noOfSeat = this.bookingResult.dptrTrip.reserves.length + "";
-    this.insertBooking.totalAmt = this.totalPrice() + "";
-    this.insertBooking.dptrTrip = {
+    let insertBooking = new InsertBookingInfoModel;
+    insertBooking.transId = this.transId.transId;
+    insertBooking.bookCode = this.bookingResult.bookCode;
+    insertBooking.bookId = this.bookingResult.bookId;
+    insertBooking.passengerName = listDptrTripByReserve.passengerName.toString();
+    insertBooking.passengerTel = listDptrTripByReserve.passengerTel.toString();
+    insertBooking.noOfSeat = this.bookingResult.dptrTrip.reserves.length + "";
+    insertBooking.totalAmt = this.totalPrice() + "";
+    insertBooking.dptrTrip = {
       dptrProvinceDesc: this.bookingResult.dptrTrip.dptrProvince.desc,
       dptrParkDesc: this.bookingResult.dptrTrip.dptrPark.desc,
       arrvProvinceDesc: this.bookingResult.dptrTrip.arrvProvince.desc,
@@ -171,9 +171,9 @@ export class SummaryComponent implements OnInit {
         listRtrnTripByReserve.disFare.push(el.disFare);
         listRtrnTripByReserve.disFee.push(el.disFee);
       }
-      this.insertBooking.noOfSeat = Number(this.insertBooking.noOfSeat) + this.bookingResult.rtrnTrip.reserves.length + "";
+      insertBooking.noOfSeat = Number(insertBooking.noOfSeat) + this.bookingResult.rtrnTrip.reserves.length + "";
 
-      this.insertBooking.rtrnTrip = {
+      insertBooking.rtrnTrip = {
         dptrProvinceDesc: this.bookingResult.rtrnTrip.dptrProvince.desc,
         dptrParkDesc: this.bookingResult.rtrnTrip.dptrPark.desc,
         arrvProvinceDesc: this.bookingResult.rtrnTrip.arrvProvince.desc,
@@ -195,6 +195,7 @@ export class SummaryComponent implements OnInit {
         coupon: this.trips.rtrnTrip.coupon
       }
     }
+    return insertBooking;
   }
 
 
@@ -205,11 +206,11 @@ export class SummaryComponent implements OnInit {
           let CHANNEL_Id = sessionStorage.getItem("ALLTICKET:authToken");
           let param = 'CHANNEL_ID=' + CHANNEL_Id + '&TRANSACTION_ID=' + res.transId + '&TOTAL_AMT=' + this.totalPrice();
 
-          if(sessionStorage.getItem("paymentChannel") == 'C07'){
-            window.parent.postMessage(param, '*');
-          } else{
+          // if (sessionStorage.getItem("paymentChannel") == 'C07') {
+            // window.parent.postMessage(param, '*');
+          // } else {
             this.router.navigate(['/resultReserve'], { relativeTo: this.route });
-          }
+          // }
         }
       } else {
         this.openDialog(this.errorMsgService.getErrorMsg(res.code));

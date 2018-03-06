@@ -1,41 +1,75 @@
-.fs18 {
-  font-size: 18px;
+@media print {
+  body * { visibility: hidden; }
+  #printArea * { visibility: visible; }
+  footer , header { display: none; }
+  
+  .img-fluid {
+    max-height: 40px;
+  }
+  
+  .transDetail {
+    width: 50% !important;
+    max-width: 50% !important;
+  }
+  
+  body {
+    font-size: 11px;
+  }
+  
+  .reserveDetail {
+    font-size: 13px;
+  }
+  
+  .condition-transit {
+    font-size: 12px;
+  }
+  
+  .reserveColLabel , .reserveColResult {
+    margin-top: 0.2rem;
+  }
 }
 
-.bdr2 {
-  border-right: 2px solid #ccc;
+#printArea {
+  margin: 0 auto;
 }
 
-.dprt {
-  padding-top: 15px;
-}
-
-.arrv {
-  padding-top: 15px;
-  padding-bottom: 15px;
-}
-
-.bookingInfo {
-  padding-bottom: 15px;
-}
-
-.busInfo {
-  padding-bottom: 15px;
-}
-
-.custInfo {
-  padding: 15px 0px;
-  width: 100%;
-  border-top: 2px solid #ccc;
-}
-
-.reserveColResultTransTrans {
+.reserveColResult {
   word-wrap: break-word;
 }
 
-@media (max-width: 575px) {
-  .bdr2 {
-    border-right: 0px;
-    border-bottom: 2px solid #ccc;
+.reserveColLabel {
+  color: black;
+}
+
+.reserveColResult {
+  border-radius: 0.5rem;
+  background-color: #eee;
+}
+
+.reserveColLabel , .reserveColResult {
+  margin-top: 0.5rem;
+}
+
+.fresultPaidTransitWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.reserveDetail {
+  margin-top: 1rem;
+}
+
+.condition-transit {
+  font-weight: bold;
+  color: red;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+
+  .condition-transit , .reserveColLabel , .reserveDetail , .reserveColResult {
+    font-size: 12.5px;
   }
+  
 }

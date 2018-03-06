@@ -5,12 +5,15 @@ import 'owl.carousel';
 declare var jQuery: any;
 
 
+import { UserTOModel } from '../../shared/models/payment/userTO.model';
+
+
 @Component({
 	selector: 'app-payment',
-	templateUrl: './payment.component.html',
-	styleUrls: [ './payment.component.css' , '../../../assets/css/standard/utility.css' ]
+	templateUrl: './resultReserve-transit.component.html',
+	styleUrls: [ './resultReserve-transit.component.css' , '../../../assets/css/standard/utility.css' ]
 })
-export class PaymentComponent implements OnInit {
+export class ResultReserveTransitComponent implements OnInit {
 
 	CASH_DISCOUNT: string = "CASH_DISCOUNT";
 	CREDIT_DISCOUNT: string = "CREDIT_DISCOUNT";
@@ -24,6 +27,7 @@ export class PaymentComponent implements OnInit {
 	showCreditDiscount: boolean = false;
 
 	paymentMethod: boolean = false;
+	userTo: UserTOModel;
 	cashDiscount: DiscountList[] = [
 		{
 			discountNo: 'MCARD',
@@ -83,6 +87,16 @@ export class PaymentComponent implements OnInit {
 			desc_discount: 'รับเครดิตเงินคืนสูงสุด 3% เมื่อชำระสินค้ายอดรวม 800 บาทขึ้นไป'
 		}
 	];
+
+	creditFeeLabel: string;
+	discountCredit: string;
+	priceAmt: number;
+	csFee: number;
+	creditFee: number;
+	endPrice: number;
+	showExpireTimeEn: string;
+	reserveId: string;
+	transDetail: string;
 	
 	constructor(private router: Router , private route: ActivatedRoute , private renderer: Renderer2) {
 	}
@@ -97,8 +111,20 @@ export class PaymentComponent implements OnInit {
 
 		this.allowPayOutlet = true;
 		this.allowPayCredit = true;
+
+		this.prepareData();
 		
 		// this.renderer.addClass(this.navSideBar.nativeElement, 'show');
+	}
+
+	prepareData(){
+		this.userTo = new UserTOModel;
+		this.userTo.firstname = 'burin';
+		this.userTo.lastname = 'sangwan';
+		this.userTo.email = 'burinsan@gosoft.co.th';
+		this.userTo.telephone = '0851992697';
+		this.userTo.cardNumber = '1234567890987';
+
 	}
 
 	ngAfterViewInit() {

@@ -42,7 +42,7 @@ import { AirlinesComponent } from './pages/eventTickets/airlines/airlines.compon
 import { BusComponent } from './pages/eventTickets/bus/bus-menu.component';
 import { ShoppingComponent } from './pages/eventTickets/shopping/shopping.component';
 import { TravelComponent } from './pages/eventTickets/travel/travel.component';
-import { PaymentComponent } from './pages/payment/payment.component';
+import { ResultReserveTransitComponent } from './pages/resultReserve-transit/resultReserve-transit.component';
 import { PurchaseHistoryComponent } from './pages/purchase-history/purchase-history.component';
 import { HistoryDetailComponent } from './pages/history-detail/history-detail.component';
 import { SelectDestinationComponent } from './pages/eventTickets/bus/select-destination/select-destination.component';
@@ -72,7 +72,7 @@ import { ReserveTransithistoryComponent } from './pages/reserve-history/reserve-
     BusComponent,
     ShoppingComponent,
     TravelComponent,
-    PaymentComponent,
+    ResultReserveTransitComponent,
     PurchaseHistoryComponent,
     HistoryDetailComponent,
     SelectDestinationComponent,

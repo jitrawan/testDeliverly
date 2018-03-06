@@ -54,13 +54,13 @@ export class SummaryComponent implements OnInit {
     this.transId = this.receiveData.transId;
     this.trips = this.receiveData.forwardData;
     this.bookingResult = this.receiveData.bookingResultModel;
-    for(let i = 0; i < this.bookingResult.dptrTrip.reserves.length; i++) {
+    for (let i = 0; i < this.bookingResult.dptrTrip.reserves.length; i++) {
       this.dprtPrice = this.dprtPrice + (Number(this.bookingResult.dptrTrip.reserves[i].fare) + Number(this.bookingResult.dptrTrip.reserves[i].fee));
       this.dprtDiscount = this.dprtDiscount + (Number(this.bookingResult.dptrTrip.reserves[i].disFare) + Number(this.bookingResult.dptrTrip.reserves[i].disFee));
     }
 
     if (this.bookingResult.rtrnTrip != null) {
-      for(let i = 0; i < this.bookingResult.rtrnTrip.reserves.length; i++) {
+      for (let i = 0; i < this.bookingResult.rtrnTrip.reserves.length; i++) {
         this.rtrnPrice = this.rtrnPrice + (Number(this.bookingResult.rtrnTrip.reserves[i].fare) + Number(this.bookingResult.rtrnTrip.reserves[i].fee));
         this.rtrnDiscount = this.rtrnDiscount + (Number(this.bookingResult.rtrnTrip.reserves[i].disFare) + Number(this.bookingResult.rtrnTrip.reserves[i].disFee));
       }
@@ -108,14 +108,13 @@ export class SummaryComponent implements OnInit {
     }, 300);
   }
 
-
-  insertBookingInfo() {
+  onNextPage() {
     this.isShowLoading = true;
-    this.queryString = {
-      payment_channel: localStorage.getItem('payment_channel'),
-      cust_email: localStorage.getItem('cust_email')
-    }
+    this.prepareDataForInsertBookingInfo();
+    this.insertBookingInfo();
+  }
 
+  prepareDataForInsertBookingInfo() {
     let listDptrTripByReserve = new listTripByReserve();
     let listRtrnTripByReserve = new listTripByReserve();
 
@@ -131,7 +130,7 @@ export class SummaryComponent implements OnInit {
     }
 
     this.insertBooking = new InsertBookingInfoModel;
-    this.insertBooking.transId = this.transId.transId; 
+    this.insertBooking.transId = this.transId.transId;
     this.insertBooking.bookCode = this.bookingResult.bookCode;
     this.insertBooking.bookId = this.bookingResult.bookId;
     this.insertBooking.passengerName = listDptrTripByReserve.passengerName.toString();
@@ -196,13 +195,21 @@ export class SummaryComponent implements OnInit {
         coupon: this.trips.rtrnTrip.coupon
       }
     }
+  }
 
+
+  insertBookingInfo() {
     this.busService.insertBookingInfo(this.insertBooking).subscribe((res) => {
       if (res.code == this.const.successCode) {
         if (res.transId != undefined && res.transId != '') {
           let CHANNEL_Id = sessionStorage.getItem("ALLTICKET:authToken");
           let param = 'CHANNEL_ID=' + CHANNEL_Id + '&TRANSACTION_ID=' + res.transId + '&TOTAL_AMT=' + this.totalPrice();
-          window.parent.postMessage(param, '*');
+
+          if(sessionStorage.getItem("paymentChannel") == 'C07'){
+            window.parent.postMessage(param, '*');
+          } else{
+            this.router.navigate(['/resultReserve'], { relativeTo: this.route });
+          }
         }
       } else {
         this.openDialog(this.errorMsgService.getErrorMsg(res.code));
@@ -214,8 +221,9 @@ export class SummaryComponent implements OnInit {
         this.isShowLoading = false;
       }
     );
-
   }
+
+
   cancelBooking() {
     this.isShowLoadingBack = true;
     this.confirmSettings = { confirmText: 'ใช่', declineText: 'ไม่ใช่' };

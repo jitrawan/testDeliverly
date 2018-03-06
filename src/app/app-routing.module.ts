@@ -11,7 +11,7 @@ import { AirlinesComponent } from './pages/eventTickets/airlines/airlines.compon
 import { BusComponent } from './pages/eventTickets/bus/bus-menu.component';
 import { ShoppingComponent } from './pages/eventTickets/shopping/shopping.component';
 import { TravelComponent } from './pages/eventTickets/travel/travel.component';
-import { PaymentComponent } from './pages/resultReserve-transit/resultReserve-transit.component';
+import { ResultReserveTransitComponent } from './pages/resultReserve-transit/resultReserve-transit.component';
 import { PurchaseHistoryComponent } from './pages/purchase-history/purchase-history.component';
 import { HistoryDetailComponent } from './pages/history-detail/history-detail.component';
 import { SelectDestinationComponent } from './pages/eventTickets/bus/select-destination/select-destination.component';
@@ -68,7 +68,7 @@ const routes: Routes = [
   { path: 'shopping', component: ShoppingComponent },
   { path: 'transport/travel', component: TravelComponent },
   { path: 'allevent/:type', component: AllEventComponent },
-  { path: 'checkOut', component: PaymentComponent },
+  { path: 'resultReserve', component: ResultReserveTransitComponent },
   { path: 'purchaseHistory', component: PurchaseHistoryComponent },
   { path: 'historyDetail', component: HistoryDetailComponent },
   { path: 'reserveTransithistory', component: ReserveTransithistoryComponent },

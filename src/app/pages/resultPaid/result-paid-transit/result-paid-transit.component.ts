@@ -3,12 +3,11 @@ import { TransReservToModel } from '../../../../app/shared/models/payment/transR
 import { UserTOModel } from '../../../../app/shared/models/payment/userTO.model';
 
 @Component({
-  selector: 'app-reserve-transithistory',
-  templateUrl: './reserve-transithistory.component.html',
-  styleUrls: ['./reserve-transithistory.component.css', '../../../../assets/css/standard/utility.css']
+  selector: 'app-result-paid-transit',
+  templateUrl: './result-paid-transit.component.html',
+  styleUrls: ['./result-paid-transit.component.css','../../../../assets/css/standard/utility.css']
 })
-export class ReserveTransithistoryComponent implements OnInit {
-
+export class ResultPaidTransitComponent implements OnInit {
   transReservTo: TransReservToModel;
   userTO: UserTOModel;
   foodDetail: string = '1';
@@ -19,9 +18,7 @@ export class ReserveTransithistoryComponent implements OnInit {
   csFee: number = 0;
   endPriceStr: number = 0;
 
-  constructor() {
-
-  }
+  constructor() { }
 
   ngOnInit() {
     this.transReservTo = new TransReservToModel;
@@ -34,8 +31,6 @@ export class ReserveTransithistoryComponent implements OnInit {
     this.userTO.lastname = 'sangwan';
     this.userTO.email = 'burinsan@gosoft.co.th';
     this.userTO.cardNumber = '1234567890987';
-
-
   }
 
 }

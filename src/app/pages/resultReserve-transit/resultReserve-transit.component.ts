@@ -7,8 +7,8 @@ declare var jQuery: any;
 
 @Component({
 	selector: 'app-payment',
-	templateUrl: './payment.component.html',
-	styleUrls: [ './payment.component.css' , '../../../assets/css/standard/utility.css' ]
+	templateUrl: './resultReserve-transit.component.html',
+	styleUrls: [ './resultReserve-transit.component.css' , '../../../assets/css/standard/utility.css' ]
 })
 export class PaymentComponent implements OnInit {
 

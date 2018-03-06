@@ -55,7 +55,7 @@ import { SelectRoundComponent } from './pages/eventTickets/bus/select-round/sele
 import { BuyTicketComponent } from './pages/eventTickets/bus/buy-ticket/buy-ticket.component';
 import { BusReceiveComponent } from './pages/eventTickets/bus/bus-receive/bus-receive.component';
 import { BusErrorComponent } from './pages/eventTickets/bus/bus-error/bus-error.component';
-import { ReserveTransithistoryComponent } from './pages/reserve-history/reserve-transithistory/reserve-transithistory.component';
+import { ResultPaidTransitComponent } from './pages/resultPaid/result-paid-transit/result-paid-transit.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +89,7 @@ import { ReserveTransithistoryComponent } from './pages/reserve-history/reserve-
 
     BusReceiveComponent,
     BusErrorComponent,
-    ReserveTransithistoryComponent
+    ResultPaidTransitComponent
   ],
   imports: [
     NgbModule.forRoot(),

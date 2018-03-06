@@ -26,13 +26,13 @@ import { BuyTicketComponent } from './pages/eventTickets/bus/buy-ticket/buy-tick
 
 import { BusReceiveComponent } from './pages/eventTickets/bus/bus-receive/bus-receive.component';
 import { BusErrorComponent } from './pages/eventTickets/bus/bus-error/bus-error.component';
-import { ReserveTransithistoryComponent } from './pages/reserve-history/reserve-transithistory/reserve-transithistory.component';
+import { ResultPaidTransitComponent } from './pages/resultPaid/result-paid-transit/result-paid-transit.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
   // { path: '**', component: SelectDestinationComponent },
   {
-    path: '', component: BuyTicketComponent,
+    path: '', component: ResultPaidTransitComponent,
     children: [
       { path: 'selectDestination', component: SelectDestinationComponent },
       { path: 'selectRound', component: SelectRoundComponent },
@@ -71,7 +71,6 @@ const routes: Routes = [
   { path: 'resultReserve', component: ResultReserveTransitComponent },
   { path: 'purchaseHistory', component: PurchaseHistoryComponent },
   { path: 'historyDetail', component: HistoryDetailComponent },
-  { path: 'reserveTransithistory', component: ReserveTransithistoryComponent },
   { path: 'busReceive', component: BusReceiveComponent },
 ];
 

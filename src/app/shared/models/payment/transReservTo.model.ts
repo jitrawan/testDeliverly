@@ -5,7 +5,7 @@ import { SeatTOModel } from './seatTO.model';
 import { DiscountRequestTo } from './discountRequestTo.model';
 import { CustomerSportTo } from './customerSportTo.model';
 
-export class transReservToModel {
+export class TransReservToModel {
     reserveId: string
     csReserveId: string;
     reservDate: Date;

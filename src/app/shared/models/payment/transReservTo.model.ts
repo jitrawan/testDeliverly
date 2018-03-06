@@ -2,10 +2,11 @@ import { EventZoneTOModel } from './eventZoneTo.model';
 import { RoundTOModel } from './roundTO.model';
 import { ZoneTOModel } from './zoneTO.model';
 import { SeatTOModel } from './seatTO.model';
+import { SeatToReserves } from './seatToReserves.model';
 import { DiscountRequestTo } from './discountRequestTo.model';
 import { CustomerSportTo } from './customerSportTo.model';
 
-export class TransReservToModel {
+export class transReservToModel {
     reserveId: string
     csReserveId: string;
     reservDate: Date;
@@ -18,7 +19,7 @@ export class TransReservToModel {
     roundTO: RoundTOModel;
     zoneTO: ZoneTOModel;
     seatTOs: SeatTOModel[];
-    // seatToReserves: SeatToReserves[];
+    seatToReserves: SeatToReserves[];
 
     noOfSeat: string;
     priceAmt: number;

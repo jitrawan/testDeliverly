@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TransReservToModel } from '../../../../app/shared/models/payment/transReservTo.model';
 
 @Component({
   selector: 'app-reserve-transithistory',
@@ -7,7 +6,7 @@ import { TransReservToModel } from '../../../../app/shared/models/payment/transR
   styleUrls: ['./reserve-transithistory.component.css']
 })
 export class ReserveTransithistoryComponent implements OnInit {
-  transReservTo: TransReservToModel;
+
   constructor() { }
 
   ngOnInit() {

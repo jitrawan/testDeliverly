@@ -12,7 +12,6 @@ import { BusComponent } from './pages/eventTickets/bus/bus-menu.component';
 import { ShoppingComponent } from './pages/eventTickets/shopping/shopping.component';
 import { TravelComponent } from './pages/eventTickets/travel/travel.component';
 import { ResultReserveTransitComponent } from './pages/resultReserve-transit/resultReserve-transit.component';
-import { PurchaseHistoryComponent } from './pages/purchase-history/purchase-history.component';
 import { HistoryDetailComponent } from './pages/history-detail/history-detail.component';
 import { SelectDestinationComponent } from './pages/eventTickets/bus/select-destination/select-destination.component';
 
@@ -27,12 +26,13 @@ import { BuyTicketComponent } from './pages/eventTickets/bus/buy-ticket/buy-tick
 import { BusReceiveComponent } from './pages/eventTickets/bus/bus-receive/bus-receive.component';
 import { BusErrorComponent } from './pages/eventTickets/bus/bus-error/bus-error.component';
 import { ResultPaidTransitComponent } from './pages/resultPaid/result-paid-transit/result-paid-transit.component';
+import { PopupResultPaidTransitComponent } from './pages/resultPaid-popup/result-paid-transit-popup/result-paid-transit-popup.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
   // { path: '**', component: SelectDestinationComponent },
   {
-    path: '', component: ResultPaidTransitComponent,
+    path: '', component: HomeComponent,
     children: [
       { path: 'selectDestination', component: SelectDestinationComponent },
       { path: 'selectRound', component: SelectRoundComponent },
@@ -69,7 +69,6 @@ const routes: Routes = [
   { path: 'transport/travel', component: TravelComponent },
   { path: 'allevent/:type', component: AllEventComponent },
   { path: 'resultReserve', component: ResultReserveTransitComponent },
-  { path: 'purchaseHistory', component: PurchaseHistoryComponent },
   { path: 'historyDetail', component: HistoryDetailComponent },
   { path: 'busReceive', component: BusReceiveComponent },
 ];

@@ -43,7 +43,6 @@ import { BusComponent } from './pages/eventTickets/bus/bus-menu.component';
 import { ShoppingComponent } from './pages/eventTickets/shopping/shopping.component';
 import { TravelComponent } from './pages/eventTickets/travel/travel.component';
 import { ResultReserveTransitComponent } from './pages/resultReserve-transit/resultReserve-transit.component';
-import { PurchaseHistoryComponent } from './pages/purchase-history/purchase-history.component';
 import { HistoryDetailComponent } from './pages/history-detail/history-detail.component';
 import { SelectDestinationComponent } from './pages/eventTickets/bus/select-destination/select-destination.component';
 
@@ -55,7 +54,9 @@ import { SelectRoundComponent } from './pages/eventTickets/bus/select-round/sele
 import { BuyTicketComponent } from './pages/eventTickets/bus/buy-ticket/buy-ticket.component';
 import { BusReceiveComponent } from './pages/eventTickets/bus/bus-receive/bus-receive.component';
 import { BusErrorComponent } from './pages/eventTickets/bus/bus-error/bus-error.component';
+
 import { ResultPaidTransitComponent } from './pages/resultPaid/result-paid-transit/result-paid-transit.component';
+import { PopupResultPaidTransitComponent } from './pages/resultPaid-popup/result-paid-transit-popup/result-paid-transit-popup.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,6 @@ import { ResultPaidTransitComponent } from './pages/resultPaid/result-paid-trans
     ShoppingComponent,
     TravelComponent,
     ResultReserveTransitComponent,
-    PurchaseHistoryComponent,
     HistoryDetailComponent,
     SelectDestinationComponent,
     PassengerInformationComponent,
@@ -89,7 +89,8 @@ import { ResultPaidTransitComponent } from './pages/resultPaid/result-paid-trans
 
     BusReceiveComponent,
     BusErrorComponent,
-    ResultPaidTransitComponent
+    ResultPaidTransitComponent,
+    PopupResultPaidTransitComponent
   ],
   imports: [
     NgbModule.forRoot(),

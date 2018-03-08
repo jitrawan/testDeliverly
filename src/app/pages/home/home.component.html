@@ -1,145 +1,123 @@
 <main>
-	<section id="slider">
-		<div class="owl-carousel">
-			<div class="item" *ngFor="let image of slideBannerImages; index as i;">
-				<img [src]="S3_CONTEXT+image.pathLocation+screenType+image.imageName" (load)="slideLoaded()" />
-				<!-- <img [src]="test()" (load)="slideLoaded()" /> -->
-			</div>
-		</div>
-	</section>
+  <section id="slider">
+    <div class="owl-carousel">
+      <div class="item" *ngFor="let image of slideBannerImages; index as i;">
+        <img [src]="S3_CONTEXT+image.pathLocation+screenType+image.imageName" (load)="slideLoaded()" />
+        <!-- <img [src]="test()" (load)="slideLoaded()" /> -->
+      </div>
+    </div>
+  </section>
 
 
-	<section id="card-ticket" class="mt-2">
-		<div class="container allevent">
-			<div class="eventtopic">
-				<div class="container">
-					<div class="row ticket-recommend">
-						<div class="col-7 col-md-6 px-0">
-							<span class="text-primary border-ticket-title">
-								<img src="./assets/images/icon_ticket_recommend.png"/>
-							</span>
-						</div>
-						<div class="col-5 col-md-6 viewall">
-							<a href="./eventTickets/allevent.html">
-								<i class="fa fa-plus"></i> view all</a>
-						</div>
-					</div>
-					<div class="row cpt20">
-						<div class="col-12 col-sm-6 col-md-6 col-lg-3 card cardwrapper" *ngFor="let cardTicket of cardTicketsRecommend;">
-							<div class="cardbox">
-								<a (click)="goEventInfo()">
-									<div class="card-overlay">
-										<img src="./assets/images/cursor.png">
-									</div>
-								</a>
-								<img class="card-img-top imgResponsive" src="{{cardTicket.image_path}}" alt="Card image cap">
-								<div class="card-buyTicket">
-									<a>
-										<i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i>
-										<span>BUY TICKET</span>
-									</a>
-								</div>
-								<div class="row cardfooter">
-									<div class="col-sm-5 col-md-5 eventDate text_overflow">
-										<span class="textblack">{{cardTicket.performShowDate}}</span>
-										<br>
-										<span class="font12"> {{cardTicket.performShowMonth}} </span>
-									</div>
-									<div class="col-sm-7 eventName text_overflow">
-										{{cardTicket.performName}}
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="eventtopic">
-				<div class="container">
-					<div class="row ticket-recommend">
-						<div class="col-7 col-md-6 px-0">
-							<span class="text-danger border-ticket-title">
-								<img src="./assets/images/icon_ticket_hot.png" />
-							</span>
-						</div>
-						<div class="col-5 col-md-6 viewall">
-							<a href="./eventTickets/allevent.html">
-								<i class="fa fa-plus"></i> view all</a>
-						</div>
-					</div>
-					<div class="row cpt20">
-						<div class="col-12 col-sm-6 col-md-6 col-lg-3 card cardwrapper" *ngFor="let cardTicket of cardTicketsHot;">
-							<div class="cardbox">
-								<a (click)="goEventInfo()">
-									<div class="card-overlay">
-										<img src="./assets/images/cursor.png">
-									</div>
-								</a>
-								<img class="card-img-top imgResponsive" src="{{cardTicket.image_path}}" alt="Card image cap">
-								<div class="card-buyTicket">
-									<a>
-										<i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i>
-										<span>BUY TICKET</span>
-									</a>
-								</div>
-								<div class="row cardfooter">
-									<div class="col-sm-5 col-md-5 eventDate text_overflow">
-										<span class="textblack">{{cardTicket.performShowDate}}</span>
-										<br>
-										<span class="font12"> {{cardTicket.performShowMonth}} </span>
-									</div>
-									<div class="col-sm-7 eventName text_overflow">
-										{{cardTicket.performName}}
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+  <section id="card-ticket" class="mt-2">
+    <div class="container allevent">
+      <div class="eventtopic">
+        <div class="container">
+          <div class="row ticket-recommend">
+            <div class="col-12 px-0">
+              <span class="text-primary border-ticket-title">
+                <img src="./assets/images/icon_ticket_recommend.png" />
+              </span>
+            </div>
+          </div>
+          <div class="row cpt20">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3 card cardwrapper" *ngFor="let cardTicket of cardTicketsRecommend;">
+              <div class="cardbox" ev-id="EV_17135" skip-info="N">
+                <a (click)="goEventInfo()">
+                  <div class="card-overlay" title="คอนเสิร์ตมันส์ล่ะหงส์ ตอน มันส์ทะลุโซเชียล">
+                    <img src="https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/images/cursor.png">
+                  </div>
+                </a>
+                <img class="card-img-top img-fluid" src="https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/content/17135/MLH2018--1-410x600.jpg"
+                  alt="Card image cap">
+                <div class="card-buyTicket">
+                  <i class="fa fa-shopping-cart fa-fw pr-2" aria-hidden="true"></i>
+                  <span>BUY TICKET</span>
+                </div>
+                <div class="row cardfooter">
+                  <div class="col-5 align-self-center eventDate px-1">
+                    <div class="text-dark text-overflow">19
+                      <br>JAN/2018</div>
+                  </div>
+                  <div class="col-7 align-self-center eventName px-1">
+                    <div class="my-1 text-overflow">มันส์ล่ะหงส์ "มันส์ทะลุโซเชียล"</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="eventtopic">
+        <div class="container">
+          <div class="row ticket-recommend">
+            <div class="col-12 px-0">
+              <span class="text-danger border-ticket-title">
+                <img src="./assets/images/icon_ticket_hot.png" />
+              </span>
+            </div>
+          </div>
+          <div class="row cpt20">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3 card cardwrapper" *ngFor="let cardTicket of cardTicketsHot;">
+              <div class="cardbox" ev-id="EV_18016" skip-info="N">
+                <a (click)="goEventInfo()">
+                  <div class="card-overlay" title="EXO PLANET #4 - The ElyXiOn - in BANGKOK">
+                    <img src="https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/images/cursor.png">
+                  </div>
+                </a>
+                <img class="card-img-top img-fluid" src="https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/content/18016/SMT18016160120181759ticketCard.jpg"
+                  alt="Card image cap">
+                <div class="card-buyTicket">
+                  <i class="fa fa-shopping-cart fa-fw pr-2" aria-hidden="true"></i>
+                  <span>BUY TICKET</span>
+                </div>
+                <div class="row cardfooter">
+                  <div class="col-5 align-self-center eventDate px-1">
+                    <div class="text-dark text-overflow">16-18
+                      <br>MAR/2018</div>
+                  </div>
+                  <div class="col-7 align-self-center eventName px-1">
+                    <div class="my-1 text-overflow">The ElyXiOn in BANGKOK</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-	<section class="mt-4 p-3" id="sliderCard">
-		<div class="container">
-			<div class="row">
-				<div class="col-12 text-right pb-3">
-					<a href="./eventTickets/allevent.html">
-						<i class="fa fa-plus"></i> view all</a>
-				</div>
-			</div>
-			<div class="row">
-				<div class="owl-carousel">
-					<div class="col cardwrapper" *ngFor="let cardTicket of cardShowAll;">
-						<div class="cardbox">
-							<a (click)="goEventInfo()">
-								<div class="card-overlay">
-									<img src="./assets/images/cursor.png">
-								</div>
-							</a>
-							<img class="card-img-top imgResponsive" src="{{cardTicket.image_path}}" alt="Card image cap">
-							<div class="card-buyTicket">
-								<a>
-									<i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i>
-									<span>BUY TICKET</span>
-								</a>
-							</div>
-							<div class="row cardfooter">
-								<div class="col-sm-5 col-md-5 eventDate text_overflow">
-									<span class="textblack">{{cardTicket.performShowDate}}</span>
-									<br>
-									<span class="font12"> {{cardTicket.performShowMonth}} </span>
-								</div>
-								<div class="col-sm-7 eventName text_overflow">
-									{{cardTicket.performName}}
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-		
+  <section class="mt-4 p-3" id="sliderCard">
+    <div class="container">
+      <div class="row">
+        <div class="owl-carousel">
+          <div class="col cardwrapper" *ngFor="let cardTicket of cardShowAll;">
+            <div class="cardbox" ev-id="EV_18022" skip-info="N">
+              <a (click)="goEventInfo()">
+                <div class="card-overlay" title="PTT THAILAND GRAND PRIX 2018  ">
+                  <img src="https://atkmedia.allticket.com/assets/images/cursor.png">
+                </div>
+              </a>
+              <img class="card-img-top img-fluid" src="https://atkmedia.allticket.com/assets/content/18022/PTT18022180120181735ticketCard.jpg"
+                alt="Card image cap">
+              <div class="card-buyTicket">
+                <i class="fa fa-shopping-cart fa-fw pr-2" aria-hidden="true"></i>
+                <span>BUY TICKET</span>
+              </div>
+              <div class="row cardfooter">
+                <div class="col-5 align-self-center eventDate px-1">
+                  <div class="text-dark text-overflow">5-7
+                    <br>OCT/2018</div>
+                </div>
+                <div class="col-7 align-self-center eventName px-1">
+                  <div class="my-1 text-overflow">PTT THAILAND GRAND PRIX 2018</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>

@@ -3,7 +3,6 @@ import { Router, ActivatedRoute, Params, NavigationEnd } from '@angular/router';
 
 import { AlertsService } from '@jaspero/ng2-alerts';
 import { SharedService } from './shared/services/shared-service.service';
-
 declare var jquery: any;
 declare var $: any;
 

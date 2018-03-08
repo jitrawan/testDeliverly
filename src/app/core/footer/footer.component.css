@@ -30,9 +30,15 @@
     padding-left : 15px;
     padding-right : 15px;
     font-weight: 100;
-    padding : 2rem 4rem;
+    padding: 2rem 3.5rem 1rem 3.5rem;
     background-color : #333333;
     color : white;
+}
+
+.footer-container {
+	max-width: 1140px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .footer-detail section h3 {
@@ -78,6 +84,11 @@ ul.footer {
     color : #F8A422;
 }
 
+.contact-detail p a {
+	text-decoration: none;
+	color: white;
+}
+
 .contact-detail .contact-icon {
     float : left;
 }
@@ -104,9 +115,37 @@ ul.footer {
         margin-top : 0.5rem;
     }
 }
-@media (max-width : 767px) {
+@media (max-width : 768px) {
     
     .logo-facebook img , .logo-youtube img {
         max-width: 60%;
     }
+    
+    #aboutUs p {
+	   	margin-top: 0.7rem;
+	    font-size: 0.9rem;
+	    margin-left: 0.3rem;
+	}
+	
+	ul.footer {
+		margin-top: 0.7rem;
+	}
+	
+	ul.footer > li {
+		font-size: 0.9rem;
+	}
+	
+	.contact-detail .contact-desc {
+	    margin-left: 2.4rem;
+	}
+	
+	#copyright h5 {
+		font-size: 0.9rem;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+	#faq ul > li:after {
+	    width: 100%;
+	}
 }

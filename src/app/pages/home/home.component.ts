@@ -1,17 +1,19 @@
-import { Component, OnInit, AfterViewInit , HostListener } from '@angular/core';
-import { Router , NavigationEnd } from '@angular/router';
+import { Component, OnInit, AfterViewInit, HostListener } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { EventBanner } from '../../shared/models/eventBanner.model';
 import { ConstMaster } from '../../shared/config/ConstMaster';
 import { HomeService } from '../../shared/services/home.service';
 import * as underscore from 'underscore';
+
 import 'owl.carousel';
 declare var jQuery: any;
+declare var $: any;
 
 @Component({
 	selector: 'app-home',
 	templateUrl: './home.component.html',
-	styleUrls: [ './home.component.css' ,
-		'../../../assets/css/standard/cardticket.css' ]
+	styleUrls: ['./home.component.css',
+		'../../../assets/css/standard/cardticket.css', '../../../assets/css/standard/utility.css']
 })
 export class HomeComponent implements OnInit {
 
@@ -44,7 +46,7 @@ export class HomeComponent implements OnInit {
 		{ performId: '17079', performName: 'Event 17079', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
 		{ performId: '17080', performName: 'Event 17080', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
 	];
-	constructor( private router: Router , private homeService: HomeService ) { 
+	constructor(private router: Router, private homeService: HomeService) {
 		this.screenWidth = (window.innerWidth);
 	}
 
@@ -59,8 +61,8 @@ export class HomeComponent implements OnInit {
 		this.homeService.getEventBanner().subscribe(response => {
 			this.slideBannerImages = response['data'];
 			this.getScreenType();
-        });
-		
+		});
+
 	}
 
 	ngAfterViewInit() {
@@ -69,54 +71,54 @@ export class HomeComponent implements OnInit {
 
 	getScreenType() {
 
-		for(let breakpoint of ConstMaster.imageBreakpoint) {
-			if(this.screenWidth < breakpoint.breakpoint) {
-				this.screenType = breakpoint.beakpointName+"/";
+		for (let breakpoint of ConstMaster.imageBreakpoint) {
+			if (this.screenWidth < breakpoint.breakpoint) {
+				this.screenType = breakpoint.beakpointName + "/";
 				break;
 			}
 		}
 	}
-	
+
 	slideLoaded() {
 		this.countImagesLoaded++;
 
-		if(this.countImagesLoaded == this.slideBannerImages.length) {
+		if (this.countImagesLoaded == this.slideBannerImages.length) {
 
 			jQuery('#slider .owl-carousel').owlCarousel({
 				items: 1,
 				animateOut: 'fadeOutLeft',
 				animateIn: 'zoomInRight',
 			});
-			
+
 			jQuery('#sliderCard .owl-carousel').owlCarousel({
-				loop : true,
+				loop: false,
 				items: 1,
 				dots: false,
 				nav: true,
 				navText: ['<i class="fa fa-chevron-left mt-2 mr-1"></i>', '<i class="fa fa-chevron-right mt-2 ml-1"></i>'],
-				responsive : {
-					0 : {
-						items : 1
+				responsive: {
+					0: {
+						items: 1
 					},
-					480 : {
-						items : 2
+					480: {
+						items: 2
 					},
-					768 : {
-						items : 3
+					768: {
+						items: 3
 					},
-					992 : {
-						items : 4
+					992: {
+						items: 4
 					},
-					1366 : {
-						items : 5
+					1366: {
+						items: 5
 					}
 				}
 			});
 		}
-		
+
 	}
 
-	goEventInfo(performId:string){
+	goEventInfo(performId: string) {
 		this.router.navigate(['/eventInfo']);
 	}
 }

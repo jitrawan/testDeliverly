@@ -28,6 +28,21 @@
   background-color: #da1c21;
 }
 
+.btn-atk-warning {
+  font-size: 18px;
+  background-color: #FBB03B;
+  border-bottom: 3px solid #ca851a;
+  color: #fff;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  border-radius: 2rem;
+  cursor: pointer;
+}
+
+.btn-atk-warning:hover {
+  background-color: #f99f13;
+}
+
 .btn-atk-success {
   font-size: 18px;
   background-color: #23d160;
@@ -60,9 +75,11 @@
 
 .btn-atk-light:focus,
 .btn-atk-danger:focus,
+.btn-atk-warning:focus,
 .btn-atk-success.focus,
 .btn-atk-light:active,
 .btn-atk-danger.active,
+.btn-atk-warning:active,
 .btn-atk-success.active {
   outline: none;
   box-shadow: none;
@@ -70,11 +87,32 @@
 }
 
 .cursor-pointer {
-	cursor: pointer;
+  cursor: pointer;
+}
+
+mark.mark-require {
+	padding: 0;
+	color: #37BDE0;
+    background-color: transparent;	
+}
+
+@media (max-width: 425px) {
+  
+  .btn-atk-primary,
+  .btn-atk-danger,
+  .btn-atk-warning,
+  .btn-atk-success,
+  .btn-atk-light {
+    font-size: 16px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border-radius: 1.5rem;
+  }
 }
 
 
 /* More Spacing Utilities Margin & Padding */
+
 
 /* Margin */
 
@@ -115,6 +153,7 @@
 .my-7 {
   margin-bottom: 5rem !important;
 }
+
 
 /* Padding */
 
@@ -338,4 +377,3 @@ print {
     font-size: 0.75rem !important;
   }
 }
-

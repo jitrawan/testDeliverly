@@ -22,6 +22,7 @@ export class HeaderComponent implements OnInit {
     regAndLog: boolean = true;
     isEditProfileOpen: boolean = false;
     isChangePasswordOpen: boolean = false;
+    isCaptchaOpen: boolean = false;
     actionTrigger: triggerType = {
         login: 'login',
         signUp: 'signup',

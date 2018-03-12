@@ -218,13 +218,13 @@
                 <mark class="mark-require">*</mark> :</div>
               <div class="offset-col-3 col-3 col-md-2" (click)="showEmergencyWrap()">
                 <div class="custom-control custom-radio">
-                  <input type="radio" id="runningYes" name="runningRadio" class="custom-control-input"  >
+                  <input type="radio" #runningYes id="runningYes" name="runningRadio" class="custom-control-input" >
                   <label class="custom-control-label" for="runningYes">Yes</label>
                 </div>
               </div>
               <div class="col-3 offset-col-3 col-md-2 pl-2" (click)="hideEmergencyWrap()">
                 <div class="custom-control custom-radio">
-                  <input type="radio" id="runningNo" name="runningRadio" class="custom-control-input">
+                  <input type="radio" id="runningNo" name="runningRadio" class="custom-control-input"  [(ngModel)]="currentItem" >
                   <label class="custom-control-label" for="runningNo">No</label>
                 </div>
               </div>
@@ -766,5 +766,4 @@
       </form>
     </ng-container>
   </div>
-
 </header>

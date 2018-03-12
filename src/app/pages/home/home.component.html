@@ -22,25 +22,27 @@
           </div>
           <div class="row cpt20">
             <div class="col-12 col-sm-6 col-md-6 col-lg-3 card cardwrapper" *ngFor="let cardTicket of cardTicketsRecommend;">
-              <div class="cardbox" ev-id="EV_17135" skip-info="N">
+              <div class="cardbox" ev-id="EV_18019" skip-info="N">
                 <a (click)="goEventInfo()">
-                  <div class="card-overlay" title="คอนเสิร์ตมันส์ล่ะหงส์ ตอน มันส์ทะลุโซเชียล">
-                    <img src="https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/images/cursor.png">
+                  <div class="card-overlay" title="Sunset Beach Music Festival 2018">
+                    <img src="https://atkmedia.allticket.com/assets/images/cursor.png">
                   </div>
                 </a>
-                <img class="card-img-top img-fluid" src="https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/content/17135/MLH2018--1-410x600.jpg"
+                <img class="card-img-top img-fluid" src="https://atkmedia.allticket.com/assets/content/18019/PHK18019150120181536ticketCard.jpg"
                   alt="Card image cap">
                 <div class="card-buyTicket">
-                  <i class="fa fa-shopping-cart fa-fw pr-2" aria-hidden="true"></i>
-                  <span>BUY TICKET</span>
+                  <a href="#">
+                    <i class="fa fa-shopping-cart fa-fw pr-2" aria-hidden="true"></i>
+                    <span>BUY TICKET</span>
+                  </a>
                 </div>
                 <div class="row cardfooter">
                   <div class="col-5 align-self-center eventDate px-1">
-                    <div class="text-dark text-overflow">19
-                      <br>JAN/2018</div>
+                    <div class="text-dark text-overflow">31
+                      <br>MAR/2018</div>
                   </div>
                   <div class="col-7 align-self-center eventName px-1">
-                    <div class="my-1 text-overflow">มันส์ล่ะหงส์ "มันส์ทะลุโซเชียล"</div>
+                    <div class="my-1 text-overflow">Sunset Beach Music Festival 2018</div>
                   </div>
                 </div>
               </div>
@@ -59,24 +61,25 @@
           </div>
           <div class="row cpt20">
             <div class="col-12 col-sm-6 col-md-6 col-lg-3 card cardwrapper" *ngFor="let cardTicket of cardTicketsHot;">
-              <div class="cardbox" ev-id="EV_18016" skip-info="N">
-                <a (click)="goEventInfo()">
-                  <div class="card-overlay" title="EXO PLANET #4 - The ElyXiOn - in BANGKOK">
-                    <img src="https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/images/cursor.png">
-                  </div>
-                </a>
-                <img class="card-img-top img-fluid" src="https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/content/18016/SMT18016160120181759ticketCard.jpg"
+              <div class="cardbox" (click)="goEventInfo()" ev-id="EV_18016" skip-info="N">
+                <div class="card-overlay" title="EXO PLANET #4 - The ElyXiOn - in BANGKOK">
+                  <img src="https://atkmedia.allticket.com/assets/images/cursor.png">
+                </div>
+                <img class="card-img-top imgResponsive" src="https://atkmedia.allticket.com/assets/content/18016/SMT18016160120181759ticketCard.jpg"
                   alt="Card image cap">
-                <div class="card-buyTicket">
-                  <i class="fa fa-shopping-cart fa-fw pr-2" aria-hidden="true"></i>
-                  <span>BUY TICKET</span>
+                <div class="card-buyTicket soldout">
+                  <a href="#">
+                    <i class="fa fa-ban" aria-hidden="true"></i>
+                    <span>SOLD OUT</span>
+                  </a>
                 </div>
                 <div class="row cardfooter">
-                  <div class="col-5 align-self-center eventDate px-1">
-                    <div class="text-dark text-overflow">16-18
-                      <br>MAR/2018</div>
+                  <div class="col-5 eventDate text-overflow">
+                    <span class="textblack">16-18
+                      <br>MAR/2018</span>
+                    <br>
                   </div>
-                  <div class="col-7 align-self-center eventName px-1">
+                  <div class="col-7 align-self-center eventName text-overflow px-1">
                     <div class="my-1 text-overflow">The ElyXiOn in BANGKOK</div>
                   </div>
                 </div>
@@ -93,25 +96,26 @@
       <div class="row">
         <div class="owl-carousel">
           <div class="col cardwrapper" *ngFor="let cardTicket of cardShowAll;">
-            <div class="cardbox" ev-id="EV_18022" skip-info="N">
-              <a (click)="goEventInfo()">
-                <div class="card-overlay" title="PTT THAILAND GRAND PRIX 2018  ">
-                  <img src="https://atkmedia.allticket.com/assets/images/cursor.png">
-                </div>
-              </a>
-              <img class="card-img-top img-fluid" src="https://atkmedia.allticket.com/assets/content/18022/PTT18022180120181735ticketCard.jpg"
+            <div class="cardbox" (click)="goEventInfo()" ev-id="EV_18023" skip-info="N">
+              <div class="card-overlay" title="บัตรชมฟุตบอลสโมสรทรู แบงค็อก ยูไนเต็ด">
+                <img src="https://atkmedia.allticket.com/assets/images/cursor.png">
+              </div>
+              <img class="card-img-top imgResponsive" src="https://atkmedia.allticket.com/assets/content/18023/TBK18023060220181353ticketCard.jpg"
                 alt="Card image cap">
-              <div class="card-buyTicket">
-                <i class="fa fa-shopping-cart fa-fw pr-2" aria-hidden="true"></i>
-                <span>BUY TICKET</span>
+              <div class="card-buyTicket commingsoon">
+                <a href="#">
+                  <i class="fa fa-clock-o" aria-hidden="true"></i>
+                  <span>COMING SOON</span>
+                </a>
               </div>
               <div class="row cardfooter">
-                <div class="col-5 align-self-center eventDate px-1">
-                  <div class="text-dark text-overflow">5-7
-                    <br>OCT/2018</div>
+                <div class="col-5 eventDate text-overflow">
+                  <span class="textblack">10
+                    <br>MAR/2018</span>
+                  <br>
                 </div>
-                <div class="col-7 align-self-center eventName px-1">
-                  <div class="my-1 text-overflow">PTT THAILAND GRAND PRIX 2018</div>
+                <div class="col-7 align-self-center eventName text-overflow px-1">
+                  <div class="my-1 text-overflow">บัตรชมฟุตบอลสโมสรทรู แบงค็อก ยูไนเต็ด</div>
                 </div>
               </div>
             </div>

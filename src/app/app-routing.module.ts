@@ -47,6 +47,7 @@ const routes: Routes = [
   { path: 'eventInfo', component: EventInfoComponent },
   { path: 'policy', component: PolicyComponent },
   { path: 'faq', component: FaqComponent },
+  { path: 'faq/:howto', component: FaqComponent },
   // { path: 'transport/airlines', component: AirlinesComponent },
   // { path: 'transport/bus', component: BusComponent },
   // { path: 'transport/bus/selectDestination', component: SelectDestinationComponent },

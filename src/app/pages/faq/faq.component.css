@@ -1,96 +1,101 @@
 .topicWrapper {
-    background-color: #eff0f2;
-    padding: 80px;
-    text-align: center;
-    letter-spacing: 6px;
+  background-color: #eff0f2;
+  padding: 80px;
+  text-align: center;
+  letter-spacing: 6px;
 }
 
-.faqicon{
-    font-size: 50px;
-    color: #515659;
+.faqicon {
+  font-size: 50px;
+  color: #515659;
 }
 
 .faqBanner {
-    font-size: 42px;
-    color: #515659;
-    border-bottom: 2px solid #515659;
-    padding: 0px 50px 15px 50px;
-}
-
-.contentWrapper {
-    padding-top: 50px;
+  font-size: 42px;
+  color: #515659;
+  border-bottom: 2px solid #515659;
+  padding: 0px 50px 15px 50px;
 }
 
 .rightWrapper {
-    border-left: 2px solid #515659;
-    height: 500px;
-}
-
-.rightWrapper .topic {
-    padding-left: 30px;
-    font-size: 32px;
-    color: #b3b3b3;
-    letter-spacing: 8px;
-}
-
-.rightWrapper .information {
-    padding: 15px 0px 0px 30px;
+  border-left: 2px solid #515659;
+  height: inherit;
+  padding: 30px 0px 30px 0px;
 }
 
 .leftWrapper {
-    height: 500px;
+  padding: 0px 20px 30px 20px !important;
 }
 
 .menu {
-    font-size: 16px;
-    color: #1b1464;
-    letter-spacing: 6px;
-    padding-top: 30px;
-    cursor: pointer;
-}
-
-.menu:hover {
-    color: #b3b3b3;
+  font-size: 16px;
+  color: #1b1464;
+  letter-spacing: 6px;
+  margin-top: 30px;
+  cursor: pointer;
 }
 
 .menu:active {
-    color: #b3b3b3;
+  color: #b3b3b3;
 }
 
-.menu:hover .rightArrow {
-    color: #1b1464;
-    display: inline;
+.menu:active .rightArrowNonActive,
+.menu:active .rightArrowNonActive {
+  color: #3191f5;
+  display: inline;
 }
 
-.menu:active .rightArrow {
-    color: #3191f5;
-    display: inline;
+.menuActive i {
+  color: #3191f5;
+  display: inline;
+  margin-top: 30px;
 }
 
-.rightArrow {
-    display: none;
-    font-size: 22px;
+.menuActive {
+  color: #3191f5;
+}
+
+.menuActive .rightArrowNonActive {
+  display: inline;
+}
+
+.rightArrowActive {
+  display: inline;
+  font-size: 22px;
+}
+
+.rightArrowNonActive {
+  display: none;
+  font-size: 22px;
 }
 
 @media (max-width: 768px) {
-    .topicWrapper {
-        padding: 40px;
-    }
-    .faqBanner {
-        font-size: 22px;
-        padding: 0px 30px 5px 30px;
-    }
-    .leftWrapper {
-        padding-bottom: 30px;
-        padding-left: 50px;
-    }
-    .rightWrapper {
-        border-top: 2px solid #515659;
-        border-left: 0px solid #515659;
-        padding-top: 30px;
-    }
-    .leftWrapper {
-        height: auto;
-    }
-    
+  .topicWrapper {
+    padding: 40px;
+  }
+  .faqBanner {
+    font-size: 22px;
+    padding: 0px 30px 5px 30px;
+  }
+  .leftWrapper {
+    padding-bottom: 30px;
+    padding-left: 50px;
+  }
+  .rightWrapper {
+    border-top: 2px solid #515659;
+    border-left: 0px solid #515659;
+    padding-top: 30px;
+  }
+  .leftWrapper {
+    height: auto;
+  }
 }
+
+.pickupStationTh {
+  font-size: 14px;
+}
+
+.pickupStationEng {
+  font-size: 12px;
+}
+

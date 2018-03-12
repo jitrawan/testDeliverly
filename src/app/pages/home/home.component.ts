@@ -121,6 +121,7 @@ export class HomeComponent implements OnInit {
 	goEventInfo(performId: string) {
 		this.router.navigate(['/eventInfo']);
 	}
+	
 }
 
 interface CardTicket {

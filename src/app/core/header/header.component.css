@@ -665,7 +665,11 @@ pv10 {
 }
 
 .telno .form-control {
-  border-radius: 0px!important;
-  border-top-right-radius: 12px!important;
-  border-bottom-right-radius: 12px!important;
+  border-radius: 0px !important;
+  border-top-right-radius: 12px !important;
+  border-bottom-right-radius: 12px !important;
+}
+
+.nav-item a {
+  cursor: pointer;
 }

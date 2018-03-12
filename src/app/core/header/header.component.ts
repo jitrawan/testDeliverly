@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { HeaderModel } from '../../shared/models/header.model';
 import { HeaderService } from '../../shared/services/header.service';
 
+declare var jQuery: any;
+declare var $: any;
+
 @Component({
     selector: 'app-navbar',
     templateUrl: './header.component.html',
@@ -38,7 +41,7 @@ export class HeaderComponent implements OnInit {
     @ViewChild('modalBox') private modalBox: ElementRef;
     @ViewChild('userModalBox') private userModalBox: ElementRef;
     @ViewChild('closeSideBar') private closeSideBar: ElementRef;
-
+    @ViewChild('runningYes') private runningYes: ElementRef;
     @HostListener('window:resize', ['$event'])
     onWindowResize(event) {
 
@@ -55,7 +58,8 @@ export class HeaderComponent implements OnInit {
         private renderer: Renderer2,
         private headerService: HeaderService,
         private router: Router,
-    ) {   this.showEmergency = false;
+    ) {
+    this.showEmergency = false;
     }
 
     ngOnInit() {
@@ -65,7 +69,6 @@ export class HeaderComponent implements OnInit {
             this.headerModel = response['data'];
         });
 
-        this.checkSidebar(window.innerWidth);
     }
 
     ngAfterViewInit() {

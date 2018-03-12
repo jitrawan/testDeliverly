@@ -32,7 +32,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
   // { path: '**', component: SelectDestinationComponent },
   {
-    path: '', component: HomeComponent,
+    path: '', component: BuyTicketComponent,
     children: [
       { path: 'selectDestination', component: SelectDestinationComponent },
       { path: 'selectRound', component: SelectRoundComponent },

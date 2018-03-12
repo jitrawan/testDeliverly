@@ -206,11 +206,11 @@ export class SummaryComponent implements OnInit {
           let CHANNEL_Id = sessionStorage.getItem("ALLTICKET:authToken");
           let param = 'CHANNEL_ID=' + CHANNEL_Id + '&TRANSACTION_ID=' + res.transId + '&TOTAL_AMT=' + this.totalPrice();
 
-          // if (sessionStorage.getItem("paymentChannel") == 'C07') {
-            // window.parent.postMessage(param, '*');
-          // } else {
+          if (sessionStorage.getItem("paymentChannel") == 'C07') {
+            window.parent.postMessage(param, '*');
+          } else {
             this.router.navigate(['/resultReserve'], { relativeTo: this.route });
-          // }
+          }
         }
       } else {
         this.openDialog(this.errorMsgService.getErrorMsg(res.code));

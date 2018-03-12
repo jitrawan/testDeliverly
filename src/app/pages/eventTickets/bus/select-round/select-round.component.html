@@ -1,6 +1,7 @@
 <div class="selectRoundBox">
-  <div class="pageTopic col-12">
-    <span>กรุณาเลือกวันที่ และ วันเดินทางไป</span>
+  <div class=" col-12">
+    <b class="parkText">เที่ยวไป </b>
+    <span> กรุณาเลือกวันที่ และวันเดินทาง</span>
   </div>
   <div class="dateRange">
     <div class="row mx-0 p-0">
@@ -66,9 +67,13 @@
 
           <tr class="tableResult" *ngFor="let data of availableTripResultModel.dptrTrips.trips; let index = index;">
             <td> {{data.date | thaidate:'short'}}
-              <br> <b>เวลา {{data.time}} น.</b></td>
+              <br>
+              <b>เวลา {{data.time}} น.</b>
+            </td>
             <td> {{data.arrvDate | thaidate:'short'}}
-              <br> <b>เวลา {{data.arrvTime}} น.</b> </td>
+              <br>
+              <b>เวลา {{data.arrvTime}} น.</b>
+            </td>
             <td> {{data.busStd.desc}} </td>
             <td> {{data.emptySeats}} / {{data.seats}} ที่นั่ง</td>
             <td *ngIf="data.emptySeats != 0">
@@ -76,7 +81,7 @@
               <label for="departure{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee) | number: '1.2'}} บาท</label>
             </td>
             <td *ngIf="data.emptySeats == 0">
-              <input class="notallow"type="radio" id="departure{{index}}" name="departure" (change)="selectDptrTrip(data)" disabled>
+              <input class="notallow" type="radio" id="departure{{index}}" name="departure" (change)="selectDptrTrip(data)" disabled>
               <label class="notallow" style="cursor: not-allowed;" for="departure{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee) | number: '1.2'}} บาท</label>
             </td>
           </tr>
@@ -90,8 +95,9 @@
 </div>
 
 <div class="selectRoundBox" *ngIf="availableTripResultModel.rtrnTrips != null">
-  <div class="pageTopic col-12">
-    <span>กรุณาเลือกวันที่ และ วันเดินทางกลับ</span>
+  <div class=" col-12">
+    <b class="parkText">เที่ยวกลับ </b>
+    <span>กรุณาเลือกวันที่ และวันเดินทาง</span>
   </div>
   <div class="dateRange">
     <div class="container">
@@ -158,9 +164,13 @@
           </tr>
           <tr class="tableResult" *ngFor="let data of availableTripResultModel.rtrnTrips.trips; let index = index;">
             <td> {{data.date | thaidate:'short'}}
-              <br> <b>เวลา {{data.time}} น.</b></td>
+              <br>
+              <b>เวลา {{data.time}} น.</b>
+            </td>
             <td> {{data.arrvDate | thaidate:'short'}}
-              <br> <b>เวลา {{data.arrvTime}} น. </b></td>
+              <br>
+              <b>เวลา {{data.arrvTime}} น. </b>
+            </td>
             <td> {{data.busStd.desc}} </td>
             <td> {{data.emptySeats}} / {{data.seats}} ที่นั่ง</td>
             <td *ngIf="data.emptySeats != 0">

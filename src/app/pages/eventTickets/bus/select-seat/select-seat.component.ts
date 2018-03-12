@@ -159,6 +159,7 @@ export class SelectSeatComponent implements OnInit {
               this.router.navigate(['/selectSeat2'], { relativeTo: this.route });
             } else {
               this.isShowLoading = false;
+              this.openDialog(this.errorMsgService.getErrorMsg(res.code));
             }
           },
             (err) => {
@@ -180,6 +181,7 @@ export class SelectSeatComponent implements OnInit {
               this.router.navigate(['/passengerInfomation'], { relativeTo: this.route });
             } else {
               this.isShowLoading = false;
+              this.openDialog(this.errorMsgService.getErrorMsg(res.code));
             }
           },
             (err) => {
@@ -236,6 +238,7 @@ export class SelectSeatComponent implements OnInit {
         this.router.navigate([routerUrl], { relativeTo: this.route });
       } else {
         this.isShowLoadingBack = false;
+        this.openDialog(this.errorMsgService.getErrorMsg(res.code));
       }
     },
       (err) => {

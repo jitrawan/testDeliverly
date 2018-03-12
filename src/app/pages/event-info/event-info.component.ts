@@ -51,9 +51,9 @@ export class EventInfoComponent implements OnInit {
 
   adjustStickyHeader(){    
     // document.getElementById('headerSticky').style.width = document.getElementById('container-fluid').offsetWidth+'';	
-    console.log('window.outerWidth : ' + window.outerWidth);
+    // console.log('window.outerWidth : ' + window.outerWidth);
     if(window.outerWidth <= 1100 && window.outerWidth > 450) {
-      console.log('768');
+      // console.log('768');
       $("#stickyTitle .inline").addClass("display-block");
       $("#stickyTitle").addClass("no-padding");
       $("#stickyTitle").removeClass("col-5");				
@@ -86,7 +86,7 @@ export class EventInfoComponent implements OnInit {
       $(".sticky-image").siblings().first().addClass("col-6");
       $(".sticky-btn-buy").css("line-height","40px");*/
     } else if(window.outerWidth <= 450) {
-      console.log('450');
+      // console.log('450');
       $(".sticky-image").show();
       $(".stickyTitle .inline.display-block").removeClass("display-block");
       document.getElementById('sticky-image').style.display = 'none';    
@@ -105,7 +105,7 @@ export class EventInfoComponent implements OnInit {
       // $(".sticky-image").siblings().first().removeClass("col-6");
       $(".sticky-image").siblings().first().show();
     } else {				
-      console.log('more than');
+      // console.log('more than');
       $(".sticky-image").show();
       $(".stickyTitle .inline.display-block").removeClass("display-block");
       document.getElementById('sticky-image').style.display = 'block';    

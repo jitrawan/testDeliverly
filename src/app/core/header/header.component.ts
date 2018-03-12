@@ -6,7 +6,7 @@ import { HeaderService } from '../../shared/services/header.service';
 @Component({
     selector: 'app-navbar',
     templateUrl: './header.component.html',
-    styleUrls: ['./header.component.css', '../../../assets/css/standard/utility.css']
+    styleUrls: ['./header.component.css', '../../../assets/css/standard/utility.css', '../../../assets/css/standard/layout.css']
 })
 export class HeaderComponent implements OnInit {
 
@@ -23,6 +23,7 @@ export class HeaderComponent implements OnInit {
     isEditProfileOpen: boolean = false;
     isChangePasswordOpen: boolean = false;
     isCaptchaOpen: boolean = false;
+    showEmergency: boolean;
     actionTrigger: triggerType = {
         login: 'login',
         signUp: 'signup',
@@ -36,6 +37,7 @@ export class HeaderComponent implements OnInit {
     @ViewChild('navSideBar') private navSideBar: ElementRef;
     @ViewChild('modalBox') private modalBox: ElementRef;
     @ViewChild('userModalBox') private userModalBox: ElementRef;
+    @ViewChild('closeSideBar') private closeSideBar: ElementRef;
 
     @HostListener('window:resize', ['$event'])
     onWindowResize(event) {
@@ -52,7 +54,8 @@ export class HeaderComponent implements OnInit {
         private el: ElementRef,
         private renderer: Renderer2,
         private headerService: HeaderService,
-        private router: Router) {
+        private router: Router,
+    ) {   this.showEmergency = false;
     }
 
     ngOnInit() {
@@ -73,19 +76,17 @@ export class HeaderComponent implements OnInit {
         this.router.navigate([route]);
     }
     triggerSidebar() {
-
         if (this.isSidebarOpen === false && this.isMobileSize) {
             this.isSidebarOpen = true;
             this.showOverlay = true;
             this.renderer.addClass(this.navSideBar.nativeElement, 'show');
+            this.renderer.addClass(this.closeSideBar.nativeElement, 'show');
         } else {
             this.closeAllDialog();
         }
-
     }
 
     triggerDialog(type: string) {
-
         this.showOverlay = true;
         this.renderer.addClass(this.modalBox.nativeElement, 'show');
 
@@ -106,30 +107,32 @@ export class HeaderComponent implements OnInit {
 
         this.isSidebarOpen = false;
         this.renderer.removeClass(this.navSideBar.nativeElement, 'show');
+        this.renderer.removeClass(this.closeSideBar.nativeElement, 'show');
     }
 
     userTriggerDialog(type: string) {
-                console.log("ice")
-                this.showOverlay = true;
-                this.renderer.addClass(this.userModalBox.nativeElement, 'show');
-        
-                if (type === this.userActionTrigger.change) {
-                    this.isEditProfileOpen = false;
-                    this.isChangePasswordOpen = true;
-                    window.scrollTo(0, 0);
-                } else if (type === this.userActionTrigger.edit) {
-                    this.isChangePasswordOpen = false;
-                    this.isEditProfileOpen = true;
-                } 
-        
-                this.isSidebarOpen = false;
-                this.renderer.removeClass(this.navSideBar.nativeElement, 'show');
-            }
+        this.showOverlay = true;
+        this.renderer.addClass(this.userModalBox.nativeElement, 'show');
+
+        if (type === this.userActionTrigger.change) {
+            this.isEditProfileOpen = false;
+            this.isChangePasswordOpen = true;
+            window.scrollTo(0, 0);
+        } else if (type === this.userActionTrigger.edit) {
+            this.isChangePasswordOpen = false;
+            this.isEditProfileOpen = true;
+        }
+
+        this.isSidebarOpen = false;
+        this.renderer.removeClass(this.navSideBar.nativeElement, 'show');
+        this.renderer.removeClass(this.closeSideBar.nativeElement, 'show');
+    }
 
     closeAllDialog() {
         this.renderer.removeClass(this.modalBox.nativeElement, 'show');
         this.renderer.removeClass(this.userModalBox.nativeElement, 'show');
         this.renderer.removeClass(this.navSideBar.nativeElement, 'show');
+        this.renderer.removeClass(this.closeSideBar.nativeElement, 'show');
 
         this.isSidebarOpen = false;
         this.showOverlay = false;
@@ -168,9 +171,17 @@ export class HeaderComponent implements OnInit {
         }
     }
 
-    logout(){
-		window.location.reload();
-	}
+    logout() {
+        window.location.reload();
+    }
+
+    showEmergencyWrap() {
+        this.showEmergency = true;
+    }
+
+    hideEmergencyWrap() {
+        this.showEmergency = false;
+    }
 }
 interface triggerType {
     login: string;
@@ -178,7 +189,7 @@ interface triggerType {
     forgotPassword: string;
 }
 
-interface userTriggerType{
+interface userTriggerType {
     edit: string;
     change: string;
 }

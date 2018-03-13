@@ -107,7 +107,7 @@ export class BusService {
     }
 
     getBusLayout(tripId, pickupId, dropoffId) {
-        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken") });
+        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken"), 'paymentChannel': sessionStorage.getItem("paymentChannel") });
         let options = new RequestOptions({ headers: headers });
         let body = {
             tripId: tripId,
@@ -123,7 +123,7 @@ export class BusService {
     }
 
     getTransId(transType: string) {
-        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken") });
+        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken"), 'paymentChannel': sessionStorage.getItem("paymentChannel") });
         let options = new RequestOptions({ headers: headers });
         let body = {
             transType: transType
@@ -137,7 +137,7 @@ export class BusService {
     }
 
     markSeat(markSeat: MarkSeatModel) {
-        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken") });
+        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken"), 'paymentChannel': sessionStorage.getItem("paymentChannel") });
         let options = new RequestOptions({ headers: headers });
         let body = {
             transId: markSeat.transId + "",
@@ -165,7 +165,7 @@ export class BusService {
     }
 
     unMarkSeat(markSeat: MarkSeatModel, reserveId) {
-        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken") });
+        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken"), 'paymentChannel': sessionStorage.getItem("paymentChannel") });
         let options = new RequestOptions({ headers: headers });
         let body = {
             transId: markSeat.transId + "",
@@ -188,7 +188,7 @@ export class BusService {
     }
 
     getTransCheckout(transId: string) {
-        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken") });
+        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken"), 'paymentChannel': sessionStorage.getItem("paymentChannel") });
         let options = new RequestOptions({ headers: headers });
         let body = {
             transId: transId
@@ -202,7 +202,7 @@ export class BusService {
     }
 
     cancelBooking(transId, bookId, bookCode) {
-        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken") });
+        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken"), 'paymentChannel': sessionStorage.getItem("paymentChannel") });
         let options = new RequestOptions({ headers: headers });
         let body = {
             transId: transId + "",
@@ -219,7 +219,7 @@ export class BusService {
 
     }
     booking(passengerBooking: PassengerBookingModel) {
-        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken") });
+        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken"), 'paymentChannel': sessionStorage.getItem("paymentChannel") });
         let options = new RequestOptions({ headers: headers });
         let body = {
             transId: passengerBooking.transId,
@@ -259,7 +259,7 @@ export class BusService {
     }
 
     clearTransSeatMark(transId: string) {
-        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken") });
+        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken"), 'paymentChannel': sessionStorage.getItem("paymentChannel") });
         let options = new RequestOptions({ headers: headers });
         let body = {
             transId: transId
@@ -273,7 +273,7 @@ export class BusService {
     }
 
     insertBookingInfo(insertBooking: InsertBookingInfoModel) {
-        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken") });
+        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken"), 'paymentChannel': sessionStorage.getItem("paymentChannel") });
         let options = new RequestOptions({ headers: headers });
         let body = insertBooking;
         return this.http.post(this.insertBookingInfoAPI, JSON.stringify(body), options)

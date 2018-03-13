@@ -190,6 +190,17 @@ export class SelectRoundComponent implements OnInit {
     }
   }
 
+
+  checkSelectRtrnTrip(trip) {
+    return this.selectedDptrTrip != null && this.selectedDptrTrip != undefined
+      && (
+        (this.selectedDptrTrip.busStd.desc != trip.busStd.desc)
+        || (this.dptrFare != this.convertStringToNumber(trip.fare) + this.convertStringToNumber(trip.fee))
+        || (trip.route.id != this.selectedDptrTrip.route.id)
+      );
+  }
+
+
   getBusLayoutToNextPage() {
     this.busService.getBusLayout(this.selectedDptrTrip.id, this.selectedDptrTrip.dptrPark.id, this.selectedDptrTrip.arrvPark.id).subscribe((res) => {
       if (res.code == this.const.successCode) {

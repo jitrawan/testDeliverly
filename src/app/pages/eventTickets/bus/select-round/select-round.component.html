@@ -175,9 +175,7 @@
             <td> {{data.emptySeats}} / {{data.seats}} ที่นั่ง</td>
             <td *ngIf="data.emptySeats != 0">
 
-              <ng-container *ngIf="this.selectedDptrTrip != null && this.selectedDptrTrip != undefined 
-                                && (this.selectedDptrTrip.busStd.desc != data.busStd.desc || this.dptrFare != convertStringToNumber(data.fare) + convertStringToNumber(data.fee)) 
-                                else normalInput">
+              <ng-container *ngIf="checkSelectRtrnTrip(data) else normalInput">
                 <input class="notallow" class="form-check-input" type="radio" id="arrvTrip{{index}}" name="arrvTrip" disabled>
                 <label class="notallow" style="cursor: not-allowed;" for="arrvTrip{{index}}">{{convertStringToNumber(data.fare) + convertStringToNumber(data.fee) | number: '1.2'}} บาท</label>
               </ng-container>

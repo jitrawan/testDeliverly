@@ -4,7 +4,7 @@ import { ActivatedRoute } from "@angular/router";
 @Component({
   selector: 'app-faq',
   templateUrl: './faq.component.html',
-  styleUrls: ['./faq.component.css']
+  styleUrls: ['./faq.component.css','../../../assets/css/standard/layout.css']
 })
 export class FaqComponent implements OnInit {
   showHowToBuy: boolean;

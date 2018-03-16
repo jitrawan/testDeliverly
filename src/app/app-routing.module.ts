@@ -27,7 +27,7 @@ import { BusReceiveComponent } from './pages/eventTickets/bus/bus-receive/bus-re
 import { BusErrorComponent } from './pages/eventTickets/bus/bus-error/bus-error.component';
 import { ResultPaidTransitComponent } from './pages/resultPaid/result-paid-transit/result-paid-transit.component';
 import { PopupResultPaidTransitComponent } from './pages/resultPaid-popup/result-paid-transit-popup/result-paid-transit-popup.component';
-
+import { FshowzoneComponent } from './pages/eventTickets/concert/fshowzone/fshowzone.component';
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
   // { path: '**', component: SelectDestinationComponent },
@@ -48,30 +48,13 @@ const routes: Routes = [
   { path: 'policy', component: PolicyComponent },
   { path: 'faq', component: FaqComponent },
   { path: 'faq/:howto', component: FaqComponent },
-  // { path: 'transport/airlines', component: AirlinesComponent },
-  // { path: 'transport/bus', component: BusComponent },
-  // { path: 'transport/bus/selectDestination', component: SelectDestinationComponent },
-  // { path: 'transport/bus/selectSeat', component: SelectSeatComponent },
-  // { path: 'transport/bus/selectRound', component: SelectRoundComponent },
-  // { path: 'transport/bus/passengerInfomation', component: PassengerInformationComponent },
-  // { path: 'transport/bus/selectRound', component: SelectRoundComponent },
-  // { path: 'transport/bus/summary', component: SummaryComponent },
-  // {
-  //   path: 'transport/bus/buyTicket', component: BuyTicketComponent,
-  //   children: [
-  //     { path: '', component: SelectDestinationComponent },
-  //     { path: 'selectRound', component: SelectRoundComponent },
-  //     { path: 'selectSeat', component: SelectSeatComponent },
-  //     { path: 'passengerInfomation', component: PassengerInformationComponent },
-  //     { path: 'summary', component: SummaryComponent }
-  //   ]
-  // },
   { path: 'shopping', component: ShoppingComponent },
-  { path: 'transport/travel', component: TravelComponent },
+  { path: 'transport/bus', component: BusComponent },
   { path: 'allevent/:type', component: AllEventComponent },
   { path: 'resultReserve', component: ResultReserveTransitComponent },
   { path: 'historyDetail', component: HistoryDetailComponent },
   { path: 'busReceive', component: BusReceiveComponent },
+  { path: 'fshowzone', component: FshowzoneComponent },
 ];
 
 @NgModule({

@@ -201,7 +201,7 @@
       </button>
       <div style="text-align: center">
         <h3>Register</h3>
-        <!-- <img class="login-facebook" src="../assets/images/facebook_btn.png"> -->
+          <button class="btn btn-atk-primary mt-4 signUp-button" type="button"(click)="signInWithFB()"><span class="fa fa-facebook"></span>  Facebook</button>
         <div class="col-md-12 col-sm-12 mt-2">
           Already member ?
           <a class="cursor-pointer modal-text-primary" (click)="triggerDialog(actionTrigger.login)"> Sign in</a>
@@ -456,7 +456,6 @@
           </div>
         </div>
         <div class="col-md-12 u-form-group">
-            <button class="btn btn-atk-primary mt-4 signUp-button" type="button" (click)="signInWithFB()">Login Facebook</button>
           <button class="btn btn-atk-primary mt-4 signUp-button" type="button">Sign up</button>
         </div>
       </form>

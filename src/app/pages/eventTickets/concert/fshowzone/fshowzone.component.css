@@ -1,0 +1,209 @@
+.fshowzoneWrapper{
+    width: 100%;
+}
+
+.zoneWrapper{
+    margin: 0px 20% 0px 20%;
+}
+
+.fshowzoneWrapper .event-detail {
+    margin: 30px 20% 0px 20%;
+    padding: 10px;
+    background-color: #edeef0;
+    color: #313030;
+    border: 1px solid #cdd7e1;
+    height: auto;
+}
+
+.fshowzoneWrapper .howToSelect{
+     background: #bfbdbd;
+     text-align: center;
+     padding: 3px;
+}
+
+.fshowzoneWrapper .head-color {
+    color: #3662f5;
+}
+
+.fshowzoneWrapper .fit {
+    width: 100%;
+}
+
+.fshowzoneWrapper .float-left {
+    float: left;
+}
+
+.fshowzoneWrapper .highlightDate a {
+    background-color :green !important;
+    background-image :none !important;
+    color: White !important;
+    font-weight:bold !important;
+    font-size: 12pt;
+}
+
+.fshowzoneWrapper .nothighlightDate a {
+/* 	#08080a */
+    background-color :#08080a !important;
+    background-image :none !important;
+    color : White !important;
+    font-weight : bold !important;
+}
+
+.fshowzoneWrapper .nothighlightDateAvatar a {
+/*  	  #eaeae1 #1c1c31*/
+    background-color : blue !important;
+    background-image :none !important;
+    color : White !important;
+    font-weight : bold !important; 
+}
+.fshowzoneWrapper .ui-datepicker-trigger {
+    height : 20px !important;
+    width : 20px !important;
+    margin: 2px !important;
+}
+     
+ .fshowzoneWrapper .font14{
+         font-size : 14px;
+}
+
+ #selectZoneFrm img{
+    width:100%!important;
+    height:auto!important;
+}
+
+.fshowzoneWrapper .eventSelect{
+    background-color : #bfbdbd;
+}
+
+.fshowzoneWrapper .zonePrice{
+    font-size: 14px;
+    background: #bfbdbd;
+}
+
+.fshowzoneWrapper .btnSeatAvlb{
+    border: 1px solid #969688; 
+    color: #585a5f; 
+    background: #dcdde1; 
+    cursor: pointer;
+}
+
+.fshowzoneWrapper .eventName{
+    font-size:20px
+}
+
+.fshowzoneWrapper .fontEventDetail{
+    font-size : 16px;
+    margin-top : 10px;
+}
+
+.fshowzoneWrapper .ticketPrice{
+    background: #000000; 
+    color: #FFFFFF; 
+    height: 30px; 
+    text-align:center;
+    padding-top: 5px;
+}
+
+.fshowzoneWrapper .zoneColor{
+    height:30px;
+}
+
+.fshowzoneWrapper #showSeatEmptyPnCon {
+    height:300px
+}
+
+#showSeatEmptyPn .modal-dialog{
+    width: 80%;
+    max-width: 200px;
+}
+
+@media screen and (max-width: 750px) {
+    .fshowzoneWrapper .event-detail {
+        margin: 30px 15% 0px 15%;
+    }
+    .fshowzoneWrapper .zoneWrapper{
+        margin: 0px 15% 0px 15%;
+    }
+    .fshowzoneWrapper .fontEventDetail{
+        font-size : 12px;
+    }	
+    .fshowzoneWrapper .ticketPrice{
+        font-size : 12px;
+    }
+    .fshowzoneWrapper .howToSelect{
+        font-size : 14px;
+    }
+    .fshowzoneWrapper .eventName{
+        font-size: 14px
+    }
+    .fshowzoneWrapper .ticketPrice{
+        height:20px;
+        margin-right: 10px;
+        padding: 0px;
+    }
+    .fshowzoneWrapper .zoneColor{
+        height:20px;
+        margin-left: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .fshowzoneWrapper .event-detail {
+        margin: 20px 0px 0px 0px;
+    }
+    .fshowzoneWrapper .zoneWrapper{
+        margin: 0px 0px 0px 0px;
+    }
+    .fshowzoneWrapper .howToSelect{
+        font-size: 10px;
+    }
+    .fshowzoneWrapper .eventName{
+        font-size: 12px
+    }
+    .fshowzoneWrapper .ticketPrice{
+        height:20px;
+        margin-right: 10px;
+        padding: 0px;
+    }
+    .fshowzoneWrapper .zoneColor{
+        height:20px;
+        margin-left: 10px;
+    }
+}
+
+#showSeatEmptyPn .modal-dialog,
+#showSeatEmptyPn .modal-content {
+    /* 80% of window height */
+    height: 90%;
+}
+
+#showSeatEmptyPn .modal-body {
+    /* 100% = dialog height, 120px = header + footer */
+    max-height: calc(100% - 120px);
+    overflow-y: scroll;
+}
+
+#showSeatEmptyPnCon {
+    height: 100%;
+}
+
+.modalCenter {text-align: center;}
+
+@media screen and (min-width: 768px) {
+    #showSeatEmptyPn .modal:before {
+        display: inline-block;
+        vertical-align: middle;
+        content: " ";
+        height: 100%;
+    }
+}
+
+#showSeatEmptyPn .modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+}
+
+area {
+    outline: none;
+}

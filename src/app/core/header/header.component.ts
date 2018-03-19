@@ -86,6 +86,9 @@ export class HeaderComponent implements OnInit {
     signInWithFB(): void {
         this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
       }
+      signInWithGoogle(): void {
+        this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+      }
 
     ngAfterViewInit() {
         // setTimeout(_ => this.navbarContent = this.child.nativeElement.innerHTML);

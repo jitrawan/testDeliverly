@@ -1,9 +1,9 @@
 <div class="overlay" *ngIf="showOverlay" (click)="overlayClicked($event)"></div>
 <header id="header">
-  <div class="close-sidebar" #closeSideBar >
+  <div class="close-sidebar" #closeSideBar>
     <i class="fa fa-times fa-2x" aria-hidden="true" (click)="closeAllDialog()"></i>
   </div>
-  <nav #navSideBar id="nav-sidebar" >
+  <nav #navSideBar id="nav-sidebar">
     <div class="sidebar-header">
       <div class="row">
         <div class="col-8">
@@ -218,13 +218,13 @@
                 <mark class="mark-require">*</mark> :</div>
               <div class="offset-col-3 col-3 col-md-2" (click)="showEmergencyWrap()">
                 <div class="custom-control custom-radio">
-                  <input type="radio" #runningYes id="runningYes" name="runningRadio" class="custom-control-input" >
+                  <input type="radio" #runningYes id="runningYes" name="runningRadio" class="custom-control-input">
                   <label class="custom-control-label" for="runningYes">Yes</label>
                 </div>
               </div>
               <div class="col-3 offset-col-3 col-md-2 pl-2" (click)="hideEmergencyWrap()">
                 <div class="custom-control custom-radio">
-                  <input type="radio" id="runningNo" name="runningRadio" class="custom-control-input"  [(ngModel)]="currentItem" >
+                  <input type="radio" id="runningNo" name="runningRadio" class="custom-control-input" [(ngModel)]="currentItem">
                   <label class="custom-control-label" for="runningNo">No</label>
                 </div>
               </div>
@@ -268,17 +268,15 @@
           </div>
         </div>
         <div class="reg-form-group">
-          <div class="col-md-12 col-sm-12 topic">
-            <div class="row">
-              <div class="custom-control custom-radio">
-                <input type="radio" id="inputMale" name="custGender" class="custom-control-input">
-                <label class="custom-control-label" for="inputMale">Male</label>
-              </div>
-              &nbsp;&nbsp;&nbsp;
-              <div class="custom-control custom-radio">
-                <input type="radio" id="inputFemale" name="custGender" class="custom-control-input">
-                <label class="custom-control-label" for="inputFemale">Female</label>
-              </div>
+          <div class="col-md-12 col-sm-12 topic d-flex">
+            <div class="custom-control custom-radio">
+              <input type="radio" id="inputMale" name="custGender" class="custom-control-input">
+              <label class="custom-control-label" for="inputMale">Male</label>
+            </div>
+            &nbsp;&nbsp;&nbsp;
+            <div class="custom-control custom-radio">
+              <input type="radio" id="inputFemale" name="custGender" class="custom-control-input">
+              <label class="custom-control-label" for="inputFemale">Female</label>
             </div>
           </div>
         </div>
@@ -370,28 +368,26 @@
             </div>
           </div>
           <div class="reg-form-group">
-            <div class="col-md-12 col-sm-12 topic">
-              <div class="row">
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="idCard" name="custCardType" class="custom-control-input">
-                  <label class="custom-control-label" for="idCard">ID Card No.</label>
-                </div>
-                &nbsp;&nbsp;
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="passport" name="custCardType" class="custom-control-input">
-                  <label class="custom-control-label" for="passport">Passport No.</label>
-                </div>
+            <div class="col-md-12 col-sm-12 topic d-flex">
+              <div class="custom-control custom-radio">
+                <input type="radio" id="idCard" name="custCardType" class="custom-control-input">
+                <label class="custom-control-label" for="idCard">ID Card No.</label>
               </div>
-              <div class="col-md-12 col-sm-12 mt-3 information p0">
-                <input type="text" class="form-control" name="custCardNumber" maxlength="13" />
+              &nbsp;&nbsp;
+              <div class="custom-control custom-radio">
+                <input type="radio" id="passport" name="custCardType" class="custom-control-input">
+                <label class="custom-control-label" for="passport">Passport No.</label>
               </div>
+            </div>
+            <div class="col-md-12 col-sm-12 mt-3 information">
+              <input type="text" class="form-control" name="custCardNumber" maxlength="13" />
             </div>
           </div>
           <div class="reg-form-group customer-tel">
             <div class="col-md-12 col-sm-12 topic">
               <mark class="mark-require">*</mark> Mobile Phone Number</div>
-            <div class="col-md-12 col-sm-12 information telno">
-              <div class="input-group mb-3">
+            <div class="col-md-12 col-sm-12 mt-3 information telno">
+              <div class="input-group mb-3 ">
                 <div class="input-group-prepend">
                   <button class="btn telcountry" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img src="https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/images/th-flag.png" style="width: 20px">
@@ -399,7 +395,7 @@
                   <div class="dropdown-menu">
                   </div>
                 </div>
-                <input type="text" class="form-control" placeholder="0XXXXXXXXX" maxlength="10">
+                <input type="text" class="form-control telnoRadius" placeholder="0XXXXXXXXX" maxlength="10">
               </div>
             </div>
           </div>
@@ -425,7 +421,7 @@
                     <div class="dropdown-menu">
                     </div>
                   </div>
-                  <input type="text" class="form-control" placeholder="0XXXXXXXXX" maxlength="10">
+                  <input type="text" class="form-control telnoRadius" placeholder="0XXXXXXXXX" maxlength="10">
                 </div>
               </div>
             </div>
@@ -449,7 +445,7 @@
               <div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" id="acceptNews">
                 <label class="custom-control-label" for="acceptNews">
-                  <span style="font-size: 14px;">&nbsp; Accept the newsletter</span>
+                  <span>&nbsp; Accept the newsletter</span>
                 </label>
               </div>
             </div>

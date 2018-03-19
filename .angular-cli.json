@@ -19,9 +19,9 @@
     "prefix": "app",
     "styles": [
       "../node_modules/bootstrap/dist/css/bootstrap.min.css",
-      "styles.css",
       "assets/css/standard/owl.carousel-custom.css",
-      "assets/css/standard/animate.css"
+      "assets/css/standard/animation.css",
+      "styles.css"
     ],
     "scripts": ["../node_modules/jquery/dist/jquery.min.js",
       "../node_modules/bootstrap/dist/js/bootstrap.js"

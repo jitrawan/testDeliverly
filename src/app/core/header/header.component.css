@@ -669,10 +669,9 @@ pv10 {
   padding: 0 10px 0 10px;
 }
 
-.telno .form-control {
-  border-radius: 0px !important;
-  border-top-right-radius: 12px !important;
-  border-bottom-right-radius: 12px !important;
+.telnoRadius {
+  border-top-left-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
 }
 
 .nav-item a {

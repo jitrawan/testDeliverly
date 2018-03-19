@@ -3,6 +3,10 @@ import { Router } from '@angular/router';
 import { HeaderModel } from '../../shared/models/header.model';
 import { HeaderService } from '../../shared/services/header.service';
 
+import { AuthService } from 'angularx-social-login';
+import { SocialUser } from 'angularx-social-login';
+import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider } from 'angularx-social-login';
+
 declare var jQuery: any;
 declare var $: any;
 
@@ -37,6 +41,8 @@ export class HeaderComponent implements OnInit {
         change: 'change',
     }
 
+    user: SocialUser;
+
     @ViewChild('navSideBar') private navSideBar: ElementRef;
     @ViewChild('modalBox') private modalBox: ElementRef;
     @ViewChild('userModalBox') private userModalBox: ElementRef;
@@ -58,6 +64,7 @@ export class HeaderComponent implements OnInit {
         private renderer: Renderer2,
         private headerService: HeaderService,
         private router: Router,
+        private authService: AuthService
     ) {
         this.showEmergency = false;
     }
@@ -69,9 +76,16 @@ export class HeaderComponent implements OnInit {
             this.headerModel = response['data'];
         });
 
+        this.authService.authState.subscribe((user) => {
+            this.user = user;
+          });
 
 
     }
+
+    signInWithFB(): void {
+        this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+      }
 
     ngAfterViewInit() {
         // setTimeout(_ => this.navbarContent = this.child.nativeElement.innerHTML);

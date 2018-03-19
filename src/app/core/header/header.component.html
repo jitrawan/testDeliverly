@@ -207,9 +207,8 @@
           <a class="cursor-pointer modal-text-primary" (click)="triggerDialog(actionTrigger.login)"> Sign in</a>
         </div>
       </div>
-      <!-- <div class="or">
-                                    <span>OR</span>
-                                </div> -->
+     
+    <!-- Register -->
       <form class="email-register">
         <div class="reg-form-group">
           <div class="col-md-12 col-sm-12 topic">
@@ -235,7 +234,7 @@
           <div class="col-md-12 col-sm-12 topic">
             <mark class="mark-require">*</mark> Email</div>
           <div class="col-md-12 col-sm-12 information">
-            <input type="email" class="form-control" name="custEmail" />
+            <input type="email" class="form-control" name="custEmail" value="{{ user.email }}"/>
           </div>
         </div>
         <div class="reg-form-group">
@@ -255,18 +254,12 @@
         <div class="col-md-12 col-sm-12 personinformation">Personal Information</div>
         <div class="reg-form-group">
           <div class="col-md-12 col-sm-12 topic">
-            <mark class="mark-require">*</mark> First name</div>
+            <mark class="mark-require">*</mark> First name - Last name</div>
           <div class="col-md-12 col-sm-12 mt-3 information">
-            <input type="text" class="form-control" name="custFirstName" />
+            <input type="text" class="form-control" name="custFirstName" value="{{ user.name }}" />
           </div>
         </div>
-        <div class="reg-form-group">
-          <div class="col-md-12 col-sm-12 topic">
-            <mark class="mark-require">*</mark> Last name</div>
-          <div class="col-md-12 col-sm-12 mt-3 information">
-            <input type="text" class="form-control" name="custLastname" />
-          </div>
-        </div>
+       
         <div class="reg-form-group">
           <div class="col-md-12 col-sm-12 topic d-flex">
             <div class="custom-control custom-radio">
@@ -463,10 +456,12 @@
           </div>
         </div>
         <div class="col-md-12 u-form-group">
+            <button class="btn btn-atk-primary mt-4 signUp-button" type="button" (click)="signInWithFB()">Login Facebook</button>
           <button class="btn btn-atk-primary mt-4 signUp-button" type="button">Sign up</button>
         </div>
       </form>
     </ng-container>
+    <!-- End Register -->
 
     <ng-container *ngIf="isShowForgotPassword">
       <button type="button" class="close" (click)="closeAllDialog()" id="closeForgotBox">

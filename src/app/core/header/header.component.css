@@ -26,6 +26,10 @@ body {
   transition: .5s ease-in-out;
 }
 
+.standard-logo {
+  cursor: pointer;
+}
+
 #searchBox {
   background: rgba(255, 255, 255, 0.3);
   border-radius: 10px;
@@ -72,6 +76,7 @@ body {
 .header-logo img {
   max-width: 100%;
   max-height: 50px;
+  cursor: pointer;
 }
 
 .flag-wrapper {

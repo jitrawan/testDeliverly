@@ -37,11 +37,6 @@
 
 .menu:active {
   color: #b3b3b3;
-  outline: none !important;
-}
-
-.menu:focus {
-  outline: none !important;
 }
 
 .menu:active .rightArrowNonActive,
@@ -58,8 +53,6 @@
 
 .menuActive {
   color: #3191f5;
-  border: 0px;
-  outline: none !important;
 }
 
 .menuActive .rightArrowNonActive {
@@ -105,3 +98,4 @@
 .pickupStationEng {
   font-size: 12px;
 }
+

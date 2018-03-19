@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, Renderer2, AfterContentChecked } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 
 @Component({
@@ -25,10 +25,6 @@ export class FaqComponent implements OnInit {
 
   ngOnInit() {
 
-
-  }
-
-  ngAfterContentChecked() {
     this.howto = this.route.snapshot.params.howto;
 
     if (this.howto === 'buy') {
@@ -37,8 +33,7 @@ export class FaqComponent implements OnInit {
       this.showRefund()
     } else if (this.howto === 'pickup') {
       this.showPickup()
-    } 
-
+    }
 
   }
 

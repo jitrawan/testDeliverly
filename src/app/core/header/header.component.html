@@ -512,55 +512,53 @@
             <div class="row">
               <div class="col-12 col-md-7">Register for event running
                 <mark class="mark-require">*</mark> :</div>
-              <div class="col-3 col-md-2">
-                <label class="custom-control custom-radio">
-                  <input id="editRunningYes" name="editRegType" type="radio" value="1" class="custom-control-input">
-                  <span class="custom-control-indicator"></span>
-                  <span class="custom-control-description">Yes</span>
-                </label>
+              <div class="offset-col-3 col-3 col-md-2" (click)="showEmergencyWrap()">
+                <div class="custom-control custom-radio">
+                  <input type="radio" #runningYes id="runningYes" name="runningRadio" class="custom-control-input">
+                  <label class="custom-control-label" for="runningYes">Yes</label>
+                </div>
               </div>
-              <div class="col-1">/</div>
-              <div class="col-3 col-md-2 pl-2">
-                <label class="custom-control custom-radio">
-                  <input id="editRunningNo" name="editRegType" type="radio" value="2" checked class="custom-control-input" />
-                  <span class="custom-control-indicator"></span>
-                  <span class="custom-control-description">No</span>
-                </label>
+              <div class="col-3 offset-col-3 col-md-2 pl-2" (click)="hideEmergencyWrap()">
+                <div class="custom-control custom-radio">
+                  <input type="radio" id="runningNo" name="runningRadio" class="custom-control-input" [(ngModel)]="currentItem">
+                  <label class="custom-control-label" for="runningNo">No</label>
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div class="reg-form-group">
           <div class="col-md-12 col-sm-12 topic">
+            <mark class="mark-require">*</mark> Email</div>
+          <div class="col-md-12 col-sm-12 information">
+            <input type="email" class="form-control" name="custEmail" />
+          </div>
+        </div>
+        <div class="col-md-12 col-sm-12 personinformation">Personal Information</div>
+        <div class="reg-form-group">
+          <div class="col-md-12 col-sm-12 topic">
             <mark class="mark-require">*</mark> First name</div>
-          <div class="col-md-12 col-sm-12 mt-2 information">
-            <input type="text" class="form-control" name="editCustFirstName" />
+          <div class="col-md-12 col-sm-12 mt-3 information">
+            <input type="text" class="form-control" name="custFirstName" />
           </div>
         </div>
         <div class="reg-form-group">
           <div class="col-md-12 col-sm-12 topic">
             <mark class="mark-require">*</mark> Last name</div>
-          <div class="col-md-12 col-sm-12 mt-2 information">
-            <input type="text" class="form-control" name="editCustLastname" />
+          <div class="col-md-12 col-sm-12 mt-3 information">
+            <input type="text" class="form-control" name="custLastname" />
           </div>
         </div>
         <div class="reg-form-group">
-          <div class="col-md-12 col-sm-12 topic">
-            <div class="row">
-              <div class="col-6">
-                <label class="custom-control custom-radio">
-                  <input id="editInputMale" name="editCustGender" type="radio" value="1" class="custom-control-input" />
-                  <span class="custom-control-indicator"></span>
-                  <span class="custom-control-description">Male</span>
-                </label>
-              </div>
-              <div class="col-6">
-                <label class="custom-control custom-radio">
-                  <input id="editInputFemale" name="editCustGender" type="radio" value="2" class="custom-control-input" />
-                  <span class="custom-control-indicator"></span>
-                  <span class="custom-control-description">Female</span>
-                </label>
-              </div>
+          <div class="col-md-12 col-sm-12 topic d-flex">
+            <div class="custom-control custom-radio">
+              <input type="radio" id="inputMale" name="custGender" class="custom-control-input">
+              <label class="custom-control-label" for="inputMale">Male</label>
+            </div>
+            &nbsp;&nbsp;&nbsp;
+            <div class="custom-control custom-radio">
+              <input type="radio" id="inputFemale" name="custGender" class="custom-control-input">
+              <label class="custom-control-label" for="inputFemale">Female</label>
             </div>
           </div>
         </div>
@@ -604,7 +602,7 @@
                   <option value="">31</option>
                 </select>
               </div>
-              <div class="form-group pv10 ">
+              <div class="form-group " style="padding: 0px 10px 0px 10px">
                 <select class="form-control dropdownCustomMM" id="select-month">
                   <option>January</option>
                   <option>Feburay</option>
@@ -652,83 +650,77 @@
             </div>
           </div>
           <div class="reg-form-group">
-            <div class="col-md-12 col-sm-12 topic">
-              <mark class="mark-require">*</mark>
-              <label class="custom-control custom-radio">
-                <input readonly="readonly" id="editIdCard" name="editCustCardType" type="radio" class="custom-control-input" />
-                <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">ID Card No.</span>
-              </label>
-              <label class="custom-control custom-radio">
-                <input readonly="readonly" id="editPassport" name="editCustCardType" type="radio" class="custom-control-input" />
-                <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">Passport No.</span>
-              </label>
+            <div class="col-md-12 col-sm-12 topic d-flex">
+              <div class="custom-control custom-radio">
+                <input type="radio" id="idCard" name="custCardType" class="custom-control-input">
+                <label class="custom-control-label" for="idCard">ID Card No.</label>
+              </div>
+              &nbsp;&nbsp;
+              <div class="custom-control custom-radio">
+                <input type="radio" id="passport" name="custCardType" class="custom-control-input">
+                <label class="custom-control-label" for="passport">Passport No.</label>
+              </div>
             </div>
-            <div class="col-md-12 col-sm-12 information">
-              <input readonly="readonly" class="form-control" type="text" name="editCustCardNumber" id="editCustCardNumber" />
+            <div class="col-md-12 col-sm-12 mt-3 information">
+              <input type="text" class="form-control" name="custCardNumber" maxlength="13" />
             </div>
           </div>
-          <div class="reg-form-group editNationality">
-            <div class="col-md-12 col-sm-12 topic">
-              <mark class="mark-require">*</mark> Nationality</div>
-            <div class="col-md-12 col-12 form-group">
-              <select class="form-control dropdownNational" id="editCustNationality" name="editCustNationality"></select>
-            </div>
-          </div>
-          <div class="reg-form-group">
+          <div class="reg-form-group customer-tel">
             <div class="col-md-12 col-sm-12 topic">
               <mark class="mark-require">*</mark> Mobile Phone Number</div>
-            <div class="col-md-12 col-sm-12 information">
-              <div class="input-group">
-                <div class="input-group-btn">
-                  <button type="button" class="btn telcountry" aria-haspopup="true" aria-expanded="false">
+            <div class="col-md-12 col-sm-12 mt-3 information telno">
+              <div class="input-group mb-3 ">
+                <div class="input-group-prepend">
+                  <button class="btn telcountry" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img src="https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/images/th-flag.png" style="width: 20px">
                   </button>
-                  <div class="dropdown-menu"></div>
+                  <div class="dropdown-menu">
+                  </div>
                 </div>
-                <input type="text" class="form-control" placeholder="0XXXXXXXXX" name="custTel" maxlength="10">
+                <input type="text" class="form-control telnoRadius" placeholder="0XXXXXXXXX" maxlength="10">
               </div>
             </div>
           </div>
-        </div>
-        <div class="editShowEmergency">
-          <div class="col-md-12 col-sm-12 emergencyContact">Emergency Contact Person Information</div>
-          <div class="reg-form-group">
-            <div class="col-md-12 col-sm-12 topic">
-              <mark class="mark-require">*</mark> Emergency Contact Name</div>
-            <div class="col-md-12 col-sm-12 information">
-              <input type="text" class="form-control" id="editEmerName" name="editEmerName" />
+          <div class="showEmergency" *ngIf="showEmergency">
+            <div class="col-md-12 col-sm-12 emergencyContact">Emergency Contact Person Information</div>
+            <div class="reg-form-group">
+              <div class="col-md-12 col-sm-12 topic">
+                <mark class="mark-require">*</mark> Emergency Contact Name</div>
+              <div class="col-md-12 col-sm-12 information">
+                <input type="text" class="form-control" id="emerName" name="emerName" />
+              </div>
             </div>
-          </div>
-          <div class="reg-form-group">
-            <div class="col-md-12 col-sm-12 topic">
-              <mark class="mark-require">*</mark> Emergency Contact Phone</div>
-            <div class="col-md-12 col-sm-12 information">
-              <div class="input-group">
-                <div class="input-group-btn">
-                  <button type="button" class="btn telcountry" aria-haspopup="true" aria-expanded="false">
-                    <img src="https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/images/th-flag.png" style="width: 20px"
-                    />
-                  </button>
-                  <div class="dropdown-menu"></div>
+            <div class="reg-form-group">
+              <div class="col-md-12 col-sm-12 topic">
+                <mark class="mark-require">*</mark> Emergency Contact Phone
+              </div>
+              <div class="col-md-12 col-sm-12 information telno">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <button class="btn telcountry" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <img src="https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/images/th-flag.png" style="width: 20px">
+                    </button>
+                    <div class="dropdown-menu">
+                    </div>
+                  </div>
+                  <input type="text" class="form-control telnoRadius" placeholder="0XXXXXXXXX" maxlength="10">
                 </div>
-                <input type="text" class="form-control" placeholder="0XXXXXXXXX" id="editEmerTel" name="editEmerTel" />
               </div>
             </div>
           </div>
-        </div>
-        <div class="text-center my-2" *ngIf="isCaptchaOpen">
-          <div class="captcha">
-            <img class="captcha-img w50pc ml1em" src="" />
-            <img class="captcha-reload" src="https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/images/refresh.png" alt="Refresh captcha"
-              title="Refresh captcha" />
+
+          <div class="text-center my-2" *ngIf="isCaptchaOpen">
+            <div class="captcha">
+              <img class="captcha-img w50pc ml1em" src="" />
+              <img class="captcha-reload" src="https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/images/refresh.png" alt="Refresh captcha"
+                title="Refresh captcha" />
+            </div>
+            <div class="form-group mt-3 mb-0 mb-md-3">
+              <input class="form-control text-center mx-auto w50pc" type="text" value="" name="capchaReserve" maxlength="6" />
+            </div>
           </div>
-          <div class="form-group mt-3 mb-0 mb-md-3">
-            <input class="form-control text-center mx-auto w50pc" type="text" value="" name="capchaReserve" maxlength="6" />
-          </div>
         </div>
-        <div class="col-md-12 u-form-group text-center">
+        <div class="col-md-12 u-form-group">
           <button class="btn btn-atk-primary mt-3" type="button" id="customerProfileEditConfirmBtn">Confirm</button>
         </div>
       </form>

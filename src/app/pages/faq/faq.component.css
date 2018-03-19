@@ -76,15 +76,6 @@
   font-size: 22px;
 }
 
-.howPickUp img {
-  width: 40%;
-  height: auto;
-}
-
-.headTop{
-  font-size: 12px;
-}
-
 @media (max-width: 768px) {
   .topicWrapper {
     padding: 40px;

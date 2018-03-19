@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, HostListener, AfterViewChecked, OnChanges } from '@angular/core';
+import { Component, OnInit, AfterViewInit, HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { EventBanner } from '../../shared/models/eventBanner.model';
 import { ConstMaster } from '../../shared/config/ConstMaster';
@@ -7,17 +7,14 @@ import * as underscore from 'underscore';
 
 import 'owl.carousel';
 declare var jQuery: any;
-import * as Jquery from 'jquery';
+declare var $: any;
 
 @Component({
 	selector: 'app-home',
 	templateUrl: './home.component.html',
 	styleUrls: ['./home.component.css',
-		'../../../assets/css/standard/cardticket.css',
-		'../../../assets/css/standard/utility.css',]
+		'../../../assets/css/standard/cardticket.css', '../../../assets/css/standard/utility.css']
 })
-
-
 export class HomeComponent implements OnInit {
 
 	private countImagesLoaded = 0;
@@ -66,32 +63,10 @@ export class HomeComponent implements OnInit {
 			this.getScreenType();
 		});
 
-		window.onscroll = function (e) {
-            var windowScroll = window.scrollY || document.getElementsByTagName("html")[0].scrollTop;
-            var header = $('#header');
-            if (windowScroll >= 550) {
-                $(header).find('.dropdown-menu').removeClass('show');
-                if (!$(header).hasClass('sticky')) {
-                    $(header).addClass('sticky');
-                }
-				$('.moveToTop').addClass('show');
-				$(".headerSticky").fadeIn(500);
-            } else {
-                if ($(header).hasClass('sticky')) {
-                    $(header).removeClass('sticky');
-                    $(header).find('.dropdown-menu').removeClass('show');
-                }
-				$('.moveToTop').removeClass('show');
-				$(".headerSticky").fadeOut();
-				
-            }
-        }
-
-
 	}
 
-	ngOnChanges() {
-
+	ngAfterViewInit() {
+		// console.log(jQuery('#slider'));
 	}
 
 	getScreenType() {
@@ -146,10 +121,7 @@ export class HomeComponent implements OnInit {
 	goEventInfo(performId: string) {
 		this.router.navigate(['/eventInfo']);
 	}
-
-
-
-
+	
 }
 
 interface CardTicket {

@@ -57,7 +57,6 @@ import { BusErrorComponent } from './pages/eventTickets/bus/bus-error/bus-error.
 
 import { ResultPaidTransitComponent } from './pages/resultPaid/result-paid-transit/result-paid-transit.component';
 import { PopupResultPaidTransitComponent } from './pages/resultPaid-popup/result-paid-transit-popup/result-paid-transit-popup.component';
-import { FshowzoneComponent } from './pages/eventTickets/concert/fshowzone/fshowzone.component';
 
 @NgModule({
   declarations: [
@@ -91,8 +90,7 @@ import { FshowzoneComponent } from './pages/eventTickets/concert/fshowzone/fshow
     BusReceiveComponent,
     BusErrorComponent,
     ResultPaidTransitComponent,
-    PopupResultPaidTransitComponent,
-    FshowzoneComponent
+    PopupResultPaidTransitComponent
   ],
   imports: [
     NgbModule.forRoot(),

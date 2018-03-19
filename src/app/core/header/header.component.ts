@@ -59,7 +59,7 @@ export class HeaderComponent implements OnInit {
         private headerService: HeaderService,
         private router: Router,
     ) {
-        this.showEmergency = false;
+    this.showEmergency = false;
     }
 
     ngOnInit() {
@@ -68,8 +68,6 @@ export class HeaderComponent implements OnInit {
         this.headerService.getHeaderMenu().subscribe(response => {
             this.headerModel = response['data'];
         });
-
-
 
     }
 
@@ -80,7 +78,6 @@ export class HeaderComponent implements OnInit {
     routeMenu(route: string) {
         this.router.navigate([route]);
     }
-
     triggerSidebar() {
         if (this.isSidebarOpen === false && this.isMobileSize) {
             this.isSidebarOpen = true;

@@ -40,7 +40,8 @@ export class HeaderComponent implements OnInit {
         edit: 'edit',
         change: 'change',
     }
-
+    emailSocial : String;
+    nameSocial : String;
     user: SocialUser;
 
     @ViewChild('navSideBar') private navSideBar: ElementRef;
@@ -78,6 +79,11 @@ export class HeaderComponent implements OnInit {
 
         this.authService.authState.subscribe((user) => {
             this.user = user;
+            if(this.user != null){
+                this.emailSocial = this.user.email;
+                this.nameSocial = this.user.name;
+
+            }
           });
 
 

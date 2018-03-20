@@ -201,6 +201,7 @@
       </button>
       <div style="text-align: center">
         <h3>Register</h3>
+
           <button class="loginBtn loginBtn--facebook" (click)="signInWithFB()">
             Login with Facebook
           </button>
@@ -239,7 +240,7 @@
           <div class="col-md-12 col-sm-12 topic">
             <mark class="mark-require">*</mark> Email</div>
           <div class="col-md-12 col-sm-12 information">
-            <input type="email" class="form-control" name="custEmail" value="{{ user.email }}"/>
+            <input type="email" class="form-control" [(ngModel)]="emailSocial" name="custEmail"/>
           </div>
         </div>
         <div class="reg-form-group">
@@ -261,7 +262,7 @@
           <div class="col-md-12 col-sm-12 topic">
             <mark class="mark-require">*</mark> First name - Last name</div>
           <div class="col-md-12 col-sm-12 mt-3 information">
-            <input type="text" class="form-control" name="custFirstName" value="{{ user.name }}" />
+            <input type="text" class="form-control" name="custFirstName" [(ngModel)]="nameSocial" />
           </div>
         </div>
        

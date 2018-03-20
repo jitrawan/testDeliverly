@@ -42,6 +42,7 @@ export class HeaderComponent implements OnInit {
     }
     emailSocial : String;
     nameSocial : String;
+    lastNameSocial : String;
     user: SocialUser;
 
     @ViewChild('navSideBar') private navSideBar: ElementRef;
@@ -81,8 +82,8 @@ export class HeaderComponent implements OnInit {
             this.user = user;
             if(this.user != null){
                 this.emailSocial = this.user.email;
-                this.nameSocial = this.user.name;
-
+                this.nameSocial = this.user.firstName;
+                this.lastNameSocial = this.user.lastName;
             }
           });
 

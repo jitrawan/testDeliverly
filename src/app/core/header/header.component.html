@@ -201,7 +201,12 @@
       </button>
       <div style="text-align: center">
         <h3>Register</h3>
-          <button class="btn btn-atk-primary mt-4 signUp-button" type="button"(click)="signInWithFB()"><span class="fa fa-facebook"></span>  Facebook</button>
+          <button class="loginBtn loginBtn--facebook" (click)="signInWithFB()">
+            Login with Facebook
+          </button>
+          <button class="loginBtn loginBtn--google" (click)="signInWithGoogle()">
+            Login with Google
+          </button>
         <div class="col-md-12 col-sm-12 mt-2">
           Already member ?
           <a class="cursor-pointer modal-text-primary" (click)="triggerDialog(actionTrigger.login)"> Sign in</a>

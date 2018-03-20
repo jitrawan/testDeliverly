@@ -67,7 +67,8 @@ import { AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider, LinkedIn
 const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider('624796833023-clhjgupm0pu6vgga7k5i5bsfp6qp6egh.apps.googleusercontent.com')
+    provider: new GoogleLoginProvider('425750395938-dv11rvh40k70nk9qmc4ao8uh2ph1dcm3.apps.googleusercontent.com')
+    // 624796833023-clhjgupm0pu6vgga7k5i5bsfp6qp6egh.apps.googleusercontent.com
   },
   {
     id: FacebookLoginProvider.PROVIDER_ID,

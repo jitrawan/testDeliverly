@@ -85,6 +85,11 @@
   font-size: 12px;
 }
 
+.selectZone{
+  border-radius: 18px;
+  font-size: 12px;
+}
+
 @media (max-width: 768px) {
   .topicWrapper {
     padding: 40px;

@@ -12,7 +12,10 @@ export class HeaderService {
   private headerUrl = ConstMaster.header.jsonFileEndPoints;
 
   getHeaderMenu(): Observable<HeaderModel> {
-    return this.http.get<HeaderModel>(this.headerUrl);
+    return this.http.get<HeaderModel>('../../assets/json/atknav.json');
+    // return this.http.get<HeaderModel>(this.headerUrl);
   }
+
+
 
 }

@@ -28,6 +28,7 @@ import { BusErrorComponent } from './pages/eventTickets/bus/bus-error/bus-error.
 import { ResultPaidTransitComponent } from './pages/resultPaid/result-paid-transit/result-paid-transit.component';
 import { PopupResultPaidTransitComponent } from './pages/resultPaid-popup/result-paid-transit-popup/result-paid-transit-popup.component';
 import { FshowzoneComponent } from './pages/eventTickets/concert/fshowzone/fshowzone.component';
+import { ConcertComponent } from './pages/eventTickets/concert/concert.component';
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
   // { path: '**', component: SelectDestinationComponent },
@@ -48,7 +49,7 @@ const routes: Routes = [
   { path: 'policy', component: PolicyComponent },
   { path: 'faq', component: FaqComponent },
   { path: 'faq/:howto', component: FaqComponent },
-  { path: 'shopping', component: ShoppingComponent },
+  { path: 'concert', component: ConcertComponent },
   { path: 'transport/bus', component: BusComponent },
   { path: 'allevent/:type', component: AllEventComponent },
   { path: 'resultReserve', component: ResultReserveTransitComponent },

@@ -25,8 +25,8 @@ export class HeaderComponent implements OnInit {
     isLoginOpen: boolean = false;
     isRegisterOpen: boolean = false;
     isShowForgotPassword: boolean = false;
-    username: boolean = true;
-    regAndLog: boolean = true;
+    userMenu: boolean = false;
+    RegAndLog: boolean = true;
     isEditProfileOpen: boolean = false;
     isChangePasswordOpen: boolean = false;
     isCaptchaOpen: boolean = false;
@@ -40,9 +40,9 @@ export class HeaderComponent implements OnInit {
         edit: 'edit',
         change: 'change',
     }
-    emailSocial : String;
-    nameSocial : String;
-    lastNameSocial : String;
+    emailSocial: String;
+    nameSocial: String;
+    lastNameSocial: String;
     user: SocialUser;
 
     @ViewChild('navSideBar') private navSideBar: ElementRef;
@@ -80,22 +80,22 @@ export class HeaderComponent implements OnInit {
 
         this.authService.authState.subscribe((user) => {
             this.user = user;
-            if(this.user != null){
+            if (this.user != null) {
                 this.emailSocial = this.user.email;
                 this.nameSocial = this.user.firstName;
                 this.lastNameSocial = this.user.lastName;
             }
-          });
+        });
 
 
     }
 
     signInWithFB(): void {
         this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
-      }
-      signInWithGoogle(): void {
+    }
+    signInWithGoogle(): void {
         this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
-      }
+    }
 
     ngAfterViewInit() {
         // setTimeout(_ => this.navbarContent = this.child.nativeElement.innerHTML);
@@ -185,24 +185,20 @@ export class HeaderComponent implements OnInit {
     }
 
     checklogin() {
-        if ((<HTMLInputElement>document.getElementById("email")).value == "test"
-            && (<HTMLInputElement>document.getElementById("password")).value == "test") {
-            console.log("test");
-
-            this.username = !this.username;
-            this.regAndLog = !this.regAndLog;
-            this.renderer.removeClass(this.modalBox.nativeElement, 'show');
-            this.isSidebarOpen = false;
-            this.showOverlay = false;
-            console.log("pass");
-        } else {
-            console.log("false");
-            return false;
-        }
+        // (<HTMLInputElement>document.getElementById("email")).value == "test"
+        // && (<HTMLInputElement>document.getElementById("password")).value == "test")
+        this.userMenu = true;
+        this.RegAndLog = false;
+        this.closeAllDialog();
     }
 
     logout() {
         window.location.reload();
+    }
+
+    showEditProfile() {
+        console.log('fuck');
+        this.isRegisterOpen = true;
     }
 
     showEmergencyWrap() {

@@ -2,6 +2,12 @@ body {
   font-family: "FontAwesome", 'Kanit', sans-serif !important;
 }
 
+@media (max-width: 992px) {
+  .header-search{
+    display: none;
+  }
+}
+
 #header {
   width: 100%;
   animation-duration: .7s;
@@ -593,6 +599,9 @@ a:focus {
   #navbar-menu {
     padding-top: 0;
     padding-bottom: 0;
+  }
+  .header-search{
+    display: block;
   }
 }
 

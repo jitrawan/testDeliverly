@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
 
     private headerModel: HeaderModel[];
     private resizeTimeout: number = 0;
-    isMobileSize: boolean = false;
+    isMobileSize: boolean = true;
     isSidebarOpen: boolean = false;
     showOverlay: boolean = false;
     isLoginOpen: boolean = false;
@@ -86,8 +86,6 @@ export class HeaderComponent implements OnInit {
                 this.lastNameSocial = this.user.lastName;
             }
         });
-
-
     }
 
     signInWithFB(): void {
@@ -106,7 +104,7 @@ export class HeaderComponent implements OnInit {
     }
 
     triggerSidebar() {
-        if (this.isSidebarOpen === false && this.isMobileSize) {
+        if (this.isSidebarOpen === false && this.isMobileSize === true) {
             this.isSidebarOpen = true;
             this.showOverlay = true;
             this.renderer.addClass(this.navSideBar.nativeElement, 'show');

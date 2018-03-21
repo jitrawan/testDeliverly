@@ -147,9 +147,6 @@ export class HomeComponent implements OnInit {
 		this.router.navigate(['/eventInfo']);
 	}
 
-
-
-
 }
 
 interface CardTicket {

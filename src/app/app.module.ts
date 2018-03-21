@@ -59,10 +59,11 @@ import { ResultPaidTransitComponent } from './pages/resultPaid/result-paid-trans
 import { PopupResultPaidTransitComponent } from './pages/resultPaid-popup/result-paid-transit-popup/result-paid-transit-popup.component';
 import { FshowzoneComponent } from './pages/eventTickets/concert/fshowzone/fshowzone.component';
 import { ConcertComponent } from './pages/eventTickets/concert/concert.component';
-
+import { HistoryComponent } from './pages/history/history.component';
 
 import { SocialLoginModule } from 'angularx-social-login';
-import { AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider  } from 'angularx-social-login';
+import { AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider } from 'angularx-social-login';
+
 
 
 const config = new AuthServiceConfig([
@@ -117,7 +118,8 @@ export function provideConfig() {
     ResultPaidTransitComponent,
     PopupResultPaidTransitComponent,
     FshowzoneComponent,
-    ConcertComponent
+    ConcertComponent,
+    HistoryComponent,
   ],
   imports: [
     NgbModule.forRoot(),

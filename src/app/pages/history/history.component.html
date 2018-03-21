@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-center is-size-4 p-t-10">
+  Purchase History
+</div>
+<div class="d-flex justify-content-end c-red">
+  *information will be updated every 5 minutes
+</div>
+<div class="wrapper">
+  <div class="eventHis d-flex justify-content-center" (click)="showEventHis()">Purchase History Event</div>
+  <div class="busHis d-flex justify-content-center" (click)="showBusHis()">Purchase History Bus</div>
+</div>
+
+<div class="outer">
+  <ng-container *ngIf="eventHis">
+    <div class="infoBoxWrapper table-responsive-md">
+      <table class="table bordered">
+        <tbody>
+          <tr class="tableTopic">
+            <td>Reserve Date</td>
+            <td>Event Name</td>
+            <td>Venue</td>
+            <td>Date & Time</td>
+            <td>Seat No.</td>
+            <td>Unit Price</td>
+            <td>Paid Date</td>
+            <td>Payment Status</td>
+            <td>Payment Chanel</td>
+          </tr>
+          <tr class="tableResult">
+            <td>21/03/2018 12:23:38</td>
+            <td>Sunset Beach Music Festival 2018</td>
+            <td>ร้านปลาทู หาดชะอำ จ.เพชรบุรี</td>
+            <td>31/03/2018 15:00:00</td>
+            <td>Festival Seat</td>
+            <td>679.00</td>
+            <td></td>
+            <td>Reserve</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="busHis">
+    <div class="infoBoxWrapper table-responsive-md">
+      <table class="table bordered">
+        <tbody>
+          <tr class="tableTopic">
+            <td>รถโดยสาร</td>
+            <td>Unit Price (Baht) </td>
+            <td>Paid Date</td>
+            <td>Payment Status</td>
+            <td>Payment Chanel</td>
+          </tr>
+          <tr class="tableResult">
+            <td>กรุงเทพ(สายใต้ใหม่) - กระบี่(อ.คลองท่อม)</td>
+            <td>547.00</td>
+            <td>21/03/2018</td>
+            <td>Paid</td>
+            <td>Couter Service</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-container>
+</div>

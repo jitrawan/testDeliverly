@@ -233,6 +233,10 @@ mark.mark-require {
   font-size: 0.75rem !important;
 }
 
+.c-red{
+  color: red
+}
+
 @media screen and (max-width: 768px) {
   .is-size-1-mobile {
     font-size: 3rem !important;

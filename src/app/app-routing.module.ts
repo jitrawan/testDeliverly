@@ -29,6 +29,8 @@ import { ResultPaidTransitComponent } from './pages/resultPaid/result-paid-trans
 import { PopupResultPaidTransitComponent } from './pages/resultPaid-popup/result-paid-transit-popup/result-paid-transit-popup.component';
 import { FshowzoneComponent } from './pages/eventTickets/concert/fshowzone/fshowzone.component';
 import { ConcertComponent } from './pages/eventTickets/concert/concert.component';
+
+import { HistoryComponent } from './pages/history/history.component';
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
   // { path: '**', component: SelectDestinationComponent },
@@ -56,6 +58,7 @@ const routes: Routes = [
   { path: 'historyDetail', component: HistoryDetailComponent },
   { path: 'busReceive', component: BusReceiveComponent },
   { path: 'fshowzone', component: FshowzoneComponent },
+  { path: 'history', component: HistoryComponent },
 ];
 
 @NgModule({

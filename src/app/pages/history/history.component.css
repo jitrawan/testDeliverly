@@ -1,0 +1,115 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.eventHis,
+.busHis {
+  grid-column: span 6;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 14px;
+  border: 2px solid #333333;
+  border-bottom: 0px;
+  background: #808080;
+  color: white;
+}
+
+.x-scroll {
+  overflow-x: scroll
+}
+
+.topicHis {
+  cursor: pointer;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  border: 1px solid black;
+}
+
+table {
+  border-collapse: separate !important;
+  border-spacing: 0;
+}
+
+.tableResult {
+  cursor: pointer;
+}
+
+.tableResult td {
+  vertical-align: middle;
+}
+
+.table td,
+.table th {
+  padding: 10px !important;
+}
+
+.infoBoxWrapper .table .tableTopic td:first-child {
+  border-left: 2px solid #333333;
+}
+
+.infoBoxWrapper .table .tableTopic td {
+  border: 2px solid #333333;
+  border-right: 0px;
+  background: #808080;
+  color: white;
+  text-align: center;
+}
+
+.infoBoxWrapper .table .tableTopic td:last-child {
+  border-right: 2px solid #333333;
+}
+
+.infoBoxWrapper .table tr td {
+  border: 2px solid #333333;
+  border-right: 0px;
+  border-top: 0px;
+  text-align: center;
+  background-color: #f3f6f6;
+}
+
+.infoBoxWrapper .table tr td:last-child {
+  border-right: 2px solid #333333;
+}
+
+.sum .table thead th {
+  vertical-align: bottom;
+  background: #808080;
+  color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border: 2px solid #333333;
+}
+
+.sum .table tr {
+  border: 2px solid #333333;
+}
+
+.sum .table tr td:nth-child(1) {
+  border-left: 2px solid #333333;
+}
+
+.sum .table tr td:nth-child(2) {
+  border-right: 2px solid #333333;
+}
+
+.sum .rowSum {
+  border-right: 2px solid #333333;
+  border-left: 2px solid #333333;
+  border-bottom: 2px solid #333333;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.sum .table td {
+  border-top: 0px;
+}
+
+.outer {
+  white-space: nowrap;
+  position: relative;
+  overflow-y: hidden;
+}

@@ -193,11 +193,13 @@ export class HeaderComponent implements OnInit {
     }
 
     logout() {
-        window.location.reload();
+        this.userMenu = false;
+        this.RegAndLog = true;
+        this.closeAllDialog();
+        this.router.navigate(['/']);
     }
 
     showEditProfile() {
-        console.log('fuck');
         this.isRegisterOpen = true;
     }
 

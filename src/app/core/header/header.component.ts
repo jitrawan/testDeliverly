@@ -19,7 +19,8 @@ export class HeaderComponent implements OnInit {
 
     private headerModel: HeaderModel[];
     private resizeTimeout: number = 0;
-    isMobileSize: boolean = true;
+    isMobileSize: boolean = false;
+    isWindowSize: boolean = true;
     isSidebarOpen: boolean = false;
     showOverlay: boolean = false;
     isLoginOpen: boolean = false;
@@ -56,9 +57,9 @@ export class HeaderComponent implements OnInit {
         if (this.resizeTimeout) {
             clearTimeout(this.resizeTimeout);
         }
-        this.resizeTimeout = setTimeout((() => {
-            this.checkSidebar(event.target.innerWidth);
-        }).bind(this), 100);
+        // this.resizeTimeout = setTimeout((() => {
+        //     this.checkSidebar(event.target.innerWidth);
+        // }).bind(this), 100);
     }
 
     constructor(
@@ -104,7 +105,7 @@ export class HeaderComponent implements OnInit {
     }
 
     triggerSidebar() {
-        if (this.isSidebarOpen === false && this.isMobileSize === true) {
+        if (this.isSidebarOpen === false && this.isWindowSize) {
             this.isSidebarOpen = true;
             this.showOverlay = true;
             this.renderer.addClass(this.navSideBar.nativeElement, 'show');
@@ -169,14 +170,14 @@ export class HeaderComponent implements OnInit {
         this.isShowForgotPassword = false;
     }
 
-    checkSidebar(width) {
-        if (width <= 992) {
-            this.isMobileSize = true;
-        } else {
-            this.isMobileSize = false;
-            this.triggerSidebar();
-        }
-    }
+    // checkSidebar(width) {
+    //     if (width <= 992) {
+    //         this.isMobileSize = true;
+    //     } else {
+    //         this.isMobileSize = false;
+    //         this.triggerSidebar();
+    //     }
+    // }
 
     overlayClicked(event) {
         this.closeAllDialog();

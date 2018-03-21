@@ -28,35 +28,24 @@
     </div>
     <div class="sidebar-content" *ngIf="isMobileSize">
       <div class="col-lg-5 login-wrapper">
-        <button class="btn btn-Login" (click)="triggerDialog(actionTrigger.login)" *ngIf="regAndLog" id="loginBtn">
-          <a class="atk-size-3">Register / Log In</a>
-        </button>
-        <div class="navbar-collapse justify-content-md-center btn-Login" *ngIf="!username">
-          <ul class="navbar-nav ">
-            <ng-container>
-              <li class="nav-item dropdown " ngbDropdown>
-                <a class="nav-link dropdown-toggle" ngbDropdownToggle>Burin Sangwan</a>
-                <div class="dropdown-menu" ngbDropdownMenu>
-                  <li>
-                    <a class="dropdown-item" (click)="userTriggerDialog(userActionTrigger.edit)"> Edit Profile</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" routerLink='/purchaseHistory'> Purchase History</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" routerLink='/changePassword'> Change Password</a>
-                  </li>
-                  <li class="divider"></li>
-                  <li id="logOutLink" (click)='logout()'>
-                    <a class="dropdown-item">
-                      <i class="icon-off"></i>
-                      <p> Logout </a>
-                  </li>
-                </div>
-              </li>
-            </ng-container>
-          </ul>
-        </div>
+        <ng-container *ngIf="userMenu">
+          <button class="btn userMenu" id="userInfoMenu" data-toggle="dropdown">
+            <a class="nav-link dropdown-toggle text-overflow-ellipsis">Mr.Allticket Ng5</a>
+          </button>
+          <div class="userMenu">
+            <div class="dropdown-menu">
+              <a class="dropdown-item" id="editProfile" (click)="userTriggerDialog(userActionTrigger.edit)">Edit Profile</a>
+              <a class="dropdown-item" id="purchase-history" href="#">Purchase History</a>
+              <a class="dropdown-item" (click)="userTriggerDialog(userActionTrigger.change)">Change Password</a>
+              <a class="dropdown-item" (click)='logout()'>Log Off</a>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="RegAndLog">
+          <button class="btn btn-Login" (click)="triggerDialog(actionTrigger.login)" id="loginBtn">
+            <a class="atk-size-3" href="#">Register / Log In</a>
+          </button>
+        </ng-container>
       </div>
       <div class="navbar-collapse justify-content-md-center">
         <ul class="navbar-nav mainMenu">
@@ -100,20 +89,24 @@
                 alt="ภาษาไทย" />
             </div>
             <div class="col-lg-5 login-wrapper">
-              <button class="btn userMenu d-none" id="userInfoMenu" data-toggle="dropdown">
-                <a class="nav-link dropdown-toggle text-overflow-ellipsis" id="userProfile"></a>
-              </button>
-              <div class="userMenu" *ngIf="!username">
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" id="editProfile" (click)="userTriggerDialog(userActionTrigger.edit)">Edit Profile</a>
-                  <a class="dropdown-item" id="purchase-history" routerLink='/purchaseHistory'>Purchase History</a>
-                  <a class="dropdown-item" (click)="userTriggerDialog(userActionTrigger.change)">Change Password</a>
-                  <a class="dropdown-item" id="logoff-btn" (click)='logout()'>Log Off</a>
+              <ng-container *ngIf="userMenu">
+                <button class="btn userMenu" id="userInfoMenu" data-toggle="dropdown">
+                  <a class="nav-link dropdown-toggle text-overflow-ellipsis">Mr.Allticket Ng5</a>
+                </button>
+                <div class="userMenu">
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" id="editProfile" (click)="userTriggerDialog(userActionTrigger.edit)">Edit Profile</a>
+                    <a class="dropdown-item" id="purchase-history" href="#">Purchase History</a>
+                    <a class="dropdown-item" (click)="userTriggerDialog(userActionTrigger.change)">Change Password</a>
+                    <a class="dropdown-item" (click)='logout()'>Log Off</a>
+                  </div>
                 </div>
-              </div>
-              <button class="btn btn-Login" (click)="triggerDialog(actionTrigger.login)" *ngIf="regAndLog" id="loginBtn">
-                <a class="atk-size-3" href="#">Register / Log In</a>
-              </button>
+              </ng-container>
+              <ng-container *ngIf="RegAndLog">
+                <button class="btn btn-Login" (click)="triggerDialog(actionTrigger.login)" id="loginBtn">
+                  <a class="atk-size-3" href="#">Register / Log In</a>
+                </button>
+              </ng-container>
             </div>
           </div>
         </div>
@@ -148,7 +141,6 @@
   </div>
 
   <div class="modal-box" #modalBox>
-
     <ng-container *ngIf="isLoginOpen">
       <button type="button" class="close" (click)="closeAllDialog()" id="closeLoginModal" aria-label="Close">
         <i class="fa fa-times-circle" aria-hidden="true"></i>
@@ -202,19 +194,19 @@
       <div style="text-align: center">
         <h3>Register</h3>
 
-          <button class="loginBtn loginBtn--facebook" (click)="signInWithFB()">
-            Login with Facebook
-          </button>
-          <button class="loginBtn loginBtn--google" (click)="signInWithGoogle()">
-            Login with Google
-          </button>
+        <button class="loginBtn loginBtn--facebook" (click)="signInWithFB()">
+          Login with Facebook
+        </button>
+        <button class="loginBtn loginBtn--google" (click)="signInWithGoogle()">
+          Login with Google
+        </button>
         <div class="col-md-12 col-sm-12 mt-2">
           Already member ?
           <a class="cursor-pointer modal-text-primary" (click)="triggerDialog(actionTrigger.login)"> Sign in</a>
         </div>
       </div>
-     
-    <!-- Register -->
+
+      <!-- Register -->
       <form class="email-register">
         <div class="reg-form-group">
           <div class="col-md-12 col-sm-12 topic">
@@ -240,7 +232,7 @@
           <div class="col-md-12 col-sm-12 topic">
             <mark class="mark-require">*</mark> Email</div>
           <div class="col-md-12 col-sm-12 information">
-            <input type="email" class="form-control" [(ngModel)]="emailSocial" name="custEmail"/>
+            <input type="email" class="form-control" [(ngModel)]="emailSocial" name="custEmail" />
           </div>
         </div>
         <div class="reg-form-group">
@@ -499,7 +491,7 @@
             <input class="form-control text-center mx-auto w50pc" type="text" value="" name="capchaReserve" maxlength="6" />
           </div>
         </div>
-        <div class="col-md-12 u-form-group text-center">
+        <div class="col-md-12 u-form-group d-flex justify-content-md-center">
           <button class="btn btn-atk-primary mt-3" id="executeForgot" type="button">Confirm</button>
         </div>
       </form>
@@ -731,7 +723,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-12 u-form-group">
+        <div class="col-md-12 u-form-group d-flex justify-content-md-center">
           <button class="btn btn-atk-primary mt-3" type="button" id="customerProfileEditConfirmBtn">Confirm</button>
         </div>
       </form>

@@ -4,13 +4,19 @@ import { ActivatedRoute } from "@angular/router";
 @Component({
   selector: 'app-faq',
   templateUrl: './faq.component.html',
-  styleUrls: ['./faq.component.css','../../../assets/css/standard/layout.css']
+  styleUrls: ['./faq.component.css', '../../../assets/css/standard/layout.css']
 })
 export class FaqComponent implements OnInit {
   showHowToBuy: boolean;
   showHowToRefund: boolean;
   showHowToPickup: boolean;
   howto: string;
+
+  zone: { id: number, name: string }[] = [
+    { "id": 0, "name": "กรุงเทพฯ และปริมณฑล" },
+    { "id": 1, "name": "ภาคกลาง" },
+    { "id": 2, "name": "ภาคเหนือ" }
+  ];
 
   @ViewChild('howbuy') private howbuy: ElementRef;
   @ViewChild('howrefund') private howrefund: ElementRef;
@@ -24,6 +30,7 @@ export class FaqComponent implements OnInit {
 
 
   ngOnInit() {
+    console.log("zone is" + this.zone);
 
 
   }
@@ -37,7 +44,7 @@ export class FaqComponent implements OnInit {
       this.showRefund()
     } else if (this.howto === 'pickup') {
       this.showPickup()
-    } 
+    }
 
 
   }
@@ -73,4 +80,9 @@ export class FaqComponent implements OnInit {
   }
 
 
+
+
 }
+
+
+

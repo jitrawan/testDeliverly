@@ -58,6 +58,7 @@ import { BusErrorComponent } from './pages/eventTickets/bus/bus-error/bus-error.
 import { ResultPaidTransitComponent } from './pages/resultPaid/result-paid-transit/result-paid-transit.component';
 import { PopupResultPaidTransitComponent } from './pages/resultPaid-popup/result-paid-transit-popup/result-paid-transit-popup.component';
 import { FshowzoneComponent } from './pages/eventTickets/concert/fshowzone/fshowzone.component';
+import { ConcertComponent } from './pages/eventTickets/concert/concert.component';
 
 
 import { SocialLoginModule } from 'angularx-social-login';
@@ -115,7 +116,8 @@ export function provideConfig() {
     BusErrorComponent,
     ResultPaidTransitComponent,
     PopupResultPaidTransitComponent,
-    FshowzoneComponent
+    FshowzoneComponent,
+    ConcertComponent
   ],
   imports: [
     NgbModule.forRoot(),

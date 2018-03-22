@@ -200,6 +200,11 @@
   padding-top: 30px;
 }
 
+.img-commingsoon {
+  width: 100%;
+  height: auto;
+}
+
 @media screen and (min-width: 320px) and (max-width: 600px) {
   .ticket-recommend img {
     height: 40px;
@@ -223,5 +228,8 @@
   .cardbox {
     min-height: 200px;
     max-width: 250px;
+  }
+  .img-commingsoon {
+    width: 50%;
   }
 }

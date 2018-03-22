@@ -33,15 +33,11 @@ import { HeaderComponent } from './core/header/header.component';
 import { FooterComponent } from './core/footer/footer.component';
 
 import { EventInfoComponent } from './pages/event-info/event-info.component';
-import { AllEventComponent } from './pages/eventTickets/all-event/all-event.component';
 import { HomeComponent } from './pages/home/home.component';
 import { BookingComponent } from './pages/booking/booking.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { PolicyComponent } from './pages/policy/policy.component';
-import { AirlinesComponent } from './pages/eventTickets/airlines/airlines.component';
 import { BusComponent } from './pages/eventTickets/bus/bus-menu.component';
-import { ShoppingComponent } from './pages/eventTickets/shopping/shopping.component';
-import { TravelComponent } from './pages/eventTickets/travel/travel.component';
 import { ResultReserveTransitComponent } from './pages/resultReserve-transit/resultReserve-transit.component';
 import { HistoryDetailComponent } from './pages/history-detail/history-detail.component';
 import { SelectDestinationComponent } from './pages/eventTickets/bus/select-destination/select-destination.component';
@@ -63,6 +59,12 @@ import { HistoryComponent } from './pages/history/history.component';
 
 import { SocialLoginModule } from 'angularx-social-login';
 import { AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider } from 'angularx-social-login';
+import { FootballComponent } from './pages/eventTickets/football/football.component';
+import { RacingComponent } from './pages/eventTickets/racing/racing.component';
+import { RunningComponent } from './pages/eventTickets/running/running.component';
+import { OthersComponent } from './pages/eventTickets/others/others.component';
+import { SeminarComponent } from './pages/eventTickets/seminar/seminar.component';
+import { EducationComponent } from './pages/eventTickets/education/education.component';
 
 
 
@@ -90,15 +92,11 @@ export function provideConfig() {
     HeaderComponent,
     FooterComponent,
     EventInfoComponent,
-    AllEventComponent,
     HomeComponent,
     BookingComponent,
     FaqComponent,
     PolicyComponent,
-    AirlinesComponent,
     BusComponent,
-    ShoppingComponent,
-    TravelComponent,
     ResultReserveTransitComponent,
     HistoryDetailComponent,
     SelectDestinationComponent,
@@ -120,6 +118,12 @@ export function provideConfig() {
     FshowzoneComponent,
     ConcertComponent,
     HistoryComponent,
+    FootballComponent,
+    RacingComponent,
+    RunningComponent,
+    OthersComponent,
+    SeminarComponent,
+    EducationComponent,
   ],
   imports: [
     NgbModule.forRoot(),

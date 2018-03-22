@@ -151,7 +151,7 @@ ol {
   top: 4px;
   left: 50%;
   transform: translate(-50%, 0%); */
-  content: url("../../../../assets/images/none.png");
+  content: url("../../../../assets/images/N.png");
   width: 100%;
   height: auto;
   background: #ffffff;
@@ -263,44 +263,12 @@ ol {
   animation-name: rubberBand;
 }
 
-.Mgender {
-  content: url("../../../../assets/images/male.png");
+.genderSeat {
   width: 100%;
   height: auto;
-  background: #ffffff;
-  box-shadow: none;
+  z-index: 1;
+  position: absolute;
   cursor: not-allowed;
-  border-radius: 5px;
-}
-
-.Fgender {
-  content: url("../../../../assets/images/female.png");
-  width: 100%;
-  height: auto;
-  background: #ffffff;
-  box-shadow: none;
-  cursor: not-allowed;
-  border-radius: 5px;
-}
-
-.Ogender {
-  content: url("../../../../assets/images/monk.png");
-  width: 100%;
-  height: auto;
-  background: #ffffff;
-  box-shadow: none;
-  cursor: not-allowed;
-  border-radius: 5px;
-}
-
-.Ngender {
-  content: url("../../../../assets/images/none.png");
-  width: 100%;
-  height: auto;
-  background: #ffffff;
-  box-shadow: none;
-  cursor: not-allowed;
-  border-radius: 5px;
 }
 
 .inner-loading {
@@ -330,7 +298,8 @@ ol {
   height: 94px;
   position: relative;
   margin: 0 auto;
-  border: 6px solid #fe6716;;
+  border: 6px solid #fe6716;
+  ;
   border-radius: 50%;
   border-left-color: transparent;
   border-right-color: transparent;

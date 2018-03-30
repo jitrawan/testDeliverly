@@ -35,7 +35,7 @@
           <div class="userMenu">
             <div class="dropdown-menu">
               <a class="dropdown-item" id="editProfile" (click)="userTriggerDialog(userActionTrigger.edit)">Edit Profile</a>
-              <a class="dropdown-item" routerLink="/history">Purchase History</a>
+              <a class="dropdown-item" (click)="routeHistory()">Purchase History</a>
               <a class="dropdown-item" (click)="userTriggerDialog(userActionTrigger.change)">Change Password</a>
               <a class="dropdown-item" (click)='logout()'>Log Off</a>
             </div>

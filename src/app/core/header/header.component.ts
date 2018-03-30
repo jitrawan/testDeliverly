@@ -40,6 +40,7 @@ export class HeaderComponent implements OnInit {
     userActionTrigger: userTriggerType = {
         edit: 'edit',
         change: 'change',
+        history: 'history',
     }
     emailSocial: String;
     nameSocial: String;
@@ -167,6 +168,11 @@ export class HeaderComponent implements OnInit {
         this.isShowForgotPassword = false;
     }
 
+    routeHistory() {
+        this.router.navigate(['history']);
+        this.closeAllDialog();
+    }
+
     // checkSidebar(width) {
     //     if (width <= 992) {
     //         this.isMobileSize = true;
@@ -216,4 +222,5 @@ interface triggerType {
 interface userTriggerType {
     edit: string;
     change: string;
+    history: string;
 }

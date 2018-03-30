@@ -21,11 +21,17 @@
       "../node_modules/bootstrap/dist/css/bootstrap.min.css",
       "assets/css/standard/owl.carousel-custom.css",
       "assets/css/standard/animation.css",
+      "../node_modules/font-awesome/css/font-awesome.min.css",
+      "../node_modules/primeng/resources/themes/omega/theme.css",
+      "../node_modules/primeng/resources/primeng.min.css",
+      "../node_modules/fullcalendar/dist/fullcalendar.min.css",
       "styles.css"
     ],
     "scripts": ["../node_modules/jquery/dist/jquery.min.js",
       "../node_modules/popper.js/dist/umd/popper.min.js",
-      "../node_modules/bootstrap/dist/js/bootstrap.min.js"
+      "../node_modules/bootstrap/dist/js/bootstrap.min.js",
+      "../node_modules/moment/min/moment.min.js",
+      "../node_modules/fullcalendar/dist/fullcalendar.min.js"
     ],
     "environmentSource": "environments/environment.ts",
     "environments": {

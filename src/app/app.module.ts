@@ -16,7 +16,8 @@ import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 import { ThaiDatePipe } from './shared/lib/date-format/thaidate.pipe';
 import { JasperoAlertsModule } from '@jaspero/ng2-alerts';
 import { JasperoConfirmationsModule } from '@jaspero/ng2-confirmations'
-
+import { AccordionModule } from 'primeng/accordion';     //accordion and accordion tab
+import { ScheduleModule } from 'primeng/schedule';
 
 /* Service */
 import { HeaderService } from './shared/services/header.service';
@@ -65,8 +66,6 @@ import { RunningComponent } from './pages/eventTickets/running/running.component
 import { OthersComponent } from './pages/eventTickets/others/others.component';
 import { SeminarComponent } from './pages/eventTickets/seminar/seminar.component';
 import { EducationComponent } from './pages/eventTickets/education/education.component';
-
-
 
 const config = new AuthServiceConfig([
   {
@@ -141,7 +140,9 @@ export function provideConfig() {
     Ng2AutoCompleteModule,
     JasperoAlertsModule,
     JasperoConfirmationsModule,
-    SocialLoginModule
+    SocialLoginModule,
+    AccordionModule,
+    ScheduleModule
   ],
   providers: [
     HeaderService,

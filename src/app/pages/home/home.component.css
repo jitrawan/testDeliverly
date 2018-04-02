@@ -1,0 +1,293 @@
+@import url('https://fonts.googleapis.com/css?family=Kanit:300,400');
+body {
+  font-family: 'Kanit', sans-serif !important;
+  font-size: 16px !important;
+}
+
+body.modal-open {
+  position: fixed;
+  width: 100%;
+}
+
+body.showloading {
+  pointer-events: none;
+}
+
+.zindex99 {
+  z-index: 99;
+}
+
+button:focus,
+a:focus {
+  outline: none !important
+}
+
+/* slider */
+
+#slider {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+#slider.show {
+  animation-name: slideLoaded;
+  animation-duration: 1s;
+}
+
+@keyframes slideLoaded {
+  from {
+    opacity: 0
+  }
+  to {
+    opacity: 1
+  }
+}
+
+#slider .owl-item {
+  -webkit-animation-duration: 1.5s;
+  -moz-animation-duration: 1.5s;
+  animation-duration: 1.5s;
+}
+
+#slider .owl-carousel {
+  margin: 0;
+}
+
+#slider img {
+  width: 100%;
+  min-height: 150px;
+  max-height: 500px;
+}
+
+#slideCard .container {
+  padding: 2.2rem;
+}
+
+@keyframes slideLoaded {
+  from {
+    opacity: 0
+  }
+  to {
+    opacity: 1
+  }
+}
+
+#slider .owl-item {
+  -webkit-animation-duration: 1.5s;
+  -moz-animation-duration: 1.5s;
+  animation-duration: 1.5s;
+}
+
+#slider .owl-carousel {
+  margin: 0;
+}
+
+#slider img {
+  width: 100%;
+  min-height: 150px;
+  max-height: 500px;
+}
+
+#slideCard .container {
+  padding: 2.2rem;
+}
+
+/* Loading */
+
+.preload-slide {
+  display: none;
+}
+
+.preload-slide.show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 480px;
+  height: 1rem;
+  background-color: #f3f3f3;
+}
+
+.preload-slide.show .is-loading {
+  width: 94px;
+  height: 94px;
+  position: relative;
+  border: 6px solid;
+  border-radius: 50%;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  animation: cssload-spin 575ms infinite linear;
+  -o-animation: cssload-spin 575ms infinite linear;
+  -ms-animation: cssload-spin 575ms infinite linear;
+  -webkit-animation: cssload-spin 575ms infinite linear;
+  -moz-animation: cssload-spin 575ms infinite linear
+}
+
+.loading-wrapper {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 1s;
+  -webkit-transition: all 1s;
+  -moz-transition: all 1s;
+  opacity: 0;
+  z-index: 1060;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.loading-wrapper.show {
+  transition: none;
+  -webkit-transition: none;
+  -moz-transition: none;
+  visibility: visible;
+  opacity: 1;
+}
+
+.loading-wheel {
+  width: 94px;
+  height: 94px;
+  position: fixed;
+  margin: 0 auto;
+  border: 6px solid #077eff;
+  border-radius: 50%;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  animation: cssload-spin 575ms infinite linear;
+  -o-animation: cssload-spin 575ms infinite linear;
+  -ms-animation: cssload-spin 575ms infinite linear;
+  -webkit-animation: cssload-spin 575ms infinite linear;
+  -moz-animation: cssload-spin 575ms infinite linear
+}
+
+@keyframes cssload-spin {
+  100% {
+    transform: rotate(360deg)
+  }
+}
+
+@-o-keyframes cssload-spin {
+  100% {
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg)
+  }
+}
+
+@-ms-keyframes cssload-spin {
+  100% {
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg)
+  }
+}
+
+@-webkit-keyframes cssload-spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg)
+  }
+}
+
+@-moz-keyframes cssload-spin {
+  100% {
+    -moz-transform: rotate(360deg);
+    transform: rotate(360deg)
+  }
+}
+
+/* Move to top */
+
+.moveToTop {
+  position: fixed;
+  right: 20px;
+  bottom: 30px;
+  z-index: 1;
+  background: rgba(0, 0, 0, .5);
+  padding: 5px 5px 6px 5px;
+  border-radius: 8px;
+  visibility: hidden;
+  transition: all .5s ease-in-out;
+  opacity: 0;
+  animation-duration: 1s;
+}
+
+.moveToTop.show {
+  visibility: visible;
+  opacity: 1;
+  transition: all .5s ease-in-out;
+}
+
+.moveToTop>a {
+  color: #fff;
+  opacity: .7;
+}
+
+.moveToTop>a:hover {
+  color: #fff;
+  opacity: 1;
+}
+
+@media (max-width: 425px) {
+  .preload-slide.show {
+    min-height: 180px;
+  }
+  .moveToTop {
+    right: 10px;
+  }
+  .moveToTop i {
+    font-size: 1.4em;
+  }
+  #sliderCard .cardbox {
+    width: 215px;
+  }
+  #sliderCard .cardWrapper {
+    width: 2.2rem;
+  }
+}
+
+@media (min-width: 426px) and (max-width: 768px) {
+  .preload-slide.show {
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .preload-slide.show .is-loading {
+    width: 64px;
+    height: 64px;
+  }
+  #mainMenu li {
+    width: 100%;
+  }
+  #mainMenu .dropdown-menu.show {
+    position: static;
+    float: none;
+    width: auto;
+    margin-top: 0;
+    border: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  #mainMenu li>a {
+    padding-top: 10px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .menu-selected-line {
+    display: none;
+  }
+}
+
+@media (min-width: 1440px) {
+  #slider img {
+    max-height: 600px;
+  }
+}

@@ -31,7 +31,9 @@
       "../node_modules/popper.js/dist/umd/popper.min.js",
       "../node_modules/bootstrap/dist/js/bootstrap.min.js",
       "../node_modules/moment/min/moment.min.js",
-      "../node_modules/fullcalendar/dist/fullcalendar.min.js"
+      "../node_modules/fullcalendar/dist/fullcalendar.min.js",
+      "../node_modules/owl.carousel/dist/owl.carousel.min.js",
+      "assets/js/jquery.jmap.js"
     ],
     "environmentSource": "environments/environment.ts",
     "environments": {

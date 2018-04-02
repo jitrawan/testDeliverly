@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewEncapsulation, ElementRef, Input, ViewChild, Renderer2 } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ElementRef, Input, ViewChild, Renderer2, AfterContentChecked } from '@angular/core';
 import { Router } from '@angular/router';
-import { imageMaps } from './imagesMapsResize.js';
 import * as $ from 'jquery';
 
-// import jMap from '../../../assets/js/jquery.jmap.min.js';
+declare function jMap(t): any;
 
 @Component({
     selector: 'app-booking',
@@ -21,7 +20,9 @@ export class BookingComponent implements OnInit {
 
     target: String;
 
-    constructor(private renderer: Renderer2) { }
+    constructor(
+        private renderer: Renderer2) {
+    }
     @ViewChild('avaDateTime') private avaDateTime: ElementRef;
     @ViewChild('chooseFestSeat') private chooseFestSeat: ElementRef;
     @ViewChild('chooseZone') private chooseZone: ElementRef;
@@ -31,27 +32,18 @@ export class BookingComponent implements OnInit {
         this.data = [];
         this.prepareFetch();
         this.loopSeatNo();
-        imageMaps();
-        // $("img[usemap]").jMap();
-        // $(window).on("load", function () {
-        //     ($('img[usemap]') as any).jMap();
-        // })
 
         this.events = [
             {
                 "title": "1,500",
-                "start": "2018-03-03"
+                "start": "2018-04-01"
             },
             {
                 "title": "1,800",
-                "start": "2018-03-31"
+                "start": "2018-04-05"
             },
         ];
-
-
     }
-
-
 
     scrollTo(target) {
         $('html,body').delay(500).animate({
@@ -66,6 +58,7 @@ export class BookingComponent implements OnInit {
 
     selectDateTime() {
         this.renderer.addClass(this.chooseZone.nativeElement, 'show');
+        jMap('img[usemap]');
         this.scrollTo('#chooseZone');
     }
 

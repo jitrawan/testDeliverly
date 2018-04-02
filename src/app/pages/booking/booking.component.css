@@ -42,6 +42,10 @@
   background-color: #666666;
 }
 
+.calendarWrapper {
+  width: 60%;
+}
+
 .custom-radio .custom-control-label::before,
 .custom-radio .custom-control-label::after {
   margin-left: 30px;
@@ -63,17 +67,12 @@
   color: white;
 }
 
-.m-imagemap{
-	margin: 0 auto; 
-	width: 100%!important; 
-	height: auto;	
+.m-imagemap {
+  margin: 0 auto;
+  width: 100% !important;
+  height: auto;
 }
 
-@media screen and (max-width : 768px){
-	.m-imagemap{		
-		width: 50%!important; 		
-	}	
-}	 
 .imagemap__item {
   width: 100%;
   height: auto;
@@ -220,12 +219,6 @@ label {
   background: #048bc1;
 }
 
-@media screen and (max-width: 768px) {
-  .m-imagemap {
-    width: 50%;
-  }
-}
-
 #avaDateTime,
 #chooseZone,
 #chooseFestSeat,
@@ -244,6 +237,29 @@ label {
 
 .js .imagemap__item {
   display: none;
+}
+
+::ng-deep .fc-content {
+  cursor: pointer;
+  color: white;
+  border: 0px;
+  text-align: center;
+}
+
+.imagemap__item {
+  width: 50% !important;
+}
+
+@media screen and (max-width: 480px) {
+  .imagemap__item {
+    width: 100% !important;
+  }
+  .calendarWrapper {
+    width: 100%;
+  }
+  .imagemap__item {
+    width: 100% !important;
+  }
 }
 
 @media screen and (min-width: 48em) {

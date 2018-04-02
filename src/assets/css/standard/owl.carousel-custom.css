@@ -1,3 +1,4 @@
+
 .owl-carousel .animated {
 	-webkit-animation-duration: 1000ms;
 	animation-duration: 1000ms;
@@ -97,7 +98,7 @@
 	user-select: none;
 }
 
-.owl-carousel.owl-loaded { display: block; }
+.owl-carousel.owl-loaded {display: block;}
 
 .owl-carousel.owl-loading {
 	opacity: 0;
@@ -298,16 +299,3 @@
 
 .owl-carousel .owl-dots .owl-dot.active span,
 .owl-carousel .owl-dots .owl-dot:hover span { opacity: 1; }
-
-
-@media (max-width: 767px) {
-
-	.owl-carousel .owl-nav .owl-next {
-		right: -15px !important;
-	}
-
-	.owl-carousel .owl-nav .owl-prev {
-		left: -15px !important;
-	}
-
-}

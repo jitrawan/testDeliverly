@@ -1,8 +1,10 @@
 <div class="bookingWrapper">
   <div class="container">
     <div class="t-underline f-w-700">Choose Date&Time</div>
-    <div class="col-12 p-t-30">
-      <p-schedule [events]="events" (onEventClick)="handleEventClick($event)"></p-schedule>
+    <div class="col-12 p-t-30 p0 d-flex justify-content-center">
+      <div class="calendarWrapper ">
+        <p-schedule [events]="events" (onEventClick)="handleEventClick($event)"></p-schedule>
+      </div>
     </div>
     <div #avaDateTime id="avaDateTime">
       <div class="t-underline f-w-700 p-t-30">Available Date&Time</div>
@@ -35,25 +37,23 @@
     </div>
     <div #chooseZone id="chooseZone">
       <div class="t-underline f-w-700 p-t-30" id="choose">Choose Zone</div>
-      <div class="row">
-        <div class="col-12">
-          <div class="text-align-center f-w-600 p-t-20">Thunder Dome Chart Zone</div>
-          <div class="m-imagemap p-t-10">
-            <img class="imagemap__item" src="../../../assets/images/testzone2.jpg" (click)="selectZone()" usemap="#image-map">
-            <map name="image-map">
-              <area target="" alt="ZONE A1" title="ZONE A1" href="zoneA1" coords="429,627,431,948,171,943,170,710,266,623" shape="poly">
-              <area target="" alt="ZONE A2" title="ZONE A2" href="a,d" coords="458,629,456,945,712,946,713,628" shape="poly">
-              <area target="" alt="ZONE A3" title="ZONE A3" href="zoneA3" coords="742,628,742,943,999,943,998,710,902,626" shape="poly">
+      <div class="col-12">
+        <div class="text-align-center f-w-600 p-t-20">Thunder Dome Chart Zone</div>
+        <div class="m-imagemap text-align-center p-t-10">
+          <img class="imagemap__item" src="../../../assets/images/testzone2.jpg" usemap="#image-map">
+          <map id="image-map" name="image-map">
+            <area target="" alt="ZONE A1" title="ZONE A1" (click)="selectZone()" coords="429,627,431,948,171,943,170,710,266,623" shape="poly">
+            <area target="" alt="ZONE A2" title="ZONE A2" (click)="selectZone()" coords="458,629,456,945,712,946,713,628" shape="poly">
+            <area target="" alt="ZONE A3" title="ZONE A3" (click)="selectZone()" coords="742,628,742,943,999,943,998,710,902,626" shape="poly">
 
-              <area target="" alt="ZONE B1" title="ZONE B1" href="zoneB1" coords="171,991,171,1205,431,1206,433,991" shape="poly">
-              <area target="" alt="ZONE B2" title="ZONE B2" href="zoneB2" coords="456,991,456,1205,716,1206,718,991" shape="poly">
-              <area target="" alt="ZONE B3" title="ZONE B3" href="zoneB3" coords="740,991,740,1205,1000,1206,1002,991" shape="poly">
+            <area target="" alt="ZONE B1" title="ZONE B1" (click)="selectZone()" coords="171,991,171,1205,431,1206,433,991" shape="poly">
+            <area target="" alt="ZONE B2" title="ZONE B2" (click)="selectZone()" coords="456,991,456,1205,716,1206,718,991" shape="poly">
+            <area target="" alt="ZONE B3" title="ZONE B3" (click)="selectZone()" coords="740,991,740,1205,1000,1206,1002,991" shape="poly">
 
-              <area target="" alt="ZONE C1" title="ZONE C1" href="zoneC1" coords="433,1363,172,1251" shape="rect">
-              <area target="" alt="ZONE C2" title="ZONE C2" href="zoneC2" coords="718,1368,456,1251" shape="rect">
-              <area target="" alt="ZONE C3" title="ZONE C3" href="zoneC3" coords="1001,1367,739,1250" shape="rect">
-            </map>
-          </div>
+            <area target="" alt="ZONE C1" title="ZONE C1" (click)="selectZone()" coords="433,1363,172,1251" shape="rect">
+            <area target="" alt="ZONE C2" title="ZONE C2" (click)="selectZone()" coords="718,1368,456,1251" shape="rect">
+            <area target="" alt="ZONE C3" title="ZONE C3" (click)="selectZone()" coords="1001,1367,739,1250" shape="rect">
+          </map>
         </div>
       </div>
     </div>
@@ -75,19 +75,18 @@
         </table>
       </div>
     </div>
-    <div class="d-flex p-t-30">
-      <div class="col-12 buttonWrapper p-0">
-        <button class="btn btn-atk-danger mt-3 buttonSize" type="button">
-          <span>
-            BACK
-          </span>
-        </button>
-        <button class="btn btn-atk-primary mt-3 buttonSize" type="button">
-          <span>
-            BOOKING
-          </span>
-        </button>
-      </div>
-    </div>
   </div>
+</div>
+<div class="col-12 buttonWrapper  p-t-30">
+
+  <button class="btn btn-atk-danger mt-3 buttonSize" type="button">
+    <span>
+      BACK
+    </span>
+  </button>
+  <button class="btn btn-atk-primary mt-3 buttonSize" type="button">
+    <span>
+      BOOKING
+    </span>
+  </button>
 </div>

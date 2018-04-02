@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, Renderer2 } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from "@angular/router";
 import * as underscore from 'underscore';
+import 'owl.carousel';
 declare var jQuery: any;
 
 

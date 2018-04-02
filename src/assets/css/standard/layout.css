@@ -584,17 +584,3 @@
 .buttonWrapper {
   text-align: right;
 }
-
-@media screen and (max-width: 575px) {
-  .btn-atk-primary {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-  .btn-atk-danger {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-  .buttonWrapper {
-    text-align: center;
-  }
-}

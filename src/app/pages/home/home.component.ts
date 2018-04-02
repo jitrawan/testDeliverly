@@ -3,9 +3,10 @@ import { Router, NavigationEnd } from '@angular/router';
 import { EventBanner } from '../../shared/models/eventBanner.model';
 import { ConstMaster } from '../../shared/config/ConstMaster';
 import { HomeService } from '../../shared/services/home.service';
+import { slideInDownAnimation } from '../../shared/constant/animations';
 import * as underscore from 'underscore';
 
-// import 'owl.carousel';
+import 'owl.carousel';
 declare var jQuery: any;
 import * as Jquery from 'jquery';
 
@@ -15,10 +16,12 @@ import * as Jquery from 'jquery';
 	styleUrls: ['./home.component.css',
 		'../../../assets/css/standard/cardticket.css',
 		'../../../assets/css/standard/utility.css',],
+	animations: [slideInDownAnimation],
 })
 
 
 export class HomeComponent implements OnInit {
+	@HostBinding('@routeAnimation') routeAnimation = true;
 	private countImagesLoaded = 0;
 	S3_CONTEXT: string = ConstMaster.S3_ENDPOINT.url;
 	screenWidth: number;

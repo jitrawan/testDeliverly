@@ -33,7 +33,6 @@ import { RunningComponent } from './pages/eventTickets/running/running.component
 import { OthersComponent } from './pages/eventTickets/others/others.component';
 import { SeminarComponent } from './pages/eventTickets/seminar/seminar.component';
 import { EducationComponent } from './pages/eventTickets/education/education.component';
-import { DiscountComponent } from './pages/discount/discount.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
@@ -68,7 +67,6 @@ const routes: Routes = [
   { path: 'others', component: OthersComponent },
   { path: 'seminar', component: SeminarComponent },
   { path: 'education', component: EducationComponent },
-  { path: 'discount', component: DiscountComponent },
 
 ];
 

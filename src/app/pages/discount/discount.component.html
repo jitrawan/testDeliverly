@@ -4,74 +4,51 @@
       <h3>สิทธิ์ส่วนลด</h3>
     </div>
   </div>
-  <div class="row">
-    <div class="col-12 col-md-10 offset-md-1" id="discount-wrapper">
-      <div class="owl-carousel owl-loaded">
 
-        <div class="owl-stage-outer">
-          <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px);transition: 0s;width: 770px;">
-            <div class="owl-item active" style="width: 385px;">
-              <div class="discount-item" id="EV_D1802211">
-                <i class="fa fa-check-circle fa-2x"></i>
-                <div class="discount-image">
-                  <img class="img-fluid" src="https://atkmedia.allticket.com/images/discount/S4P3.jpg ">
-                </div>
-                <div class="discount-title discountItemInfoName">S4P3</div>
-                <div class="discount-desc">ซื้อ 4 จ่าย 3</div>
-                <input class="discountItemLabel" type="hidden" value="เบอร์โทรศัพท์">
-                <input class="discountItemCondition" type="hidden" value="NON">
-                <input class="discountItemMin" type="hidden" value="10">
-                <input class="discountItemMax" type="hidden" value="10">
-              </div>
-            </div>
-            <div class="owl-item active" style="width: 385px;">
-              <div class="discount-item" id="EV_D1802201">
-                <i class="fa fa-check-circle fa-2x"></i>
-                <div class="discount-image">
-                  <img class="img-fluid" src="https://atkmedia.allticket.com/images/discount/GT_BlueCard.jpg ">
-                </div>
-                <div class="discount-title discountItemInfoName">PTT Blue Card</div>
-                <div class="discount-desc">แสดงบัตร PTT BLUE CARD รับส่วนลด 25% (6 ใบต่อ 1 ครั้งลดซ้ำได้)</div>
-                <input class="discountItemLabel" type="hidden"
-                  value="หมายเลขบัตร">
-                <input class="discountItemCondition" type="hidden" value="MEM">
-                <input class="discountItemMin" type="hidden" value="16">
-                <input class="discountItemMax" type="hidden" value="16">
-              </div>
-            </div>
-          </div>
+  <div class="owl-carousel owl-theme">
+    <div class="item">
+      <div class="discount-item" id="1" [ngClass]="{selected:ischeck == discountId}" #itemDiscount (click)="selectDiscount(itemDiscount.id)">
+        <i class="fa fa-check-circle fa-2x"></i>
+        <div class="discount-image">
+          <img class="img-fluid" src="https://atkmedia.allticket.com/images/discount/S4P3.jpg ">
         </div>
-        <div class="owl-nav disabled">
-          <div class="owl-prev disabled">
-            <i class="fa fa-chevron-left"></i>
-          </div>
-          <div class="owl-next disabled">
-            <i class="fa fa-chevron-right"></i>
-          </div>
-        </div>
-        <div class="owl-dots disabled">
-          <div class="owl-dot active">
-            <span></span>
-          </div>
-        </div>
+        <div class="discount-title discountItemInfoName">S4P3</div>
+        <div class="discount-desc text-center">ซื้อ 4 จ่าย 3</div>
       </div>
+    </div>
 
-      <form id="getDiscountFrm">
-        <input type="hidden" value="" name="discountId" id="discountId">
-        <input type="hidden" value="" name="discountValue" id="discountValue">
-      </form>
-      <div class="row">
-        <div class="col-12">
-          <div id="empDiscountInput" class="discountInput"></div>
+    <div class="item">
+      <div class="discount-item" id="2" [ngClass]="{selected:ischeck == discountId}" #itemDiscount (click)="selectDiscount(itemDiscount.id)">
+        <i class="fa fa-check-circle fa-2x"></i>
+        <div class="discount-image">
+          <img class="img-fluid" src="https://atkmedia.allticket.com/images/discount/GT_BlueCard.jpg ">
         </div>
+        <div class="discount-title discountItemInfoName">PTT Blue Card</div>
+        <div class="discount-desc text-center">แสดงบัตร PTT BLUE CARD รับส่วนลด 25% (6 ใบต่อ 1 ครั้งลดซ้ำได้)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div id="empDiscountInput" class="discountInput">
+        <div class="row mt-4">
+          <div class="col-12 col-sm-5 offset-sm-0 text-sm-right">สิทธิ์ส่วนลดที่เลือก : </div>
+          <div class="col-12 col-md-4 col-sm-7 text-center text-sm-left mt-3 mt-sm-0">
+            <input type="text" class="form-control d-inline-block discountInputComp" value="" readonly="readonly">
+          </div>
+        </div>
+        <input class="discountMin" type="hidden" value="10">
+        <input class="discountLabel" type="hidden" value="เบอร์โทรศัพท์">
+        <input class="discountCondition" type="hidden" value="NON">
       </div>
     </div>
   </div>
 
   <div class="row">
     <div class="col-12 mt-5 d-flex justify-content-center is-size-6-mobile">
-      <button class="btn btn-atk-danger px-md-4" id="unUseDisBtn">NOT USE DISCOUNT</button>
-      <button class="btn btn-atk-primary px-md-4 ml-2" id="useDisBtn">USE DISCOUNT</button>
+      <button class="btn btn-atk-danger px-md-4" id="unUseDisBtn" (click)="goResultReserve()">NOT USE DISCOUNT</button>
+      <button class="btn btn-atk-primary px-md-4 ml-2" id="useDisBtn" (click)="goDiscountDetail()">USE DISCOUNT</button>
     </div>
   </div>
 </div>

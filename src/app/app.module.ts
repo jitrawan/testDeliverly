@@ -67,6 +67,7 @@ import { OthersComponent } from './pages/eventTickets/others/others.component';
 import { SeminarComponent } from './pages/eventTickets/seminar/seminar.component';
 import { EducationComponent } from './pages/eventTickets/education/education.component';
 import { DiscountComponent } from './pages/discount/discount.component';
+import { DiscountDetailComponent } from './pages/discount-detail/discount-detail.component';
 
 const config = new AuthServiceConfig([
   {
@@ -125,6 +126,7 @@ export function provideConfig() {
     SeminarComponent,
     EducationComponent,
     DiscountComponent,
+    DiscountDetailComponent,
   ],
   imports: [
     NgbModule.forRoot(),

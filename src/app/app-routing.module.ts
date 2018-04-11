@@ -34,7 +34,7 @@ import { OthersComponent } from './pages/eventTickets/others/others.component';
 import { SeminarComponent } from './pages/eventTickets/seminar/seminar.component';
 import { EducationComponent } from './pages/eventTickets/education/education.component';
 import { DiscountComponent } from './pages/discount/discount.component';
-
+import { DiscountDetailComponent } from './pages/discount-detail/discount-detail.component';
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
   // { path: '**', component: SelectDestinationComponent },
@@ -69,7 +69,7 @@ const routes: Routes = [
   { path: 'seminar', component: SeminarComponent },
   { path: 'education', component: EducationComponent },
   { path: 'discount', component: DiscountComponent },
-
+  { path: 'discount-detail', component: DiscountDetailComponent },
 ];
 
 @NgModule({

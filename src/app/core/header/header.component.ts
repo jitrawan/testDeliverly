@@ -13,7 +13,9 @@ declare var $: any;
 @Component({
     selector: 'app-navbar',
     templateUrl: './header.component.html',
-    styleUrls: ['./header.component.css', '../../../assets/css/standard/utility.css', '../../../assets/css/standard/layout.css']
+    styleUrls: ['./header.component.css', 
+    '../../../assets/css/standard/utility.css', 
+    '../../../assets/css/standard/layout.css']
 })
 export class HeaderComponent implements OnInit {
 

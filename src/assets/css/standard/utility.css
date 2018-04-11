@@ -91,13 +91,12 @@
 }
 
 mark.mark-require {
-	padding: 0;
-	color: #37BDE0;
-    background-color: transparent;	
+  padding: 0;
+  color: #37BDE0;
+  background-color: transparent;
 }
 
 @media (max-width: 425px) {
-  
   .btn-atk-primary,
   .btn-atk-danger,
   .btn-atk-warning,
@@ -110,9 +109,21 @@ mark.mark-require {
   }
 }
 
+@media screen and (max-width: 575px) {
+  .btn-atk-primary,
+  .btn-atk-danger,
+  .btn-atk-warning,
+  .btn-atk-success,
+  .btn-atk-light {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  .buttonWrapper {
+    text-align: center;
+  }
+}
 
 /* More Spacing Utilities Margin & Padding */
-
 
 /* Margin */
 
@@ -153,7 +164,6 @@ mark.mark-require {
 .my-7 {
   margin-bottom: 5rem !important;
 }
-
 
 /* Padding */
 
@@ -233,7 +243,7 @@ mark.mark-require {
   font-size: 0.75rem !important;
 }
 
-.c-red{
+.c-red {
   color: red
 }
 

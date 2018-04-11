@@ -559,28 +559,6 @@
   margin-right: 5rem !important
 }
 
-.btn-atk-primary {
-  font-size: 18px;
-  background-color: #37BDE0;
-  border-bottom: 3px solid #389ABF;
-  color: #fff;
-  padding-left: 3rem;
-  padding-right: 3rem;
-  border-radius: 2rem;
-  cursor: pointer;
-}
-
-.btn-atk-danger {
-  font-size: 18px;
-  background-color: #EC1D23;
-  border-bottom: 3px solid #ad1616;
-  color: #fff;
-  padding-left: 3rem;
-  padding-right: 3rem;
-  border-radius: 2rem;
-  cursor: pointer;
-}
-
 .buttonWrapper {
   text-align: right;
 }

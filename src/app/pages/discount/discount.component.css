@@ -29,11 +29,11 @@
     right: 0.5rem;
     top: -0.5rem;
     color: #07ab07;
-    display: none;
+    display: none!important;
 }
 
-.discount-item.selected i {
-    display: block;
+.discount-item .selected i {
+    display: block!important;
 }
 
 .discount-item .discount-desc , .discount-item .discount-title {
@@ -54,8 +54,39 @@
     -webkit-transition: all 0.5s ease-in-out;
 }
 
+.owl-item{
+    width: 380px;
+}
+
 #discount-wrapper .form-control {
     max-width: 220px;
 }
 
+::ng-deep .owl-carousel .owl-nav .owl-next{
+    left: auto!important;
+    right :0px!important;
+}
 
+::ng-deep .owl-carousel .owl-nav .owl-prev {
+    left: 0px!important;
+}
+
+.test{
+    background-color: red;
+}
+
+@media (max-width: 768px) {
+    .btn-atk-primary , .btn-atk-danger {
+        padding-left: 0.6rem!important;
+        padding-right: 0.6rem!important;
+        font-size: 14px!important;
+    }
+}
+
+.check{
+    display: none;
+}
+
+.show{
+    display: inline-block;
+}

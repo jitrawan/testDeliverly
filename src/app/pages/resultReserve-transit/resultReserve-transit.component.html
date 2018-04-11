@@ -18,19 +18,26 @@
   <div class="row-wrapper py-3">
     <div class="row">
       <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Name - Surname</div>
-      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper"> {{ userTo.firstname }} {{ userTo.lastname }} </div>
+      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+        <div class="text-desc">{{ userTo.firstname }} {{ userTo.lastname }} </div>
+      </div>
     </div>
     <div class="row">
       <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Email - Address</div>
-      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper"> {{ userTo.email}} </div>
+      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+        <div class="text-desc"> {{ userTo.email}} </div>
+      </div>
     </div>
     <div class="row">
       <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Mobile No</div>
-      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper"> {{userTo.telephone}} </div>
+      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+        <div class="text-desc">{{userTo.telephone}} </div>
+      </div>
     </div>
     <div class="row">
       <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">ID CARD / Passport ID</div>
-      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper"> {{ userTo.cardNumber }}
+      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+        <div class="text-desc"> {{ userTo.cardNumber }}</div>
       </div>
     </div>
   </div>
@@ -199,12 +206,13 @@
       </div>
     </div>
     <div class="row ">
-      <div class="form-group col-12" style="text-align: center;">
-        <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
-          <input type="checkbox" class="custom-control-input" name="acceptConditions" />
-          <span class="custom-control-indicator"></span>
-          <span class="agreeLabel">Please clicking you agree to the “Terms and Conditions” set forth by Counter Service Co., Ltd.</span>
-        </label>
+      <div class="col-12 mt-2 d-flex justify-content-center">
+        <div class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+          <input class="custom-control-input" id="acceptConditions" type="checkbox">
+          <label class="custom-control-label" for="acceptConditions">
+            <span>Please clicking you agree to the “Terms and Conditions” set forth by Counter Service Co., Ltd.</span>
+          </label>
+        </div>
       </div>
     </div>
     <div class="row ">

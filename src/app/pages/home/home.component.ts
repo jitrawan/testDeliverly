@@ -6,8 +6,8 @@ import { HomeService } from '../../shared/services/home.service';
 import * as underscore from 'underscore';
 
 // import 'owl.carousel';
-declare var jQuery: any;
-import * as Jquery from 'jquery';
+declare var $: any;
+// import * as $ from 'jquery';
 
 @Component({
 	selector: 'app-home',
@@ -105,18 +105,18 @@ export class HomeComponent implements OnInit {
 		}
 	}
 
-	slideLoaded() {
+	private slideLoaded() {
 		this.countImagesLoaded++;
 
 		if (this.countImagesLoaded == this.slideBannerImages.length) {
 
-			jQuery('#slider .owl-carousel').owlCarousel({
+			$('#slider .owl-carousel').owlCarousel({
 				items: 1,
 				animateOut: 'fadeOutLeft',
 				animateIn: 'zoomInRight',
 			});
 
-			jQuery('#sliderCard .owl-carousel').owlCarousel({
+			$('#sliderCard .owl-carousel').owlCarousel({
 				loop: false,
 				items: 1,
 				dots: false,

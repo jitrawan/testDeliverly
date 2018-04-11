@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, ElementRef, Input, ViewChild, Renderer2, AfterContentChecked } from '@angular/core';
 import { Router } from '@angular/router';
+
 import * as $ from 'jquery';
 
 declare function jMap(t): any;
@@ -8,7 +9,8 @@ declare function jMap(t): any;
     selector: 'app-booking',
     templateUrl: './booking.component.html',
     styleUrls: ['./booking.component.css',
-        '../../../assets/css/standard/layout.css',]
+        '../../../assets/css/standard/layout.css',
+        '../../../assets/css/standard/utility.css',]
 })
 export class BookingComponent implements OnInit {
     events: any[];
@@ -21,7 +23,8 @@ export class BookingComponent implements OnInit {
     target: String;
 
     constructor(
-        private renderer: Renderer2) {
+        private renderer: Renderer2,
+        private router: Router) {
     }
     @ViewChild('avaDateTime') private avaDateTime: ElementRef;
     @ViewChild('chooseFestSeat') private chooseFestSeat: ElementRef;
@@ -93,8 +96,14 @@ export class BookingComponent implements OnInit {
         var resultObject = this.data.filter(item => item.y === row);
         return resultObject.filter(item => item.x === pos);
     }
-}
 
-// interface JQuery {
-//     jMap(): void;
-// }
+    goDiscountList() {
+        this.router.navigate(['/discount']);
+    }
+
+    goEventInfo() {
+        this.router.navigate(['/eventInfo']);
+    }
+
+
+}

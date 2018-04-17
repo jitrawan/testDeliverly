@@ -1,25 +1,24 @@
-import { Component, OnInit, AfterViewInit, HostListener, AfterViewChecked, OnChanges } from '@angular/core';
+import { Component, OnInit, AfterViewInit, HostListener, AfterViewChecked, OnChanges, HostBinding } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { EventBanner } from '../../shared/models/eventBanner.model';
 import { ConstMaster } from '../../shared/config/ConstMaster';
 import { HomeService } from '../../shared/services/home.service';
 import * as underscore from 'underscore';
 
-import 'owl.carousel';
-declare var jQuery: any;
-import * as Jquery from 'jquery';
+// import 'owl.carousel';
+declare var $: any;
+// import * as $ from 'jquery';
 
 @Component({
 	selector: 'app-home',
 	templateUrl: './home.component.html',
 	styleUrls: ['./home.component.css',
 		'../../../assets/css/standard/cardticket.css',
-		'../../../assets/css/standard/utility.css',]
+		'../../../assets/css/standard/utility.css',],
 })
 
 
 export class HomeComponent implements OnInit {
-
 	private countImagesLoaded = 0;
 	S3_CONTEXT: string = ConstMaster.S3_ENDPOINT.url;
 	screenWidth: number;
@@ -67,25 +66,27 @@ export class HomeComponent implements OnInit {
 		});
 
 		// window.onscroll = function (e) {
-        //     var windowScroll = window.scrollY || document.getElementsByTagName("html")[0].scrollTop;
-        //     var header = $('#header');
-        //     if (windowScroll >= 550) {
-        //         $(header).find('.dropdown-menu').removeClass('show');
-        //         if (!$(header).hasClass('sticky')) {
-        //             $(header).addClass('sticky');
-        //         }
+		// 	var windowScroll = window.scrollY || document.getElementsByTagName("html")[0].scrollTop;
+		// 	var header = $('#header');
+		// 	if (windowScroll >= 550) {
+		// 		$(header).find('.dropdown-menu').removeClass('show');
+		// 		if (!$(header).hasClass('sticky')) {
+		// 			$(header).addClass('sticky');
+		// 		}
 		// 		$('.moveToTop').addClass('show');
 		// 		$(".headerSticky").fadeIn(500);
-        //     } else {
-        //         if ($(header).hasClass('sticky')) {
-        //             $(header).removeClass('sticky');
-        //             $(header).find('.dropdown-menu').removeClass('show');
-        //         }
+		// 	} else {
+		// 		if ($(header).hasClass('sticky')) {
+		// 			$(header).removeClass('sticky');
+		// 			$(header).find('.dropdown-menu').removeClass('show');
+		// 		}
 		// 		$('.moveToTop').removeClass('show');
 		// 		$(".headerSticky").fadeOut();
-				
-        //     }
-        // }
+
+		// 	}
+		// }
+
+
 
 
 	}
@@ -104,18 +105,18 @@ export class HomeComponent implements OnInit {
 		}
 	}
 
-	slideLoaded() {
+	private slideLoaded() {
 		this.countImagesLoaded++;
 
 		if (this.countImagesLoaded == this.slideBannerImages.length) {
 
-			jQuery('#slider .owl-carousel').owlCarousel({
+			$('#slider .owl-carousel').owlCarousel({
 				items: 1,
 				animateOut: 'fadeOutLeft',
 				animateIn: 'zoomInRight',
 			});
 
-			jQuery('#sliderCard .owl-carousel').owlCarousel({
+			$('#sliderCard .owl-carousel').owlCarousel({
 				loop: false,
 				items: 1,
 				dots: false,
@@ -146,9 +147,6 @@ export class HomeComponent implements OnInit {
 	goEventInfo(performId: string) {
 		this.router.navigate(['/eventInfo']);
 	}
-
-
-
 
 }
 

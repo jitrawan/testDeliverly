@@ -12,7 +12,7 @@
               alt="Allticket Logo">
           </a>
         </div>
-        <div class="col-4 align-self-center" *ngIf="isMobileSize">
+        <div class="col-4 align-self-center" *ngIf="isWindowSize">
           <div class="row">
             <div class="col-6 px-0">
               <img class="flag language-flag" lang-val="en" src="https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/images/uk-flag-icon.png"
@@ -26,7 +26,7 @@
         </div>
       </div>
     </div>
-    <div class="sidebar-content" *ngIf="isMobileSize">
+    <div class="sidebar-content" *ngIf="isWindowSize">
       <div class="col-lg-5 login-wrapper">
         <ng-container *ngIf="userMenu">
           <button class="btn userMenu" id="userInfoMenu" data-toggle="dropdown">
@@ -35,7 +35,7 @@
           <div class="userMenu">
             <div class="dropdown-menu">
               <a class="dropdown-item" id="editProfile" (click)="userTriggerDialog(userActionTrigger.edit)">Edit Profile</a>
-              <a class="dropdown-item" routerLink="/history">Purchase History</a>
+              <a class="dropdown-item" (click)="routeHistory()">Purchase History</a>
               <a class="dropdown-item" (click)="userTriggerDialog(userActionTrigger.change)">Change Password</a>
               <a class="dropdown-item" (click)='logout()'>Log Off</a>
             </div>

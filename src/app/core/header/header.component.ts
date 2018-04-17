@@ -15,7 +15,9 @@ declare var $: any;
 @Component({
     selector: 'app-navbar',
     templateUrl: './header.component.html',
-    styleUrls: ['./header.component.css', '../../../assets/css/standard/utility.css', '../../../assets/css/standard/layout.css']
+    styleUrls: ['./header.component.css', 
+    '../../../assets/css/standard/utility.css', 
+    '../../../assets/css/standard/layout.css']
 })
 export class HeaderComponent implements OnInit {
     userModel: User = new User();
@@ -23,6 +25,7 @@ export class HeaderComponent implements OnInit {
     private headerModel: HeaderModel[];
     private resizeTimeout: number = 0;
     isMobileSize: boolean = false;
+    isWindowSize: boolean = true;
     isSidebarOpen: boolean = false;
     showOverlay: boolean = false;
     isLoginOpen: boolean = false;
@@ -42,6 +45,7 @@ export class HeaderComponent implements OnInit {
     userActionTrigger: userTriggerType = {
         edit: 'edit',
         change: 'change',
+        history: 'history',
     }
     emailSocial: String;
     nameSocial: String;
@@ -61,9 +65,9 @@ export class HeaderComponent implements OnInit {
         if (this.resizeTimeout) {
             clearTimeout(this.resizeTimeout);
         }
-        this.resizeTimeout = setTimeout((() => {
-            this.checkSidebar(event.target.innerWidth);
-        }).bind(this), 100);
+        // this.resizeTimeout = setTimeout((() => {
+        //     this.checkSidebar(event.target.innerWidth);
+        // }).bind(this), 100);
     }
 
     constructor(
@@ -108,8 +112,6 @@ export class HeaderComponent implements OnInit {
                 this.authForm.value.lastname = this.user.lastName;
             }
         });
-
-
     }
 
     signInWithFB(): void {
@@ -119,6 +121,7 @@ export class HeaderComponent implements OnInit {
         this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
     }
 
+<<<<<<< HEAD
     signUp(): void {
         console.log("Gender : " + this.authForm.value.gender);
         // this.apiService.createUser(this.userModel)
@@ -131,12 +134,15 @@ export class HeaderComponent implements OnInit {
         // setTimeout(_ => this.navbarContent = this.child.nativeElement.innerHTML);
     }
 
+=======
+>>>>>>> b756c701d1a2136eb12799373d92fbca6d8fd341
     routeMenu(route: string) {
         this.router.navigate([route]);
+        this.closeAllDialog();
     }
 
     triggerSidebar() {
-        if (this.isSidebarOpen === false && this.isMobileSize) {
+        if (this.isSidebarOpen === false && this.isWindowSize) {
             this.isSidebarOpen = true;
             this.showOverlay = true;
             this.renderer.addClass(this.navSideBar.nativeElement, 'show');
@@ -201,14 +207,19 @@ export class HeaderComponent implements OnInit {
         this.isShowForgotPassword = false;
     }
 
-    checkSidebar(width) {
-        if (width <= 992) {
-            this.isMobileSize = true;
-        } else {
-            this.isMobileSize = false;
-            this.triggerSidebar();
-        }
+    routeHistory() {
+        this.router.navigate(['history']);
+        this.closeAllDialog();
     }
+
+    // checkSidebar(width) {
+    //     if (width <= 992) {
+    //         this.isMobileSize = true;
+    //     } else {
+    //         this.isMobileSize = false;
+    //         this.triggerSidebar();
+    //     }
+    // }
 
     overlayClicked(event) {
         this.closeAllDialog();
@@ -253,4 +264,5 @@ interface triggerType {
 interface userTriggerType {
     edit: string;
     change: string;
+    history: string;
 }

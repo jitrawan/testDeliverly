@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private sharedService: SharedService,
-    private router: Router
+    private router: Router,
   ) { }
   paymentChannel: string = 'mobile';
   sub: any;

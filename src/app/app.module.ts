@@ -17,7 +17,8 @@ import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 import { ThaiDatePipe } from './shared/lib/date-format/thaidate.pipe';
 import { JasperoAlertsModule } from '@jaspero/ng2-alerts';
 import { JasperoConfirmationsModule } from '@jaspero/ng2-confirmations'
-
+import { AccordionModule } from 'primeng/accordion';     //accordion and accordion tab
+import { ScheduleModule } from 'primeng/schedule';
 
 /* Service */
 import { ApiService } from './shared/services/api.service';
@@ -35,15 +36,11 @@ import { HeaderComponent } from './core/header/header.component';
 import { FooterComponent } from './core/footer/footer.component';
 
 import { EventInfoComponent } from './pages/event-info/event-info.component';
-import { AllEventComponent } from './pages/eventTickets/all-event/all-event.component';
 import { HomeComponent } from './pages/home/home.component';
 import { BookingComponent } from './pages/booking/booking.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { PolicyComponent } from './pages/policy/policy.component';
-import { AirlinesComponent } from './pages/eventTickets/airlines/airlines.component';
 import { BusComponent } from './pages/eventTickets/bus/bus-menu.component';
-import { ShoppingComponent } from './pages/eventTickets/shopping/shopping.component';
-import { TravelComponent } from './pages/eventTickets/travel/travel.component';
 import { ResultReserveTransitComponent } from './pages/resultReserve-transit/resultReserve-transit.component';
 import { HistoryDetailComponent } from './pages/history-detail/history-detail.component';
 import { SelectDestinationComponent } from './pages/eventTickets/bus/select-destination/select-destination.component';
@@ -65,7 +62,18 @@ import { HistoryComponent } from './pages/history/history.component';
 
 import { SocialLoginModule } from 'angularx-social-login';
 import { AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider } from 'angularx-social-login';
+<<<<<<< HEAD
 
+=======
+import { FootballComponent } from './pages/eventTickets/football/football.component';
+import { RacingComponent } from './pages/eventTickets/racing/racing.component';
+import { RunningComponent } from './pages/eventTickets/running/running.component';
+import { OthersComponent } from './pages/eventTickets/others/others.component';
+import { SeminarComponent } from './pages/eventTickets/seminar/seminar.component';
+import { EducationComponent } from './pages/eventTickets/education/education.component';
+import { DiscountComponent } from './pages/discount/discount.component';
+import { DiscountDetailComponent } from './pages/discount-detail/discount-detail.component';
+>>>>>>> b756c701d1a2136eb12799373d92fbca6d8fd341
 
 const config = new AuthServiceConfig([
   {
@@ -91,15 +99,11 @@ export function provideConfig() {
     HeaderComponent,
     FooterComponent,
     EventInfoComponent,
-    AllEventComponent,
     HomeComponent,
     BookingComponent,
     FaqComponent,
     PolicyComponent,
-    AirlinesComponent,
     BusComponent,
-    ShoppingComponent,
-    TravelComponent,
     ResultReserveTransitComponent,
     HistoryDetailComponent,
     SelectDestinationComponent,
@@ -121,6 +125,14 @@ export function provideConfig() {
     FshowzoneComponent,
     ConcertComponent,
     HistoryComponent,
+    FootballComponent,
+    RacingComponent,
+    RunningComponent,
+    OthersComponent,
+    SeminarComponent,
+    EducationComponent,
+    DiscountComponent,
+    DiscountDetailComponent,
   ],
   imports: [
     NgbModule.forRoot(),
@@ -139,7 +151,12 @@ export function provideConfig() {
     JasperoAlertsModule,
     JasperoConfirmationsModule,
     SocialLoginModule,
+<<<<<<< HEAD
     ReactiveFormsModule
+=======
+    AccordionModule,
+    ScheduleModule
+>>>>>>> b756c701d1a2136eb12799373d92fbca6d8fd341
   ],
   providers: [
     HeaderService,

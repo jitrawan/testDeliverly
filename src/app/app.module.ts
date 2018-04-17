@@ -1,10 +1,11 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
+import { FormsModule , ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 import { DatePipe } from '@angular/common';
@@ -19,6 +20,7 @@ import { JasperoConfirmationsModule } from '@jaspero/ng2-confirmations'
 
 
 /* Service */
+import { ApiService } from './shared/services/api.service';
 import { HeaderService } from './shared/services/header.service';
 import { HomeService } from './shared/services/home.service';
 import { SharedService } from './shared/services/shared-service.service';
@@ -63,7 +65,6 @@ import { HistoryComponent } from './pages/history/history.component';
 
 import { SocialLoginModule } from 'angularx-social-login';
 import { AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider } from 'angularx-social-login';
-
 
 
 const config = new AuthServiceConfig([
@@ -137,7 +138,8 @@ export function provideConfig() {
     Ng2AutoCompleteModule,
     JasperoAlertsModule,
     JasperoConfirmationsModule,
-    SocialLoginModule
+    SocialLoginModule,
+    ReactiveFormsModule
   ],
   providers: [
     HeaderService,
@@ -148,10 +150,12 @@ export function provideConfig() {
     ErrorMsgService,
     CheckAllowService,
     BuyTicketComponent,
+    ApiService,
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig
-    }
+    },
+    PersonService
   ],
   bootstrap: [AppComponent]
 })

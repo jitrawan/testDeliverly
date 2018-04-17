@@ -1,8 +1,10 @@
+import { ApiService } from './../../shared/services/api.service';
+import { User } from './../../shared/models/user.model';
 import { Component, OnInit, AfterViewInit, HostListener, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { HeaderModel } from '../../shared/models/header.model';
 import { HeaderService } from '../../shared/services/header.service';
-
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'angularx-social-login';
 import { SocialUser } from 'angularx-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider } from 'angularx-social-login';
@@ -16,7 +18,8 @@ declare var $: any;
     styleUrls: ['./header.component.css', '../../../assets/css/standard/utility.css', '../../../assets/css/standard/layout.css']
 })
 export class HeaderComponent implements OnInit {
-
+    userModel: User = new User();
+    authForm: FormGroup;
     private headerModel: HeaderModel[];
     private resizeTimeout: number = 0;
     isMobileSize: boolean = false;
@@ -43,6 +46,8 @@ export class HeaderComponent implements OnInit {
     emailSocial: String;
     nameSocial: String;
     lastNameSocial: String;
+    gender: String;
+    confirmPassword: any;
     user: SocialUser;
 
     @ViewChild('navSideBar') private navSideBar: ElementRef;
@@ -66,9 +71,26 @@ export class HeaderComponent implements OnInit {
         private renderer: Renderer2,
         private headerService: HeaderService,
         private router: Router,
-        private authService: AuthService
+        private authService: AuthService,
+        private fb: FormBuilder,
+        private apiService: ApiService
     ) {
         this.showEmergency = false;
+
+        // use FormBuilder to create a form group
+  this.authForm = this.fb.group({
+    'email': ['', Validators.required],
+    'password': ['', Validators.required],
+    'confirmpassword': ['', Validators.required],
+    'firstname': ['', Validators.required],
+    'lastname': ['', Validators.required],
+    'gender': ['', Validators.required],
+    'birthday': ['', Validators.required],
+    'idCard': ['', Validators.required],
+    'phone': ['', Validators.required],
+    'currentItem': ['', Validators.required]
+
+   });
     }
 
     ngOnInit() {
@@ -81,9 +103,9 @@ export class HeaderComponent implements OnInit {
         this.authService.authState.subscribe((user) => {
             this.user = user;
             if (this.user != null) {
-                this.emailSocial = this.user.email;
-                this.nameSocial = this.user.firstName;
-                this.lastNameSocial = this.user.lastName;
+                this.authForm.value.email = this.user.email;
+                this.authForm.value.firstname = this.user.firstName;
+                this.authForm.value.lastname = this.user.lastName;
             }
         });
 
@@ -97,6 +119,14 @@ export class HeaderComponent implements OnInit {
         this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
     }
 
+    signUp(): void {
+        console.log("Gender : " + this.authForm.value.gender);
+        // this.apiService.createUser(this.userModel)
+        //     .subscribe( data => {
+        //       alert("User created successfully.");
+        //     });
+    
+      }
     ngAfterViewInit() {
         // setTimeout(_ => this.navbarContent = this.child.nativeElement.innerHTML);
     }
@@ -210,7 +240,10 @@ export class HeaderComponent implements OnInit {
     hideEmergencyWrap() {
         this.showEmergency = false;
     }
+
+    
 }
+
 interface triggerType {
     login: string;
     signUp: string;

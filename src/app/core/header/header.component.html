@@ -207,7 +207,7 @@
       </div>
 
       <!-- Register -->
-      <form class="email-register">
+      <form class="email-register" [formGroup]="authForm" (ngSubmit)="signUp()">
         <div class="reg-form-group">
           <div class="col-md-12 col-sm-12 topic">
             <div class="row">
@@ -221,7 +221,7 @@
               </div>
               <div class="col-3 offset-col-3 col-md-2 pl-2" (click)="hideEmergencyWrap()">
                 <div class="custom-control custom-radio">
-                  <input type="radio" id="runningNo" name="runningRadio" class="custom-control-input" [(ngModel)]="currentItem">
+                  <input type="radio" id="runningNo" name="runningRadio" class="custom-control-input" formControlName="currentItem">
                   <label class="custom-control-label" for="runningNo">No</label>
                 </div>
               </div>
@@ -232,21 +232,21 @@
           <div class="col-md-12 col-sm-12 topic">
             <mark class="mark-require">*</mark> Email</div>
           <div class="col-md-12 col-sm-12 information">
-            <input type="email" class="form-control" [(ngModel)]="emailSocial" name="custEmail" />
+            <input type="email" formControlName="email" class="form-control" name="custEmail" />
           </div>
         </div>
         <div class="reg-form-group">
           <div class="col-md-12 col-sm-12 topic">
             <mark class="mark-require">*</mark> Password</div>
           <div class="col-md-12 col-sm-12 information">
-            <input type="password" class="form-control" name="custPassword" />
+            <input type="password" formControlName="password" class="form-control" name="custPassword" />
           </div>
         </div>
         <div class="reg-form-group">
           <div class="col-md-12 col-sm-12 topic">
             <mark class="mark-require">*</mark> Password Confirmation</div>
           <div class="col-md-12 col-sm-12 information">
-            <input type="password" class="form-control" name="confirmCustPassword" />
+            <input type="password" class="form-control" formControlName="confirmpassword" name="confirmCustPassword" />
           </div>
         </div>
         <div class="col-md-12 col-sm-12 personinformation">Personal Information</div>
@@ -254,25 +254,25 @@
           <div class="col-md-12 col-sm-12 topic">
             <mark class="mark-require">*</mark> First name</div>
           <div class="col-md-12 col-sm-12 mt-3 information">
-            <input type="text" class="form-control" name="custFirstName" [(ngModel)]="nameSocial" />
+            <input type="text" class="form-control" name="custFirstName" formControlName="firstname" />
           </div>
         </div>
         <div class="reg-form-group">
           <div class="col-md-12 col-sm-12 topic">
             <mark class="mark-require">*</mark>Last name</div>
           <div class="col-md-12 col-sm-12 mt-3 information">
-            <input type="text" class="form-control" name="custLastName" [(ngModel)]="lastNameSocial" />
+            <input type="text" class="form-control" name="custLastName" formControlName="lastname" />
           </div>
         </div>
         <div class="reg-form-group">
           <div class="col-md-12 col-sm-12 topic d-flex">
             <div class="custom-control custom-radio">
-              <input type="radio" id="inputMale" name="custGender" class="custom-control-input">
+              <input type="radio" id="inputMale" class="custom-control-input" formControlName="gender" value="Male"/>
               <label class="custom-control-label" for="inputMale">Male</label>
             </div>
             &nbsp;&nbsp;&nbsp;
             <div class="custom-control custom-radio">
-              <input type="radio" id="inputFemale" name="custGender" class="custom-control-input">
+              <input type="radio" id="inputFemale" class="custom-control-input" formControlName="gender" value="Female" autofocus required/>
               <label class="custom-control-label" for="inputFemale">Female</label>
             </div>
           </div>
@@ -317,6 +317,7 @@
                   <option value="">31</option>
                 </select>
               </div>
+              
               <div class="form-group " style="padding: 0px 10px 0px 10px">
                 <select class="form-control dropdownCustomMM" id="select-month">
                   <option>January</option>
@@ -460,7 +461,7 @@
           </div>
         </div>
         <div class="col-md-12 u-form-group">
-          <button class="btn btn-atk-primary mt-4 signUp-button" type="button">Sign up</button>
+          <button class="btn btn-atk-primary mt-4 signUp-button" type="submit">Sign up</button>
         </div>
       </form>
     </ng-container>

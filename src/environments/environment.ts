@@ -6,5 +6,6 @@
 export const environment = {
   production: false,
   baseUrl: '//d11aliyfxni7iy.cloudfront.net',
-  apiGateway: 'https://ad5xsmjzzj.execute-api.ap-southeast-1.amazonaws.com/v1/'
+  apiGateway: 'https://ad5xsmjzzj.execute-api.ap-southeast-1.amazonaws.com/v1/',
+  api_url: 'http://localhost:8080/api/book'
 };

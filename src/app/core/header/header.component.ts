@@ -1,3 +1,4 @@
+import { checkLoginModel } from './../../shared/models/checkLogin.model';
 import { checkEmailSocial } from './../../shared/models/checkEmail.model';
 import { ApiService } from './../../shared/services/api.service';
 import { User } from './../../shared/models/user.model';
@@ -10,7 +11,7 @@ import { AuthService } from 'angularx-social-login';
 import { SocialUser } from 'angularx-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider } from 'angularx-social-login';
 // import { PushNotificationsService } from 'angular2-notifications';
-
+declare function JSEncrypt(): any;
 declare var jQuery: any;
 declare var $: any;
 
@@ -25,6 +26,7 @@ export class HeaderComponent implements OnInit {
     responRecaptcha : string;
     userModel: User = new User();
     _checkEmailSocial: checkEmailSocial = new checkEmailSocial();
+    _checkLoginModel: checkLoginModel = new checkLoginModel();
     authForm: FormGroup;
     emailNameView: string;
     firstNameView: string;
@@ -123,26 +125,21 @@ export class HeaderComponent implements OnInit {
             this.headerModel = response['data'];
         });
         this.user = null;
-      
-        // for(let i = 0; i<4; i++){
-        //     this.notify("I am GoD"+ i);
-        //   }
-
+        JSEncrypt.prototype.setPrivateKey('MIIBVAIBADANBgkqhkiG9w0BAQEFAASCAT4wggE6AgEAAkEAs2hMvCeWnKyp/uxtzhScCuxInUTlUtBmtCMfY99SWfa07c2ytNIClREavSCcvWoybrBzQT8pnlsFWm/Cr3/IrQIDAQABAkBb1bjp223qNywxlL7EbaJOqRKmhlzI3mqkLRJlYixaZeXS7UXWaLo7+XRb60TF5N0fLcC0QMxGuPD/Jbv2pkehAiEA5ixxF3hosuaCvwypl4Dulf0Td6Q1tH2wbwTrWRPpZ5kCIQDHiaOKA9pkMk0vp7UQQw5Vd313pib6aH0MDOy+bpXGNQIgVsRQCXnxdechSGW8lIkc51uUeBhlyllLJj6jfVvdM5kCIQCWEjTHdoJoXVSkBNQu+N/s88OPm40xRCjYSVg9GVrYCQIgMXHdMVgaRL7mI4f0kl9/jeiFAJKdX5Wol+vVxB85ZGc=');
+        console.log("Password : " + JSEncrypt.prototype.encrypt("1234"));
         }
-
-      
       
     signInWithFB(): void {
         this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
         this.loginSocial();
         this.socialLogin = true;
-        this.userModel.mediaType = "facebook";
+        this.userModel.mediaType = "FACEBOOK";
     }
     signInWithGoogle(): void {
         this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
         this.loginSocial();
         this.socialLogin = true;
-        this.userModel.mediaType = "google";
+        this.userModel.mediaType = "GOOGLE";
     }
 
     signUp(): void {
@@ -168,6 +165,10 @@ export class HeaderComponent implements OnInit {
             }
             else if(this.userModel.password == null || this.userModel.password == ''|| this.userModel.password.length == 0){
                 this.invalid = 'Please input your password !!'
+                this.alertValidate();
+            }
+            else if(this.userModel.password.length < 8){
+                this.invalid = 'Please input your password over 8 character !!'
                 this.alertValidate();
             }
             else if(this.userModel.confirmpassword == null || this.userModel.confirmpassword == ''|| this.userModel.confirmpassword.length == 0){
@@ -217,14 +218,15 @@ export class HeaderComponent implements OnInit {
                             // this.triggerDialog(this.actionTrigger.login);
                             this.userMenu = true;
                             this.RegAndLog = false;
+                            this.closeAllDialog();
                         }else{
                             if(result["message"] != "Email นี้มีอยู่ในระบบแล้วไม่สามารถใช้งานได้"){
                                 
                             this.invalid = 'Please Confirm your Email !!'
                             this.alertValidate();
                             this.closeAllDialog();
-                            this.userMenu = true;
-                            this.RegAndLog = false;
+                            this.userMenu = false;
+                            this.RegAndLog = true;
                              }else{
                                this.invalid = 'Email นี้มีอยู่ในระบบแล้วไม่สามารถใช้งานได้ !!'
                                this.alertValidate();
@@ -268,14 +270,15 @@ export class HeaderComponent implements OnInit {
             window.scrollTo(0, 0);
         } else if (type === this.actionTrigger.signUp) {
             if(this.socialLogin == false){
-                this.userModel.mediaType = "normal";
+                this.userModel.mediaType = "NORMAL";
+                this.firstNameView = "";
+                this.lastNameView = "";
             }
             this.isLoginOpen = false;
             this.isShowForgotPassword = false;
             this.isRegisterOpen = true;
             this.user = null;
-            this.firstNameView = null;
-            this.lastNameView = null;
+           
         } else if (type === this.actionTrigger.forgotPassword) {
             this.isLoginOpen = false;
             this.isRegisterOpen = false;
@@ -326,7 +329,7 @@ export class HeaderComponent implements OnInit {
         this.authService.authState.subscribe((user) => {
             this.user = user;
             if (this.user != null) {
-                console.log("Email : "+this.user.email);
+                console.log("Email : "+this.user.firstName);
                 this.authForm.value.email = this.user.email;
                 this.authForm.value.firstname = this.user.firstName;
                 this.authForm.value.lastname = this.user.lastName;
@@ -401,12 +404,44 @@ export class HeaderComponent implements OnInit {
         }
         else{
 
-        this.firstNameView = "Prasittichai";
-        this.lastNameView = "Samngam";
+        this._checkLoginModel.email = $('#email-login').val();
+        this._checkLoginModel.password = $('#password-login').val();
+        this._checkLoginModel.mediaType =  "NORMAL";
+        this._checkLoginModel.accessToken = "";
 
-        this.userMenu = true;
-        this.RegAndLog = false;
-        this.closeAllDialog();
+        this.apiService.checkLogin(this._checkLoginModel).subscribe(data => {
+            var result =  JSON.parse(JSON.stringify(data));
+            console.log("Data response Login Normal : " + JSON.stringify(data));
+            if(result["success"] == true){
+                if(result["data"]["CUST_STATUS"] == "Y"){
+                    console.log("Data information User : " + result["data"]["CARD_ID"]);
+                    this.firstNameView = result["data"]["CUST_FIRSTNAME"];
+                    this.lastNameView = result["data"]["CUST_LASTNAME"];
+                    this.RegAndLog = false;
+                    this.userMenu = true;
+                    this.closeAllDialog();
+                }else{
+                    this.invalid = 'Please Confirm your Email !!'
+                    this.alertValidate();
+                }
+                
+               
+            }else{
+                this.invalid = 'Please Register !!'
+                this.userMenu = false;
+                this.RegAndLog = true;
+                this.alertValidate();
+                this.triggerDialog(this.actionTrigger.signUp);
+            }
+            
+        });
+
+        // this.firstNameView = "Prasittichai";
+        // this.lastNameView = "Samngam";
+
+        // this.userMenu = true;
+        // this.RegAndLog = false;
+        // this.closeAllDialog();
         }
     }
 
@@ -415,7 +450,9 @@ export class HeaderComponent implements OnInit {
         this.RegAndLog = true;
         this.closeAllDialog();
         this.user = null;
+        this.responRecaptcha = null
         this.router.navigate(['/']);
+
     }
 
     showEditProfile() {

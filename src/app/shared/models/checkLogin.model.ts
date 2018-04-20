@@ -1,4 +1,4 @@
-export class checkLogin {
+export class checkLoginModel {
     
       email: string;
       password: string;

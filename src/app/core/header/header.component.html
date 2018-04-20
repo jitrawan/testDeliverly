@@ -30,7 +30,7 @@
       <div class="col-lg-5 login-wrapper">
         <ng-container *ngIf="userMenu">
           <button class="btn userMenu" id="userInfoMenu" data-toggle="dropdown">
-            <a class="nav-link dropdown-toggle text-overflow-ellipsis">Mr.Allticket Ng5</a>
+            <a class="nav-link dropdown-toggle text-overflow-ellipsis">{{firstNameView}} {{lastNameView}}</a>
           </button>
           <div class="userMenu">
             <div class="dropdown-menu">
@@ -67,6 +67,7 @@
     </div>
   </nav>
 
+
   <div class="header-wrapper">
     <div class="container">
       <div class="row">
@@ -91,7 +92,7 @@
             <div class="col-lg-5 login-wrapper">
               <ng-container *ngIf="userMenu">
                 <button class="btn userMenu" id="userInfoMenu" data-toggle="dropdown">
-                  <a class="nav-link dropdown-toggle text-overflow-ellipsis">Mr.Allticket Ng5</a>
+                  <a class="nav-link dropdown-toggle text-overflow-ellipsis">{{firstNameView}} {{lastNameView}}</a>
                 </button>
                 <div class="userMenu">
                   <div class="dropdown-menu">
@@ -150,10 +151,10 @@
       </div>
       <form class="email-login mt-4">
         <div class="u-form-group">
-          <input type="email" class="form-control" placeholder="Email" name="email" />
+          <input type="email" class="form-control" id="email-login" placeholder="Email" name="email" />
         </div>
         <div class="u-form-group mt-3">
-          <input type="password" class="form-control" placeholder="Password" name="password" />
+          <input type="password" class="form-control" id="password-login" placeholder="Password" name="password" />
         </div>
         <div class="u-form-group groupoption">
           <div class="row">
@@ -163,20 +164,20 @@
             </div>
           </div>
         </div>
-        <div class="text-center my-2" *ngIf="isCaptchaOpen">
+        <div class="text-center my-2" *ngIf="isReCaptchaOpen">
           <div class="captcha">
-            <img class="captcha-img w50pc ml1em" src="" />
-            <img class="captcha-reload" src="https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/images/refresh.png" alt="Refresh captcha"
-              title="Refresh captcha" />
-          </div>
-          <div class="form-group mt-3 mb-0 mb-md-3">
-            <input class="form-control text-center mx-auto w50pc" type="text" value="" name="capchaReserve" maxlength="6" />
+            <re-captcha (resolved)="resolved($event)" siteKey="6LcPgVAUAAAAAP9AjXUNyt82AOHKjtVmmOeiwYZK"></re-captcha>
           </div>
         </div>
-
         <div class="u-form-group">
           <button class="btn btn-atk-primary mt-2 mt-md-0 signin-button" (click)="checklogin()" type="button">Sign in</button>
         </div>
+        <button class="loginBtn loginBtn--facebook" (click)="signInWithFB()">
+          Login with Facebook
+        </button>
+        <button class="loginBtn loginBtn--google" (click)="signInWithGoogle()">
+          Login with Google
+        </button>
         <hr class="under-signin">
         <div class="col-md-12 p-2">
           <p class="font-weight-bold">Not a member ?</p>
@@ -187,27 +188,22 @@
       </form>
     </ng-container>
 
+     <!-- Register -->
+
     <ng-container *ngIf="isRegisterOpen">
       <button type="button" class="close" (click)="closeAllDialog()" id="closeSignupModal" aria-label="Close">
         <i class="fa fa-times-circle" aria-hidden="true"></i>
       </button>
       <div style="text-align: center">
         <h3>Register</h3>
-
-        <button class="loginBtn loginBtn--facebook" (click)="signInWithFB()">
-          Login with Facebook
-        </button>
-        <button class="loginBtn loginBtn--google" (click)="signInWithGoogle()">
-          Login with Google
-        </button>
         <div class="col-md-12 col-sm-12 mt-2">
           Already member ?
           <a class="cursor-pointer modal-text-primary" (click)="triggerDialog(actionTrigger.login)"> Sign in</a>
         </div>
       </div>
 
-      <!-- Register -->
-      <form class="email-register" [formGroup]="authForm" (ngSubmit)="signUp()">
+     
+      <form class="email-register" [formGroup]="authForm" (ngSubmit)="signUp()" data-toggle="validator" role="form">
         <div class="reg-form-group">
           <div class="col-md-12 col-sm-12 topic">
             <div class="row">
@@ -232,9 +228,11 @@
           <div class="col-md-12 col-sm-12 topic">
             <mark class="mark-require">*</mark> Email</div>
           <div class="col-md-12 col-sm-12 information">
-            <input type="email" formControlName="email" class="form-control" name="custEmail" />
+            <input type="email" formControlName="email" id="email" class="form-control" name="custEmail" [(ngModel)]="emailNameView" />
           </div>
         </div>
+
+       
         <div class="reg-form-group">
           <div class="col-md-12 col-sm-12 topic">
             <mark class="mark-require">*</mark> Password</div>
@@ -249,30 +247,32 @@
             <input type="password" class="form-control" formControlName="confirmpassword" name="confirmCustPassword" />
           </div>
         </div>
+      
+
         <div class="col-md-12 col-sm-12 personinformation">Personal Information</div>
         <div class="reg-form-group">
           <div class="col-md-12 col-sm-12 topic">
             <mark class="mark-require">*</mark> First name</div>
           <div class="col-md-12 col-sm-12 mt-3 information">
-            <input type="text" class="form-control" name="custFirstName" formControlName="firstname" />
+            <input type="text" class="form-control" name="custFirstName" formControlName="firstname" [(ngModel)]="firstNameView" />
           </div>
         </div>
         <div class="reg-form-group">
           <div class="col-md-12 col-sm-12 topic">
             <mark class="mark-require">*</mark>Last name</div>
           <div class="col-md-12 col-sm-12 mt-3 information">
-            <input type="text" class="form-control" name="custLastName" formControlName="lastname" />
+            <input type="text" class="form-control" name="custLastName" formControlName="lastname" [(ngModel)]="lastNameView" />
           </div>
         </div>
         <div class="reg-form-group">
           <div class="col-md-12 col-sm-12 topic d-flex">
             <div class="custom-control custom-radio">
-              <input type="radio" id="inputMale" class="custom-control-input" formControlName="gender" value="Male"/>
+              <input type="radio" id="inputMale" class="custom-control-input" formControlName="gender" value="1"/>
               <label class="custom-control-label" for="inputMale">Male</label>
             </div>
             &nbsp;&nbsp;&nbsp;
             <div class="custom-control custom-radio">
-              <input type="radio" id="inputFemale" class="custom-control-input" formControlName="gender" value="Female" autofocus required/>
+              <input type="radio" id="inputFemale" class="custom-control-input" formControlName="gender" value="2" autofocus required/>
               <label class="custom-control-label" for="inputFemale">Female</label>
             </div>
           </div>
@@ -283,84 +283,84 @@
           <div class="col-md-12 col-sm-12 DOBWrapper">
             <div class="row">
               <div class="form-group ">
-                <select class="form-control dropdownCustom" id="select-date">
-                  <option value="">01</option>
-                  <option value="">02</option>
-                  <option value="">03</option>
-                  <option value="">04</option>
-                  <option value="">05</option>
-                  <option value="">06</option>
-                  <option value="">07</option>
-                  <option value="">08</option>
-                  <option value="">09</option>
-                  <option value="">10</option>
-                  <option value="">11</option>
-                  <option value="">12</option>
-                  <option value="">13</option>
-                  <option value="">14</option>
-                  <option value="">15</option>
-                  <option value="">16</option>
-                  <option value="">17</option>
-                  <option value="">18</option>
-                  <option value="">19</option>
-                  <option value="">20</option>
-                  <option value="">21</option>
-                  <option value="">22</option>
-                  <option value="">23</option>
-                  <option value="">24</option>
-                  <option value="">25</option>
-                  <option value="">26</option>
-                  <option value="">27</option>
-                  <option value="">28</option>
-                  <option value="">29</option>
-                  <option value="">30</option>
-                  <option value="">31</option>
+                <select class="form-control dropdownCustom" id="select-date" formControlName="birthdayDate">
+                  <option >01</option>
+                  <option >02</option>
+                  <option >03</option>
+                  <option >04</option>
+                  <option >05</option>
+                  <option >06</option>
+                  <option >07</option>
+                  <option >08</option>
+                  <option >09</option>
+                  <option >10</option>
+                  <option >11</option>
+                  <option >12</option>
+                  <option >13</option>
+                  <option >14</option>
+                  <option >15</option>
+                  <option >16</option>
+                  <option >17</option>
+                  <option >18</option>
+                  <option >19</option>
+                  <option >20</option>
+                  <option >21</option>
+                  <option >22</option>
+                  <option >23</option>
+                  <option >24</option>
+                  <option >25</option>
+                  <option >26</option>
+                  <option >27</option>
+                  <option >28</option>
+                  <option >29</option>
+                  <option >30</option>
+                  <option >31</option>
                 </select>
               </div>
               
               <div class="form-group " style="padding: 0px 10px 0px 10px">
-                <select class="form-control dropdownCustomMM" id="select-month">
-                  <option>January</option>
-                  <option>Feburay</option>
-                  <option>March</option>
-                  <option>April</option>
-                  <option>May</option>
-                  <option>June</option>
-                  <option>July</option>
-                  <option>August</option>
-                  <option>September</option>
-                  <option>October</option>
-                  <option>November</option>
-                  <option>December</option>
+                <select class="form-control dropdownCustomMM" id="select-month"formControlName="birthdayMonth">
+                  <option value="01">January</option>
+                  <option value="02">Feburay</option>
+                  <option value="03">March</option>
+                  <option value="04">April</option>
+                  <option value="05">May</option>
+                  <option value="06">June</option>
+                  <option value="07">July</option>
+                  <option value="08">August</option>
+                  <option value="09">September</option>
+                  <option value="10">October</option>
+                  <option value="11">November</option>
+                  <option value="12">December</option>
                 </select>
               </div>
               <div class="form-group ">
-                <select class="form-control dropdownCustom" id="select-year">
-                  <option value="">1980</option>
-                  <option value="">1981</option>
-                  <option value="">1982</option>
-                  <option value="">1983</option>
-                  <option value="">1984</option>
-                  <option value="">1985</option>
-                  <option value="">1986</option>
-                  <option value="">1987</option>
-                  <option value="">1988</option>
-                  <option value="">1989</option>
-                  <option value="">1990</option>
-                  <option value="">1991</option>
-                  <option value="">1992</option>
-                  <option value="">1993</option>
-                  <option value="">1994</option>
-                  <option value="">1995</option>
-                  <option value="">1996</option>
-                  <option value="">1997</option>
-                  <option value="">1998</option>
-                  <option value="">1999</option>
-                  <option value="">2000</option>
-                  <option value="">2001</option>
-                  <option value="">2002</option>
-                  <option value="">2003</option>
-                  <option value="">2004</option>
+                <select class="form-control dropdownCustom" id="select-year"formControlName="birthdayYear">
+                  <option >1980</option>
+                  <option >1981</option>
+                  <option >1982</option>
+                  <option >1983</option>
+                  <option >1984</option>
+                  <option >1985</option>
+                  <option >1986</option>
+                  <option >1987</option>
+                  <option >1988</option>
+                  <option >1989</option>
+                  <option >1990</option>
+                  <option >1991</option>
+                  <option >1992</option>
+                  <option >1993</option>
+                  <option >1994</option>
+                  <option >1995</option>
+                  <option >1996</option>
+                  <option >1997</option>
+                  <option >1998</option>
+                  <option >1999</option>
+                  <option >2000</option>
+                  <option >2001</option>
+                  <option >2002</option>
+                  <option >2003</option>
+                  <option >2004</option>
                 </select>
               </div>
             </div>
@@ -368,7 +368,7 @@
           <div class="reg-form-group">
             <div class="col-md-12 col-sm-12 topic d-flex">
               <div class="custom-control custom-radio">
-                <input type="radio" id="idCard" name="custCardType" class="custom-control-input">
+                <input type="radio" id="idCard" name="custCardType" class="custom-control-input" checked="checked">
                 <label class="custom-control-label" for="idCard">ID Card No.</label>
               </div>
               &nbsp;&nbsp;
@@ -378,7 +378,7 @@
               </div>
             </div>
             <div class="col-md-12 col-sm-12 mt-3 information">
-              <input type="text" class="form-control" name="custCardNumber" maxlength="13" />
+              <input type="text" class="form-control" name="custCardNumber" maxlength="13" formControlName="idCard"/>
             </div>
           </div>
           <div class="reg-form-group customer-tel">
@@ -393,7 +393,7 @@
                   <div class="dropdown-menu">
                   </div>
                 </div>
-                <input type="text" class="form-control telnoRadius" placeholder="0XXXXXXXXX" maxlength="10">
+                <input type="text" class="form-control telnoRadius" placeholder="0XXXXXXXXX" maxlength="10"formControlName="phone">
               </div>
             </div>
           </div>
@@ -419,7 +419,7 @@
                     <div class="dropdown-menu">
                     </div>
                   </div>
-                  <input type="text" class="form-control telnoRadius" placeholder="0XXXXXXXXX" maxlength="10">
+                  <input type="text" class="form-control telnoRadius" placeholder="0XXXXXXXXX" maxlength="10" formControlName="phone">
                 </div>
               </div>
             </div>
@@ -427,7 +427,7 @@
           <div class="reg-form-group">
             <div class="col-md-12 col-sm-12 topic">
               <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="acceptTerms">
+                <input type="checkbox" class="custom-control-input" id="acceptTerms" formControlName="acceptTeam">
                 <label class="custom-control-label" for="acceptTerms">
                   <mark class="mark-require">*</mark> Accept
                   <a href="tos.html" target="_blank">
@@ -441,7 +441,7 @@
           <div class="reg-form-group">
             <div class="col-md-12 col-sm-12 topic">
               <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="acceptNews">
+                <input type="checkbox" class="custom-control-input" id="acceptNews" formControlName="acceptNews">
                 <label class="custom-control-label" for="acceptNews">
                   <span>&nbsp; Accept the newsletter</span>
                 </label>
@@ -461,7 +461,7 @@
           </div>
         </div>
         <div class="col-md-12 u-form-group">
-          <button class="btn btn-atk-primary mt-4 signUp-button" type="submit">Sign up</button>
+          <button class="btn btn-atk-primary mt-4 signUp-button" type="submit" data-dismiss="modal">Sign up</button>
         </div>
       </form>
     </ng-container>
@@ -535,7 +535,7 @@
           <div class="col-md-12 col-sm-12 topic">
             <mark class="mark-require">*</mark> Email</div>
           <div class="col-md-12 col-sm-12 information">
-            <input type="email" class="form-control" name="custEmail" />
+            <input type="email" class="form-control" name="custEmail" value="{{user.email}}" />
           </div>
         </div>
         <div class="col-md-12 col-sm-12 personinformation">Personal Information</div>
@@ -543,14 +543,14 @@
           <div class="col-md-12 col-sm-12 topic">
             <mark class="mark-require">*</mark> First name</div>
           <div class="col-md-12 col-sm-12 mt-3 information">
-            <input type="text" class="form-control" name="custFirstName" />
+            <input type="text" class="form-control" name="custFirstName"  value="{{user.firstName}}" />
           </div>
         </div>
         <div class="reg-form-group">
           <div class="col-md-12 col-sm-12 topic">
             <mark class="mark-require">*</mark> Last name</div>
           <div class="col-md-12 col-sm-12 mt-3 information">
-            <input type="text" class="form-control" name="custLastname" />
+            <input type="text" class="form-control" name="custLastname" value="{{user.lastName}}"/>
           </div>
         </div>
         <div class="reg-form-group">
@@ -752,5 +752,19 @@
         </div>
       </form>
     </ng-container>
+  </div>
+
+  <div id="myModal" class="modal fade in">
+      <div class="modal-dialog">
+        <div class="modal-content">
+        <!-- dialog body -->
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+         <label id="fail" style="color: black">{{invalid}}</label>
+        </div>
+        <!-- dialog buttons -->
+        <div class="modal-footer"><button type="button" class="btn btn-primary" data-dismiss="modal"data-dismiss="modal">OK</button></div>
+        </div>
+      </div>
   </div>
 </header>

@@ -62,9 +62,7 @@ import { HistoryComponent } from './pages/history/history.component';
 
 import { SocialLoginModule } from 'angularx-social-login';
 import { AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider } from 'angularx-social-login';
-<<<<<<< HEAD
 
-=======
 import { FootballComponent } from './pages/eventTickets/football/football.component';
 import { RacingComponent } from './pages/eventTickets/racing/racing.component';
 import { RunningComponent } from './pages/eventTickets/running/running.component';
@@ -73,7 +71,8 @@ import { SeminarComponent } from './pages/eventTickets/seminar/seminar.component
 import { EducationComponent } from './pages/eventTickets/education/education.component';
 import { DiscountComponent } from './pages/discount/discount.component';
 import { DiscountDetailComponent } from './pages/discount-detail/discount-detail.component';
->>>>>>> b756c701d1a2136eb12799373d92fbca6d8fd341
+import { RecaptchaModule } from 'ng-recaptcha';
+import { PushNotificationModule } from 'ng-push-notification';
 
 const config = new AuthServiceConfig([
   {
@@ -151,12 +150,12 @@ export function provideConfig() {
     JasperoAlertsModule,
     JasperoConfirmationsModule,
     SocialLoginModule,
-<<<<<<< HEAD
-    ReactiveFormsModule
-=======
+    ReactiveFormsModule,
     AccordionModule,
-    ScheduleModule
->>>>>>> b756c701d1a2136eb12799373d92fbca6d8fd341
+    ScheduleModule,
+    RecaptchaModule.forRoot(),
+    PushNotificationModule.forRoot()
+
   ],
   providers: [
     HeaderService,

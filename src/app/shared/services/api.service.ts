@@ -1,7 +1,9 @@
+import { checkEmailSocial } from './../models/checkEmail.model';
+import { User } from './../models/user.model';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Headers, Http, Response, URLSearchParams } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import * as Xml2js from 'xml2js';
@@ -72,7 +74,22 @@ post(path: string, body: Object = {}): Observable<any> {
     .map((res: Response) => res.toString());
   }
 
-  createUser(user) {
-    return this.http.post(`${environment.apiGateway}`, user);
+  createUser(body : User): Observable<Response> {
+    return this.http.post(`${environment.apiGatewayRegister}`, JSON.stringify(body)).map((res: Response) => (JSON.parse(res["_body"])));
+  }
+  checkAccessToken(accessToken : string){
+    return this.http.post(`https://graph.facebook.com/me?access_token=${accessToken}`,{ headers: this.getHeaders() }).map((res: Response) => (res["_body"]));
+  }
+
+  checkEmail(body : checkEmailSocial): Observable<Response> {
+    return this.http.post(`https://26ieslrird.execute-api.ap-southeast-1.amazonaws.com/latest/checkemail`, JSON.stringify(body)).map((res: Response) => (JSON.parse(res["_body"])));
+  }
+
+  private getHeaders() {
+    let headers = new Headers();
+    headers.append('Access-Control-Allow-Origin', '*');
+    headers.append('Accept', 'application/json');
+    headers.append('Content-Type', 'application/json');
+    return headers;
   }
 }

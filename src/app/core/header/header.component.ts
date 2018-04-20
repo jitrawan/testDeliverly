@@ -1,3 +1,4 @@
+import { checkEmailSocial } from './../../shared/models/checkEmail.model';
 import { ApiService } from './../../shared/services/api.service';
 import { User } from './../../shared/models/user.model';
 import { Component, OnInit, AfterViewInit, HostListener, ElementRef, ViewChild, Renderer2 } from '@angular/core';
@@ -8,6 +9,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { AuthService } from 'angularx-social-login';
 import { SocialUser } from 'angularx-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider } from 'angularx-social-login';
+// import { PushNotificationsService } from 'angular2-notifications';
 
 declare var jQuery: any;
 declare var $: any;
@@ -20,8 +22,17 @@ declare var $: any;
     '../../../assets/css/standard/layout.css']
 })
 export class HeaderComponent implements OnInit {
+    responRecaptcha : string;
     userModel: User = new User();
+    _checkEmailSocial: checkEmailSocial = new checkEmailSocial();
     authForm: FormGroup;
+    emailNameView: string;
+    firstNameView: string;
+    lastNameView : string;
+    invalid: string;
+    birthDayDate: any;
+    birthDayMonth: any;
+    birthDayYear: any;
     private headerModel: HeaderModel[];
     private resizeTimeout: number = 0;
     isMobileSize: boolean = false;
@@ -32,10 +43,12 @@ export class HeaderComponent implements OnInit {
     isRegisterOpen: boolean = false;
     isShowForgotPassword: boolean = false;
     userMenu: boolean = false;
+    socialLogin: boolean = false;
     RegAndLog: boolean = true;
     isEditProfileOpen: boolean = false;
     isChangePasswordOpen: boolean = false;
     isCaptchaOpen: boolean = false;
+    isReCaptchaOpen: boolean = true;
     showEmergency: boolean;
     actionTrigger: triggerType = {
         login: 'login',
@@ -77,8 +90,10 @@ export class HeaderComponent implements OnInit {
         private router: Router,
         private authService: AuthService,
         private fb: FormBuilder,
-        private apiService: ApiService
+        private apiService: ApiService,
+        // private _pushNotifications: PushNotificationsService
     ) {
+        // _pushNotifications.requestPermission(); 
         this.showEmergency = false;
 
         // use FormBuilder to create a form group
@@ -89,9 +104,13 @@ export class HeaderComponent implements OnInit {
     'firstname': ['', Validators.required],
     'lastname': ['', Validators.required],
     'gender': ['', Validators.required],
-    'birthday': ['', Validators.required],
+    'birthdayDate': ['', Validators.required],
+    'birthdayMonth': ['', Validators.required],
+    'birthdayYear': ['', Validators.required],
     'idCard': ['', Validators.required],
     'phone': ['', Validators.required],
+    'acceptTeam': ['', Validators.required],
+    'acceptNews': ['', Validators.required],
     'currentItem': ['', Validators.required]
 
    });
@@ -103,39 +122,125 @@ export class HeaderComponent implements OnInit {
         this.headerService.getHeaderMenu().subscribe(response => {
             this.headerModel = response['data'];
         });
+        this.user = null;
+      
+        // for(let i = 0; i<4; i++){
+        //     this.notify("I am GoD"+ i);
+        //   }
 
-        this.authService.authState.subscribe((user) => {
-            this.user = user;
-            if (this.user != null) {
-                this.authForm.value.email = this.user.email;
-                this.authForm.value.firstname = this.user.firstName;
-                this.authForm.value.lastname = this.user.lastName;
-            }
-        });
-    }
+        }
 
+      
+      
     signInWithFB(): void {
         this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+        this.loginSocial();
+        this.socialLogin = true;
+        this.userModel.mediaType = "facebook";
     }
     signInWithGoogle(): void {
         this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+        this.loginSocial();
+        this.socialLogin = true;
+        this.userModel.mediaType = "google";
     }
 
-<<<<<<< HEAD
     signUp(): void {
-        console.log("Gender : " + this.authForm.value.gender);
-        // this.apiService.createUser(this.userModel)
-        //     .subscribe( data => {
-        //       alert("User created successfully.");
-        //     });
-    
-      }
+        this.userModel.email = this.authForm.value.email;
+        this.userModel.password = this.authForm.value.password;
+        this.userModel.confirmpassword = this.authForm.value.confirmpassword;
+        this.userModel.firstName = this.authForm.value.firstname;
+        this.userModel.lastName = this.authForm.value.lastname;
+        this.userModel.gender = this.authForm.value.gender;
+        this.userModel.birthday = $('#select-month').val() +"/" + $('#select-date').val() +"/" + $('#select-year').val();
+        this.userModel.idCard = this.authForm.value.idCard;
+        this.userModel.phone = this.authForm.value.phone;
+        this.userModel.acceptTeam = this.authForm.value.acceptTeam;
+        this.userModel.acceptNews = this.authForm.value.acceptNews;
+          
+        
+        console.log("Data : " + JSON.stringify(this.userModel));
+        console.log("socialLogin : " + this.socialLogin);
+
+            if(this.userModel.email == null || this.userModel.email == ''|| this.userModel.email.length == 0){
+                this.invalid = 'Please input your email !!'
+                this.alertValidate();
+            }
+            else if(this.userModel.password == null || this.userModel.password == ''|| this.userModel.password.length == 0){
+                this.invalid = 'Please input your password !!'
+                this.alertValidate();
+            }
+            else if(this.userModel.confirmpassword == null || this.userModel.confirmpassword == ''|| this.userModel.confirmpassword.length == 0){
+                this.invalid = 'Please input your confirm password !!'
+                this.alertValidate();
+            }
+            else if(this.userModel.confirmpassword != this.userModel.password){
+                this.invalid = 'Please input your confirm password same password !!'
+                this.alertValidate();
+            }
+            else if(this.userModel.firstName == null || this.userModel.firstName == ''|| this.userModel.firstName.length == 0){
+                this.invalid = 'Please input your First Name !!'
+                this.alertValidate();
+            }
+            else if(this.userModel.lastName == null || this.userModel.lastName == ''|| this.userModel.lastName.length == 0){
+                this.invalid = 'Please input your Last Name !!'
+                this.alertValidate();
+            }
+            else if(this.userModel.gender == null || this.userModel.gender == ''|| this.userModel.gender.length == 0){
+                this.invalid = 'Please choose your Gender !!'
+                this.alertValidate();
+            }
+            else if($('#select-date').val() == null || $('#select-date').val() == ''|| $('#select-date').val() == 0 || $('#select-month').val() == null || $('#select-month').val() == ''|| $('#select-month').val() == 0 || $('#select-year').val() == null || $('#select-year').val() == ''|| $('#select-year').val() == 0){
+                this.invalid = 'Please input your Birthday !!'
+                this.alertValidate();
+            }
+            else if(this.userModel.idCard == null || this.userModel.idCard == ''&& this.userModel.idCard.length < 13){
+                this.invalid = 'Please input your ID Card !!'
+                this.alertValidate();
+            }
+            else if(this.userModel.phone == null || this.userModel.phone == ''|| this.userModel.phone.length < 10){
+                this.invalid = 'Please input your Phone number !!'
+                this.alertValidate();
+            }
+            else if(this.userModel.acceptTeam == null ){
+                this.invalid = 'Please choose Accept Term !!'
+                this.alertValidate();
+            }
+            else{
+            this.apiService.createUser(this.userModel)
+                .subscribe( data => {
+                    console.log("Data Response " +  JSON.stringify(data));
+                    var result =  JSON.parse(JSON.stringify(data));
+                    if(result["success"] == true){
+
+                        if(this.socialLogin == true){
+                            // this.triggerDialog(this.actionTrigger.login);
+                            this.userMenu = true;
+                            this.RegAndLog = false;
+                        }else{
+                            if(result["message"] != "Email นี้มีอยู่ในระบบแล้วไม่สามารถใช้งานได้"){
+                                
+                            this.invalid = 'Please Confirm your Email !!'
+                            this.alertValidate();
+                            this.closeAllDialog();
+                            this.userMenu = true;
+                            this.RegAndLog = false;
+                             }else{
+                               this.invalid = 'Email นี้มีอยู่ในระบบแล้วไม่สามารถใช้งานได้ !!'
+                               this.alertValidate();
+                                                        
+                            }
+                        }
+                    }
+                });
+                
+            }
+        
+    }
     ngAfterViewInit() {
         // setTimeout(_ => this.navbarContent = this.child.nativeElement.innerHTML);
     }
 
-=======
->>>>>>> b756c701d1a2136eb12799373d92fbca6d8fd341
     routeMenu(route: string) {
         this.router.navigate([route]);
         this.closeAllDialog();
@@ -162,9 +267,15 @@ export class HeaderComponent implements OnInit {
             this.isLoginOpen = true;
             window.scrollTo(0, 0);
         } else if (type === this.actionTrigger.signUp) {
+            if(this.socialLogin == false){
+                this.userModel.mediaType = "normal";
+            }
             this.isLoginOpen = false;
             this.isShowForgotPassword = false;
             this.isRegisterOpen = true;
+            this.user = null;
+            this.firstNameView = null;
+            this.lastNameView = null;
         } else if (type === this.actionTrigger.forgotPassword) {
             this.isLoginOpen = false;
             this.isRegisterOpen = false;
@@ -211,7 +322,51 @@ export class HeaderComponent implements OnInit {
         this.router.navigate(['history']);
         this.closeAllDialog();
     }
+    loginSocial(){
+        this.authService.authState.subscribe((user) => {
+            this.user = user;
+            if (this.user != null) {
+                console.log("Email : "+this.user.email);
+                this.authForm.value.email = this.user.email;
+                this.authForm.value.firstname = this.user.firstName;
+                this.authForm.value.lastname = this.user.lastName;
+                this.userModel.accessToken = this.user.authToken;
+              
+                // this.userMenu = true;
+                
+                this._checkEmailSocial.email = this.user.email;
+                this._checkEmailSocial.accessToken = this.user.authToken;
 
+                console.log("Data Check Email : " + JSON.stringify(this._checkEmailSocial));
+
+                this.apiService.checkEmail(this._checkEmailSocial).subscribe(data => {
+                    var result =  JSON.parse(JSON.stringify(data));
+                    console.log("Data response Login Social : " + JSON.stringify(data));
+                    if(result["success"] == true){
+                                this.RegAndLog = false;
+                                this.userMenu = true;
+                                this.firstNameView = this.user.firstName;
+                                this.lastNameView = this.user.lastName;
+                                this.closeAllDialog();
+                       
+                    }else{
+                        this.emailNameView = this.user.email;
+                        this.firstNameView = this.user.firstName;
+                        this.lastNameView = this.user.lastName;
+                        this.triggerDialog(this.actionTrigger.signUp);
+                       
+                      
+                    }
+                    
+                });
+
+            }else{
+                this.userMenu = false;
+                this.RegAndLog = true;
+            }
+        });
+        
+    }
     // checkSidebar(width) {
     //     if (width <= 992) {
     //         this.isMobileSize = true;
@@ -226,17 +381,40 @@ export class HeaderComponent implements OnInit {
     }
 
     checklogin() {
-        // (<HTMLInputElement>document.getElementById("email")).value == "test"
-        // && (<HTMLInputElement>document.getElementById("password")).value == "test")
+        if($('#email-login').val() == null || $('#email-login').val() == '' || $('#email-login').val().lenght == 0 ){
+            this.invalid = 'Please input your email !!'
+            this.alertValidate();
+            this.userMenu = false;
+            this.RegAndLog = true;
+        }
+        else if($('#password-login').val() == null || $('#password-login').val() == '' || $('#password-login').val().lenght == 0 ){
+            this.invalid = 'Please input your password !!'
+            this.alertValidate();
+            this.userMenu = false;
+            this.RegAndLog = true;
+        }
+        else if(this.responRecaptcha == null){
+            this.invalid = 'Please input Captcha key !!'
+            this.alertValidate();
+            this.userMenu = false;
+            this.RegAndLog = true;
+        }
+        else{
+
+        this.firstNameView = "Prasittichai";
+        this.lastNameView = "Samngam";
+
         this.userMenu = true;
         this.RegAndLog = false;
         this.closeAllDialog();
+        }
     }
 
     logout() {
         this.userMenu = false;
         this.RegAndLog = true;
         this.closeAllDialog();
+        this.user = null;
         this.router.navigate(['/']);
     }
 
@@ -252,6 +430,33 @@ export class HeaderComponent implements OnInit {
         this.showEmergency = false;
     }
 
+    alertValidate(){
+        $(document).ready(function () {
+            
+                      $("#myModal").on("show", function () {   
+                          $("#myModal a.btn").on("click", function (e) {
+                              $("#myModal").modal('hide');
+                          });
+                      });
+                      $("#myModal").on("hide", function () {    // remove the event listeners when the dialog is dismissed
+                          $("#myModal a.btn").off("click");
+                      });
+                      $("#myModal").on("hidden", function () {  // remove the actual elements from the DOM when fully hidden
+                          $("#myModal").remove();
+                      });
+                      $("#myModal").modal({                    // wire up the actual modal functionality and show the dialog
+                          "backdrop": "static",
+                          "keyboard": true,
+                          "show": true                     // ensure the modal is shown immediately
+                      });
+                  });
+    }
+
+    resolved(captchaResponse: string) {
+        console.log(`Resolved captcha with response ${captchaResponse}:`);
+        this.responRecaptcha = captchaResponse;
+        console.log("Token :" + this.responRecaptcha);
+    }
     
 }
 
@@ -266,3 +471,4 @@ interface userTriggerType {
     change: string;
     history: string;
 }
+

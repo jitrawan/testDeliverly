@@ -517,7 +517,8 @@ a:focus {
 }
 
 .captcha {
-  display: none;
+  right: 10%;
+  margin-left: 15%;
 }
 
 .captcha-reload {
@@ -720,4 +721,48 @@ pv10 {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #F5F5F5;
   }
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 1;
+  width: 100%;
+  height: 455%;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.headerSticky {
+  position: fixed;
+  top: 0;
+  width: inherit;
+  z-index: 2;
+  background-color: #414042;
+  display: none;
+}
+
+.sticky-btn-buy {
+  line-height: 40px;
+}
+
+.sticky-btn-buy>button {
+  background-color: #f5e900;
+  border-radius: 10px;
+  color: black;
+  font-weight: bold;
+}
+
+.sticky-image {
+  text-align: right;
+}
+
+.sticky-image img {
+  height: auto;
+  width: 100%;
+}
+
+.stickyOverlay {
+  color: white;
 }

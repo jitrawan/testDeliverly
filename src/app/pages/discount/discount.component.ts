@@ -16,12 +16,13 @@ declare var $: any;
 export class DiscountComponent implements OnInit {
 
   @ViewChild('itemDiscount') private itemDiscount: ElementRef;
+  @ViewChild('itemDiscount2') private itemDiscount2: ElementRef;
   isCheck: String
   // discountList = new Array();
 
   discountList = [
-    { id: 1, title: 'S4P3', desc: 'ซื้อ 4 จ่าย 3' },
-    { id: 2, title: 'PTT Blue Card', desc: 'แสดงบัตร PTT BLUE CARD รับส่วนลด 25% (6 ใบต่อ 1 ครั้งลดซ้ำได้)' }
+    { id: 1, title: 'S4P3', desc: 'ซื้อ 4 จ่าย 3' , imgUrl: 'https://atkmedia.allticket.com/images/discount/S4P3.jpg' },
+    { id: 2, title: 'PTT Blue Card', desc: 'แสดงบัตร PTT BLUE CARD รับส่วนลด 25% (6 ใบต่อ 1 ครั้งลดซ้ำได้)', imgUrl: "https://atkmedia.allticket.com/images/discount/GT_BlueCard.jpg " }
   ];
 
   constructor(
@@ -36,7 +37,13 @@ export class DiscountComponent implements OnInit {
 
   selectDiscount(id: String) {
     this.isCheck = id;
-    this.renderer.addClass(this.itemDiscount.nativeElement, 'blur');
+    if(id == "1"){
+    this.renderer.addClass(this.itemDiscount2.nativeElement, 'blur');
+    this.renderer.removeClass(this.itemDiscount.nativeElement, 'blur');
+    }else{
+      this.renderer.removeClass(this.itemDiscount2.nativeElement, 'blur');
+      this.renderer.addClass(this.itemDiscount.nativeElement, 'blur');
+    }
   }
 
   generateDiscountSlide() {

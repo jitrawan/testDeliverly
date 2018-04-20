@@ -13,7 +13,6 @@
     -moz-transition: all .3s ease;
     transition: all .3s ease;
 }
-
 .discount-item .discount-image {
     display: flex;
     justify-content: center;

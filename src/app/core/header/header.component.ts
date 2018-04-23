@@ -208,6 +208,12 @@ export class HeaderComponent implements OnInit {
                 this.invalid = 'Please choose Accept Term !!'
                 this.alertValidate();
             }
+            else if(this.responRecaptcha == null){
+            this.invalid = 'Please input Captcha key !!'
+            this.alertValidate();
+            this.userMenu = false;
+            this.RegAndLog = true;
+        }
             else{
             this.apiService.createUser(this.userModel)
                 .subscribe( data => {
@@ -392,12 +398,6 @@ export class HeaderComponent implements OnInit {
         }
         else if($('#password-login').val() == null || $('#password-login').val() == '' || $('#password-login').val().lenght == 0 ){
             this.invalid = 'Please input your password !!'
-            this.alertValidate();
-            this.userMenu = false;
-            this.RegAndLog = true;
-        }
-        else if(this.responRecaptcha == null){
-            this.invalid = 'Please input Captcha key !!'
             this.alertValidate();
             this.userMenu = false;
             this.RegAndLog = true;

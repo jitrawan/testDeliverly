@@ -215,7 +215,6 @@ export class HeaderComponent implements OnInit {
                     if(result["success"] == true){
 
                         if(this.socialLogin == true){
-                            // this.triggerDialog(this.actionTrigger.login);
                             this.userMenu = true;
                             this.RegAndLog = false;
                             this.closeAllDialog();

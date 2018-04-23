@@ -120,7 +120,8 @@ export class HeaderComponent implements OnInit {
 
     ngOnInit() {
         this.resizeTimeout = 0;
-
+        // 6Lfg51QUAAAAAID_dAd_epeHdsoj0gkr8IyQ3pmf
+        // 6LcPgVAUAAAAAP9AjXUNyt82AOHKjtVmmOeiwYZK
         this.headerService.getHeaderMenu().subscribe(response => {
             this.headerModel = response['data'];
         });

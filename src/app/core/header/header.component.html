@@ -422,7 +422,7 @@
           <div class="reg-form-group">
             <div class="col-md-12 col-sm-12 topic">
               <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="acceptTerms" formControlName="acceptTeam">
+                <input type="checkbox" class="custom-control-input" id="acceptTerms" formControlName="acceptTerm">
                 <label class="custom-control-label" for="acceptTerms">
                   <mark class="mark-require">*</mark> Accept
                   <a href="tos.html" target="_blank">
@@ -545,12 +545,12 @@
         <div class="reg-form-group">
           <div class="col-md-12 col-sm-12 topic d-flex">
             <div class="custom-control custom-radio">
-              <input type="radio" id="inputMale" name="custGender" class="custom-control-input">
+              <input type="radio" id="inputMale" name="custGender" class="custom-control-input" [(ngModel)]="genderEdit" value="male">
               <label class="custom-control-label" for="inputMale">Male</label>
             </div>
             &nbsp;&nbsp;&nbsp;
             <div class="custom-control custom-radio">
-              <input type="radio" id="inputFemale" name="custGender" class="custom-control-input">
+              <input type="radio" id="inputFemale" name="custGender" class="custom-control-input" [(ngModel)]="genderEdit" value="female">
               <label class="custom-control-label" for="inputFemale">Female</label>
             </div>
           </div>
@@ -655,7 +655,7 @@
               </div>
             </div>
             <div class="col-md-12 col-sm-12 mt-3 information">
-              <input type="text" class="form-control" name="custCardNumber" maxlength="13" />
+              <input type="text" class="form-control" name="custCardNumber" maxlength="13" [(ngModel)]="idCardView"/>
             </div>
           </div>
           <div class="reg-form-group customer-tel">
@@ -756,4 +756,16 @@
         </div>
       </div>
   </div>
+
+  <div id="waitingModal" class="modal" tabindex="-1" role="dialog" *ngIf="isLoading" [style.display]="isLoading ? 'block' : 'none'">
+		<div>
+			<div class="loader loader--style2" title="1" style="margin-left:40%;margin-top:20%">
+				<svg height="100px" id="loader-1" style="enable-background:new 0 0 50 50;" version="1.1" viewBox="0 0 50 50" width="100px" x="0px" xmlns="http://www.w3.org/2000/svg" y="0px">
+				<path d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" fill="#000" transform="rotate(215.303 25 25)">
+					<animateTransform attributeName="transform" attributeType="xml" dur="0.6s" from="0 25 25" repeatCount="indefinite" to="360 25 25" type="rotate"></animateTransform>
+					</path>
+				</svg>
+			</div>
+		</div>
+	</div>
 </header>

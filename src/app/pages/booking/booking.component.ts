@@ -19,8 +19,9 @@ export class BookingComponent implements OnInit {
     numbersOfCol: Array<any>;
     numbersOfRow: Array<any>;
     rowHeader: Array<any>;
-
+    rentSeat : boolean = false;
     target: String;
+    listSeat : any;
 
     constructor(
         private renderer: Renderer2,
@@ -32,10 +33,10 @@ export class BookingComponent implements OnInit {
     @ViewChild('chooseSeat') private chooseSeat: ElementRef;
 
     ngOnInit() {
+        this.listSeat = [];
         this.data = [];
         this.prepareFetch();
         this.loopSeatNo();
-
         this.events = [
             {
                 "title": "1,500",
@@ -74,8 +75,8 @@ export class BookingComponent implements OnInit {
         var i: number;
         var u: number;
 
-        for (i = 1; i <= 40; i++) {
-            for (u = 1; u <= 40; u++) {
+        for (i = 1; i <= 3; i++) {
+            for (u = 1; u <= 20; u++) {
                 this.data.push({ x: u, y: i, z: '' + i + u, labelRow: String.fromCharCode(i + 64) })
             }
         }
@@ -98,12 +99,22 @@ export class BookingComponent implements OnInit {
     }
 
     goDiscountList() {
-        this.router.navigate(['/discount']);
+        console.log("Choose Seat : " + JSON.stringify(this.listSeat));
+       // this.router.navigate(['/discount']);
     }
 
     goEventInfo() {
         this.router.navigate(['/eventInfo']);
     }
-
+    onChangeSeat(seat:string, isChecked: boolean) {
+        if(isChecked){
+        this.listSeat.push({"seat" : seat})
+            console.log("Seat : " + JSON.stringify(this.listSeat));
+        }else{
+            this.listSeat.splice(seat, 1);
+            console.log("Delete Seat : " + JSON.stringify(this.listSeat));
+        }
+        
+      }
 
 }

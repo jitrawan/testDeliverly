@@ -20,7 +20,9 @@ export class AppComponent implements OnInit {
     private sharedService: SharedService,
     private router: Router,
     private pushNotification: PushNotificationService
-  ) { }
+  ) {
+     pushNotification.requestPermission();
+  }
   paymentChannel: string = 'mobile';
   sub: any;
 

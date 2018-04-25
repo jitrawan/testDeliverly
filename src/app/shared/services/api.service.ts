@@ -90,6 +90,15 @@ post(path: string, body: Object = {}): Observable<any> {
     return this.http.post(`https://26ieslrird.execute-api.ap-southeast-1.amazonaws.com/latest/login`, JSON.stringify(body)).map((res: Response) => (JSON.parse(res["_body"])));
   }
 
+  checkUserHistory(email : string): Observable<Response> {
+    return this.http.post(`https://26ieslrird.execute-api.ap-southeast-1.amazonaws.com/latest/login`, JSON.stringify(email)).map((res: Response) => (JSON.parse(res["_body"])));
+  }
+
+  checkSessionUserLogin(email : string): Observable<Response> {
+    return this.http.post(`https://26ieslrird.execute-api.ap-southeast-1.amazonaws.com/latest/login`, JSON.stringify(email)).map((res: Response) => (JSON.parse(res["_body"])));
+  }
+
+
   private getHeaders() {
     let headers = new Headers();
     headers.append('Access-Control-Allow-Origin', '*');

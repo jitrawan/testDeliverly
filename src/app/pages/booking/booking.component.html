@@ -67,7 +67,7 @@
           <tr class="d-flex" *ngFor="let index of numbersOfRow; let row = index">
             <td class="seats" type="A" *ngFor="let col of numbersOfCol; let pos = index">
               <div class="seat" *ngFor="let data of fatchRowData(row+1, pos+1);">
-                <input type="checkbox" id="{{data.z}}" />
+                <input type="checkbox" name="{{data.z}}" id="{{data.z}}" (change)="onChangeSeat(data.labelRow + data.x, $event.target.checked)" />
                 <label class="bg-cream" for="{{data.z}}">{{data.labelRow}}{{data.x}}</label>
               </div>
             </td>

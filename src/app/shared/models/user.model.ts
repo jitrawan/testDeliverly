@@ -9,7 +9,7 @@ export class User {
       gender: string;
       birthday: string;
       phone: string;
-      acceptTeam: string;
+      acceptTerm: boolean;
       acceptNews: string;
       mediaType:string;
       accessToken:string;

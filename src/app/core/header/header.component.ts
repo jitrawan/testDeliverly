@@ -31,6 +31,7 @@ export class HeaderComponent implements OnInit {
     emailNameView: string;
     firstNameView: string;
     lastNameView : string;
+    idCardView : string;
     invalid: string;
     birthDayDate: any;
     birthDayMonth: any;
@@ -68,6 +69,8 @@ export class HeaderComponent implements OnInit {
     gender: String;
     confirmPassword: any;
     user: SocialUser;
+    isLoading : boolean = false;
+    genderEdit: string;
 
     @ViewChild('navSideBar') private navSideBar: ElementRef;
     @ViewChild('modalBox') private modalBox: ElementRef;
@@ -111,14 +114,17 @@ export class HeaderComponent implements OnInit {
     'birthdayYear': ['', Validators.required],
     'idCard': ['', Validators.required],
     'phone': ['', Validators.required],
-    'acceptTeam': ['', Validators.required],
-    'acceptNews': ['', Validators.required],
+    'acceptTerm': [Boolean, Validators.required],
+    'acceptNews': [Boolean, Validators.required],
     'currentItem': ['', Validators.required]
 
    });
     }
 
     ngOnInit() {
+        // this.apiService.checkAccessToken('EAAFjqLD3QdABAAbqo5g7fT6ZCkGxxp9VySyBJZCQ3kothAJwzZAcoFV1qJZBR7WUbNWWokB0ZChDLYSWqoV6SoaMQnm8db51he9hueSyb1l6j8scNP8XqEaLPh4LoEHK0t7B7kEZCX2wAcB8k8avJT22thiM6GrIYTDfcOnezq2Yk14z90NxkZBQUYfFFXZAhUVYmkXGFYQU7wZDZD')
+        // .subscribe( data => {console.log(data)});
+
         this.resizeTimeout = 0;
         // 6Lfg51QUAAAAAID_dAd_epeHdsoj0gkr8IyQ3pmf
         // 6LcPgVAUAAAAAP9AjXUNyt82AOHKjtVmmOeiwYZK
@@ -153,7 +159,7 @@ export class HeaderComponent implements OnInit {
         this.userModel.birthday = $('#select-month').val() +"/" + $('#select-date').val() +"/" + $('#select-year').val();
         this.userModel.idCard = this.authForm.value.idCard;
         this.userModel.phone = this.authForm.value.phone;
-        this.userModel.acceptTeam = this.authForm.value.acceptTeam;
+        this.userModel.acceptTerm = this.authForm.value.acceptTerm;
         this.userModel.acceptNews = this.authForm.value.acceptNews;
           
         
@@ -204,7 +210,7 @@ export class HeaderComponent implements OnInit {
                 this.invalid = 'Please input your Phone number !!'
                 this.alertValidate();
             }
-            else if(this.userModel.acceptTeam == null ){
+            else if(this.userModel.acceptTerm != true ){
                 this.invalid = 'Please choose Accept Term !!'
                 this.alertValidate();
             }
@@ -213,7 +219,7 @@ export class HeaderComponent implements OnInit {
             this.alertValidate();
             this.userMenu = false;
             this.RegAndLog = true;
-        }
+            }
             else{
             this.apiService.createUser(this.userModel)
                 .subscribe( data => {
@@ -222,6 +228,8 @@ export class HeaderComponent implements OnInit {
                     if(result["success"] == true){
 
                         if(this.socialLogin == true){
+                            this.isLoading = false;
+                            this.showOverlay = false;
                             this.userMenu = true;
                             this.RegAndLog = false;
                             this.closeAllDialog();
@@ -243,7 +251,6 @@ export class HeaderComponent implements OnInit {
                 });
                 
             }
-        
     }
     ngAfterViewInit() {
         // setTimeout(_ => this.navbarContent = this.child.nativeElement.innerHTML);
@@ -277,6 +284,7 @@ export class HeaderComponent implements OnInit {
         } else if (type === this.actionTrigger.signUp) {
             if(this.socialLogin == false){
                 this.userModel.mediaType = "NORMAL";
+                this.emailNameView = "";
                 this.firstNameView = "";
                 this.lastNameView = "";
             }
@@ -345,26 +353,40 @@ export class HeaderComponent implements OnInit {
                 
                 this._checkEmailSocial.email = this.user.email;
                 this._checkEmailSocial.accessToken = this.user.authToken;
-
+                this._checkEmailSocial.mediaType = this.userModel.mediaType;
                 console.log("Data Check Email : " + JSON.stringify(this._checkEmailSocial));
+
+                this.isLoading = true;
+                this.showOverlay = true;
 
                 this.apiService.checkEmail(this._checkEmailSocial).subscribe(data => {
                     var result =  JSON.parse(JSON.stringify(data));
+                    var success = false;
                     console.log("Data response Login Social : " + JSON.stringify(data));
-                    if(result["success"] == true){
-                                this.RegAndLog = false;
-                                this.userMenu = true;
-                                this.firstNameView = this.user.firstName;
-                                this.lastNameView = this.user.lastName;
-                                this.closeAllDialog();
+                    if( this.userModel.mediaType == "FACEBOOK"){
+                        success = result["success"];
+                    }
+                    else if( this.userModel.mediaType == "GOOGLE"){
+                        success = result["verified_email"];
+                    }
+                    console.log("Success : " + success);
+                    if(success == true){
+                        this.isLoading = false;
+                        this.showOverlay = false;
+                        this.RegAndLog = false;
+                        this.userMenu = true;
+                        this.emailNameView = this.user.email;
+                        this.firstNameView = this.user.firstName;
+                        this.lastNameView = this.user.lastName;
+                        this.closeAllDialog();
                        
                     }else{
+                        this.isLoading = false;
+                        this.showOverlay = false;
                         this.emailNameView = this.user.email;
                         this.firstNameView = this.user.firstName;
                         this.lastNameView = this.user.lastName;
                         this.triggerDialog(this.actionTrigger.signUp);
-                       
-                      
                     }
                     
                 });
@@ -403,6 +425,8 @@ export class HeaderComponent implements OnInit {
             this.RegAndLog = true;
         }
         else{
+        this.isLoading = true;
+        this.showOverlay = true;
 
         this._checkLoginModel.email = $('#email-login').val();
         this._checkLoginModel.password = $('#password-login').val();
@@ -414,13 +438,18 @@ export class HeaderComponent implements OnInit {
             console.log("Data response Login Normal : " + JSON.stringify(data));
             if(result["success"] == true){
                 if(result["data"]["CUST_STATUS"] == "Y"){
-                    console.log("Data information User : " + result["data"]["CARD_ID"]);
+                    localStorage.setItem('USER_PROFILE', result["data"]);
                     this.firstNameView = result["data"]["CUST_FIRSTNAME"];
                     this.lastNameView = result["data"]["CUST_LASTNAME"];
+                    this.idCardView = result["data"]["CARD_ID"];
                     this.RegAndLog = false;
                     this.userMenu = true;
+                    this.isLoading = false;
+                    this.showOverlay = false;   
                     this.closeAllDialog();
                 }else{
+                    this.isLoading = false;
+                    this.showOverlay = false;
                     this.invalid = 'Please Confirm your Email !!'
                     this.alertValidate();
                 }
@@ -450,6 +479,7 @@ export class HeaderComponent implements OnInit {
         this.RegAndLog = true;
         this.closeAllDialog();
         this.user = null;
+        this.socialLogin = false;
         this.responRecaptcha = null
         this.router.navigate(['/']);
 

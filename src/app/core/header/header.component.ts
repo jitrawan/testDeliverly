@@ -1,3 +1,6 @@
+import { ForgetPasswordModel } from './../../shared/models/forgetPassword.model';
+import { UserProfile } from './../../shared/models/userProfile.model';
+import { ChangePasswordModel } from './../../shared/models/changePassword.model';
 import { checkLoginModel } from './../../shared/models/checkLogin.model';
 import { checkEmailSocial } from './../../shared/models/checkEmail.model';
 import { ApiService } from './../../shared/services/api.service';
@@ -10,6 +13,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { AuthService } from 'angularx-social-login';
 import { SocialUser } from 'angularx-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider } from 'angularx-social-login';
+
 // import { PushNotificationsService } from 'angular2-notifications';
 declare function JSEncrypt(): any;
 declare var jQuery: any;
@@ -25,17 +29,20 @@ declare var $: any;
 export class HeaderComponent implements OnInit {
     responRecaptcha : string;
     userModel: User = new User();
+    userProfileModel : UserProfile = new UserProfile();
+    changePasswordModel : ChangePasswordModel = new ChangePasswordModel();
     _checkEmailSocial: checkEmailSocial = new checkEmailSocial();
     _checkLoginModel: checkLoginModel = new checkLoginModel();
+    forgetPasswordModel : ForgetPasswordModel = new ForgetPasswordModel();
     authForm: FormGroup;
+    changePasswordForm: FormGroup;
+    mediaType:string;
+    editProfileForm: FormGroup;
     emailNameView: string;
     firstNameView: string;
     lastNameView : string;
     idCardView : string;
     invalid: string;
-    birthDayDate: any;
-    birthDayMonth: any;
-    birthDayYear: any;
     private headerModel: HeaderModel[];
     private resizeTimeout: number = 0;
     isMobileSize: boolean = false;
@@ -50,6 +57,7 @@ export class HeaderComponent implements OnInit {
     RegAndLog: boolean = true;
     isEditProfileOpen: boolean = false;
     isChangePasswordOpen: boolean = false;
+    isValidateAlert: boolean = false;
     isCaptchaOpen: boolean = false;
     isReCaptchaOpen: boolean = true;
     showEmergency: boolean;
@@ -70,10 +78,23 @@ export class HeaderComponent implements OnInit {
     confirmPassword: any;
     user: SocialUser;
     isLoading : boolean = false;
+
+    emailEdit:string;
+    firstnameEdit: string;
+    lastnameEdit: string;
     genderEdit: string;
+    birthDayDateEdit: any;
+    birthDayMonthEdit: any;
+    birthDayYearEdit: any;
+    idCardEdit: string;
+    phoneEdit: string;
+
+    _emailOfForgotPasseord:string;
+
 
     @ViewChild('navSideBar') private navSideBar: ElementRef;
     @ViewChild('modalBox') private modalBox: ElementRef;
+    @ViewChild('modalBoxAlert') private modalBoxAlert: ElementRef;
     @ViewChild('userModalBox') private userModalBox: ElementRef;
     @ViewChild('closeSideBar') private closeSideBar: ElementRef;
     @ViewChild('runningYes') private runningYes: ElementRef;
@@ -94,7 +115,7 @@ export class HeaderComponent implements OnInit {
         private headerService: HeaderService,
         private router: Router,
         private authService: AuthService,
-        private fb: FormBuilder,
+        private formBuilder: FormBuilder,
         private apiService: ApiService,
         // private _pushNotifications: PushNotificationsService
     ) {
@@ -102,12 +123,12 @@ export class HeaderComponent implements OnInit {
         this.showEmergency = false;
 
         // use FormBuilder to create a form group
-  this.authForm = this.fb.group({
+  this.authForm = this.formBuilder.group({
     'email': ['', Validators.required],
-    'password': ['', Validators.required],
-    'confirmpassword': ['', Validators.required],
     'firstname': ['', Validators.required],
     'lastname': ['', Validators.required],
+    'password': ['', Validators.required],
+    'confirmpassword': ['', Validators.required],
     'gender': ['', Validators.required],
     'birthdayDate': ['', Validators.required],
     'birthdayMonth': ['', Validators.required],
@@ -119,11 +140,40 @@ export class HeaderComponent implements OnInit {
     'currentItem': ['', Validators.required]
 
    });
-    }
+
+   this.changePasswordForm = this.formBuilder.group({
+    'oldPassword': ['', Validators.required],
+    'newPassword': ['', Validators.required],
+    'confirmNewPassword': ['', Validators.required]
+
+   });
+
+   this.editProfileForm = this.formBuilder.group({
+    'email': ['', Validators.required],
+    'firstName': ['', Validators.required],
+    'lastName': ['', Validators.required],
+    'gender': ['', Validators.required],
+    'birthDayDate': [Number, Validators.required],
+    'birthDayMonth': ['', Validators.required],
+    'birthDayYear': [Number, Validators.required],
+    'idCard': ['', Validators.required],
+    'phone': ['', Validators.required],
+    'currentItem': ['', Validators.required]
+
+   });
+
+
+}
 
     ngOnInit() {
-        // this.apiService.checkAccessToken('EAAFjqLD3QdABAAbqo5g7fT6ZCkGxxp9VySyBJZCQ3kothAJwzZAcoFV1qJZBR7WUbNWWokB0ZChDLYSWqoV6SoaMQnm8db51he9hueSyb1l6j8scNP8XqEaLPh4LoEHK0t7B7kEZCX2wAcB8k8avJT22thiM6GrIYTDfcOnezq2Yk14z90NxkZBQUYfFFXZAhUVYmkXGFYQU7wZDZD')
-        // .subscribe( data => {console.log(data)});
+       
+        var retrievedObject = localStorage.getItem('USER_PROFILE');
+        console.log('retrievedObject: ', JSON.parse((retrievedObject)));
+        var result =  JSON.parse((retrievedObject));
+        // this.firstNameView = result.CUST_FIRSTNAME;
+        // this.lastNameView = result.CUST_LASTNAME;
+        // this.userMenu = true;
+        // this.RegAndLog = false;
 
         this.resizeTimeout = 0;
         // 6Lfg51QUAAAAAID_dAd_epeHdsoj0gkr8IyQ3pmf
@@ -132,21 +182,27 @@ export class HeaderComponent implements OnInit {
             this.headerModel = response['data'];
         });
         this.user = null;
-        JSEncrypt.prototype.setPrivateKey('MIIBVAIBADANBgkqhkiG9w0BAQEFAASCAT4wggE6AgEAAkEAs2hMvCeWnKyp/uxtzhScCuxInUTlUtBmtCMfY99SWfa07c2ytNIClREavSCcvWoybrBzQT8pnlsFWm/Cr3/IrQIDAQABAkBb1bjp223qNywxlL7EbaJOqRKmhlzI3mqkLRJlYixaZeXS7UXWaLo7+XRb60TF5N0fLcC0QMxGuPD/Jbv2pkehAiEA5ixxF3hosuaCvwypl4Dulf0Td6Q1tH2wbwTrWRPpZ5kCIQDHiaOKA9pkMk0vp7UQQw5Vd313pib6aH0MDOy+bpXGNQIgVsRQCXnxdechSGW8lIkc51uUeBhlyllLJj6jfVvdM5kCIQCWEjTHdoJoXVSkBNQu+N/s88OPm40xRCjYSVg9GVrYCQIgMXHdMVgaRL7mI4f0kl9/jeiFAJKdX5Wol+vVxB85ZGc=');
-        console.log("Password : " + JSEncrypt.prototype.encrypt("1234"));
+        var privateKey = 'MIIBOQIBAAJAWYbAUbPhRWQ7TAjKaotbJEQJI6imMtmXnrXDMSYpLU5AxDXjUsoCMbzk/9PEh2igdu2JyyhLPGgwqJFZxJM1SwIDAQABAkAxiLo+On3I7CVW84IzozlhfndkEHsspXIbsUv3lLqxwvLsDXrZWiMdQJKWOvwojFmbEFhxjKZC3c/BzMVjjCZxAiEAp+U3uAPhZB8Vr+s0zrONEYyAgzm49FqezwjT+Zvia9kCIQCIgZK0I0rja3ZRiI/kQjqcrf5F46sU8hg1ROrIovUnwwIhAI3l12KpvOuerfihZF8yNw7W3aKKvXufv0qhXm4+xm15AiBbP8pyclkgNvirvg759a+6hrC/xVXatY6rJTuRDSW2AwIgUgpYOwni1NMbjqryxZo9UXR7oUaI4EZDuQ/0BTMUCt8=' ;
+        var publicKey = 'MFswDQYJKoZIhvcNAQEBBQADSgAwRwJAWYbAUbPhRWQ7TAjKaotbJEQJI6imMtmXnrXDMSYpLU5AxDXjUsoCMbzk/9PEh2igdu2JyyhLPGgwqJFZxJM1SwIDAQAB';
+        
+        JSEncrypt.prototype.setPrivateKey(privateKey);
+        JSEncrypt.prototype.setPublicKey(publicKey);
+        console.log("Password En: " + JSEncrypt.prototype.encrypt("1234"));
         }
       
     signInWithFB(): void {
         this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
-        this.loginSocial();
+        this.loginSocial("FACEBOOK");
         this.socialLogin = true;
-        this.userModel.mediaType = "FACEBOOK";
+        this.mediaType = "FACEBOOK";
+        console.log("Media : " + this.userModel.mediaType)
     }
     signInWithGoogle(): void {
         this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
-        this.loginSocial();
+        this.loginSocial("GOOGLE");
         this.socialLogin = true;
-        this.userModel.mediaType = "GOOGLE";
+        this.mediaType = "GOOGLE";
+        console.log("Media : " + this.userModel.mediaType)
     }
 
     signUp(): void {
@@ -333,27 +389,25 @@ export class HeaderComponent implements OnInit {
         this.isLoginOpen = false;
         this.isRegisterOpen = false;
         this.isShowForgotPassword = false;
+        this.isChangePasswordOpen = false;
     }
 
     routeHistory() {
         this.router.navigate(['history']);
         this.closeAllDialog();
     }
-    loginSocial(){
+    loginSocial(mediaType : string){
         this.authService.authState.subscribe((user) => {
             this.user = user;
             if (this.user != null) {
                 console.log("Email : "+this.user.firstName);
-                this.authForm.value.email = this.user.email;
                 this.authForm.value.firstname = this.user.firstName;
                 this.authForm.value.lastname = this.user.lastName;
                 this.userModel.accessToken = this.user.authToken;
-              
-                // this.userMenu = true;
-                
+
                 this._checkEmailSocial.email = this.user.email;
                 this._checkEmailSocial.accessToken = this.user.authToken;
-                this._checkEmailSocial.mediaType = this.userModel.mediaType;
+                this._checkEmailSocial.mediaType = mediaType;
                 console.log("Data Check Email : " + JSON.stringify(this._checkEmailSocial));
 
                 this.isLoading = true;
@@ -363,26 +417,24 @@ export class HeaderComponent implements OnInit {
                     var result =  JSON.parse(JSON.stringify(data));
                     var success = false;
                     console.log("Data response Login Social : " + JSON.stringify(data));
-                    if( this.userModel.mediaType == "FACEBOOK"){
+                    if( this.mediaType == "FACEBOOK"){
                         success = result["success"];
                     }
-                    else if( this.userModel.mediaType == "GOOGLE"){
+                    else if( this.mediaType == "GOOGLE"){
                         success = result["verified_email"];
                     }
                     console.log("Success : " + success);
                     if(success == true){
-                        this.isLoading = false;
-                        this.showOverlay = false;
-                        this.RegAndLog = false;
-                        this.userMenu = true;
-                        this.emailNameView = this.user.email;
-                        this.firstNameView = this.user.firstName;
-                        this.lastNameView = this.user.lastName;
-                        this.closeAllDialog();
+                        this.isRegisterOpen = false;
+                        this.checkLoginSocial();
                        
                     }else{
                         this.isLoading = false;
                         this.showOverlay = false;
+                        this.isLoading = false;
+                        this.showOverlay = false;
+                        this.RegAndLog = true;
+                        this.userMenu = false;
                         this.emailNameView = this.user.email;
                         this.firstNameView = this.user.firstName;
                         this.lastNameView = this.user.lastName;
@@ -438,10 +490,18 @@ export class HeaderComponent implements OnInit {
             console.log("Data response Login Normal : " + JSON.stringify(data));
             if(result["success"] == true){
                 if(result["data"]["CUST_STATUS"] == "Y"){
-                    localStorage.setItem('USER_PROFILE', result["data"]);
-                    this.firstNameView = result["data"]["CUST_FIRSTNAME"];
-                    this.lastNameView = result["data"]["CUST_LASTNAME"];
-                    this.idCardView = result["data"]["CARD_ID"];
+                    localStorage.setItem('USER_PROFILE', JSON.stringify(result["data"]));
+                    this.emailEdit = result["data"]["CUST_EMAIL"];
+                    this.firstnameEdit = result["data"]["CUST_FIRSTNAME"];
+                    this.lastnameEdit = result["data"]["CUST_LASTNAME"];
+                    this.idCardEdit = result["data"]["CARD_ID"];
+                    this.genderEdit = result["data"]["GENDER"];
+                    var resultBirthDay = result["data"]["DATE_OF_BIRTH"].replace("T00:00:00.000Z","");
+                    var dateFormat = resultBirthDay.split("-")
+                    this.birthDayDateEdit = dateFormat[2];
+                    this.birthDayMonthEdit = dateFormat[1];
+                    this.birthDayYearEdit = dateFormat[0];
+                    this.phoneEdit = result["data"]["CUST_TEL"];
                     this.RegAndLog = false;
                     this.userMenu = true;
                     this.isLoading = false;
@@ -464,14 +524,122 @@ export class HeaderComponent implements OnInit {
             }
             
         });
-
-        // this.firstNameView = "Prasittichai";
-        // this.lastNameView = "Samngam";
-
-        // this.userMenu = true;
-        // this.RegAndLog = false;
-        // this.closeAllDialog();
         }
+    }
+    checkLoginSocial(){
+        this._checkLoginModel.email = this._checkEmailSocial.email;
+        this._checkLoginModel.password = "";
+        this._checkLoginModel.mediaType =  this._checkEmailSocial.mediaType;
+        this._checkLoginModel.accessToken = this._checkEmailSocial.accessToken;
+
+        this.apiService.checkLogin(this._checkLoginModel).subscribe(data => {
+            var result =  JSON.parse(JSON.stringify(data));
+            console.log("Data response Check Login Social : " + JSON.stringify(data));
+            if(result["success"] == true){
+                if(result["data"]["CUST_STATUS"] == "Y"){
+                    localStorage.setItem('USER_PROFILE', JSON.stringify(result["data"]));
+                    this.emailEdit = result["data"]["CUST_EMAIL"];
+                    this.firstNameView = result["data"]["CUST_FIRSTNAME"];
+                    this.lastNameView = result["data"]["CUST_LASTNAME"];
+                    this.firstnameEdit = result["data"]["CUST_FIRSTNAME"];
+                    this.lastnameEdit = result["data"]["CUST_LASTNAME"];
+                    this.idCardEdit = result["data"]["CARD_ID"];
+                    this.genderEdit = result["data"]["GENDER"];
+                    var resultBirthDay = result["data"]["DATE_OF_BIRTH"].replace("T00:00:00.000Z","");
+                    var dateFormat = resultBirthDay.split("-");
+                    this.birthDayDateEdit = dateFormat[2];
+                    this.birthDayMonthEdit = dateFormat[1];
+                    this.birthDayYearEdit = dateFormat[0];
+                    this.phoneEdit = result["data"]["CUST_TEL"];
+                    
+                    this.RegAndLog = false;
+                    this.userMenu = true;
+                    this.isLoading = false;
+                    this.showOverlay = false;   
+                    this.closeAllDialog();
+                }
+            }else{
+                this.RegAndLog = true;
+                this.userMenu = false;
+                this.isLoading = false;
+                this.showOverlay = false;   
+            }
+            
+        });
+    }
+    onForgetPassword(){
+        this.forgetPasswordModel.email = $('#forgotPwd-value').val();
+        this.apiService.forgetPassword(this.forgetPasswordModel).subscribe(data =>{
+            var result =  JSON.parse(JSON.stringify(data));
+            console.log("Data response Login Normal : " + JSON.stringify(data));
+        });
+    }
+
+    onChangePassword(){
+        this.changePasswordForm.value.newPassword
+        this.changePasswordModel.email = this.emailNameView;
+        this.changePasswordModel.oldPassword = this.changePasswordForm.value.oldPassword;
+        this.changePasswordModel.newPassword = this.changePasswordForm.value.newPassword;
+        this.changePasswordModel.confirmNewPassword = this.changePasswordForm.value.confirmNewPassword;
+        console.log("Data Change Password : " + JSON.stringify(this.changePasswordModel));
+
+        if(this.changePasswordModel.oldPassword.length == 0){
+            this.invalid = 'Please input Old Password  !!'
+            this.alertValidate();
+        }
+        else if(this.changePasswordModel.newPassword.length == 0){
+            this.invalid = 'Please input New Password  !!'
+            this.alertValidate();
+        }
+        else if(this.changePasswordModel.newPassword.length < 8){
+            this.invalid = 'Please input New Password over 8 chracter  !!'
+            this.alertValidate();
+        }
+        else if(this.changePasswordModel.confirmNewPassword.length == 0){
+            this.invalid = 'Please input Confirm New Password  !!'
+            this.alertValidate();
+        }
+        else if(this.changePasswordModel.confirmNewPassword != this.changePasswordModel.newPassword){
+            this.invalid = 'Please input Confirm Password like with Password  !!'
+            this.alertValidate();
+        }else{
+        this.apiService.changePassword(this.changePasswordModel).subscribe(data => {
+            var result =  JSON.parse(JSON.stringify(data));
+            console.log("Data Response ChangePassword : "+ (JSON.stringify(data)))
+            if(result["success"] == true){
+                this.invalid = 'Change Password success  !!'
+                this.alertValidate();
+                this.closeAllDialog();
+            }else{
+                this.invalid = 'Old Password Fail  !!'
+                this.alertValidate();
+            }
+        });
+    }
+    }
+
+    onEditProfile(){
+        this.userProfileModel.email = this.editProfileForm.value.email;
+        this.userProfileModel.idCard = this.editProfileForm.value.idCard;
+        this.userProfileModel.firstName = this.editProfileForm.value.firstName;
+        this.userProfileModel.lastName = this.editProfileForm.value.lastName;
+        this.userProfileModel.gender = this.editProfileForm.value.gender;
+        this.userProfileModel.birthday = $('#select-month-edit').val() +"/" + $('#select-date-edit').val() +"/" + $('#select-year-edit').val();
+        this.userProfileModel.phone = this.editProfileForm.value.phone;
+
+        console.log("User Profile : " + JSON.stringify(this.userProfileModel))
+        this.apiService.updateProfile(this.userProfileModel).subscribe(data => {
+            var result =  JSON.parse(JSON.stringify(data));
+            console.log("Data Response ChangePassword : "+ (JSON.stringify(data)))
+            if(result["success"] == true){
+                this.invalid = 'Update Profile success  !!'
+                this.alertValidate();
+                this.closeAllDialog();
+            }else{
+                this.invalid = 'Update Profile Fail  !!'
+                this.alertValidate();
+            }
+        });
     }
 
     logout() {
@@ -498,23 +666,24 @@ export class HeaderComponent implements OnInit {
     }
 
     alertValidate(){
+      
+        this.isValidateAlert = true;
         $(document).ready(function () {
-            
                       $("#myModal").on("show", function () {   
                           $("#myModal a.btn").on("click", function (e) {
                               $("#myModal").modal('hide');
                           });
                       });
-                      $("#myModal").on("hide", function () {    // remove the event listeners when the dialog is dismissed
+                      $("#myModal").on("hide", function () {
                           $("#myModal a.btn").off("click");
                       });
-                      $("#myModal").on("hidden", function () {  // remove the actual elements from the DOM when fully hidden
+                      $("#myModal").on("hidden", function () { 
                           $("#myModal").remove();
                       });
-                      $("#myModal").modal({                    // wire up the actual modal functionality and show the dialog
+                      $("#myModal").modal({                 
                           "backdrop": "static",
                           "keyboard": true,
-                          "show": true                     // ensure the modal is shown immediately
+                          "show": true                   
                       });
                   });
     }

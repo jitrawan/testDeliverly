@@ -74,6 +74,7 @@ import { DiscountDetailComponent } from './pages/discount-detail/discount-detail
 import { RecaptchaModule } from 'ng-recaptcha';
 import { PushNotificationModule } from 'ng-push-notification';
 
+
 const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,

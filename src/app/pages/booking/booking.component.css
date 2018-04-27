@@ -1,17 +1,5 @@
-.bookingWrapper {
-  padding-top: 30px;
-}
-
 .t-underline {
   border-bottom: 2px solid #F8A422;
-}
-
-.f-w-700 {
-  font-weight: 700;
-}
-
-.f-w-600 {
-  font-weight: 600;
 }
 
 .b-r-12 {
@@ -42,6 +30,7 @@
   background-color: #666666;
 }
 
+
 .calendarWrapper {
   width: 60%;
 }
@@ -58,11 +47,11 @@
   padding-bottom: 10px
 }
 
-.bookingWrapper .custom-control-input:checked~.custom-control-label::before {
+.custom-control-input:checked~.custom-control-label::before {
   background-color: #F8A422;
 }
 
-.bookingWrapper .custom-control-input:checked~.custom-control-label {
+.custom-control-input:checked~.custom-control-label {
   background-color: #048bc1;
   color: white;
 }
@@ -192,22 +181,17 @@ label {
   margin: 0;
 }
 
-/* Let's get this party started */
 
 ::-webkit-scrollbar {
   width: 12px;
   height: 8px;
 }
 
-/* Track */
-
 ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   -webkit-border-radius: 10px;
   border-radius: 10px;
 }
-
-/* Handle */
 
 ::-webkit-scrollbar-thumb {
   -webkit-border-radius: 10px;
@@ -223,10 +207,10 @@ label {
 #chooseZone,
 #chooseFestSeat,
 #chooseSeat {
-  display: none
+  display: none;
 }
 
-.show {
+#avaDateTime.show, #chooseZone.show, #chooseFestSeat.show, #chooseSeat.show {
   display: inline !important;
 }
 
@@ -250,18 +234,53 @@ label {
   width: 50% !important;
 }
 
+.nonSeatSelector {
+  display: none;
+  width: 85%;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+  background-color: rgba(202, 209, 243, 0.3);
+  border-radius: 5px;
+  border: 1px solid #ecec;
+  
+}
+
+.nonSeatSelector.show {
+  display: block;
+}
+
+.nonSeatSelector .zone-detail {
+  margin-bottom: 1.5rem;
+}
+
+.nonSeatSelector .zone-desc {
+  margin-left: 1rem;
+  font-size: 13.5px;
+}
+
+.nonSeatSelector .zone-desc p {
+  margin-bottom: 0;
+}
+
 @media screen and (max-width: 480px) {
   .imagemap__item {
     width: 100% !important;
-  }
-  .calendarWrapper {
-    width: 100%;
   }
   .imagemap__item {
     width: 100% !important;
   }
 }
 
+@media screen and (max-width: 640px) {
+  .calendarWrapper {
+    width: 100%;
+  }
+
+  .nonSeatSelector {
+    width: 100%;
+  }
+  
+}
 @media screen and (min-width: 48em) {
   .imagemap__item:target {
     display: block;

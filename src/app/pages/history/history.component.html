@@ -1,66 +1,80 @@
-<div class="d-flex justify-content-center is-size-4 p-t-10">
-  Purchase History
-</div>
-<div class="d-flex justify-content-end c-red">
-  *information will be updated every 5 minutes
-</div>
-<div class="wrapper">
-  <div class="eventHis d-flex justify-content-center" (click)="showEventHis()">Purchase History Event</div>
-  <div class="busHis d-flex justify-content-center" (click)="showBusHis()">Purchase History Bus</div>
-</div>
+<div class="container-fluid">
+  <h3 class="text-center mt-3 is-size-4-mobile">Purchase History</h3>
 
-<div class="outer">
+
+  <div class="text-center text-sm-right c-red">
+    *Information will be updated every 5 minutes
+  </div>
+
+  <div class="row mx-0 mt-2">
+    <div class="col-12 col-md-6 px-0 history-title has-border" (click)="showEventHis()">Purchase History Event</div>
+    <div class="col-12 col-md-6 px-0 history-title" (click)="showBusHis()">Purchase History Bus</div>
+  </div>
+  
   <ng-container *ngIf="eventHis">
-    <div class="infoBoxWrapper table-responsive-md">
-      <table class="table bordered">
-        <tbody>
-          <tr class="tableTopic">
-            <td>Reserve Date</td>
-            <td>Event Name</td>
-            <td>Venue</td>
-            <td>Date & Time</td>
-            <td>Seat No.</td>
-            <td>Unit Price</td>
-            <td>Paid Date</td>
-            <td>Payment Status</td>
-            <td>Payment Chanel</td>
-          </tr>
-          <tr class="tableResult">
-            <td>21/03/2018 12:23:38</td>
-            <td>Sunset Beach Music Festival 2018</td>
-            <td>ร้านปลาทู หาดชะอำ จ.เพชรบุรี</td>
-            <td>31/03/2018 15:00:00</td>
-            <td>Festival Seat</td>
-            <td>679.00</td>
-            <td></td>
-            <td>Reserve</td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <table class="atk-responsive-table">
+      <thead>
+        <tr>
+          <th scope="col">Reserve Date</th>
+          <th scope="col">Event Name</th>
+          <th scope="col">Venue</th>
+          <th scope="col">Date & Time</th>
+          <th scope="col">Seat No.</th>
+          <th scope="col">Unit Price</th>
+          <th scope="col">Paid Date</th>
+          <th scope="col">Payment Status</th>
+          <th scope="col">Payment Channel</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td scope="row" data-label="Reserve Date">21/03/2018 12:23:38</td>
+          <td data-label="Event Name">Sunset Beach Music Festival 2018</td>
+          <td data-label="Venue">ร้านปลาทู หาดชะอำ จ.เพชรบุรี</td>
+          <td data-label="Date & Time">31/03/2018 15:00:00</td>
+          <td data-label="Seat No.">Festival Seat</td>
+          <td data-label="Unit Price">679.00</td>
+          <td data-label="Paid Date">14/04/2018 13:33</td>
+          <td data-label="Payment Status">Reserve</td>
+          <td data-label="Payment Channel">C07</td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td scope="row" data-label="Reserve Date">21/03/2018 12:23:38</td>
+          <td data-label="Event Name">EXO 2018</td>
+          <td data-label="Venue">Thunder Dome</td>
+          <td data-label="Date & Time">16/03/2018 15:00:00</td>
+          <td data-label="Seat No.">SH-02</td>
+          <td data-label="Unit Price">6000.00</td>
+          <td data-label="Paid Date">02/03/2018 13:33</td>
+          <td data-label="Payment Status">Reserve</td>
+          <td data-label="Payment Channel">C07</td>
+        </tr>
+      </tbody>
+    </table>
   </ng-container>
-
+  
   <ng-container *ngIf="busHis">
-    <div class="infoBoxWrapper table-responsive-md">
-      <table class="table bordered">
-        <tbody>
-          <tr class="tableTopic">
-            <td>รถโดยสาร</td>
-            <td>Unit Price (Baht) </td>
-            <td>Paid Date</td>
-            <td>Payment Status</td>
-            <td>Payment Chanel</td>
-          </tr>
-          <tr class="tableResult">
-            <td>กรุงเทพ(สายใต้ใหม่) - กระบี่(อ.คลองท่อม)</td>
-            <td>547.00</td>
-            <td>21/03/2018</td>
-            <td>Paid</td>
-            <td>Couter Service</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <table class="atk-responsive-table">
+      <thead>
+        <tr>
+          <th scope="col">Bus Route</th>
+          <th scope="col">Unit Price (Baht)</th>
+          <th scope="col">Paid Date</th>
+          <th scope="col">Payment Status</th>
+          <th scope="col">Payment Channel</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td scope="row" data-label="Bus Route">กรุงเทพ(สายใต้ใหม่) - กระบี่(อ.คลองท่อม)</td>
+          <td data-label="Unit Price (Baht)">547.00</td>
+          <td data-label="Paid Date">11/12/2017 12:34:56</td>
+          <td data-label="Payment Status">Reserve</td>
+          <td data-label="Payment Channel">C07</td>
+        </tr>
+      </tbody>
+    </table>
   </ng-container>
 </div>

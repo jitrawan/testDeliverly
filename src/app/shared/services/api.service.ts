@@ -1,3 +1,6 @@
+import { ForgetPasswordModel } from './../models/forgetPassword.model';
+import { UserProfile } from './../models/userProfile.model';
+import { ChangePasswordModel } from './../models/changePassword.model';
 import { checkLoginModel } from './../models/checkLogin.model';
 import { checkEmailSocial } from './../models/checkEmail.model';
 import { User } from './../models/user.model';
@@ -98,6 +101,15 @@ post(path: string, body: Object = {}): Observable<any> {
     return this.http.post(`https://26ieslrird.execute-api.ap-southeast-1.amazonaws.com/latest/login`, JSON.stringify(email)).map((res: Response) => (JSON.parse(res["_body"])));
   }
 
+  changePassword(body : ChangePasswordModel): Observable<Response> {
+    return this.http.post(`https://26ieslrird.execute-api.ap-southeast-1.amazonaws.com/latest/changepassword`, JSON.stringify(body)).map((res: Response) => (JSON.parse(res["_body"])));
+  }
+  updateProfile(body : UserProfile): Observable<Response> {
+    return this.http.post(`https://26ieslrird.execute-api.ap-southeast-1.amazonaws.com/latest/edit-profile`, JSON.stringify(body)).map((res: Response) => (JSON.parse(res["_body"])));
+  }
+  forgetPassword(body : ForgetPasswordModel): Observable<Response> {
+    return this.http.post(`https://26ieslrird.execute-api.ap-southeast-1.amazonaws.com/latest/edit-profile`, JSON.stringify(body)).map((res: Response) => (JSON.parse(res["_body"])));
+  }
 
   private getHeaders() {
     let headers = new Headers();

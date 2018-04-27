@@ -117,7 +117,7 @@ export class BookingComponent implements OnInit {
 
     goDiscountList() {
         console.log("Choose Seat : " + JSON.stringify(this.listSeat));
-       // this.router.navigate(['/discount']);
+        this.router.navigate(['/discount']);
     }
 
     goEventInfo() {

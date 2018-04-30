@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { HomeService } from '../../shared/services/home.service';
 import * as Jquery from 'jquery';
-import { setTimeout } from 'timers';
 import { resolveDefinition } from '@angular/core/src/view/util';
 
 @Component({

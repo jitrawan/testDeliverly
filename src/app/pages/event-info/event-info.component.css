@@ -744,3 +744,217 @@ agm-map {
 .showMap {
   display: none;
 }
+
+
+
+@media screen and (max-width: 360px) {
+  .f1 {
+    font-size: 28px !important;
+  }
+  .f2 {
+    font-size: 24px !important;
+  }
+  .f3 {
+    font-size: 20px !important;
+  }
+  .f4 {
+    font-size: 16px !important;
+  }
+  .f5 {
+    font-size: 12px !important;
+  }
+  .f6 {
+    font-size: 10px !important;
+  }
+  .wrapper-event-info .round-info{
+    width: 100% !important;
+    border-right: 0px solid;
+    border-bottom: 1px solid;
+  }
+  .wrapper-event-info .round-btn{
+    width: 100% !important;
+  }   
+  .wrapper-event-info .split-half-layout {
+    max-width: 100% !important;
+  }
+}
+
+@media screen and (min-width: 361px) and (max-width: 640px) {
+  .f1 {
+    font-size: 32px !important;
+  }
+  .f2 {
+    font-size: 28px !important;
+  }
+  .f3 {
+    font-size: 24px !important;
+  }
+  .f4 {
+    font-size: 20px !important;
+  }
+  .f5 {
+    font-size: 16px !important;
+  }
+  .f6 {
+    font-size: 12px !important;
+  }
+  .wrapper-event-info .round-info{
+    border-right: 1px solid;
+    border-bottom: 0px solid;
+  }
+  .wrapper-event-info .split-half-layout {
+    max-width: 100% !important;
+  }
+}
+@media screen and (min-width: 641px) {
+  .f1 {
+    font-size: 40px !important;
+  }
+  .f2 {
+    font-size: 32px !important;
+  }
+  .f3 {
+    font-size: 28px !important;
+  }
+  .f4 {
+    font-size: 24px !important;
+  }
+  .f5 {
+    font-size: 20px !important;
+  }
+  .f6 {
+    font-size: 16px !important;
+  }
+  .wrapper-event-info .round-info{
+    border-right: 1px solid;
+    border-bottom: 0px solid;
+  }
+}
+
+/* for video */
+.wrapper-event-info .video-content {
+  max-width: 100% !important;
+}
+
+/* for image */
+.wrapper-event-info img {
+  max-width: 100% !important;
+}
+
+.wrapper-event-info .img-layout {
+  min-width: 250px !important;
+  padding: 5px;
+}
+
+.wrapper-event-info .img-buy-ticket-layout {
+  vertical-align: middle;
+  width: 90%;
+  max-width: 125px !important;
+}
+
+.wrapper-event-info .frame {
+  white-space: nowrap; /* this is required unless you put the helper span closely near the img */    
+  text-align: center; margin: 1em 0;
+}
+
+.wrapper-event-info .helper {
+  display: inline-block;
+  /*   height: 100%; */
+  vertical-align: middle;
+}
+
+.wrapper-event-info .row-layout {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.wrapper-event-info .center-layout {
+    display: table;
+    margin: 0 auto;
+}
+.wrapper-event-info .wrapper-event-info {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+}
+.wrapper-event-info .round-info{
+  width: 75%;
+}
+.wrapper-event-info .round-btn{
+  width: 24%;
+}
+.wrapper-event-info .no-more-tables table {
+  width: 100%;
+}
+@media only screen and (max-width: 800px) {
+  /* Force table to not be like tables anymore */
+  .wrapper-event-info .no-more-tables table,
+  .wrapper-event-info .no-more-tables thead,
+  .wrapper-event-info .no-more-tables tbody,
+  .wrapper-event-info .no-more-tables th,
+  .wrapper-event-info .no-more-tables td,
+  .wrapper-event-info .no-more-tables tr {
+    display: block;
+  }
+  
+  /* Hide table headers (but not display: none;, for accessibility) */
+  .wrapper-event-info .no-more-tables thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+    
+  .wrapper-event-info .no-more-tables tr { border: 1px solid #ccc; }
+    
+  .wrapper-event-info .no-more-tables td {
+  /* Behave like a "row" */
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+    white-space: normal;
+    text-align:left;
+  }
+    
+  .wrapper-event-info .no-more-tables td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align:left;
+    font-weight: bold;
+  }
+    
+  /*
+  Label the data
+  */
+  .wrapper-event-info .no-more-tables td:before { content: attr(data-title); }
+}
+
+.wrapper-event-info .table-striped>tbody>tr:nth-child(odd)>td, .table-striped>tbody>tr:nth-child(odd)>th {
+  background-color: #f9f9f9;
+}
+
+.wrapper-event-info .table-bordered>thead>tr>th, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td {
+  border: 1px solid rgb(2, 2, 2);
+}
+
+.wrapper-event-info .table-condensed>thead>tr>th, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>tbody>tr>td, .table-condensed>tfoot>tr>td {
+  padding: 5px;
+}
+
+.wrapper-event-info table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.wrapper-event-info .split-half-layout {
+  max-width: 50%;
+}	

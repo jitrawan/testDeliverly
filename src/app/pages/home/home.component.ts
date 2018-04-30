@@ -26,9 +26,9 @@ export class HomeComponent implements OnInit {
 	slideBannerImages: EventBanner[];
 
 	cardTicketsRecommend: CardTicket[] = [
-		{ performId: '17070', performName: 'Event 17070', performShowDate: '31 - 10', performShowMonth: 'Dec/2017', image_path: 'assets/images/bmmf.jpg' },
-		{ performId: '17071', performName: 'Event 17071', performShowDate: '31 - 10', performShowMonth: 'Dec/2017', image_path: 'assets/images/bmmf.jpg' },
-		{ performId: '17072', performName: 'Event 17072', performShowDate: '31 - 10', performShowMonth: 'Dec/2017', image_path: 'assets/images/bmmf.jpg' },
+		{ performId: '18016', performName: 'EXO PLANET #4 - The ElyXiOn - in BANGKOK', performShowDate: '16 - 18', performShowMonth: 'MAR/2018', image_path: 'https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/content/18016/SMT18016160120181759ticketCard.jpg' },
+		{ performId: '18042', performName: 'What the Fest Music Festival', performShowDate: '16 - 17', performShowMonth: 'JUNE/2018', image_path: 'https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/content/18042/WTF18042110420181548ticketCard.jpg' },
+		{ performId: '18043', performName: 'NCT U (TAEYONGxTEN) FAN MEETING in BANGKOK', performShowDate: '3', performShowMonth: 'JUNE/2018', image_path: 'https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/content/18043/NCT18043120420181031ticketCard.jpg' },
 		{ performId: '17073', performName: 'Event 17073', performShowDate: '31 - 10', performShowMonth: 'Dec/2017', image_path: 'assets/images/bmmf.jpg' }
 	];
 
@@ -145,7 +145,8 @@ export class HomeComponent implements OnInit {
 	}
 
 	goEventInfo(performId: string) {
-		this.router.navigate(['/eventInfo']);
+		console.log(performId);
+		this.router.navigate(['/event',performId]);
 	}
 
 }

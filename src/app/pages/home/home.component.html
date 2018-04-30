@@ -8,7 +8,6 @@
     </div>
   </section>
 
-
   <section id="card-ticket" class="mt-2">
     <div class="container allevent">
       <div class="eventtopic">
@@ -22,13 +21,13 @@
           </div>
           <div class="row cpt20">
             <div class="col-12 col-sm-6 col-lg-3 card align-items-center align-items-lg-stretch cardwrapper" *ngFor="let cardTicket of cardTicketsRecommend;">
-              <div class="cardbox" ev-id="EV_18019" skip-info="N">
-                <a (click)="goEventInfo()">
+              <div class="cardbox" ev-id="" skip-info="N" (click)="goEventInfo(cardTicket.performId)">
+                <a>
                   <div class="card-overlay" title="Sunset Beach Music Festival 2018">
                     <img src="https://atkmedia.allticket.com/assets/images/cursor.png">
                   </div>
                 </a>
-                <img class="card-img-top img-fluid" src="https://atkmedia.allticket.com/assets/content/18019/PHK18019150120181536ticketCard.jpg"
+                <img class="card-img-top img-fluid" src="{{cardTicket.image_path}}"
                   alt="Card image cap">
                 <div class="card-buyTicket">
                   <a href="#">
@@ -42,7 +41,7 @@
                       <br>MAR/2018</div>
                   </div>
                   <div class="col-7 align-self-center eventName px-1">
-                    <div class="my-1 text-overflow">Sunset Beach Music Festival 2018</div>
+                    <div class="my-1 text-overflow">{{cardTicket.performName}}</div>
                   </div>
                 </div>
               </div>

@@ -15,6 +15,7 @@ import { CalendarModule } from './shared/lib/datetimepicker/primeng/calendar/cal
 import { DialogModule } from './shared/lib/dialog/dialog.component';
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 import { ThaiDatePipe } from './shared/lib/date-format/thaidate.pipe';
+import { SafeHtmlPipe } from './shared/lib/dom/safehtml.pipe';
 import { JasperoAlertsModule } from '@jaspero/ng2-alerts';
 import { JasperoConfirmationsModule } from '@jaspero/ng2-confirmations'
 import { AccordionModule } from 'primeng/accordion';     //accordion and accordion tab
@@ -120,6 +121,7 @@ export function provideConfig() {
     BuyTicketComponent,
 
     ThaiDatePipe,
+    SafeHtmlPipe,
 
     BusReceiveComponent,
     BusErrorComponent,

@@ -22,6 +22,8 @@ export class BookingComponent implements OnInit {
     rentSeat : boolean = false;
     target: String;
     listSeat : any;
+    
+    displayDate: string;
 
     constructor(
         private renderer: Renderer2,
@@ -31,6 +33,8 @@ export class BookingComponent implements OnInit {
     @ViewChild('chooseFestSeat') private chooseFestSeat: ElementRef;
     @ViewChild('chooseZone') private chooseZone: ElementRef;
     @ViewChild('chooseSeat') private chooseSeat: ElementRef;
+    @ViewChild('nonSeatSelector') private nonSeatSelector: ElementRef;
+
 
     ngOnInit() {
         this.listSeat = [];
@@ -39,25 +43,38 @@ export class BookingComponent implements OnInit {
         this.loopSeatNo();
         this.events = [
             {
-                "title": "1,500",
-                "start": "2018-04-01"
+                "title": "Event",
+                "start": "2018-04-06",
+                "round": "R1"
             },
             {
-                "title": "1,800",
-                "start": "2018-04-05"
+                "title": "Event",
+                "start": "2018-04-07",
+                "round": "R2"
+            },
+            {
+                "title": "Event",
+                "start": "2018-04-08",
+                "round": "R3",
+                "showSeat": "N"
             },
         ];
     }
 
     scrollTo(target) {
-        $('html,body').delay(500).animate({
+        $('html,body').stop().delay(200).animate({
             scrollTop: $(target).offset().top
         }, 700);
     }
 
-    handleEventClick(e) {
-        this.renderer.addClass(this.avaDateTime.nativeElement, 'show');
-        this.scrollTo('#avaDateTime');
+    onSelectDate(e) {
+        console.log(e);
+        let showSeat = e.calEvent.showSeat;
+
+        if(showSeat == "N") {
+            this.displayDate = e.calEvent.start._i;
+            this.showNonSeat();
+        }
     }
 
     selectDateTime() {
@@ -115,6 +132,11 @@ export class BookingComponent implements OnInit {
             console.log("Delete Seat : " + JSON.stringify(this.listSeat));
         }
         
-      }
+    }
+
+    showNonSeat() {
+        this.renderer.addClass(this.nonSeatSelector.nativeElement, 'show');
+        this.scrollTo('.nonSeatSelector');
+    }
 
 }

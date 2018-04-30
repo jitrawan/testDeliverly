@@ -1,115 +1,95 @@
-.wrapper {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-}
-
-.eventHis,
-.busHis {
-  grid-column: span 6;
-  cursor: pointer;
-  transition: 0.3s;
-  font-size: 14px;
-  border: 2px solid #333333;
-  border-bottom: 0px;
-  background: #808080;
+.history-title {
+  text-align: center;
+  background-color: #1f2e31;
   color: white;
-}
-
-.x-scroll {
-  overflow-x: scroll
-}
-
-.topicHis {
-  cursor: pointer;
-  width: 200px;
-  display: flex;
-  justify-content: center;
-  border: 1px solid black;
-}
-
-table {
-  border-collapse: separate !important;
-  border-spacing: 0;
-}
-
-.tableResult {
+  margin-bottom: -1px;
   cursor: pointer;
 }
-
-.tableResult td {
-  vertical-align: middle;
+.history-title:hover {
+  color: #e2e2de;
+}
+.history-title.has-border{
+  border-right: 2px solid #f8feff;
+}
+.atk-responsive-table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
 }
 
-.table td,
-.table th {
-  padding: 10px !important;
+.atk-responsive-table th {
+  background-color: #6c7ae0;
+  color: #fff;
 }
 
-.infoBoxWrapper .table .tableTopic td:first-child {
-  border-left: 2px solid #333333;
+.atk-responsive-table tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
 }
 
-.infoBoxWrapper .table .tableTopic td {
-  border: 2px solid #333333;
-  border-right: 0px;
-  background: #808080;
-  color: white;
+.atk-responsive-table th,
+.atk-responsive-table td {
+  padding: .625em;
   text-align: center;
 }
 
-.infoBoxWrapper .table .tableTopic td:last-child {
-  border-right: 2px solid #333333;
+.atk-responsive-table th {
+  font-size: .85em;
+  font-weight: 400;
+  letter-spacing: .1em;
+  text-transform: uppercase;
 }
 
-.infoBoxWrapper .table tr td {
-  border: 2px solid #333333;
-  border-right: 0px;
-  border-top: 0px;
-  text-align: center;
-  background-color: #f3f6f6;
-}
+@media screen and (max-width: 768px) {
+  .atk-responsive-table {
+    border: 0;
+  }
 
-.infoBoxWrapper .table tr td:last-child {
-  border-right: 2px solid #333333;
-}
+  .atk-responsive-table caption {
+    font-size: 1.3em;
+  }
+  
+  .atk-responsive-table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  .atk-responsive-table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  
+  .atk-responsive-table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  
+  .atk-responsive-table td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .atk-responsive-table td:last-child {
+    border-bottom: 0;
+  }
 
-.sum .table thead th {
-  vertical-align: bottom;
-  background: #808080;
-  color: white;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  border: 2px solid #333333;
-}
-
-.sum .table tr {
-  border: 2px solid #333333;
-}
-
-.sum .table tr td:nth-child(1) {
-  border-left: 2px solid #333333;
-}
-
-.sum .table tr td:nth-child(2) {
-  border-right: 2px solid #333333;
-}
-
-.sum .rowSum {
-  border-right: 2px solid #333333;
-  border-left: 2px solid #333333;
-  border-bottom: 2px solid #333333;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  text-align: center;
-  font-weight: 600;
-}
-
-.sum .table td {
-  border-top: 0px;
-}
-
-.outer {
-  white-space: nowrap;
-  position: relative;
-  overflow-y: hidden;
+  .history-title.has-border{
+    border-right: 0;
+    border-bottom: 2px solid #f8feff;
+  }
 }

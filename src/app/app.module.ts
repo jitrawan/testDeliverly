@@ -75,6 +75,9 @@ import { DiscountDetailComponent } from './pages/discount-detail/discount-detail
 import { RecaptchaModule } from 'ng-recaptcha';
 import { PushNotificationModule } from 'ng-push-notification';
 
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+
 
 const config = new AuthServiceConfig([
   {
@@ -157,7 +160,8 @@ export function provideConfig() {
     AccordionModule,
     ScheduleModule,
     RecaptchaModule.forRoot(),
-    PushNotificationModule.forRoot()
+    PushNotificationModule.forRoot(),
+    environment.production ? ServiceWorkerModule.register('ngsw-worker.js') : []
 
   ],
   providers: [

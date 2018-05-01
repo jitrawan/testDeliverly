@@ -13,11 +13,11 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { AuthService } from 'angularx-social-login';
 import { SocialUser } from 'angularx-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider } from 'angularx-social-login';
-
+import * as Crypto2 from 'crypto2';
 // import { PushNotificationsService } from 'angular2-notifications';
 declare function JSEncrypt(): any;
 declare var jQuery: any;
-declare var $: any;
+declare var $: any
 
 @Component({
     selector: 'app-navbar',
@@ -184,10 +184,10 @@ export class HeaderComponent implements OnInit {
         this.user = null;
         var privateKey = 'MIIBOQIBAAJAWYbAUbPhRWQ7TAjKaotbJEQJI6imMtmXnrXDMSYpLU5AxDXjUsoCMbzk/9PEh2igdu2JyyhLPGgwqJFZxJM1SwIDAQABAkAxiLo+On3I7CVW84IzozlhfndkEHsspXIbsUv3lLqxwvLsDXrZWiMdQJKWOvwojFmbEFhxjKZC3c/BzMVjjCZxAiEAp+U3uAPhZB8Vr+s0zrONEYyAgzm49FqezwjT+Zvia9kCIQCIgZK0I0rja3ZRiI/kQjqcrf5F46sU8hg1ROrIovUnwwIhAI3l12KpvOuerfihZF8yNw7W3aKKvXufv0qhXm4+xm15AiBbP8pyclkgNvirvg759a+6hrC/xVXatY6rJTuRDSW2AwIgUgpYOwni1NMbjqryxZo9UXR7oUaI4EZDuQ/0BTMUCt8=' ;
         var publicKey = 'MFswDQYJKoZIhvcNAQEBBQADSgAwRwJAWYbAUbPhRWQ7TAjKaotbJEQJI6imMtmXnrXDMSYpLU5AxDXjUsoCMbzk/9PEh2igdu2JyyhLPGgwqJFZxJM1SwIDAQAB';
-        
         JSEncrypt.prototype.setPrivateKey(privateKey);
         JSEncrypt.prototype.setPublicKey(publicKey);
         console.log("Password En: " + JSEncrypt.prototype.encrypt("1234"));
+        
         }
       
     signInWithFB(): void {
@@ -195,14 +195,14 @@ export class HeaderComponent implements OnInit {
         this.loginSocial("FACEBOOK");
         this.socialLogin = true;
         this.mediaType = "FACEBOOK";
-        console.log("Media : " + this.userModel.mediaType)
+        console.log("Media : " + this.mediaType)
     }
     signInWithGoogle(): void {
         this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
         this.loginSocial("GOOGLE");
         this.socialLogin = true;
         this.mediaType = "GOOGLE";
-        console.log("Media : " + this.userModel.mediaType)
+        console.log("Media : " + this.mediaType)
     }
 
     signUp(): void {
@@ -397,6 +397,7 @@ export class HeaderComponent implements OnInit {
         this.closeAllDialog();
     }
     loginSocial(mediaType : string){
+        this.closeAllDialog();
         this.authService.authState.subscribe((user) => {
             this.user = user;
             if (this.user != null) {
@@ -412,7 +413,7 @@ export class HeaderComponent implements OnInit {
 
                 this.isLoading = true;
                 this.showOverlay = true;
-
+                
                 this.apiService.checkEmail(this._checkEmailSocial).subscribe(data => {
                     var result =  JSON.parse(JSON.stringify(data));
                     var success = false;
@@ -531,7 +532,7 @@ export class HeaderComponent implements OnInit {
         this._checkLoginModel.password = "";
         this._checkLoginModel.mediaType =  this._checkEmailSocial.mediaType;
         this._checkLoginModel.accessToken = this._checkEmailSocial.accessToken;
-
+        this.showOverlay = true;
         this.apiService.checkLogin(this._checkLoginModel).subscribe(data => {
             var result =  JSON.parse(JSON.stringify(data));
             console.log("Data response Check Login Social : " + JSON.stringify(data));

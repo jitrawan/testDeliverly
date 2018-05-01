@@ -219,10 +219,6 @@ label {
   height: auto;
 }
 
-.js .imagemap__item {
-  display: none;
-}
-
 ::ng-deep .fc-content {
   cursor: pointer;
   color: white;
@@ -230,9 +226,6 @@ label {
   text-align: center;
 }
 
-.imagemap__item {
-  width: 50% !important;
-}
 
 .nonSeatSelector {
   display: none;
@@ -242,7 +235,6 @@ label {
   background-color: rgba(202, 209, 243, 0.3);
   border-radius: 5px;
   border: 1px solid #ecec;
-  
 }
 
 .nonSeatSelector.show {
@@ -250,7 +242,7 @@ label {
 }
 
 .nonSeatSelector .zone-detail {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .nonSeatSelector .zone-desc {
@@ -260,6 +252,10 @@ label {
 
 .nonSeatSelector .zone-desc p {
   margin-bottom: 0;
+}
+
+.nonSeatSelector select.form-control {
+  width: 70px;
 }
 
 @media screen and (max-width: 480px) {
@@ -278,6 +274,15 @@ label {
 
   .nonSeatSelector {
     width: 100%;
+  }
+
+  .nonSeatSelector select.form-control {
+    width: 50px;
+    padding: 0 .5rem;
+  }
+
+  .nonSeatSelector .zone-desc {
+    margin-left: -15px;
   }
   
 }

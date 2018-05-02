@@ -32,7 +32,7 @@ export class BookingComponent implements OnInit {
         ){
     }
     @ViewChild('avaDateTime') private avaDateTime: ElementRef;
-    @ViewChild('chooseFestSeat') private chooseFestSeat: ElementRef;
+    @ViewChild('chooseNonSeat') private chooseNonSeat: ElementRef;
     @ViewChild('chooseZone') private chooseZone: ElementRef;
     @ViewChild('chooseSeat') private chooseSeat: ElementRef;
     @ViewChild('nonSeatSelector') private nonSeatSelector: ElementRef;
@@ -53,17 +53,17 @@ export class BookingComponent implements OnInit {
                 "event_calendar" : [
                     {
                         "title": "Event",
-                        "start": "2018-04-06",
+                        "start": "2018-05-06",
                         "round": "R1"
                     },
                     {
                         "title": "Event",
-                        "start": "2018-04-07",
+                        "start": "2018-05-07",
                         "round": "R2"
                     },
                     {
                         "title": "Event",
-                        "start": "2018-04-08",
+                        "start": "2018-05-08",
                         "round": "R3",
                     },
                 ],
@@ -90,63 +90,62 @@ export class BookingComponent implements OnInit {
                     }
                 ]
             }
+        } else if (receiveData == "18043") {
+            this.event = {
+                "onlyNonSeat" : "N",
+                "event_calendar" : [
+                    {
+                        "title": "Event",
+                        "start": "2018-05-18",
+                        "round": "R1"
+                    },
+                    {
+                        "title": "Event",
+                        "start": "2018-05-19",
+                        "round": "R2"
+                    }
+                ]
+            }
         }
         console.log(receiveData);
 
-        this.event = {
-            "onlyNonSeat" : "Y",
-            "event_calendar" : [
-                {
-                    "title": "Event",
-                    "start": "2018-05-04",
-                    "round": "R1"
-                },
-                {
-                    "title": "Event",
-                    "start": "2018-05-05",
-                    "round": "R2"
-                },
-                {
-                    "title": "Event",
-                    "start": "2018-05-06",
-                    "round": "R3"
-                }
-            ]
-        }
-        this.renderer.addClass(this.nonSeatSelector.nativeElement, 'show');
     }
 
     scrollTo(target) {
         $('html,body').stop().delay(200).animate({
             scrollTop: $(target).offset().top
-        }, 700);
+        }, 1000);
     }
 
     onSelectDate(e) {
-        console.log(e);
-        let showSeat = e.calEvent.showSeat;
-
-        if(this.event.onlyNonSeat == "Y") {
-            this.displayDate = e.calEvent.start._i;
-            this.showNonSeat();
-        } else {
-            this.selectDateTime();
-        }
+        this.displayDate = e.calEvent.start._i;
+        this.toggleElement(this.avaDateTime,'show',true);
+        this.scrollTo('#avaDateTime');
     }
 
     selectDateTime() {
-        this.renderer.addClass(this.chooseZone.nativeElement, 'show');
-        setTimeout(() => {
-            jMap('img[usemap]');
-            console.log("TRIGGER !")
-        }, 1000);
-        
-        // this.scrollTo('#chooseZone');
+        if(this.event.onlyNonSeat == "Y") {
+            this.showNonSeat();
+        } else {
+            this.toggleElement(this.chooseZone,'show',true);
+            this.scrollTo('#chooseZone');
+            setTimeout(() => {
+                jMap('img[usemap]');
+                console.log("TRIGGER !")
+            }, 800);
+        }
     }
 
-    selectZone() {
-        this.renderer.addClass(this.chooseSeat.nativeElement, 'show');
-        this.scrollTo('#chooseSeat');
+    selectZone(zoneType: string) {
+        if(zoneType == "nonseat") {
+            this.toggleElement(this.chooseNonSeat,'show',true);
+            this.toggleElement(this.chooseSeat,'show',false);
+            this.scrollTo('#chooseNonSeat');
+        } else {
+            this.toggleElement(this.chooseSeat,'show',true);
+            this.toggleElement(this.chooseNonSeat,'show',false);
+            this.scrollTo('#chooseSeat');
+        }
     }
 
     loopSeatNo() {
@@ -196,8 +195,16 @@ export class BookingComponent implements OnInit {
     }
 
     showNonSeat() {
-        this.renderer.addClass(this.nonSeatSelector.nativeElement, 'show');
+        this.toggleElement(this.nonSeatSelector,'show',true);
         this.scrollTo('.nonSeatSelector');
     }
 
+    toggleElement(_element: ElementRef, _toggleClass: string, isAddClass: boolean) {
+        if(isAddClass) {
+            this.renderer.addClass(_element.nativeElement, _toggleClass);
+        } else {
+            this.renderer.removeClass(_element.nativeElement, _toggleClass);
+        }
+        
+    }
 }

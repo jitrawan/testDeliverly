@@ -96,9 +96,8 @@ export class HomeComponent implements OnInit {
 	}
 
 	getScreenType() {
-
 		for (let breakpoint of ConstMaster.imageBreakpoint) {
-			if (this.screenWidth < breakpoint.breakpoint) {
+			if (this.screenWidth <= breakpoint.breakpoint) {
 				this.screenType = breakpoint.beakpointName + "/";
 				break;
 			}

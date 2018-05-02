@@ -3,6 +3,7 @@ import { AgmMap } from '@agm/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { HomeService } from '../../shared/services/home.service';
+import { SharedService } from '../../shared/services/shared-service.service';
 import * as Jquery from 'jquery';
 import { resolveDefinition } from '@angular/core/src/view/util';
 
@@ -21,7 +22,8 @@ export class EventInfoComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
-    private homeService: HomeService
+    private homeService: HomeService,
+    private sharedService: SharedService
   ) {}
 
   @ViewChild(AgmMap) agmMap: AgmMap
@@ -75,6 +77,8 @@ export class EventInfoComponent implements OnInit {
       this.isLoading = false;
     }
 
+    this.sharedService.sendData(this.performId);
+
     // console.log((_.findIndex(eventIndex,this.performPath)));
     
     // let eventInfoContent = <HTMLDivElement> document.getElementById("eventInfoContent");
@@ -92,7 +96,8 @@ export class EventInfoComponent implements OnInit {
     
     // window.addEventListener('scroll', this.adjustStickyHeader);
     // window.addEventListener('resize', this.adjustStickyHeader);
-        
+
+
   }
 
   ngOnDestroy() {

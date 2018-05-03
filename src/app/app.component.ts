@@ -21,7 +21,9 @@ export class AppComponent implements OnInit {
     private router: Router,
     private pushNotification: PushNotificationService
   ) {
-     pushNotification.requestPermission();
+     pushNotification.requestPermission().then(function(value){
+       console.log("Permisstion : " + value);
+     });
   }
   paymentChannel: string = 'mobile';
   sub: any;

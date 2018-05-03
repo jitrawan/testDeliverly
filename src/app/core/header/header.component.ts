@@ -135,8 +135,8 @@ export class HeaderComponent implements OnInit {
     'birthdayYear': ['', Validators.required],
     'idCard': ['', Validators.required],
     'phone': ['', Validators.required],
-    'acceptTerm': [Boolean, Validators.required],
-    'acceptNews': [Boolean, Validators.required],
+    'acceptTerm': ['', Validators.required],
+    'acceptNews': ['', Validators.required],
     'currentItem': ['', Validators.required]
 
    });
@@ -166,18 +166,20 @@ export class HeaderComponent implements OnInit {
 }
 
     ngOnInit() {
-       
-        var retrievedObject = localStorage.getItem('USER_PROFILE');
-        console.log('retrievedObject: ', JSON.parse((retrievedObject)));
-        var result =  JSON.parse((retrievedObject));
+        // localStorage.removeItem('USER_PROFILE');
+        // var retrievedObject = localStorage.getItem('USER_PROFILE');
+        // console.log('retrievedObject: ', JSON.parse((retrievedObject)));
+        // var result =  JSON.parse((retrievedObject));
         // this.firstNameView = result.CUST_FIRSTNAME;
         // this.lastNameView = result.CUST_LASTNAME;
         // this.userMenu = true;
         // this.RegAndLog = false;
 
         this.resizeTimeout = 0;
+        
         // 6Lfg51QUAAAAAID_dAd_epeHdsoj0gkr8IyQ3pmf
         // 6LcPgVAUAAAAAP9AjXUNyt82AOHKjtVmmOeiwYZK
+
         this.headerService.getHeaderMenu().subscribe(response => {
             this.headerModel = response['data'];
         });
@@ -239,7 +241,7 @@ export class HeaderComponent implements OnInit {
                 this.alertValidate();
             }
             else if(this.userModel.confirmpassword != this.userModel.password){
-                this.invalid = 'Please input your confirm password same password !!'
+                this.invalid = 'Please input your confirm password like password !!'
                 this.alertValidate();
             }
             else if(this.userModel.firstName == null || this.userModel.firstName == ''|| this.userModel.firstName.length == 0){
@@ -267,7 +269,7 @@ export class HeaderComponent implements OnInit {
                 this.alertValidate();
             }
             else if(this.userModel.acceptTerm != true ){
-                this.invalid = 'Please choose Accept Term !!'
+                this.invalid = 'Please choose Accept Terms !!'
                 this.alertValidate();
             }
             else if(this.responRecaptcha == null){
@@ -303,6 +305,11 @@ export class HeaderComponent implements OnInit {
                                                         
                             }
                         }
+                    }else{
+                        this.invalid = 'พบข้อผิดพลาดระหว่างการส่ง Mail !!'
+                        this.alertValidate();
+                        this.userMenu = false;
+                        this.RegAndLog = true;
                     }
                 });
                 
@@ -311,7 +318,21 @@ export class HeaderComponent implements OnInit {
     ngAfterViewInit() {
         // setTimeout(_ => this.navbarContent = this.child.nativeElement.innerHTML);
     }
+    clearInputRegisterForm(){
+        this.authForm.value.email = null;
+        this.authForm.value.password = null;
+        this.authForm.value.confirmpassword = null;
+        this.authForm.value.firstname = null;
+        this.authForm.value.lastname = null;
+        this.authForm.value.gender = null;
+        this.authForm.value.idCard = null;
+        this.authForm.value.phone = null;
+        this.authForm.value.acceptTerm = false;
+        this.authForm.value.acceptNews = false;
 
+
+
+    }
     routeMenu(route: string) {
         this.router.navigate([route]);
         this.closeAllDialog();
@@ -338,7 +359,9 @@ export class HeaderComponent implements OnInit {
             this.isLoginOpen = true;
             window.scrollTo(0, 0);
         } else if (type === this.actionTrigger.signUp) {
+            
             if(this.socialLogin == false){
+                this.clearInputRegisterForm();
                 this.userModel.mediaType = "NORMAL";
                 this.emailNameView = "";
                 this.firstNameView = "";

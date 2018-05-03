@@ -37,9 +37,8 @@
 
 .custom-radio .custom-control-label::before,
 .custom-radio .custom-control-label::after {
-  margin-left: 30px;
+  margin-left: 45px;
   margin-top: 10px;
-  margin-bottom: 10px
 }
 
 .custom-control-label {
@@ -282,9 +281,10 @@ label {
   border-radius: 5px;
 }
 
-.li-num-ticket a:hover {
+.li-num-ticket a:hover , .li-num-ticket.selected {
   background-color: #eee;
   color: #111;
+  border-radius: 5px;
 }
 
 .li-num-ticket-select {
@@ -304,6 +304,12 @@ label {
   border-color: #e77600;
   background: #fef8f2;
   border-radius: 5px;
+}
+
+::ng-deep .fc-today.ui-state-highlight {
+  border-color: #D5D5D5;
+  background: #fff;
+  color: #222222;
 }
 
 @media screen and (max-width: 480px) {

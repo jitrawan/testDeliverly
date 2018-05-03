@@ -18,5 +18,14 @@
       "es2017",
       "dom"
     ]
-  }
+  },
+  "include": [
+    "node_modules/@jaspero/ng2-alerts",
+    "src/main.ts",
+    "src/polyfills.ts",
+    "src/app/window.parent.d.ts"
+  ],
+  "exclude": [
+    // ...
+  ],
 }

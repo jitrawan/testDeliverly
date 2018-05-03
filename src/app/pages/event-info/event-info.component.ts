@@ -38,9 +38,9 @@ export class EventInfoComponent implements OnInit {
   private info: any;  
   private elements: any;
   private performPath: string;
-  private eventInfoHtml: string;
   private performId: string;
-  private isLoading: boolean = true;
+  isLoading: boolean = true;
+  eventInfoHtml: string;
   
   private clickShowMap() {
     this.showMap = !this.showMap;

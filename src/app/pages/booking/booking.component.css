@@ -63,7 +63,6 @@
 }
 
 .imagemap__item {
-  width: 100%;
   height: auto;
 }
 
@@ -205,17 +204,17 @@ label {
 
 #avaDateTime,
 #chooseZone,
-#chooseFestSeat,
+#chooseNonSeat,
 #chooseSeat {
   display: none;
 }
 
-#avaDateTime.show, #chooseZone.show, #chooseFestSeat.show, #chooseSeat.show {
+#avaDateTime.show, #chooseZone.show, #chooseNonSeat.show, #chooseSeat.show {
   display: inline !important;
 }
 
 .m-imagemap img {
-  max-width: 100%;
+  max-width: 600px;
   height: auto;
 }
 
@@ -256,6 +255,55 @@ label {
 
 .nonSeatSelector select.form-control {
   width: 70px;
+}
+
+.ul-num-ticket {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+}
+
+.li-num-ticket {
+  float: left;
+  padding: 2px;
+}
+
+.li-num-ticket a {
+  display: block;
+  cursor: pointer;
+  color: #999999;
+  text-align: center;
+  padding: 16px 20px;
+  text-decoration: none;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ADB1B8;
+  border-radius: 5px;
+}
+
+.li-num-ticket a:hover {
+  background-color: #eee;
+  color: #111;
+}
+
+.li-num-ticket-select {
+  float: left;
+  padding: 2px;
+}
+
+.li-num-ticket-select a {
+  display: block;
+  color: #111;
+  font-weight: 900px;
+  text-align: center;
+  padding: 16px 20px;
+  text-decoration: none;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #e77600;
+  background: #fef8f2;
+  border-radius: 5px;
 }
 
 @media screen and (max-width: 480px) {

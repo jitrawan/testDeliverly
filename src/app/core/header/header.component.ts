@@ -176,8 +176,9 @@ export class HeaderComponent implements OnInit {
         // this.RegAndLog = false;
 
         this.resizeTimeout = 0;
-        
+        // recaptcha prod
         // 6Lfg51QUAAAAAID_dAd_epeHdsoj0gkr8IyQ3pmf
+        //dev
         // 6LcPgVAUAAAAAP9AjXUNyt82AOHKjtVmmOeiwYZK
 
         this.headerService.getHeaderMenu().subscribe(response => {
@@ -292,15 +293,15 @@ export class HeaderComponent implements OnInit {
                             this.RegAndLog = false;
                             this.closeAllDialog();
                         }else{
-                            if(result["message"] != "Email นี้มีอยู่ในระบบแล้วไม่สามารถใช้งานได้"){
+                            if(result["message"] == "Email นี้มีอยู่ในระบบแล้วไม่สามารถใช้งานได้"){
                                 
-                            this.invalid = 'Please Confirm your Email !!'
+                            this.invalid = 'Email นี้มีอยู่ในระบบแล้วไม่สามารถใช้งานได้ !!'
                             this.alertValidate();
                             this.closeAllDialog();
                             this.userMenu = false;
                             this.RegAndLog = true;
                              }else{
-                               this.invalid = 'Email นี้มีอยู่ในระบบแล้วไม่สามารถใช้งานได้ !!'
+                               this.invalid = 'Please Confirm Email !!'
                                this.alertValidate();
                                                         
                             }
@@ -514,7 +515,6 @@ export class HeaderComponent implements OnInit {
             console.log("Data response Login Normal : " + JSON.stringify(data));
             if(result["success"] == true){
                 if(result["data"]["CUST_STATUS"] == "Y"){
-                    localStorage.setItem('USER_PROFILE', JSON.stringify(result["data"]));
                     this.emailEdit = result["data"]["CUST_EMAIL"];
                     this.firstnameEdit = result["data"]["CUST_FIRSTNAME"];
                     this.lastnameEdit = result["data"]["CUST_LASTNAME"];
@@ -561,7 +561,6 @@ export class HeaderComponent implements OnInit {
             console.log("Data response Check Login Social : " + JSON.stringify(data));
             if(result["success"] == true){
                 if(result["data"]["CUST_STATUS"] == "Y"){
-                    localStorage.setItem('USER_PROFILE', JSON.stringify(result["data"]));
                     this.emailEdit = result["data"]["CUST_EMAIL"];
                     this.firstNameView = result["data"]["CUST_FIRSTNAME"];
                     this.lastNameView = result["data"]["CUST_LASTNAME"];

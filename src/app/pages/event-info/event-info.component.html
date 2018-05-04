@@ -2,7 +2,7 @@
 	<div class="text-center my-3">
 		<button class="btn btn-atk-primary" (click)="buyTicket(performId)">BUY TICKET</button>
 	</div>
-	<div class="wrapper-event-info" [innerHTML]="eventInfoHtml | safeHtml"></div>
+	<div class="wrapper-event-info px-3" [innerHTML]="eventInfoHtml | safeHtml"></div>
 </div>
 
 <div class="container" *ngIf="(eventInfoHtml == null || eventInfoHtml == '') && isLoading == false">

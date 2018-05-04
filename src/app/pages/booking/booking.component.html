@@ -61,20 +61,8 @@
     <div class="row my-3">
       <div class="col-12">
         <ul class="ul-num-ticket">
-          <li class="li-num-ticket" data-value="1">
-            <a>1</a>
-          </li>
-          <li class="li-num-ticket" data-value="2">
-            <a>2</a>
-          </li>
-          <li class="li-num-ticket" data-value="3">
-            <a>3</a>
-          </li>
-          <li class="li-num-ticket" data-value="4">
-            <a>4</a>
-          </li>
-          <li class="li-num-ticket" data-value="5">
-            <a>5</a>
+          <li class="li-num-ticket" (click)="chooseSeatAmt(index)" [ngClass]="{ 'selected': nonSeatAmtSelected == index }" *ngFor="let index of [1,2,3,4,5]">
+            <a>{{index}}</a>
           </li>
         </ul>
       </div>

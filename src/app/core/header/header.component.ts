@@ -515,7 +515,6 @@ export class HeaderComponent implements OnInit {
             console.log("Data response Login Normal : " + JSON.stringify(data));
             if(result["success"] == true){
                 if(result["data"]["CUST_STATUS"] == "Y"){
-                    localStorage.setItem('USER_PROFILE', JSON.stringify(result["data"]));
                     this.emailEdit = result["data"]["CUST_EMAIL"];
                     this.firstnameEdit = result["data"]["CUST_FIRSTNAME"];
                     this.lastnameEdit = result["data"]["CUST_LASTNAME"];
@@ -562,7 +561,6 @@ export class HeaderComponent implements OnInit {
             console.log("Data response Check Login Social : " + JSON.stringify(data));
             if(result["success"] == true){
                 if(result["data"]["CUST_STATUS"] == "Y"){
-                    localStorage.setItem('USER_PROFILE', JSON.stringify(result["data"]));
                     this.emailEdit = result["data"]["CUST_EMAIL"];
                     this.firstNameView = result["data"]["CUST_FIRSTNAME"];
                     this.lastNameView = result["data"]["CUST_LASTNAME"];

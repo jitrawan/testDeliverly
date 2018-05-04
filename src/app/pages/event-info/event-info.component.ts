@@ -6,6 +6,7 @@ import { HomeService } from '../../shared/services/home.service';
 import { SharedService } from '../../shared/services/shared-service.service';
 import * as Jquery from 'jquery';
 import { resolveDefinition } from '@angular/core/src/view/util';
+import { EventInfo } from '../../shared/models/eventInfo.model';
 
 @Component({
   selector: 'app-event-info',
@@ -40,7 +41,7 @@ export class EventInfoComponent implements OnInit {
   private performPath: string;
   private performId: string;
   isLoading: boolean = true;
-  eventInfoHtml: string;
+  eventInfo: EventInfo;
   
   private clickShowMap() {
     this.showMap = !this.showMap;
@@ -51,6 +52,7 @@ export class EventInfoComponent implements OnInit {
     var eventIndex = [
       { performId: "18042", pretty_path: "What-the-fest-2018" },
       { performId: "18043", pretty_path: "NCT" },
+      { performId: "18043", pretty_path: "Another-nct" },
       { performId: "18016", pretty_path: "EXO-2018" },
     ];
 
@@ -68,7 +70,7 @@ export class EventInfoComponent implements OnInit {
 
     if(this.performId != undefined && this.performId != '') {
       this.homeService.getEventInfo(this.performId).subscribe(res => {
-        this.eventInfoHtml = res['data']['infoHtml'];
+        this.eventInfo = res['data'];
         this.isLoading = false;
       }, error => {
         this.isLoading = false;
@@ -76,8 +78,6 @@ export class EventInfoComponent implements OnInit {
     } else {
       this.isLoading = false;
     }
-
-    this.sharedService.sendData(this.performId);
 
     // console.log((_.findIndex(eventIndex,this.performPath)));
     
@@ -106,7 +106,7 @@ export class EventInfoComponent implements OnInit {
   }
 
   buyTicket(performId: string) {
-    console.log(performId);
+    this.sharedService.sendData(this.performId);
     this.router.navigate(['/booking']);
   }
   adjustStickyHeader(){    
@@ -191,7 +191,7 @@ export class EventInfoComponent implements OnInit {
   }      
     
   getDirection(event: any): void {
-        window.open('https://www.google.com/maps/dir/Current+Location/' + this.lat + ',' + this.lng);
+    window.open('https://www.google.com/maps/dir/Current+Location/' + this.lat + ',' + this.lng);
   }
 
   activeMap(): void {

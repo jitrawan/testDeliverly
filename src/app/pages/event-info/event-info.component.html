@@ -1,10 +1,72 @@
-<div class="container-fluid px-0" *ngIf="eventInfoHtml != null || eventInfoHtml == ''">
-	<div class="text-center my-3">
-		<button class="btn btn-atk-primary" (click)="buyTicket(performId)">BUY TICKET</button>
-	</div>
-	<div class="wrapper-event-info px-3" [innerHTML]="eventInfoHtml | safeHtml"></div>
-</div>
-
-<div class="container" *ngIf="(eventInfoHtml == null || eventInfoHtml == '') && isLoading == false">
-	<h3 class="text-center my-5">Event not found.</h3>
+<div class="container-fluid px-0" [ngClass]="{ 'spinner-loading' : isLoading }">
+	<ng-container *ngIf="eventInfo?.infoHtml != null || eventInfo?.infoHtml == ''">
+		<div class="row eventDescHeader mx-0">
+			<div class="col-md-5 d-flex d-lg-block align-items-center">
+				<div class="inner-wrapper">
+					<img [src]="eventInfo?.event_logo" class="img-fluid event-logo"/>
+				</div>
+			</div>
+	
+			<div class="col-md-7">
+				<div class="inner-wrapper">
+					<div class="row mx-0">
+						<div class="col-12">
+							<h4 class="text-center text-white event-title pb-2">{{eventInfo?.event_name}}</h4>
+						</div>
+					</div>
+					<div class="row mx-0 mt-2">
+						<div class="col-6 col-lg-5 border-right">
+							<div class="row mx-0">
+								<div class="col-12 col-lg-2 align-self-md-center px-0">
+									<i class="fa fa-calendar-o text-white is-size-4" aria-hidden="true"></i>
+								</div>
+								<div class="col-12 col-lg-9 px-0">
+									<span class="text-white l_h_2" [innerHTML]="eventInfo?.event_show_date | safeHtml"></span>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-6 col-lg-5">
+							<div class="row mx-0">
+								<div class="col-12 col-lg-2 align-self-md-center text-lg-center px-0">
+									<i class="fa fa-clock-o text-white is-size-4" aria-hidden="true"></i>
+								</div>
+								<div class="col-12 col-lg-9 px-0">
+									<span class="text-white l_h_2" [innerHTML]="eventInfo?.event_show_time | safeHtml"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row mx-0 mt-3">
+						<div class="col-12 col-lg-1">
+							<img src="https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/images/icon/locate.png" width="25px">
+						</div>
+						<div class="col-12 col-lg-10 px-lg-0 align-self-lg-center">
+							<span class="text-white">{{eventInfo.event_location}}</span>
+						</div>
+					</div>
+					<div class="row mx-0 mt-3">
+						<div class="col-12 col-lg-1">
+							<img src="https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/images/icon/currency.png" width="20px">
+						</div>
+						<div class="col-12 col-lg-10 px-lg-0 align-self-lg-center">
+							<span class="ticketPrice">{{eventInfo.event_show_price}}</span>
+						</div>
+					</div>
+					<div class="row text-center mt-4 mt-sm-5 mx-0">
+						<div class="col-12">
+							<button class="btn btn-atk-primary" (click)="buyTicket(performId)">BUY TICKET</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="wrapper-event-info p-3" [innerHTML]="eventInfo?.infoHtml | safeHtml"></div>
+	</ng-container>
+	
+	<ng-container *ngIf="(eventInfo?.infoHtml == null || eventInfo?.infoHtml == '') && isLoading == false">
+		<div class="container">
+			<h3 class="text-center my-5">Event not found.</h3>
+		</div>
+	</ng-container>
 </div>

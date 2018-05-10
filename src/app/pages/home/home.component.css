@@ -57,36 +57,7 @@ a:focus {
 #slider img {
   width: 100%;
   min-height: 150px;
-  max-height: 500px;
-}
-
-#slideCard .container {
-  padding: 2.2rem;
-}
-
-@keyframes slideLoaded {
-  from {
-    opacity: 0
-  }
-  to {
-    opacity: 1
-  }
-}
-
-#slider .owl-item {
-  -webkit-animation-duration: 1.5s;
-  -moz-animation-duration: 1.5s;
-  animation-duration: 1.5s;
-}
-
-#slider .owl-carousel {
-  margin: 0;
-}
-
-#slider img {
-  width: 100%;
-  min-height: 150px;
-  max-height: 500px;
+  max-height: 450px;
 }
 
 #slideCard .container {

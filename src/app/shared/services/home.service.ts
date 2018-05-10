@@ -14,10 +14,10 @@ export class HomeService {
   
   constructor(private http: HttpClient) { }
 
-  private eventBannerUrl = ConstMaster.home.jsonFileEndPoints;
-
+  private eventBannerUrl = ConstMaster.HOME_API.endpoint;
+  
   getEventBanner(): Observable<EventBanner> {
-    return this.http.get<EventBanner>(this.eventBannerUrl);
+    return this.http.post<EventBanner>(this.eventBannerUrl,httpOptions);
   }
 
   getEventInfo(performId: string) {

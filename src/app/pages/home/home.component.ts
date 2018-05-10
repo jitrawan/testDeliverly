@@ -1,53 +1,34 @@
 import { Component, OnInit, AfterViewInit, HostListener, AfterViewChecked, OnChanges, HostBinding } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { EventBanner } from '../../shared/models/eventBanner.model';
+import { CardTicket } from '../../shared/models/cardTickets';
+import { CardTickets } from '../../shared/models/cardTickets';
 import { ConstMaster } from '../../shared/config/ConstMaster';
 import { HomeService } from '../../shared/services/home.service';
 import * as underscore from 'underscore';
-
-// import 'owl.carousel';
 declare var $: any;
-// import * as $ from 'jquery';
 
 @Component({
 	selector: 'app-home',
 	templateUrl: './home.component.html',
-	styleUrls: ['./home.component.css',
-		'../../../assets/css/standard/cardticket.css',
-		'../../../assets/css/standard/utility.css',],
+	styleUrls: [
+			'./home.component.css',
+			'../../../assets/css/standard/cardticket.css',
+			'../../../assets/css/standard/utility.css',
+			'../../../assets/css/standard/layout.css',
+		]
 })
-
 
 export class HomeComponent implements OnInit {
 	private countImagesLoaded = 0;
-	S3_CONTEXT: string = ConstMaster.S3_ENDPOINT.url;
 	screenWidth: number;
 	screenType: string;
 	slideBannerImages: EventBanner[];
+	cardTicketSlide: CardTicket[];
+	cardTicketHot: CardTicket[];
+	cardTicketRec: CardTicket[];
+	cardTickets: CardTickets;
 
-	cardTicketsRecommend: CardTicket[] = [
-		{ performId: '18016', performName: 'EXO PLANET #4 - The ElyXiOn - in BANGKOK', performShowDate: '16 - 18', performShowMonth: 'MAR/2018', image_path: 'https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/content/18016/SMT18016160120181759ticketCard.jpg' },
-		{ performId: '18042', performName: 'What the Fest Music Festival', performShowDate: '16 - 17', performShowMonth: 'JUNE/2018', image_path: 'https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/content/18042/WTF18042110420181548ticketCard.jpg' },
-		{ performId: '18043', performName: 'NCT U (TAEYONGxTEN) FAN MEETING in BANGKOK', performShowDate: '3', performShowMonth: 'JUNE/2018', image_path: 'https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/content/18043/NCT18043120420181031ticketCard.jpg' },
-		{ performId: '17073', performName: 'Event 17073', performShowDate: '31 - 10', performShowMonth: 'Dec/2017', image_path: 'assets/images/bmmf.jpg' }
-	];
-
-	cardTicketsHot: CardTicket[] = [
-		{ performId: '17074', performName: 'Event 17074', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
-		{ performId: '17075', performName: 'Event 17075', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
-		{ performId: '17076', performName: 'Event 17076', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
-		{ performId: '17077', performName: 'Event 17077', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
-	];
-
-	cardShowAll: CardTicket[] = [
-		{ performId: '17074', performName: 'Event 17074', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
-		{ performId: '17075', performName: 'Event 17075', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
-		{ performId: '17076', performName: 'Event 17076', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
-		{ performId: '17077', performName: 'Event 17077', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
-		{ performId: '17078', performName: 'Event 17078', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
-		{ performId: '17079', performName: 'Event 17079', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
-		{ performId: '17080', performName: 'Event 17080', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
-	];
 	constructor(private router: Router, private homeService: HomeService) {
 		this.screenWidth = (window.innerWidth);
 	}
@@ -61,8 +42,18 @@ export class HomeComponent implements OnInit {
 		});
 
 		this.homeService.getEventBanner().subscribe(response => {
-			this.slideBannerImages = response['data'];
-			this.getScreenType();
+
+			if(response['success'] == true && response['code'] == 100) {
+				console.log(response)
+				this.slideBannerImages = response['data']['banner_']['items'];
+				this.cardTicketSlide = response['data']['all_']['items'];
+				this.cardTicketHot = response['data']['hot_']['items'];
+				this.cardTicketRec = response['data']['rec_']['items'];
+				this.cardTickets = {
+					rec: this.cardTicketRec,
+					hot: this.cardTicketHot
+				}
+			}
 		});
 
 		// window.onscroll = function (e) {
@@ -86,22 +77,6 @@ export class HomeComponent implements OnInit {
 		// 	}
 		// }
 
-
-
-
-	}
-
-	ngOnChanges() {
-
-	}
-
-	getScreenType() {
-		for (let breakpoint of ConstMaster.imageBreakpoint) {
-			if (this.screenWidth <= breakpoint.breakpoint) {
-				this.screenType = breakpoint.beakpointName + "/";
-				break;
-			}
-		}
 	}
 
 	private slideLoaded() {
@@ -142,18 +117,4 @@ export class HomeComponent implements OnInit {
 		}
 
 	}
-
-	goEventInfo(performId: string) {
-		console.log(performId);
-		this.router.navigate(['/event',performId]);
-	}
-
-}
-
-interface CardTicket {
-	performId: string;
-	performName: string;
-	performShowDate: string;
-	performShowMonth: string;
-	image_path: string;
 }

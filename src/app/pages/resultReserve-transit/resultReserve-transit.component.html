@@ -1,6 +1,5 @@
 <div class="container resultReserveWrapper">
   <h2 class="heading text-center is-size-4-mobile mt-4">RESERVE SUMMARY</h2>
-
   <div class="divider divider-center">
     <i class="fa fa-circle"></i>
   </div>
@@ -73,22 +72,6 @@
     </div>
   </div>
 
-  <!-- <div class="row mt-3">
-    <div class="col-12 col-md-5 mt-3">
-      <div data-payment-type="cash" class="paymentWrapper" [ngClass]="{ 'active': paymentMethodSelected == 1 }" (click)="choosePaymentMethod(1)">
-        <i class="fa fa-check-circle fa-2x"></i>
-        <img class="img-fluid" src="//s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/images/payment/cs711.png">
-      </div>
-    </div>
-  
-    <div class="col-12 col-md-7 mt-3">
-      <div data-payment-type="credit" class="paymentWrapper" [ngClass]="{ 'active': paymentMethodSelected == 2 }" (click)="choosePaymentMethod(2)">
-        <i class="fa fa-check-circle fa-2x"></i>
-        <img class="img-fluid" src="//s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/images/payment/creditIcon.png">
-      </div>
-    </div>
-  </div> -->
-
   <div class="row" id="display-credit-fee" *ngIf="creditFeeLabel != null && creditFeeLabel != '0'">
     <div class="col-sm-7 offset-sm-5">
       <div class="alert alert-primary mx-auto mt-3 text-center" role="alert">
@@ -138,52 +121,137 @@
   </div>
 
   <div class="row-wrapper py-3" id="order-info">
-    <div class="row">
-      <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Reserve ID</div>
-      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
-        <div class="text-desc"> {{ reserveId}} </div>
+
+    <ng-container *ngIf="performType == 'BUS'">
+      <div class="row">
+        <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Reserve ID</div>
+        <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+          <div class="text-desc"> {{ reserveId}} </div>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Flight Detail</div>
-      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
-        <div class="text-desc"> {{ transDetail }} </div>
+      <div class="row">
+        <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Flight Detail</div>
+        <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+          <div class="text-desc"> {{ transDetail }} </div>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Price (Baht)</div>
-      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
-        <div class="text-desc">{{ priceAmt| number : '1.2' }}</div>
+      <div class="row">
+        <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Price (Baht)</div>
+        <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+          <div class="text-desc">{{ priceAmt| number : '1.2' }}</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Service Fee</div>
+        <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+          <div class="text-desc"> {{csFee| number : '1.2'}} </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Convenience fee (Baht)</div>
+        <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+          <div class="text-desc"> {{creditFee| number : '1.2'}} </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Total Amount (Baht)</div>
+        <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+          <div class="text-desc"> {{ endPrice| number : '1.2' }}</div>
+        </div>
+      </div>
+
+      <div class="row mt-4 d-none" id="paymentTimeOutDesc">
+        <div class="col-12">
+          Please process payment at Counter Service (7-Eleven Shop) within {{ showExpireTimeEn }}
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="performType == 'concert'">
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Event Name</div>
+          <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+            <div class="text-desc">What the Fest Music Festival</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Venue</div>
+          <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+            <div class="text-desc">Royal Paragon Hall 1,2,3 Siam Paragon Hall 5th Floor</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Reserve ID</div>
+          <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+            <div class="text-desc">Show Date : 16 - 17 Jun 2018</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Zone</div>
+          <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+            <div class="text-desc">PS</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Seat No</div>
+          <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+            <div class="text-desc">NONSEAT</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Reserve ID</div>
+          <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+            <div class="text-desc">810011804200014764</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Unit Price (Baht)</div>
+          <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+            <div class="text-desc">2,500</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Discount</div>
+          <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+            <div class="text-desc">0</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Service Fee (20 Baht per ticket)</div>
+          <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+            <div class="text-desc">40</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Counter Service Fee (Baht)</div>
+          <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+            <div class="text-desc">0</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Total Amount (Baht)</div>
+          <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+            <div class="text-desc">5,040</div>
+          </div>
+        </div>
+    </ng-container>
+
+    <div class="row mt-4">
+      <div class="col-12 d-flex justify-content-center">
+        <div class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+          <input class="custom-control-input" id="acceptConditions" type="checkbox">
+          <label class="custom-control-label" for="acceptConditions">
+            <span>Please clicking you agree to the <span class="text-primary cursor-pointer" (click)="openModal(termCondition)"> “Terms and Conditions” </span> set forth by Counter Service Co., Ltd.</span>
+          </label>
+        </div>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Service Fee</div>
-      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
-        <div class="text-desc"> {{csFee| number : '1.2'}} </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Convenience fee (Baht)</div>
-      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
-        <div class="text-desc"> {{creditFee| number : '1.2'}} </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Total Amount (Baht)</div>
-      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
-        <div class="text-desc"> {{ endPrice| number : '1.2' }}</div>
-      </div>
-    </div>
-
-    <div class="row mt-4 d-none" id="paymentTimeOutDesc">
-      <div class="col-12">
-        Please process payment at Counter Service (7-Eleven Shop) within {{ showExpireTimeEn }}
-      </div>
-    </div>
   </div>
+
   <div class="row-wrapper mt-4" id="term-condition">
-    <div class="row border-bottom">
+    <!-- <div class="row border-bottom">
       <div class="col-12">
         <div class="sub-heading with-icon">
           <i class="fa fa-handshake-o fa-2x fa-fw" aria-hidden="true"></i>
@@ -214,9 +282,10 @@
           </label>
         </div>
       </div>
-    </div>
-    <div class="row ">
-      <div class="form-group col-12 buttonWrapper ">
+    </div> -->
+    
+    <div class="row">
+      <div class="form-group col-12 text-center">
         <button class="btn btn-atk-danger" id="btnResultBack">Back</button>
         <button class="btn btn-atk-primary ml-2" id="payBtn">Payment</button>
       </div>
@@ -224,3 +293,24 @@
   </div>
 </div>
 <!-- </div> -->
+
+<ng-template #termCondition let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Term and condition</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <ul class="term-condition">
+        <li>To prevent order cancellation, please make payment by time shown on the payment form.</li>
+        <li>Tickets can be collected at Counter Service outlets.</li>
+        <li>All goods and Service are non-refundable.</li>
+        <li>Please retain the payment receipt for your reference.</li>
+        <li>In some case a convenience fee charge, when you payment by credit card.</li>
+      </ul>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-primary" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>

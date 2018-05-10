@@ -1,0 +1,75 @@
+<div class="container allevent">
+  <div class="eventtopic">
+    <div class="container">
+      <div class="row ticket-recommend">
+        <div class="col-12 px-0">
+          <span class="text-primary border-ticket-title">
+            <img src="./assets/images/icon_ticket_recommend.png" />
+          </span>
+        </div>
+      </div>
+      <div class="row cpt20">
+        <div class="col-12 col-sm-6 col-lg-3 card align-items-center align-items-lg-stretch cardwrapper" *ngFor="let cardTicket of this.cardTickets.rec;">
+          <div class="cardbox" (click)="goEventInfo(cardTicket.id)" ev-id="" skip-info="N">
+            <a>
+              <div class="card-overlay" [title]="cardTicket.name">
+                <img src="https://atkmedia.allticket.com/assets/images/cursor.png">
+              </div>
+            </a>
+            <img class="card-img-top img-fluid" [src]="cardTicket.performCardPic" [alt]="cardTicket.name">
+            <div class="card-buyTicket">
+              <a href="#">
+                <i class="fa fa-shopping-cart fa-fw pr-2" aria-hidden="true"></i>
+                <span>BUY TICKET</span>
+              </a>
+            </div>
+            <div class="row cardfooter">
+              <div class="col-5 align-self-center eventDate px-1">
+                <div class="text-dark text-overflow" [innerHTML]="cardTicket.performCardShowDate | safeHtml"></div>
+              </div>
+              <div class="col-7 align-self-center eventName px-1">
+                <div class="my-1 text-overflow">{{cardTicket.performCardName}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="eventtopic">
+    <div class="container">
+      <div class="row ticket-recommend">
+        <div class="col-12 px-0">
+          <span class="text-danger border-ticket-title">
+            <img src="./assets/images/icon_ticket_hot.png" />
+          </span>
+        </div>
+      </div>
+      <div class="row cpt20">
+        <div class="col-12 col-sm-6 col-lg-3 card align-items-center align-items-lg-stretch cardwrapper" *ngFor="let cardTicket of this.cardTickets.hot;">
+          <div class="cardbox" (click)="goEventInfo(cardTicket.id)" ev-id="EV_18016" skip-info="N">
+            <div class="card-overlay" [title]="cardTicket.name">
+              <img src="https://atkmedia.allticket.com/assets/images/cursor.png">
+            </div>
+            <img class="card-img-top imgResponsive" [src]="cardTicket.performCardPic"
+              [alt]="cardTicket.name">
+            <div class="card-buyTicket soldout">
+              <a href="#">
+                <i class="fa fa-ban" aria-hidden="true"></i>
+                <span>SOLD OUT</span>
+              </a>
+            </div>
+            <div class="row cardfooter">
+              <div class="col-5 align-self-center eventDate px-1">
+                <div class="text-dark text-overflow" [innerHTML]="cardTicket.performCardShowDate | safeHtml"></div>
+              </div>
+              <div class="col-7 align-self-center eventName text-overflow px-1">
+                <div class="my-1 text-overflow">{{cardTicket.performCardName}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -77,6 +77,7 @@ import { PushNotificationModule } from 'ng-push-notification';
 
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { CardTicketComponent } from './pages/home/card-ticket/card-ticket.component';
 
 
 const config = new AuthServiceConfig([
@@ -138,6 +139,7 @@ export function provideConfig() {
     EducationComponent,
     DiscountComponent,
     DiscountDetailComponent,
+    CardTicketComponent,
   ],
   imports: [
     NgbModule.forRoot(),

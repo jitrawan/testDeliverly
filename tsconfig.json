@@ -24,8 +24,5 @@
     "src/main.ts",
     "src/polyfills.ts",
     "src/app/window.parent.d.ts"
-  ],
-  "exclude": [
-    // ...
-  ],
+  ]
 }

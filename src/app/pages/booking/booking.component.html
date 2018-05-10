@@ -88,7 +88,7 @@
     </div>
   </div>
 
-  <div class="nonSeatSelector mt-3" #nonSeatSelector>
+  <div class="nonSeatSelector mt-3 d-block" #nonSeatSelector>
     
     <h4 class="text-center">Tickets for {{displayDate}}</h4>
     <div class="zone-detail">
@@ -96,24 +96,25 @@
         <div class="col-12 col-md-5 offset-md-1 col-lg-5 align-self-md-center">
           Early Bird 1 (Day)
         </div>
-        <div class="col-5 col-md-2 col-lg-3 text-right align-self-center">
+        <div class="col-5 col-md-2 col-lg-2 text-right align-self-center mt-2 mt-md-0">
           1,500 ฿
         </div>
-        <div class="col-7 col-md-3 col-lg-2 text-right text-md-left">
-          <i class="fa fa-times pr-1"></i>
-          <select class="form-control d-inline">
-            <option selected>0</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>50</option>
-          </select>
+        <div class="col-7 col-md-3 col-lg-3 d-flex align-items-center justify-content-end justify-content-md-start mt-2 mt-md-0">
+          <i class="fa fa-times pr-1 d-none d-md-inline-block"></i>
+          <div class="plusAndMinus ml-md-3">
+            <div class="sign minus" (click)="qtyBtnHandler('1','minus')">
+              <i class="fa fa-minus" aria-hidden="true"></i>
+            </div>
+            <input type="number" data-input-seq="1" min="0" max="100" value="0"/>
+            <div class="sign plus" (click)="qtyBtnHandler('1','plus')">
+              <i class="fa fa-plus"></i>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="row zone-desc">
+      <div class="row zone-desc mt-2">
         <div class="col-12 col-md-10 offset-md-1">
-          <p>small description</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
         </div>
       </div>
     </div>
@@ -123,19 +124,20 @@
         <div class="col-12 col-md-5 offset-md-1 col-lg-5 align-self-md-center">
           Early Bird 2 (Days)
         </div>
-        <div class="col-5 col-md-2 col-lg-3 text-right align-self-center">
+        <div class="col-5 col-md-2 col-lg-2 text-right align-self-center mt-2 mt-md-0">
           2,300 ฿
         </div>
-        <div class="col-7 col-md-3 col-lg-2 text-right text-md-left">
-          <i class="fa fa-times pr-1"></i>
-          <select class="form-control d-inline">
-            <option selected>0</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
+        <div class="col-7 col-md-3 col-lg-3 d-flex align-items-center justify-content-end justify-content-md-start mt-2 mt-md-0">
+          <i class="fa fa-times pr-1 d-none d-md-inline-block"></i>
+          <div class="plusAndMinus ml-md-3">
+            <div class="sign minus" (click)="qtyBtnHandler('2','minus')">
+              <i class="fa fa-minus" aria-hidden="true"></i>
+            </div>
+            <input type="number" data-input-seq="2" min="0" max="100" value="0"/>
+            <div class="sign plus" (click)="qtyBtnHandler('2','plus')">
+              <i class="fa fa-plus"></i>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -145,22 +147,23 @@
         <div class="col-12 col-md-5 offset-md-1 col-lg-5 align-self-md-center">
           VIP Access (2 Days Access)
         </div>
-        <div class="col-5 col-md-2 col-lg-3 text-right align-self-center">
+        <div class="col-5 col-md-2 col-lg-2 text-right align-self-center mt-2 mt-md-0">
           6,000 ฿
         </div>
-        <div class="col-7 col-md-3 col-lg-2 text-right text-md-left">
-          <i class="fa fa-times pr-1"></i>
-          <select class="form-control d-inline">
-            <option selected>0</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
+        <div class="col-7 col-md-3 col-lg-3 d-flex align-items-center justify-content-end justify-content-md-start mt-2 mt-md-0">
+          <i class="fa fa-times pr-1 d-none d-md-inline-block"></i>
+          <div class="plusAndMinus ml-md-3">
+            <div class="sign minus" (click)="qtyBtnHandler('3','minus')">
+              <i class="fa fa-minus" aria-hidden="true"></i>
+            </div>
+            <input type="number" data-input-seq="3" min="0" max="100" value="0"/>
+            <div class="sign plus" (click)="qtyBtnHandler('3','plus')">
+              <i class="fa fa-plus"></i>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="row zone-desc">
+      <div class="row zone-desc mt-2">
         <div class="col-12 col-sm-10 offset-sm-1">
           <p>
             - VIP Wrist Brand<br>
@@ -170,13 +173,13 @@
       </div>
     </div>
   </div>
-  <div class="text-right">
-    <button class="btn btn-atk-danger mt-3 buttonSize" type="button" (click)=" goEventInfo()">
+  <div class="text-center">
+    <button class="btn btn-atk-danger mt-3" type="button" (click)=" goEventInfo()">
       <span>
         BACK
       </span>
     </button>
-    <button class="btn btn-atk-primary mt-3 buttonSize" type="button" (click)=" goDiscountList()">
+    <button class="btn btn-atk-primary mt-3" type="button" (click)=" goDiscountList()">
       <span>
         BOOKING
       </span>

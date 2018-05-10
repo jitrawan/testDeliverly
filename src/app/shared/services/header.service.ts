@@ -9,7 +9,7 @@ export class HeaderService {
 
   constructor(private http: HttpClient) { }
 
-  private headerUrl = ConstMaster.header.jsonFileEndPoints;
+  private headerUrl = ConstMaster.HEADER_API.endpoint;
 
   getHeaderMenu(): Observable<HeaderModel> {
     return this.http.get<HeaderModel>(this.headerUrl);

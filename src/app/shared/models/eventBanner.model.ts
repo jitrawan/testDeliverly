@@ -1,6 +1,4 @@
 export interface EventBanner {
-	performId: string;
-	performName?: string;
-	pathLocation: string;
+	id: string;
 	imageName: string;
 }

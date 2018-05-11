@@ -14,12 +14,26 @@ export class HomeService {
   
   constructor(private http: HttpClient) { }
 
-  private eventBannerUrl = ConstMaster.HOME_API.endpoint;
+  private homeDataUrl = ConstMaster.HOME_API.endpoint;
+  private eventCardUrl = ConstMaster.EVENT_CARD_API.endpoint;
   
-  getEventBanner(): Observable<EventBanner> {
-    return this.http.post<EventBanner>(this.eventBannerUrl,httpOptions);
+  
+  fetchHomeData(): Observable<any> {
+    return this.http.post<any>(this.homeDataUrl,httpOptions);
   }
 
+  getEventCardByType(type: string): Observable<any> {
+
+    if(type == null) {
+      return this.http.post<any>(this.eventCardUrl,httpOptions);
+    } else {
+      let param = {
+        groupKey : type
+      }
+      return this.http.post<any>(this.eventCardUrl,param,httpOptions);
+    }
+    
+  }
   getEventInfo(performId: string) {
     return this.http.get<EventInfo>('https://s3-ap-southeast-1.amazonaws.com/static-file-demo/json/event_info/'+performId+'.json');
   }

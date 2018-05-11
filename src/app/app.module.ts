@@ -59,6 +59,7 @@ import { PushNotificationModule } from 'ng-push-notification';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { CardTicketComponent } from './pages/home/card-ticket/card-ticket.component';
+import { ShowEventComponent } from './pages/home/show-event/show-event.component';
 
 // Import module
 import { SharedModule } from './shared.module';
@@ -106,6 +107,7 @@ export function provideConfig() {
     DiscountComponent,
     DiscountDetailComponent,
     CardTicketComponent,
+    ShowEventComponent
   ],
   imports: [
     NgbModule.forRoot(),

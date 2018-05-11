@@ -9,5 +9,6 @@ export const environment = {
   apiGateway: 'https://ad5xsmjzzj.execute-api.ap-southeast-1.amazonaws.com/v1/',
   apiGatewayRegister: 'https://26ieslrird.execute-api.ap-southeast-1.amazonaws.com/latest/register',
   apiGatewayHomePage: 'https://26ieslrird.execute-api.ap-southeast-1.amazonaws.com/latest/homepage',
+  apiGatewayAllEvent: 'https://26ieslrird.execute-api.ap-southeast-1.amazonaws.com/latest/all-event',
   apiGatewayHeader: '//s3-ap-southeast-1.amazonaws.com/atkfullsite/config/HeaderMenu.json',
 };

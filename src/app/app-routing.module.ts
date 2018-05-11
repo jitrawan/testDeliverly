@@ -19,14 +19,16 @@ import { SeminarComponent } from './pages/eventTickets/seminar/seminar.component
 import { EducationComponent } from './pages/eventTickets/education/education.component';
 import { DiscountComponent } from './pages/discount/discount.component';
 import { DiscountDetailComponent } from './pages/discount-detail/discount-detail.component';
+import { ShowEventComponent } from './pages/home/show-event/show-event.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: '', component: HomeComponent },
   { path: 'booking', loadChildren: './booking/booking.module#BookingModule' },
   { path: 'bus', loadChildren: './bus/bus.module#BusModule' },
-
   { path: 'home', component: HomeComponent },
+  { path: 'genre', component: ShowEventComponent },
+  { path: 'genre/:genre', component: ShowEventComponent },
   { path: 'policy', component: PolicyComponent },
   { path: 'faq', component: FaqComponent },
   { path: 'faq/:howto', component: FaqComponent },

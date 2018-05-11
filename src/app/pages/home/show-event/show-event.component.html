@@ -1,0 +1,18 @@
+<div class="container mt-4" *ngIf="cardTickets else notFound">
+  <div class="card-ticket px-4">
+    <div class="row">
+      <div class="col-md-12 iconTopic">
+        <span class="displayGenre">{{displayGenre}}
+          <img src="https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/images/{{genre}}.png">
+        </span>
+      </div>
+    </div>
+    <card-ticket [cardData]="cardTickets"></card-ticket>
+  </div>
+</div>
+
+<ng-template #notFound>
+  <div class="container mt-4">
+    <img src="http://atkmedia.allticket.com/assets/images/allticket-comming-soon-btn.png">
+  </div>
+</ng-template>

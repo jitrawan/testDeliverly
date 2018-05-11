@@ -3,18 +3,18 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DatePipe, Location } from '@angular/common';
 
 /* ---------------------------------- services -------------------*/
-import { BusService } from '../../../../shared/services/bus.service';
-import { ErrorMsgService } from '../../../../shared/services/errorMsg.service';
-import { SharedService } from '../../../../shared/services/shared-service.service';
+import { BusService } from '../../shared/services/bus.service';
+import { ErrorMsgService } from '../../shared/services/errorMsg.service';
+import { SharedService } from '../../shared/services/shared-service.service';
 import { AlertsService } from '@jaspero/ng2-alerts';
 
 /* ---------------------------------- models -------------------*/
-import { AvailableTripResultModel } from '../../../../shared/models/bus/availableTripResult.model';
-import { AvailableTripModel } from '../../../../shared/models/bus/availableTripSearch.model';
-import { BusLayoutModel } from '../../../.././shared/models/bus/busLayout.model';
-import { TripModel } from '../../../.././shared/models/bus/trip.model';
-import { ErrorMessage } from '../../../../shared/constant/error-message';
-import { Constant } from '../../../../shared/constant/constant';
+import { AvailableTripResultModel } from '../../shared/models/bus/availableTripResult.model';
+import { AvailableTripModel } from '../../shared/models/bus/availableTripSearch.model';
+import { BusLayoutModel } from '../.././shared/models/bus/busLayout.model';
+import { TripModel } from '../.././shared/models/bus/trip.model';
+import { ErrorMessage } from '../../shared/constant/error-message';
+import { Constant } from '../../shared/constant/constant';
 import { log } from 'util';
 
 import { BuyTicketComponent } from '../buy-ticket/buy-ticket.component';

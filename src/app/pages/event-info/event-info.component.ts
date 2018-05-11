@@ -107,7 +107,7 @@ export class EventInfoComponent implements OnInit {
 
   buyTicket(performId: string) {
     this.sharedService.sendData(this.performId);
-    this.router.navigate(['/booking']);
+    this.router.navigate(['/booking/get-seat']);
   }
   adjustStickyHeader(){    
     // document.getElementById('headerSticky').style.width = document.getElementById('container-fluid').offsetWidth+'';	

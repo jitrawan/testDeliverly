@@ -12,7 +12,7 @@ import { Constant } from '../../shared/constant/constant';
 import { AlertsService } from '@jaspero/ng2-alerts';
 import { ErrorMsgService } from './errorMsg.service';
 
-import { BuyTicketComponent } from '../../pages/eventTickets/bus/buy-ticket/buy-ticket.component';
+import { BuyTicketComponent } from '../../bus/buy-ticket/buy-ticket.component';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';

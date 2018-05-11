@@ -86,7 +86,7 @@
 }
 
 .male {
-  content: url("../../../../../assets/images/male.png");
+  content: url("../../../assets/images/male.png");
   width: 100%;
   height: auto;
 }

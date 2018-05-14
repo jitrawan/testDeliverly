@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
 	screenWidth: number;
 	screenType: string;
 	slideBannerImages: EventBanner[];
-	cardTicketSlide: CardTicket[];
+	cardTicketSlide: CardTicket[] = [];
 	cardTicketHot: CardTicket[];
 	cardTicketRec: CardTicket[];
 	cardTickets: CardTickets;

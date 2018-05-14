@@ -5,13 +5,12 @@
     </div>
     <div class="owl-carousel">
       <div class="item cursor-pointer" *ngFor="let image of slideBannerImages; index as i;" (click)="goToEventInfo(image.id)">
-        <img [src]="image.imageName" (load)="slideLoaded()" />
-        <!-- <img [src]="test()" (load)="slideLoaded()" /> -->
+        <img [src]="image.value" (load)="slideLoaded()"/>
       </div>
     </div>
   </section>
 
-  <section id="card-ticket" class="mt-2" *ngIf="cardTickets">
+   <section id="card-ticket" class="mt-2" *ngIf="cardTickets">
     <div class="container">
       <div class="card-ticket px-4">
         <div class="row ticket-recommend">
@@ -36,18 +35,18 @@
       </div>
     </div>
   </section>
-
-  <section class="mt-4 p-3" id="sliderCard">
+  <section class="mt-4 p-3" id="sliderCard" [ngClass]="{ 'show' : countCardImageLoaded == cardTicketSlide.length }">
+    <div class="preload-slide" [ngClass]="{ 'show' : countCardImageLoaded != cardTicketSlide.length }">
+      <div class="is-loading" style="color:#077eff"></div>
+    </div>
     <div class="container">
       <div class="row">
         <div class="owl-carousel">
           <div class="col cardwrapper" *ngFor="let cardTicket of cardTicketSlide;">
-            <div class="cardbox mx-auto">
-              <a href="#">
-                <div class="card-overlay" [title]="cardTicket.name">
-                  <img src="https://atkmedia.allticket.com/assets/images/cursor.png">
-                </div>
-              </a>
+            <div class="cardbox mx-auto" (click)="goToEventInfo(cardTicket.id)">
+              <div class="card-overlay" [title]="cardTicket.name">
+                <img src="https://atkmedia.allticket.com/assets/images/cursor.png">
+              </div>
               <img class="card-img-top img-fluid" [src]="cardTicket.performCardPic" (load)="slideCardLoaded()" (error)="cardTicket.performCardPic = placeHolderImg"
               [alt]="cardTicket.name">
               <ng-template [ngIf]="cardTicket.isPromo == true" [ngIfElse]="isPromo">
@@ -91,5 +90,5 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> 
 </main>

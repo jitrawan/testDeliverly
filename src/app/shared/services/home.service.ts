@@ -23,15 +23,10 @@ export class HomeService {
   }
 
   getEventCardByType(type: string): Observable<any> {
-
-    if(type == null) {
-      return this.http.post<any>(this.eventCardUrl,httpOptions);
-    } else {
-      let param = {
-        groupKey : type
-      }
-      return this.http.post<any>(this.eventCardUrl,param,httpOptions);
+    if(type == null || type == undefined) {
+      type = '';
     }
+    return this.http.post<any>(this.eventCardUrl,{ groupKey : type },httpOptions);
     
   }
   getEventInfo(performId: string) {

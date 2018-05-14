@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { EventInfoComponent } from './pages/event-info/event-info.component';
-import { BookingComponent } from './pages/booking/booking.component';
 import { PolicyComponent } from './pages/policy/policy.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { ResultReserveTransitComponent } from './pages/resultReserve-transit/resultReserve-transit.component';
@@ -27,8 +26,8 @@ const routes: Routes = [
   { path: 'booking', loadChildren: './booking/booking.module#BookingModule' },
   { path: 'bus', loadChildren: './bus/bus.module#BusModule' },
   { path: 'home', component: HomeComponent },
-  { path: 'genre', component: ShowEventComponent },
-  { path: 'genre/:genre', component: ShowEventComponent },
+  { path: 'category', component: ShowEventComponent },
+  { path: 'category/:category', component: ShowEventComponent },
   { path: 'policy', component: PolicyComponent },
   { path: 'faq', component: FaqComponent },
   { path: 'faq/:howto', component: FaqComponent },

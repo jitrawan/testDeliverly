@@ -15,5 +15,6 @@ export const ConstMaster = {
         banner: environment.bucketS3+'/assets/images/placeholder/place-holder-1440x480.jpg.jpg',
         ticketCard: environment.bucketS3+'/assets/images/placeholder/place-holder-410x600.jpg',
         eventLogo: environment.bucketS3+'/assets/images/placeholder/place-holder-650x450.jpg'
-    }
+    },
+    S3_PATH: environment.bucketS3
 };

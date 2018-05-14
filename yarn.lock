@@ -388,10 +388,6 @@ angular-sweetalert-service@^2.0.2:
     object-assign "^4.1.1"
     sweetalert2 "^6.6.1"
 
-angular5-social-login@^1.0.9:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/angular5-social-login/-/angular5-social-login-1.0.9.tgz#6e4808da883da273c52618decca8c2274158fabf"
-
 angularx-social-login@^1.1.8:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/angularx-social-login/-/angularx-social-login-1.1.8.tgz#169828be47a68bd8a2e84519d57d44bdaf38d866"

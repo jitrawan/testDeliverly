@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { CardTickets } from '../../../shared/models/cardTickets';
+import { ConstMaster } from '../../../shared/config/ConstMaster';
 
 @Component({
 	selector: 'card-ticket',
@@ -14,7 +15,7 @@ export class CardTicketComponent implements OnInit {
 
 	@Input() cardData;
 	cardTickets: CardTicket;
-	placeHolderImg: string = "https://atkmedia.allticket.com/assets/images/placeholder/place-holder-410x600.jpg";
+	placeHolderImg: string = ConstMaster.DEFAULT_IMAGES.ticketCard;
 	
 	constructor(private router: Router) { }
 

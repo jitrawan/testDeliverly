@@ -24,7 +24,7 @@
         <card-ticket [cardData]="cardTickets.rec"></card-ticket>
       </div>
 
-      <div class="card-ticket px-4">
+      <div class="card-ticket px-4" *ngIf="cardTickets.hot.length > 0">
         <div class="row ticket-recommend">
           <div class="col-12 px-0">
             <span class="text-danger border-ticket-title">
@@ -48,7 +48,8 @@
                   <img src="https://atkmedia.allticket.com/assets/images/cursor.png">
                 </div>
               </a>
-              <img class="card-img-top img-fluid" [src]="cardTicket.performCardPic" [alt]="cardTicket.name">
+              <img class="card-img-top img-fluid" [src]="cardTicket.performCardPic" (load)="slideCardLoaded()" (error)="cardTicket.performCardPic = placeHolderImg"
+              [alt]="cardTicket.name">
               <ng-template [ngIf]="cardTicket.isPromo == true" [ngIfElse]="isPromo">
                   <div class="card-buyTicket commingsoon">
                     <a href="#">
@@ -82,7 +83,7 @@
                   <div class="text-dark text-overflow-ellipsis" [innerHTML]="cardTicket.performCardShowDate | safeHtml"></div>
                 </div>
                 <div class="col-7 align-self-center eventName px-1">
-                  <div class="my-1 text-overflow">{{cardTicket.performCardName}}</div>
+                  <div class="my-1 text-overflow" [innerHtml]="cardTicket.performCardName == '' ? cardTicket.name : cardTicket.performCardName"></div>
                 </div>
               </div>
             </div>

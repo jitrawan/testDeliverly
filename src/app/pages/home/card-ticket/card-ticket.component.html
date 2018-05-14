@@ -43,7 +43,7 @@
           <div class="text-dark text-overflow" [innerHTML]="cardTicket.performCardShowDate | safeHtml"></div>
         </div>
         <div class="col-7 align-self-center eventName px-1">
-          <div class="my-1 text-overflow">{{cardTicket.performCardName}}</div>
+          <div class="my-1 text-overflow" [innerHtml]="cardTicket.performCardName == '' ? cardTicket.name : cardTicket.performCardName"></div>
         </div>
       </div>
     </div>

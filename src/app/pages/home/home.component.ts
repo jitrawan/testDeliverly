@@ -22,8 +22,8 @@ declare var $: any;
 
 export class HomeComponent implements OnInit {
 	@ViewChild(CardTicketComponent) cardTicketComponent : CardTicketComponent;
-	private countImagesLoaded = 0;
-	private countCardImageLoaded = 0;
+	countImagesLoaded = 0;
+	countCardImageLoaded = 0;
 	screenWidth: number;
 	screenType: string;
 	slideBannerImages: EventBanner[];

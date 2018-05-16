@@ -76,7 +76,7 @@ a:focus {
   justify-content: center;
   min-height: 460px;
   height: 1rem;
-  background-color: #f3f3f3;
+  background-color: transparent;
 }
 
 #sliderCard .preload-slide.show {

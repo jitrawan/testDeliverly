@@ -15,4 +15,5 @@ export interface CardTicket {
     performStatusDesc: string;
     performType: string;
     skipInfo: string;
+    performUri: string;
 }

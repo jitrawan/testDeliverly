@@ -43,7 +43,7 @@ const routes: Routes = [
   { path: 'education', component: EducationComponent },
   { path: 'discount', component: DiscountComponent },
   { path: 'discount-detail', component: DiscountDetailComponent },
-  { path: 'event/:performId', component: EventInfoComponent }
+  { path: 'event/:performUri', component: EventInfoComponent }
 ];
 
 @NgModule({

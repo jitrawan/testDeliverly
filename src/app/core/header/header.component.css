@@ -14,8 +14,9 @@ body {
 }
 
 #header.sticky {
-  z-index: 2;
   position: fixed;
+  top: 0;
+  z-index: 2;
 }
 
 #header.sticky .header-logo,

@@ -4,7 +4,7 @@
       <div class="is-loading text-danger"></div>
     </div>
     <div class="owl-carousel">
-      <div class="item cursor-pointer" *ngFor="let image of slideBannerImages; index as i;" (click)="goToEventInfo(image.id)">
+      <div class="item cursor-pointer" *ngFor="let image of slideBannerImages; index as i;" (click)="goToEventInfo(image.performUri)">
         <img [src]="image.value" (load)="slideLoaded()"/>
       </div>
     </div>
@@ -12,7 +12,7 @@
 
    <section id="card-ticket" class="mt-2" *ngIf="cardTickets">
     <div class="container">
-      <div class="card-ticket px-4">
+      <div class="card-ticket px-4" *ngIf="cardTickets.rec.length > 0">
         <div class="row ticket-recommend">
           <div class="col-12 px-0">
             <span class="text-primary border-ticket-title">
@@ -78,11 +78,15 @@
                 </div>
               </ng-template>
               <div class="row cardfooter">
-                <div class="col-5 align-self-center eventDate is-size-6 p-1">
-                  <div class="text-dark text-overflow-ellipsis" [innerHTML]="cardTicket.performCardShowDate | safeHtml"></div>
+                <div class="col-5 p-1">
+                  <div class="splitWrapper eventDate is-size-6">
+                    <div class="text-dark text-overflow-ellipsis" [innerHTML]="cardTicket.performCardShowDate | safeHtml"></div>
+                  </div>
                 </div>
-                <div class="col-7 align-self-center eventName px-1">
-                  <div class="my-1 text-overflow" [innerHtml]="cardTicket.performCardName == '' ? cardTicket.name : cardTicket.performCardName"></div>
+                <div class="col-7 px-1">
+                  <div class="splitWrapper eventName">
+                    <div class="my-1 text-overflow" [innerHtml]="cardTicket.performCardName == '' ? cardTicket.name : cardTicket.performCardName"></div>
+                  </div>
                 </div>
               </div>
             </div>

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HomeService } from '../../../shared/services/home.service';
 import { CardTicket } from '../../../shared/models/cardTickets';
 import { ConstMaster } from '../../../shared/config/ConstMaster';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-show-event',
@@ -21,6 +22,7 @@ export class ShowEventComponent implements OnInit {
   cardTickets: CardTicket[];
   isLoading: boolean = true;
   categoryImagePath: string;
+  subscription: Subscription;
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -29,12 +31,20 @@ export class ShowEventComponent implements OnInit {
     });
   }
 
+  ngOnDestroy() {
+		this.subscription.unsubscribe();
+  }
+  
   reInitiateComponent(){
     this.isLoading = true;
     this.cardTickets = undefined;
     this.displayCategory = undefined;
+    
+    if(this.subscription != undefined) {
+      this.subscription.unsubscribe();
+    }
 
-    this.service.getEventCardByType(this.category).subscribe(response => {
+    this.subscription = this.service.getEventCardByType(this.category).subscribe(response => {
       if(response['success'] == true && response['code'] == 100) {
         
         if(Object.keys(response['data']).length > 0 && response['data']['event']['items'].length > 0) {

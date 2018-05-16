@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { CardTickets } from '../../../shared/models/cardTickets';
 import { ConstMaster } from '../../../shared/config/ConstMaster';
+import { CardTicket } from '../../../shared/models/cardTickets';
 
 @Component({
 	selector: 'card-ticket',
@@ -23,16 +24,12 @@ export class CardTicketComponent implements OnInit {
 		this.cardTickets = this.cardData;
 	}
 
-	goToEventInfo(performId: string) {
-		this.router.navigate(['/event', performId]);
+	goToEventInfo(performUri: string, performId?: string) {
+		console.log(performUri)
+		console.log(performId)
+		if(performUri != undefined && performUri != '') {
+			this.router.navigate(['/event', performUri]);
+		}
 	}
 
-}
-
-interface CardTicket {
-	performId: string;
-	performName: string;
-	performShowDate: string;
-	performShowMonth: string;
-	image_path: string;
 }

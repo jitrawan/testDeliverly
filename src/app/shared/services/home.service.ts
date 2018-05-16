@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable , isDevMode } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { ConstMaster } from '../config/ConstMaster';
@@ -19,7 +19,13 @@ export class HomeService {
   
   
   fetchHomeData(): Observable<any> {
-    return this.http.post<any>(this.homeDataUrl,httpOptions);
+    let useCache = true;
+    if(isDevMode()) {
+      useCache = false;
+    }
+
+    return this.http.post<any>(this.homeDataUrl,{ cached : useCache },httpOptions);
+    
   }
 
   getEventCardByType(type: string): Observable<any> {

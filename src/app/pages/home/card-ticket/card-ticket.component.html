@@ -1,6 +1,6 @@
 <div class="row pt-3">
   <div class="col-12 col-sm-6 col-lg-3 card align-items-center align-items-lg-stretch cardwrapper" *ngFor="let cardTicket of this.cardTickets;">
-    <div class="cardbox" (click)="goToEventInfo(cardTicket.id)" ev-id="" skip-info="N">
+    <div class="cardbox" (click)="goToEventInfo(cardTicket.performUri,cardTicket.id)">
       <a>
         <div class="card-overlay" [title]="cardTicket.name">
           <img src="https://atkmedia.allticket.com/assets/images/cursor.png">
@@ -39,11 +39,15 @@
       </ng-template>
 
       <div class="row cardfooter">
-        <div class="col-5 align-self-center eventDate px-1">
-          <div class="text-dark text-overflow" [innerHTML]="cardTicket.performCardShowDate | safeHtml"></div>
+        <div class="col-5 p-1" *ngIf="cardTicket.performCardShowDate != undefined" [ngClass]="{ 'full-column' : cardTicket.performCardName == undefined }">
+          <div class="splitWrapper eventDate is-size-6">
+            <div class="text-dark text-overflow-ellipsis" [innerHTML]="cardTicket.performCardShowDate | safeHtml"></div>
+          </div>
         </div>
-        <div class="col-7 align-self-center eventName px-1">
-          <div class="my-1 text-overflow" [innerHtml]="cardTicket.performCardName == '' ? cardTicket.name : cardTicket.performCardName"></div>
+        <div class="col-7 px-1" *ngIf="cardTicket.performCardName != undefined" [ngClass]="{ 'full-column' : cardTicket.performCardShowDate == undefined }">
+          <div class="splitWrapper eventName">
+            <div class="my-1 text-overflow" [innerHtml]="cardTicket.performCardName == '' ? cardTicket.name : cardTicket.performCardName"></div>
+          </div>
         </div>
       </div>
     </div>

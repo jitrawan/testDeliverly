@@ -3,18 +3,18 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
 import { AlertsService } from '@jaspero/ng2-alerts';
-import { BusService } from '../../../../shared/services/bus.service';
-import { SharedService } from '../../../../shared/services/shared-service.service';
-import { ErrorMsgService } from '../../../../shared/services/errorMsg.service';
+import { BusService } from '../../shared/services/bus.service';
+import { SharedService } from '../../shared/services/shared-service.service';
+import { ErrorMsgService } from '../../shared/services/errorMsg.service';
 
-import { ErrorMessage } from '../../../../shared/constant/error-message';
-import { Constant } from '../../../../shared/constant/constant';
-import { AvailableTripModel } from '../../../../shared/models/bus/availableTripSearch.model';
-import { AvailableTripResultModel } from '../../../../shared/models/bus/availableTripResult.model';
-import { ProvinceModel } from '../../../../shared/models/bus/province.model';
-import { ParkModel } from '../../../../shared/models/bus/park.model';
-import { RoutePrvParkMapModel } from '../../../../shared/models/bus/routePrvParkMap.model';
-import { ErrorCodeModel } from '../../../../shared/models/error/error.model';
+import { ErrorMessage } from '../../shared/constant/error-message';
+import { Constant } from '../../shared/constant/constant';
+import { AvailableTripModel } from '../../shared/models/bus/availableTripSearch.model';
+import { AvailableTripResultModel } from '../../shared/models/bus/availableTripResult.model';
+import { ProvinceModel } from '../../shared/models/bus/province.model';
+import { ParkModel } from '../../shared/models/bus/park.model';
+import { RoutePrvParkMapModel } from '../../shared/models/bus/routePrvParkMap.model';
+import { ErrorCodeModel } from '../../shared/models/error/error.model';
 
 @Component({
   selector: 'app-select-destination',

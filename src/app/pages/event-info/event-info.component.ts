@@ -38,7 +38,7 @@ export class EventInfoComponent implements OnInit {
   private idOld: any;  
   private info: any;  
   private elements: any;
-  private performPath: string;
+  private performUri: string;
   private performId: string;
   isLoading: boolean = true;
   eventInfo: EventInfo;
@@ -49,27 +49,12 @@ export class EventInfoComponent implements OnInit {
 
   ngOnInit() {
 
-    var eventIndex = [
-      { performId: "18042", pretty_path: "What-the-fest-2018" },
-      { performId: "18043", pretty_path: "NCT" },
-      { performId: "18043", pretty_path: "Another-nct" },
-      { performId: "18016", pretty_path: "EXO-2018" },
-    ];
-
     this.route.paramMap.subscribe(params => {
-      this.performPath = params.get('performId');
+      this.performUri = params.get('performUri');
     });
 
-    eventIndex.forEach(event => {
-      if(event.performId == this.performPath) {
-        this.performId = event.performId;  
-      } else if(event.pretty_path == this.performPath){
-        this.performId = event.performId;
-      }
-    });
-
-    if(this.performId != undefined && this.performId != '') {
-      this.homeService.getEventInfo(this.performId).subscribe(res => {
+    if(this.performUri != undefined && this.performUri != '') {
+      this.homeService.getEventInfo(this.performUri).subscribe(res => {
         this.eventInfo = res['data'];
         this.isLoading = false;
       }, error => {
@@ -107,7 +92,7 @@ export class EventInfoComponent implements OnInit {
 
   buyTicket(performId: string) {
     this.sharedService.sendData(this.performId);
-    this.router.navigate(['/booking']);
+    this.router.navigate(['/booking/get-seat']);
   }
   adjustStickyHeader(){    
     // document.getElementById('headerSticky').style.width = document.getElementById('container-fluid').offsetWidth+'';	

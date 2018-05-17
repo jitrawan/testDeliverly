@@ -23,9 +23,7 @@
     "node_modules/@jaspero/ng2-alerts",
     "src/main.ts",
     "src/polyfills.ts",
-    "src/app/window.parent.d.ts"
-  ],
-  "exclude": [
-    // ...
-  ],
+    "src/app/window.parent.d.ts",
+    "src/**/*"
+  ]
 }

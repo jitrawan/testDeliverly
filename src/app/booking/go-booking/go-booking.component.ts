@@ -7,12 +7,12 @@ declare function jMap(element): any;
 
 @Component({
     selector: 'app-booking',
-    templateUrl: './booking.component.html',
-    styleUrls: ['./booking.component.css',
+    templateUrl: './go-booking.component.html',
+    styleUrls: ['./go-booking.component.css',
         '../../../assets/css/standard/layout.css',
         '../../../assets/css/standard/utility.css',]
 })
-export class BookingComponent implements OnInit {
+export class GoBookingComponent implements OnInit {
     event: any;
     @Input() data: any;
     @Input() test: any;
@@ -108,6 +108,27 @@ export class BookingComponent implements OnInit {
                 ]
             }
         }
+        this.event = {
+            "onlyNonSeat" : "Y",
+            "event_calendar" : [
+                {
+                    "title": "Event",
+                    "start": "2018-05-04",
+                    "round": "R1"
+                },
+                {
+                    "title": "Event",
+                    "start": "2018-05-05",
+                    "round": "R2"
+                },
+                {
+                    "title": "Event",
+                    "start": "2018-05-06",
+                    "round": "R3"
+                }
+            ]
+        }
+        
     }
 
     scrollTo(target) {
@@ -181,7 +202,8 @@ export class BookingComponent implements OnInit {
 
     goDiscountList() {
         console.log("Choose Seat : " + JSON.stringify(this.listSeat));
-        this.router.navigate(['/discount']);
+        // this.router.navigate(['/discount']);
+        this.router.navigate(['/resultReserve']);
     }
 
     goEventInfo() {
@@ -210,5 +232,21 @@ export class BookingComponent implements OnInit {
             this.renderer.removeClass(_element.nativeElement, _toggleClass);
         }
         
+    }
+
+    qtyBtnHandler(searchKey: string,triggerType: string){
+        
+        let _el = document.querySelectorAll('[data-input-seq="'+searchKey+'"]') as any;
+        let otherFields = document.querySelectorAll('[data-input-seq]');
+        let value = parseFloat(_el[0].value);
+        if(triggerType == 'plus') {
+            value += 1;
+        } else {
+            if(value > 0) {
+                value -= 1;
+            }
+        }
+
+        _el[0].value = value;
     }
 }

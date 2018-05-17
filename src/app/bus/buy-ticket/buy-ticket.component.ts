@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CheckAllowService } from '../../../../shared/services/checkAllow.service';
-import { SharedService } from '../../../../shared/services/shared-service.service';
+import { CheckAllowService } from '../../shared/services/checkAllow.service';
+import { SharedService } from '../../shared/services/shared-service.service';
 import { AlertsService } from '@jaspero/ng2-alerts';;
-import { ErrorMsgService } from '../../../../shared/services/errorMsg.service';
-import { Constant } from '../../../../shared/constant/constant';
+import { ErrorMsgService } from '../../shared/services/errorMsg.service';
+import { Constant } from '../../shared/constant/constant';
 
 
 @Component({

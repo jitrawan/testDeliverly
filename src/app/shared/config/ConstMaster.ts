@@ -1,25 +1,20 @@
+import { environment } from '../../../environments/environment';
+
 export const ConstMaster = {
-    S3_ENDPOINT : {
-        url : 'https://s3-ap-southeast-1.amazonaws.com/haball-assets/'
+    
+    HOME_API : {
+        endpoint: environment.apiGatewayHomePage
     },
-    header : {
-        jsonFileEndPoints: '//s3-ap-southeast-1.amazonaws.com/atkfullsite/config/HeaderMenu.json'
+    EVENT_CARD_API : {
+        endpoint: environment.apiGatewayAllEvent
     },
-    home : {
-        jsonFileEndPoints: 'https://s3-ap-southeast-1.amazonaws.com/haball-assets/json/EventBanner.json'
+    HEADER_API : {
+        endpoint: environment.apiGatewayHeader
     },
-    imageBreakpoint : [
-        {
-            breakpoint: 768,
-            beakpointName: 'sd'
-        },
-        {
-            breakpoint: 1366,
-            beakpointName: 'hd'
-        },
-        {
-            breakpoint: 1920,
-            beakpointName: 'fullhd'
-        }
-    ]
+    DEFAULT_IMAGES : {
+        banner: environment.bucketS3+'/assets/images/placeholder/place-holder-1440x480.jpg.jpg',
+        ticketCard: environment.bucketS3+'/assets/images/placeholder/place-holder-410x600.jpg',
+        eventLogo: environment.bucketS3+'/assets/images/placeholder/place-holder-650x450.jpg'
+    },
+    S3_PATH: environment.bucketS3
 };

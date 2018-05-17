@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit, Renderer2 } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from "@angular/router";
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import * as underscore from 'underscore';
 declare var jQuery: any;
 
@@ -96,8 +97,13 @@ export class ResultReserveTransitComponent implements OnInit {
 	showExpireTimeEn: string;
 	reserveId: string = '810018043400168704';
 	transDetail: string = 'เที่ยวไป : จุดจอด อ.คลองท่อม ไป กรุงเทพ(สายใต้ใหม่) วันที่ 15/03/2018 เวลา 16:00 น.';
+	performType: string;
 
-	constructor(private router: Router, private route: ActivatedRoute, private renderer: Renderer2) {
+	constructor(
+		private router: Router, 
+		private route: ActivatedRoute, 
+		private renderer: Renderer2,
+		private modalService: NgbModal) {
 	}
 
 	ngOnInit() {
@@ -116,6 +122,10 @@ export class ResultReserveTransitComponent implements OnInit {
 		// this.renderer.addClass(this.navSideBar.nativeElement, 'show');
 	}
 
+	openModal(content) {
+		this.modalService.open(content);
+	}
+	
 	prepareData() {
 
 		this.userTo = new UserTOModel;
@@ -125,6 +135,8 @@ export class ResultReserveTransitComponent implements OnInit {
 		this.userTo.telephone = '0851992697';
 		this.userTo.cardNumber = '1234567890987';
 
+
+		this.performType = "concert";
 	}
 
 	ngAfterViewInit() {
@@ -198,12 +210,15 @@ export class ResultReserveTransitComponent implements OnInit {
 
 	choosePaymentMethod(paymentMethodIndex: number) {
 
+		if(this.paymentMethodSelected < 0) {
+			this.scrollTo('#term-condition');
+		}
+		
 		if (this.paymentMethodSelected === paymentMethodIndex) {
 			this.paymentMethodSelected = 0;
 		} else {
 			this.paymentMethodSelected = paymentMethodIndex;
 		}
-
 
 		// if(paymentMethodIndex == 2) {
 		// 	this.showCreditDiscount = true;
@@ -237,6 +252,11 @@ export class ResultReserveTransitComponent implements OnInit {
 		
 	}
 
+	scrollTo(target) {
+        jQuery('html,body').stop().delay(200).animate({
+            scrollTop: jQuery(target).offset().top - 200
+        }, 1000);
+    }
 }
 
 interface ConstMenu {

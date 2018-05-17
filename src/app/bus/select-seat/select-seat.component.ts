@@ -1,21 +1,21 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertsService } from '@jaspero/ng2-alerts';
-import { SharedService } from '../../../../shared/services/shared-service.service';
-import { BusService } from '../../../../shared/services/bus.service';
+import { SharedService } from '../../shared/services/shared-service.service';
+import { BusService } from '../../shared/services/bus.service';
 import { Location } from '@angular/common';
 
-import { AvailableTripModel } from '../../../../shared/models/bus/availableTripSearch.model';
-import { AvailableTripResultModel } from '../../../../shared/models/bus/availableTripResult.model';
-import { ProvinceModel } from '../../../../shared/models/bus/province.model';
-import { TripModel } from '../../../.././shared/models/bus/trip.model';
-import { ErrorMessage } from '../../../../shared/constant/error-message';
-import { Constant } from '../../../../shared/constant/constant';
-import { BusLayoutModel } from '../../../.././shared/models/bus/busLayout.model';
-import { MarkSeatModel } from '../../../../shared/models/bus/markSeat.model';
-import { TransIdModel } from '../../../../shared/models/bus/transaction/transId.model';
-import { TransCheckoutModel } from '../../../../shared/models/bus/transCheckout.model';
-import { ErrorMsgService } from '../../../../shared/services/errorMsg.service';
+import { AvailableTripModel } from '../../shared/models/bus/availableTripSearch.model';
+import { AvailableTripResultModel } from '../../shared/models/bus/availableTripResult.model';
+import { ProvinceModel } from '../../shared/models/bus/province.model';
+import { TripModel } from '../.././shared/models/bus/trip.model';
+import { ErrorMessage } from '../../shared/constant/error-message';
+import { Constant } from '../../shared/constant/constant';
+import { BusLayoutModel } from '../.././shared/models/bus/busLayout.model';
+import { MarkSeatModel } from '../../shared/models/bus/markSeat.model';
+import { TransIdModel } from '../../shared/models/bus/transaction/transId.model';
+import { TransCheckoutModel } from '../../shared/models/bus/transCheckout.model';
+import { ErrorMsgService } from '../../shared/services/errorMsg.service';
 
 @Component({
   selector: 'app-select-seat',

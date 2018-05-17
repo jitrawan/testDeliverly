@@ -3,15 +3,15 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertsService } from '@jaspero/ng2-alerts';
 import { ConfirmationService } from '@jaspero/ng2-confirmations';
-import { SharedService } from '../../../../shared/services/shared-service.service';
-import { BusService } from '../../../../shared/services/bus.service';
-import { ConfirmBoxEmit } from '../../../../shared/models/confirmBoxEmit';
-import { BookingResultModel } from '../../../../shared/models/bus/bookingResult.model';
-import { InsertBookingInfoModel, listTripByReserve } from '../../../../shared/models/bus/insertBookingInfo.model';
-import { ErrorMsgService } from '../../../../shared/services/errorMsg.service';
+import { SharedService } from '../../shared/services/shared-service.service';
+import { BusService } from '../../shared/services/bus.service';
+import { ConfirmBoxEmit } from '../../shared/models/confirmBoxEmit';
+import { BookingResultModel } from '../../shared/models/bus/bookingResult.model';
+import { InsertBookingInfoModel, listTripByReserve } from '../../shared/models/bus/insertBookingInfo.model';
+import { ErrorMsgService } from '../../shared/services/errorMsg.service';
 import { BuyTicketComponent } from '../buy-ticket/buy-ticket.component';
-import { Constant } from '../../../../shared/constant/constant';
-import { TransIdModel } from '../../../../shared/models/bus/transaction/transId.model';
+import { Constant } from '../../shared/constant/constant';
+import { TransIdModel } from '../../shared/models/bus/transaction/transId.model';
 
 @Component({
   selector: 'app-summary',

@@ -30,7 +30,7 @@ a:focus {
   overflow: hidden;
 }
 
-#slider.show {
+#slider.show , #sliderCard.show {
   animation-name: slideLoaded;
   animation-duration: 1s;
 }
@@ -57,39 +57,10 @@ a:focus {
 #slider img {
   width: 100%;
   min-height: 150px;
-  max-height: 500px;
+  max-height: 460px;
 }
 
-#slideCard .container {
-  padding: 2.2rem;
-}
-
-@keyframes slideLoaded {
-  from {
-    opacity: 0
-  }
-  to {
-    opacity: 1
-  }
-}
-
-#slider .owl-item {
-  -webkit-animation-duration: 1.5s;
-  -moz-animation-duration: 1.5s;
-  animation-duration: 1.5s;
-}
-
-#slider .owl-carousel {
-  margin: 0;
-}
-
-#slider img {
-  width: 100%;
-  min-height: 150px;
-  max-height: 500px;
-}
-
-#slideCard .container {
+#sliderCard .container {
   padding: 2.2rem;
 }
 
@@ -103,9 +74,18 @@ a:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 480px;
+  min-height: 460px;
   height: 1rem;
-  background-color: #f3f3f3;
+  background-color: transparent;
+}
+
+#sliderCard .preload-slide.show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 390px;
+  height: 1rem;
+  background-color: transparent;
 }
 
 .preload-slide.show .is-loading {
@@ -116,11 +96,11 @@ a:focus {
   border-radius: 50%;
   border-left-color: transparent;
   border-right-color: transparent;
-  animation: cssload-spin 575ms infinite linear;
-  -o-animation: cssload-spin 575ms infinite linear;
-  -ms-animation: cssload-spin 575ms infinite linear;
-  -webkit-animation: cssload-spin 575ms infinite linear;
-  -moz-animation: cssload-spin 575ms infinite linear
+  animation: cssload-spin 850ms infinite linear;
+  -o-animation: cssload-spin 850ms infinite linear;
+  -ms-animation: cssload-spin 850ms infinite linear;
+  -webkit-animation: cssload-spin 850ms infinite linear;
+  -moz-animation: cssload-spin 850ms infinite linear
 }
 
 .loading-wrapper {

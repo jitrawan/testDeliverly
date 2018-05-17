@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable , isDevMode } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { ConstMaster } from '../config/ConstMaster';
@@ -14,12 +14,27 @@ export class HomeService {
   
   constructor(private http: HttpClient) { }
 
-  private eventBannerUrl = ConstMaster.home.jsonFileEndPoints;
+  private homeDataUrl = ConstMaster.HOME_API.endpoint;
+  private eventCardUrl = ConstMaster.EVENT_CARD_API.endpoint;
+  
+  
+  fetchHomeData(): Observable<any> {
+    let useCache = true;
+    if(isDevMode()) {
+      useCache = false;
+    }
 
-  getEventBanner(): Observable<EventBanner> {
-    return this.http.get<EventBanner>(this.eventBannerUrl);
+    return this.http.post<any>(this.homeDataUrl,{ cached : useCache },httpOptions);
+    
   }
 
+  getEventCardByType(type: string): Observable<any> {
+    if(type == null || type == undefined) {
+      type = '';
+    }
+    return this.http.post<any>(this.eventCardUrl,{ groupKey : type },httpOptions);
+    
+  }
   getEventInfo(performId: string) {
     return this.http.get<EventInfo>('https://s3-ap-southeast-1.amazonaws.com/static-file-demo/json/event_info/'+performId+'.json');
   }

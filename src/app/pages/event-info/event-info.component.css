@@ -36,6 +36,7 @@
   border: 5px solid transparent;
   border-top-color: #077eff;
   border-bottom-color: #077eff;
+  z-index: 2;
   animation: spinner 0.9s ease infinite;
 }
 
@@ -45,6 +46,9 @@
   }
 }
 
+.prevent-white-space {
+  min-height: 240px;
+}
 @media (max-width: 992px) {
   .eventDescHeader .inner-wrapper {
     padding: 1rem 0;

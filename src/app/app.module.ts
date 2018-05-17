@@ -72,13 +72,18 @@ import { SeminarComponent } from './pages/eventTickets/seminar/seminar.component
 import { EducationComponent } from './pages/eventTickets/education/education.component';
 import { DiscountComponent } from './pages/discount/discount.component';
 import { DiscountDetailComponent } from './pages/discount-detail/discount-detail.component';
-import { RecaptchaModule } from 'ng-recaptcha';
+import {
+  RECAPTCHA_SETTINGS,
+  RecaptchaSettings,
+  RecaptchaLoaderService,
+  RecaptchaModule,
+} from 'ng-recaptcha';
 import { PushNotificationModule } from 'ng-push-notification';
 
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
-
+const globalSettings: RecaptchaSettings = {siteKey: '6Lf-vVkUAAAAAD3PIUUU8961BBz1oC9mCVNCiFjL'}
 const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
@@ -174,6 +179,10 @@ export function provideConfig() {
     CheckAllowService,
     BuyTicketComponent,
     ApiService,
+    {
+      provide: RECAPTCHA_SETTINGS,
+      useValue: globalSettings,
+    },
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig

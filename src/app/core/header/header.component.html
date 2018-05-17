@@ -539,12 +539,13 @@
           </div>
           <div class="text-center my-2" *ngIf="isReCaptchaOpen">
             <div class="captcha">
-              <re-captcha (resolved)="resolved($event)" siteKey="6Lfg51QUAAAAAID_dAd_epeHdsoj0gkr8IyQ3pmf"></re-captcha>
+              <!-- <re-captcha (resolved)="resolved($event)" siteKey="6Lfg51QUAAAAAID_dAd_epeHdsoj0gkr8IyQ3pmf"></re-captcha> -->
             </div>
           </div>
         </div>
         <div class="col-md-12 u-form-group">
-          <button class="btn btn-atk-primary mt-4 signUp-button" type="submit" data-dismiss="modal">Sign up</button>
+            <re-captcha (resolved)="resolved($event)" #captchaRef="reCaptcha" size="invisible"></re-captcha>
+          <button class="btn btn-atk-primary mt-4 signUp-button" type="submit" (click)="onClickSignUp(captchaRef)" data-dismiss="modal">Sign up</button>
         </div>
       </form>
     </ng-container>

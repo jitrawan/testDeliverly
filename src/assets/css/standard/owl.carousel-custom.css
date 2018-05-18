@@ -79,6 +79,8 @@
 
 .owl-carousel .owl-item img {
 	display:block;
+	max-width: 100%;
+	width: auto;
 	-webkit-transform-style:preserve-3d;
 }
 
@@ -139,7 +141,6 @@
 	transition:opacity 400ms ease
 }
 
-.owl-carousel .owl-item img { transform-style:preserve-3d }
 
 .owl-carousel .owl-video-wrapper {
 	position:relative;
@@ -269,6 +270,11 @@
 	background-color: #337AB7 !important;
 	color: #FFF !important;
 	text-decoration: none;
+	outline: none;
+}
+
+.owl-carousel .owl-nav [class*=owl-]:focus {
+	outline: none;
 }
 
 .owl-carousel .owl-nav .disabled { display: none !important; }
@@ -281,7 +287,7 @@
 	display: inline-block;
 	zoom: 1;
 	margin-top: 30px;
-	*display: inline;
+	display: inline;
 }
 
 .owl-carousel .owl-dots .owl-dot span {

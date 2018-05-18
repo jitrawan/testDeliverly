@@ -110,7 +110,7 @@ export class HomeComponent implements OnInit {
 				items: 1,
 				dots: false,
 				nav: true,
-				navText: ['<i class="fa fa-chevron-left mt-2 mr-1"></i>', '<i class="fa fa-chevron-right mt-2 ml-1"></i>'],
+				navText: ['<i class="fa fa-chevron-left mr-1"></i>', '<i class="fa fa-chevron-right"></i>'],
 				responsive: {
 					0: {
 						items: 1

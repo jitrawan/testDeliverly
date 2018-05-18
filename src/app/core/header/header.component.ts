@@ -27,6 +27,7 @@ declare var $: any
     '../../../assets/css/standard/layout.css']
 })
 export class HeaderComponent implements OnInit {
+    recaptchaStr = '';
     responRecaptcha : string;
     userModel: User = new User();
     userProfileModel : UserProfile = new UserProfile();
@@ -716,6 +717,12 @@ export class HeaderComponent implements OnInit {
         this.responRecaptcha = captchaResponse;
         console.log("Token :" + this.responRecaptcha);
     }
+    onClickSignUp(captchaRef: any): void {
+        if (this.recaptchaStr) {
+            captchaRef.reset();
+        }
+        captchaRef.execute();
+      }
     
 }
 

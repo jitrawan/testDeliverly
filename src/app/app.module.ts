@@ -20,7 +20,7 @@ import { CalendarModule } from './shared/lib/datetimepicker/primeng/calendar/cal
 /* Service */
 import { ApiService } from './shared/services/api.service';
 import { HeaderService } from './shared/services/header.service';
-import { HomeService } from './shared/services/home.service';
+import { AtkService } from './shared/services/atk.service';
 import { SharedService } from './shared/services/shared-service.service';
 import { ErrorMsgService } from './shared/services/errorMsg.service';
 
@@ -135,7 +135,7 @@ export function provideConfig() {
   ],
   providers: [
     HeaderService,
-    HomeService,
+    AtkService,
     SharedService,
     DatePipe,
     ErrorMsgService,

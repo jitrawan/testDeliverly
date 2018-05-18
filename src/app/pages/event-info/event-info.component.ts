@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation, ElementRef } from '@angular/core';
 import { AgmMap } from '@agm/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { HomeService } from '../../shared/services/home.service';
+import { AtkService } from '../../shared/services/atk.service';
 import { SharedService } from '../../shared/services/shared-service.service';
 import * as Jquery from 'jquery';
 import { resolveDefinition } from '@angular/core/src/view/util';
@@ -23,11 +23,12 @@ export class EventInfoComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
-    private homeService: HomeService,
+    private atkService: AtkService,
     private sharedService: SharedService
   ) {}
 
   @ViewChild(AgmMap) agmMap: AgmMap
+  @ViewChild('BUYTICKET') private buyTicketBtn: ElementRef;
   
   lat: number = 13.913260;
   lng: number = 100.546502;
@@ -41,22 +42,23 @@ export class EventInfoComponent implements OnInit {
   private performUri: string;
   private performId: string;
   isLoading: boolean = true;
+  isEventStatusLoading = true;
   eventInfo: EventInfo;
   
-  private clickShowMap() {
-    this.showMap = !this.showMap;
-  }
-
   ngOnInit() {
 
+    this.sharedService.receiveData.subscribe(data => this.performId = data);
+    console.log(this.performId);
     this.route.paramMap.subscribe(params => {
       this.performUri = params.get('performUri');
     });
 
     if(this.performUri != undefined && this.performUri != '') {
-      this.homeService.getEventInfo(this.performUri).subscribe(res => {
+      this.atkService.getEventInfo(this.performUri).subscribe(res => {
         this.eventInfo = res['data'];
+        this.performId = this.eventInfo.event_id;
         this.isLoading = false;
+        this.getEventStatus();
       }, error => {
         this.isLoading = false;
       });
@@ -90,15 +92,27 @@ export class EventInfoComponent implements OnInit {
     window.removeEventListener('scroll', this.adjustStickyHeader);
   }
 
+  getEventStatus() {
+    if(this.performId != undefined && this.isLoading == false) {
+      this.atkService.getEventStatus(this.performId).subscribe(res => {
+        if(res['code'] == 100 && res['success'] == true) {
+          this.isEventStatusLoading = false;
+          // this.buyTicketBtn.nativeElement.addClass('')
+        }
+        console.log(res);
+      });
+    } else {
+      this.isEventStatusLoading = false;
+    }
+  }
+
   buyTicket(performId: string) {
     this.sharedService.sendData(this.performId);
     this.router.navigate(['/booking/get-seat']);
   }
+  
   adjustStickyHeader(){    
-    // document.getElementById('headerSticky').style.width = document.getElementById('container-fluid').offsetWidth+'';	
-    // console.log('window.outerWidth : ' + window.outerWidth);
     if(window.outerWidth <= 1100 && window.outerWidth > 450) {
-      // console.log('768');
       $("#stickyTitle .inline").addClass("display-block");
       $("#stickyTitle").addClass("no-padding");
       $("#stickyTitle").removeClass("col-5");				
@@ -106,12 +120,7 @@ export class EventInfoComponent implements OnInit {
       $(".stickyTitle").addClass("m-l-10");		
       document.getElementById('sticky-image').style.display = 'none';    
       document.getElementById('concertIcon').style.visibility = 'hidden';  
-//				$("#sticky-image").removeClass("col-2");
-//				$("#sticky-image").addClass("col-5");
-//				$("#sticky-image").show();
-//				$("#sticky-image").siblings().first().show();				
       $(".sticky-btn-buy").addClass("text-align-center");
-      //$(".sticky-btn-buy").css("line-height","60px");
       $(".sticky-btn-buy button").parent().addClass("col-12");
       $("#locateBar").addClass("col-4 no-padding");
       $("#dateBar").addClass("col-4 no-padding");
@@ -119,38 +128,24 @@ export class EventInfoComponent implements OnInit {
       document.getElementById('dateBar').style.display = 'block';
       document.getElementById('locateBar').style.display = 'block';
       document.getElementById('timeBar').style.display = 'block';
-        
-        $('#sticky-btn-buy').removeClass('col-5');
-        $('#sticky-btn-buy').addClass('col-12');
-    /*} else if($window.width() <= 1024) {
-      console.log('1024');
-      $(".sticky-image").show();
-      $(".stickyTitle .inline.display-block").removeClass("display-block");
-      $(".sticky-btn-buy button").parent().removeClass("col-3");
-      $(".sticky-image").siblings().first().show();
-      $(".sticky-image").siblings().first().addClass("col-6");
-      $(".sticky-btn-buy").css("line-height","40px");*/
+      $('#sticky-btn-buy').removeClass('col-5');
+      $('#sticky-btn-buy').addClass('col-12');
     } else if(window.outerWidth <= 450) {
-      // console.log('450');
       $(".sticky-image").show();
       $(".stickyTitle .inline.display-block").removeClass("display-block");
       document.getElementById('sticky-image').style.display = 'none';    
-        document.getElementById('concertIcon').style.visibility = 'visible';
+      document.getElementById('concertIcon').style.visibility = 'visible';
+      
+      document.getElementById('dateBar').style.display = 'none';
+      document.getElementById('locateBar').style.display = 'none';
+      document.getElementById('timeBar').style.display = 'none';
+      
+      $('#sticky-btn-buy').removeClass('col-12');
+      $('#sticky-btn-buy').addClass('col-5');			    
         
-        document.getElementById('dateBar').style.display = 'none';
-        document.getElementById('locateBar').style.display = 'none';
-        document.getElementById('timeBar').style.display = 'none';
-        
-        $('#sticky-btn-buy').removeClass('col-12');
-        $('#sticky-btn-buy').addClass('col-5');			    
-        
-      // $("#sticky-image").addClass("padding_l_r_5px");
       $(".sticky-btn-buy").css("line-height","50px");
-      /// $(".sticky-btn-buy button").parent().removeClass("col-3");
-      // $(".sticky-image").siblings().first().removeClass("col-6");
       $(".sticky-image").siblings().first().show();
     } else {				
-      // console.log('more than');
       $(".sticky-image").show();
       $(".stickyTitle .inline.display-block").removeClass("display-block");
       document.getElementById('sticky-image').style.display = 'block';    
@@ -158,18 +153,14 @@ export class EventInfoComponent implements OnInit {
       $("#locateBar").removeClass("col-12");
       $("#dateBar").removeClass("col-12");
       $("#timeBar").removeClass("col-12");				
-      // $("#sticky-image").addClass("padding_l_r_5px");
       $(".sticky-btn-buy").css("line-height","50px");
-      /// $(".sticky-btn-buy button").parent().removeClass("col-3");
-      // $(".sticky-image").siblings().first().removeClass("col-6");
       $(".sticky-image").siblings().first().show();
-
-        document.getElementById('dateBar').style.display = 'block';
-        document.getElementById('locateBar').style.display = 'block';
-        document.getElementById('timeBar').style.display = 'block';
-        
-        $('#sticky-btn-buy').removeClass('col-5');
-        $('#sticky-btn-buy').addClass('col-12');
+      document.getElementById('dateBar').style.display = 'block';
+      document.getElementById('locateBar').style.display = 'block';
+      document.getElementById('timeBar').style.display = 'block';
+      
+      $('#sticky-btn-buy').removeClass('col-5');
+      $('#sticky-btn-buy').addClass('col-12');
         
     }
 
@@ -177,6 +168,10 @@ export class EventInfoComponent implements OnInit {
     
   getDirection(event: any): void {
     window.open('https://www.google.com/maps/dir/Current+Location/' + this.lat + ',' + this.lng);
+  }
+
+  private clickShowMap() {
+    this.showMap = !this.showMap;
   }
 
   activeMap(): void {

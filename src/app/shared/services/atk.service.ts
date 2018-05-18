@@ -10,7 +10,7 @@ const httpOptions = {
 };
 
 @Injectable()
-export class HomeService {
+export class AtkService {
   
   constructor(private http: HttpClient) { }
 
@@ -38,4 +38,13 @@ export class HomeService {
   getEventInfo(performId: string) {
     return this.http.get<EventInfo>('https://s3-ap-southeast-1.amazonaws.com/static-file-demo/json/event_info/'+performId+'.json');
   }
+
+  getEventStatus(performId: string) {
+    let params = {
+      performId: performId,
+      cached: true
+    }
+    return this.http.post<any>(ConstMaster.EVENT_INFO_API.getEventStatus,params,httpOptions);
+  }
+
 }

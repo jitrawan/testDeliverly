@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewEncapsulation, ElementRef, Input, ViewChild, Renderer2, AfterContentChecked } from '@angular/core';
 import { Router } from '@angular/router';
 import { SharedService } from '../../shared/services/shared-service.service';
+import { Location } from '@angular/common';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 import * as $ from 'jquery';
 
 declare function jMap(element): any;
@@ -8,9 +10,21 @@ declare function jMap(element): any;
 @Component({
     selector: 'app-booking',
     templateUrl: './go-booking.component.html',
-    styleUrls: ['./go-booking.component.css',
+    styleUrls: [ './go-booking.component.css',
         '../../../assets/css/standard/layout.css',
-        '../../../assets/css/standard/utility.css',]
+        '../../../assets/css/standard/utility.css', ],
+    animations: [
+        trigger('moveInOut', [
+            state('*', style({
+                opacity: 1
+            })),
+            state('void', style({
+                opacity: 0
+            })),
+            transition('* => void', animate('400ms ease-out')),
+            transition('void => *', animate('600ms ease-in'))
+        ])
+    ]
 })
 export class GoBookingComponent implements OnInit {
     event: any;
@@ -23,14 +37,17 @@ export class GoBookingComponent implements OnInit {
     target: String;
     listSeat : any;
     nonSeatAmtSelected: number;
+    showExecuteButton: boolean;
     private performId: string;
+    selectedData: any = {};
     
     displayDate: string;
 
     constructor(
         private renderer: Renderer2,
         private router: Router,
-        private sharedService: SharedService
+        private sharedService: SharedService,
+        private location: Location
         ){
     }
     @ViewChild('avaDateTime') private avaDateTime: ElementRef;
@@ -39,18 +56,21 @@ export class GoBookingComponent implements OnInit {
     @ViewChild('chooseSeat') private chooseSeat: ElementRef;
     @ViewChild('nonSeatSelector') private nonSeatSelector: ElementRef;
 
-
     ngOnInit() {
         this.listSeat = [];
         this.data = [];
-        this.prepareFetch();
-        this.loopSeatNo();
+        this.sharedService.receiveData.subscribe(data => {
+            if(Object.keys(data).length == 0) {
+                this.router.navigate(['/']);
+            } else {
+                this.performId = data;
+            }
+        });
 
-        this.sharedService.receiveData.subscribe(data => this.performId = data);
-
-        if(this.performId == "18016") {
+        if(this.performId == "18045") {
             this.event = {
                 "onlyNonSeat" : "N",
+                "seatLimit" : "N",
                 "event_calendar" : [
                     {
                         "title": "Event",
@@ -73,6 +93,7 @@ export class GoBookingComponent implements OnInit {
         } else if (this.performId == "18042") {
             this.event = {
                 "onlyNonSeat" : "Y",
+                "seatLimit" : "4",
                 "event_calendar" : [
                     {
                         "title": "Event",
@@ -91,9 +112,10 @@ export class GoBookingComponent implements OnInit {
                     }
                 ]
             }
-        } else if (this.performId == "18043") {
+        } else if (this.performId == "18043" || this.performId == "18046") {
             this.event = {
                 "onlyNonSeat" : "N",
+                "seatLimit" : "4",
                 "event_calendar" : [
                     {
                         "title": "Event",
@@ -108,27 +130,10 @@ export class GoBookingComponent implements OnInit {
                 ]
             }
         }
-        this.event = {
-            "onlyNonSeat" : "Y",
-            "event_calendar" : [
-                {
-                    "title": "Event",
-                    "start": "2018-05-04",
-                    "round": "R1"
-                },
-                {
-                    "title": "Event",
-                    "start": "2018-05-05",
-                    "round": "R2"
-                },
-                {
-                    "title": "Event",
-                    "start": "2018-05-06",
-                    "round": "R3"
-                }
-            ]
-        }
         
+        this.prepareFetch();
+        this.loopSeatNo();
+
     }
 
     scrollTo(target) {
@@ -143,7 +148,7 @@ export class GoBookingComponent implements OnInit {
         this.scrollTo('#avaDateTime');
     }
 
-    selectDateTime() {
+    selectDateTime(dateTime) {
         if(this.event.onlyNonSeat == "Y") {
             this.showNonSeat();
         } else {
@@ -154,6 +159,7 @@ export class GoBookingComponent implements OnInit {
                 console.log("TRIGGER !")
             }, 600);
         }
+        this.selectedData['round'] = dateTime;
     }
 
     selectZone(zoneType?: string) {
@@ -166,6 +172,7 @@ export class GoBookingComponent implements OnInit {
             this.toggleElement(this.chooseNonSeat,'show',false);
             this.scrollTo('#chooseSeat');
         }
+        this.showExecuteButton = true;
     }
 
     chooseSeatAmt(seatAmount: number) {
@@ -207,17 +214,18 @@ export class GoBookingComponent implements OnInit {
     }
 
     goEventInfo() {
-        this.router.navigate(['/event',this.performId]);
+        this.location.back();
     }
-    onChangeSeat(seat:string, isChecked: boolean) {
-        if(isChecked){
-        this.listSeat.push({"seat" : seat})
+
+    onChangeSeat(seat: string, isChecked: boolean) {
+        if (isChecked) {
+            this.listSeat.push({ "seat": seat })
             console.log("Seat : " + JSON.stringify(this.listSeat));
-        }else{
+        } else {
             this.listSeat.splice(seat, 1);
             console.log("Delete Seat : " + JSON.stringify(this.listSeat));
         }
-        
+
     }
 
     showNonSeat() {
@@ -239,6 +247,9 @@ export class GoBookingComponent implements OnInit {
         let _el = document.querySelectorAll('[data-input-seq="'+searchKey+'"]') as any;
         let otherFields = document.querySelectorAll('[data-input-seq]');
         let value = parseFloat(_el[0].value);
+        if(isNaN(value) || value == undefined) {
+            value = 0;
+        }
         if(triggerType == 'plus') {
             value += 1;
         } else {
@@ -246,6 +257,8 @@ export class GoBookingComponent implements OnInit {
                 value -= 1;
             }
         }
+
+        this.showExecuteButton = value > 0 ? true: false;
 
         _el[0].value = value;
     }

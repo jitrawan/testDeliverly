@@ -1,6 +1,6 @@
 <div class="row pt-3">
   <div class="col-12 col-sm-6 col-lg-3 card align-items-center align-items-lg-stretch cardwrapper" *ngFor="let cardTicket of this.cardTickets;">
-    <div class="cardbox" (click)="goToEventInfo(cardTicket.performUri,cardTicket.id)">
+    <div class="cardbox" (click)="goToEventInfo(cardTicket)">
       <a>
         <div class="card-overlay" [title]="cardTicket.name">
           <img src="https://atkmedia.allticket.com/assets/images/cursor.png">

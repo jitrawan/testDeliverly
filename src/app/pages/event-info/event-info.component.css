@@ -40,6 +40,17 @@
   animation: spinner 0.9s ease infinite;
 }
 
+.spinner-loading.withButton:before {
+  position: absolute;
+  margin-top: 0;
+  border-top-color: #0781ff;
+  border-bottom-color: #ff9c07;
+}
+
+.spinner-loading.withButton button {
+  display: none;
+}
+
 @keyframes spinner {
   to {
     transform: rotate(360deg);

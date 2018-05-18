@@ -1,4 +1,5 @@
 export interface EventInfo {
+    event_id: string,
     event_logo: string,
     event_name: string,
     event_show_date: string,

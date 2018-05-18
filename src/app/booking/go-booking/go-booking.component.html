@@ -1,29 +1,29 @@
 <div class="container mt-4">
-  <div class="t-underline f-w-700">Select Date & Time</div>
+  <div class="booking-border-title">Select Date & Time</div>
   <div class="col-12 p-t-30 p0 d-flex justify-content-center">
     <div class="calendarWrapper ">
       <p-schedule [events]="event.event_calendar" (onEventClick)="onSelectDate($event)"></p-schedule>
     </div>
   </div>
   <div #avaDateTime id="avaDateTime">
-    <div class="t-underline f-w-700 p-t-30">Select Time</div>
+    <div class="booking-border-title">Select Time</div>
     <div>
-      <div class="col12 p-t-10">
+      <div class="col-12 mt-3">
         <div class="custom-radio">
           <input class="custom-control-input" id="first" name="custCardType" type="radio">
-          <label class="custom-control-label col-12 p-l-60 b-2px-grey b-r-12 cursorPointer " for="first" (click)="selectDateTime()">{{displayDate | date:'fullDate'}} | 03:00 PM - 01:00 AM</label>
+          <label class="custom-control-label col-12 p-l-60 b-2px-grey b-r-12 cursorPointer " for="first" (click)="selectDateTime(displayDate)">{{displayDate | date:'fullDate'}} | 03:00 PM - 01:00 AM</label>
         </div>
       </div>
-      <div class="col12 p-t-10">
+      <div class="col-12 mt-3">
         <div class="custom-radio">
           <input class="custom-control-input" id="second" name="custCardType" type="radio">
-          <label class="custom-control-label col-12 p-l-60 b-2px-grey b-r-12 cursorPointer " for="second" (click)="selectDateTime()">{{displayDate | date:'fullDate'}} | 03:00 PM - 01:00 AM</label>
+          <label class="custom-control-label col-12 p-l-60 b-2px-grey b-r-12 cursorPointer " for="second" (click)="selectDateTime(displayDate)">{{displayDate | date:'fullDate'}} | 03:00 PM - 01:00 AM</label>
         </div>
       </div>
     </div>
   </div>
-  <div #chooseZone id="chooseZone">
-    <div class="t-underline f-w-700 p-t-30" id="choose">Choose Zone</div>
+  <div #chooseZone class="mt-4" id="chooseZone" >
+    <div class="booking-border-title" id="choose">Choose Zone</div>
     <div class="col-12">
       <div class="text-align-center f-w-600 p-t-20">Thunder Dome Chart Zone</div>
       <!-- <div class = "d-flex justify-content-center mt-3" [innerHTML]="event.image_zone | safeHtml"></div> -->
@@ -56,20 +56,29 @@
       </div>
     </div>
   </div>
-  <div #chooseNonSeat id="chooseNonSeat">
-    <div class="t-underline f-w-700">Choose number of tickets</div>
-    <div class="row my-3">
-      <div class="col-12">
-        <ul class="ul-num-ticket">
-          <li class="li-num-ticket" (click)="chooseSeatAmt(index)" [ngClass]="{ 'selected': nonSeatAmtSelected == index }" *ngFor="let index of [1,2,3,4,5]">
-            <a>{{index}}</a>
-          </li>
-        </ul>
+  <div #chooseNonSeat id="chooseNonSeat" class="my-4">
+    <div class="booking-border-title">Choose number of tickets</div>
+    <div class="row my-4">
+      
+      <div class="col-12 col-md-8 offset-md-2">
+        <div class="booking-wrapper">
+          <div class="plusAndMinus justify-content-center">
+            <div class="d-flex align-items-center mr-2">Seat amount : </div>
+            <div class="sign minus" (click)="qtyBtnHandler('1','minus')">
+              <i class="fa fa-minus" aria-hidden="true"></i>
+            </div>
+            <input type="number" data-input-seq="1" min="0" max="100" value="1" />
+            <div class="sign plus" (click)="qtyBtnHandler('1','plus')">
+              <i class="fa fa-plus"></i>
+            </div>
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
   <div #chooseSeat id="chooseSeat">
-    <div class="t-underline f-w-700 p-t-30">Choose Seat</div>
+    <div class="booking-border-title">Choose Seat</div>
     <div class="col-12 bg-grey d-flex justify-content-center p-v0-h10 m-t-30">
       <span class="stage">STAGE</span>
     </div>
@@ -173,16 +182,49 @@
       </div>
     </div>
   </div>
-  <div class="text-center">
-    <button class="btn btn-atk-danger mt-3" type="button" (click)=" goEventInfo()">
-      <span>
-        BACK
-      </span>
-    </button>
-    <button class="btn btn-atk-primary mt-3" type="button" (click)=" goDiscountList()">
-      <span>
-        BOOKING
-      </span>
-    </button>
+  <div class="row mt-5" *ngIf="showExecuteButton" [@moveInOut]>
+    <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+      <div class="ticket-summary">
+        <div class="summary-title text-center">
+          <h3 class="my-0 is-size-5-mobile">TICKET SUMMARY</h3>
+        </div>
+        <div class="summary-body">
+          <div class="row mx-0  ">
+              <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Round</div>
+              <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+                <div class="text-desc">{{selectedData.round | date:'fullDate' }}</div>
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Zone</div>
+              <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+                <div class="text-desc">A5</div>
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Seat No</div>
+              <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+                <div class="text-desc">VALUE</div>
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Quantity</div>
+              <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+                <div class="text-desc">VALUE</div>
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Unit Price (Baht)</div>
+              <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+                <div class="text-desc">VALUE</div>
+              </div>
+          </div>
+          <div class="text-center mt-3">
+            <button class="btn btn-atk-danger mt-3" type="button" (click)=" goEventInfo()">
+              <span>
+                BACK
+              </span>
+            </button>
+            <button class="btn btn-atk-primary mt-3" type="button" (click)=" goDiscountList()">
+              <span>
+                BOOKING
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

@@ -113,7 +113,7 @@ ol {
 }
 
 .seat input[type=checkbox]:checked+label {
-  background: rgb(10, 247, 42);
+  background: #63b7f3;
   -webkit-animation-name: rubberBand;
   animation-name: rubberBand;
   animation-duration: 300ms;
@@ -209,7 +209,7 @@ label {
 }
 
 #avaDateTime.show, #chooseZone.show, #chooseNonSeat.show, #chooseSeat.show {
-  display: inline !important;
+  display: block !important;
 }
 
 .m-imagemap img {
@@ -224,7 +224,12 @@ label {
   text-align: center;
 }
 
-
+.booking-border-title {
+  border-bottom: 2px solid #F8A422;
+  font-size: 19px;
+  letter-spacing: 1px;
+  padding-bottom: 8px;
+}
 .nonSeatSelector {
   display: none;
   width: 85%;
@@ -319,54 +324,40 @@ input[type="number"] {
   border-left: 0;
   border-right: 0;
 }
-.ul-num-ticket {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: visible;
+
+.ticket-summary {
+  background-color: #617fec;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+  overflow: hidden;
+  position: relative;
 }
 
-.li-num-ticket {
-  float: left;
-  padding: 2px;
+.ticket-summary > .summary-title {
+  color: white;
+  background-color: #617fec;
+  padding: .5rem 1.5rem;
+  border-color: #9897ff;
+  border-bottom: 2px solid transparent;
+  border-bottom-color: transparent;
+  
 }
 
-.li-num-ticket a {
-  display: block;
-  cursor: pointer;
-  color: #999999;
-  text-align: center;
-  padding: 16px 20px;
-  text-decoration: none;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #ADB1B8;
-  border-radius: 5px;
+.ticket-summary > .summary-body {
+  background-color: white;
+  border: 3px #94baf5 dotted;
+  border-top: 0;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
 }
 
-.li-num-ticket a:hover , .li-num-ticket.selected {
-  background-color: #eee;
-  color: #111;
-  border-radius: 5px;
+.title-text {
+  font-weight: bold;
+  font-size: 17px;
 }
 
-.li-num-ticket-select {
-  float: left;
-  padding: 2px;
-}
-
-.li-num-ticket-select a {
-  display: block;
-  color: #111;
-  font-weight: 900px;
-  text-align: center;
-  padding: 16px 20px;
-  text-decoration: none;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #e77600;
-  background: #fef8f2;
-  border-radius: 5px;
+.text-desc {
+  font-size: 16px;
 }
 
 ::ng-deep .fc-today.ui-state-highlight {
@@ -375,12 +366,41 @@ input[type="number"] {
   color: #222222;
 }
 
-@media screen and (max-width: 480px) {
-  .imagemap__item {
-    width: 100% !important;
+@media (min-width: 425px) {
+  .title-text:after {
+    content: " : ";
   }
-  .imagemap__item {
-    width: 100% !important;
+
+  .imagemap__item:target {
+    display: block;
+  }
+  .imagemap__item:target>.imagemap__text {
+    display: block;
+  }
+
+}
+
+@media (min-width: 1024px) {
+  .title-text,
+  .text-desc {
+    margin-top: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .calendarWrapper {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .title-text {
+    margin-top: 0.6rem;
+    letter-spacing: -0.5px;
+  }
+  .text-desc {
+    margin-top: 0.6rem;
+    font-size: 15px;
   }
 }
 
@@ -397,20 +417,28 @@ input[type="number"] {
   .nonSeatSelector .zone-desc {
     margin-left: -15px;
   }
-  
 }
 
-@media screen and (max-width: 992px) {
-  .calendarWrapper {
-    width: 100%;
+@media (max-width: 576px) {
+  .title-text {
+    font-size: 1rem;
   }
 }
 
-@media screen and (min-width: 48em) {
-  .imagemap__item:target {
-    display: block;
+@media screen and (max-width: 480px) {
+  .imagemap__item {
+    width: 100% !important;
   }
-  .imagemap__item:target>.imagemap__text {
-    display: block;
+  .imagemap__item {
+    width: 100% !important;
+  }
+
+  .text-desc {
+    background-color: #f3f3f3;
+    border-radius: 5px;
+    padding: 0.3rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    word-wrap: break-word;
   }
 }

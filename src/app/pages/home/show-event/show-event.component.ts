@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HomeService } from '../../../shared/services/home.service';
+import { AtkService } from '../../../shared/services/atk.service';
 import { CardTicket } from '../../../shared/models/cardTickets';
 import { ConstMaster } from '../../../shared/config/ConstMaster';
 import { Subscription } from 'rxjs';
@@ -14,7 +14,7 @@ export class ShowEventComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private service: HomeService
+    private service: AtkService
   ){}
 
   category: string;

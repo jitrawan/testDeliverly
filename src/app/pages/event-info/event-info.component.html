@@ -54,8 +54,8 @@
 						</div>
 					</div>
 					<div class="row text-center mt-4 mt-sm-5 mx-0">
-						<div class="col-12">
-							<button class="btn btn-atk-primary" (click)="buyTicket(performId)">BUY TICKET</button>
+						<div class="col-12" [ngClass]="{ 'spinner-loading withButton' : isEventStatusLoading }" >
+							<button class="btn btn-atk-primary" (click)="buyTicket(performId)" #BUYTICKET>BUY TICKET</button>
 						</div>
 					</div>
 				</div>

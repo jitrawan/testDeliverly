@@ -2,6 +2,7 @@ export const environment = {
   production: true,
   baseUrl: document.location.origin,
   apiGateway: 'https://api.allticket.com/trs/',
+  apiGatewayBaseUrl: 'https://26ieslrird.execute-api.ap-southeast-1.amazonaws.com/latest/',
   apiGatewayRegister: 'https://26ieslrird.execute-api.ap-southeast-1.amazonaws.com/latest/register',
   apiGatewayHomePage: 'https://26ieslrird.execute-api.ap-southeast-1.amazonaws.com/latest/homepage',
   apiGatewayAllEvent: 'https://26ieslrird.execute-api.ap-southeast-1.amazonaws.com/latest/all-event',

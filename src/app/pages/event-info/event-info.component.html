@@ -1,5 +1,41 @@
 <div class="container-fluid px-0" [ngClass]="{ 'spinner-loading' : isLoading }">
 	<ng-container *ngIf="eventInfo?.infoHtml != null || eventInfo?.infoHtml == ''">
+		<div class="event-sticky" *ngIf="isShowStickyHeader" [@UpNDown]>
+			<div class="row mx-0 p-3">
+				<div class="col-md col-lg-1 d-none d-lg-flex align-items-center justify-content-center">
+					<img [src]="eventInfo?.event_logo" class="img-fluid event-logo"/>
+				</div>
+
+				<div class="col-8 col-md-12 col-lg-8 d-lg-block d-flex align-self-center">
+					<div class="row">
+						<div class="col-12 text-white">
+							{{eventInfo?.event_name}}
+						</div>
+					</div>
+					<div class="row d-none d-md-flex">
+						<div class="col-6 column-wrapping">
+							<img class="small-icon" src="https://atkmedia.allticket.com/assets/images/icon/locate.png" width="15px">
+							<span class="ml-2">{{eventInfo.event_location}}</span>
+						</div>
+
+						<div class="col-3 column-wrapping">
+							<i class="fa fa-calendar-o" aria-hidden="true"></i>
+							<span class="ml-3" [innerHTML]="eventInfo?.event_show_date | safeHtml"></span>
+						</div>
+
+						<div class="col-3 column-wrapping">
+							<i class="fa fa-clock-o" aria-hidden="true"></i>
+							<span class="ml-3" [innerHTML]="eventInfo?.event_show_time | safeHtml"></span>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="col-4 col-md-12 col-lg-3 column-wrapping justify-content-center buyTicket" id="stickyButtonWrapper">
+					<!-- <button class="btn btn-atk-primary" #buyBtnSticky>BUY TICKETS</button> -->
+				</div>
+			</div>
+		</div>
 		<div class="row eventDescHeader mx-0">
 			<div class="col-md-5 d-flex d-lg-block align-items-center">
 				<div class="inner-wrapper">
@@ -54,7 +90,7 @@
 						</div>
 					</div>
 					<div class="row text-center mt-4 mt-sm-5 mx-0">
-						<div class="col-12" [ngClass]="{ 'spinner-loading withButton' : isEventStatusLoading }" >
+						<div class="col-12" [ngClass]="{ 'spinner-loading withButton' : isEventStatusLoading }" id="buttonWrapper">
 							<button class="btn btn-atk-primary" (click)="buyTicket(performId)" #BUYTICKET>BUY TICKET</button>
 						</div>
 					</div>

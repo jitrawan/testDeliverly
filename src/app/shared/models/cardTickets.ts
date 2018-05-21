@@ -5,8 +5,8 @@ export class CardTickets {
 
 export interface CardTicket {
     id: string;
-    isFull: boolean;
-    isPromo: boolean;
+    isFull: string;
+    isPromo: string;
     name: string;
 	performCardName: string;
 	performCardPic: string;

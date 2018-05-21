@@ -60,6 +60,38 @@
 .prevent-white-space {
   min-height: 240px;
 }
+
+.event-sticky {
+  width: 100%;
+  background-color: #414042;
+  position: fixed;
+  top: 0;
+  z-index: 2;
+}
+
+.event-sticky img.event-logo {
+  max-height: 80px;
+  border-radius: 0;
+}
+
+.event-sticky .small-icon {
+  max-height: 20px;
+}
+
+.event-sticky .column-wrapping {
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 15px;
+}
+
+.event-sticky .buyTicket > button {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 1rem;
+  border-radius: 1rem;
+}
+
 @media (max-width: 992px) {
   .eventDescHeader .inner-wrapper {
     padding: 1rem 0;
@@ -97,6 +129,14 @@
   .wrapper-event-info .split-half-layout {
     max-width: 100% !important;
   }
+
+  .event-sticky .buyTicket > button {
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+    font-size: 0.8rem;
+    border-radius: 0.4rem;
+  }
+
 }
 
 @media screen and (min-width: 361px) and (max-width: 640px) {

@@ -62,9 +62,9 @@
   font-size: 18px;
   background-color: #ECECEC;
   border-bottom: 3px solid #C2C6C7;
-  color: #B3B3B3;
-  padding-left: 5.5rem;
-  padding-right: 5.5rem;
+  color: #484848;
+  padding-left: 3rem;
+  padding-right: 3rem;
   border-radius: 2rem;
   cursor: pointer;
 }

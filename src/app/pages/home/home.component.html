@@ -49,7 +49,7 @@
               </div>
               <img class="card-img-top img-fluid" [src]="cardTicket.performCardPic" (load)="slideCardLoaded()" (error)="cardTicket.performCardPic = placeHolderImg"
               [alt]="cardTicket.name">
-              <ng-template [ngIf]="cardTicket.isPromo == true" [ngIfElse]="isPromo">
+              <ng-template [ngIf]="cardTicket.isPromo == 'Y'" [ngIfElse]="isPromo">
                   <div class="card-buyTicket commingsoon">
                     <a href="#">
                       <i class="fa fa-clock-o fa-fw pr-2" aria-hidden="true"></i>
@@ -59,7 +59,7 @@
                 </ng-template>
                 
               <ng-template #isPromo>
-                <ng-template [ngIf]="cardTicket.isFull == true" [ngIfElse]="showBuyBtn">
+                <ng-template [ngIf]="cardTicket.isFull == 'Y'" [ngIfElse]="showBuyBtn">
                   <div class="card-buyTicket soldout">
                     <a href="#">
                       <i class="fa fa-ban fa-fw pr-2" aria-hidden="true"></i>

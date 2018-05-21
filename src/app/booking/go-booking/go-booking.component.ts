@@ -60,7 +60,8 @@ export class GoBookingComponent implements OnInit {
         this.listSeat = [];
         this.data = [];
         this.sharedService.receiveData.subscribe(data => {
-            if(Object.keys(data).length == 0) {
+            console.log(data);
+            if(data == undefined || Object.keys(data).length == 0) {
                 this.router.navigate(['/']);
             } else {
                 this.performId = data;

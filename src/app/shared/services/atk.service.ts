@@ -47,4 +47,11 @@ export class AtkService {
     return this.http.post<any>(ConstMaster.EVENT_INFO_API.getEventStatus,params,httpOptions);
   }
 
+  getRoundDetail(performId: string) {
+    let params = {
+      performId: performId
+    }
+    return this.http.post<any>(ConstMaster.BOOKING_API.getRound,params,httpOptions);
+  }
+
 }

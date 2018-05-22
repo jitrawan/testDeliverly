@@ -21,11 +21,9 @@ function jMap(element) {
                 c = "coords";
               t('map[name="' + o + '"] area').each(function () {
                 var a = t(this);
-                console.log("24 :   "+a.data(c)+'  ||| '+ a.attr(c));
                 a.data(c) || a.data(c, a.attr(c));
                 for (var r = a.data(c).split(","), i = new Array(r.length), o = 0; o < i.length; ++o) o % 2 === 0 ? i[o] = parseInt(r[o] / n * 100 * h) : i[o] = parseInt(r[o] / e * 100 * s);
                 a.attr(c, i.toString())
-                console.log("28 :   "+c+'  ||| '+ i.toString());
               })
             }).attr("src", a.attr("src"))
           }

@@ -30,6 +30,33 @@
   background-color: #666666;
 }
 
+.container.spinner-loading{
+  min-height: 700px;
+}
+
+.spinner-loading:before {
+  content: "";
+  box-sizing: border-box;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 60px;
+  height: 60px;
+  margin-top: -30px;
+  margin-left: -30px;
+  border-radius: 50%;
+  border: 5px solid transparent;
+  border-top-color: #077eff;
+  border-bottom-color: #077eff;
+  z-index: 2;
+  animation: spinner 0.9s ease infinite;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 .calendarWrapper {
   width: 60%;
@@ -201,14 +228,13 @@ label {
   background: #048bc1;
 }
 
-#avaDateTime,
 #chooseZone,
 #chooseNonSeat,
 #chooseSeat {
   display: none;
 }
 
-#avaDateTime.show, #chooseZone.show, #chooseNonSeat.show, #chooseSeat.show {
+#chooseZone.show, #chooseNonSeat.show, #chooseSeat.show {
   display: block !important;
 }
 
@@ -225,8 +251,8 @@ label {
 }
 
 .booking-border-title {
-  border-bottom: 2px solid #F8A422;
-  font-size: 19px;
+  border-bottom: 3px solid #F8A422;
+  font-size: 20px;
   letter-spacing: 1px;
   padding-bottom: 8px;
 }

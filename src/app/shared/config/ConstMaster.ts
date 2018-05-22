@@ -12,7 +12,10 @@ export const ConstMaster = {
         endpoint: environment.apiGatewayHeader
     },
     EVENT_INFO_API : {
-        getEventStatus: environment.apiGatewayBaseUrl+'/event-status'
+        getEventStatus: environment.apiGatewayCheckEvent
+    },
+    BOOKING_API : {
+        getRound: environment.apiGatewayGetRound
     },
     DEFAULT_IMAGES : {
         banner: environment.bucketS3+'/assets/images/placeholder/place-holder-1440x480.jpg.jpg',

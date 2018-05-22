@@ -1,15 +1,19 @@
 import { ModuleWithProviders , NgModule } from '@angular/core';
 import { ThaiDatePipe } from './shared/lib/date-format/thaidate.pipe';
+import { SafeHtmlPipe } from './shared/lib/dom/safehtml.pipe';
+
 
 @NgModule({
   declarations: [
-    ThaiDatePipe
+    ThaiDatePipe,
+    SafeHtmlPipe
   ],
   imports: [
     
   ],
   exports: [
-    ThaiDatePipe
+    ThaiDatePipe,
+    SafeHtmlPipe
   ]
 })
 export class SharedModule {

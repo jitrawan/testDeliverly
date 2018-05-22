@@ -12,7 +12,6 @@ import { DatePipe } from '@angular/common';
 /* Library */
 import { DialogModule } from './shared/lib/dialog/dialog.component';
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
-import { SafeHtmlPipe } from './shared/lib/dom/safehtml.pipe';
 import { JasperoAlertsModule } from '@jaspero/ng2-alerts';
 import { JasperoConfirmationsModule } from '@jaspero/ng2-confirmations'
 import { CalendarModule } from './shared/lib/datetimepicker/primeng/calendar/calendar';
@@ -98,7 +97,6 @@ export function provideConfig() {
     FaqComponent,
     PolicyComponent,
     ResultReserveTransitComponent,
-    SafeHtmlPipe,
     ResultPaidTransitComponent,
     PopupResultPaidTransitComponent,
     FshowzoneComponent,

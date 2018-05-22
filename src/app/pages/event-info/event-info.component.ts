@@ -84,7 +84,8 @@ export class EventInfoComponent implements OnInit {
     }
     
     var _self = this;
-    window.onscroll = function (e) {
+    
+    window.addEventListener('scroll', function() {
       var windowScroll = window.scrollY || document.getElementsByTagName("html")[0].scrollTop;
       if (windowScroll >= 750) {
         _self.isShowStickyHeader = true;
@@ -93,7 +94,7 @@ export class EventInfoComponent implements OnInit {
         _self.isShowStickyHeader = false;
         $('#stickyButtonWrapper button').appendTo($('#buttonWrapper'));
       }
-    }
+    });
   }
 
   ngOnDestroy() {
@@ -104,9 +105,9 @@ export class EventInfoComponent implements OnInit {
   getEventStatus() {
     if(this.performId != undefined && this.isLoading == false) {
       this.atkService.getEventStatus(this.performId).subscribe(res => {
-        console.log(res);
         if(res['code'] == 100 && res['success'] == true) {
           this.eventStatus = res['data']['event_info'];
+          console.log("EVENT CHECK STATUS : ", this.eventStatus)
           this.validateBuyTicketBtn(this.eventStatus);
         }
       });

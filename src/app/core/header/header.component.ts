@@ -6,7 +6,7 @@ import { checkEmailSocial } from './../../shared/models/checkEmail.model';
 import { ApiService } from './../../shared/services/api.service';
 import { User } from './../../shared/models/user.model';
 import { Component, OnInit, AfterViewInit, HostListener, ElementRef, ViewChild, Renderer2 } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HeaderModel } from '../../shared/models/header.model';
 import { HeaderService } from '../../shared/services/header.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
@@ -115,6 +115,7 @@ export class HeaderComponent implements OnInit {
         private renderer: Renderer2,
         private headerService: HeaderService,
         private router: Router,
+        private route: ActivatedRoute,
         private authService: AuthService,
         private formBuilder: FormBuilder,
         private apiService: ApiService,
@@ -184,6 +185,7 @@ export class HeaderComponent implements OnInit {
 
         this.headerService.getHeaderMenu().subscribe(response => {
             this.headerModel = response['data'];
+            sessionStorage.setItem('headerMenu',JSON.stringify(this.headerModel));
         });
         this.user = null;
         var privateKey = 'MIIBOQIBAAJAWYbAUbPhRWQ7TAjKaotbJEQJI6imMtmXnrXDMSYpLU5AxDXjUsoCMbzk/9PEh2igdu2JyyhLPGgwqJFZxJM1SwIDAQABAkAxiLo+On3I7CVW84IzozlhfndkEHsspXIbsUv3lLqxwvLsDXrZWiMdQJKWOvwojFmbEFhxjKZC3c/BzMVjjCZxAiEAp+U3uAPhZB8Vr+s0zrONEYyAgzm49FqezwjT+Zvia9kCIQCIgZK0I0rja3ZRiI/kQjqcrf5F46sU8hg1ROrIovUnwwIhAI3l12KpvOuerfihZF8yNw7W3aKKvXufv0qhXm4+xm15AiBbP8pyclkgNvirvg759a+6hrC/xVXatY6rJTuRDSW2AwIgUgpYOwni1NMbjqryxZo9UXR7oUaI4EZDuQ/0BTMUCt8=' ;
@@ -722,7 +724,7 @@ export class HeaderComponent implements OnInit {
             captchaRef.reset();
         }
         captchaRef.execute();
-      }
+    }
     
 }
 

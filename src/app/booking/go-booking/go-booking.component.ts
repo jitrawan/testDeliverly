@@ -73,14 +73,14 @@ export class GoBookingComponent implements OnInit {
         this.sharedService.receiveData.subscribe(data => {
             console.log(data);
             if(data == undefined || Object.keys(data).length == 0) {
-                this.router.navigate(['/']);
+                // this.router.navigate(['/']);
             } else {
                 this.performId = data;
             }
         });
 
 
-        this.atkService.getRoundDetail(this.performId).subscribe(res =>{
+        this.atkService.getRoundDetail('18042').subscribe(res =>{
             
             console.log(res);
             
@@ -252,6 +252,14 @@ export class GoBookingComponent implements OnInit {
         this.showExecuteButton = value > 0 ? true: false;
 
         _el[0].value = value;
+    }
+
+    zoneLayoutClicked(event) {
+        if (event.target && event.target.className.indexOf('p_') >= 0) {
+            let element = event.target;
+            console.log(element);
+            this.showExecuteButton = true;
+        }
     }
 }
 

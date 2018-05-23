@@ -61,6 +61,7 @@ const globalSettings: RecaptchaSettings = {siteKey: '6LfUOlcUAAAAAPaRz8g50yRbhDq
 
 // Import module
 import { SharedModule } from './shared.module';
+import { ScrollDirective } from './shared/directive/scroll.directive';
 const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
@@ -95,7 +96,8 @@ export function provideConfig() {
     DiscountComponent,
     DiscountDetailComponent,
     CardTicketComponent,
-    ShowEventComponent
+    ShowEventComponent,
+    ScrollDirective
   ],
   imports: [
     NgbModule.forRoot(),

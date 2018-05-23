@@ -1,4 +1,4 @@
-<div class="container-fluid px-0" [ngClass]="{ 'spinner-loading' : isLoading }">
+<div class="container-fluid px-0" [ngClass]="{ 'spinner-loading' : isLoading }" scrollable [heightTrigger]="750" (scrollPosition)="stickyBarTrigger($event)">
 	<ng-container *ngIf="eventInfo?.infoHtml != null || eventInfo?.infoHtml == ''">
 		<div class="event-sticky" *ngIf="isShowStickyHeader" [@UpNDown]>
 			<div class="row mx-0 p-3">

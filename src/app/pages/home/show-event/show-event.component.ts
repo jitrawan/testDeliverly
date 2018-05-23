@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AtkService } from '../../../shared/services/atk.service';
 import { CardTicket } from '../../../shared/models/cardTickets';
 import { ConstMaster } from '../../../shared/config/ConstMaster';
+import { HeaderModel } from '../../../shared/models/header.model';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -23,8 +24,11 @@ export class ShowEventComponent implements OnInit {
   isLoading: boolean = true;
   categoryImagePath: string;
   subscription: Subscription;
+  header: object[];
+  groupKey: string;
 
   ngOnInit() {
+    this.header = JSON.parse(sessionStorage.getItem('headerMenu'));
     this.route.paramMap.subscribe(params => {
       this.category = params.get('category');
       this.reInitiateComponent();
@@ -43,8 +47,34 @@ export class ShowEventComponent implements OnInit {
     if(this.subscription != undefined) {
       this.subscription.unsubscribe();
     }
+    
+    var _self = this;
 
-    this.subscription = this.service.getEventCardByType(this.category).subscribe(response => {
+
+    for(let i =0; i < this.header.length; i++) {
+
+      if(this.header[i]['dropdownList'] != undefined) {
+        var dropdownFilter = this.header[i]['dropdownList'].filter(_el => {
+          let split = _el.routeTo.split('/');
+          if(split.length > 0 && split[split.length-1] == _self.category) {
+            _self.groupKey = _el.groupKey
+            return _el;
+          }
+        });
+      }
+
+      if(dropdownFilter != undefined && dropdownFilter.length > 0) {
+        break;
+      }
+
+      let split = this.header[i]['routeTo'].split('/');
+      if(split.length > 0 && split[split.length-1] == _self.category) {
+        _self.groupKey = this.header[i]['groupKey'];
+        break;
+      }
+    }
+
+    this.subscription = this.service.getEventCardByType(this.groupKey).subscribe(response => {
       if(response['success'] == true && response['code'] == 100) {
         
         if(Object.keys(response['data']).length > 0 && response['data']['event']['items'].length > 0) {
@@ -59,6 +89,23 @@ export class ShowEventComponent implements OnInit {
 
       this.isLoading = false;
     });
+    
   }
+
+  headerHandler(emit) {
+		let header = $('#header');
+
+		if (emit) {
+			$(header).find('.dropdown-menu.show').removeClass('show');
+			if (!$(header).hasClass('sticky')) {
+				$(header).addClass('sticky');
+			}
+		} else {
+			if ($(header).hasClass('sticky')) {
+				$(header).removeClass('sticky');
+				$(header).find('.dropdown-menu.show').removeClass('show');
+			}
+		}
+	}
 
 }

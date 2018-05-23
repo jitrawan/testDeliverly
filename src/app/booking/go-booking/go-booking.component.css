@@ -37,7 +37,7 @@
 .spinner-loading:before {
   content: "";
   box-sizing: border-box;
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   width: 60px;
@@ -238,8 +238,8 @@ label {
   display: block !important;
 }
 
-.m-imagemap img {
-  max-width: 600px;
+::ng-deep .m-imagemap img {
+  max-width: 100%;
   height: auto;
 }
 

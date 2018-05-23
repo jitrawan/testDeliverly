@@ -24,26 +24,7 @@
   <div #chooseZone class="mt-4" id="chooseZone" >
     <div class="booking-border-title" id="choose">Choose Zone</div>
     <div class="col-12">
-      <!-- <div class = "d-flex justify-content-center mt-3" [innerHTML]="event.image_zone | safeHtml"></div> -->
-      <div class="m-imagemap text-center mt-3" [innerHTML]="event.displayZoneLayout | safeHtml">
-        
-      </div>
-      <!-- <div class="m-imagemap text-align-center p-t-10">
-        <img class="imagemap__item" src="../../../assets/images/testzone2.jpg" usemap="#image-map">
-        <map id="image-map" name="image-map">
-          <area target="" alt="ZONE A1" title="ZONE A1" (click)="selectZone('nonseat')" coords="429,627,431,948,171,943,170,710,266,623" shape="poly">
-          <area target="" alt="ZONE A2" title="ZONE A2" (click)="selectZone('nonseat')" coords="458,629,456,945,712,946,713,628" shape="poly">
-          <area target="" alt="ZONE A3" title="ZONE A3" (click)="selectZone('nonseat')" coords="742,628,742,943,999,943,998,710,902,626" shape="poly">
-
-          <area target="" alt="ZONE B1" title="ZONE B1" (click)="selectZone()" coords="171,991,171,1205,431,1206,433,991" shape="poly">
-          <area target="" alt="ZONE B2" title="ZONE B2" (click)="selectZone()" coords="456,991,456,1205,716,1206,718,991" shape="poly">
-          <area target="" alt="ZONE B3" title="ZONE B3" (click)="selectZone()" coords="740,991,740,1205,1000,1206,1002,991" shape="poly">
-
-          <area target="" alt="ZONE C1" title="ZONE C1" (click)="selectZone()" coords="433,1363,172,1251" shape="rect">
-          <area target="" alt="ZONE C2" title="ZONE C2" (click)="selectZone()" coords="718,1368,456,1251" shape="rect">
-          <area target="" alt="ZONE C3" title="ZONE C3" (click)="selectZone()" coords="1001,1367,739,1250" shape="rect">
-        </map>
-      </div> -->
+      <div class="m-imagemap text-center mt-3" (click)="zoneLayoutClicked($event)" [innerHTML]="event.displayZoneLayout | safeHtml"></div>
     </div>
   </div>
   <div #chooseNonSeat id="chooseNonSeat" class="my-4">
@@ -176,7 +157,7 @@
     <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
       <div class="ticket-summary">
         <div class="summary-title text-center">
-          <h3 class="my-0 is-size-5-mobile">TICKET SUMMARY</h3>
+          <h4 class="my-0 is-size-5-mobile">TICKET INFORMATION</h4>
         </div>
         <div class="summary-body">
           <div class="row mx-0  ">
@@ -192,11 +173,23 @@
               <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
                 <div class="text-desc">VALUE</div>
               </div>
-              <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Quantity</div>
+              <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text my-3">Quantity</div>
+              <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper my-3">
+                <div class="plusAndMinus">
+                  <div class="sign minus" (click)="qtyBtnHandler('4','minus')">
+                    <i class="fa fa-minus" aria-hidden="true"></i>
+                  </div>
+                  <input type="number" data-input-seq="4" min="0" max="100" value="1" />
+                  <div class="sign plus" (click)="qtyBtnHandler('4','plus')">
+                    <i class="fa fa-plus"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Unit Price (Baht)</div>
               <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
                 <div class="text-desc">VALUE</div>
               </div>
-              <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Unit Price (Baht)</div>
+              <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Total Price (Baht)</div>
               <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
                 <div class="text-desc">VALUE</div>
               </div>

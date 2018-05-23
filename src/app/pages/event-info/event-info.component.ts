@@ -64,8 +64,9 @@ export class EventInfoComponent implements OnInit {
   
   ngOnInit() {
 
+    $('#header').removeClass('sticky');
+    
     this.sharedService.receiveData.subscribe(data => this.performId = data);
-    console.log(this.performId);
     this.route.paramMap.subscribe(params => {
       this.performUri = params.get('performUri');
     });
@@ -83,23 +84,9 @@ export class EventInfoComponent implements OnInit {
       this.isLoading = false;
     }
     
-    var _self = this;
-    
-    window.addEventListener('scroll', function() {
-      var windowScroll = window.scrollY || document.getElementsByTagName("html")[0].scrollTop;
-      if (windowScroll >= 750) {
-        _self.isShowStickyHeader = true;
-        $('#buttonWrapper button').appendTo($('#stickyButtonWrapper'));
-      } else {			
-        _self.isShowStickyHeader = false;
-        $('#stickyButtonWrapper button').appendTo($('#buttonWrapper'));
-      }
-    });
   }
 
   ngOnDestroy() {
-    // window.removeEventListener('resize', this.adjustStickyHeader);
-    // window.removeEventListener('scroll', this.adjustStickyHeader);
   }
 
   getEventStatus() {
@@ -162,6 +149,16 @@ export class EventInfoComponent implements OnInit {
 
   }
 
+  stickyBarTrigger(isShow) {
+    if(isShow) {
+      this.isShowStickyHeader = true
+      $('#buttonWrapper button').appendTo($('#stickyButtonWrapper'));
+    } else {
+      this.isShowStickyHeader = false;
+      $('#stickyButtonWrapper button').appendTo($('#buttonWrapper'));
+    }
+  }
+  
   getDirection(event: any): void {
     window.open('https://www.google.com/maps/dir/Current+Location/' + this.lat + ',' + this.lng);
   }

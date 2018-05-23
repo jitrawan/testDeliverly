@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, HostListener, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { EventBanner } from '../../shared/models/eventBanner.model';
 import { CardTicket } from '../../shared/models/cardTickets';
@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
 	placeHolderImg: string = ConstMaster.DEFAULT_IMAGES.ticketCard;
 	subscription: Subscription;
 
-	constructor(private router: Router, private atkService: AtkService) {
+	constructor(private router: Router, private atkService: AtkService, private el: ElementRef) {
 		this.screenWidth = (window.innerWidth);
 	}
 
@@ -68,12 +68,9 @@ export class HomeComponent implements OnInit {
 
 		});
 
-		document.addEventListener("scroll",this.scrollHandler);
 	}
 
 	ngOnDestroy() {
-		document.removeEventListener("scroll",this.scrollHandler);
-		$('#header').removeClass('sticky'); // temp
 		this.subscription.unsubscribe();
 	}
 
@@ -132,14 +129,10 @@ export class HomeComponent implements OnInit {
 		}
 	}
 
-	private scrollHandler() {
-		let windowScroll = window.scrollY || document.getElementsByTagName("html")[0].scrollTop;
+	headerHandler(emit) {
+
 		let header = $('#header');
-		let maxHeight = document.documentElement.scrollHeight;
-		if (windowScroll >= 800) {
-
-			if(maxHeight < 1500) return;
-
+		if (emit) {
 			$(header).find('.dropdown-menu.show').removeClass('show');
 			if (!$(header).hasClass('sticky')) {
 				$(header).addClass('sticky');
@@ -149,7 +142,7 @@ export class HomeComponent implements OnInit {
 				$(header).removeClass('sticky');
 				$(header).find('.dropdown-menu.show').removeClass('show');
 			}
-
 		}
 	}
+	
 }

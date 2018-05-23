@@ -1,4 +1,4 @@
-<div class="container mt-4" *ngIf="cardTickets else notFound">
+<div class="container mt-4" scrollable [heightTrigger]="50" (scrollPosition)="headerHandler($event)" *ngIf="cardTickets else notFound">
   <div class="card-ticket px-4">
     <div class="row">
       <div class="col-md-12 iconTopic">

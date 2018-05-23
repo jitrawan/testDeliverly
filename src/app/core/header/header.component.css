@@ -10,13 +10,15 @@ body {
 
 #header {
   width: 100%;
-  animation-duration: .7s;
+  position: relative;
 }
 
-#header.sticky {
+#header.sticky > .main-wrapper {
   position: fixed;
+  width: 100%;
   top: 0;
   z-index: 2;
+  animation: smoothScroll 0.7s forwards;
 }
 
 #header.sticky .header-logo,
@@ -29,7 +31,6 @@ body {
   max-height: 40px;
   -webkit-transition: .5s ease-in-out;
   -moz-transition: .5s ease-in-out;
-  -o-transition: .5s ease-in-out;
   transition: .5s ease-in-out;
 }
 
@@ -532,10 +533,6 @@ a:focus {
   margin-left: 1rem;
 }
 
-pv10 {
-  padding: 0 10px 0 10px;
-}
-
 .telnoRadius {
   border-top-left-radius: 0px !important;
   border-bottom-left-radius: 0px !important;
@@ -776,4 +773,15 @@ pv10 {
   margin: 0 auto 1em;
   display: inline-block;
   vertical-align: top;
+}
+
+@keyframes slideDown {
+	0% {
+    transform: translateY(-40px);
+    opacity: 0.5;
+	}
+	100% {
+    transform: translateY(0px);
+    opacity: 1;
+	}
 }

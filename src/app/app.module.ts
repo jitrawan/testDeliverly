@@ -37,19 +37,11 @@ import { ResultReserveTransitComponent } from './pages/resultReserve-transit/res
 
 import { ResultPaidTransitComponent } from './pages/resultPaid/result-paid-transit/result-paid-transit.component';
 import { PopupResultPaidTransitComponent } from './pages/resultPaid-popup/result-paid-transit-popup/result-paid-transit-popup.component';
-import { FshowzoneComponent } from './pages/eventTickets/concert/fshowzone/fshowzone.component';
-import { ConcertComponent } from './pages/eventTickets/concert/concert.component';
 import { HistoryComponent } from './pages/history/history.component';
 
 import { SocialLoginModule } from 'angularx-social-login';
 import { AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider } from 'angularx-social-login';
 
-import { FootballComponent } from './pages/eventTickets/football/football.component';
-import { RacingComponent } from './pages/eventTickets/racing/racing.component';
-import { RunningComponent } from './pages/eventTickets/running/running.component';
-import { OthersComponent } from './pages/eventTickets/others/others.component';
-import { SeminarComponent } from './pages/eventTickets/seminar/seminar.component';
-import { EducationComponent } from './pages/eventTickets/education/education.component';
 import { DiscountComponent } from './pages/discount/discount.component';
 import { DiscountDetailComponent } from './pages/discount-detail/discount-detail.component';
 import {
@@ -99,15 +91,7 @@ export function provideConfig() {
     ResultReserveTransitComponent,
     ResultPaidTransitComponent,
     PopupResultPaidTransitComponent,
-    FshowzoneComponent,
-    ConcertComponent,
     HistoryComponent,
-    FootballComponent,
-    RacingComponent,
-    RunningComponent,
-    OthersComponent,
-    SeminarComponent,
-    EducationComponent,
     DiscountComponent,
     DiscountDetailComponent,
     CardTicketComponent,

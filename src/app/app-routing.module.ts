@@ -7,16 +7,7 @@ import { FaqComponent } from './pages/faq/faq.component';
 import { ResultReserveTransitComponent } from './pages/resultReserve-transit/resultReserve-transit.component';
 import { ResultPaidTransitComponent } from './pages/resultPaid/result-paid-transit/result-paid-transit.component';
 import { PopupResultPaidTransitComponent } from './pages/resultPaid-popup/result-paid-transit-popup/result-paid-transit-popup.component';
-import { FshowzoneComponent } from './pages/eventTickets/concert/fshowzone/fshowzone.component';
-import { ConcertComponent } from './pages/eventTickets/concert/concert.component';
 import { HistoryComponent } from './pages/history/history.component';
-import { FootballComponent } from './pages/eventTickets/football/football.component';
-import { RacingComponent } from './pages/eventTickets/racing/racing.component';
-import { RunningComponent } from './pages/eventTickets/running/running.component';
-import { OthersComponent } from './pages/eventTickets/others/others.component';
-import { SeminarComponent } from './pages/eventTickets/seminar/seminar.component';
-import { EducationComponent } from './pages/eventTickets/education/education.component';
-import { DiscountComponent } from './pages/discount/discount.component';
 import { DiscountDetailComponent } from './pages/discount-detail/discount-detail.component';
 import { ShowEventComponent } from './pages/home/show-event/show-event.component';
 
@@ -31,17 +22,8 @@ const routes: Routes = [
   { path: 'policy', component: PolicyComponent },
   { path: 'faq', component: FaqComponent },
   { path: 'faq/:howto', component: FaqComponent },
-  { path: 'concert', component: ConcertComponent },
   { path: 'resultReserve', component: ResultReserveTransitComponent },
-  { path: 'fshowzone', component: FshowzoneComponent },
   { path: 'history', component: HistoryComponent },
-  { path: 'football', component: FootballComponent },
-  { path: 'racing', component: RacingComponent },
-  { path: 'running', component: RunningComponent },
-  { path: 'others', component: OthersComponent },
-  { path: 'seminar', component: SeminarComponent },
-  { path: 'education', component: EducationComponent },
-  { path: 'discount', component: DiscountComponent },
   { path: 'discount-detail', component: DiscountDetailComponent },
   { path: 'event/:performUri', component: EventInfoComponent }
 ];

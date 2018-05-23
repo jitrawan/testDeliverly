@@ -45,7 +45,7 @@
           <div class="col cardwrapper" *ngFor="let cardTicket of cardTicketSlide;">
             <div class="cardbox mx-auto" (click)="goToEventInfo(cardTicket)">
               <div class="card-overlay" [title]="cardTicket.name">
-                <img src="https://atkmedia.allticket.com/assets/images/cursor.png">
+                <img src="//atkmedia.allticket.com/assets/images/cursor.png">
               </div>
               <img class="card-img-top img-fluid" [src]="cardTicket.performCardPic" (load)="slideCardLoaded()" (error)="cardTicket.performCardPic = placeHolderImg"
               [alt]="cardTicket.name">

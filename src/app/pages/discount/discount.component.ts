@@ -21,8 +21,8 @@ export class DiscountComponent implements OnInit {
   // discountList = new Array();
 
   discountList = [
-    { id: 1, title: 'S4P3', desc: 'ซื้อ 4 จ่าย 3' , imgUrl: 'https://atkmedia.allticket.com/images/discount/S4P3.jpg' },
-    { id: 2, title: 'PTT Blue Card', desc: 'แสดงบัตร PTT BLUE CARD รับส่วนลด 25% (6 ใบต่อ 1 ครั้งลดซ้ำได้)', imgUrl: "https://atkmedia.allticket.com/images/discount/GT_BlueCard.jpg " }
+    { id: 1, title: 'S4P3', desc: 'ซื้อ 4 จ่าย 3' , imgUrl: '//atkmedia.allticket.com/images/discount/S4P3.jpg' },
+    { id: 2, title: 'PTT Blue Card', desc: 'แสดงบัตร PTT BLUE CARD รับส่วนลด 25% (6 ใบต่อ 1 ครั้งลดซ้ำได้)', imgUrl: "//atkmedia.allticket.com/images/discount/GT_BlueCard.jpg " }
   ];
 
   constructor(

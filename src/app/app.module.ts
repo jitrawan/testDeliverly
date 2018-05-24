@@ -57,7 +57,7 @@ import { environment } from '../environments/environment';
 import { CardTicketComponent } from './pages/home/card-ticket/card-ticket.component';
 import { ShowEventComponent } from './pages/home/show-event/show-event.component';
 
-const globalSettings: RecaptchaSettings = {siteKey: '6LfUOlcUAAAAAPaRz8g50yRbhDqeEoogu2waIz9i'}
+const globalSettings: RecaptchaSettings = {siteKey: '6Lek2FoUAAAAAPQZEags-82eJwRwDdJFm_LHVpXF'}
 
 // Import module
 import { SharedModule } from './shared.module';

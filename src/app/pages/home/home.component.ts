@@ -1,13 +1,12 @@
 import { Component, OnInit, AfterViewInit, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { EventBanner } from '../../shared/models/eventBanner.model';
-import { CardTicket } from '../../shared/models/cardTickets';
-import { CardTickets } from '../../shared/models/cardTickets';
-import { ConstMaster } from '../../shared/config/ConstMaster';
-import { AtkService } from '../../shared/services/atk.service';
+import { EventBanner } from '@atk-shared/models/eventBanner.model';
+import { CardTicket } from '@atk-shared/models/cardTickets';
+import { CardTickets } from '@atk-shared/models/cardTickets';
+import { ConstMaster } from '@atk-shared/config/ConstMaster';
+import { AtkService } from '@atk-service/atk.service';
 import { CardTicketComponent } from './card-ticket/card-ticket.component';
 import { Subscription } from 'rxjs';
-import * as underscore from 'underscore';
 declare var $: any;
 
 @Component({

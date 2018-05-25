@@ -1,5 +1,6 @@
 .eventDescHeader {
   background-color: #333333;
+  min-height: 370px;
 }
 
 .eventDescHeader .inner-wrapper {

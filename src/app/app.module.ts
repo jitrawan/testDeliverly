@@ -17,17 +17,17 @@ import { JasperoConfirmationsModule } from '@jaspero/ng2-confirmations'
 import { CalendarModule } from './shared/lib/datetimepicker/primeng/calendar/calendar';
 
 /* Service */
-import { ApiService } from './shared/services/api.service';
-import { HeaderService } from './shared/services/header.service';
-import { AtkService } from './shared/services/atk.service';
-import { SharedService } from './shared/services/shared-service.service';
-import { ErrorMsgService } from './shared/services/errorMsg.service';
+import { ApiService } from '@atk-service/api.service';
+import { HeaderService } from '@atk-service/header.service';
+import { AtkService } from '@atk-service/atk.service';
+import { SharedService } from '@atk-service/shared-service.service';
+import { ErrorMsgService } from '@atk-service/errorMsg.service';
 
 /* Page */
 import { AppComponent } from './app.component';
 
-import { HeaderComponent } from './core/header/header.component';
-import { FooterComponent } from './core/footer/footer.component';
+import { HeaderComponent } from '@atk-pages/header/header.component';
+import { FooterComponent } from '@atk-pages/footer/footer.component';
 
 import { EventInfoComponent } from './pages/event-info/event-info.component';
 import { HomeComponent } from './pages/home/home.component';

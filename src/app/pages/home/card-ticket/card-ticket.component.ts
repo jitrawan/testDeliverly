@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { CardTickets } from '../../../shared/models/cardTickets';
-import { ConstMaster } from '../../../shared/config/ConstMaster';
-import { CardTicket } from '../../../shared/models/cardTickets';
-import { SharedService } from '../../../shared/services/shared-service.service';
+import { CardTickets } from '@atk-shared/models/cardTickets';
+import { ConstMaster } from '@atk-shared/config/ConstMaster';
+import { CardTicket } from '@atk-shared/models/cardTickets';
+import { SharedService } from '@atk-service/shared-service.service';
 
 @Component({
 	selector: 'card-ticket',

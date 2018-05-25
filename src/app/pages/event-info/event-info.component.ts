@@ -3,10 +3,10 @@ import { AgmMap } from '@agm/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import { AtkService } from '../../shared/services/atk.service';
-import { SharedService } from '../../shared/services/shared-service.service';
+import { AtkService } from '@atk-service/atk.service';
+import { SharedService } from '@atk-service/shared-service.service';
 import { resolveDefinition } from '@angular/core/src/view/util';
-import { EventInfo } from '../../shared/models/eventInfo.model';
+import { EventInfo } from '@atk-shared/models/eventInfo.model';
 import * as Jquery from 'jquery';
 
 @Component({
@@ -152,10 +152,15 @@ export class EventInfoComponent implements OnInit {
   stickyBarTrigger(isShow) {
     if(isShow) {
       this.isShowStickyHeader = true
-      $('#buttonWrapper button').appendTo($('#stickyButtonWrapper'));
+      setTimeout(() =>{
+        $('#buttonWrapper button').appendTo($('#stickyButtonWrapper'));
+      },100);
+      
     } else {
       this.isShowStickyHeader = false;
-      $('#stickyButtonWrapper button').appendTo($('#buttonWrapper'));
+      setTimeout(() =>{
+        $('#stickyButtonWrapper button').appendTo($('#buttonWrapper'));
+      },100);
     }
   }
   

@@ -13,17 +13,17 @@ import { SummaryComponent } from './summary/summary.component';
 import { BusReceiveComponent } from './bus-receive/bus-receive.component';
 import { BuyTicketComponent } from './buy-ticket/buy-ticket.component';
 import { BusErrorComponent } from './bus-error/bus-error.component';
-import { BusLayoutComponent } from '../shared/lib/bus-layout/bus-layout.component';
+import { BusLayoutComponent } from '@atk-shared/lib/bus-layout/bus-layout.component';
 
 // Import services
-import { SharedService } from '../shared/services/shared-service.service';
-import { BusService } from '../shared/services/bus.service';
-import { ErrorMsgService } from '../shared/services/errorMsg.service';
-import { CheckAllowService } from '../shared/services/checkAllow.service';
+import { SharedService } from '@atk-service/shared-service.service';
+import { BusService } from '@atk-service/bus.service';
+import { ErrorMsgService } from '@atk-service/errorMsg.service';
+import { CheckAllowService } from '@atk-service/checkAllow.service';
 
 // Import Libary
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
-import { CalendarModule } from '../shared/lib/datetimepicker/primeng/calendar/calendar';
+import { CalendarModule } from '@atk-shared/lib/datetimepicker/primeng/calendar/calendar';
 
 // Import module
 import { SharedModule } from '../shared.module';

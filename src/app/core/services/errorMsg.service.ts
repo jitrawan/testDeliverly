@@ -3,9 +3,9 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { HttpModule } from '@angular/http';
 
-import { ErrorCodeModel } from '../models/error/error.model';
-import { ErrorMessage } from '../constant/error-message';
-import { Constant } from '../constant/constant';
+import { ErrorCodeModel } from '@atk-shared/models/error/error.model';
+import { ErrorMessage } from '@atk-shared/constant/error-message';
+import { Constant } from '@atk-shared/constant/constant';
 
 @Injectable()
 export class ErrorMsgService {

@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewEncapsulation, ElementRef, Input, ViewChild, Renderer2, AfterContentChecked } from '@angular/core';
 import { Router } from '@angular/router';
-import { SharedService } from '../../shared/services/shared-service.service';
-import { AtkService } from '../../shared/services/atk.service';
+import { SharedService } from '@atk-service/shared-service.service';
+import { AtkService } from '@atk-service/atk.service';
 import { Location , DatePipe } from '@angular/common';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import * as $ from 'jquery';
-import * as underscore from 'underscore';
 
 declare function jMap(element): any;
 

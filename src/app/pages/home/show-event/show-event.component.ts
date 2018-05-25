@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AtkService } from '../../../shared/services/atk.service';
-import { CardTicket } from '../../../shared/models/cardTickets';
-import { ConstMaster } from '../../../shared/config/ConstMaster';
-import { HeaderModel } from '../../../shared/models/header.model';
+import { AtkService } from '@atk-service/atk.service';
+import { CardTicket } from '@atk-shared/models/cardTickets';
+import { ConstMaster } from '@atk-shared/config/ConstMaster';
+import { HeaderModel } from '@atk-shared/models/header.model';
 import { Subscription } from 'rxjs';
 
 @Component({

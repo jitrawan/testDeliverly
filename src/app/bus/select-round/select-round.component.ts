@@ -3,9 +3,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DatePipe, Location } from '@angular/common';
 
 /* ---------------------------------- services -------------------*/
-import { BusService } from '../../shared/services/bus.service';
-import { ErrorMsgService } from '../../shared/services/errorMsg.service';
-import { SharedService } from '../../shared/services/shared-service.service';
+import { BusService } from '@atk-service/bus.service';
+import { ErrorMsgService } from '@atk-service/errorMsg.service';
+import { SharedService } from '@atk-service/shared-service.service';
 import { AlertsService } from '@jaspero/ng2-alerts';
 
 /* ---------------------------------- models -------------------*/

@@ -1,9 +1,9 @@
-import { ForgetPasswordModel } from './../models/forgetPassword.model';
-import { UserProfile } from './../models/userProfile.model';
-import { ChangePasswordModel } from './../models/changePassword.model';
-import { checkLoginModel } from './../models/checkLogin.model';
-import { checkEmailSocial } from './../models/checkEmail.model';
-import { User } from './../models/user.model';
+import { ForgetPasswordModel } from '@atk-shared/models/forgetPassword.model';
+import { UserProfile } from '@atk-shared/models/userProfile.model';
+import { ChangePasswordModel } from '@atk-shared/models/changePassword.model';
+import { checkLoginModel } from '@atk-shared/models/checkLogin.model';
+import { checkEmailSocial } from '@atk-shared/models/checkEmail.model';
+import { User } from '@atk-shared/models/user.model';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Headers, Http, Response, URLSearchParams } from '@angular/http';

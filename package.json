@@ -47,7 +47,6 @@
     "popper.js": "^1.14.1",
     "primeng": "^5.2.4",
     "rxjs": "5.5.2",
-    "underscore": "^1.8.3",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {

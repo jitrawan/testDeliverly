@@ -3,9 +3,9 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
 import { AlertsService } from '@jaspero/ng2-alerts';
-import { BusService } from '../../shared/services/bus.service';
-import { SharedService } from '../../shared/services/shared-service.service';
-import { ErrorMsgService } from '../../shared/services/errorMsg.service';
+import { BusService } from '@atk-service/bus.service';
+import { SharedService } from '@atk-service/shared-service.service';
+import { ErrorMsgService } from '@atk-service/errorMsg.service';
 
 import { ErrorMessage } from '../../shared/constant/error-message';
 import { Constant } from '../../shared/constant/constant';

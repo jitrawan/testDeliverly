@@ -4,10 +4,10 @@ import { Observable } from 'rxjs/Observable';
 import { HttpModule } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { AvailableTripModel } from '../models/bus/availableTripSearch.model';
-import { ProvinceModel } from '../models/bus/province.model';
-import { MarkSeatModel } from '../models/bus/markSeat.model';
-import { PassengerBookingModel } from '../models/bus/passengerBooking.model';
+import { AvailableTripModel } from '@atk-shared/models/bus/availableTripSearch.model';
+import { ProvinceModel } from '@atk-shared/models/bus/province.model';
+import { MarkSeatModel } from '@atk-shared/models/bus/markSeat.model';
+import { PassengerBookingModel } from '@atk-shared/models/bus/passengerBooking.model';
 import { Constant } from '../../shared/constant/constant';
 import { AlertsService } from '@jaspero/ng2-alerts';
 import { ErrorMsgService } from './errorMsg.service';
@@ -18,7 +18,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/timeout'
 
-import { InsertBookingInfoModel } from '../models/bus/insertBookingInfo.model';
+import { InsertBookingInfoModel } from '@atk-shared/models/bus/insertBookingInfo.model';
 
 @Injectable()
 export class BusService {

@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AlertsService } from '@jaspero/ng2-alerts';
 import { ErrorMsgService } from './errorMsg.service';
 
-import { Constant } from '../../shared/constant/constant';
+import { Constant } from '@atk-shared/constant/constant';
 
 @Injectable()
 export class CheckAllowService {

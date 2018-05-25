@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { ConstMaster } from '../config/ConstMaster';
-import { HeaderModel } from '../models/header.model';
+import { ConstMaster } from '@atk-shared/config/ConstMaster';
+import { HeaderModel } from '@atk-shared/models/header.model';
 
 @Injectable()
 export class HeaderService {
@@ -13,7 +13,6 @@ export class HeaderService {
 
   getHeaderMenu(): Observable<HeaderModel> {
     return this.http.get<HeaderModel>(this.headerUrl);
-    // return this.http.get<HeaderModel>(this.headerUrl);
   }
 
 

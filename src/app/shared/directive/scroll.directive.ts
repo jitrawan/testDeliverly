@@ -7,6 +7,7 @@ export class ScrollDirective {
 
   @Output() scrollPosition = new EventEmitter()
   @Input('heightTrigger') heightTrigger:number;
+  
   constructor(private el: ElementRef) { }
 
   @HostListener('window:scroll', ['$event'])

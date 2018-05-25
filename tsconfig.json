@@ -17,7 +17,14 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "baseUrl": "src",
+    "paths": {
+      "@atk-service/*": ["app/core/services/*"],
+      "@atk-shared/*": ["app/shared/*"],
+      "@atk-booking/*": ["app/booking/*"],
+      "@atk-pages/*": ["app/pages/*"]
+    }
   },
   "include": [
     "node_modules/@jaspero/ng2-alerts",

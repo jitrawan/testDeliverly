@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertsService } from '@jaspero/ng2-alerts';
-import { SharedService } from '../../shared/services/shared-service.service';
-import { BusService } from '../../shared/services/bus.service';
+import { SharedService } from '@atk-service/shared-service.service';
+import { BusService } from '@atk-service/bus.service';
 import { Location } from '@angular/common';
 
 import { AvailableTripModel } from '../../shared/models/bus/availableTripSearch.model';
@@ -15,7 +15,7 @@ import { BusLayoutModel } from '../.././shared/models/bus/busLayout.model';
 import { MarkSeatModel } from '../../shared/models/bus/markSeat.model';
 import { TransIdModel } from '../../shared/models/bus/transaction/transId.model';
 import { TransCheckoutModel } from '../../shared/models/bus/transCheckout.model';
-import { ErrorMsgService } from '../../shared/services/errorMsg.service';
+import { ErrorMsgService } from '@atk-service/errorMsg.service';
 
 @Component({
   selector: 'app-select-seat',

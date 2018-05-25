@@ -2,18 +2,18 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { AlertsService } from '@jaspero/ng2-alerts';
-import { ErrorMsgService } from '../../shared/services/errorMsg.service';
+import { ErrorMsgService } from '@atk-service/errorMsg.service';
 
-import { ErrorMessage } from '../../shared/constant/error-message';
-import { Constant } from '../../shared/constant/constant';
-import { PassengerInformationModel } from '../../shared/models/bus/passengerInformation.model';
-import { TransCheckoutModel } from '../../shared/models/bus/transCheckout.model';
-import { PassengerBookingModel } from '../../shared/models/bus/passengerBooking.model';
-import { BookingResultModel } from '../../shared/models/bus/bookingResult.model';
-import { TransIdModel } from '../../shared/models/bus/transaction/transId.model';
+import { ErrorMessage } from '@atk-shared/constant/error-message';
+import { Constant } from '@atk-shared/constant/constant';
+import { PassengerInformationModel } from '@atk-shared/models/bus/passengerInformation.model';
+import { TransCheckoutModel } from '@atk-shared/models/bus/transCheckout.model';
+import { PassengerBookingModel } from '@atk-shared/models/bus/passengerBooking.model';
+import { BookingResultModel } from '@atk-shared/models/bus/bookingResult.model';
+import { TransIdModel } from '@atk-shared/models/bus/transaction/transId.model';
 
-import { SharedService } from '../../shared/services/shared-service.service';
-import { BusService } from '../../shared/services/bus.service';
+import { SharedService } from '@atk-service/shared-service.service';
+import { BusService } from '@atk-service/bus.service';
 
 @Component({
   selector: 'app-passenger-information',

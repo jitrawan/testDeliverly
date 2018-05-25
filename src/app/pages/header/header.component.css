@@ -10,6 +10,7 @@ body {
 
 #header {
   width: 100%;
+  z-index: 2;
   position: relative;
 }
 
@@ -17,8 +18,7 @@ body {
   position: fixed;
   width: 100%;
   top: 0;
-  z-index: 2;
-  animation: smoothScroll 0.7s forwards;
+  animation: slideDown 0.7s forwards;
 }
 
 #header.sticky .header-logo,
@@ -764,6 +764,7 @@ a:focus {
 .stickyOverlay {
   color: white;
 }
+
 .loader{
   margin: 0 0 2em;
   height: 100px;

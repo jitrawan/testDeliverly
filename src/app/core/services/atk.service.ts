@@ -1,9 +1,9 @@
 import { Injectable , isDevMode } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { ConstMaster } from '../config/ConstMaster';
-import { EventBanner } from '../models/eventBanner.model';
-import { EventInfo } from '../models/EventInfo.model';
+import { ConstMaster } from '@atk-shared/config/ConstMaster';
+import { EventBanner } from '@atk-shared/models/eventBanner.model';
+import { EventInfo } from '@atk-shared/models/EventInfo.model';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

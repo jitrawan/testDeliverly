@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, EventEmitter, Output, Renderer2 } from '@angular/core';
 import { AlertsService } from '@jaspero/ng2-alerts';
 
-import { BusService } from '../../services/bus.service';
-import { ErrorMsgService } from '../../services/errorMsg.service';
+import { BusService } from '@atk-service/bus.service';
+import { ErrorMsgService } from '@atk-service/errorMsg.service';
 
 import { ErrorMessage } from '../../constant/error-message';
 import { Constant } from '../../constant/constant';

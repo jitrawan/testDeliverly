@@ -1,0 +1,52 @@
+LAYOUT
+
+<input #input type="checkbox" id="test"  />
+<!-- <div class="over-x  m-t-30" align="center">
+  <table *ngFor="let zone of seatList; let zoneIndex = index;">
+    <tr class="d-flex" *ngFor="let row of zone.labelOfRow">
+      <td class="noneSeatItem"> {{row}} </td>
+      <td class="noneSeatItem" type="A" style="display: block;" type="A" *ngFor="let col of zone.labelOfCol">
+        <div class="seat" *ngFor="let data of fatchRowData(zone, col, row, 'a'); let index = index">
+          <input #input *ngIf="data.status == 'A'" type="checkbox" id="{{zone.zoneId}}{{row}}{{col}}" />
+          <label [ngStyle]="{'background-color': zone.color }" *ngIf="data.status == 'A'" for="{{zone.zoneId}}{{row}}{{col}}"> {{data.seatNo}} </label>
+          <span [ngStyle]="{'background-color': zone.color }" *ngIf="data.status != 'A'" id="{{zone.zoneId}}{{row}}{{col}}"> {{data.seatNo}} </span>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div> -->
+
+
+<div class="over-x  m-t-30" align="center">
+  <table >
+    <tr class="d-flex" *ngFor="let row of labelOfRow">
+      <td class="noneSeatItem"> {{row}} </td>
+      <td class="noneSeatItem" style="display: block;" *ngFor="let col of labelOfCol">
+        <div class="" *ngFor="let data of fatchRowSpecialData(col, row); let index = index">
+          <input #input *ngIf="data.status == 'A'" type="checkbox" id="{{data.zoneId}}{{row}}{{col}}"  (click)="selectSeat($event, data, input.id)" />
+          <label [ngStyle]="{'background-color': data.color }" *ngIf="data.status == 'A'" for="{{data.zoneId}}{{row}}{{col}}"> {{data.seatNo}} </label>
+          <span [ngStyle]="{'background-color': data.color }" *ngIf="data.status != 'A'" id="{{data.zoneId}}{{row}}{{col}}"> {{data.seatNo}} </span>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+
+
+<!-- <div class="over-x  m-t-30" align="center">
+    <table>
+      <tr class="d-flex" *ngFor="let index of numbersOfRow; let row = index">
+        <td class="seats" type="A" *ngFor="let col of numbersOfCol; let pos = index">
+          <div class="seat" *ngFor="let data of fatchRowData(row+1, pos+1);">
+            <input type="checkbox" name="{{data.z}}" id="{{data.z}}" (change)="onChangeSeat(data.labelRow + data.x, $event.target.checked)"
+            />
+            <label class="bg-cream" for="{{data.z}}">{{data.labelRow}}{{data.x}}</label>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div> -->
+
+<!-- (change)="onChangeSeat(data.labelRow + data.x, $event.target.checked)" -->
+
+<!-- *ngFor="let data of fatchRowData(floorOneList, row+1, pos+1); let index = index" -->

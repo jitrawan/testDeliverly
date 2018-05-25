@@ -15,9 +15,9 @@ import { PaymentService } from '@atk-service/payment.service';
 @Component({
     selector: 'app-result-reserve-popup-transit',
     templateUrl: './popup-result-reserve-transit.component.html',
-    styleUrls: ['../../../../assets/css/standard/utility.css',
+    styleUrls: [
+        '../../../../../assets/css/standard/utility.css',
         './popup-result-reserve-transit.component.css'
-
     ]
 })
 export class ResultReservePopupTransitComponent implements OnInit {

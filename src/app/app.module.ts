@@ -25,21 +25,15 @@ import { ErrorMsgService } from '@atk-service/errorMsg.service';
 
 /* Page */
 import { AppComponent } from './app.component';
-
 import { HeaderComponent } from '@atk-pages/header/header.component';
 import { FooterComponent } from '@atk-pages/footer/footer.component';
-
 import { EventInfoComponent } from './pages/event-info/event-info.component';
 import { HomeComponent } from './pages/home/home.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { PolicyComponent } from './pages/policy/policy.component';
-import { ResultReserveTransitComponent } from './pages/resultReserve-transit/resultReserve-transit.component';
-
 import { HistoryComponent } from './pages/history/history.component';
-
 import { SocialLoginModule } from 'angularx-social-login';
 import { AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider } from 'angularx-social-login';
-
 import { DiscountComponent } from './pages/discount/discount.component';
 import { DiscountDetailComponent } from './pages/discount-detail/discount-detail.component';
 import {
@@ -87,7 +81,6 @@ export function provideConfig() {
     HomeComponent,
     FaqComponent,
     PolicyComponent,
-    ResultReserveTransitComponent,
     HistoryComponent,
     DiscountComponent,
     DiscountDetailComponent,

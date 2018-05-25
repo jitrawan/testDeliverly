@@ -14,9 +14,10 @@ import { BusReceiveComponent } from './bus-receive/bus-receive.component';
 import { BuyTicketComponent } from './buy-ticket/buy-ticket.component';
 import { BusErrorComponent } from './bus-error/bus-error.component';
 import { BusLayoutComponent } from '@atk-shared/lib/bus-layout/bus-layout.component';
-import { ResultPaidTransitComponent } from '@atk-pages/resultPaid/result-paid-transit/result-paid-transit.component';
-import { PopupResultPaidTransitComponent } from '@atk-pages/resultPaid-popup/result-paid-transit-popup/result-paid-transit-popup.component';
-import { ResultReservePopupTransitComponent } from '@atk-pages/popup-resultReserve/popup-result-reserve-transit/popup-result-reserve-transit.component';
+import { ResultPaidTransitComponent } from '@atk-bus/reserved-transit/result-paid/result-paid-transit.component';
+import { PopupResultPaidTransitComponent } from '@atk-bus/reserved-transit/result-paid/popup/result-paid-transit-popup.component';
+import { ResultReservePopupTransitComponent } from '@atk-bus/reserved-transit/result-reserve/popup/popup-result-reserve-transit.component';
+import { ResultReserveTransitComponent } from '@atk-bus/reserved-transit/result-reserve/resultReserve-transit.component';
 
 // Import services
 import { SharedService } from '@atk-service/shared-service.service';
@@ -47,7 +48,8 @@ const routes: Routes = [
   { path: 'busReceive', component: BusReceiveComponent },
   { path: 'resultPaid', component: ResultPaidTransitComponent },
   { path: 'popupResultPaid', component: PopupResultPaidTransitComponent },
-  { path: 'reserveDetail', component: ResultReservePopupTransitComponent }
+  { path: 'reserveDetail', component: ResultReservePopupTransitComponent },
+  { path: 'resultReserve', component: ResultReserveTransitComponent }
 ];
 
 @NgModule({
@@ -71,7 +73,8 @@ const routes: Routes = [
     BusLayoutComponent,
     ResultPaidTransitComponent,
     ResultReservePopupTransitComponent,
-    PopupResultPaidTransitComponent
+    PopupResultPaidTransitComponent,
+    ResultReserveTransitComponent
   ],
   providers: [
     SharedService,

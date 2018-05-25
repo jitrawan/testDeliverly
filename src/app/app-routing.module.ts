@@ -4,7 +4,6 @@ import { HomeComponent } from './pages/home/home.component';
 import { EventInfoComponent } from './pages/event-info/event-info.component';
 import { PolicyComponent } from './pages/policy/policy.component';
 import { FaqComponent } from './pages/faq/faq.component';
-import { ResultReserveTransitComponent } from './pages/resultReserve-transit/resultReserve-transit.component';
 import { HistoryComponent } from './pages/history/history.component';
 import { DiscountDetailComponent } from './pages/discount-detail/discount-detail.component';
 import { ShowEventComponent } from './pages/home/show-event/show-event.component';
@@ -20,7 +19,6 @@ const routes: Routes = [
   { path: 'policy', component: PolicyComponent },
   { path: 'faq', component: FaqComponent },
   { path: 'faq/:howto', component: FaqComponent },
-  { path: 'resultReserve', component: ResultReserveTransitComponent },
   { path: 'history', component: HistoryComponent },
   { path: 'discount-detail', component: DiscountDetailComponent },
   { path: 'event/:performUri', component: EventInfoComponent }

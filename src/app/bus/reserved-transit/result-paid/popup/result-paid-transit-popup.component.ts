@@ -7,7 +7,7 @@ import { UserTOModel } from '@atk-shared/models/payment/userTO.model';
   templateUrl: './result-paid-transit-popup.component.html',
   styleUrls: [ 
       './result-paid-transit-popup.component.css',
-      '../../../../assets/css/standard/utility.css' ]
+      '../../../../../assets/css/standard/utility.css' ]
 })
 export class PopupResultPaidTransitComponent implements OnInit {
   transReservTo: TransReservToModel;

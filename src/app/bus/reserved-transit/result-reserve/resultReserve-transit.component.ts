@@ -25,7 +25,10 @@ import { BuyTicketComponent } from '@atk-bus/buy-ticket/buy-ticket.component';
 @Component({
 	selector: 'app-payment',
 	templateUrl: './resultReserve-transit.component.html',
-	styleUrls: ['./resultReserve-transit.component.css', '../../../assets/css/standard/utility.css']
+	styleUrls: [
+		'./resultReserve-transit.component.css',
+		'../../../../assets/css/standard/utility.css'
+	]
 })
 export class ResultReserveTransitComponent implements OnInit {
 

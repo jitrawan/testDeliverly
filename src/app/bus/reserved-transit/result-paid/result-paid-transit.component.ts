@@ -5,7 +5,10 @@ import { UserTOModel } from '../../../../app/shared/models/payment/userTO.model'
 @Component({
   selector: 'app-result-paid-transit',
   templateUrl: './result-paid-transit.component.html',
-  styleUrls: ['./result-paid-transit.component.css','../../../../assets/css/standard/utility.css']
+  styleUrls: [
+      './result-paid-transit.component.css',
+      '../../../../assets/css/standard/utility.css'
+  ]
 })
 export class ResultPaidTransitComponent implements OnInit {
   transReservTo: TransReservToModel;

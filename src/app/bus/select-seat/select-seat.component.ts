@@ -5,16 +5,16 @@ import { SharedService } from '@atk-service/shared-service.service';
 import { BusService } from '@atk-service/bus.service';
 import { Location } from '@angular/common';
 
-import { AvailableTripModel } from '../../shared/models/bus/availableTripSearch.model';
-import { AvailableTripResultModel } from '../../shared/models/bus/availableTripResult.model';
-import { ProvinceModel } from '../../shared/models/bus/province.model';
-import { TripModel } from '../.././shared/models/bus/trip.model';
-import { ErrorMessage } from '../../shared/constant/error-message';
-import { Constant } from '../../shared/constant/constant';
-import { BusLayoutModel } from '../.././shared/models/bus/busLayout.model';
-import { MarkSeatModel } from '../../shared/models/bus/markSeat.model';
-import { TransIdModel } from '../../shared/models/bus/transaction/transId.model';
-import { TransCheckoutModel } from '../../shared/models/bus/transCheckout.model';
+import { AvailableTripModel } from '@atk-shared/models/bus/availableTripSearch.model';
+import { AvailableTripResultModel } from '@atk-shared/models/bus/availableTripResult.model';
+import { ProvinceModel } from '@atk-shared/models/bus/province.model';
+import { TripModel } from '@atk-shared/models/bus/trip.model';
+import { ErrorMessage } from '@atk-shared/constant/error-message';
+import { Constant } from '@atk-shared/constant/constant';
+import { BusLayoutModel } from '@atk-shared/models/bus/busLayout.model';
+import { MarkSeatModel } from '@atk-shared/models/bus/markSeat.model';
+import { TransIdModel } from '@atk-shared/models/bus/transaction/transId.model';
+import { TransCheckoutModel } from '@atk-shared/models/bus/transCheckout.model';
 import { ErrorMsgService } from '@atk-service/errorMsg.service';
 
 @Component({
@@ -159,6 +159,7 @@ export class SelectSeatComponent implements OnInit {
               this.router.navigate(['/selectSeat2'], { relativeTo: this.route });
             } else {
               this.isShowLoading = false;
+              this.openDialog(this.errorMsgService.getErrorMsg(res.code));
             }
           },
             (err) => {
@@ -180,6 +181,7 @@ export class SelectSeatComponent implements OnInit {
               this.router.navigate(['/passengerInfomation'], { relativeTo: this.route });
             } else {
               this.isShowLoading = false;
+              this.openDialog(this.errorMsgService.getErrorMsg(res.code));
             }
           },
             (err) => {
@@ -212,7 +214,7 @@ export class SelectSeatComponent implements OnInit {
         rtrnPark: this.arrvPark,
         totalPassenger: this.totalPassenger
       }
-      routerUrl = '../selectRound'
+      routerUrl = '../select-round'
 
     } else {
       dataBackSeat = {
@@ -236,6 +238,7 @@ export class SelectSeatComponent implements OnInit {
         this.router.navigate([routerUrl], { relativeTo: this.route });
       } else {
         this.isShowLoadingBack = false;
+        this.openDialog(this.errorMsgService.getErrorMsg(res.code));
       }
     },
       (err) => {
@@ -246,4 +249,3 @@ export class SelectSeatComponent implements OnInit {
 
   }
 }
-

@@ -23,6 +23,7 @@
       "@atk-service/*": ["app/core/services/*"],
       "@atk-shared/*": ["app/shared/*"],
       "@atk-booking/*": ["app/booking/*"],
+      "@atk-bus/*": ["app/bus/*"],
       "@atk-pages/*": ["app/pages/*"]
     }
   },

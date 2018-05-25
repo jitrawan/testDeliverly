@@ -394,3 +394,9 @@ table {
     padding-top: 10px;
   }
 }
+
+.parkText {
+  color: #fe6716;
+  font-size: 22px;
+  /* font-weight: bolder; */
+}

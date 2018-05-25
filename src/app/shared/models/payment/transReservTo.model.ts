@@ -6,59 +6,57 @@ import { DiscountRequestTo } from './discountRequestTo.model';
 import { CustomerSportTo } from './customerSportTo.model';
 
 export class TransReservToModel {
-    reserveId: string
-    csReserveId: string;
-    reservDate: Date;
-    expireDate: Date;
-    priceAmtTotal: number;
-    eventId: string;
-    roundNo: string;
+    public reserveId: string
+    public csReserveId: string;
+    public reservDate: Date;
+    public expireDate: Date;
+    public priceAmtTotal: number;
+    public eventId: string;
+    public roundNo: string;
 
-    eventZoneTO: EventZoneTOModel;
-    roundTO: RoundTOModel;
-    zoneTO: ZoneTOModel;
-    seatTOs: SeatTOModel[];
+    public eventZoneTO: EventZoneTOModel;
+    public roundTO: RoundTOModel;
+    public zoneTO: ZoneTOModel;
+    public vseatTOs: SeatTOModel[];
     // seatToReserves: SeatToReserves[];
+    public noOfSeat: string;
+    public priceAmt: number;
 
-    noOfSeat: string;
-    priceAmt: number;
+    public confirmSuccess: boolean;
+    public message: string;
+    public maxreserve: string;
+    public feeOfseat: string;
+    public labelSeatReserve: string;
+    public labelSeatRowNo: string;
+    public labelSeatId: string;
+    public totalOfSeat: number;
+    public pricePerseat: number;
+    public feePerseat: number;
+    public disCountValue: number;
+    public feeTotal: number;
+    public endPrice: number;
+    public vat: number;
+    public transFee: number;
+    public csFee: number;
+    public discountId: string;
+    public promotionCode: string;
+    public detailConditions: string; //เพิ่มข้อความเงื่อนไขหลังจ่ายด้วยบัตรเครดิต 17/02/2017 Prach
+    public PREDEFINE_ID //เพิ่มข้อความเงื่อนไขหลังจ่ายด้วยบัตรเครดิต 17/02/2017 Prach
+    public creditFee: number;
 
-    confirmSuccess: boolean;
-    message: string;
-    maxreserve: string;
-    feeOfseat: string;
-    labelSeatReserve: string;
-    labelSeatRowNo: string;
-    labelSeatId: string;
-    totalOfSeat: number;
-    pricePerseat: number;
-    feePerseat: number;
-    disCountValue: number;
-    feeTotal: number;
-    endPrice: number;
-    vat: number;
-    transFee: number;
-    csFee: number;
-    discountId: string;
-    promotionCode: string;
-    detailConditions: string; //เพิ่มข้อความเงื่อนไขหลังจ่ายด้วยบัตรเครดิต 17/02/2017 Prach
-    PREDEFINE_ID //เพิ่มข้อความเงื่อนไขหลังจ่ายด้วยบัตรเครดิต 17/02/2017 Prach
+    public clientCode: string;
+    public serviceCode: string;
+    public transId: string;
+    public transDetail: string;
+    public transSlip: string;
 
-    creditFee: number;
-
-    clientCode: string;
-    serviceCode: string;
-    transId: string;
-    transDetail: string;
-    transSlip: string;
-
-    discountRequestTo:DiscountRequestTo;
-    customerSportTOs:CustomerSportTo[];
+    public discountRequestTo:DiscountRequestTo;
+    public customerSportTOs:CustomerSportTo[];
     
     // Map<String, ShirtSizeTO> shirtSizeTO;
-
-    data1: string;
-    data2: string;
-    data3: string;
-    data4: string;
+    public data1: string;
+    public data2: string;
+    public data3: string;
+    public data4: string;
+    public busPayCode: string;
 }

@@ -72,14 +72,14 @@ export class GoBookingComponent implements OnInit {
         this.sharedService.receiveData.subscribe(data => {
             console.log(data);
             if(data == undefined || Object.keys(data).length == 0) {
-                // this.router.navigate(['/']);
+                this.router.navigate(['/']);
             } else {
                 this.performId = data;
             }
         });
 
 
-        this.atkService.getRoundDetail('18042').subscribe(res =>{
+        this.atkService.getRoundDetail(this.performId).subscribe(res =>{
             
             console.log(res);
             

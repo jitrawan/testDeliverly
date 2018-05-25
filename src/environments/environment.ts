@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: '//d11aliyfxni7iy.cloudfront.net',
+  baseUrl: '//dmkeuw46g1lts.cloudfront.net',
   apiGateway: 'https://ad5xsmjzzj.execute-api.ap-southeast-1.amazonaws.com/v1/',
   apiGatewayBaseUrl: 'https://26ieslrird.execute-api.ap-southeast-1.amazonaws.com/latest/',
   apiGatewayRegister: 'https://26ieslrird.execute-api.ap-southeast-1.amazonaws.com/latest/register',

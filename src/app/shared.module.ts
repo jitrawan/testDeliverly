@@ -2,6 +2,9 @@ import { ModuleWithProviders , NgModule } from '@angular/core';
 import { ThaiDatePipe } from './shared/lib/date-format/thaidate.pipe';
 import { SafeHtmlPipe } from './shared/lib/dom/safehtml.pipe';
 
+import { JasperoConfirmationsModule } from '@jaspero/ng2-confirmations';
+import { NgxBarcodeModule } from 'ngx-barcode';
+
 
 @NgModule({
   declarations: [
@@ -9,11 +12,14 @@ import { SafeHtmlPipe } from './shared/lib/dom/safehtml.pipe';
     SafeHtmlPipe
   ],
   imports: [
-    
+    JasperoConfirmationsModule,
+    NgxBarcodeModule
   ],
   exports: [
     ThaiDatePipe,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    JasperoConfirmationsModule,
+    NgxBarcodeModule
   ]
 })
 export class SharedModule {

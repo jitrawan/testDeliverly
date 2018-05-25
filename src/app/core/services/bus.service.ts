@@ -12,13 +12,13 @@ import { Constant } from '../../shared/constant/constant';
 import { AlertsService } from '@jaspero/ng2-alerts';
 import { ErrorMsgService } from './errorMsg.service';
 
-import { BuyTicketComponent } from '../../bus/buy-ticket/buy-ticket.component';
+import { BuyTicketComponent } from '@atk-bus/buy-ticket/buy-ticket.component';
+import { InsertBookingInfoModel } from '@atk-shared/models/bus/insertBookingInfo.model';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/timeout'
 
-import { InsertBookingInfoModel } from '@atk-shared/models/bus/insertBookingInfo.model';
 
 @Injectable()
 export class BusService {
@@ -40,12 +40,12 @@ export class BusService {
     private getTransCheckoutAPI = this.apiTrsUrl + 'ag_trans_checkout';
     private bookingAPI = this.apiTrsUrl + 'ag_booking';
     private cancelBookingAPI = this.apiTrsUrl + 'ag_cancel_booking';
-    private insertBookingInfoAPI = this.apiBusUrl + 'insert_booking_info';
+    private insertBookingInfoAPI = this.apiBusUrl + 'insert_booking_info'; //'https://ad5xsmjzzj.execute-api.ap-southeast-1.amazonaws.com/latest/insertbookinginfo' //
     private clearTransSeatmarkAPI = this.apiTrsUrl + 'ag_clear_trans_seatmark';
+    private confirmReserveTransitAPI = this.apiBusUrl + 'confirm_reserve_transit';
     // private checkAllowReserveAPI = 'https://ad5xsmjzzj.execute-api.ap-southeast-1.amazonaws.com/v1/checkallowreserve';
     alertSettings: any;
     // private buyTicketComponent = new BuyTicketComponent;
-
     constructor(
         private http: Http,
         private _alert: AlertsService,
@@ -107,7 +107,7 @@ export class BusService {
     }
 
     getBusLayout(tripId, pickupId, dropoffId) {
-        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken") });
+        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken"), 'paymentChannel': sessionStorage.getItem("paymentChannel") });
         let options = new RequestOptions({ headers: headers });
         let body = {
             tripId: tripId,
@@ -123,7 +123,7 @@ export class BusService {
     }
 
     getTransId(transType: string) {
-        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken") });
+        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken"), 'paymentChannel': sessionStorage.getItem("paymentChannel") });
         let options = new RequestOptions({ headers: headers });
         let body = {
             transType: transType
@@ -137,7 +137,7 @@ export class BusService {
     }
 
     markSeat(markSeat: MarkSeatModel) {
-        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken") });
+        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken"), 'paymentChannel': sessionStorage.getItem("paymentChannel") });
         let options = new RequestOptions({ headers: headers });
         let body = {
             transId: markSeat.transId + "",
@@ -165,7 +165,7 @@ export class BusService {
     }
 
     unMarkSeat(markSeat: MarkSeatModel, reserveId) {
-        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken") });
+        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken"), 'paymentChannel': sessionStorage.getItem("paymentChannel") });
         let options = new RequestOptions({ headers: headers });
         let body = {
             transId: markSeat.transId + "",
@@ -188,7 +188,7 @@ export class BusService {
     }
 
     getTransCheckout(transId: string) {
-        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken") });
+        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken"), 'paymentChannel': sessionStorage.getItem("paymentChannel") });
         let options = new RequestOptions({ headers: headers });
         let body = {
             transId: transId
@@ -202,7 +202,7 @@ export class BusService {
     }
 
     cancelBooking(transId, bookId, bookCode) {
-        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken") });
+        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken"), 'paymentChannel': sessionStorage.getItem("paymentChannel") });
         let options = new RequestOptions({ headers: headers });
         let body = {
             transId: transId + "",
@@ -219,7 +219,7 @@ export class BusService {
 
     }
     booking(passengerBooking: PassengerBookingModel) {
-        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken") });
+        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken"), 'paymentChannel': sessionStorage.getItem("paymentChannel") });
         let options = new RequestOptions({ headers: headers });
         let body = {
             transId: passengerBooking.transId,
@@ -249,7 +249,7 @@ export class BusService {
         }
 
         return this.http.post(this.bookingAPI, JSON.stringify(body), options)
-            .timeout(this.const.timeoutSec)
+            .timeout(this.const.timeoutSecBooking)
             .map((res: Response) => {
                 return res.json();
             })
@@ -259,7 +259,7 @@ export class BusService {
     }
 
     clearTransSeatMark(transId: string) {
-        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken") });
+        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken"), 'paymentChannel': sessionStorage.getItem("paymentChannel") });
         let options = new RequestOptions({ headers: headers });
         let body = {
             transId: transId
@@ -273,11 +273,11 @@ export class BusService {
     }
 
     insertBookingInfo(insertBooking: InsertBookingInfoModel) {
-        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken") });
+        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken"), 'paymentChannel': sessionStorage.getItem("paymentChannel") });
         let options = new RequestOptions({ headers: headers });
         let body = insertBooking;
         return this.http.post(this.insertBookingInfoAPI, JSON.stringify(body), options)
-            .timeout(this.const.timeoutSec)
+            .timeout(15000)
             .map((res: Response) => {
                 return res.json();
             })
@@ -287,6 +287,25 @@ export class BusService {
             );
     }
 
+    confirmReserveTransit(transId, bookId, bookCode, paymentCode) {
+        let headers = new Headers({ 'Content-Type': 'application/json', 'authToken': sessionStorage.getItem("ALLTICKET:authToken"), 'paymentChannel': sessionStorage.getItem("paymentChannel") });
+        let options = new RequestOptions({ headers: headers });
+        let body = {
+            transId: transId,
+            bookId: bookId,
+            bookCode: bookCode,
+            paymentCode: paymentCode
+        };
+        return this.http.post(this.confirmReserveTransitAPI, JSON.stringify(body), options)
+            .timeout(this.const.timeoutSec)
+            .map((res: Response) => {
+                return res.json();
+            })
+            .catch((error: any) => {
+                return Observable.throw(this.handleError(error));
+            }
+            );
+    }
     checkAuthen(currentUrl) {
         let checkAuthAPI = '//' + currentUrl + '/fcheckauthen.html';
         return this.http.get(checkAuthAPI)

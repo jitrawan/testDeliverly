@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { TransReservToModel } from '../../../../app/shared/models/payment/transReservTo.model';
-import { UserTOModel } from '../../../../app/shared/models/payment/userTO.model';
+import { TransReservToModel } from '@atk-shared/models/payment/transReservTo.model';
+import { UserTOModel } from '@atk-shared/models/payment/userTO.model';
 
 @Component({
   selector: 'app-result-paid-transit-popup',
   templateUrl: './result-paid-transit-popup.component.html',
-  styleUrls: ['./result-paid-transit-popup.component.css','../../../../assets/css/standard/utility.css']
+  styleUrls: [ 
+      './result-paid-transit-popup.component.css',
+      '../../../../assets/css/standard/utility.css' ]
 })
 export class PopupResultPaidTransitComponent implements OnInit {
   transReservTo: TransReservToModel;
@@ -22,7 +24,7 @@ export class PopupResultPaidTransitComponent implements OnInit {
 
   ngOnInit() {
     this.transReservTo = new TransReservToModel;
-    this.transReservTo.reserveId = '810018043400168704'
+    this.transReservTo.reserveId = '80434999801803071454453'
     this.transReservTo.transId = '999801802220954085'
     this.transReservTo.data3 = '00538416'
 

@@ -9,12 +9,12 @@ import { SharedService } from '@atk-service/shared-service.service';
 import { AlertsService } from '@jaspero/ng2-alerts';
 
 /* ---------------------------------- models -------------------*/
-import { AvailableTripResultModel } from '../../shared/models/bus/availableTripResult.model';
-import { AvailableTripModel } from '../../shared/models/bus/availableTripSearch.model';
-import { BusLayoutModel } from '../.././shared/models/bus/busLayout.model';
-import { TripModel } from '../.././shared/models/bus/trip.model';
-import { ErrorMessage } from '../../shared/constant/error-message';
-import { Constant } from '../../shared/constant/constant';
+import { AvailableTripResultModel } from '@atk-shared/models/bus/availableTripResult.model';
+import { AvailableTripModel } from '@atk-shared/models/bus/availableTripSearch.model';
+import { BusLayoutModel } from '@atk-shared/models/bus/busLayout.model';
+import { TripModel } from '@atk-shared/models/bus/trip.model';
+import { ErrorMessage } from '@atk-shared/constant/error-message';
+import { Constant } from '@atk-shared/constant/constant';
 import { log } from 'util';
 
 import { BuyTicketComponent } from '../buy-ticket/buy-ticket.component';
@@ -150,6 +150,15 @@ export class SelectRoundComponent implements OnInit {
     }
   }
 
+  checkSelectRtrnTrip(trip) {
+    return this.selectedDptrTrip != null && this.selectedDptrTrip != undefined
+      && (
+        (this.selectedDptrTrip.busStd.desc != trip.busStd.desc)
+        || (this.dptrFare != this.convertStringToNumber(trip.fare) + this.convertStringToNumber(trip.fee))
+        || (trip.route.id != this.selectedDptrTrip.route.id)
+      );
+  }
+
   openDialog(msg) {
     let type: any = "warning";
     this.alertSettings = { overlay: true, overlayClickToClose: false, showCloseButton: true, duration: 100000 };
@@ -182,7 +191,7 @@ export class SelectRoundComponent implements OnInit {
       this.openDialog(this.errorMessage.pleaseSelect + 'วันที่และเวลาเดินทางกลับ');
     } else {
       this.isShowLoading = true;
-      if (sessionStorage.getItem("paymentChannel") == "C07") {
+      if (sessionStorage.getItem("paymentChannel") ==  this.const.WEB_PAYMENT_CHANNEL) {
         this.checkAuthen();
       } else {
         this.getBusLayoutToNextPage();

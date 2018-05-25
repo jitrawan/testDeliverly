@@ -85,12 +85,6 @@
   padding-left: 30px;
 }
 
-.male {
-  content: url("../../../assets/images/male.png");
-  width: 100%;
-  height: auto;
-}
-
 .genderIcon img {
   width: 50px;
   height: 50px;
@@ -139,4 +133,9 @@
   -ms-animation: cssload-spin 575ms infinite linear;
   -webkit-animation: cssload-spin 575ms infinite linear;
   -moz-animation: cssload-spin 575ms infinite linear
+}
+
+.parkText {
+  color: #fe6716;
+  font-size: 22px;
 }

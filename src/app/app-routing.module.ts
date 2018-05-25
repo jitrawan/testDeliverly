@@ -5,8 +5,6 @@ import { EventInfoComponent } from './pages/event-info/event-info.component';
 import { PolicyComponent } from './pages/policy/policy.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { ResultReserveTransitComponent } from './pages/resultReserve-transit/resultReserve-transit.component';
-import { ResultPaidTransitComponent } from './pages/resultPaid/result-paid-transit/result-paid-transit.component';
-import { PopupResultPaidTransitComponent } from './pages/resultPaid-popup/result-paid-transit-popup/result-paid-transit-popup.component';
 import { HistoryComponent } from './pages/history/history.component';
 import { DiscountDetailComponent } from './pages/discount-detail/discount-detail.component';
 import { ShowEventComponent } from './pages/home/show-event/show-event.component';

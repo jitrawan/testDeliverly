@@ -7,14 +7,14 @@ import { BusService } from '@atk-service/bus.service';
 import { SharedService } from '@atk-service/shared-service.service';
 import { ErrorMsgService } from '@atk-service/errorMsg.service';
 
-import { ErrorMessage } from '../../shared/constant/error-message';
-import { Constant } from '../../shared/constant/constant';
-import { AvailableTripModel } from '../../shared/models/bus/availableTripSearch.model';
-import { AvailableTripResultModel } from '../../shared/models/bus/availableTripResult.model';
-import { ProvinceModel } from '../../shared/models/bus/province.model';
-import { ParkModel } from '../../shared/models/bus/park.model';
-import { RoutePrvParkMapModel } from '../../shared/models/bus/routePrvParkMap.model';
-import { ErrorCodeModel } from '../../shared/models/error/error.model';
+import { ErrorMessage } from '@atk-shared/constant/error-message';
+import { Constant } from '@atk-shared/constant/constant';
+import { AvailableTripModel } from '@atk-shared/models/bus/availableTripSearch.model';
+import { AvailableTripResultModel } from '@atk-shared/models/bus/availableTripResult.model';
+import { ProvinceModel } from '@atk-shared/models/bus/province.model';
+import { ParkModel } from '@atk-shared/models/bus/park.model';
+import { RoutePrvParkMapModel } from '@atk-shared/models/bus/routePrvParkMap.model';
+import { ErrorCodeModel } from '@atk-shared/models/error/error.model';
 
 @Component({
   selector: 'app-select-destination',
@@ -64,7 +64,6 @@ export class SelectDestinationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getErrorFile();
     this.maxDate.setDate(this.maxDate.getDate() + 90);
     this.maxDateForReturn.setDate(this.maxDateForReturn.getDate() + 90);
     this.getProvinceList();
@@ -82,30 +81,6 @@ export class SelectDestinationComponent implements OnInit {
     if (this.maxDateForReturn > this.maxDate) {
       this.maxDateForReturn = this.maxDate;
     }
-  }
-
-  getErrorFile() {
-    if (this.checkExpireLocalStorage()) {
-      this.errorMsgService.getErrorFile().subscribe((res) => {
-        if (res.code == this.const.successCode) {
-          var record = { value: res.data, timestamp: new Date().setHours(0, 0, 0, 0) }
-          localStorage.setItem('errorCodeList', JSON.stringify(record));
-        } else {
-          this.openDialog(this.errorMsgService.getErrorMsg(res.code));
-        }
-      },
-        (err) => {
-          this.openDialog(this.errorMsgService.getErrorMsg(err.code));
-        }
-      );
-    }
-  }
-
-  checkExpireLocalStorage() {
-    var record = JSON.parse(localStorage.getItem('errorCodeList'));
-    if (!record) { return true; }
-    var today = new Date().setHours(0, 0, 0, 0)
-    return (new Date(record.timestamp) < new Date(today));
   }
 
   getProvinceList() {
@@ -153,8 +128,8 @@ export class SelectDestinationComponent implements OnInit {
   }
 
   getRoutePrvParkMap() {
-    this.isArrvProvinceLoading = true;
-    if (this.selectedDptrPark != null) {
+    if (this.selectedDptrPark != null && this.selectedDptrPark != undefined && this.selectedDptrPark != "" && this.arrvProvinceList.length == 0) { 
+      this.isArrvProvinceLoading = true;
       this.busService.getRoutePrvParkMap(this.selectedDptrPark.id).subscribe(
         (res) => {
           if (res.code == this.const.successCode) {
@@ -253,9 +228,10 @@ export class SelectDestinationComponent implements OnInit {
   }
 
   condition = [
-    '- สามารถจองตั๋ว ก่อนเวลาเดินทางของเที่ยววิ่ง 3 ชม.',
-    '- วันที่เดินทางไป และกลับ มีระยะเวลาห่างกันไม่เกิน 30 วัน',
-    '- สามารถซื้อตั๋วล่วงหน้าได้ 90 วัน'
+    '- สามารถจองตั๋วล่วงหน้าได้ 90 วัน',
+    '- สามารถจองตั๋วก่อนเวลาเดินทางของเที่ยววิ่ง 3 ชั่วโมง',
+    '- วันที่เดินทางไปและกลับ มีระยะเวลาห่างกันไม่เกิน 30 วัน',
+    '- ทุกที่นั่งเรามีพ.ร.บ. และประกันภัยคุ้มครอง รวมมูลค่า 500,000 บาท'
   ];
 
   selectType(event) {
@@ -322,7 +298,7 @@ export class SelectDestinationComponent implements OnInit {
             totalPassenger: this.selectedNumOfPerson
           }
           this.sharedService.sendData(dataForSend);
-          this.router.navigate(['/selectRound'], { relativeTo: this.route });
+          this.router.navigate(['/bus/select-round'], { relativeTo: this.route });
         } else {
           this.openDialog(this.errorMsgService.getErrorMsg(res.code));
           this.isShowLoading = false;

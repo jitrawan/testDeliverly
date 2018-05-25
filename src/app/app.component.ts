@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, Params, NavigationEnd } from '@angular/router';
 
 import { AlertsService } from '@jaspero/ng2-alerts';
 import { SharedService } from '@atk-service/shared-service.service';
+import { ErrorMsgService } from '@atk-service/errorMsg.service';
 import { PushNotificationService } from 'ng-push-notification';
 declare var jquery: any;
 declare var $: any;
@@ -19,6 +20,7 @@ export class AppComponent implements OnInit {
   constructor(
     private sharedService: SharedService,
     private router: Router,
+    private errorMsgService: ErrorMsgService,
     private pushNotification: PushNotificationService
   ) {
      pushNotification.requestPermission().then(function(value){
@@ -39,7 +41,9 @@ export class AppComponent implements OnInit {
       }
       window.parent.scroll(0, 0);
     });
+    
     this.showPush();
+    this.getErrorFile();
   }
 
   showPush() {
@@ -49,7 +53,11 @@ export class AppComponent implements OnInit {
       6000, // close delay.
     );
   }
- 
+  
+  getErrorFile() {
+    this.errorMsgService.getErrorFileFromAPI();
+  }
+  
   async showAnotherPush() {
     const notification = await this.pushNotification.show('Returns promise with Notification object.');
     setTimeout(() => notification.close(), 1000);

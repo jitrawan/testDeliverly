@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
@@ -35,8 +35,6 @@ import { FaqComponent } from './pages/faq/faq.component';
 import { PolicyComponent } from './pages/policy/policy.component';
 import { ResultReserveTransitComponent } from './pages/resultReserve-transit/resultReserve-transit.component';
 
-import { ResultPaidTransitComponent } from './pages/resultPaid/result-paid-transit/result-paid-transit.component';
-import { PopupResultPaidTransitComponent } from './pages/resultPaid-popup/result-paid-transit-popup/result-paid-transit-popup.component';
 import { HistoryComponent } from './pages/history/history.component';
 
 import { SocialLoginModule } from 'angularx-social-login';
@@ -90,8 +88,6 @@ export function provideConfig() {
     FaqComponent,
     PolicyComponent,
     ResultReserveTransitComponent,
-    ResultPaidTransitComponent,
-    PopupResultPaidTransitComponent,
     HistoryComponent,
     DiscountComponent,
     DiscountDetailComponent,
@@ -122,6 +118,10 @@ export function provideConfig() {
     SharedModule,
     environment.production ? ServiceWorkerModule.register('ngsw-worker.js') : []
 
+  ],
+  schemas: [ 
+    CUSTOM_ELEMENTS_SCHEMA,
+    NO_ERRORS_SCHEMA
   ],
   providers: [
     HeaderService,

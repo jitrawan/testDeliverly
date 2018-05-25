@@ -124,6 +124,17 @@
   cursor: pointer;
 }
 
+::ng-deep p-calendar .input-group {
+  flex-wrap: nowrap;
+}
+
+::ng-deep p-calendar .input-group > .input-group-addon.btn {
+  color: #495057;
+  background-color: #e9ecef;
+  border: 1px solid #ced4da;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
 .clearable {
   position: relative;
   display: block;

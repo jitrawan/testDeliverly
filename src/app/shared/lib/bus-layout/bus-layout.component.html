@@ -11,7 +11,8 @@
         </div>
         <div class="row seats" type="A" *ngFor="let index of numbersOfRow; let row = index">
           <div class="seat" style="display: block;" *ngFor="let col of numbersOfCol; let pos = index">
-            <div class="{{data.gender}}gender" *ngFor="let data of fatchRowData(floorOneList, row+1, pos+1); let index = index">
+            <div *ngFor="let data of fatchRowData(floorOneList, row+1, pos+1); let index = index">
+                <img *ngIf="data.gender != ''" class="genderSeat" src="assets/images/{{data.gender}}.png" alt="">
               <input #input *ngIf="data.type == 1" type="checkbox" [id]="data.name" (click)="selectSeat($event, data, input.id)" />
               <label *ngIf="data.type == 1" [for]="data.name">{{data.name}}</label>
               <span *ngIf="data.type == 2" class="seatSize{{data.dim.w}} seatHeight{{data.dim.h}}" [id]="data.name"> {{data.name}}</span>
@@ -33,6 +34,7 @@
         <div class="row seats" type="A" *ngFor="let index of numbersOfRow; let row = index">
           <div class="seat" style="display: block;" *ngFor="let col of numbersOfCol; let pos = index">
             <div class="{{data.gender}}gender" *ngFor="let data of fatchRowData(floorTwoList, row+1, pos+1);">
+              <img *ngIf="data.gender != ''" class="genderSeat" src="assets/images/{{data.gender}}.png" alt="">
               <input #input *ngIf="data.type == 1" type="checkbox" id="{{data.name}}up" (click)="selectSeat($event, data, input.id)" />
               <label *ngIf="data.type == 1" for="{{data.name}}up">{{data.name}} </label>
               <span *ngIf="data.type == 2" class="seatSize{{data.dim.w}} seatHeight{{data.dim.h}}" [id]="data.name"> {{data.name}}</span>

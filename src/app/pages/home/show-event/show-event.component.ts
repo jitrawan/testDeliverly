@@ -33,6 +33,8 @@ export class ShowEventComponent implements OnInit {
       this.category = params.get('category');
       this.reInitiateComponent();
     });
+    
+    this.headerHandler();
   }
 
   ngOnDestroy() {
@@ -92,7 +94,7 @@ export class ShowEventComponent implements OnInit {
     
   }
 
-  headerHandler(emit) {
+  headerHandler(emit?) {
 		let header = $('#header');
 
 		if (emit) {

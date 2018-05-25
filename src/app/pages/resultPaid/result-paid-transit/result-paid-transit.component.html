@@ -1,190 +1,190 @@
 <div class="container">
-    <div id="printArea">
-      <div class="row py-3 px-2">
-        <div class="col-12">
-          <img class="img-fluid" src="https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/images/logo.gif">
-        </div>
+  <div id="printArea">
+    <div class="row py-3 px-2">
+      <div class="col-12">
+        <img class="img-fluid" src="https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/images/logo.gif">
       </div>
-  
-      <div class="p-2" style="border: 1px solid #003fc0;">
-        <div class="row m-0">
-          <div class="col-12 px-0">
-            <div class="py-2">
-              <h5 class="ml-3 my-0 is-size-5 font-weight-bold">ข้อมูลการจอง</h5>
-            </div>
-          </div>
-        </div>
-  
-        <div class="row m-0">
-          <div class="col-6 reserveColLabel">
-            Reserve ID
-          </div>
-          <div class="col-6 reserveColResult">
-            {{transReservTo.reserveId}}
-          </div>
-        </div>
-  
-        <div class="row m-0">
-          <div class="col-6 reserveColLabel">
-            TransID
-          </div>
-          <div class="col-6 reserveColResult">
-            {{transReservTo.transId}}
-          </div>
-        </div>
-  
-        <div class="row m-0">
-          <div class="col-6 reserveColLabel">
-            รหัสออกตั๋ว
-          </div>
-          <div class="col-6 reserveColResult">
-            {{transReservTo.data3}}
+    </div>
+
+    <div class="p-2" style="border: 1px solid #003fc0;">
+      <div class="row m-0">
+        <div class="col-12 px-0">
+          <div class="py-2">
+            <h5 class="ml-3 my-0 is-size-5 font-weight-bold">ข้อมูลการจอง</h5>
           </div>
         </div>
       </div>
-  
-      <div class="p-2" style="border: 1px solid #003fc0;">
-        <div class="row m-0">
-          <div class="col-12 px-0">
-            <div class="py-2">
-              <h5 class="ml-3 my-0 font-weight-bold">รายละเอียดเที่ยวรถ</h5>
-            </div>
+
+      <div class="row m-0">
+        <div class="col-6 reserveColLabel">
+          Reserve ID
+        </div>
+        <div class="col-6 reserveColResult">
+          {{transReservTo.reserveId}}
+        </div>
+      </div>
+
+      <div class="row m-0">
+        <div class="col-6 reserveColLabel">
+          TransID
+        </div>
+        <div class="col-6 reserveColResult">
+          {{transReservTo.transId}}
+        </div>
+      </div>
+
+      <div class="row m-0">
+        <div class="col-6 reserveColLabel">
+          รหัสออกตั๋ว
+        </div>
+        <div class="col-6 reserveColResult">
+          {{transReservTo.data3}}
+        </div>
+      </div>
+    </div>
+
+    <div class="p-2" style="border: 1px solid #003fc0;">
+      <div class="row m-0">
+        <div class="col-12 px-0">
+          <div class="py-2">
+            <h5 class="ml-3 my-0 font-weight-bold">รายละเอียดเที่ยวรถ</h5>
           </div>
         </div>
-        <div *ngIf="transDetailTurn != ''">
-          <div class="row m-0">
-            <div class="col-12">
-              <div class="row">
-                <div class="col-12 col-md-6 mt-3 transDetail">
-                  <b>
-                    เที่ยวไป
-                  </b>
-                  <div class="reserveDetail reserveColResult p-3">
-                    <!-- <c:out value="${transDetail}" escapeXml="false" /> -->
-                  </div>
+      </div>
+      <div *ngIf="transDetailTurn != ''">
+        <div class="row m-0">
+          <div class="col-12">
+            <div class="row">
+              <div class="col-12 col-md-6 mt-3 transDetail">
+                <b>
+                  เที่ยวไป
+                </b>
+                <div class="reserveDetail reserveColResult p-3">
+                  <!-- <c:out value="${transDetail}" escapeXml="false" /> -->
                 </div>
-                <div class="col-12 col-md-6 mt-3 transDetail">
-                  <b>
-                    เที่ยวกลับ
-                  </b>
-                  <div class="reserveDetail reserveColResult p-3">
-                    <!-- <c:out value="${transDetailTurn}" escapeXml="false" /> -->
-                  </div>
+              </div>
+              <div class="col-12 col-md-6 mt-3 transDetail">
+                <b>
+                  เที่ยวกลับ
+                </b>
+                <div class="reserveDetail reserveColResult p-3">
+                  <!-- <c:out value="${transDetailTurn}" escapeXml="false" /> -->
                 </div>
               </div>
             </div>
           </div>
         </div>
-  
-        <div *ngIf="transDetailTurn == ''">
-          <div class="row justify-content-md-center m-0">
-            <div class="col-12 text-md-center reserveColLabel is-size-5 font-weight-bold">
-              เที่ยวไป
-            </div>
-            <div class="col-12 col-md-6 col-lg-4 reserveColResult">
-              <!-- {{transDetail}} -->
-              รหัสออกตั๋ว 00538416 <br>
-              กระบี่ ไป กรุงเทพมหานคร <br>
-              วันที่ 15/03/2018 เวลา 16:00 น. <br>
-              สายที่ 785 มาตรฐาน ม.4ข <br>
-              ชานชาลา กรุงเทพ(สายใต้ใหม่) <br>
-              ช่อง 112 (สายใต้ใหม่) <br>
-              หมายเลขรถ 909-1148 ชั้น 2 ที่นั่ง C8 <br>
-              Burin Sangwan <br>
-              เบอร์โทร 0851992697 
-            </div>
+      </div>
+
+      <div *ngIf="transDetailTurn == ''">
+        <div class="row justify-content-md-center m-0">
+          <div class="col-12 text-md-center reserveColLabel is-size-5 font-weight-bold">
+            เที่ยวไป
           </div>
-        </div>
-  
-        <div class="row m-1 py-2">
-          <div class="col-12 condition-transit">
-            <div>ท่านจะต้องมาถึงสถานีขนส่งหรือจุดขึ้นรถก่อนกำหนดการเดินทางไม่น้อยกว่า 30 นาที
-              <br>กรุณานำหลักฐานการชำระเงิน มาพิมพ์ตั๋วโดยสารได้ที่ร้าน 7-Eleven ทั่วประเทศ เพื่อใช้ในการขึ้นรถโดยสาร </div>
-          </div>
-        </div>
-  
-        <div class="row m-0 mt-2">
-          <div class="col-6 reserveColLabel">
-            บัตรอาหาร
-          </div>
-          <div class="col-6 reserveColResult">
-            <div *ngIf="foodDetail != ''">{{transitFoodTicketAvail}}</div>
-            <div *ngIf="foodDetail == ''"> - </div>
-          </div>
-        </div>
-  
-        <div class="row m-0">
-          <div class="col-6 reserveColLabel">
-            Price (Baht)
-          </div>
-          <div class="col-6 reserveColResult">
-            {{priceAmt| number : '1.2'}}
-          </div>
-        </div>
-  
-        <div class="row m-0">
-          <div class="col-6 reserveColLabel">
-            Service Fee
-          </div>
-          <div class="col-6 reserveColResult">
-            {{csFee| number : '1.2'}}
-          </div>
-        </div>
-  
-        <div class="row m-0">
-          <div class="col-6 reserveColLabel">
-            Total Amount (Baht)
-          </div>
-          <div class="col-6 reserveColResult">
-            {{csFee| number : '1.2'}}
+          <div class="col-12 col-md-6 col-lg-4 reserveColResult">
+            <!-- {{transDetail}} -->
+            รหัสออกตั๋ว 00538416
+            <br> กระบี่ ไป กรุงเทพมหานคร
+            <br> วันที่ 15/03/2018 เวลา 16:00 น.
+            <br> สายที่ 785 มาตรฐาน ม.4ข
+            <br> ชานชาลา กรุงเทพ(สายใต้ใหม่)
+            <br> ช่อง 112 (สายใต้ใหม่)
+            <br> หมายเลขรถ 909-1148 ชั้น 2 ที่นั่ง C8
+            <br> Burin Sangwan
+            <br> เบอร์โทร 0851992697
           </div>
         </div>
       </div>
-  
-      <div class="p-2" style="border: 1px solid #003fc0;">
-        <div class="row m-0">
-          <div class="col-12 is-size-5">
-            Customer Information
-          </div>
+
+      <div class="row m-1 py-2">
+        <div class="col-12 condition-transit">
+          <div>ท่านจะต้องมาถึงสถานีขนส่งหรือจุดขึ้นรถก่อนกำหนดการเดินทางไม่น้อยกว่า 30 นาที
+            <br>กรุณานำหลักฐานการชำระเงิน มาพิมพ์ตั๋วโดยสารได้ที่ร้าน 7-Eleven ทั่วประเทศ เพื่อใช้ในการขึ้นรถโดยสาร </div>
         </div>
-  
-        <div class="row m-0">
-          <div class="col-6 reserveColLabel">
-            Name
-          </div>
-          <div class="col-6 reserveColResult">
-            <b>{{userTO.firstname}} {{userTO.lastname}} </b>
-          </div>
+      </div>
+
+      <div class="row m-0 mt-2">
+        <div class="col-6 reserveColLabel">
+          บัตรอาหาร
         </div>
-  
-        <div class="row m-0">
-          <div class="col-6 reserveColLabel">
-            Email
-          </div>
-          <div class="col-6 reserveColResult">
-            <b>{{userTO.email}}</b>
-          </div>
+        <div class="col-6 reserveColResult">
+          <div *ngIf="foodDetail != ''">{{transitFoodTicketAvail}}</div>
+          <div *ngIf="foodDetail == ''"> - </div>
         </div>
-  
-        <div class="row m-0">
-          <div class="col-6 reserveColLabel">
-            ID Card No. / Passport No.
-          </div>
-          <div class="col-6 reserveColResult">
-            <b>{{userTO.cardNumber}}</b>
-          </div>
+      </div>
+
+      <div class="row m-0">
+        <div class="col-6 reserveColLabel">
+          Price (Baht)
         </div>
-  
-  
+        <div class="col-6 reserveColResult">
+          {{priceAmt| number : '1.2'}}
+        </div>
+      </div>
+
+      <div class="row m-0">
+        <div class="col-6 reserveColLabel">
+          Service Fee
+        </div>
+        <div class="col-6 reserveColResult">
+          {{csFee| number : '1.2'}}
+        </div>
+      </div>
+
+      <div class="row m-0">
+        <div class="col-6 reserveColLabel">
+          Total Amount (Baht)
+        </div>
+        <div class="col-6 reserveColResult">
+          {{csFee| number : '1.2'}}
+        </div>
       </div>
     </div>
-    <div class="row m-0 my-2 pt-2">
-      <div class="col-12 text-center">
-        <button id="printBtn" title="Print" class="btPrint btn btn-atk-primary">
-          <i class="fa fa-print pr-1" style="line-height: 15px;"></i>
-          <span>Print</span>
-        </button>
+
+    <div class="p-2" style="border: 1px solid #003fc0;">
+      <div class="row m-0">
+        <div class="col-12 is-size-5">
+          Customer Information
+        </div>
       </div>
+
+      <div class="row m-0">
+        <div class="col-6 reserveColLabel">
+          Name
+        </div>
+        <div class="col-6 reserveColResult">
+          <b>{{userTO.firstname}} {{userTO.lastname}} </b>
+        </div>
+      </div>
+
+      <div class="row m-0">
+        <div class="col-6 reserveColLabel">
+          Email
+        </div>
+        <div class="col-6 reserveColResult">
+          <b>{{userTO.email}}</b>
+        </div>
+      </div>
+
+      <div class="row m-0">
+        <div class="col-6 reserveColLabel">
+          ID Card No. / Passport No.
+        </div>
+        <div class="col-6 reserveColResult">
+          <b>{{userTO.cardNumber}}</b>
+        </div>
+      </div>
+
+
+
     </div>
   </div>
-  
+  <div class="row m-0 my-2 pt-2">
+    <div class="col-12 text-center">
+      <button id="printBtn" title="Print" class="btPrint btn btn-atk-primary">
+        <i class="fa fa-print pr-1" style="line-height: 15px;"></i>
+        <span>Print</span>
+      </button>
+    </div>
+  </div>
+</div>

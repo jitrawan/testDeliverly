@@ -1,0 +1,140 @@
+#printArea {
+  margin: 0 auto;
+}
+
+.tripDetail {
+  display: flex;
+  justify-content: center;
+}
+
+.reserveColResult {
+  word-wrap: break-word;
+}
+
+.reserveColLabel {
+  color: black;
+}
+
+.reserveColResult {
+  border-radius: 0.5rem;
+  background-color: #eee;
+}
+
+.reserveColLabel,
+.reserveColResult {
+  margin-top: 0.5rem;
+}
+
+.fresultPaidTransitWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.reserveDetail {
+  margin-top: 1rem;
+}
+
+.condition-transit {
+  font-weight: bold;
+  color: red;
+  text-align: center;
+}
+
+.barcodeArea {
+  text-align: center;
+  padding-top: 20px;
+}
+
+.barcodeInfo {
+  font-size: 18px;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+::ng-deep ngx-barcode img {
+  max-width: 100%;
+  align-content: center;
+}
+
+@media (max-width: 480px) {
+  .condition-transit,
+  .reserveColLabel,
+  .reserveDetail,
+  .reserveColResult {
+    font-size: 12.5px;
+  }
+  #printArea h3 {
+    font-size: 10px;
+  }
+  #printArea h5 {
+    font-size: 12px;
+  }
+  .is-size-5 {
+    font-size: 12px !important;
+  }
+  .barcodeInfo {
+    font-size: 12px;
+    text-align: center;
+  }
+  .barcodeArea {
+    padding-top: 10px;
+  }
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printArea * {
+    visibility: visible;
+  }
+  footer,
+  header {
+    display: none;
+  }
+  .btnPrint {
+    visibility: hidden;
+  }
+  ::ng-deep ngx-barcode img {
+    max-height: 100px;
+    max-width: 100%;
+  }
+  .img-fluid {
+    max-height: 40px;
+  }
+  .popupArea {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+  #printArea h3 {
+    font-size: 1rem;
+  }
+  .transDetail {
+    width: 50% !important;
+    max-width: 50% !important;
+  }
+  body {
+    font-size: 16px;
+  }
+  .reserveDetail {
+    font-size: 17px;
+  }
+  .condition-transit {
+    font-size: 15px;
+  }
+  .reserveColLabel,
+  .reserveColResult {
+    margin-top: 0rem;
+  }
+  .reserveColResult {
+    font-size: 17px;
+  }
+  .barcodeInfo {
+    font-size: 14px;
+  }
+  ::ng-deep ngx-barcode img {
+    max-width: 50%;
+  }
+}

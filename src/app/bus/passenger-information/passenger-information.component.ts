@@ -58,6 +58,7 @@ export class PassengerInformationComponent implements OnInit {
     for (let index = 0; index < this.totalPassenger; index++) {
       let passengerInfoModel: PassengerInformationModel = new PassengerInformationModel;
       this.passengerInfoList.push(passengerInfoModel);
+      this.passengerInfoList[index].gender = "";
       let receiveData;
       this.sharedService.receiveData.subscribe(data => receiveData = data);
       this.receiveData = receiveData.forwardData;
@@ -87,7 +88,7 @@ export class PassengerInformationComponent implements OnInit {
   nextPage() {
     var isFound = false;
     for (let index = 0; index < this.passengerInfoList.length && !isFound; index++) {
-      if (this.passengerInfoList[index].gender == undefined) {
+      if (this.passengerInfoList[index].gender == "") {
         this.openDialog(this.errorMessage.pleaseSelect + 'เพศ ' + 'ของผู้โดยสารคนที่ ' + (index + 1));
         isFound = true;
       } else if (this.passengerInfoList[index].passengerName == undefined) {
@@ -225,5 +226,4 @@ export class PassengerInformationComponent implements OnInit {
     );
   }
 }
-
 

@@ -5,8 +5,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { ScheduleModule } from 'primeng/schedule';
 import { SharedModule } from '../shared.module';
 import { ReserveSummaryComponent } from '@atk-booking/get-reserve/reserve-summary/reserve-summary.component';
+import { HomeComponent } from '@atk-pages/home/home.component';
 
 const routes: Routes = [
+  { path: '', component: GoBookingComponent },
   { path: 'get-seat', component: GoBookingComponent }
 ];
 

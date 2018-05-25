@@ -15,7 +15,7 @@ import { Constant } from '@atk-shared/constant/constant';
 })
 export class BuyTicketComponent implements OnInit {
 
-   isEnable: boolean = true;
+  isEnable: boolean = true;
   private msgError: string;
   private alertSettings: any;
   private const = new Constant;
@@ -38,10 +38,13 @@ export class BuyTicketComponent implements OnInit {
     let receiveData;
     this.sharedService.receiveData.subscribe(data => receiveData = data);
     if (receiveData instanceof URLSearchParams) {
-      sessionStorage.setItem('paymentChannel', receiveData.get('paymentChannel'));
-      sessionStorage.setItem('ALLTICKET:authToken', receiveData.get('authToken'));
-      // let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwYXlsb2FkIjoie1wiZW1haWxcIjpcImJ1cmluc2FuQGdvc29mdC5jby50aFwiLFwicGF5bWVudENoYW5uZWxcIjpcIkMwN1wiLFwidGltZVN0ZW1wXCI6MTUxOTgxNDIyNzM0NCxcImlzc3VlclwiOlwiY3NhdGsxOFwiLFwidXNlcklkXCI6XCJcIixcInRpY2tldFR5cGVcIjpcIjAxXCIsXCJsYW5nXCI6XCJUXCIsXCJ1cmxiYWNrXCI6XCJ3d3cuYWxsdGlja2V0LmNvbVwifSIsImlzcyI6ImNzYXRrMTgiLCJleHAiOjE1MTk4MTc4Mjd9.u2EIwPp1UK-Zd3UdcvvKd7R_lVVoYJNb3UfkAz5AuJI';
-      // sessionStorage.setItem('ALLTICKET:authToken', token);
+      if (receiveData.get('paymentChannel') != null) {
+        sessionStorage.setItem('paymentChannel', receiveData.get('paymentChannel'));
+      }
+
+      if(receiveData.get('authToken') != null){
+        sessionStorage.setItem('ALLTICKET:authToken', receiveData.get('authToken'));
+      }
     }
   }
 
@@ -49,7 +52,7 @@ export class BuyTicketComponent implements OnInit {
     this.checkAllowService.checkAllowReserve().subscribe((res) => {
       if (res.code == this.const.successCode) {
         this.isEnable = true;
-        this.router.navigate(['/selectDestination'], { relativeTo: this.route });
+        this.router.navigate(['/bus/select-destination'], { relativeTo: this.route });
       } else {
         this.isEnable = false;
         this.msgError = res.msg;
@@ -71,6 +74,5 @@ export class BuyTicketComponent implements OnInit {
     }, 300);
 
   }
-
 
 }

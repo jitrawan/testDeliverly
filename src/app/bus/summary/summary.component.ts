@@ -202,15 +202,21 @@ export class SummaryComponent implements OnInit {
   insertBookingInfo() {
     this.busService.insertBookingInfo(this.insertBooking).subscribe((res) => {
       if (res.code == this.const.successCode) {
-        if (res.transId != undefined && res.transId != '') {
+        if (res.resultReserve != null && res.resultReserve.transId != undefined && res.resultReserve.transId != '') {
           let CHANNEL_Id = sessionStorage.getItem("ALLTICKET:authToken");
           let param = 'CHANNEL_ID=' + CHANNEL_Id + '&TRANSACTION_ID=' + res.transId + '&TOTAL_AMT=' + this.totalPrice();
-
-          // if (sessionStorage.getItem("paymentChannel") == 'C07') {
-            // window.parent.postMessage(param, '*');
-          // } else {
-            this.router.navigate(['/resultReserve'], { relativeTo: this.route });
-          // }
+          let data = {
+            ticketInvoice: res.ticketInvoice,
+            urlRedirect: res.urlRedirect,
+            transId: this.transId,
+            bookId: this.insertBooking.bookId,
+            bookCode: this.insertBooking.bookCode,
+            resultReserve: res.resultReserve
+          }
+          this.sharedService.sendData(data);
+          this.router.navigate(['/resultReserve'], { relativeTo: this.route });
+        } else {
+          this.isShowLoading = false;
         }
       } else {
         this.openDialog(this.errorMsgService.getErrorMsg(res.code));

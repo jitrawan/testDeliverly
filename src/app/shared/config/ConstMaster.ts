@@ -2,6 +2,9 @@ import { environment } from '../../../environments/environment';
 
 export const ConstMaster = {
     
+    STORAGE_KEY : {
+        HOMEPAGE: 'atk:homepage'
+    },
     HOME_API : {
         endpoint: environment.apiGatewayHomePage
     },

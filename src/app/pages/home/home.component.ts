@@ -24,8 +24,6 @@ export class HomeComponent implements OnInit {
 	@ViewChild(CardTicketComponent) cardTicketComponent : CardTicketComponent;
 	countImagesLoaded = 0;
 	countCardImageLoaded = 0;
-	screenWidth: number;
-	screenType: string;
 	slideBannerImages: EventBanner[];
 	cardTicketSlide: CardTicket[] = [];
 	cardTicketHot: CardTicket[];
@@ -35,9 +33,7 @@ export class HomeComponent implements OnInit {
 	placeHolderImg: string = ConstMaster.DEFAULT_IMAGES.ticketCard;
 	subscription: Subscription;
 
-	constructor(private router: Router, private atkService: AtkService, private el: ElementRef) {
-		this.screenWidth = (window.innerWidth);
-	}
+	constructor(private router: Router, private atkService: AtkService, private el: ElementRef) {}
 
 	ngOnInit() {
 		this.router.events.subscribe((evt) => {
@@ -49,24 +45,45 @@ export class HomeComponent implements OnInit {
 
 		this.subscription = this.atkService.fetchHomeData().subscribe(response => {
 
-			// let response = {"success":true,"code":100,"message":"Success","data":{"all_":{"isNext":false,"curpage":1,"items":[{"id":"18042","isFull":true,"performStatus":null,"name":"What the Fest Music Festival","performStatusDesc":"","performCardPic":"https://atkmedia.allticket.com/assets/content/18042/WTF18042110420181548ticketCard.jpg","performType":"C","performCardShowDate":"16 - 17<br/>JUNE/2018","performCardName":"What the Fest Music Festival","skipInfo":"N","isPromo":false},{"id":"18043","isFull":true,"performStatus":null,"name":"NCT U (TAEYONGxTEN) FAN MEETING in BANGKOK","performStatusDesc":"","performCardPic":"https://atkmedia.allticket.com/assets/content/18043/NCT18043120420181031ticketCard.jpg","performType":"C","performCardShowDate":"03<br/>JUNE/2018","performCardName":"TAEYONGxTEN FANMEETINGinBKK","skipInfo":"N","isPromo":false},{"id":"18031","isFull":false,"performStatus":null,"name":"คาราบาว \"หากหัวใจยังรักควาย\"","performStatusDesc":"","performCardPic":"https://atkmedia.allticket.com/assets/content/18031/ITP18031080320180956ticketCard.jpg","performType":"C","performCardShowDate":"21<br/>JUL/2018","performCardName":"คาราบาว \"หากหัวใจยังรักควาย\"","skipInfo":"N","isPromo":false},{"id":"18041","isFull":false,"performStatus":null,"name":"CHANG SUPER GT RACE 2018 ROUND 4","performStatusDesc":"","performCardPic":"https://atkmedia.allticket.com/assets/content/18041/SGT18041020420181658ticketCard.jpg","performType":"S","performCardShowDate":"30 JUN - <br/> 01 JUL/2018 ","performCardName":"CHANG SUPER GT RACE 2018 ROUND 4","skipInfo":"N","isPromo":false},{"id":"18022","isFull":false,"performStatus":null,"name":"PTT THAILAND GRAND PRIX 2018 ","performStatusDesc":"","performCardPic":"https://atkmedia.allticket.com/assets/content/18022/PTT18022180120181735ticketCard.jpg","performType":"S","performCardShowDate":"5-7<br/>OCT/2018","performCardName":"PTT THAILAND GRAND PRIX 2018","skipInfo":"N","isPromo":false},{"id":"18038","isFull":false,"performStatus":null,"name":"BLANCPAIN GT SERIES ASIA 2018","performStatusDesc":"","performCardPic":"https://atkmedia.allticket.com/assets/content/18038/BPA18038290320181423ticketCard.jpg","performType":"S","performCardShowDate":"12-13<br/>MAY/2018","performCardName":"BLANCPIAN GT SERIES ASIA 2018","skipInfo":"N","isPromo":false},{"id":"18029","isFull":false,"performStatus":null,"name":"บัตรชมฟุตบอลสโมสรสุพรรณบุรี เอฟซี","performStatusDesc":"","performCardPic":"https://atkmedia.allticket.com/assets/content/18029/SMF18029130220181125ticketCard.jpg","performType":"S","performCardShowDate":"7<br/>APR/2018","performCardName":"บัตรชมฟุตบอลสโมสรสุพรรณบุรี เอฟซี","skipInfo":"N","isPromo":false},{"id":"18024","isFull":false,"performStatus":null,"name":"บัตรชมฟุตบอลสโมสรไทยฮอนด้า เอฟซี","performStatusDesc":"","performCardPic":"https://atkmedia.allticket.com/assets/content/18024/THD18024020220181106ticketCard.jpg","performType":"S","performCardShowDate":"6<br/>MAY/2018","performCardName":"บัตรชมฟุตบอลสโมสรไทยฮอนด้า เอฟซี ฤดูกาล 2018","skipInfo":"N","isPromo":true},{"id":"18027","isFull":false,"performStatus":null,"name":"บัตรชมฟุตบอลสโมสรบีจีเอฟซี","performStatusDesc":"","performCardPic":"https://atkmedia.allticket.com/assets/content/18027/BGF18027230220181405ticketCard.jpg","performType":"S","performCardShowDate":"13<br/>MAY/2018","performCardName":"บัตรชมฟุตบอลสโมสรบีจีเอฟซี","skipInfo":"N","isPromo":false},{"id":"18001","isFull":false,"performStatus":null,"name":"บัตรชมฟุตบอลสโมสรบุรีรัมย์ ยูไนเต็ด","performStatusDesc":"","performCardPic":"https://atkmedia.allticket.com/assets/content/18001/1800128012018logoweb.jpg","performType":"S","performCardShowDate":"26<br/>JUNE/2018","performCardName":"บัตรชมฟุตบอลสโมสรบุรีรัมย์ ยูไนเต็ด ฤดูกาล 2018","skipInfo":"N","isPromo":false},{"id":"18023","isFull":false,"performStatus":null,"name":"บัตรชมฟุตบอลสโมสรทรู แบงค็อก ยูไนเต็ด","performStatusDesc":"","performCardPic":"https://atkmedia.allticket.com/assets/content/18023/TBK18023060220181353ticketCard.jpg","performType":"S","performCardShowDate":"6<br/>MAY/2018","performCardName":"บัตรชมฟุตบอลสโมสรทรู แบงค็อก ยูไนเต็ด","skipInfo":"N","isPromo":true}],"cnall":11,"isBack":false,"allpage":1},"banner_":{"items":[{"id":"18042","value":"https://atkmedia.allticket.com/assets/content/18042/WTF18042110420181549Slidebanner.jpg"},{"id":"18043","value":"https://atkmedia.allticket.com/assets/content/18043/NCT060520182011SoldOut.jpg"},{"id":"18022","value":"https://atkmedia.allticket.com/assets/content/18022/PTT18022240420181107slidebanner.jpg"},{"id":"18031","value":"https://atkmedia.allticket.com/assets/content/18031/ITP18031080320180958slideBanner.jpg"}]},"hot_":{"isNext":false,"curpage":1,"items":[{"id":"18001","isFull":false,"performStatus":null,"name":"บัตรชมฟุตบอลสโมสรบุรีรัมย์ ยูไนเต็ด","performStatusDesc":"","performCardPic":"https://atkmedia.allticket.com/assets/content/18001/1800128012018logoweb.jpg","performType":"S","performCardShowDate":"26<br/>JUNE/2018","performCardName":"บัตรชมฟุตบอลสโมสรบุรีรัมย์ ยูไนเต็ด ฤดูกาล 2018","skipInfo":"N","isPromo":false},{"id":"18031","isFull":false,"performStatus":null,"name":"คาราบาว \"หากหัวใจยังรักควาย\"","performStatusDesc":"","performCardPic":"https://atkmedia.allticket.com/assets/content/18031/ITP18031080320180956ticketCard.jpg","performType":"C","performCardShowDate":"21<br/>JUL/2018","performCardName":"คาราบาว \"หากหัวใจยังรักควาย\"","skipInfo":"N","isPromo":false}],"cnall":2,"isBack":false,"allpage":0},"rec_":{"isNext":false,"curpage":1,"items":[{"id":"18022","isFull":false,"performStatus":null,"name":"PTT THAILAND GRAND PRIX 2018 ","performStatusDesc":"","performCardPic":"https://atkmedia.allticket.com/assets/content/18022/PTT18022180120181735ticketCard.jpg","performType":"S","performCardShowDate":"5-7<br/>OCT/2018","performCardName":"PTT THAILAND GRAND PRIX 2018","skipInfo":"N","isPromo":false},{"id":"18043","isFull":true,"performStatus":null,"name":"NCT U (TAEYONGxTEN) FAN MEETING in BANGKOK","performStatusDesc":"","performCardPic":"https://atkmedia.allticket.com/assets/content/18043/NCT18043120420181031ticketCard.jpg","performType":"C","performCardShowDate":"03<br/>JUNE/2018","performCardName":"TAEYONGxTEN FANMEETINGinBKK","skipInfo":"N","isPromo":false},{"id":"18042","isFull":true,"performStatus":null,"name":"What the Fest Music Festival","performStatusDesc":"","performCardPic":"https://atkmedia.allticket.com/assets/content/18042/WTF18042110420181548ticketCard.jpg","performType":"C","performCardShowDate":"16 - 17<br/>JUNE/2018","performCardName":"What the Fest Music Festival","skipInfo":"N","isPromo":false},{"id":"80434","isFull":false,"performStatus":null,"name":"ซื้อตั๋วรถโดยสาร บขส.","performStatusDesc":"","performCardPic":"https://atkmedia.allticket.com/assets/content/80434/card-80434.jpg","performType":"B","performCardShowDate":"<Br>All Time","performCardName":"รถโดยสาร บขส 999","skipInfo":"N","isPromo":false}],"cnall":4,"isBack":false,"allpage":1}}}
-			console.log(response)
-			if(response['success'] == true && response['code'] == 100) {
-
-				if(Object.keys(response['data']).length > 0 ) {
-					this.slideBannerImages = response['data']['banner_']['items'];
-					this.cardTicketSlide = response['data']['all_']['items'];
-					this.cardTicketHot = response['data']['hot_']['items'];
-					this.cardTicketRec = response['data']['rec_']['items'];
-					this.cardTickets = {
-						rec: this.cardTicketRec,
-						hot: this.cardTicketHot
-					}
+			if (response['success'] == true && response['code'] == 100 && Object.keys(response['data']).length > 0) {
+				this.mappingHomePage(response['data'],false);
+				sessionStorage.setItem(ConstMaster.STORAGE_KEY.HOMEPAGE,JSON.stringify(response['data']));
+			} else {
+				
+				if(this.mappingHomePage('',true) === false) {
+					console.log('No data in storage');
 				}
 			}
 
+		},error => {
+			if(this.mappingHomePage('',true) === false) {
+				console.log('No data in storage');
+			}
 		});
 
+	}
+
+	mappingHomePage(data: any, getFromStorage: boolean) {
+
+		if (getFromStorage) {
+			let homePage = sessionStorage.getItem(ConstMaster.STORAGE_KEY.HOMEPAGE);
+			if (homePage != null || homePage != undefined) {
+				data = JSON.parse(homePage);
+			} else {
+				return false;
+			}
+		}
+
+		this.slideBannerImages = data['banner_']['items'];
+		this.cardTicketSlide = data['all_']['items'];
+		this.cardTicketHot = data['hot_']['items'];
+		this.cardTicketRec = data['rec_']['items'];
+		this.cardTickets = {
+			rec: this.cardTicketRec,
+			hot: this.cardTicketHot
+		}
+
+		return true;
 	}
 
 	ngOnDestroy() {

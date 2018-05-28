@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+
+import "rxjs/add/operator/timeout";
+import "rxjs/add/operator/map";
+import "rxjs/add/operator/catch";
+
 import { HttpModule } from '@angular/http';
 
 import { ErrorCodeModel } from '@atk-shared/models/error/error.model';

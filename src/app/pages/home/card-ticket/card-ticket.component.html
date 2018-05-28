@@ -39,16 +39,23 @@
       </ng-template>
 
       <div class="row cardfooter">
-        <div class="col-5 p-1" *ngIf="cardTicket.performCardShowDate != undefined" [ngClass]="{ 'full-column' : cardTicket.performCardName == undefined }">
-          <div class="splitWrapper eventDate is-size-6">
-            <div class="text-dark text-overflow-ellipsis" [innerHTML]="cardTicket.performCardShowDate | safeHtml"></div>
-          </div>
-        </div>
-        <div class="col-7 px-1" *ngIf="cardTicket.performCardName != undefined" [ngClass]="{ 'full-column' : cardTicket.performCardShowDate == undefined }">
-          <div class="splitWrapper eventName">
+        <ng-container *ngIf="cardTicket.performSubType == 'INFO' else normalCard ">
+          <div class="col-12 align-self-center eventName text-overflow p-3">
             <div class="my-1 text-overflow" [innerHtml]="cardTicket.performCardName == '' ? cardTicket.name : cardTicket.performCardName"></div>
           </div>
-        </div>
+        </ng-container>
+        <ng-template #normalCard>
+          <div class="col-5 p-1" *ngIf="cardTicket.performCardShowDate != undefined && cardTicket.performCardShowDate != ''" [ngClass]="{ 'full-column' : cardTicket.performCardName == undefined }">
+            <div class="splitWrapper eventDate is-size-6">
+              <div class="text-dark text-overflow-ellipsis" [innerHTML]="cardTicket.performCardShowDate | safeHtml"></div>
+            </div>
+          </div>
+          <div class="col-7 px-1" *ngIf="cardTicket.performCardName != undefined" [ngClass]="{ 'full-column' : cardTicket.performCardShowDate == undefined }">
+            <div class="splitWrapper eventName">
+              <div class="my-1 text-overflow" [innerHtml]="cardTicket.performCardName == '' ? cardTicket.name : cardTicket.performCardName"></div>
+            </div>
+          </div>
+        </ng-template>
       </div>
     </div>
   </div>

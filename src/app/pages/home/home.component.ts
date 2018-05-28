@@ -18,7 +18,7 @@ declare var $: any;
 			'../../../assets/css/standard/utility.css',
 			'../../../assets/css/standard/layout.css',
 		]
-})
+	})
 
 export class HomeComponent implements OnInit {
 	@ViewChild(CardTicketComponent) cardTicketComponent : CardTicketComponent;

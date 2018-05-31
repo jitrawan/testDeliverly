@@ -30,6 +30,10 @@
   background-color: #666666;
 }
 
+.container {
+  position: relative;
+}
+
 .container.spinner-loading{
   min-height: 700px;
 }

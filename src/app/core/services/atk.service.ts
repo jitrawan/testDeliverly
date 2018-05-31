@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { ConstMaster } from '@atk-shared/config/ConstMaster';
 import { EventBanner } from '@atk-shared/models/eventBanner.model';
 import { EventInfo } from '@atk-shared/models/EventInfo.model';
+import { ReserveModel } from '@atk-shared/models/reserve.model';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -52,6 +53,16 @@ export class AtkService {
       performId: performId
     }
     return this.http.post<any>(ConstMaster.BOOKING_API.getRound,params,httpOptions);
+  }
+
+  getSeat(reserveModel: ReserveModel) {
+    let params = {
+      performId: reserveModel.performId,
+      roundId: reserveModel.roundId,
+      zoneId: reserveModel.zoneId
+    }
+
+    return this.http.post<any>(ConstMaster.BOOKING_API.getSeat,params,httpOptions);
   }
 
 }

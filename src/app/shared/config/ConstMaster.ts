@@ -18,7 +18,8 @@ export const ConstMaster = {
         getEventStatus: environment.apiGatewayCheckEvent
     },
     BOOKING_API : {
-        getRound: environment.apiGatewayGetRound
+        getRound: environment.apiGatewayGetRound,
+        getSeat: environment.apiGatewayGetSeat
     },
     DEFAULT_IMAGES : {
         banner: environment.bucketS3+'/assets/images/placeholder/place-holder-1440x480.jpg.jpg',

@@ -16,7 +16,7 @@
       <div class="col-12 mt-3" *ngFor="let round of rounds; let i = index;">
         <div class="custom-radio">
           <input class="custom-control-input" id="{{i}}" name="custCardType" type="radio">
-          <label class="custom-control-label col-12 p-l-60 b-2px-grey b-r-12 cursorPointer " for="{{i}}" (click)="selectDateTime(round.roundId)">{{round.roundDate | date:'fullDate' }} <span class="mx-2">|</span> {{round.startTime}} - {{round.endTime}}</label>
+          <label class="custom-control-label col-12 p-l-60 b-2px-grey b-r-12 cursorPointer " for="{{i}}" (click)="selectDateTime(round)">{{round.roundDate | date:'fullDate' }} <span class="mx-2">|</span> {{round.startTime}} - {{round.endTime}}</label>
         </div>
       </div>
     </div>
@@ -153,46 +153,51 @@
       </div>
     </div>
   </div>
-  <div class="row mt-5" *ngIf="showExecuteButton" [@moveInOut]>
+  
+  <div class="row mt-5" id="reserveInfo" *ngIf="showZoneType != undefined" [@moveInOut]>
+    
+    <div class="col-12" *ngIf="showZoneType == 'SEAT'">
+      <seat-layout [seatList]="seatList"></seat-layout>
+    </div>
     <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
       <div class="ticket-summary">
         <div class="summary-title text-center">
           <h4 class="my-0 is-size-5-mobile">TICKET INFORMATION</h4>
         </div>
         <div class="summary-body">
-          <div class="row mx-0  ">
-              <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Round</div>
-              <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
-                <div class="text-desc">{{selectedData.round | date:'fullDate' }}</div>
-              </div>
-              <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Zone</div>
-              <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
-                <div class="text-desc">A5</div>
-              </div>
-              <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Seat No</div>
-              <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
-                <div class="text-desc">VALUE</div>
-              </div>
-              <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text my-3">Quantity</div>
-              <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper my-3">
-                <div class="plusAndMinus">
-                  <div class="sign minus" (click)="qtyBtnHandler('4','minus')">
-                    <i class="fa fa-minus" aria-hidden="true"></i>
-                  </div>
-                  <input type="number" data-input-seq="4" min="0" max="100" value="1" />
-                  <div class="sign plus" (click)="qtyBtnHandler('4','plus')">
-                    <i class="fa fa-plus"></i>
-                  </div>
+          <div class="row mx-0">
+            <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Round</div>
+            <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+              <div class="text-desc">{{ reserve.roundDate | date:'longDate' }}</div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Zone</div>
+            <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+              <div class="text-desc">{{ reserve.zoneId }}</div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Seat No</div>
+            <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+              <div class="text-desc">{{ showZoneType == 'STAND' ? 'Festival Seat':'GG'}}</div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text my-3">Quantity</div>
+            <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper my-3">
+              <div class="plusAndMinus" *ngIf="showZoneType == 'STAND'">
+                <div class="sign minus" (click)="qtyBtnHandler('4','minus')">
+                  <i class="fa fa-minus" aria-hidden="true"></i>
+                </div>
+                <input type="number" data-input-seq="4" min="0" max="100" value="1" />
+                <div class="sign plus" (click)="qtyBtnHandler('4','plus')">
+                  <i class="fa fa-plus"></i>
                 </div>
               </div>
-              <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Unit Price (Baht)</div>
-              <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
-                <div class="text-desc">VALUE</div>
-              </div>
-              <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Total Price (Baht)</div>
-              <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
-                <div class="text-desc">VALUE</div>
-              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Unit Price (Baht)</div>
+            <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+              <div class="text-desc">VALUE</div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Total Price (Baht)</div>
+            <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+              <div class="text-desc">VALUE</div>
+            </div>
           </div>
           <div class="text-center mt-3">
             <button class="btn btn-atk-danger mt-3" type="button" (click)=" goEventInfo()">

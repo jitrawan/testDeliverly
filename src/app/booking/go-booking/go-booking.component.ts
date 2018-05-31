@@ -4,7 +4,10 @@ import { SharedService } from '@atk-service/shared-service.service';
 import { AtkService } from '@atk-service/atk.service';
 import { Location , DatePipe } from '@angular/common';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { ReserveModel } from '@atk-shared/models/reserve.model';
 import * as $ from 'jquery';
+import { ReserveParkModel } from '@atk-shared/models/bus/reservePark.model';
+import { SeatByZoneModel } from '@atk-shared/models/zoneSeat/seatByZone.model';
 
 declare function jMap(element): any;
 
@@ -29,7 +32,6 @@ declare function jMap(element): any;
 })
 export class GoBookingComponent implements OnInit {
     @Input() data: any;
-    @Input() test: any;
 
     event: Event = {} as any;
     isLoading: boolean = true;
@@ -51,6 +53,10 @@ export class GoBookingComponent implements OnInit {
 
     rounds: ListRound[] =[];
 
+    reserve: ReserveModel = {} as any;
+    showZoneType: string;
+    seatList: SeatByZoneModel[];
+
     constructor(
         private renderer: Renderer2,
         private router: Router,
@@ -67,19 +73,19 @@ export class GoBookingComponent implements OnInit {
     @ViewChild('nonSeatSelector') private nonSeatSelector: ElementRef;
 
     ngOnInit() {
+        this.reserve.performId = '17142';
         this.listSeat = [];
         this.data = [];
         this.sharedService.receiveData.subscribe(data => {
             console.log(data);
             if(data == undefined || Object.keys(data).length == 0) {
-                this.router.navigate(['/']);
+                // this.router.navigate(['/']);
             } else {
-                this.performId = data;
+                this.reserve.performId = data;
             }
         });
 
-
-        this.atkService.getRoundDetail(this.performId).subscribe(res =>{
+        this.atkService.getRoundDetail(this.reserve.performId).subscribe(res =>{
             
             console.log(res);
             
@@ -110,10 +116,6 @@ export class GoBookingComponent implements OnInit {
             this.isLoading = false;
         });
 
-        
-        // this.prepareFetch();
-        // this.loopSeatNo();
-
     }
 
     scrollTo(target) {
@@ -127,16 +129,20 @@ export class GoBookingComponent implements OnInit {
         this.rounds = this.event.listRound.filter(function(el){
             return el.roundDate == e.calEvent.dateSelected;
         });
-
+        console.log(this.rounds);
         setTimeout(() => {
             this.scrollTo(this.avaDateTime.nativeElement);
         }, 200);
         
     }
 
-    selectDateTime(roundId) {
+    selectDateTime(round) {
+        console.log("Round : ",round);
+        this.reserve.roundId = round.roundId;
+        this.reserve.roundDate = round.roundDate;
+
         this.event.listRound.forEach(el => {
-            if(roundId == el.roundId) {
+            if(round.roundId == el.roundId) {
                 if(el.zoneLayoutWeb == null) {
                     this.event.displayZoneLayout = this.event.zoneLayout.replace('href="#',' ');
                 } else {
@@ -145,56 +151,45 @@ export class GoBookingComponent implements OnInit {
                 this.toggleElement(this.chooseZone,'show',true);
                 this.scrollTo('#chooseZone');
                 setTimeout(() => {
+                    let mapLayout:any = document.querySelector('img[usemap]');
+                    mapLayout.style.setProperty('width','auto');
+                    mapLayout.style.setProperty('height','auto');
                     jMap('img[usemap]');
-                    console.log("TRIGGER !")
                 }, 600);
             }
         });
     }
 
-    selectZone(zoneType?: string) {
-        if(zoneType == "nonseat") {
-            this.toggleElement(this.chooseNonSeat,'show',true);
-            this.toggleElement(this.chooseSeat,'show',false);
-            this.scrollTo('#chooseNonSeat');
-        } else {
-            this.toggleElement(this.chooseSeat,'show',true);
-            this.toggleElement(this.chooseNonSeat,'show',false);
-            this.scrollTo('#chooseSeat');
+    zoneLayoutClicked(event) {
+        if (event.target && event.target.className.indexOf('p_') >= 0) {
+            let zoneSelected = event.target.dataset.zone;
+            this.reserve.zoneId = zoneSelected;
+            console.log(this.reserve);
         }
-        this.showExecuteButton = true;
+
+        this.atkService.getSeat(this.reserve).subscribe(res =>{
+            if (res['success'] == true && res['code'] == 100 && Object.keys(res['data']).length > 0) {
+                this.showZoneType = res['data']['zone_type'];
+                this.showExecuteButton = true;
+
+                if(this.showZoneType == 'STAND') {
+                    setTimeout(() => {
+                        this.scrollTo('#reserveInfo');  
+                    }, 0);
+                } else {
+                    this.seatList = res['data']['seats_available'];
+                    console.log(this.seatList)
+                }
+            } else {
+
+            }
+            console.log(res)
+        });
     }
 
     chooseSeatAmt(seatAmount: number) {
         this.nonSeatAmtSelected = seatAmount;
         console.log(this.nonSeatAmtSelected)
-    }
-
-    loopSeatNo() {
-        var i: number;
-        var u: number;
-
-        for (i = 1; i <= 3; i++) {
-            for (u = 1; u <= 20; u++) {
-                this.data.push({ x: u, y: i, z: '' + i + u, labelRow: String.fromCharCode(i + 64) })
-            }
-        }
-    }
-
-    groupObjByRow(row) {
-        return this.data.filter(item => item.y === row);
-    }
-
-    prepareFetch() {
-        if (this.data != null) {
-            this.numbersOfRow = Array(5).fill('');
-            this.numbersOfCol = Array(20).fill('');
-            this.rowHeader = this.numbersOfRow;
-        }
-    }
-    fatchRowData(row, pos) {
-        var resultObject = this.data.filter(item => item.y === row);
-        return resultObject.filter(item => item.x === pos);
     }
 
     goDiscountList() {
@@ -205,17 +200,6 @@ export class GoBookingComponent implements OnInit {
 
     goEventInfo() {
         this.location.back();
-    }
-
-    onChangeSeat(seat: string, isChecked: boolean) {
-        if (isChecked) {
-            this.listSeat.push({ "seat": seat })
-            console.log("Seat : " + JSON.stringify(this.listSeat));
-        } else {
-            this.listSeat.splice(seat, 1);
-            console.log("Delete Seat : " + JSON.stringify(this.listSeat));
-        }
-
     }
 
     showNonSeat() {
@@ -248,18 +232,10 @@ export class GoBookingComponent implements OnInit {
             }
         }
 
-        this.showExecuteButton = value > 0 ? true: false;
-
+        this.showExecuteButton = true;
         _el[0].value = value;
     }
 
-    zoneLayoutClicked(event) {
-        if (event.target && event.target.className.indexOf('p_') >= 0) {
-            let element = event.target;
-            console.log(element);
-            this.showExecuteButton = true;
-        }
-    }
 }
 
 interface Event {

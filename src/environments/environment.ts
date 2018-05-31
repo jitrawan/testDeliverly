@@ -13,6 +13,7 @@ export const environment = {
   apiGatewayAllEvent: 'https://kskyyucr18.execute-api.ap-southeast-1.amazonaws.com/latest/get-all-events',
   apiGatewayCheckEvent: 'https://2za1bogkhk.execute-api.ap-southeast-1.amazonaws.com/latest/check-event',
   apiGatewayGetRound: 'https://2za1bogkhk.execute-api.ap-southeast-1.amazonaws.com/latest/get-round',
+  apiGatewayGetSeat: 'https://2za1bogkhk.execute-api.ap-southeast-1.amazonaws.com/latest/get-seat',
   apiGatewayHeader: '//s3-ap-southeast-1.amazonaws.com/atkfullsite/config/HeaderMenu.json',
   bucketS3: '//s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com',
 };

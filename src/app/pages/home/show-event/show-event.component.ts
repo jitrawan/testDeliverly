@@ -33,8 +33,6 @@ export class ShowEventComponent implements OnInit {
       this.category = params.get('category');
       this.reInitiateComponent();
     });
-    
-    this.headerHandler();
   }
 
   ngOnDestroy() {
@@ -45,6 +43,7 @@ export class ShowEventComponent implements OnInit {
     this.isLoading = true;
     this.cardTickets = undefined;
     this.displayCategory = undefined;
+    this.headerHandler();
     
     if(this.subscription != undefined) {
       this.subscription.unsubscribe();

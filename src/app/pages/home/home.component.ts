@@ -87,6 +87,7 @@ export class HomeComponent implements OnInit {
 	}
 
 	ngOnDestroy() {
+		this.headerHandler();
 		this.subscription.unsubscribe();
 	}
 
@@ -145,7 +146,7 @@ export class HomeComponent implements OnInit {
 		}
 	}
 
-	headerHandler(emit) {
+	headerHandler(emit?) {
 
 		let header = $('#header');
 		if (emit) {

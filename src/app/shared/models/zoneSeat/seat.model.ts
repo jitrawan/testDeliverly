@@ -1,14 +1,20 @@
 export class SeatModel {
-    public seatNo: string;
-    public rowName: string;
-    public status: string;
-    public id: string;
-    public priceAmt: number;
-    public rowNo: string;
-    public colNo: string;
-    public active: string;
-    public available: boolean;
-    public canSelect: boolean;
-    public zoneId: string;
-    public lockType: string;
+    seatNo: string;
+    rowName: string;
+    status: string;
+    id: string;
+    priceAmt: number;
+    rowNo: string;
+    colNo: string;
+    active: string;
+    available: boolean;
+    canSelect: boolean;
+    zoneId: string;
+    lockType: string;
+    authenGroup: string;
+    bookArea: string;
+    iconpath: string;
+    color: string;
+    html: string;
+    name: string;
 }

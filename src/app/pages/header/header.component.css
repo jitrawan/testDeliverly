@@ -2,12 +2,6 @@ body {
   font-family: "FontAwesome", 'Kanit', sans-serif !important;
 }
 
-@media (max-width: 992px) {
-  .header-search {
-    display: none;
-  }
-}
-
 #header {
   width: 100%;
   z-index: 2;
@@ -32,6 +26,10 @@ body {
   -webkit-transition: .5s ease-in-out;
   -moz-transition: .5s ease-in-out;
   transition: .5s ease-in-out;
+}
+
+.header-search {
+  transition: 1s all;
 }
 
 .standard-logo {
@@ -612,10 +610,16 @@ a:focus {
 }
 
 @media (min-width: 992px) {
+  
+  .header-search {
+    display: none;
+  }
+  
   #navbar-menu {
     padding-top: 0;
     padding-bottom: 0;
   }
+  
   .header-search {
     display: block;
   }

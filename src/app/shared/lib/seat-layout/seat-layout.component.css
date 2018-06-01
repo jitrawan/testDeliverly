@@ -1,0 +1,111 @@
+.seat-chart table {
+  table-layout: fixed;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.header-row {
+  display: table-cell;
+  vertical-align: middle;
+  padding-right: 1rem;
+  font-weight: bold;
+}
+
+.seat {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: block;
+  stroke-width: 2;
+  stroke: #fff;
+  stroke-miterlimit: 10;
+  margin: 10% auto;
+  
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  -ms-transition: all .5s ease;
+  transition: all .5s ease;
+  /* box-shadow: inset 0px 0px 0px 30px #ececec; */
+  /* animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both; */
+}
+
+.seat-circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 4;
+  stroke-miterlimit: 10;
+  stroke: #37484e;
+  fill: none;
+  animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.seat.available, .seat.selected {
+    cursor: pointer;
+}
+
+.seat.taken {
+    cursor: not-allowed;
+}
+
+.seat.available:hover {
+    transform: scale(0.95);
+}
+
+.seat.selected {
+    transition: 0.4s box-shadow ease-in;
+    box-shadow: inset 0px 0px 0px 30px #28ace0 !important;
+}
+
+.seat.taken > .seat-circle {
+  animation: fill-taken 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.seat-position {
+  stroke: black;
+  text-anchor: middle;
+  stroke-width: 2px;
+  font-size: 24px;
+  font-weight: 300;
+}
+
+.seat-sign {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  stroke: lime;
+  animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes scale {
+  0%,
+  100% {
+    transform: none;
+  }
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+
+@keyframes fill {
+  100% {
+    box-shadow: inset 0px 0px 0px 30px red;
+  }
+}
+
+@keyframes fill-taken {
+    100% {
+        fill: black;
+    }
+}

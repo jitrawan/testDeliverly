@@ -154,12 +154,12 @@
     </div>
   </div>
   
-  <div class="row mt-5" id="reserveInfo" *ngIf="showZoneType != undefined" [@moveInOut]>
+  <div class="row mt-5" id="reserveInfo" *ngIf="showZoneType != undefined">
     
     <div class="col-12" *ngIf="showZoneType == 'SEAT'">
-      <seat-layout [seatList]="seatList"></seat-layout>
+      <seat-layout [seatList]="seatList" (seatsSelected)="seatSelectedHandler($event)"></seat-layout>
     </div>
-    <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+    <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 mt-4">
       <div class="ticket-summary">
         <div class="summary-title text-center">
           <h4 class="my-0 is-size-5-mobile">TICKET INFORMATION</h4>

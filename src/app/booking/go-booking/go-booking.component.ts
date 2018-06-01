@@ -73,7 +73,7 @@ export class GoBookingComponent implements OnInit {
     @ViewChild('nonSeatSelector') private nonSeatSelector: ElementRef;
 
     ngOnInit() {
-        this.reserve.performId = '17142';
+        this.reserve.performId = '18051';
         this.listSeat = [];
         this.data = [];
         this.sharedService.receiveData.subscribe(data => {
@@ -143,10 +143,13 @@ export class GoBookingComponent implements OnInit {
 
         this.event.listRound.forEach(el => {
             if(round.roundId == el.roundId) {
+                var find = 'href="#"';
+                var replace = new RegExp(find, 'g');
                 if(el.zoneLayoutWeb == null) {
-                    this.event.displayZoneLayout = this.event.zoneLayout.replace('href="#',' ');
+                    this.event.displayZoneLayout = this.event.zoneLayout.replace(replace,' ');
                 } else {
-                    this.event.displayZoneLayout = el.zoneLayoutWeb.replace('href="#',' ');
+                    console.log("Else")
+                    this.event.displayZoneLayout = el.zoneLayoutWeb.replace(replace,' ');
                 }
                 this.toggleElement(this.chooseZone,'show',true);
                 this.scrollTo('#chooseZone');
@@ -166,16 +169,17 @@ export class GoBookingComponent implements OnInit {
             this.reserve.zoneId = zoneSelected;
             console.log(this.reserve);
         }
-
+        console.time('getSeat')
         this.atkService.getSeat(this.reserve).subscribe(res =>{
+            console.timeEnd('getSeat')
             if (res['success'] == true && res['code'] == 100 && Object.keys(res['data']).length > 0) {
                 this.showZoneType = res['data']['zone_type'];
                 this.showExecuteButton = true;
 
                 if(this.showZoneType == 'STAND') {
-                    setTimeout(() => {
-                        this.scrollTo('#reserveInfo');  
-                    }, 0);
+                    // setTimeout(() => {
+                    //     this.scrollTo('#reserveInfo');  
+                    // }, 0);
                 } else {
                     this.seatList = res['data']['seats_available'];
                     console.log(this.seatList)
@@ -216,6 +220,9 @@ export class GoBookingComponent implements OnInit {
         
     }
 
+    seatSelectedHandler(event) {
+        console.log(event);
+    }
     qtyBtnHandler(searchKey: string,triggerType: string){
         
         let _el = document.querySelectorAll('[data-input-seq="'+searchKey+'"]') as any;

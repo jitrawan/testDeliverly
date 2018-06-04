@@ -1,9 +1,20 @@
-.seat-chart table {
+.seat-container table {
   table-layout: fixed;
   text-align: center;
   margin: 0 auto;
 }
 
+.seat-container {
+  overflow: auto;
+}
+
+.seat-wrapper {
+  margin: 1rem auto;
+  max-width: 100%;
+  max-height: 430px;
+  /* transform: matrix(0.8, 0, 0, 0.8, 11, -43.5); */
+  transition: 1s transform ease-in-out;
+}
 .header-row {
   display: table-cell;
   vertical-align: middle;
@@ -20,12 +31,10 @@
   stroke: #fff;
   stroke-miterlimit: 10;
   margin: 10% auto;
-  
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
-
   -webkit-transition: all .5s ease;
   -moz-transition: all .5s ease;
   -o-transition: all .5s ease;
@@ -45,25 +54,38 @@
   animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
 }
 
-.seat.available, .seat.selected {
-    cursor: pointer;
+.seat.available,
+.seat.selected {
+  cursor: pointer;
 }
 
-.seat.taken {
-    cursor: not-allowed;
+.seat.taken, .seat.noSeat {
+  cursor: not-allowed;
 }
 
 .seat.available:hover {
-    transform: scale(0.95);
+  transform: scale(1.05);
+}
+
+.seat.available .mark-selected {
+  display: none;
 }
 
 .seat.selected {
-    transition: 0.4s box-shadow ease-in;
-    box-shadow: inset 0px 0px 0px 30px #28ace0 !important;
+  transition: 0.4s box-shadow ease-in;
+  box-shadow: inset 0px 0px 0px 30px #28ace0 !important;
 }
 
-.seat.taken > .seat-circle {
+.seat.selected .seat-position {
+  display: none;
+}
+
+.seat.taken>.seat-circle {
   animation: fill-taken 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.seat.noSeat {
+  box-shadow: inset 0px 0px 0px 30px #ececec !important;
 }
 
 .seat-position {
@@ -79,7 +101,7 @@
   stroke-dasharray: 48;
   stroke-dashoffset: 48;
   stroke: lime;
-  animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+  animation: stroke 0.4s cubic-bezier(0.65, 0, 0.45, 1) forwards;
 }
 
 @keyframes stroke {
@@ -105,7 +127,7 @@
 }
 
 @keyframes fill-taken {
-    100% {
-        fill: black;
-    }
+  100% {
+    fill: black;
+  }
 }

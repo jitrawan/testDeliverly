@@ -101,13 +101,12 @@ export class HeaderComponent implements OnInit {
     @ViewChild('runningYes') private runningYes: ElementRef;
     @HostListener('window:resize', ['$event'])
     onWindowResize(event) {
-
         if (this.resizeTimeout) {
             clearTimeout(this.resizeTimeout);
         }
-        // this.resizeTimeout = setTimeout((() => {
-        //     this.checkSidebar(event.target.innerWidth);
-        // }).bind(this), 100);
+        this.resizeTimeout = setTimeout((() => {
+            this.checkSidebar(event.target.innerWidth);
+        }).bind(this), 50);
     }
 
     constructor(
@@ -187,6 +186,8 @@ export class HeaderComponent implements OnInit {
             this.headerModel = response['data'];
             sessionStorage.setItem('headerMenu',JSON.stringify(this.headerModel));
         });
+        this.checkSidebar(window.innerWidth);
+        
         this.user = null;
         var privateKey = 'MIIBOQIBAAJAWYbAUbPhRWQ7TAjKaotbJEQJI6imMtmXnrXDMSYpLU5AxDXjUsoCMbzk/9PEh2igdu2JyyhLPGgwqJFZxJM1SwIDAQABAkAxiLo+On3I7CVW84IzozlhfndkEHsspXIbsUv3lLqxwvLsDXrZWiMdQJKWOvwojFmbEFhxjKZC3c/BzMVjjCZxAiEAp+U3uAPhZB8Vr+s0zrONEYyAgzm49FqezwjT+Zvia9kCIQCIgZK0I0rja3ZRiI/kQjqcrf5F46sU8hg1ROrIovUnwwIhAI3l12KpvOuerfihZF8yNw7W3aKKvXufv0qhXm4+xm15AiBbP8pyclkgNvirvg759a+6hrC/xVXatY6rJTuRDSW2AwIgUgpYOwni1NMbjqryxZo9UXR7oUaI4EZDuQ/0BTMUCt8=' ;
         var publicKey = 'MFswDQYJKoZIhvcNAQEBBQADSgAwRwJAWYbAUbPhRWQ7TAjKaotbJEQJI6imMtmXnrXDMSYpLU5AxDXjUsoCMbzk/9PEh2igdu2JyyhLPGgwqJFZxJM1SwIDAQAB';
@@ -478,14 +479,15 @@ export class HeaderComponent implements OnInit {
         });
         
     }
-    // checkSidebar(width) {
-    //     if (width <= 992) {
-    //         this.isMobileSize = true;
-    //     } else {
-    //         this.isMobileSize = false;
-    //         this.triggerSidebar();
-    //     }
-    // }
+
+    checkSidebar(width) {
+        if (width <= 992) {
+            this.isMobileSize = true;
+        } else {
+            this.isMobileSize = false;
+            this.closeAllDialog();
+        }
+    }
 
     overlayClicked(event) {
         this.closeAllDialog();

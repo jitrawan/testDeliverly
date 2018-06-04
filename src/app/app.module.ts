@@ -27,15 +27,15 @@ import { ErrorMsgService } from '@atk-service/errorMsg.service';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from '@atk-pages/header/header.component';
 import { FooterComponent } from '@atk-pages/footer/footer.component';
-import { EventInfoComponent } from './pages/event-info/event-info.component';
-import { HomeComponent } from './pages/home/home.component';
-import { FaqComponent } from './pages/faq/faq.component';
-import { PolicyComponent } from './pages/policy/policy.component';
-import { HistoryComponent } from './pages/history/history.component';
+import { EventInfoComponent } from '@atk-pages/event-info/event-info.component';
+import { HomeComponent } from '@atk-pages/home/home.component';
+import { FaqComponent } from '@atk-pages/faq/faq.component';
+import { PolicyComponent } from '@atk-pages/policy/policy.component';
+import { HistoryComponent } from '@atk-pages/history/history.component';
 import { SocialLoginModule } from 'angularx-social-login';
 import { AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider } from 'angularx-social-login';
-import { DiscountComponent } from './pages/discount/discount.component';
-import { DiscountDetailComponent } from './pages/discount-detail/discount-detail.component';
+import { DiscountComponent } from '@atk-pages/discount/discount.component';
+import { DiscountDetailComponent } from '@atk-pages/discount-detail/discount-detail.component';
 import {
   RECAPTCHA_SETTINGS,
   RecaptchaSettings,
@@ -46,8 +46,8 @@ import { PushNotificationModule } from 'ng-push-notification';
 
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { CardTicketComponent } from './pages/home/card-ticket/card-ticket.component';
-import { ShowEventComponent } from './pages/home/show-event/show-event.component';
+import { CardTicketComponent } from '@atk-pages/home/card-ticket/card-ticket.component';
+import { ShowEventComponent } from '@atk-pages/home/show-event/show-event.component';
 
 const globalSettings: RecaptchaSettings = {siteKey: '6Lek2FoUAAAAAPQZEags-82eJwRwDdJFm_LHVpXF'}
 

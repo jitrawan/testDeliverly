@@ -56,6 +56,31 @@
   animation: spinner 0.9s ease infinite;
 }
 
+.seat-loading {
+  min-height: 400px;
+  position: absolute;
+  right: 0;
+  left: 0;
+}
+
+.seat-loading:before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60px;
+  height: 60px;
+  margin-top: -30px;
+  margin-left: -30px;
+  border-radius: 50%;
+  border: 5px solid transparent;
+  border-top-color: #077eff;
+  border-bottom-color: #077eff;
+  z-index: 2;
+  animation: spinner 0.9s ease infinite;
+}
+
 @keyframes spinner {
   to {
     transform: rotate(360deg);
@@ -394,6 +419,11 @@ input[type="number"] {
   border-color: #D5D5D5;
   background: #fff;
   color: #222222;
+}
+
+.summary-wrapper {
+  position: relative;
+  max-width: 100%;
 }
 
 @media (min-width: 425px) {

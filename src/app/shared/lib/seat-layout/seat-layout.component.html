@@ -1,32 +1,43 @@
-<h2 class="text-center mt-3"> STAGE</h2>
-
-<div class="seat-chart mt-3" align="center">
-  <table>
-    <tr *ngFor="let row of labelOfRow">
-      <td class="header-row"> {{row}} </td>
-      <td *ngFor="let col of labelOfCol">
-        <!-- <ng-container *ngFor="let data of seatLayoutData">
-          <div class="seat-container" *ngIf="data.status == 'A' && data.colNo == col && data.rowName == row" (click)="selectSeat($event, data)">
-            <svg class="seat available" [ngStyle]="{ 'box-shadow' : 'inset 0px 0px 0px 30px '+data.color }" viewBox="0 0 52 52">
+<div class="seat-container mt-3">
+  <button (click)="testZoom(true)"><i class="fa fa-search-plus" aria-hidden="true"></i></button>
+  <button (click)="testZoom(false)"><i class="fa fa-search-minus" aria-hidden="true"></i></button>
+  <div class="seat-wrapper" [ngStyle]="zoomTest">
+    <h2 class="text-center mt-3"> STAGE</h2>
+    <table>
+      <tr *ngFor="let row of labelOfRow">
+        <td class="header-row"> {{row}} </td>
+        <td *ngFor="let col of labelOfCol">
+          <div *ngIf="seatLayoutData[row+col]?.status == 'A'" (click)="selectSeat($event, seatLayoutData[row+col])">
+            <svg class="seat available" [ngStyle]="{ 'box-shadow' : 'inset 0px 0px 0px 30px '+seatLayoutData[row+col].color }" viewBox="0 0 52 52">
               <circle class="seat-circle" cx="26" cy="26" r="25" fill="none" />
-              <text class="seat-position" [ngStyle]="{ 'stroke' : data.fontColor ? data.fontColor : '#000' }"x="50%" y="50%" dy=".3em">{{col}}</text>
+              <path class="seat-sign mark-selected" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" [ngStyle]="{ 'stroke' : seatLayoutData[row+col].fontColor ? seatLayoutData[row+col].fontColor : '#000' }" />
+              <text class="seat-position" [ngStyle]="{ 'stroke' : seatLayoutData[row+col].fontColor ? seatLayoutData[row+col].fontColor : '#000' }" x="50%" y="50%" dy=".3em">{{col}}</text>
             </svg>
           </div>
-            
-          <div *ngIf="data.status != 'A' && data.colNo == col && data.rowName == row ">
-            <svg class="seat taken" viewBox="0 0 52 52">
+
+          <div *ngIf="seatLayoutData[row+col]?.status != 'A'">
+
+            <svg class="seat taken" viewBox="0 0 52 52" *ngIf="seatLayoutData[row+col] != undefined else noSeat">
               <circle class="seat-circle" cx="26" cy="26" r="25" fill="none" />
               <path class="seat-sign" d="M16 16 36 36 M36 16 16 36" />
+              <text class="seat-position"></text>
             </svg>
+
+            <ng-template #noSeat>
+              <svg class="seat noSeat" viewBox="0 0 52 52">
+                <circle class="seat-circle" cx="26" cy="26" r="25" fill="none" />
+              </svg>
+            </ng-template>
           </div>
-        </ng-container> -->
-        <!-- <path class="seat-sign" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" /> -->
-        <!-- <div class="" *ngFor="let data of fatchRowSpecialData(col, row); let index = index">
-          <input #input *ngIf="data.status == 'A'" type="checkbox" id="{{data.zoneId}}{{row}}{{col}}"  (click)="selectSeat($event, data, input.id)" />
-          <label [ngStyle]="{'background-color': data.color }" *ngIf="data.status == 'A'" for="{{data.zoneId}}{{row}}{{col}}"> {{data.seatNo}} </label>
-          <span [ngStyle]="{'background-color': data.color }" *ngIf="data.status != 'A'" id="{{data.zoneId}}{{row}}{{col}}"> {{data.seatNo}} </span>
-        </div> -->
-      </td>
-    </tr>
-  </table>
+        </td>
+      </tr>
+    </table>
+  </div>
 </div>
+
+<!-- <path class="seat-sign" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" /> -->
+<!-- <div class="" *ngFor="let data of fatchRowSpecialData(col, row); let index = index">
+  <input #input *ngIf="data.status == 'A'" type="checkbox" id="{{data.zoneId}}{{row}}{{col}}"  (click)="selectSeat($event, data, input.id)" />
+  <label [ngStyle]="{'background-color': data.color }" *ngIf="data.status == 'A'" for="{{data.zoneId}}{{row}}{{col}}"> {{data.seatNo}} </label>
+  <span [ngStyle]="{'background-color': data.color }" *ngIf="data.status != 'A'" id="{{data.zoneId}}{{row}}{{col}}"> {{data.seatNo}} </span>
+</div> -->

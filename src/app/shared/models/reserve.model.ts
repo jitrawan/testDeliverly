@@ -5,4 +5,5 @@ export class ReserveModel {
     seatNo: string;
     seatAmount: string;
     roundDate: string;
+    priceAmount: string;
 }

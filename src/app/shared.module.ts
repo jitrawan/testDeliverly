@@ -4,12 +4,14 @@ import { SafeHtmlPipe } from './shared/lib/dom/safehtml.pipe';
 
 import { JasperoConfirmationsModule } from '@jaspero/ng2-confirmations';
 import { NgxBarcodeModule } from 'ngx-barcode';
+import { LoadingComponent } from '@atk-pages/loading/loading.component';
 
 
 @NgModule({
   declarations: [
     ThaiDatePipe,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    LoadingComponent
   ],
   imports: [
     JasperoConfirmationsModule,
@@ -19,7 +21,8 @@ import { NgxBarcodeModule } from 'ngx-barcode';
     ThaiDatePipe,
     SafeHtmlPipe,
     JasperoConfirmationsModule,
-    NgxBarcodeModule
+    NgxBarcodeModule,
+    LoadingComponent
   ]
 })
 export class SharedModule {

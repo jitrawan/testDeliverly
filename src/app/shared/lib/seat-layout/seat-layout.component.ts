@@ -20,7 +20,8 @@ export class SeatLayoutComponent implements OnInit {
   labelOfCol: any;
 
   selectedSeat: any[] = [];
-  seatLayoutData: SeatLayoutModel[] = [];
+  seatLayoutData: any = {};
+  zoomTest: Object = { 'transform': 'translate3d(0,0,0) scale(0.7,0.7)'};
 
   constructor() { }
 
@@ -65,15 +66,13 @@ export class SeatLayoutComponent implements OnInit {
   }
 
   prerender(){
-
     for(let row of this.labelOfRow) {
       for(let col of this.labelOfCol) {
         for(let data of this.fetchRowSpecialData(col, row)) {
-          this.seatLayoutData.push(data);
+          this.seatLayoutData[row+''+col] = data;
         }
       }
     }
-
   }
 
   layoutSpecial() {
@@ -93,10 +92,16 @@ export class SeatLayoutComponent implements OnInit {
     }
 
     this.prerender();
-    console.log(this.seatLayoutData)
+    
   }
 
-
+  testZoom(isZoomIn) {
+    if(isZoomIn) {
+      this.zoomTest['transform'] = 'translate3d(0,0,0) scale(1,1)';
+    } else {
+      this.zoomTest['transform'] = 'translate3d(0,0,0) scale(0.5,0.5)';
+    }
+  }
   selectSeat(event, data){
 
     const AVAILABLE_CLASS = "available";
@@ -132,7 +137,7 @@ export class SeatLayoutComponent implements OnInit {
     // console.log(this.selectedSeat);
     this.seatsSelected.emit(this.selectedSeat);
   }
-
+  
 }
 
 export class SeatLayoutModel {

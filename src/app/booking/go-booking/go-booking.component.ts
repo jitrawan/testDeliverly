@@ -25,8 +25,8 @@ declare function jMap(element): any;
             state('void', style({
                 opacity: 0
             })),
-            transition('* => void', animate('400ms ease-out')),
-            transition('void => *', animate('600ms ease-in'))
+            transition('* => void', animate('0ms ease-out')),
+            transition('void => *', animate('700ms ease-in'))
         ])
     ]
 })
@@ -35,6 +35,7 @@ export class GoBookingComponent implements OnInit {
 
     event: Event = {} as any;
     isLoading: boolean = true;
+    isGetSeatLoading: boolean = false;
     numbersOfCol: Array<any>;
     numbersOfRow: Array<any>;
     rowHeader: Array<any>;
@@ -73,7 +74,7 @@ export class GoBookingComponent implements OnInit {
     @ViewChild('nonSeatSelector') private nonSeatSelector: ElementRef;
 
     ngOnInit() {
-        this.reserve.performId = '18051';
+        this.reserve.performId = '17142';
         this.listSeat = [];
         this.data = [];
         this.sharedService.receiveData.subscribe(data => {
@@ -170,13 +171,16 @@ export class GoBookingComponent implements OnInit {
             console.log(this.reserve);
         }
         console.time('getSeat')
+        this.isGetSeatLoading = true;
         this.atkService.getSeat(this.reserve).subscribe(res =>{
             console.timeEnd('getSeat')
+            this.isGetSeatLoading = false;
             if (res['success'] == true && res['code'] == 100 && Object.keys(res['data']).length > 0) {
                 this.showZoneType = res['data']['zone_type'];
                 this.showExecuteButton = true;
 
                 if(this.showZoneType == 'STAND') {
+                    this.reserve.priceAmount = res['data']['seats_available'][0]['priceAmt'];
                     // setTimeout(() => {
                     //     this.scrollTo('#reserveInfo');  
                     // }, 0);

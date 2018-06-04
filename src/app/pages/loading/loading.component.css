@@ -1,17 +1,12 @@
-.displayGenre {
-    font-size: 28px;
-}
-
-.prevent-white-space {
-    min-height: 240px;
-}
-
-img {
-    max-height: 70px;
+:host {
+    width: 100%;
+    min-height: 300px;
 }
 
 .spinner-loading {
     position: relative;
+    width: 100%;
+    height: 100%;
 }
 
 .spinner-loading:before {

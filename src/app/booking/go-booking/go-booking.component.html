@@ -48,25 +48,6 @@
 
     </div>
   </div>
-  <div #chooseSeat id="chooseSeat">
-    <div class="booking-border-title">Choose Seat</div>
-    <div class="col-12 bg-grey d-flex justify-content-center p-v0-h10 m-t-30">
-      <span class="stage">STAGE</span>
-    </div>
-    <div class="over-x  m-t-30" align="center">
-      <table>
-        <tr class="d-flex" *ngFor="let index of numbersOfRow; let row = index">
-          <td class="seats" type="A" *ngFor="let col of numbersOfCol; let pos = index">
-            <div class="seat" *ngFor="let data of fatchRowData(row+1, pos+1);">
-              <input type="checkbox" name="{{data.z}}" id="{{data.z}}" (change)="onChangeSeat(data.labelRow + data.x, $event.target.checked)"
-              />
-              <label class="bg-cream" for="{{data.z}}">{{data.labelRow}}{{data.x}}</label>
-            </div>
-          </td>
-        </tr>
-      </table>
-    </div>
-  </div>
 
   <div class="nonSeatSelector mt-3" #nonSeatSelector>
     
@@ -159,8 +140,8 @@
     <show-loading *ngIf="isGetSeatLoading"></show-loading>
     
     <div class="summary-wrapper" *ngIf="showZoneType != undefined && !isGetSeatLoading" [@moveInOut]>
-      <div class="col-12" *ngIf="showZoneType == 'SEAT'">
-        <seat-layout [seatList]="seatList" (seatsSelected)="seatSelectedHandler($event)"></seat-layout>
+      <div *ngIf="showZoneType == 'SEAT'">
+        <seat-layout [seatList]="seatList" [seatLimit]="maxReserve" (seatsSelected)="seatSelectedHandler($event)"></seat-layout>
       </div>
       <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 mt-4">
         <div class="ticket-summary">
@@ -185,7 +166,7 @@
               <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper my-3">
                 <div class="plusAndMinus" *ngIf="showZoneType == 'STAND'">
                   <div class="sign minus" (click)="qtyBtnHandler('4','minus')">
-                    <i class="fa fa-minus" aria-hidden="true"></i>
+                    <i class="fa fa-minus"></i>
                   </div>
                   <input type="number" data-input-seq="4" min="0" max="100" value="1" />
                   <div class="sign plus" (click)="qtyBtnHandler('4','plus')">
@@ -199,7 +180,7 @@
               </div>
               <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Total Price (Baht)</div>
               <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
-                <div class="text-desc">VALUE</div>
+                <div class="text-desc">{{ reserve.totalPrice | number}}</div>
               </div>
             </div>
             <div class="text-center mt-3">

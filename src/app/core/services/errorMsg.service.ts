@@ -68,11 +68,11 @@ export class ErrorMsgService {
                     var record = { value: res.data, timestamp: new Date().setHours(0, 0, 0, 0) }
                     localStorage.setItem('errorCodeList', JSON.stringify(record));
                 } else {
-                    this.openDialog(this.getErrorMsg(res.code));
+                    // this.openDialog(this.getErrorMsg(res.code));
                 }
             },
                 (err) => {
-                    this.openDialog(this.getErrorMsg(err.code));
+                    // this.openDialog(this.getErrorMsg(err.code));
                 }
             );
         }

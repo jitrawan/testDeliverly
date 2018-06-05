@@ -36,6 +36,7 @@ export class ShowEventComponent implements OnInit {
   }
 
   ngOnDestroy() {
+    this.headerHandler();
 		this.subscription.unsubscribe();
   }
   

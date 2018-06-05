@@ -1,26 +1,35 @@
 <div class="seat-container mt-3">
-  <button (click)="testZoom(true)"><i class="fa fa-search-plus" aria-hidden="true"></i></button>
-  <button (click)="testZoom(false)"><i class="fa fa-search-minus" aria-hidden="true"></i></button>
-  <div class="seat-wrapper" [ngStyle]="zoomTest">
-    <h2 class="text-center mt-3"> STAGE</h2>
+  <div class="seat-tool">
+    <span class="fa-stack fa-lg" (click)="zoomTrigger(true)">
+      <i class="fa fa-square fa-stack-2x"></i>
+      <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+    </span>
+    <span class="fa-stack fa-lg d-block" (click)="zoomTrigger(false)">
+        <i class="fa fa-square fa-stack-2x"></i>
+        <i class="fa fa-search-minus fa-stack-1x fa-inverse"></i>
+      </span>
+  </div>
+  <div class="seat-wrapper" [ngStyle]="zoomRange">
     <table>
+      <tr>
+        <td colspan="100%"><h2 class="stage">STAGE</h2></td> 
+      </tr>
       <tr *ngFor="let row of labelOfRow">
         <td class="header-row"> {{row}} </td>
         <td *ngFor="let col of labelOfCol">
-          <div *ngIf="seatLayoutData[row+col]?.status == 'A'" (click)="selectSeat($event, seatLayoutData[row+col])">
-            <svg class="seat available" [ngStyle]="{ 'box-shadow' : 'inset 0px 0px 0px 30px '+seatLayoutData[row+col].color }" viewBox="0 0 52 52">
+          <div *ngIf="seatLayoutData[row+'-'+col]?.status == 'A'" (click)="selectSeat($event, seatLayoutData[row+'-'+col])">
+            <svg class="seat available" [ngStyle]="{ 'box-shadow' : 'inset 0px 0px 0px 30px '+seatLayoutData[row+'-'+col].color }" viewBox="0 0 52 52">
               <circle class="seat-circle" cx="26" cy="26" r="25" fill="none" />
-              <path class="seat-sign mark-selected" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" [ngStyle]="{ 'stroke' : seatLayoutData[row+col].fontColor ? seatLayoutData[row+col].fontColor : '#000' }" />
-              <text class="seat-position" [ngStyle]="{ 'stroke' : seatLayoutData[row+col].fontColor ? seatLayoutData[row+col].fontColor : '#000' }" x="50%" y="50%" dy=".3em">{{col}}</text>
+              <path class="seat-sign mark-selected" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" [ngStyle]="{ 'stroke' : seatLayoutData[row+'-'+col].fontColor ? seatLayoutData[row+'-'+col].fontColor : '#000' }" />
+              <text class="seat-position" [ngStyle]="{ 'stroke' : seatLayoutData[row+'-'+col].fontColor ? seatLayoutData[row+'-'+col].fontColor : '#000' }" x="50%" y="50%" dy=".3em">{{seatLayoutData[row+'-'+col].seatNo}}</text>
             </svg>
           </div>
 
-          <div *ngIf="seatLayoutData[row+col]?.status != 'A'">
+          <div *ngIf="seatLayoutData[row+'-'+col]?.status != 'A'">
 
-            <svg class="seat taken" viewBox="0 0 52 52" *ngIf="seatLayoutData[row+col] != undefined else noSeat">
+            <svg class="seat taken" viewBox="0 0 52 52" *ngIf="seatLayoutData[row+'-'+col] != undefined else noSeat">
               <circle class="seat-circle" cx="26" cy="26" r="25" fill="none" />
               <path class="seat-sign" d="M16 16 36 36 M36 16 16 36" />
-              <text class="seat-position"></text>
             </svg>
 
             <ng-template #noSeat>

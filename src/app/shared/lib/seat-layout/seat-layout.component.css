@@ -5,16 +5,20 @@
 }
 
 .seat-container {
+  position: relative;
   overflow: auto;
 }
 
 .seat-wrapper {
   margin: 1rem auto;
   max-width: 100%;
-  max-height: 430px;
-  /* transform: matrix(0.8, 0, 0, 0.8, 11, -43.5); */
-  transition: 1s transform ease-in-out;
+  max-height: 500px;
+  padding: 0 2rem;
+  transition: 0.7s transform ease-in-out;
+  -moz-transition: 0.7s transform ease-in-out;
+  -webkit-transition: 0.7s transform ease-in-out
 }
+
 .header-row {
   display: table-cell;
   vertical-align: middle;
@@ -23,8 +27,8 @@
 }
 
 .seat {
-  width: 34px;
-  height: 34px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   display: block;
   stroke-width: 2;
@@ -47,9 +51,9 @@
 .seat-circle {
   stroke-dasharray: 166;
   stroke-dashoffset: 166;
-  stroke-width: 4;
+  stroke-width: 3;
   stroke-miterlimit: 10;
-  stroke: #37484e;
+  stroke: #000;
   fill: none;
   animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
 }
@@ -64,7 +68,7 @@
 }
 
 .seat.available:hover {
-  transform: scale(1.05);
+  /* transform: scale(1.05); */
 }
 
 .seat.available .mark-selected {
@@ -104,6 +108,24 @@
   animation: stroke 0.4s cubic-bezier(0.65, 0, 0.45, 1) forwards;
 }
 
+.seat-tool {
+  position: fixed;
+  top: 0;
+  right: 2rem;
+  cursor: pointer;
+}
+
+.seat-tool .fa-square {
+  color: #20b2aa;
+}
+
+.stage {
+  display: inline-block;
+  background-color: transparent;
+  border: 2px solid black;
+  padding: 5px;
+}
+
 @keyframes stroke {
   100% {
     stroke-dashoffset: 0;
@@ -116,7 +138,7 @@
     transform: none;
   }
   50% {
-    transform: scale3d(1.1, 1.1, 1);
+    transform: scale3d(1, 1, 1);
   }
 }
 

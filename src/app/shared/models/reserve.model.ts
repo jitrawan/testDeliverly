@@ -3,7 +3,8 @@ export class ReserveModel {
     roundId: string;
     zoneId: string;
     seatNo: string;
-    seatAmount: string;
+    seatAmount: number;
     roundDate: string;
-    priceAmount: string;
+    priceAmount: number;
+    totalPrice: number;
 }

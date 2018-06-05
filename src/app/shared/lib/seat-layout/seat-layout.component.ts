@@ -12,7 +12,7 @@ import { SeatModel } from '../../models/zoneSeat/seat.model';
 export class SeatLayoutComponent implements OnInit {
 
   @Input() seatList: SeatByZoneModel[];
-  @Input() seatLimit: number = 3;
+  @Input() seatLimit:number;
 
   @Output() seatsSelected: EventEmitter<any> = new EventEmitter();
 
@@ -21,18 +21,41 @@ export class SeatLayoutComponent implements OnInit {
 
   selectedSeat: any[] = [];
   seatLayoutData: any = {};
-  zoomTest: Object = { 'transform': 'translate3d(0,0,0) scale(0.7,0.7)'};
-
-  constructor() { }
+  zoomRange: Object;
+  screenSize: string;
+  private zoomStep: number = 1;
+  private canzoom: boolean = true;
+  private zoomValue = [
+    {
+      transform: 'translate3d(0,0,0) matrix(0.6, 0, 0, 0.6, 50, -30)'
+    },
+    {
+      transform: 'translate3d(0,0,0) matrix(0.8, 0, 0, 0.8, 35, 0)'
+    },
+    {
+      transform: 'translate3d(0,0,0) matrix(1, 0, 0, 1, 20, 30)'
+    },
+    {
+      transform: 'translate3d(0,0,0) matrix(1.2, 0, 0, 1.2, 35, 50)'
+    },
+    {
+      transform: 'translate3d(0,0,0) matrix(1.4, 0, 0, 1.4, 50, 100)'
+    },
+  ];
+  
+  constructor() {}
 
   ngOnInit() {
     console.time('seat-layout pre-render');
     this.layoutSpecial();
+    this.checkScreenSize(window.innerWidth);
+    this.zoomTrigger(true);
   }
 
   ngAfterViewInit() {
     console.timeEnd("seat-layout pre-render")
   }
+
   fetchRowSpecialData(col, row) {
     var resultAllObject;
     var seatLayoutList: SeatLayoutModel[] = [];
@@ -69,7 +92,7 @@ export class SeatLayoutComponent implements OnInit {
     for(let row of this.labelOfRow) {
       for(let col of this.labelOfCol) {
         for(let data of this.fetchRowSpecialData(col, row)) {
-          this.seatLayoutData[row+''+col] = data;
+          this.seatLayoutData[row+'-'+col] = data;
         }
       }
     }
@@ -95,13 +118,29 @@ export class SeatLayoutComponent implements OnInit {
     
   }
 
-  testZoom(isZoomIn) {
+  zoomTrigger(isZoomIn) {
     if(isZoomIn) {
-      this.zoomTest['transform'] = 'translate3d(0,0,0) scale(1,1)';
+
+      if(this.canzoom == false) {
+        return false;
+      }
+
+      this.zoomStep++;
+
+      if(this.zoomValue.length == this.zoomStep+1) {
+        this.canzoom = false;
+      }
+      
     } else {
-      this.zoomTest['transform'] = 'translate3d(0,0,0) scale(0.5,0.5)';
+      if(this.zoomStep == 0) return false;
+
+      this.zoomStep--;
+      this.canzoom = true;
     }
+
+    this.zoomRange = this.zoomValue[this.zoomStep];
   }
+
   selectSeat(event, data){
 
     const AVAILABLE_CLASS = "available";
@@ -129,13 +168,23 @@ export class SeatLayoutComponent implements OnInit {
       }
     }
     
-    if (this.selectedSeat.length < this.seatLimit && !isSplice) {
+    if (this.selectedSeat.length <= this.seatLimit && !isSplice) {
       this.selectedSeat.push(data);
     }
 
 
     // console.log(this.selectedSeat);
     this.seatsSelected.emit(this.selectedSeat);
+  }
+
+  checkScreenSize(width) {
+    if(width > 1366) {
+      this.screenSize = "lg";
+    } else if(width < 1366 ) {
+      this.screenSize = 'md';
+    } else {
+      this.screenSize = 'sm';
+    }
   }
   
 }

@@ -35,35 +35,10 @@
 }
 
 .container.spinner-loading{
-  min-height: 700px;
+  min-height: 500px;
 }
 
 .spinner-loading:before {
-  content: "";
-  box-sizing: border-box;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 60px;
-  height: 60px;
-  margin-top: -30px;
-  margin-left: -30px;
-  border-radius: 50%;
-  border: 5px solid transparent;
-  border-top-color: #077eff;
-  border-bottom-color: #077eff;
-  z-index: 2;
-  animation: spinner 0.9s ease infinite;
-}
-
-.seat-loading {
-  min-height: 400px;
-  position: absolute;
-  right: 0;
-  left: 0;
-}
-
-.seat-loading:before {
   content: "";
   box-sizing: border-box;
   position: absolute;
@@ -121,141 +96,6 @@
   height: auto;
 }
 
-.wrapper {
-  display: grid;
-  grid-template-columns: repeat(20, 1fr);
-}
-
-.box {
-  grid-column: span 1;
-  border: 2px solid #333333;
-  width: 30px;
-  height: 30px;
-}
-
-.stage {
-  color: white;
-  font-weight: 600;
-  letter-spacing: 10px;
-}
-
-.over-x {
-  overflow-x: auto;
-}
-
-ol {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.seats {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-}
-
-.seat {
-  display: flex;
-  flex: 0 0 14.28571428571429%;
-  padding: 3px;
-  position: relative;
-}
-
-.seat input[type=checkbox] {
-  position: absolute;
-  opacity: 0;
-}
-
-.seat input[type=checkbox]:checked+label {
-  background: #63b7f3;
-  -webkit-animation-name: rubberBand;
-  animation-name: rubberBand;
-  animation-duration: 300ms;
-  animation-fill-mode: both;
-  content: "sdsd";
-  z-index: 999;
-}
-
-.seat input[type=checkbox]:disabled+label {
-  background: #dddddd;
-  text-indent: -9999px;
-  overflow: hidden;
-}
-
-.seat input[type=checkbox]:disabled+label:after {
-  content: "X";
-  text-indent: 0;
-  position: absolute;
-  top: 4px;
-  left: 50%;
-  transform: translate(-50%, 0%);
-}
-
-.seat input[type=checkbox]:disabled+label:hover {
-  box-shadow: none;
-  cursor: not-allowed;
-}
-
-.seat label {
-  width: 30px;
-  height: 30px;
-  display: block;
-  position: relative;
-  text-align: center;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 1.5rem;
-  padding: 4px 0;
-  border-radius: 5px;
-  animation-duration: 300ms;
-  animation-fill-mode: both;
-}
-
-.seat label:before {
-  content: "";
-  position: absolute;
-  width: 75%;
-  height: 75%;
-  top: 1px;
-  left: 50%;
-  transform: translate(-50%, 0%);
-  background: rgba(255, 255, 255, 0.4);
-  border-radius: 3px;
-}
-
-.seat label:hover {
-  cursor: pointer;
-  box-shadow: 0 0 0px 2px #5C6AFF;
-}
-
-label {
-  padding: 0;
-  margin: 0;
-}
-
-
-::-webkit-scrollbar {
-  width: 12px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  background: #f48131;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #048bc1;
-}
 
 #chooseZone,
 #chooseNonSeat,

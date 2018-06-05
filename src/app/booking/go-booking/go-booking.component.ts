@@ -8,6 +8,7 @@ import { ReserveModel } from '@atk-shared/models/reserve.model';
 import * as $ from 'jquery';
 import { ReserveParkModel } from '@atk-shared/models/bus/reservePark.model';
 import { SeatByZoneModel } from '@atk-shared/models/zoneSeat/seatByZone.model';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 declare function jMap(element): any;
 
@@ -58,6 +59,8 @@ export class GoBookingComponent implements OnInit {
     showZoneType: string;
     seatList: SeatByZoneModel[];
 
+    maxReserve: number;
+
     constructor(
         private renderer: Renderer2,
         private router: Router,
@@ -97,6 +100,7 @@ export class GoBookingComponent implements OnInit {
             this.rounds = data['list_round'];
             this.event.zoneLayout = data['zoneLayout'];
             this.event.fullName = data['fullname'];
+            this.maxReserve = data['maxReserve'];
 
             if(this.event.displayType != undefined && this.event.displayType != null && this.event.displayType == 'CALENDAR') {
                 this.event.event_calendar = [];
@@ -119,6 +123,10 @@ export class GoBookingComponent implements OnInit {
 
     }
 
+    ngAfterViewInit() {
+        window.scrollTo(0, 0);    
+        
+    }
     scrollTo(target) {
         $('html,body').stop().delay(200).animate({
             scrollTop: $(target).offset().top
@@ -168,7 +176,9 @@ export class GoBookingComponent implements OnInit {
         if (event.target && event.target.className.indexOf('p_') >= 0) {
             let zoneSelected = event.target.dataset.zone;
             this.reserve.zoneId = zoneSelected;
-            console.log(this.reserve);
+            this.scrollTo('#reserveInfo');  
+        } else {
+            return false; // zone not found
         }
         console.time('getSeat')
         this.isGetSeatLoading = true;
@@ -181,9 +191,6 @@ export class GoBookingComponent implements OnInit {
 
                 if(this.showZoneType == 'STAND') {
                     this.reserve.priceAmount = res['data']['seats_available'][0]['priceAmt'];
-                    // setTimeout(() => {
-                    //     this.scrollTo('#reserveInfo');  
-                    // }, 0);
                 } else {
                     this.seatList = res['data']['seats_available'];
                     console.log(this.seatList)
@@ -224,19 +231,25 @@ export class GoBookingComponent implements OnInit {
         
     }
 
-    seatSelectedHandler(event) {
+    seatSelectedHandler(seat) {
+        // this.reserve.priceAmount = 
         console.log(event);
     }
-    qtyBtnHandler(searchKey: string,triggerType: string){
+
+    qtyBtnHandler(searchKey: string,triggerType: string) {
         
         let _el = document.querySelectorAll('[data-input-seq="'+searchKey+'"]') as any;
-        let otherFields = document.querySelectorAll('[data-input-seq]');
+        // let otherFields = document.querySelectorAll('[data-input-seq]');
         let value = parseFloat(_el[0].value);
         if(isNaN(value) || value == undefined) {
             value = 0;
         }
         if(triggerType == 'plus') {
-            value += 1;
+            
+            if(value < this.maxReserve) {
+                value += 1;
+            }
+            
         } else {
             if(value > 0) {
                 value -= 1;
@@ -244,6 +257,8 @@ export class GoBookingComponent implements OnInit {
         }
 
         this.showExecuteButton = true;
+        this.reserve.seatAmount = value;
+        this.reserve.totalPrice = this.reserve.seatAmount * this.reserve.priceAmount;
         _el[0].value = value;
     }
 

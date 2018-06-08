@@ -103,12 +103,17 @@
   display: none;
 }
 
-#chooseZone.show, #chooseNonSeat.show, #chooseSeat.show {
+#chooseNonSeat.show, #chooseSeat.show {
   display: block !important;
+}
+
+#chooseZone.show {
+  display: flex;
 }
 
 ::ng-deep .m-imagemap img {
   max-width: 100%;
+  border-radius: 10px;
   height: auto;
 }
 
@@ -264,6 +269,50 @@ input[type="number"] {
 .summary-wrapper {
   position: relative;
   max-width: 100%;
+}
+
+.show-available {
+  position: relative;
+  margin-top: 1.7rem;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.35);
+  -webkit-box-shadow: 0 2px 10px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.35);
+}
+
+.show-available.spinner-loading {
+  opacity: 0.4 !important;
+}
+
+.show-available > .row {
+  margin: 0;
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.show-available > .row > div {
+  border-bottom: 1px solid #dee2e6;
+  margin-bottom: .2rem;
+}
+
+.badge {
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.show-available:after {
+	bottom: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-color: rgba(226, 226, 226, 0);
+	border-bottom-color: #f1f0f0;
+	border-width: 20px;
+	margin-left: -20px;
 }
 
 @media (min-width: 425px) {

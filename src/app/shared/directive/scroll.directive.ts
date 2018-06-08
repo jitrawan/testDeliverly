@@ -6,20 +6,27 @@ import { Directive, HostListener, ElementRef, EventEmitter, Output, Input } from
 export class ScrollDirective {
 
   @Output() scrollPosition = new EventEmitter()
-  @Input('heightTrigger') heightTrigger:number;
+  @Input('heightTrigger') heightTrigger: number;
+  @Input('getOnlyEvent') getOnlyEvent: boolean;
   
   constructor(private el: ElementRef) { }
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(event) {
     try {
-      var top = event.target.scrollingElement.scrollTop;
 
-      if (top > this.heightTrigger) {
-        this.scrollPosition.emit(true);
+      if(this.getOnlyEvent) {
+        this.scrollPosition.emit(event);
       } else {
-        this.scrollPosition.emit(false);
+        var top = event.target.scrollingElement.scrollTop;
+
+        if (top > this.heightTrigger) {
+          this.scrollPosition.emit(true);
+        } else {
+          this.scrollPosition.emit(false);
+        }
       }
+      
 
     } catch (err) {
 

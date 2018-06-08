@@ -26,7 +26,15 @@
     z-index: 2;
     animation: spinner 0.9s ease infinite;
 }
-  
+
+h3.loading-text {
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
 @keyframes spinner {
     to {
         transform: rotate(360deg);

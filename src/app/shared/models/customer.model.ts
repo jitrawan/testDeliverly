@@ -1,0 +1,20 @@
+export interface CustomerModel {
+    idNo : string, 
+    title: string, 
+    name: string, 
+    surName: string, 
+    titleEn: string, 
+    nameEn: string, 
+    midNameEn: string, 
+    surNameEn: string, 
+    birthDay: number, 
+    gender: string, 
+    cardSubDistrict: string, 
+    cardDistrict: string, 
+    cardProvince: string, 
+    cardEffectDate: number, 
+    cardExpiredDate: number, 
+    telephone: string, 
+    cardAddress: string,
+    country: string
+}

@@ -5,10 +5,10 @@ import { AtkService } from '@atk-service/atk.service';
 import { Location , DatePipe } from '@angular/common';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { ReserveModel } from '@atk-shared/models/reserve.model';
+import { RequestBooking } from '@atk-shared/models/booking/RequestBooking.model';
 import * as $ from 'jquery';
-import { ReserveParkModel } from '@atk-shared/models/bus/reservePark.model';
 import { SeatByZoneModel } from '@atk-shared/models/zoneSeat/seatByZone.model';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { CustomerModel } from '@atk-shared/models/customer.model';
 
 declare function jMap(element): any;
 
@@ -28,15 +28,29 @@ declare function jMap(element): any;
             })),
             transition('* => void', animate('0ms ease-out')),
             transition('void => *', animate('700ms ease-in'))
+        ]),
+        trigger('slideDown', [
+            state('*', style({
+                opacity: 1,
+                transform: 'translateY(0) scale(1)',
+            })),
+            state('void', style({
+                opacity: 0.5,
+                transform: 'translateY(-50%) scale(0.1)'
+            })),
+            transition('* => void', animate('200ms ease-in-out')),
+            transition('void => *', animate('500ms ease-in-out'))
         ])
     ]
 })
 export class GoBookingComponent implements OnInit {
+    
     @Input() data: any;
-
+    private performId: string;
     event: Event = {} as any;
     isLoading: boolean = true;
     isGetSeatLoading: boolean = false;
+    loadingZoneAvailable: boolean = false;
     numbersOfCol: Array<any>;
     numbersOfRow: Array<any>;
     rowHeader: Array<any>;
@@ -46,20 +60,18 @@ export class GoBookingComponent implements OnInit {
     nonSeatAmtSelected: number;
     showExecuteButton: boolean;
     defaulDate: string;
-    private performId: string;
     selectedData: any = {};
 
     displayDate: string;
     displayType: string;
     showSelectTime: boolean = false;
-
     rounds: ListRound[] =[];
-
     reserve: ReserveModel = {} as any;
     showZoneType: string;
     seatList: SeatByZoneModel[];
-
     maxReserve: number;
+    seatAvailable: SeatAvailable[] = [];
+    reserveRequest: RequestBooking = {} as any;
 
     constructor(
         private renderer: Renderer2,
@@ -77,6 +89,28 @@ export class GoBookingComponent implements OnInit {
     @ViewChild('nonSeatSelector') private nonSeatSelector: ElementRef;
 
     ngOnInit() {
+        let custTo: CustomerModel = {
+            idNo: '1103199293341',
+            title: 'นาย',
+            name: 'ฮาบอล',
+            surName: 'ฮาฮาบอล',
+            titleEn: 'Mr',
+            nameEn: 'Haball',
+            midNameEn: '',
+            surNameEn: 'Hahaball',
+            birthDay: 757616400000,
+            gender: '1',
+            cardDistrict: '',
+            cardSubDistrict: '',
+            cardProvince: '',
+            cardEffectDate: 1527755083618,
+            cardExpiredDate: 1685521483618,
+            telephone: '0851992697',
+            cardAddress: '1010/123',
+            country: 'TH'
+        };
+        this.reserveRequest.custTo = custTo;
+
         this.reserve.performId = '17142';
         this.listSeat = [];
         this.data = [];
@@ -91,42 +125,46 @@ export class GoBookingComponent implements OnInit {
 
         this.atkService.getRoundDetail(this.reserve.performId).subscribe(res =>{
             
-            console.log(res);
-            
-            let data = res['data']['event_info'];
+            console.log("get round", res);
 
-            this.event.displayType = data['selectRoundType'];
-            this.event.listRound = data['list_round'];
-            this.rounds = data['list_round'];
-            this.event.zoneLayout = data['zoneLayout'];
-            this.event.fullName = data['fullname'];
-            this.maxReserve = data['maxReserve'];
+            if (res['success'] == true && res['code'] == 100 && Object.keys(res['data']).length > 0) {
+                let data = res['data']['event_info'];
 
-            if(this.event.displayType != undefined && this.event.displayType != null && this.event.displayType == 'CALENDAR') {
-                this.event.event_calendar = [];
-                data['duration_date'].forEach(element => {
-                    let object = {
-                        "title" : "EVENT",
-                        "start" : this.datePipe.transform(element,"yyyy-MM-dd"),
-                        "dateSelected" : element
-                    };
-                    this.event.event_calendar.push(object);
-                });
+                this.event.displayType = data['selectRoundType'];
+                this.event.listRound = data['list_round'];
+                this.rounds = data['list_round'];
+                this.event.zoneLayout = data['zoneLayout'];
+                this.event.fullName = data['fullname'];
+                this.maxReserve = data['maxSelectSeat'];
 
-                this.defaulDate = this.event.event_calendar[0]['start'];
+                if (this.event.displayType != undefined && this.event.displayType != null && this.event.displayType == 'CALENDAR') {
+                    this.event.event_calendar = [];
+                    data['duration_date'].forEach(element => {
+                        let object = {
+                            "title": "EVENT",
+                            "start": this.datePipe.transform(element, "yyyy-MM-dd"),
+                            "dateSelected": element
+                        };
+                        this.event.event_calendar.push(object);
+                    });
+
+                    this.defaulDate = this.event.event_calendar[0]['start'];
+                } else {
+                    this.showSelectTime = true;
+                }
             } else {
-                this.showSelectTime = true;
+                console.log("get round fail")
             }
 
             this.isLoading = false;
         });
 
     }
-
+    
     ngAfterViewInit() {
         window.scrollTo(0, 0);    
-        
     }
+
     scrollTo(target) {
         $('html,body').stop().delay(200).animate({
             scrollTop: $(target).offset().top
@@ -157,7 +195,6 @@ export class GoBookingComponent implements OnInit {
                 if(el.zoneLayoutWeb == null) {
                     this.event.displayZoneLayout = this.event.zoneLayout.replace(replace,' ');
                 } else {
-                    console.log("Else")
                     this.event.displayZoneLayout = el.zoneLayoutWeb.replace(replace,' ');
                 }
                 this.toggleElement(this.chooseZone,'show',true);
@@ -176,6 +213,7 @@ export class GoBookingComponent implements OnInit {
         if (event.target && event.target.className.indexOf('p_') >= 0) {
             let zoneSelected = event.target.dataset.zone;
             this.reserve.zoneId = zoneSelected;
+            this.reserve.totalPrice = 0;
             this.scrollTo('#reserveInfo');  
         } else {
             return false; // zone not found
@@ -188,8 +226,7 @@ export class GoBookingComponent implements OnInit {
             if (res['success'] == true && res['code'] == 100 && Object.keys(res['data']).length > 0) {
                 this.showZoneType = res['data']['zone_type'];
                 this.showExecuteButton = true;
-
-                if(this.showZoneType == 'STAND') {
+                if(this.showZoneType == 'STAND' || this.showZoneType == 'NONSEAT') {
                     this.reserve.priceAmount = res['data']['seats_available'][0]['priceAmt'];
                 } else {
                     this.seatList = res['data']['seats_available'];
@@ -198,19 +235,13 @@ export class GoBookingComponent implements OnInit {
             } else {
 
             }
-            console.log(res)
+            console.log("get-seat",res)
         });
     }
 
     chooseSeatAmt(seatAmount: number) {
         this.nonSeatAmtSelected = seatAmount;
         console.log(this.nonSeatAmtSelected)
-    }
-
-    goDiscountList() {
-        console.log("Choose Seat : " + JSON.stringify(this.listSeat));
-        // this.router.navigate(['/discount']);
-        this.router.navigate(['/resultReserve']);
     }
 
     goEventInfo() {
@@ -231,9 +262,29 @@ export class GoBookingComponent implements OnInit {
         
     }
 
-    seatSelectedHandler(seat) {
-        // this.reserve.priceAmount = 
-        console.log(event);
+    seatSelectedHandler(seats: any) {
+        var seatNo = [];
+        var seatColNo = [];
+        this.reserve.totalPrice = 0;
+        console.log(seats);
+        
+        for(let seat of seats) {
+            this.reserve.priceAmount = seat.priceAmt;
+            this.reserve.totalPrice += seat.priceAmt;
+            this.reserve.seatNo = seat.seatNo+",";
+            this.reserve.zoneId = seat.zoneId;
+            seatNo.push(seat.rowName+''+seat.seatNo); // Use for show to user
+            seatColNo.push(seat.rowName+'_'+seat.colNo); // Use for booking request
+        }
+        this.reserve.seatAmount = seats.length;
+        this.reserve.seatNo = seatNo.toString();
+        this.reserve.seatColNo = seatColNo;
+        
+        if(seats.length == 0) {
+            this.reserve.zoneId = '';
+        }
+
+        console.log(this.reserve)
     }
 
     qtyBtnHandler(searchKey: string,triggerType: string) {
@@ -262,6 +313,81 @@ export class GoBookingComponent implements OnInit {
         _el[0].value = value;
     }
 
+    getZoneAvailable() {
+
+        if(!$('#seatAva').hasClass('order-last')) {
+            $('#seatAva').addClass('d-none');
+            $('#zone').addClass('col-lg-8')
+            setTimeout(() => {
+                $('#seatAva').removeClass('d-none').addClass('col-lg-4 order-last');
+            }, 600);
+        }
+
+        console.time("getZoneAvailable");
+        this.loadingZoneAvailable = true;
+
+        this.atkService.getZoneAvailable(this.reserve).subscribe(res =>{
+            
+            this.seatAvailable = [];
+            this.loadingZoneAvailable = false;
+            if (res['success'] == true && res['code'] == 100 && Object.keys(res['data']).length > 0) {
+                let data = res['data']['seat_available'];
+
+                for(let zone of data) {
+                    let seatLeft = '';
+
+                    if(zone.type == 'STAND') {
+                        seatLeft = '<span style="color:#1323f9">AVAILABLE</span>';
+                    } else {
+                        seatLeft = zone.amount;
+                    }
+                    this.seatAvailable.push( { zoneName: zone.id , seatLeft: seatLeft } );
+                }
+
+            } else {
+                console.log("getZoneAvailable fail")
+            }
+            
+            console.log(this.seatAvailable);
+            console.log(this.loadingZoneAvailable)
+        });
+        
+        console.timeEnd("getZoneAvailable");
+
+
+    }
+
+    getReserve() {
+        this.reserveRequest.performId = this.reserve.performId;
+        this.reserveRequest.roundId = this.reserve.roundId;
+        this.reserveRequest.zoneId = this.reserve.zoneId;
+        this.reserveRequest.seatTo = {} as any;
+        this.reserveRequest.seatTo.seatType = this.showZoneType;
+        if(this.showZoneType == 'SEAT') {
+            this.reserveRequest.seatTo.seats = this.reserve.seatColNo;
+        } else {
+            this.reserveRequest.seatTo.seatAmount = this.reserve.seatAmount;
+        }
+        console.log(this.reserveRequest)
+
+        this.atkService.getReserve(this.reserveRequest).subscribe(res =>{
+            
+            console.log("getReserve", res);
+
+            if (res['success'] == true && res['code'] == 100 && Object.keys(res['data']).length > 0) {
+
+            } else {
+                console.log("get getReserve fail")
+            }
+
+            this.router.navigate(['/booking/check-booking']);
+
+        });
+
+        // this.router.navigate(['/discount']);
+        // this.router.navigate(['/resultReserve']);
+    }
+
 }
 
 interface Event {
@@ -273,6 +399,7 @@ interface Event {
     event_calendar: object[];
     listRound: ListRound[]
 }
+
 interface ListRound {
     beginDate: Date,
     endDate: Date,
@@ -284,4 +411,9 @@ interface ListRound {
     showdateCardLabel: string,
     showdateRoundLabel: string,
     zoneLayoutWeb: string
+}
+
+interface SeatAvailable {
+    zoneName: string,
+    seatLeft: string,
 }

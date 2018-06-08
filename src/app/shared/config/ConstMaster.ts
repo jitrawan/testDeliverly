@@ -19,7 +19,9 @@ export const ConstMaster = {
     },
     BOOKING_API : {
         getRound: environment.apiGatewayGetRound,
-        getSeat: environment.apiGatewayGetSeat
+        getZoneAvailable: environment.apiGatewayGetZoneAvailable,
+        getSeat: environment.apiGatewayGetSeat,
+        getReserve: environment.apiGatewayGetReserve
     },
     DEFAULT_IMAGES : {
         banner: environment.bucketS3+'/assets/images/placeholder/place-holder-1440x480.jpg.jpg',

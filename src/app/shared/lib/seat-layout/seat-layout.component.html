@@ -1,18 +1,20 @@
 <div class="seat-container mt-3">
-  <div class="seat-tool">
-    <span class="fa-stack fa-lg" (click)="zoomTrigger(true)">
-      <i class="fa fa-square fa-stack-2x"></i>
-      <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
-    </span>
-    <span class="fa-stack fa-lg d-block" (click)="zoomTrigger(false)">
-        <i class="fa fa-square fa-stack-2x"></i>
-        <i class="fa fa-search-minus fa-stack-1x fa-inverse"></i>
-      </span>
-  </div>
-  <div class="seat-wrapper" [ngStyle]="zoomRange">
+  <div class="seat-wrapper" [ngClass]="'seat-zoom-'+zoomStep">
     <table>
       <tr>
-        <td colspan="100%"><h2 class="stage">STAGE</h2></td> 
+        <td colspan="100%" style="position: relative;">
+          <h2 class="stage">STAGE</h2>
+          <div class="seat-tool">
+            <span class="fa-stack fa-lg" (click)="zoomTrigger(true)">
+              <i class="fa fa-square fa-stack-2x"></i>
+              <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+            </span>
+            <span class="fa-stack fa-lg d-block" (click)="zoomTrigger(false)">
+                <i class="fa fa-square fa-stack-2x"></i>
+                <i class="fa fa-search-minus fa-stack-1x fa-inverse"></i>
+              </span>
+          </div>
+        </td> 
       </tr>
       <tr *ngFor="let row of labelOfRow">
         <td class="header-row"> {{row}} </td>
@@ -39,6 +41,7 @@
             </ng-template>
           </div>
         </td>
+        <td class="header-row row-end"> {{row}} </td>
       </tr>
     </table>
   </div>

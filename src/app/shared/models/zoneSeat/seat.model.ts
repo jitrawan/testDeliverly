@@ -2,7 +2,7 @@ export class SeatModel {
     seatNo: string;
     rowName: string;
     status: string;
-    id: string;
+    seatId : any;
     priceAmt: number;
     rowNo: string;
     colNo: string;
@@ -17,4 +17,10 @@ export class SeatModel {
     color: string;
     html: string;
     name: string;
+    discountId : any;
+    discountCSId: any;
+    zoneType : any;
+    oldReserveId : any;
+    oldLockType : any;
+    newLockType : any;
 }

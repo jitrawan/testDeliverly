@@ -7,11 +7,13 @@ import { SharedModule } from '../shared.module';
 import { ReserveSummaryComponent } from '@atk-booking/get-reserve/reserve-summary/reserve-summary.component';
 import { HomeComponent } from '@atk-pages/home/home.component';
 import { SeatLayoutComponent } from '@atk-shared/lib/seat-layout/seat-layout.component';
+import { CheckBookingComponent } from '../booking/check-booking/check-booking.component'
 
 const routes: Routes = [
   { path: '', component: GoBookingComponent },
   { path: 'get-seat', component: GoBookingComponent },
-  { path: 'showseat', component: SeatLayoutComponent }
+  { path: 'check-booking', component: CheckBookingComponent }
+  
 ];
 
 @NgModule({
@@ -21,6 +23,11 @@ const routes: Routes = [
     SharedModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [GoBookingComponent, ReserveSummaryComponent, SeatLayoutComponent]
+  declarations: [
+    GoBookingComponent,
+    ReserveSummaryComponent,
+    SeatLayoutComponent,
+    CheckBookingComponent
+  ]
 })
 export class BookingModule { }

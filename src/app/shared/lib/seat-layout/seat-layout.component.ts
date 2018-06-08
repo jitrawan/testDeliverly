@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
-import { SeatByZoneModel } from '../../models/zoneSeat/seatByZone.model';
-import { SeatModel } from '../../models/zoneSeat/seat.model';
+import { SeatByZoneModel } from '@atk-shared/models/zoneSeat/seatByZone.model';
+import { SeatModel } from '@atk-shared/models/zoneSeat/seat.model';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'seat-layout',
@@ -23,25 +24,8 @@ export class SeatLayoutComponent implements OnInit {
   seatLayoutData: any = {};
   zoomRange: Object;
   screenSize: string;
-  private zoomStep: number = 1;
+  zoomStep: number = 2;
   private canzoom: boolean = true;
-  private zoomValue = [
-    {
-      transform: 'translate3d(0,0,0) matrix(0.6, 0, 0, 0.6, 50, -30)'
-    },
-    {
-      transform: 'translate3d(0,0,0) matrix(0.8, 0, 0, 0.8, 35, 0)'
-    },
-    {
-      transform: 'translate3d(0,0,0) matrix(1, 0, 0, 1, 20, 30)'
-    },
-    {
-      transform: 'translate3d(0,0,0) matrix(1.2, 0, 0, 1.2, 35, 50)'
-    },
-    {
-      transform: 'translate3d(0,0,0) matrix(1.4, 0, 0, 1.4, 50, 100)'
-    },
-  ];
   
   constructor() {}
 
@@ -70,7 +54,7 @@ export class SeatLayoutComponent implements OnInit {
         seatLayout.colNo = filterlabelOfColumn[0].colNo;
         seatLayout.color = this.seatList[index].color;
         seatLayout.fontColor = this.seatList[index].fontColor;
-        seatLayout.id = filterlabelOfColumn[0].id;
+        seatLayout.id = filterlabelOfColumn[0].seatId;
         seatLayout.lockType = filterlabelOfColumn[0].lockType;
         seatLayout.priceAmt = filterlabelOfColumn[0].priceAmt;
         seatLayout.rowName = filterlabelOfColumn[0].rowName;
@@ -127,18 +111,16 @@ export class SeatLayoutComponent implements OnInit {
 
       this.zoomStep++;
 
-      if(this.zoomValue.length == this.zoomStep+1) {
+      if(this.zoomStep+1 > 5) {
         this.canzoom = false;
       }
       
     } else {
-      if(this.zoomStep == 0) return false;
+      if(this.zoomStep == 1) return false;
 
       this.zoomStep--;
       this.canzoom = true;
     }
-
-    this.zoomRange = this.zoomValue[this.zoomStep];
   }
 
   selectSeat(event, data){
@@ -151,7 +133,29 @@ export class SeatLayoutComponent implements OnInit {
     if(seat.classList.contains(AVAILABLE_CLASS)) {
 
       if(this.selectedSeat.length >= this.seatLimit) {
-        alert('ไม่สามารถเลือกที่นั่งเกินจำนวนคนที่ท่านเลือกไว้ได้');
+        swal({
+          position: 'center',
+          type: 'warning',
+          text: 'There is a strict '+this.seatLimit+' ticket per person limit for this event.'
+        });
+        return false;
+      }
+
+      // Check selected cross zone
+      var isCrossZone = false;
+      for(let seat of this.selectedSeat) {
+        if(seat.zoneId != data.zoneId) {
+          isCrossZone = true;
+          break;
+        }
+      }
+      
+      if(isCrossZone) {
+        swal({
+          position: 'center',
+          type: 'warning',
+          text: 'Please select same price ticket.'
+        });
         return false;
       }
 

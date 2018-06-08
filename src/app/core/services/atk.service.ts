@@ -5,6 +5,7 @@ import { ConstMaster } from '@atk-shared/config/ConstMaster';
 import { EventBanner } from '@atk-shared/models/eventBanner.model';
 import { EventInfo } from '@atk-shared/models/EventInfo.model';
 import { ReserveModel } from '@atk-shared/models/reserve.model';
+import { RequestBooking } from '@atk-shared/models/booking/RequestBooking.model';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -44,15 +45,26 @@ export class AtkService {
     let params = {
       performId: performId,
       cached: true
-    }
+    };
+
     return this.http.post<any>(ConstMaster.EVENT_INFO_API.getEventStatus,params,httpOptions);
   }
 
   getRoundDetail(performId: string) {
     let params = {
       performId: performId
-    }
+    };
+
     return this.http.post<any>(ConstMaster.BOOKING_API.getRound,params,httpOptions);
+  }
+
+  getZoneAvailable(reserveModel: ReserveModel) {
+    let params = {
+      performId: reserveModel.performId,
+      roundId: reserveModel.roundId
+    };
+
+    return this.http.post<any>(ConstMaster.BOOKING_API.getZoneAvailable,params,httpOptions);
   }
 
   getSeat(reserveModel: ReserveModel) {
@@ -60,9 +72,21 @@ export class AtkService {
       performId: reserveModel.performId,
       roundId: reserveModel.roundId,
       zoneId: reserveModel.zoneId
-    }
+    };
 
     return this.http.post<any>(ConstMaster.BOOKING_API.getSeat,params,httpOptions);
   }
 
+  getReserve(reserveRequest: RequestBooking) {
+    
+    let params = {
+      performId: reserveRequest.performId,
+      roundId: reserveRequest.roundId,
+      zoneId: reserveRequest.zoneId,
+      seatTo: reserveRequest.seatTo,
+      custTo: reserveRequest.custTo,
+    };
+
+    return this.http.post<any>(ConstMaster.BOOKING_API.getReserve,params,httpOptions);
+  }
 }

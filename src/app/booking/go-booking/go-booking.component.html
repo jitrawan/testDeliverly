@@ -1,5 +1,4 @@
 <div class="container mt-4" [ngClass]="{ 'spinner-loading' : isLoading }">
-<!-- <show-loading></show-loading> -->
 <h3 class="text-center pb-4 pt-2">{{event.fullName}}</h3>
   <ng-container *ngIf="event.displayType != undefined && event.displayType != null && event.displayType == 'CALENDAR'">
     <div class="booking-border-title">Select Date & Time</div>
@@ -21,9 +20,26 @@
       </div>
     </div>
   </div>
-  <div #chooseZone class="mt-4" id="chooseZone" >
-    <div class="booking-border-title" id="choose">Choose Zone</div>
-    <div class="col-12">
+  <div #chooseZone class="row mx-0 mt-4" id="chooseZone" >
+    <div class="booking-border-title w-100" id="choose">Choose Zone</div>
+    <div class="col-12" id="seatAva">
+      <div class="text-center mt-3">
+        <button type="button" class="btn btn-outline-info" (click)="getZoneAvailable()">CHECK SEAT AVAILABLE</button>
+        <div class="show-available" *ngIf="seatAvailable.length > 0" [@slideDown] [ngClass]="{ 'spinner-loading' : loadingZoneAvailable == true }">
+          <div class="row">
+            <div class="col-5 px-0">Zone</div>
+            <div class="col-7 px-0">Seats Available</div>
+            <ng-container *ngFor="let zone of seatAvailable">
+              <div class="col-5 px-0">
+                <span class="badge badge-success">{{zone.zoneName}}</span>
+              </div>
+              <div class="col-7 px-0" [innerHtml]="zone.seatLeft | safeHtml"></div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12" id="zone">
       <div class="m-imagemap text-center mt-3" (click)="zoneLayoutClicked($event)" [innerHTML]="event.displayZoneLayout | safeHtml"></div>
     </div>
   </div>
@@ -137,7 +153,7 @@
   
   <div class="row mt-5" id="reserveInfo">
     
-    <show-loading *ngIf="isGetSeatLoading"></show-loading>
+    <show-loading *ngIf="isGetSeatLoading" [loadingText]="'Loading seats....'"></show-loading>
     
     <div class="summary-wrapper" *ngIf="showZoneType != undefined && !isGetSeatLoading" [@moveInOut]>
       <div *ngIf="showZoneType == 'SEAT'">
@@ -156,15 +172,15 @@
               </div>
               <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Zone</div>
               <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
-                <div class="text-desc">{{ reserve.zoneId }}</div>
+                <div class="text-desc">{{ reserve.zoneId ? reserve.zoneId : 'No seat selected' }}</div>
               </div>
               <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Seat No</div>
               <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
-                <div class="text-desc">{{ showZoneType == 'STAND' ? 'Festival Seat':'GG'}}</div>
+                <div class="text-desc">{{ showZoneType == 'STAND' || showZoneType == 'NONSEAT' ? 'Festival Seat':reserve.seatNo ? reserve.seatNo : 'No seat selected' }}</div>
               </div>
-              <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text my-3">Quantity</div>
-              <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper my-3">
-                <div class="plusAndMinus" *ngIf="showZoneType == 'STAND'">
+              <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text" [ngClass]=" { 'my-3' : ( showZoneType == 'STAND' || showZoneType == 'NONSEAT') }">Quantity</div>
+              <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper" [ngClass]=" { 'my-3' : ( showZoneType == 'STAND' || showZoneType == 'NONSEAT') }">
+                <div class="plusAndMinus" *ngIf="(showZoneType == 'STAND' || showZoneType == 'NONSEAT') else showTypeSeat">
                   <div class="sign minus" (click)="qtyBtnHandler('4','minus')">
                     <i class="fa fa-minus"></i>
                   </div>
@@ -173,6 +189,10 @@
                     <i class="fa fa-plus"></i>
                   </div>
                 </div>
+                <ng-template #showTypeSeat>
+                  <div class="text-desc">{{ reserve.seatAmount }}</div>
+                </ng-template>
+              
               </div>
               <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Unit Price (Baht)</div>
               <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
@@ -184,12 +204,12 @@
               </div>
             </div>
             <div class="text-center mt-3">
-              <button class="btn btn-atk-danger mt-3" type="button" (click)=" goEventInfo()">
+              <button class="btn btn-atk-danger mt-3" type="button" (click)="goEventInfo()">
                 <span>
                   BACK
                 </span>
               </button>
-              <button class="btn btn-atk-primary mt-3" type="button" (click)=" goDiscountList()">
+              <button class="btn btn-atk-primary mt-3" type="button" (click)="getReserve()">
                 <span>
                   BOOKING
                 </span>

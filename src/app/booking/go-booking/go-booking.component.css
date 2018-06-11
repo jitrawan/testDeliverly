@@ -273,6 +273,7 @@ input[type="number"] {
 
 .show-available {
   position: relative;
+  min-height: 300px;
   margin-top: 1.7rem;
   padding: 1rem;
   border-radius: 10px;

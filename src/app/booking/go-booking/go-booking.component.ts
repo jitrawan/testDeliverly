@@ -71,6 +71,7 @@ export class GoBookingComponent implements OnInit {
     seatList: SeatByZoneModel[];
     maxReserve: number;
     seatAvailable: SeatAvailable[] = [];
+    showZoneAvailable: boolean = false;
     reserveRequest: RequestBooking = {} as any;
 
     constructor(
@@ -314,13 +315,14 @@ export class GoBookingComponent implements OnInit {
     }
 
     getZoneAvailable() {
+        this.showZoneAvailable = true;
 
         if(!$('#seatAva').hasClass('order-last')) {
             $('#seatAva').addClass('d-none');
             $('#zone').addClass('col-lg-8')
             setTimeout(() => {
                 $('#seatAva').removeClass('d-none').addClass('col-lg-4 order-last');
-            }, 600);
+            }, 200);
         }
 
         console.time("getZoneAvailable");
@@ -328,6 +330,8 @@ export class GoBookingComponent implements OnInit {
 
         this.atkService.getZoneAvailable(this.reserve).subscribe(res =>{
             
+            console.timeEnd("getZoneAvailable");
+
             this.seatAvailable = [];
             this.loadingZoneAvailable = false;
             if (res['success'] == true && res['code'] == 100 && Object.keys(res['data']).length > 0) {
@@ -351,9 +355,6 @@ export class GoBookingComponent implements OnInit {
             console.log(this.seatAvailable);
             console.log(this.loadingZoneAvailable)
         });
-        
-        console.timeEnd("getZoneAvailable");
-
 
     }
 

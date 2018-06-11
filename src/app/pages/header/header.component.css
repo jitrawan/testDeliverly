@@ -28,10 +28,6 @@ body {
   transition: .5s ease-in-out;
 }
 
-.header-search {
-  transition: 1s all;
-}
-
 .standard-logo {
   cursor: pointer;
 }

@@ -96,16 +96,14 @@ mark.mark-require {
   background-color: transparent;
 }
 
-@media (max-width: 425px) {
+@media screen and (max-width: 992px) {
   .btn-atk-primary,
   .btn-atk-danger,
   .btn-atk-warning,
   .btn-atk-success,
   .btn-atk-light {
-    font-size: 16px;
     padding-left: 2rem;
     padding-right: 2rem;
-    border-radius: 1.5rem;
   }
 }
 
@@ -115,11 +113,21 @@ mark.mark-require {
   .btn-atk-warning,
   .btn-atk-success,
   .btn-atk-light {
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
-  .buttonWrapper {
-    text-align: center;
+}
+
+@media (max-width: 425px) {
+  .btn-atk-primary,
+  .btn-atk-danger,
+  .btn-atk-warning,
+  .btn-atk-success,
+  .btn-atk-light {
+    font-size: 14px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 1rem;
   }
 }
 

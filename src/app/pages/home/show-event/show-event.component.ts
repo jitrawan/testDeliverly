@@ -76,24 +76,41 @@ export class ShowEventComponent implements OnInit {
       }
     }
 
+    this.displayCategory = this.category.toUpperCase();
+
     this.subscription = this.service.getEventCardByType(this.groupKey).subscribe(response => {
-      if(response['success'] == true && response['code'] == 100) {
+      
+      if(response['success'] == true && response['code'] == 100 && Object.keys(response['data']['event']).length > 0) {
+        this.cardTickets = response['data']['event']['items'];
+        this.categoryImagePath = ConstMaster.S3_PATH+'/assets/images/'+this.category+'.png';
         
-        if(Object.keys(response['data']).length > 0 && response['data']['event']['items'].length > 0) {
-          this.cardTickets = response['data']['event']['items'];
-          this.displayCategory = this.category.toUpperCase();
-          this.categoryImagePath = ConstMaster.S3_PATH+'/assets/images/'+this.category+'.png';
+        // console.log("response ", response)
+
+        if(this.cardTickets != undefined) {
+          sessionStorage.setItem(ConstMaster.STORAGE_KEY.CARD_EVENT+':'+this.groupKey,JSON.stringify(this.cardTickets));
         }
-        
-        console.log("response ", response)
-        console.log(this.cardTickets)
+
+      } else {
+        this.getDataFromStorage();
       }
 
       this.isLoading = false;
-    });
+    },error => {
+      this.getDataFromStorage();
+		});
     
   }
 
+  getDataFromStorage() {
+    let dataFromStorage = sessionStorage.getItem(ConstMaster.STORAGE_KEY.CARD_EVENT+':'+this.groupKey);
+    if (dataFromStorage == undefined) {
+      //console.log('No data in storage');
+    } else {
+      //console.log("use data from storage");
+      this.cardTickets = JSON.parse(dataFromStorage);
+    }
+  }
+  
   headerHandler(emit?) {
 		let header = $('#header');
 

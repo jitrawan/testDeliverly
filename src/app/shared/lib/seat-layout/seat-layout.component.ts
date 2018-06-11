@@ -38,6 +38,43 @@ export class SeatLayoutComponent implements OnInit {
 
   ngAfterViewInit() {
     console.timeEnd("seat-layout pre-render")
+
+
+    // Drag Scroll na ja
+    const seatLayout:HTMLElement = document.querySelector('.seat-container');
+    let isMouseDown = false;
+    let startX,startY;
+    let scrollLeft,scrollTop;
+
+    seatLayout.addEventListener('mousedown', (e) => {
+      isMouseDown = true;
+      seatLayout.classList.add('onDrag');
+      startX = e.pageX - seatLayout.offsetLeft;
+      startY = e.pageY - seatLayout.offsetTop;
+      scrollLeft = seatLayout.scrollLeft;
+      scrollTop = seatLayout.scrollTop;
+    });
+
+    seatLayout.addEventListener('mouseleave', () => {
+      seatLayout.classList.remove('onDrag');
+      isMouseDown = false;
+    });
+
+    seatLayout.addEventListener('mouseup', () => {
+      seatLayout.classList.remove('onDrag');
+      isMouseDown = false;
+    });
+
+    seatLayout.addEventListener('mousemove', (e) => {
+      if(!isMouseDown) return false;
+      e.preventDefault();
+      const x = e.pageX - seatLayout.offsetLeft;
+      const y = e.pageY - seatLayout.offsetTop;
+      const scrollWalkX = x - startX;
+      const scrollWalkY = y - startY;
+      seatLayout.scrollLeft = scrollLeft - scrollWalkX;
+      seatLayout.scrollTop = scrollTop - scrollWalkY;
+    });
   }
 
   fetchRowSpecialData(col, row) {

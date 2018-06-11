@@ -42,9 +42,7 @@ export class HomeComponent implements OnInit {
 			}
 			window.scrollTo(0, 0);
 		});
-
 		this.subscription = this.atkService.fetchHomeData().subscribe(response => {
-
 			if (response['success'] == true && response['code'] == 100 && Object.keys(response['data']).length > 0) {
 				this.mappingHomePage(response['data'],false);
 				sessionStorage.setItem(ConstMaster.STORAGE_KEY.HOMEPAGE,JSON.stringify(response['data']));

@@ -1,7 +1,7 @@
-<main scrollable [heightTrigger]="50" (scrollPosition)="headerHandler($event)">
+<main scrollable [heightTrigger]="150" (scrollPosition)="headerHandler($event)">
   <section id="slider" [ngClass]="{ 'show' : isSlideLoaded == true }">
     <div class="preload-slide" [ngClass]="{ 'show' : isSlideLoaded == false }">
-      <div class="is-loading text-danger"></div>
+      <div class="is-loading text-primary"></div>
     </div>
     <div class="owl-carousel">
       <div class="item cursor-pointer" *ngFor="let image of slideBannerImages; index as i;" (click)="goToEventInfoFromBanner(image.performUri,image.id)">

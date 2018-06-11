@@ -7,12 +7,14 @@ import { SharedModule } from '../shared.module';
 import { ReserveSummaryComponent } from '@atk-booking/get-reserve/reserve-summary/reserve-summary.component';
 import { HomeComponent } from '@atk-pages/home/home.component';
 import { SeatLayoutComponent } from '@atk-shared/lib/seat-layout/seat-layout.component';
-import { CheckBookingComponent } from '../booking/check-booking/check-booking.component'
+import { CheckBookingComponent } from '../booking/get-reserve/check-booking/check-booking.component';
+import { ShowDiscountComponent } from './get-reserve/show-discount/show-discount.component'
 
 const routes: Routes = [
   { path: '', component: GoBookingComponent },
   { path: 'get-seat', component: GoBookingComponent },
-  { path: 'check-booking', component: CheckBookingComponent }
+  { path: 'check-booking', component: CheckBookingComponent },
+  { path: 'show-discount', component: ShowDiscountComponent }
   
 ];
 
@@ -27,7 +29,8 @@ const routes: Routes = [
     GoBookingComponent,
     ReserveSummaryComponent,
     SeatLayoutComponent,
-    CheckBookingComponent
+    CheckBookingComponent,
+    ShowDiscountComponent
   ]
 })
 export class BookingModule { }

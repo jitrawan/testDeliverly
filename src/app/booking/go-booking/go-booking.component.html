@@ -25,10 +25,10 @@
     <div class="col-12" id="seatAva">
       <div class="text-center mt-3">
         <button type="button" class="btn btn-outline-info" (click)="getZoneAvailable()">CHECK SEAT AVAILABLE</button>
-        <div class="show-available" *ngIf="seatAvailable.length > 0" [@slideDown] [ngClass]="{ 'spinner-loading' : loadingZoneAvailable == true }">
-          <div class="row">
-            <div class="col-5 px-0">Zone</div>
-            <div class="col-7 px-0">Seats Available</div>
+        <div class="show-available" *ngIf="showZoneAvailable == true" [@slideDown] [ngClass]="{ 'spinner-loading' : loadingZoneAvailable == true }">
+          <div class="row" *ngIf="seatAvailable.length > 0">
+            <div class="col-5 px-0 py-1">Zone</div>
+            <div class="col-7 px-0 py-1">Seats Available</div>
             <ng-container *ngFor="let zone of seatAvailable">
               <div class="col-5 px-0">
                 <span class="badge badge-success">{{zone.zoneName}}</span>

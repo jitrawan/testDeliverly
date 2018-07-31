@@ -139,11 +139,18 @@ ol {
 }
 
 .seat input[type=checkbox]:disabled+label {
+  /* background: #828282; */
   text-indent: -9999px;
   overflow: hidden;
 }
 
 .seat input[type=checkbox]:disabled+label:after {
+  /* content: "X";
+  text-indent: 0;
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translate(-50%, 0%); */
   content: url("../../../../assets/images/N.png");
   width: 100%;
   height: auto;

@@ -1,11 +1,11 @@
 export class HeaderModel {
     displayNameEng: string;
     displayNameThai: string;
-    groupKey: string;
-    routeTo: string;
-    dropdownList: Dropdown[];
+    RouteTo: string;
+    dropdownList: Dropdown;
 }
 
 interface Dropdown {
-    headerModel: HeaderModel;
+    displayNameEng: string;
+    displayNameThai: string;
 }

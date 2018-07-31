@@ -1,39 +1,52 @@
-import { Component, OnInit, AfterViewInit, HostListener, ViewChild, ElementRef } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { EventBanner } from '@atk-shared/models/eventBanner.model';
-import { CardTicket } from '@atk-shared/models/cardTickets';
-import { CardTickets } from '@atk-shared/models/cardTickets';
-import { ConstMaster } from '@atk-shared/config/ConstMaster';
-import { AtkService } from '@atk-service/atk.service';
-import { CardTicketComponent } from './card-ticket/card-ticket.component';
-import { Subscription } from 'rxjs';
-declare var $: any;
+import { Component, OnInit, AfterViewInit , HostListener } from '@angular/core';
+import { Router , NavigationEnd } from '@angular/router';
+import { EventBanner } from '../../shared/models/eventBanner.model';
+import { ConstMaster } from '../../shared/config/ConstMaster';
+import { HomeService } from '../../shared/services/home.service';
+import * as underscore from 'underscore';
+import 'owl.carousel';
+declare var jQuery: any;
 
 @Component({
 	selector: 'app-home',
 	templateUrl: './home.component.html',
-	styleUrls: [
-			'./home.component.css',
-			'../../../assets/css/standard/cardticket.css',
-			'../../../assets/css/standard/utility.css',
-			'../../../assets/css/standard/layout.css',
-		]
-	})
-
+	styleUrls: [ './home.component.css' ,
+		'../../../assets/css/standard/cardticket.css' ]
+})
 export class HomeComponent implements OnInit {
-	@ViewChild(CardTicketComponent) cardTicketComponent : CardTicketComponent;
-	countImagesLoaded = 0;
-	countCardImageLoaded = 0;
-	slideBannerImages: EventBanner[];
-	cardTicketSlide: CardTicket[] = [];
-	cardTicketHot: CardTicket[];
-	cardTicketRec: CardTicket[];
-	cardTickets: CardTickets;
-	isSlideLoaded: boolean = false;
-	placeHolderImg: string = ConstMaster.DEFAULT_IMAGES.ticketCard;
-	subscription: Subscription;
 
-	constructor(private router: Router, private atkService: AtkService, private el: ElementRef) {}
+	private countImagesLoaded = 0;
+	S3_CONTEXT: string = ConstMaster.S3_ENDPOINT.url;
+	screenWidth: number;
+	screenType: string;
+	slideBannerImages: EventBanner[];
+
+	cardTicketsRecommend: CardTicket[] = [
+		{ performId: '17070', performName: 'Event 17070', performShowDate: '31 - 10', performShowMonth: 'Dec/2017', image_path: 'assets/images/bmmf.jpg' },
+		{ performId: '17071', performName: 'Event 17071', performShowDate: '31 - 10', performShowMonth: 'Dec/2017', image_path: 'assets/images/bmmf.jpg' },
+		{ performId: '17072', performName: 'Event 17072', performShowDate: '31 - 10', performShowMonth: 'Dec/2017', image_path: 'assets/images/bmmf.jpg' },
+		{ performId: '17073', performName: 'Event 17073', performShowDate: '31 - 10', performShowMonth: 'Dec/2017', image_path: 'assets/images/bmmf.jpg' }
+	];
+
+	cardTicketsHot: CardTicket[] = [
+		{ performId: '17074', performName: 'Event 17074', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
+		{ performId: '17075', performName: 'Event 17075', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
+		{ performId: '17076', performName: 'Event 17076', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
+		{ performId: '17077', performName: 'Event 17077', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
+	];
+
+	cardShowAll: CardTicket[] = [
+		{ performId: '17074', performName: 'Event 17074', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
+		{ performId: '17075', performName: 'Event 17075', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
+		{ performId: '17076', performName: 'Event 17076', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
+		{ performId: '17077', performName: 'Event 17077', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
+		{ performId: '17078', performName: 'Event 17078', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
+		{ performId: '17079', performName: 'Event 17079', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
+		{ performId: '17080', performName: 'Event 17080', performShowDate: '1 - 10', performShowMonth: 'Jan/2017', image_path: 'assets/images/bmmf.jpg' },
+	];
+	constructor( private router: Router , private homeService: HomeService ) { 
+		this.screenWidth = (window.innerWidth);
+	}
 
 	ngOnInit() {
 		this.router.events.subscribe((evt) => {
@@ -42,122 +55,76 @@ export class HomeComponent implements OnInit {
 			}
 			window.scrollTo(0, 0);
 		});
-		this.subscription = this.atkService.fetchHomeData().subscribe(response => {
-			if (response['success'] == true && response['code'] == 100 && Object.keys(response['data']).length > 0) {
-				this.mappingHomePage(response['data'],false);
-				sessionStorage.setItem(ConstMaster.STORAGE_KEY.HOMEPAGE,JSON.stringify(response['data']));
-			} else {
-				
-				if(this.mappingHomePage('',true) === false) {
-					console.log('No data in storage');
-				}
-			}
 
-		},error => {
-			if(this.mappingHomePage('',true) === false) {
-				console.log('No data in storage');
-			}
-		});
-
+		this.homeService.getEventBanner().subscribe(response => {
+			this.slideBannerImages = response['data'];
+			this.getScreenType();
+        });
+		
 	}
 
-	mappingHomePage(data: any, getFromStorage: boolean) {
-
-		if (getFromStorage) {
-			let homePage = sessionStorage.getItem(ConstMaster.STORAGE_KEY.HOMEPAGE);
-			if (homePage != null || homePage != undefined) {
-				data = JSON.parse(homePage);
-			} else {
-				return false;
-			}
-		}
-
-		this.slideBannerImages = data['banner_']['items'];
-		this.cardTicketSlide = data['all_']['items'];
-		this.cardTicketHot = data['hot_']['items'];
-		this.cardTicketRec = data['rec_']['items'];
-		this.cardTickets = {
-			rec: this.cardTicketRec,
-			hot: this.cardTicketHot
-		}
-
-		return true;
+	ngAfterViewInit() {
+		// console.log(jQuery('#slider'));
 	}
 
-	ngOnDestroy() {
-		this.headerHandler();
-		this.subscription.unsubscribe();
-	}
+	getScreenType() {
 
-	goToEventInfoFromBanner(performUri: string, performId: string){
-		this.cardTicketComponent.goToEventInfoFromBanner(performUri,performId);
-	}
-
-	goToEventInfo(cardTicket: CardTicket) {
-		this.cardTicketComponent.goToEventInfo(cardTicket);
-	}
-
-	private slideLoaded() {
-		this.countImagesLoaded++;
-
-		if (this.countImagesLoaded == this.slideBannerImages.length) {
-
-			this.isSlideLoaded = true;
-
-			$('#slider .owl-carousel').owlCarousel({
-				items: 1,
-				animateOut: 'fadeOutLeft',
-				animateIn: 'zoomInRight',
-			});
-
-		}
-	}
-
-	private slideCardLoaded() {
-		this.countCardImageLoaded++;
-
-		if(this.countCardImageLoaded == this.cardTicketSlide.length) {
-			$('#sliderCard .owl-carousel').owlCarousel({
-				loop: false,
-				items: 1,
-				dots: false,
-				nav: true,
-				navText: ['<i class="fa fa-chevron-left mr-1"></i>', '<i class="fa fa-chevron-right"></i>'],
-				responsive: {
-					0: {
-						items: 1
-					},
-					480: {
-						items: 2
-					},
-					768: {
-						items: 3
-					},
-					992: {
-						items: 4
-					},
-					1366: {
-						items: 5
-					}
-				}
-			});
-		}
-	}
-
-	headerHandler(emit?) {
-
-		let header = $('#header');
-		if (emit) {
-			$(header).find('.dropdown-menu.show').removeClass('show');
-			if (!$(header).hasClass('sticky')) {
-				$(header).addClass('sticky');
-			}
-		} else {
-			if ($(header).hasClass('sticky')) {
-				$(header).removeClass('sticky');
-				$(header).find('.dropdown-menu.show').removeClass('show');
+		for(let breakpoint of ConstMaster.imageBreakpoint) {
+			if(this.screenWidth < breakpoint.breakpoint) {
+				this.screenType = breakpoint.beakpointName+"/";
+				break;
 			}
 		}
 	}
 	
+	slideLoaded() {
+		this.countImagesLoaded++;
+
+		if(this.countImagesLoaded == this.slideBannerImages.length) {
+
+			jQuery('#slider .owl-carousel').owlCarousel({
+				items: 1,
+				animateOut: 'fadeOutLeft',
+				animateIn: 'zoomInRight',
+			});
+			
+			jQuery('#sliderCard .owl-carousel').owlCarousel({
+				loop : true,
+				items: 1,
+				dots: false,
+				nav: true,
+				navText: ['<i class="fa fa-chevron-left mt-2 mr-1"></i>', '<i class="fa fa-chevron-right mt-2 ml-1"></i>'],
+				responsive : {
+					0 : {
+						items : 1
+					},
+					480 : {
+						items : 2
+					},
+					768 : {
+						items : 3
+					},
+					992 : {
+						items : 4
+					},
+					1366 : {
+						items : 5
+					}
+				}
+			});
+		}
+		
+	}
+
+	goEventInfo(performId:string){
+		this.router.navigate(['/eventInfo']);
+	}
+}
+
+interface CardTicket {
+	performId: string;
+	performName: string;
+	performShowDate: string;
+	performShowMonth: string;
+	image_path: string;
 }

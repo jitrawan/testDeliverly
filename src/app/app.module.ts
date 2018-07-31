@@ -1,75 +1,62 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule , ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 import { DatePipe } from '@angular/common';
 
 /* Library */
+import { CalendarModule } from './shared/lib/datetimepicker/primeng/calendar/calendar';
 import { DialogModule } from './shared/lib/dialog/dialog.component';
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
+import { ThaiDatePipe } from './shared/lib/date-format/thaidate.pipe';
 import { JasperoAlertsModule } from '@jaspero/ng2-alerts';
 import { JasperoConfirmationsModule } from '@jaspero/ng2-confirmations'
-import { CalendarModule } from './shared/lib/datetimepicker/primeng/calendar/calendar';
+
 
 /* Service */
-import { ApiService } from '@atk-service/api.service';
-import { HeaderService } from '@atk-service/header.service';
-import { AtkService } from '@atk-service/atk.service';
-import { SharedService } from '@atk-service/shared-service.service';
-import { ErrorMsgService } from '@atk-service/errorMsg.service';
+import { HeaderService } from './shared/services/header.service';
+import { HomeService } from './shared/services/home.service';
+import { SharedService } from './shared/services/shared-service.service';
+import { BusService } from './shared/services/bus.service';
+import { ErrorMsgService } from './shared/services/errorMsg.service';
+import { CheckAllowService } from './shared/services/checkAllow.service';
 
 /* Page */
 import { AppComponent } from './app.component';
-import { HeaderComponent } from '@atk-pages/header/header.component';
-import { FooterComponent } from '@atk-pages/footer/footer.component';
-import { EventInfoComponent } from '@atk-pages/event-info/event-info.component';
-import { HomeComponent } from '@atk-pages/home/home.component';
-import { FaqComponent } from '@atk-pages/faq/faq.component';
-import { PolicyComponent } from '@atk-pages/policy/policy.component';
-import { HistoryComponent } from '@atk-pages/history/history.component';
-import { SocialLoginModule } from 'angularx-social-login';
-import { AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider } from 'angularx-social-login';
-import { DiscountComponent } from '@atk-pages/discount/discount.component';
-import { DiscountDetailComponent } from '@atk-pages/discount-detail/discount-detail.component';
-import {
-  RECAPTCHA_SETTINGS,
-  RecaptchaSettings,
-  RecaptchaLoaderService,
-  RecaptchaModule,
-} from 'ng-recaptcha';
-import { PushNotificationModule } from 'ng-push-notification';
 
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
-import { CardTicketComponent } from '@atk-pages/home/card-ticket/card-ticket.component';
-import { ShowEventComponent } from '@atk-pages/home/show-event/show-event.component';
+import { HeaderComponent } from './core/header/header.component';
+import { FooterComponent } from './core/footer/footer.component';
 
-const globalSettings: RecaptchaSettings = {siteKey: '6Lek2FoUAAAAAPQZEags-82eJwRwDdJFm_LHVpXF'}
+import { EventInfoComponent } from './pages/event-info/event-info.component';
+import { AllEventComponent } from './pages/eventTickets/all-event/all-event.component';
+import { HomeComponent } from './pages/home/home.component';
+import { BookingComponent } from './pages/booking/booking.component';
+import { FaqComponent } from './pages/faq/faq.component';
+import { PolicyComponent } from './pages/policy/policy.component';
+import { AirlinesComponent } from './pages/eventTickets/airlines/airlines.component';
+import { BusComponent } from './pages/eventTickets/bus/bus-menu.component';
+import { ShoppingComponent } from './pages/eventTickets/shopping/shopping.component';
+import { TravelComponent } from './pages/eventTickets/travel/travel.component';
+import { ResultReserveTransitComponent } from './pages/resultReserve-transit/resultReserve-transit.component';
+import { HistoryDetailComponent } from './pages/history-detail/history-detail.component';
+import { SelectDestinationComponent } from './pages/eventTickets/bus/select-destination/select-destination.component';
 
-// Import module
-import { SharedModule } from './shared.module';
-const config = new AuthServiceConfig([
-  {
-    id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider('425750395938-52us01eev9lune9ltac5t2o0d1b1utdl.apps.googleusercontent.com')
-    // 624796833023-clhjgupm0pu6vgga7k5i5bsfp6qp6egh.apps.googleusercontent.com
-  },
-  {
-    id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider('391051151360464')
-    //561602290896109
-  }
-]);
+import { SelectSeatComponent } from './pages/eventTickets/bus/select-seat/select-seat.component';
+import { BusLayoutComponent } from './shared/lib/bus-layout/bus-layout.component';
+import { PassengerInformationComponent } from './pages/eventTickets/bus/passenger-information/passenger-information.component';
+import { SummaryComponent } from './pages/eventTickets/bus/summary/summary.component';
+import { SelectRoundComponent } from './pages/eventTickets/bus/select-round/select-round.component';
+import { BuyTicketComponent } from './pages/eventTickets/bus/buy-ticket/buy-ticket.component';
+import { BusReceiveComponent } from './pages/eventTickets/bus/bus-receive/bus-receive.component';
+import { BusErrorComponent } from './pages/eventTickets/bus/bus-error/bus-error.component';
 
-export function provideConfig() {
-  return config;
-}
-
+import { ResultPaidTransitComponent } from './pages/resultPaid/result-paid-transit/result-paid-transit.component';
+import { PopupResultPaidTransitComponent } from './pages/resultPaid-popup/result-paid-transit-popup/result-paid-transit-popup.component';
 
 @NgModule({
   declarations: [
@@ -77,14 +64,33 @@ export function provideConfig() {
     HeaderComponent,
     FooterComponent,
     EventInfoComponent,
+    AllEventComponent,
     HomeComponent,
+    BookingComponent,
     FaqComponent,
     PolicyComponent,
-    HistoryComponent,
-    DiscountComponent,
-    DiscountDetailComponent,
-    CardTicketComponent,
-    ShowEventComponent
+    AirlinesComponent,
+    BusComponent,
+    ShoppingComponent,
+    TravelComponent,
+    ResultReserveTransitComponent,
+    HistoryDetailComponent,
+    SelectDestinationComponent,
+    PassengerInformationComponent,
+    SummaryComponent,
+
+    SelectSeatComponent,
+    SelectRoundComponent,
+    BusLayoutComponent,
+    PassengerInformationComponent,
+    BuyTicketComponent,
+
+    ThaiDatePipe,
+
+    BusReceiveComponent,
+    BusErrorComponent,
+    ResultPaidTransitComponent,
+    PopupResultPaidTransitComponent
   ],
   imports: [
     NgbModule.forRoot(),
@@ -97,39 +103,25 @@ export function provideConfig() {
     AppRoutingModule,
     HttpClientModule,
     HttpModule,
+    CalendarModule,
     DialogModule,
     Ng2AutoCompleteModule,
     JasperoAlertsModule,
-    JasperoConfirmationsModule,
-    SocialLoginModule,
-    CalendarModule,
-    ReactiveFormsModule,
-    RecaptchaModule.forRoot(),
-    PushNotificationModule.forRoot(),
-    SharedModule,
-    environment.production ? ServiceWorkerModule.register('ngsw-worker.js') : []
-
-  ],
-  schemas: [ 
-    CUSTOM_ELEMENTS_SCHEMA,
-    NO_ERRORS_SCHEMA
+    JasperoConfirmationsModule
   ],
   providers: [
     HeaderService,
-    AtkService,
+    HomeService,
     SharedService,
     DatePipe,
+    BusService,
     ErrorMsgService,
-    ApiService,
-    {
-      provide: RECAPTCHA_SETTINGS,
-      useValue: globalSettings,
-    },
-    {
-      provide: AuthServiceConfig,
-      useFactory: provideConfig
-    }
+    CheckAllowService,
+    BuyTicketComponent
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+}
+
+

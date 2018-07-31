@@ -1,75 +1,50 @@
-<div class="faqWrapper">
-  <div class="topicWrapper">
-    <span class="faqBanner">FAQ
-    </span>
-    <span class="faqicon">
-      <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
-    </span>
-  </div>
-  <div class="container-fluid contentWrapper">
-    <div class="row">
-      <div class="col-md-4 col-lg-4 leftWrapper">
-        <div class="menu" #howbuy routerLink="/faq/buy" (click)="showBuy()">
-          <span class="rightArrow">
-            <i class="fa fa-caret-right " aria-hidden="true"></i>
-          </span> How to Buy
-        </div>
-        <div class="menu" #howrefund routerLink="/faq/refund" (click)="showRefund()">
-          <span class="rightArrow">
-            <i class="fa fa-caret-right " aria-hidden="true"></i>
-          </span>
-          How to Refund
-        </div>
-        <div class="menu" #howpickup routerLink="/faq/pickup" (click)="showPickup()">
-          <span class="rightArrow">
-            <i class="fa fa-caret-right " aria-hidden="true"></i>
-          </span>
-          Pick Up Ticket
-        </div>
-      </div>
-      <div class="col-md-8 col-lg-8 rightWrapper">
-        <div class="col-12" *ngIf="showHowToBuy">
-          <div class="topic">
-            <img alt="" src="https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/images/faq/HowToBuy.png" style="width: 100%; height: auto;">
-          </div>
-        </div>
-        <div class="col-12" *ngIf="showHowToRefund">
-          <div class="topic">
-            <img alt="" src="https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/images/faq/HowToRefund.png" style="width: 100%; height: auto;">
-          </div>
-        </div>
 
-        <div class="col-12 howPickUp" *ngIf="showHowToPickup">
-          <div class="topic d-flex">
-            <div class="col-4 p0 text-align-center">
-              <img alt="" src="https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/images/big_time_icon.png">
-            </div>
-            <div class="col-4 p0 text-align-center headTop">
-              สถานที่รับบัตร
-              <br> Pick Up Station
-            </div>
-            <div class="col-4 p0 text-align-center">
-              <img alt="" src="https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/images/cs_store_icon.png">
-            </div>
-          </div>
-          <div class="col-12 justify-content-center d-flex p-t-10">
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle selectZone" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                กรุณาระบุพื้นที่
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item">กรุงเทพฯ และปริมณฑล</a>
-                <a class="dropdown-item">ภาคกลาง</a>
-                <a class="dropdown-item">ภาคเหนือ</a>
-                <a class="dropdown-item">ภาคใต้</a>
-                <a class="dropdown-item">ภาคตะวันออก</a>
-                <a class="dropdown-item">ภาคตะวันออกเฉียงเหนือ</a>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="faqWrapper">
+      <div class="topicWrapper">
+          <span class="faqBanner">FAQ
+          </span>
+          <span class="faqicon"><i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+              </span>
       </div>
-    </div>
+      <div class="container contentWrapper">
+          <div class="row">
+              <div class="col-md-4 col-lg-4 leftWrapper">
+                  <div class="menu">
+                      <span class="rightArrow">
+                          <i class="fa fa-caret-right " aria-hidden="true"></i>
+                      </span> How to Buy
+                  </div>
+                  <div class="menu">
+                      <span class="rightArrow">
+                          <i class="fa fa-caret-right " aria-hidden="true"></i>
+                      </span>
+                      How to Pay
+                  </div>
+                  <div class="menu">
+                      <span class="rightArrow">
+                          <i class="fa fa-caret-right " aria-hidden="true"></i>
+                      </span>
+                      How to Refund
+                  </div>
+                  <div class="menu">
+                      <span class="rightArrow">
+                          <i class="fa fa-caret-right " aria-hidden="true"></i>
+                      </span>
+                      Pick Up Ticket
+                  </div>
+              </div>
+              <div class="col-md-8 col-lg-8 rightWrapper">
+                  <div class="topic"> How to Buy </div>
+
+                  <div class="information">
+                      Purchase via Couter Service All Tickets in 7-Eleven or at any shops that have Couter Service Logos (Payment by cash only).
+                      <br/>
+                      <br/> Purchase via www.allticket.com Payment by credit cards (Service charge 3%) or take PAY CODE to pay
+                      at Counter Service all branches.
+                      <br/>
+                      <br/> Purchase via Couter Service All Ticket booth at the venue.
+                  </div>
+              </div>
+          </div>
+      </div>
   </div>
-</div>

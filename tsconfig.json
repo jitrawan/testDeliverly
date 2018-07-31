@@ -17,21 +17,6 @@
     "lib": [
       "es2017",
       "dom"
-    ],
-    "baseUrl": "src",
-    "paths": {
-      "@atk-service/*": ["app/core/services/*"],
-      "@atk-shared/*": ["app/shared/*"],
-      "@atk-booking/*": ["app/booking/*"],
-      "@atk-bus/*": ["app/bus/*"],
-      "@atk-pages/*": ["app/pages/*"]
-    }
-  },
-  "include": [
-    "node_modules/@jaspero/ng2-alerts",
-    "src/main.ts",
-    "src/polyfills.ts",
-    "src/app/window.parent.d.ts",
-    "src/**/*"
-  ]
+    ]
+  }
 }

@@ -28,21 +28,6 @@
   background-color: #da1c21;
 }
 
-.btn-atk-warning {
-  font-size: 18px;
-  background-color: #FBB03B;
-  border-bottom: 3px solid #ca851a;
-  color: #fff;
-  padding-left: 3rem;
-  padding-right: 3rem;
-  border-radius: 2rem;
-  cursor: pointer;
-}
-
-.btn-atk-warning:hover {
-  background-color: #f99f13;
-}
-
 .btn-atk-success {
   font-size: 18px;
   background-color: #23d160;
@@ -62,9 +47,9 @@
   font-size: 18px;
   background-color: #ECECEC;
   border-bottom: 3px solid #C2C6C7;
-  color: #484848;
-  padding-left: 3rem;
-  padding-right: 3rem;
+  color: #B3B3B3;
+  padding-left: 5.5rem;
+  padding-right: 5.5rem;
   border-radius: 2rem;
   cursor: pointer;
 }
@@ -75,11 +60,9 @@
 
 .btn-atk-light:focus,
 .btn-atk-danger:focus,
-.btn-atk-warning:focus,
 .btn-atk-success.focus,
 .btn-atk-light:active,
 .btn-atk-danger.active,
-.btn-atk-warning:active,
 .btn-atk-success.active {
   outline: none;
   box-shadow: none;
@@ -87,49 +70,9 @@
 }
 
 .cursor-pointer {
-  cursor: pointer;
+	cursor: pointer;
 }
 
-mark.mark-require {
-  padding: 0;
-  color: #37BDE0;
-  background-color: transparent;
-}
-
-@media screen and (max-width: 992px) {
-  .btn-atk-primary,
-  .btn-atk-danger,
-  .btn-atk-warning,
-  .btn-atk-success,
-  .btn-atk-light {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-}
-
-@media screen and (max-width: 575px) {
-  .btn-atk-primary,
-  .btn-atk-danger,
-  .btn-atk-warning,
-  .btn-atk-success,
-  .btn-atk-light {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-}
-
-@media (max-width: 425px) {
-  .btn-atk-primary,
-  .btn-atk-danger,
-  .btn-atk-warning,
-  .btn-atk-success,
-  .btn-atk-light {
-    font-size: 14px;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    border-radius: 1rem;
-  }
-}
 
 /* More Spacing Utilities Margin & Padding */
 
@@ -249,16 +192,6 @@ mark.mark-require {
 
 .is-size-7 {
   font-size: 0.75rem !important;
-}
-
-.c-red {
-  color: red
-}
-
-.text-overflow-ellipsis {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 @media screen and (max-width: 768px) {
@@ -405,3 +338,4 @@ print {
     font-size: 0.75rem !important;
   }
 }
+

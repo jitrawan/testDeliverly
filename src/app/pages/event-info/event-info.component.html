@@ -1,108 +1,172 @@
-<div class="container-fluid px-0" [ngClass]="{ 'spinner-loading' : isLoading }" scrollable [heightTrigger]="750" (scrollPosition)="stickyBarTrigger($event)">
-	<ng-container *ngIf="eventInfo?.infoHtml != null || eventInfo?.infoHtml == ''">
-		<div class="event-sticky" *ngIf="isShowStickyHeader" [@UpNDown]>
-			<div class="row mx-0 p-3">
-				<div class="col-md col-lg-1 d-none d-lg-flex align-items-center justify-content-center">
-					<img [src]="eventInfo?.event_logo" class="img-fluid event-logo"/>
-				</div>
-
-				<div class="col-8 col-md-12 col-lg-8 d-lg-block d-flex align-self-center">
-					<div class="row">
-						<div class="col-12 text-white">
-							{{eventInfo?.event_name}}
-						</div>
-					</div>
-					<div class="row d-none d-md-flex">
-						<div class="col-6 column-wrapping">
-							<img class="small-icon" src="//atkmedia.allticket.com/assets/images/icon/locate.png" width="15px">
-							<span class="ml-2">{{eventInfo.event_location}}</span>
-						</div>
-
-						<div class="col-3 column-wrapping">
-							<i class="fa fa-calendar-o" aria-hidden="true"></i>
-							<span class="ml-3" [innerHTML]="eventInfo?.event_show_date | safeHtml"></span>
-						</div>
-
-						<div class="col-3 column-wrapping">
-							<i class="fa fa-clock-o" aria-hidden="true"></i>
-							<span class="ml-3" [innerHTML]="eventInfo?.event_show_time | safeHtml"></span>
-						</div>
-
-					</div>
-				</div>
-
-				<div class="col-4 col-md-12 col-lg-3 column-wrapping justify-content-center buyTicket" id="stickyButtonWrapper">
-					<!-- <button class="btn btn-atk-primary" #buyBtnSticky>BUY TICKETS</button> -->
-				</div>
+<div class="container-fluid no-padding" id="container-fluid">
+	<div class="headerSticky" id="headerSticky">
+		<div class="row stickyOverlay p-10">
+			<div class="col-5 col-sm-5 col-md-3 col-lg-1 sticky-image " id="sticky-image">
+				<img class="img-rounded" id="concertIcon">
 			</div>
-		</div>
-		<div class="row eventDescHeader mx-0">
-			<div class="col-md-5 d-flex d-lg-block align-items-center justify-content-center">
-				<div class="inner-wrapper">
-					<img [src]="eventInfo?.event_logo" class="img-fluid event-logo"/>
+			<div class="col col-sm-12 col-md-12 col-lg-9 no-padding-left" id="stickyTitle">
+				<div class="row no-margin">
+					<div class="col-12 col-sm-12 col-md-12 col-lg-12 stickyTitle"> EXO PLANET </div>
 				</div>
-			</div>
-	
-			<div class="col-md-7">
-				<div class="inner-wrapper">
-					<div class="row mx-0">
-						<div class="col-12">
-							<h4 class="text-center text-white event-title pb-2">{{eventInfo?.event_name}}</h4>
-						</div>
-					</div>
-					<div class="row mx-0 mt-2">
-						<div class="col-6 col-lg-5 border-right">
-							<div class="row mx-0">
-								<div class="col-12 col-lg-2 align-self-md-center px-0">
-									<i class="fa fa-calendar-o text-white is-size-4" aria-hidden="true"></i>
-								</div>
-								<div class="col-12 col-lg-9 px-0">
-									<span class="text-white l_h_2" [innerHTML]="eventInfo?.event_show_date | safeHtml"></span>
-								</div>
+				<div class="row no-margin">
+					<div class="col-12 col-sm-12 col-md-12 col-lg-12 stickyTitle no-padding">
+						<div class="row no-margin">
+							<div class="col-4 inline cursorPointer no-padding l_h_2" (click)="activeMap()" id="locateBar">
+								<img src="../../../../assets/images/icon/locate.png" width="15px">
+								<span class="m-l-10 detail">RATCHABURI</span>
 							</div>
-						</div>
-						
-						<div class="col-6 col-lg-5">
-							<div class="row mx-0">
-								<div class="col-12 col-lg-2 align-self-md-center text-lg-center px-0">
-									<i class="fa fa-clock-o text-white is-size-4" aria-hidden="true"></i>
-								</div>
-								<div class="col-12 col-lg-9 px-0">
-									<span class="text-white l_h_2" [innerHTML]="eventInfo?.event_show_time | safeHtml"></span>
-								</div>
+
+							<div class="col-4 inline no-padding l_h_2" id="dateBar">
+								<i class="fa fa-calendar-o" aria-hidden="true" style="font-size: 15px;"></i>
+								<span class="m-l-10 detail"> 1 NOVEMBER 2017</span>
+							</div>
+							<div class="col-4 inline no-padding l_h_2" id="timeBar">
+								<i class="fa fa-clock-o" aria-hidden="true" style="font-size: 15px;"></i>
+								<span class="m-l-10 l_h_2">7.00 PM - 12.00 AM</span>
 							</div>
 						</div>
 					</div>
-					<div class="row mx-0 mt-3">
-						<div class="col-12 col-lg-1">
-							<img src="https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/images/icon/locate.png" width="25px">
-						</div>
-						<div class="col-12 col-lg-10 px-lg-0 align-self-lg-center">
-							<span class="text-white">{{eventInfo.event_location}}</span>
-						</div>
-					</div>
-					<div class="row mx-0 mt-3">
-						<div class="col-12 col-lg-1">
-							<img src="https://s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/images/icon/currency.png" width="20px">
-						</div>
-						<div class="col-12 col-lg-10 px-lg-0 align-self-lg-center">
-							<span class="ticketPrice">{{eventInfo.event_show_price}}</span>
-						</div>
-					</div>
-					<div class="row text-center mt-4 mt-sm-5 mx-0">
-						<div class="col-12" [ngClass]="{ 'spinner-loading withButton' : isEventStatusLoading }" id="buttonWrapper">
-							<button class="btn btn-atk-primary" (click)="buyTicket(performId)" #BUYTICKET>BUY TICKET</button>
+				</div>
+			</div>
+			<div class="col-12 col-sm-12 col-md-12 col-lg-2 sticky-btn-buy no-padding" id="sticky-btn-buy">
+				<div class="middle">
+					<a href="#" routerLink="/payment/booking-review" class="buyTicketBtnBar banner">BUY TICKET</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row no-margin" id="eventDescHeader">
+		<div class=" col-sm-12 col-md-5 col-lg-5 txtAlgCen" id="eventLogo">
+			<div class="middle" style="padding: 10px 10px 10px 10px">
+				<img alt="#" src="../../../../assets/images/eventProfile/festival_profile.png" class="banner">
+			</div>
+		</div>
+		<div class="col-sm-12 col-md-7 col-lg-7" id="eventDesc">
+			<div class="row no-margin">
+				<div class=" col-12 no-padding">&nbsp;</div>
+			</div>
+			<div class="row no-margin">
+				<div class=" col-sm-12 col-md-12 col-lg-12 dspTable no-padding" style="border-bottom: 1px solid;">
+					<span class="dspTableCell verticalMiddle txtAlgCen h3">สวนผึ้งไฮแลนด์ เคาน์ดาวน์เฟสติวัล 2017</span>
+				</div>
+				<div class=" col-sm-12 col-md-12 col-lg-12 no-padding">
+					<div class="row no-margin">
+						<div class=" col-sm-12 col-md-12 col-lg-12 no-padding">
+							<div class="row no-margin">
+								<div class="col-12 no-padding ">&nbsp;</div>
+								<div class="col-6 col-sm-6 col-md-6 col-lg-4 txtAlgleft h6 p-l-15" style="border-right: 1px solid;">
+									<div class="row no-margin">
+										<div class=" col-sm-12 col-md-2 col-lg-3 no-padding">
+											<i class="fa fa-calendar-o" aria-hidden="true" style="font-size: 25px;"></i>
+										</div>
+										<div class=" col-sm-12 col-md-10 col-lg-9 no-padding">
+											<span class="l_h_2"> 1 NOVEMBER 2017</span>
+										</div>
+									</div>
+								</div>
+								<div class="col-6 col-6 col-sm-6 col-md-6 col-lg-8 txtAlgLeft h6 no-padding-right">
+									<div class="row no-margin">
+										<div class=" col-sm-12 col-md-2 col-lg-1 no-padding">
+											<i class="fa fa-clock-o" aria-hidden="true" style="font-size: 25px;"></i>
+										</div>
+										<div class=" col-sm-12 col-md-10 col-lg-11 no-padding">
+											<span class="l_h_2">7.00 PM - 12.00 AM</span>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			<div class="row no-margin">
+				<div class=" col-sm-12 col-md-12 col-lg-12 no-padding">
+					<div class="row no-margin">
+						<div class=" col-sm-12 col-md-12 col-lg-12 no-padding">
+							<div class="row no-margin p-t-15">
+								<div class="col-12 col-sm-12 col-md-12 col-lg-12 txtAlgleft h6 p-l-15 no-padding-right">
+									<div class="row no-margin">
+										<div class=" col-sm-12 col-md-1 col-lg-1 no-padding">
+											<img src="../../../../assets/images/icon/locate.png" width="25px">
+										</div>
+										<div class=" col-sm-12 col-md-11 col-lg-11 no-padding">
+											<span class="l_h_2">RATCHABURI</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row no-margin">
+				<div class=" col-sm-12 col-md-12 col-lg-12 no-padding">
+					<div class="row no-margin p-t-15">
+						<div class=" col-sm-12 col-md-12 col-lg-12 no-padding">
+							<div class="row no-margin">
+								<div class="col-12 col-sm-12 col-md-12 col-lg-12 txtAlgleft h6 p-l-15 no-padding-right">
+									<div class="row no-margin">
+										<div class=" col-sm-12 col-md-1 col-lg-1 no-padding">
+											<img src="../../../../assets/images/icon/currency.png" width="20px">
+										</div>
+										<div class=" col-sm-12 col-md-11 col-lg-11 no-padding">
+											<span class="l_h_2 ticketPrice">1,200 / 1,000 / 900</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row no-margin">
+				<div class=" col-sm-12 col-md-12 col-lg-12 no-padding">
+					<div class="row no-margin">
+						<div class=" col-12 no-padding">&nbsp;</div>
+					</div>
+					<div class="row no-margin">
+						<div class=" col-sm-3 col-md-1 col-lg-3 no-padding">&nbsp;</div>
+						<div class=" col-sm-6 col-md-10 col-lg-6 no-padding txtAlgCen">
+							<a href="#" routerLink="/payment/booking-review" class="btn btn-atk-primary px-6 py-2 is-size-4">BUY TICKETS</a>
+						</div>
+						<div class=" col-sm-3 col-md-1 col-lg-3 no-padding">&nbsp;</div>
+					</div>
+					<div class="row no-margin">
+						<div class=" col-12 no-padding">&nbsp;</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div class="wrapper-event-info p-3" [innerHTML]="eventInfo?.infoHtml | safeHtml"></div>
-	</ng-container>
-	
-	<ng-container *ngIf="(eventInfo?.infoHtml == null || eventInfo?.infoHtml == '') && isLoading == false">
-		<div class="container prevent-white-space d-flex justify-content-center mt-4">
-			<h3 class="my-5 align-self-center">Event not found.</h3>
+	</div>
+	<div class="row no-margin">
+		<div class="col-12" style="border: 15px solid #efefef; border-bottom: 0px;">
+			<div class="ticketinfo" id="eventInfoContent"></div>
 		</div>
-	</ng-container>
+		<div class="col-12" style="border: 15px solid #efefef; border-top: 0px; min-height: 200px;'">
+			<div class="row cursorPointer" (click)="activeMap()" id="Locat">
+				<div class="col-12 col-sm-11 col-sm-offset-1 col-md-12 col-md-offset-0">
+					<p style="font-weight: bold; display: inline-block;">
+						<img src="../../../../assets/images/point.png" width="15px" height="20px">&nbsp;&nbsp;Location:</p>&nbsp;&nbsp;
+					<p style="display: inline-block;">Impact Areana Soi Nanthana 4. Ban Song Hong, Nonthaburi, Thailand 11000
+						<img src="../../../../assets/images/drop.png" width="10px" height="10px" class="mgLeft5px">
+					</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12 col-md-12">
+					<div class="showMap">
+						<agm-map [zoom]="17" [latitude]="lat" [longitude]="lng">
+							<agm-marker [latitude]="lat" [longitude]="lng">
+								<agm-info-window *ngIf="isMapShow">
+									<div (click)='getDirection()'>Get Direction</div>
+								</agm-info-window>
+							</agm-marker>
+						</agm-map>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </div>

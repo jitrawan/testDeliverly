@@ -1,33 +1,25 @@
-import { environment } from '../../../environments/environment';
-
 export const ConstMaster = {
-    
-    STORAGE_KEY : {
-        HOMEPAGE: 'atk:homepage',
-        CARD_EVENT: 'atk-cardEvent'
+    S3_ENDPOINT : {
+        url : 'https://s3-ap-southeast-1.amazonaws.com/haball-assets/'
     },
-    HOME_API : {
-        endpoint: environment.apiGatewayHomePage
+    header : {
+        jsonFileEndPoints: 'https://s3-ap-southeast-1.amazonaws.com/haball-assets/json/HeaderMenu.json'
     },
-    EVENT_CARD_API : {
-        endpoint: environment.apiGatewayAllEvent
+    home : {
+        jsonFileEndPoints: 'https://s3-ap-southeast-1.amazonaws.com/haball-assets/json/EventBanner.json'
     },
-    HEADER_API : {
-        endpoint: environment.apiGatewayHeader
-    },
-    EVENT_INFO_API : {
-        getEventStatus: environment.apiGatewayCheckEvent
-    },
-    BOOKING_API : {
-        getRound: environment.apiGatewayGetRound,
-        getZoneAvailable: environment.apiGatewayGetZoneAvailable,
-        getSeat: environment.apiGatewayGetSeat,
-        getReserve: environment.apiGatewayGetReserve
-    },
-    DEFAULT_IMAGES : {
-        banner: environment.bucketS3+'/assets/images/placeholder/place-holder-1440x480.jpg.jpg',
-        ticketCard: environment.bucketS3+'/assets/images/placeholder/place-holder-410x600.jpg',
-        eventLogo: environment.bucketS3+'/assets/images/placeholder/place-holder-650x450.jpg'
-    },
-    S3_PATH: environment.bucketS3
+    imageBreakpoint : [
+        {
+            breakpoint: 768,
+            beakpointName: 'sd'
+        },
+        {
+            breakpoint: 1366,
+            beakpointName: 'hd'
+        },
+        {
+            breakpoint: 1920,
+            beakpointName: 'fullhd'
+        }
+    ]
 };

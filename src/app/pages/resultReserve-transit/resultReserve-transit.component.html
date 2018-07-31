@@ -1,0 +1,218 @@
+<div class="container resultReserveWrapper">
+  <h2 class="heading text-center is-size-4-mobile mt-4">RESERVE SUMMARY</h2>
+
+  <div class="divider divider-center">
+    <i class="fa fa-circle"></i>
+  </div>
+
+  <div class="row border-bottom">
+    <div class="col-12">
+      <div class="sub-heading with-icon">
+        <i class="fa fa-user fa-2x fa-fw" aria-hidden="true"></i>
+        <span>
+          Customer Information
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="row-wrapper py-3">
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Name - Surname</div>
+      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper"> {{ userTo.firstname }} {{ userTo.lastname }} </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Email - Address</div>
+      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper"> {{ userTo.email}} </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Mobile No</div>
+      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper"> {{userTo.telephone}} </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">ID CARD / Passport ID</div>
+      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper"> {{ userTo.cardNumber }}
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4 border-bottom">
+    <div class="col-12">
+      <div class="sub-heading with-icon">
+        <i class="fa fa-credit-card fa-2x fa-fw" aria-hidden="true"></i>
+        <span>
+          Payment Methods
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" id="selectMethodsTxt">
+    <div class="col-12 mt-4">
+      <h3 class="text-center paymentTypeText">Please choose your payment method</h3>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-10 offset-1 col-sm-4 offset-sm-1 paymentWrapper" title="Cash Payment" *ngIf="allowPayOutlet" [ngClass]="{ 'selected': paymentMethodSelected == 1 }"
+      (click)="choosePaymentMethod(1)">
+      <i class="fa fa-check-circle fa-2x"></i>
+      <img class="img-fluid" src="//s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/images/payment/cs711.png"
+      />
+    </div>
+    <div class="col-10 offset-1 col-sm-5 d-flex paymentWrapper" title="Credit Card Payment" *ngIf="allowPayCredit" [ngClass]="{ 'selected': paymentMethodSelected == 2 }"
+      (click)="choosePaymentMethod(2)">
+      <i class="fa fa-check-circle fa-2x"></i>
+      <img class="img-fluid" src="//s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/images/payment/creditIcon.png"
+      />
+    </div>
+  </div>
+
+  <!-- <div class="row mt-3">
+    <div class="col-12 col-md-5 mt-3">
+      <div data-payment-type="cash" class="paymentWrapper" [ngClass]="{ 'active': paymentMethodSelected == 1 }" (click)="choosePaymentMethod(1)">
+        <i class="fa fa-check-circle fa-2x"></i>
+        <img class="img-fluid" src="//s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/images/payment/cs711.png">
+      </div>
+    </div>
+  
+    <div class="col-12 col-md-7 mt-3">
+      <div data-payment-type="credit" class="paymentWrapper" [ngClass]="{ 'active': paymentMethodSelected == 2 }" (click)="choosePaymentMethod(2)">
+        <i class="fa fa-check-circle fa-2x"></i>
+        <img class="img-fluid" src="//s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com/assets/images/payment/creditIcon.png">
+      </div>
+    </div>
+  </div> -->
+
+  <div class="row" id="display-credit-fee" *ngIf="creditFeeLabel != null && creditFeeLabel != '0'">
+    <div class="col-sm-7 offset-sm-5">
+      <div class="alert alert-primary mx-auto mt-3 text-center" role="alert">
+        Convenience fee {{creditFeeLabel}} Baht
+      </div>
+    </div>
+  </div>
+
+  <div class="row-wrapper" id="credit-promo" *ngIf="discountCredit != null">
+    <input type="hidden" id="creditDiscount" />
+    <div class="row mt-4 border-bottom">
+      <div class="col-12">
+        <div class="sub-heading with-icon">
+          <i class="fa fa-credit-card fa-2x fa-fw" aria-hidden="true"></i>
+          <span>
+            Credit Card Promotion
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-md-10 offset-md-1" id="creditDiscountWrapper">
+        <div class="owl-carousel">
+          <div class="discount-item">
+            <i class="fa fa-check-circle fa-2x"></i>
+            <div class="discount-image">
+              <img class="img-fluid" src="${context_s3}images/discount/${discount.sponsorLogo}" />
+            </div>
+            <div class="discount-desc">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5 border-bottom">
+    <div class="col-12">
+      <div class="sub-heading with-icon">
+        <i class="fa fa-calculator fa-2x fa-fw" aria-hidden="true"></i>
+        <span>
+          Order Information
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-wrapper py-3" id="order-info">
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Reserve ID</div>
+      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+        <div class="text-desc"> {{ reserveId}} </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Flight Detail</div>
+      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+        <div class="text-desc"> {{ transDetail }} </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Price (Baht)</div>
+      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+        <div class="text-desc">{{ priceAmt| number : '1.2' }}</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Service Fee</div>
+      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+        <div class="text-desc"> {{csFee| number : '1.2'}} </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Convenience fee (Baht)</div>
+      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+        <div class="text-desc"> {{creditFee| number : '1.2'}} </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-6 offset-md-1 col-title-wrapper title-text">Total Amount (Baht)</div>
+      <div class="col-12 col-sm-6 col-md-5 col-desc-wrapper">
+        <div class="text-desc"> {{ endPrice| number : '1.2' }}</div>
+      </div>
+    </div>
+
+    <div class="row mt-4 d-none" id="paymentTimeOutDesc">
+      <div class="col-12">
+        Please process payment at Counter Service (7-Eleven Shop) within {{ showExpireTimeEn }}
+      </div>
+    </div>
+  </div>
+  <div class="row-wrapper mt-4" id="term-condition">
+    <div class="row border-bottom">
+      <div class="col-12">
+        <div class="sub-heading with-icon">
+          <i class="fa fa-handshake-o fa-2x fa-fw" aria-hidden="true"></i>
+          <span>
+            Condition
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-12 col-sm-11 offset-sm-1 form-group">
+        <ul class="term-condition">
+          <li>To prevent order cancellation, please make payment by time shown on the payment form.</li>
+          <li>Tickets can be collected at Counter Service outlets.</li>
+          <li>All goods and Service are non-refundable.</li>
+          <li>Please retain the payment receipt for your reference.</li>
+          <li>In some case a convenience fee charge, when you payment by credit card.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="form-group col-12" style="text-align: center;">
+        <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+          <input type="checkbox" class="custom-control-input" name="acceptConditions" />
+          <span class="custom-control-indicator"></span>
+          <span class="agreeLabel">Please clicking you agree to the “Terms and Conditions” set forth by Counter Service Co., Ltd.</span>
+        </label>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="form-group col-12 buttonWrapper ">
+        <button class="btn btn-atk-danger" id="btnResultBack">Back</button>
+        <button class="btn btn-atk-primary ml-2" id="payBtn">Payment</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- </div> -->

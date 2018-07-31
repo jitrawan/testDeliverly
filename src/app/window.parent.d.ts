@@ -1,4 +1,4 @@
 interface Window {
-    receiveMessage(param1:string,param2?:string):boolean
+    receiveMessage(args:string):boolean
     postMessage(params:string,domain:string):void
 }

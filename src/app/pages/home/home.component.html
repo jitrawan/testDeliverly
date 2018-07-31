@@ -1,98 +1,145 @@
-<main scrollable [heightTrigger]="150" (scrollPosition)="headerHandler($event)">
-  <section id="slider" [ngClass]="{ 'show' : isSlideLoaded == true }">
-    <div class="preload-slide" [ngClass]="{ 'show' : isSlideLoaded == false }">
-      <div class="is-loading text-primary"></div>
-    </div>
-    <div class="owl-carousel">
-      <div class="item cursor-pointer" *ngFor="let image of slideBannerImages; index as i;" (click)="goToEventInfoFromBanner(image.performUri,image.id)">
-        <img [src]="image.value" (load)="slideLoaded()"/>
-      </div>
-    </div>
-  </section>
+<main>
+	<section id="slider">
+		<div class="owl-carousel">
+			<div class="item" *ngFor="let image of slideBannerImages; index as i;">
+				<img [src]="S3_CONTEXT+image.pathLocation+screenType+image.imageName" (load)="slideLoaded()" />
+				<!-- <img [src]="test()" (load)="slideLoaded()" /> -->
+			</div>
+		</div>
+	</section>
 
-   <section id="card-ticket" class="mt-2" *ngIf="cardTickets">
-    <div class="container">
-      <div class="card-ticket px-4" *ngIf="cardTickets.rec.length > 0">
-        <div class="row ticket-recommend">
-          <div class="col-12 px-0">
-            <span class="text-primary border-ticket-title">
-              <img src="./assets/images/icon_ticket_recommend.png" />
-            </span>
-          </div>
-        </div>
-        <card-ticket [cardData]="cardTickets.rec"></card-ticket>
-      </div>
 
-      <div class="card-ticket px-4" *ngIf="cardTickets.hot.length > 0">
-        <div class="row ticket-recommend">
-          <div class="col-12 px-0">
-            <span class="text-danger border-ticket-title">
-              <img src="./assets/images/icon_ticket_hot.png" />
-            </span>
-          </div>
-        </div>
-        <card-ticket [cardData]="cardTickets.hot"></card-ticket>
-      </div>
-    </div>
-  </section>
-  <section class="mt-4 p-3" id="sliderCard" [ngClass]="{ 'show' : countCardImageLoaded == cardTicketSlide.length }">
-    <div class="preload-slide" [ngClass]="{ 'show' : countCardImageLoaded != cardTicketSlide.length }">
-      <div class="is-loading" style="color:#077eff"></div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="owl-carousel">
-          <div class="col cardwrapper" *ngFor="let cardTicket of cardTicketSlide;">
-            <div class="cardbox mx-auto" (click)="goToEventInfo(cardTicket)">
-              <div class="card-overlay" [title]="cardTicket.name">
-                <img src="//atkmedia.allticket.com/assets/images/cursor.png">
-              </div>
-              <img class="card-img-top img-fluid" [src]="cardTicket.performCardPic" (load)="slideCardLoaded()" (error)="cardTicket.performCardPic = placeHolderImg"
-              [alt]="cardTicket.name">
-              <ng-template [ngIf]="cardTicket.isPromo == 'Y'" [ngIfElse]="isPromo">
-                  <div class="card-buyTicket commingsoon">
-                    <a href="#">
-                      <i class="fa fa-clock-o fa-fw pr-2" aria-hidden="true"></i>
-                      <span>COMING SOON</span>
-                    </a>
-                  </div>
-                </ng-template>
-                
-              <ng-template #isPromo>
-                <ng-template [ngIf]="cardTicket.isFull == 'Y'" [ngIfElse]="showBuyBtn">
-                  <div class="card-buyTicket soldout">
-                    <a href="#">
-                      <i class="fa fa-ban fa-fw pr-2" aria-hidden="true"></i>
-                      <span>SOLD OUT</span>
-                    </a>
-                  </div>
-                </ng-template>
-              </ng-template>
-  
-              <ng-template #showBuyBtn>
-                <div class="card-buyTicket">
-                  <a href="#">
-                    <i class="fa fa-shopping-cart fa-fw pr-2" aria-hidden="true"></i>
-                    <span>BUY TICKET</span>
-                  </a>
-                </div>
-              </ng-template>
-              <div class="row cardfooter">
-                <div class="col-5 p-1" *ngIf="cardTicket.performCardShowDate != undefined" [ngClass]="{ 'full-column' : cardTicket.performCardName == undefined }">
-                  <div class="splitWrapper eventDate is-size-6">
-                    <div class="text-dark text-overflow-ellipsis" [innerHTML]="cardTicket.performCardShowDate | safeHtml"></div>
-                  </div>
-                </div>
-                <div class="col-7 px-1" *ngIf="cardTicket.performCardName != undefined" [ngClass]="{ 'full-column' : cardTicket.performCardShowDate == undefined }">
-                  <div class="splitWrapper eventName">
-                    <div class="my-1 text-overflow" [innerHtml]="cardTicket.performCardName == '' ? cardTicket.name : cardTicket.performCardName"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> 
+	<section id="card-ticket" class="mt-2">
+		<div class="container allevent">
+			<div class="eventtopic">
+				<div class="container">
+					<div class="row ticket-recommend">
+						<div class="col-7 col-md-6 px-0">
+							<span class="text-primary border-ticket-title">
+								<img src="./assets/images/icon_ticket_recommend.png"/>
+							</span>
+						</div>
+						<div class="col-5 col-md-6 viewall">
+							<a href="./eventTickets/allevent.html">
+								<i class="fa fa-plus"></i> view all</a>
+						</div>
+					</div>
+					<div class="row cpt20">
+						<div class="col-12 col-sm-6 col-md-6 col-lg-3 card cardwrapper" *ngFor="let cardTicket of cardTicketsRecommend;">
+							<div class="cardbox">
+								<a (click)="goEventInfo()">
+									<div class="card-overlay">
+										<img src="./assets/images/cursor.png">
+									</div>
+								</a>
+								<img class="card-img-top imgResponsive" src="{{cardTicket.image_path}}" alt="Card image cap">
+								<div class="card-buyTicket">
+									<a>
+										<i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i>
+										<span>BUY TICKET</span>
+									</a>
+								</div>
+								<div class="row cardfooter">
+									<div class="col-sm-5 col-md-5 eventDate text_overflow">
+										<span class="textblack">{{cardTicket.performShowDate}}</span>
+										<br>
+										<span class="font12"> {{cardTicket.performShowMonth}} </span>
+									</div>
+									<div class="col-sm-7 eventName text_overflow">
+										{{cardTicket.performName}}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="eventtopic">
+				<div class="container">
+					<div class="row ticket-recommend">
+						<div class="col-7 col-md-6 px-0">
+							<span class="text-danger border-ticket-title">
+								<img src="./assets/images/icon_ticket_hot.png" />
+							</span>
+						</div>
+						<div class="col-5 col-md-6 viewall">
+							<a href="./eventTickets/allevent.html">
+								<i class="fa fa-plus"></i> view all</a>
+						</div>
+					</div>
+					<div class="row cpt20">
+						<div class="col-12 col-sm-6 col-md-6 col-lg-3 card cardwrapper" *ngFor="let cardTicket of cardTicketsHot;">
+							<div class="cardbox">
+								<a (click)="goEventInfo()">
+									<div class="card-overlay">
+										<img src="./assets/images/cursor.png">
+									</div>
+								</a>
+								<img class="card-img-top imgResponsive" src="{{cardTicket.image_path}}" alt="Card image cap">
+								<div class="card-buyTicket">
+									<a>
+										<i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i>
+										<span>BUY TICKET</span>
+									</a>
+								</div>
+								<div class="row cardfooter">
+									<div class="col-sm-5 col-md-5 eventDate text_overflow">
+										<span class="textblack">{{cardTicket.performShowDate}}</span>
+										<br>
+										<span class="font12"> {{cardTicket.performShowMonth}} </span>
+									</div>
+									<div class="col-sm-7 eventName text_overflow">
+										{{cardTicket.performName}}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="mt-4 p-3" id="sliderCard">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 text-right pb-3">
+					<a href="./eventTickets/allevent.html">
+						<i class="fa fa-plus"></i> view all</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="owl-carousel">
+					<div class="col cardwrapper" *ngFor="let cardTicket of cardShowAll;">
+						<div class="cardbox">
+							<a (click)="goEventInfo()">
+								<div class="card-overlay">
+									<img src="./assets/images/cursor.png">
+								</div>
+							</a>
+							<img class="card-img-top imgResponsive" src="{{cardTicket.image_path}}" alt="Card image cap">
+							<div class="card-buyTicket">
+								<a>
+									<i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i>
+									<span>BUY TICKET</span>
+								</a>
+							</div>
+							<div class="row cardfooter">
+								<div class="col-sm-5 col-md-5 eventDate text_overflow">
+									<span class="textblack">{{cardTicket.performShowDate}}</span>
+									<br>
+									<span class="font12"> {{cardTicket.performShowMonth}} </span>
+								</div>
+								<div class="col-sm-7 eventName text_overflow">
+									{{cardTicket.performName}}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+		
 </main>

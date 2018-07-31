@@ -5,17 +5,6 @@
 
 export const environment = {
   production: false,
-  baseUrl: '//dmkeuw46g1lts.cloudfront.net',
-  apiGateway: 'https://ad5xsmjzzj.execute-api.ap-southeast-1.amazonaws.com/v1/',
-  apiGatewayBaseUrl: 'https://26ieslrird.execute-api.ap-southeast-1.amazonaws.com/latest/',
-  apiGatewayRegister: 'https://26ieslrird.execute-api.ap-southeast-1.amazonaws.com/latest/register',
-  apiGatewayHomePage: 'https://kskyyucr18.execute-api.ap-southeast-1.amazonaws.com/latest/get-home',
-  apiGatewayAllEvent: 'https://kskyyucr18.execute-api.ap-southeast-1.amazonaws.com/latest/get-all-events',
-  apiGatewayCheckEvent: 'https://2za1bogkhk.execute-api.ap-southeast-1.amazonaws.com/latest/check-event',
-  apiGatewayGetRound: 'https://2za1bogkhk.execute-api.ap-southeast-1.amazonaws.com/latest/get-round',
-  apiGatewayGetZoneAvailable: 'https://2za1bogkhk.execute-api.ap-southeast-1.amazonaws.com/latest/seat-available',
-  apiGatewayGetSeat: 'https://2za1bogkhk.execute-api.ap-southeast-1.amazonaws.com/latest/get-seat',
-  apiGatewayGetReserve: 'https://2za1bogkhk.execute-api.ap-southeast-1.amazonaws.com/latest/handler-reserve',
-  apiGatewayHeader: '//s3-ap-southeast-1.amazonaws.com/atkfullsite/config/HeaderMenu.json',
-  bucketS3: '//s3-ap-southeast-1.amazonaws.com/dev.allticketthailand.com',
+  baseUrl: '//d11aliyfxni7iy.cloudfront.net',
+  apiGateway: 'https://ad5xsmjzzj.execute-api.ap-southeast-1.amazonaws.com/v1/'
 };

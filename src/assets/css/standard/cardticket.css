@@ -2,16 +2,11 @@
   border: 0px #fff solid !important;
   border-top: none;
   border-left: none;
-  padding: 1rem;
+  padding-bottom: 40px;
 }
 
 .card {
   border: 0px #fff solid !important;
-}
-
-.cardfooter {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
 }
 
 .imgResponsive {
@@ -23,7 +18,6 @@
   box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.5);
   position: relative;
   min-height: 200px;
-  max-width: 250px;
   cursor: pointer;
 }
 
@@ -48,22 +42,10 @@
 }
 
 .cardbox:hover .soldout {
-  background: #b8b8b8;
+  background: #808080;
 }
 
 .cardbox:hover .soldout a {
-  color: white;
-}
-
-.commingsoon a {
-  color: #b8b8b8;
-}
-
-.cardbox:hover .commingsoon {
-  background: #FBB03B;
-}
-
-.cardbox:hover .commingsoon a {
   color: white;
 }
 
@@ -88,11 +70,24 @@
 
 .eventName {
   color: black;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 300;
   letter-spacing: 0.5px;
+  margin: 7px 0;
   text-align: center;
-  line-height: 1.4;
+  line-height: 1.3;
+  padding-left: 10px;
+}
+
+.eventNameRe {
+  color: black;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  margin: 7px 0;
+  text-align: center;
+  line-height: 1.3;
+  padding-left: 10px;
 }
 
 .eventDate {
@@ -100,40 +95,18 @@
   font-size: 16px;
   font-weight: 300;
   letter-spacing: 0.5px;
+  border-right: 1px solid #4f7685;
   text-align: center;
+  line-height: 1.3;
+  padding-left: 30px;
 }
 
-.eventDate:after {
-  content: '';
-  height: 100%; 
-  width: 1px;
-  position: absolute;
-  right: 0;
-  top: 0;
-  background-color: #343a40;
-}
-
-.text-overflow {
+.text_overflow {
+  width: 100px;
+  overflow: hidden;
+  display: inline-block;
   text-overflow: ellipsis;
-   display: block;
-   overflow: hidden;
-white-space: nowrap;
-}
-
-@supports (-webkit-appearance:none) {
-  .text-overflow {
-    white-space: unset;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-  }
-}
-
-@supports (-ms-ime-align: auto) {
-  .text-overflow {
-    display: block;
   white-space: nowrap;
-  }
 }
 
 .card-buyTicket {
@@ -160,9 +133,8 @@ white-space: nowrap;
 
 .card-overlay img {
   margin: 0 auto;
-  position: absolute;
-  top: 40%;
-  left: 40%;
+  position: relative;
+  top: 45%;
 }
 
 .card-date {
@@ -193,6 +165,11 @@ white-space: nowrap;
   padding-top: 20px;
 }
 
+.cardWrapper {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
 .cpt20 {
   padding-top: 20px;
   text-align: center;
@@ -202,7 +179,7 @@ white-space: nowrap;
   color: black;
 }
 
-.font-size-12 {
+.font12 {
   font-size: 12px;
 }
 
@@ -210,44 +187,23 @@ white-space: nowrap;
   padding-top: 30px;
 }
 
-.cardfooter .splitWrapper {
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.full-column {
-  max-width: 100%;
-  flex: 0 0 100%;
-}
-
 @media screen and (min-width: 320px) and (max-width: 600px) {
-
-  .ticket-recommend img {
-      height: 40px;
-  }
-
-  .ticket-recommend .border-ticket-title {
-      padding-bottom: 1.5em;
-  }
-
   .iconTopic {
-      padding-left: 10px;
-      height: auto;
-      font-size: 18px;
+    padding-left: 10px;
+    height: auto;
+    font-size: 18px;
   }
   .eventName {
-      font-size: 14px;
-      text-align: center;
+    font-size: 14px;
+    text-align: center;
   }
   .eventNameRe {
-      font-size: 22px;
-      text-align: center;
+    font-size: 22px;
+    text-align: center;
   }
   .cardbox {
-      min-height: 200px;
-      max-width: 250px;
+    min-height: 200px;
+    max-width: 250px;
+    margin: 0 auto;
   }
 }

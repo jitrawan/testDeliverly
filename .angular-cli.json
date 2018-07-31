@@ -3,53 +3,42 @@
   "project": {
     "name": "new-all-ticket-web-v2"
   },
-  "apps": [{
-    "root": "src",
-    "outDir": "dist",
-    "assets": [
-      "assets",
-      "favicon.ico",
-      "manifest.json"
-    ],
-    "index": "index.html",
-    "main": "main.ts",
-    "polyfills": "polyfills.ts",
-    "test": "test.ts",
-    "tsconfig": "tsconfig.app.json",
-    "testTsconfig": "tsconfig.spec.json",
-    "prefix": "app",
-    "styles": [
-      "../node_modules/bootstrap/dist/css/bootstrap.min.css",
-      "../node_modules/owl.carousel/dist/assets/owl.carousel.min.css",
-      "../node_modules/owl.carousel/dist/assets/owl.theme.green.min.css",
-      "assets/css/standard/owl.carousel-custom.css",
-      "assets/css/standard/animation.css",
-      "../node_modules/font-awesome/css/font-awesome.min.css",
-      "../node_modules/primeng/resources/themes/omega/theme.css",
-      "../node_modules/primeng/resources/primeng.min.css",
-      "../node_modules/fullcalendar/dist/fullcalendar.min.css",
-      "styles.css"
-    ],
-    "scripts": ["../node_modules/jquery/dist/jquery.min.js",
-      "../node_modules/moment/min/moment.min.js",
-      "../node_modules/fullcalendar/dist/fullcalendar.min.js",
-      "../node_modules/owl.carousel/dist/owl.carousel.min.js",
-      "assets/js/jquery.jmap.js"
-    ],
-    "environmentSource": "environments/environment.ts",
-    "environments": {
-      "dev": "environments/environment.ts",
-      "test": "environments/environment.test.ts",
-      "prod": "environments/environment.prod.ts"
-    },
-    "serviceWorker": true
-  }],
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app",
+      "styles": [
+        "styles.css",
+        "assets/css/standard/owl.carousel-custom.css",
+        "assets/css/standard/animate.css"
+      ],
+      "scripts": ["../node_modules/jquery/dist/jquery.min.js"],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "test": "environments/environment.test.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
+  ],
   "e2e": {
     "protractor": {
       "config": "./protractor.conf.js"
     }
   },
-  "lint": [{
+  "lint": [
+    {
       "project": "src/tsconfig.app.json",
       "exclude": "**/node_modules/**"
     },

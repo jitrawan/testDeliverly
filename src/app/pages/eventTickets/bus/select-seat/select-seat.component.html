@@ -3,7 +3,7 @@
 <div class="container mt-2">
   <div class="row form-group">
     <div class="col-md-7">
-      <h5> กรุณาเลือกหมายเลขที่นั่ง </h5>
+      <h5> ที่นั่ง </h5>
       <bus-layout [data]="busLayout" [numberOfSeat]="totalPassenger" [transId]="transId" [trip]="trip" (outputValue)="selectSeat($event)"
         *ngIf="transId != undefined"> </bus-layout>
     </div>
@@ -13,17 +13,15 @@
           <div class="col-12 topicRow">{{tripName}}</div>
         </div>
         <div class="row border1s BoxRow py-1 text-center">
-          <div class="col-12 rowSummary  ">
-            <b class="parkText">ต้นทาง : </b>
-            <br/>{{dptrPark}}
+          <div class="col-12 rowSummary ">
+            <b>ต้นทาง : </b><br>{{dptrPark}}
           </div>
           <div class="col-12">
             <b>วันที่ {{dptrDate | thaidate:'full'}} เวลา {{dptrTime}} น.</b>
           </div>
           <div class="col-12 py-2"> ถึง</div>
           <div class="col-12 rowSummary">
-            <b class="parkText">ปลายทาง : </b>
-            <br>{{arrvPark}}
+            <b>ปลายทาง : </b><br>{{arrvPark}}
           </div>
           <div class="col-12">
             <b>วันที่ {{arrvDate | thaidate:'full'}} เวลา {{arrvTime}} น.</b>
@@ -42,8 +40,7 @@
         <div class="row border1s BoxRow">
           <div class="col-md-12 col-sm-12 rowSummary ">
             หมายเลขที่นั่งที่ท่านเลือก :
-            <span class="selectSeat" *ngFor="let data of selectedSeat; let index = index;">
-              <span *ngIf="index > 0">,</span> {{data.name}} ชั้น {{data.pos.z}}</span>
+            <span class="selectSeat" *ngFor="let data of selectedSeat; let index = index;"><span *ngIf="index > 0">,</span> {{data.name}} ชั้น {{data.pos.z}}</span>
           </div>
         </div>
       </div>

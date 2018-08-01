@@ -134,9 +134,3 @@
   -webkit-animation: cssload-spin 575ms infinite linear;
   -moz-animation: cssload-spin 575ms infinite linear
 }
-
-.parkText {
-  color: #fe6716;
-  font-size: 22px;
-  /* font-weight: bolder; */
-}
